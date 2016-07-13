@@ -1,7 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import useScroll from 'react-router-scroll';
-import { IndexRoute, Router, Route, applyRouterMiddleware } from 'react-router';
+import {IndexRoute, Router, Route, applyRouterMiddleware} from 'react-router';
 import ContainerPage from './containers/pages/ContainerPage';
 import HomePage from './containers/pages/HomePage';
 import DataPage from './containers/pages/DataPage';
@@ -15,7 +15,7 @@ import AboutPage from './containers/pages/AboutPage';
 import FAQsPage from './containers/pages/FAQsPage';
 import ContactPage from './containers/pages/ContactPage';
 
-function shouldUpdateScroll(prevRouterProps, { location }) {
+function shouldUpdateScroll(prevRouterProps, {location}) {
   /**
    * Return whether the two pages match the regex and have the same matching
    * regex parameters
@@ -23,7 +23,7 @@ function shouldUpdateScroll(prevRouterProps, { location }) {
    * @return {Boolean}
    */
   function isSamePage(regex) {
-    const pathname = prevRouterProps && prevRouterProps.location.pathname || '';
+    const pathname = (prevRouterProps && prevRouterProps.location.pathname) || '';
     const nextPathname = location.pathname;
 
     /* We first check if the pages are concerned by the regex. If not, the route
@@ -31,19 +31,27 @@ function shouldUpdateScroll(prevRouterProps, { location }) {
     const isPathnameConcerned = regex.test(pathname);
     const isNextPathnameConcerned = regex.test(nextPathname);
 
-    if (!isPathnameConcerned || !isNextPathnameConcerned) return false;
+    if (!isPathnameConcerned || !isNextPathnameConcerned) {
+      return false;
+    }
 
     /* We then get the matching regex params and return false if there isn't
      * any */
     const routeParams = pathname.match(regex);
     const nextRouteParams = nextPathname.match(regex);
 
-    if (!routeParams || !nextRouteParams) return false;
+    if (!routeParams || !nextRouteParams) {
+      return false;
+    }
 
     /* We remove the first element of the arrays as it is the whole matched
      * string (i.e. the route) */
-    if (routeParams.length) routeParams.splice(0, 1);
-    if (nextRouteParams.length) nextRouteParams.splice(0, 1);
+    if (routeParams.length) {
+      routeParams.splice(0, 1);
+    }
+    if (nextRouteParams.length) {
+      nextRouteParams.splice(0, 1);
+    }
 
     const paramsCount = Math.min(routeParams.length, nextRouteParams.length);
 
@@ -67,7 +75,9 @@ function shouldUpdateScroll(prevRouterProps, { location }) {
   ];
 
   for (let i = 0, j = regexes.length; i < j; i++) {
-    if (isSamePage(regexes[i])) return false;
+    if (isSamePage(regexes[i])) {
+      return false;
+    }
   }
 
   return true;
