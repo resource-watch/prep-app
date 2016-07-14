@@ -1,29 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+import wriLogoLight from '../../../assets/logos/wri-light@2x.png';
+import esriLogoLight from '../../../assets/logos/esri-light@2x.png';
+import vizzualityLogoLight from '../../../assets/logos/vizzuality-light@2x.png';
+import nasaLogoLight from '../../../assets/logos/nasa-light@2x.png';
+import descartesLogoLight from '../../../assets/logos/descartes-light@2x.png';
+
 function Footer(props) {
   return (
     <div className="c-footer">
       <div className="wrapper">
         <div className="partners">
           <a href="http://www.wri.org" rel="noreferrer" target="_blank">
-            <img src={gon.assets.lightWriLogo} alt="World Resources Institute" className="wri" />
+            <img src={wriLogoLight} alt="World Resources Institute" className="wri" />
           </a>
           <a href="http://www.esri.com" rel="noreferrer" target="_blank">
-            <img src={gon.assets.lightEsriLogo} alt="esri" className="esri" />
+            <img src={esriLogoLight} alt="esri" className="esri" />
           </a>
           <a href="http://www.vizzuality.com" rel="noreferrer" target="_blank">
-            <img src={gon.assets.lightVizzualityLogo} alt="Vizzuality" className="vizzuality" />
+            <img src={vizzualityLogoLight} alt="Vizzuality" className="vizzuality" />
           </a>
           <a href="http://www.nasa.gov" rel="noreferrer" target="_blank">
-            <img src={gon.assets.lightNasaLogo} alt="NASA" className="nasa" />
+            <img src={nasaLogoLight} alt="NASA" className="nasa" />
           </a>
           <a
             href="http://www.descarteslabs.com"
             rel="noreferrer"
             target="_blank"
           >
-            <img src={gon.assets.lightDescartesLogo} alt="Descartes Labs" className="descartes" />
+            <img src={descartesLogoLight} alt="Descartes Labs" className="descartes" />
           </a>
         </div>
         <footer>

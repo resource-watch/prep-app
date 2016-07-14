@@ -5,28 +5,29 @@ import Title from '../commons/Title';
 import Card from '../cards/Card';
 import Button from '../commons/Button';
 import Modal from '../commons/Modal';
+import LoadingSpinner from '../commons/LoadingSpinner';
 
 class DashboardsPage extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      createInsightModalOpen: false
+      createDashboardModalOpen: false
     };
+    this.pageType = 1; // For page colors, 1 = yellow
   }
 
   componentDidMount() {
     if (!this.props.data.length) {
-      this.props.getInsightsList();
+      this.props.getDashboardList();
     }
-    this.pageType = 2; // For page colors, 2 = blue
   }
 
   getContent() {
     if (!this.props.data) {
       return (
         <div>
-          TODO: loading component
+          <LoadingSpinner />
         </div>
       );
     }
@@ -34,8 +35,8 @@ class DashboardsPage extends React.Component {
     let items = [];
     this.props.data.forEach((item, index) => {
       items.push(
-        <Card border="neutral" key={`insight-item-${index}`}>
-          <Link to={`/insights/${item.slug}`}>
+        <Card border="neutral" key={`dashboard-item-${index}`}>
+          <Link to={`/dashboards/${item.slug}`}>
             <Title type="content">
               {item.title}
             </Title>
@@ -45,7 +46,7 @@ class DashboardsPage extends React.Component {
           </p>
           <a href="#">
             <img
-              src={gon.assets[item.partner.logo]}
+              src={item.partner.logo}
               className="logo"
               alt={item.partner.name}
             />
@@ -73,7 +74,7 @@ class DashboardsPage extends React.Component {
       <div className="l-dashboards">
         <Header type="small" pageType={this.pageType}>
           <Title inverse center border type="page">
-            Insights
+            Dashboards
           </Title>
         </Header>
 
@@ -90,13 +91,13 @@ class DashboardsPage extends React.Component {
                 </Link>
               </div>
               <div className="card -image">
-                <Title inverse center>Dashboards</Title>
+                <Title inverse center>Insights</Title>
                 <p>
                   Integer id placerat ligula, eget consequat sapien. Duis nec
                   neque scelerisque
                 </p>
-                <Link to="/dashboards">
-                  <Button themeColor>Explore the dashboards</Button>
+                <Link to="/insights">
+                  <Button themeColor>Explore the insights</Button>
                 </Link>
               </div>
             </div>
@@ -115,10 +116,10 @@ class DashboardsPage extends React.Component {
                     inverse
                     border
                     click={() => this.setState({
-                      createInsightModalOpen: true
+                      createDashboardModalOpen: true
                     })}
                   >
-                    Create your insight
+                    Create your dashboard
                   </Button>
                 </div>
               </div>
@@ -134,18 +135,17 @@ class DashboardsPage extends React.Component {
               </div>
             </div>
           </div>
-
-          <Modal
-            opened={this.state.createInsightModalOpen}
-            close={() => this.setState({ createInsightModalOpen: false })}
-          >
-            <div className="content">
-              The website is under development. The feature will be available
-              later.
-            </div>
-          </Modal>
-
         </div>
+
+        <Modal
+          opened={this.state.createDashboardModalOpen}
+          close={() => this.setState({ createDashboardModalOpen: false })}
+        >
+          <div className="content">
+            The website is under development. The feature will be available
+            later.
+          </div>
+        </Modal>
 
       </div>
     );
@@ -158,11 +158,11 @@ DashboardsPage.propTypes = {
    */
   currentPage: React.PropTypes.string,
   /**
-   * Define function to get the insights list
+   * Define function to get the dashboard list
    */
-  getInsightsList: React.PropTypes.func.isRequired,
+  getDashboardList: React.PropTypes.func.isRequired,
   /**
-   * Define insights list data
+   * Define dashboards list data
    */
   data: React.PropTypes.array,
 };

@@ -1,0 +1,82 @@
+.c-data-map-sidebar {
+  position: absolute;
+  top: $navbar-height-small;
+  left: 0;
+  height: calc(100% - #{$navbar-height-small});
+  width: 100%;
+  background-color: $color-5;
+  z-index: 2;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-out;
+
+  @media #{$mq-tablet} {
+    width: 350px;
+    background-color: rgba($color-5, 0.9);
+  }
+
+  > .actions {
+    position: absolute;
+    top: 16px;
+    right: -30px;
+    background-color: $color-7;
+    > div {
+      display: block;
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      background-color: $color-7;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      >.toggle-status {
+        @include hamburger-icon(10px, 2px, 2px, 1px, $color-5, $color-4);
+      }
+    }
+  }
+
+  > .content {
+    //50px from the c-filter-tab
+    padding: 1rem;
+    overflow: auto;
+    @media #{$mq-tablet} {
+      height: calc(100% - 50px);
+    }
+    > .layer {
+      margin: 15px 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      > .title {
+        margin-left: 8px;
+        font-size: $font-size-small;
+        font-family: $font-family-1;
+      }
+      > .detail-link {
+        width: 22px;
+        text-align: center;
+        > svg {
+          height: 12px;
+          width: 100%;
+          fill: rgba($color-1, 0.3);
+        }
+      }
+    }
+  }
+
+  > .actions-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @media #{$mq-tablet} {
+      display: none;
+    }
+  }
+
+  &.-open {
+    transform: translateX(0);
+  }
+}

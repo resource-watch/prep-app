@@ -5,13 +5,14 @@ require('dotenv').config({silent: true});
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const rootPath = process.cwd();
 
 const webpackConfig = {
 
   entry: [
-    path.join(rootPath, 'app/main.jsx')
+    path.join(rootPath, 'app/src/main.jsx')
   ],
 
   output: {
@@ -26,6 +27,9 @@ const webpackConfig = {
       inject: 'body',
       filename: 'index.html'
     }),
+    new ExtractTextPlugin('styles-[hash].css', {
+        allChunks: true
+    }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
@@ -36,7 +40,22 @@ const webpackConfig = {
 
   module: {
     loaders: [
-      {test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel'}
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel'
+      },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('css?sourceMap&importLoaders=1&localI‌​dentName=[name]__[local]!sass?sourceMap')
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loaders: [
+            'file?hash=sha512&digest=hex&name=[hash].[ext]',
+            'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+        ]
+      }
     ]
   },
 
