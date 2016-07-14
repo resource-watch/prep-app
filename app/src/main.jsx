@@ -8,7 +8,7 @@ import {syncHistoryWithStore, routerReducer, routerMiddleware} from 'react-route
 import * as reducers from './reducers';
 import Routes from './routes';
 
-import './stylesheets/application.scss';
+import '../stylesheets/application.scss';
 
 /**
  * Reducers

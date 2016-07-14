@@ -12,7 +12,7 @@ const rootPath = process.cwd();
 const webpackConfig = {
 
   entry: [
-    path.join(rootPath, 'app/main.jsx')
+    path.join(rootPath, 'app/src/main.jsx')
   ],
 
   output: {
@@ -47,7 +47,7 @@ const webpackConfig = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('css?sourceMap&importLoaders=1&localI‌​dentName=[name]__[local]___[hash:base64:5]!sass?sourceMap')
+        loader: ExtractTextPlugin.extract('css?sourceMap&importLoaders=1&localI‌​dentName=[name]__[local]!sass?sourceMap')
       }
     ]
   },
