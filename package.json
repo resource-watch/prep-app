@@ -35,6 +35,7 @@
     "express": "^4.13.4",
     "html-webpack-plugin": "^2.21.0",
     "json-loader": "^0.5.4",
+    "leaflet": "^0.7.7",
     "morgan": "^1.7.0",
     "pretty-error": "^2.0.0",
     "react": "^15.0.2",
@@ -47,13 +48,16 @@
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
     "style-loader": "^0.13.1",
+    "vega": "^2.6.0",
     "webpack": "^1.13.0"
   },
   "xo": {
     "esnext": true,
     "space": 2,
     "ignores": [],
-    "envs": ["browser"],
+    "envs": [
+      "browser"
+    ],
     "rules": {
       "space-before-function-paren": [
         "error",

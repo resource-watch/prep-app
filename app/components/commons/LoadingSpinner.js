@@ -10,7 +10,7 @@ export default function LoadingSpinner() {
           r="20"
           fill="none"
           strokeWidth="3"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
         />
       </svg>
     </div>
