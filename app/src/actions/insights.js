@@ -4,9 +4,11 @@ import {
   INSIGHTS_DETAIL_RECEIVED
 } from '../constants';
 
+const { apiUrl } = config;
+
 export function getInsightsList() {
   return dispatch => {
-    fetch('http://localhost:9000/api/insights')
+    fetch(`${apiUrl}/api/insights`)
       .then(response => (response.json()))
       .then(data => {
         dispatch({
@@ -25,7 +27,7 @@ export function getInsightsList() {
 
 export function getInsightBySlug(slug) {
   return dispatch => {
-    fetch(`http://localhost:9000/api/insights/${slug}`)
+    fetch(`${apiUrl}/api/insights/${slug}`)
       .then(response => (response.json()))
       .then(data => {
         dispatch({

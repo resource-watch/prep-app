@@ -4,9 +4,11 @@ import {
   DASHBOARD_DETAIL_RECEIVED
 } from '../constants';
 
+const { apiUrl } = config;
+
 export function getDashboardList() {
   return dispatch => {
-    fetch('http://localhost:9000/api/dashboards')
+    fetch(`${apiUrl}/api/dashboards`)
       .then(response => {
         if (response.ok) return response.json();
       })
@@ -26,7 +28,7 @@ export function getDashboardList() {
 }
 export function getDashboardBySlug(slug) {
   return dispatch => {
-    fetch(`http://localhost:9000/api/dashboards/${slug}`)
+    fetch(`${apiUrl}/api/dashboards/${slug}`)
       .then(response => {
         if (response.ok) return response.json();
       })

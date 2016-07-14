@@ -6,9 +6,11 @@ import {
   SET_SWITCH_STATUS
 } from '../constants';
 
+const { apiUrl } = config;
+
 export function getDatasets() {
   return dispatch => {
-    fetch('http://localhost:9000/data/datasets/list.json')
+    fetch(`${apiUrl}/data/datasets/list.json`)
       .then(response => {
         if (response.ok) return response.json();
       })
@@ -32,7 +34,7 @@ export function getDatasets() {
 
 export function getDatasetBySlug(slug) {
   return dispatch => {
-    fetch(`http://localhost:9000/data/datasets/${slug}.json`)
+    fetch(`${apiUrl}/data/datasets/${slug}.json`)
       .then(response => {
         if (response.ok) return response.json();
       })

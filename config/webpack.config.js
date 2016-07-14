@@ -6,6 +6,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const DotenvPlugin = require('webpack-dotenv-plugin');
 
 const rootPath = process.cwd();
 
@@ -28,13 +29,18 @@ const webpackConfig = {
       filename: 'index.html'
     }),
     new ExtractTextPlugin('styles-[hash].css', {
-        allChunks: true
+      allChunks: true
+    }),
+    new webpack.DefinePlugin({
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      config: {
+        apiUrl: JSON.stringify(process.env.API_URL)
+      }
     })
   ],
 
