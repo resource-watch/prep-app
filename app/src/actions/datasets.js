@@ -1,5 +1,6 @@
 import {
   DATASET_LIST_RECEIVED,
+  DATASET_FETCH_ERROR,
   DATASET_DETAIL_RECEIVED,
   SWITCH_CHANGED,
   SET_SWITCH_STATUS
@@ -7,31 +8,46 @@ import {
 
 export function getDatasets() {
   return dispatch => {
-    fetch('/data/datasets/list.json')
-      .then(response => (response.json()))
+    fetch('http://localhost:9000/data/datasets/list.json')
+      .then(response => {
+        if (response.ok) return response.json();
+      })
       .then(data => {
+        const layers = data && data.layers || [];
         dispatch({
           type: DATASET_LIST_RECEIVED,
           payload: {
-            data: data.layers
+            data: layers
           }
         });
-      }
-    );
+      })
+      .catch(function(error) {
+        dispatch({
+          type: DATASET_FETCH_ERROR,
+          payload: error
+        });
+      });
   };
 }
 
 export function getDatasetBySlug(slug) {
   return dispatch => {
-    fetch(`/data/datasets/${slug}.json`)
-      .then(response => (response.json()))
+    fetch(`http://localhost:9000/data/datasets/${slug}.json`)
+      .then(response => {
+        if (response.ok) return response.json();
+      })
       .then(data => {
         dispatch({
           type: DATASET_DETAIL_RECEIVED,
           payload: { data }
         });
-      }
-    );
+      })
+      .catch(function(error) {
+        dispatch({
+          type: DATASET_FETCH_ERROR,
+          payload: error
+        });
+      });
   };
 }
 

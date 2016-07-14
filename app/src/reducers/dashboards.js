@@ -1,6 +1,6 @@
 import {
-  LIST_DASHBOARD_RECEIVED,
-  DETAIL_DASHBOARD_RECEIVED
+  DASHBOARD_LIST_RECEIVED,
+  DASHBOARD_DETAIL_RECEIVED
 } from '../constants';
 
 const initialState = {
@@ -10,10 +10,10 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case LIST_DASHBOARD_RECEIVED: {
+    case DASHBOARD_LIST_RECEIVED: {
       return Object.assign({}, state, { list: action.payload.data });
     }
-    case DETAIL_DASHBOARD_RECEIVED: {
+    case DASHBOARD_DETAIL_RECEIVED: {
       const obj = {};
       obj[action.payload.data.slug] = action.payload.data;
       return Object.assign({}, state, { detail: obj });
