@@ -46,7 +46,7 @@ class DashboardDetailPage extends React.Component {
 
         <div className="wrapper">
           <div className="iframe-container">
-            <IFrame src={`http://localhost:9000/proxy?url=${this.props.data.content_url}`} />
+            <IFrame src={`/proxy?url=${this.props.data.content_url}`} />
           </div>
         </div>
       </div>
