@@ -37,7 +37,7 @@ class Navbar extends React.Component {
             </button>
             <nav className="navbar">
               <ul className="links">
-                <li className={['link', this.props.currentPage === 'data' ? '-active' : ''].join(' ')}>
+                <li className={['link', /^data/.test(this.props.currentPage) ? '-active' : ''].join(' ')}>
                   <Link to="/data">Data</Link>
                 </li>
                 <li className={['link', /^dashboards/.test(this.props.currentPage) ? '-active' : ''].join(' ')}>

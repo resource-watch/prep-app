@@ -21,6 +21,13 @@ function ContainerPage(props) {
       footer: '',
       class: '-height100'
     },
+    /* Data detail */
+    {
+      regex: /^\/data\/.+$/,
+      theme: 2,
+      header: <Navbar currentPage="data" />,
+      footer: <Footer />
+    },
     /* Dashboards */
     {
       regex: /^\/dashboards$/,
