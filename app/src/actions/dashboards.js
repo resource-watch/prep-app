@@ -1,31 +1,46 @@
 import {
-  LIST_DASHBOARD_RECEIVED,
-  DETAIL_DASHBOARD_RECEIVED
+  DASHBOARD_FETCH_ERROR,
+  DASHBOARD_LIST_RECEIVED,
+  DASHBOARD_DETAIL_RECEIVED
 } from '../constants';
 
 export function getDashboardList() {
   return dispatch => {
-    fetch('/api/dashboards')
-      .then(response => (response.json()))
+    fetch('http://localhost:9000/api/dashboards')
+      .then(response => {
+        if (response.ok) return response.json();
+      })
       .then(data => {
         dispatch({
-          type: LIST_DASHBOARD_RECEIVED,
+          type: DASHBOARD_LIST_RECEIVED,
           payload: { data }
         });
-      }
-    );
+      })
+      .catch(function(error) {
+        dispatch({
+          type: DASHBOARD_FETCH_ERROR,
+          payload: error
+        });
+      });
   };
 }
 export function getDashboardBySlug(slug) {
   return dispatch => {
-    fetch(`/api/dashboards/${slug}`)
-      .then(response => (response.json()))
+    fetch(`http://localhost:9000/api/dashboards/${slug}`)
+      .then(response => {
+        if (response.ok) return response.json();
+      })
       .then(data => {
         dispatch({
-          type: DETAIL_DASHBOARD_RECEIVED,
+          type: DASHBOARD_DETAIL_RECEIVED,
           payload: { data }
         });
-      }
-    );
+      })
+      .catch(function(error) {
+        dispatch({
+          type: DASHBOARD_FETCH_ERROR,
+          payload: error
+        });
+      });
   };
 }

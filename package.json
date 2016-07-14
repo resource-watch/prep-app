@@ -36,8 +36,8 @@
     "css-loader": "^0.23.1",
     "dotenv": "^2.0.0",
     "express": "^4.13.4",
-    "html-webpack-plugin": "^2.21.0",
     "extract-text-webpack-plugin": "^1.0.1",
+    "html-webpack-plugin": "^2.21.0",
     "json-loader": "^0.5.4",
     "leaflet": "^0.7.7",
     "morgan": "^1.7.0",
@@ -51,6 +51,7 @@
     "react-router-scroll": "^0.2.0",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
+    "request": "^2.73.0",
     "style-loader": "^0.13.1",
     "vega": "^2.6.0",
     "webpack": "^1.13.0"
