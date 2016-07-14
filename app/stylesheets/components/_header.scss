@@ -1,0 +1,50 @@
+.c-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 415px;
+  background-color: $color-1;
+  background-size: cover;
+  transition: background 0.3s ease-in;
+
+  @media #{$mq-tablet} {
+    min-height: 640px;
+  }
+
+  &.-type-1 {
+    background-image: image-url('bg-dashboards-image@2x.png');
+  }
+
+  &.-type-2 {
+    background-image: image-url('bg-insights-image@2x.jpg');
+  }
+
+  &.-type-3 {
+    background-image: image-url('bg-dashboards-map@2x.png');
+  }
+
+  &.-type-4 {
+    background-image: image-url('bg-home-header@2x.jpg');
+  }
+
+  &.-small {
+    min-height: 320px;
+
+    @media #{$mq-tablet} {
+      min-height: 415px;
+    }
+  }
+
+  &.-large {
+    min-height: 450px;
+
+    @media #{$mq-mobile-large} {
+      min-height: 590px;
+    }
+
+    @media #{$mq-tablet} {
+      min-height: 775px;
+    }
+  }
+}

@@ -5,6 +5,7 @@ require('dotenv').config({silent: true});
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const rootPath = process.cwd();
 
@@ -26,6 +27,9 @@ const webpackConfig = {
       inject: 'body',
       filename: 'index.html'
     }),
+    new ExtractTextPlugin('styles.css', {
+        allChunks: true
+    }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
@@ -36,7 +40,15 @@ const webpackConfig = {
 
   module: {
     loaders: [
-      {test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel'}
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel'
+      },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('css?sourceMap&importLoaders=1&localI‌​dentName=[name]__[local]___[hash:base64:5]!sass?sourceMap')
+      }
     ]
   },
 
