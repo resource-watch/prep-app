@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+import logo from '../../../assets/preplogo@2x.png';
+
 class Navbar extends React.Component {
   constructor() {
     super();
@@ -25,7 +27,7 @@ class Navbar extends React.Component {
         <div className="wrapper">
           <div className="content">
             <Link to={"/"} className="logo">
-              <img src={gon.assets.logo} alt="Preparedness for Resilience" />
+              <img src={logo} alt="Preparedness for Resilience" />
             </Link>
             <button
               className={toggleClassName.join(' ')}

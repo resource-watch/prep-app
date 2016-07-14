@@ -8,6 +8,9 @@ import Map from '../maps/Map';
 import Button from '../commons/Button';
 import Modal from '../commons/Modal';
 
+import homeAccessible from '../../../assets/home-accessible@2x.jpg';
+import homeUnderstanding from '../../../assets/home-understanding@2x.jpg';
+
 class HomePage extends React.Component {
 
   constructor(props) {
@@ -58,7 +61,7 @@ class HomePage extends React.Component {
             </div>
             <div className="floating-card">
               <img
-                src={gon.assets.homeAccessible}
+                src={homeAccessible}
                 alt="Accessible, authoritative assessments"
               />
               <Title border type="section">
@@ -124,7 +127,7 @@ class HomePage extends React.Component {
                 </div>
               </div>
               <div className="insight">
-                <img src={gon.assets.homeUnderstanding} alt="New York" />
+                <img src={homeUnderstanding} alt="New York" />
                 <Link to="/insights/framer-assesses-crops-impact">
                   Go to Framer assesses possible impacts of climate change on
                   his crops (grapes) insight

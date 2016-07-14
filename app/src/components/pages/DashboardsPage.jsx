@@ -14,13 +14,13 @@ class DashboardsPage extends React.Component {
     this.state = {
       createDashboardModalOpen: false
     };
+    this.pageType = 1; // For page colors, 1 = yellow
   }
 
   componentDidMount() {
     if (!this.props.data.length) {
       this.props.getDashboardList();
     }
-    this.pageType = 1; // For page colors, 1 = yellow
   }
 
   getContent() {

@@ -85,7 +85,7 @@
 
   .background-image {
     height: 300px;
-    background: url(asset_path('home-mission@2x.jpg')) no-repeat center center;
+    background: url('../assets/home-mission@2x.jpg') no-repeat center center;
     background-size: cover;
 
     @media #{$mq-tablet} {

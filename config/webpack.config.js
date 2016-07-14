@@ -27,7 +27,7 @@ const webpackConfig = {
       inject: 'body',
       filename: 'index.html'
     }),
-    new ExtractTextPlugin('styles.css', {
+    new ExtractTextPlugin('styles-[hash].css', {
         allChunks: true
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
@@ -48,6 +48,13 @@ const webpackConfig = {
       {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('css?sourceMap&importLoaders=1&localI‌​dentName=[name]__[local]!sass?sourceMap')
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loaders: [
+            'file?hash=sha512&digest=hex&name=[hash].[ext]',
+            'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+        ]
       }
     ]
   },

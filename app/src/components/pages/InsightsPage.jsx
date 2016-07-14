@@ -13,13 +13,13 @@ class DashboardsPage extends React.Component {
     this.state = {
       createInsightModalOpen: false
     };
+    this.pageType = 2; // For page colors, 2 = blue
   }
 
   componentDidMount() {
     if (!this.props.data.length) {
       this.props.getInsightsList();
     }
-    this.pageType = 2; // For page colors, 2 = blue
   }
 
   getContent() {

@@ -4,7 +4,7 @@
   "description": "Preparedness for resilience",
   "main": "server.js",
   "scripts": {
-    "build": "webpack --config ./config/webpack.config.js --progress --profile --colors",
+    "build": "rm -rf dist/ && webpack --config ./config/webpack.config.js --progress --profile --colors",
     "postinstall": "npm run build",
     "test": "./node_modules/.bin/xo"
   },
