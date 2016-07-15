@@ -17,7 +17,7 @@ function ContainerPage(props) {
     {
       regex: /^\/data$/,
       theme: 2,
-      header: <Navbar small dark currentPage="data" />,
+      header: <Navbar small dark />,
       footer: '',
       class: '-height100'
     },
@@ -25,42 +25,42 @@ function ContainerPage(props) {
     {
       regex: /^\/data\/.+$/,
       theme: 2,
-      header: <Navbar currentPage="data" />,
+      header: <Navbar />,
       footer: <Footer />
     },
     /* Dashboards */
     {
       regex: /^\/dashboards$/,
       theme: 1,
-      header: <Navbar currentPage="dashboards" />,
+      header: <Navbar />,
       footer: <Footer />
     },
     /* Dashboard detail */
     {
       regex: /^\/dashboards\/.+$/,
       theme: 1,
-      header: <Navbar currentPage="dashboards" />,
+      header: <Navbar />,
       footer: <Footer />
     },
     /* Insights */
     {
       regex: /^\/insights$/,
       theme: 3,
-      header: <Navbar currentPage="insights" />,
+      header: <Navbar />,
       footer: <Footer />
     },
     /* Insight detail */
     {
       regex: /^\/insights\/.+$/,
       theme: 3,
-      header: <Navbar currentPage="insights" />,
+      header: <Navbar />,
       footer: <Footer />
     },
     /* Default rule - Statics */
     {
       regex: /.*/,
       theme: 1,
-      header: <Navbar currentPage="" />,
+      header: <Navbar />,
       footer: <Footer />
     }
   ];

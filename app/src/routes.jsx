@@ -91,12 +91,18 @@ function Routes(props) {
     >
       <Route path="/" component={ContainerPage}>
         <IndexRoute component={HomePage} />
-        <Route path="data" component={DataPage} />
-        <Route path="data/:slug" component={DataDetailPage} />
-        <Route path="dashboards" component={DashboardsPage} />
-        <Route path="dashboards/:slug(/:tab)" component={DashboardDetailPage} />
-        <Route path="insights" component={InsightsPage} />
-        <Route path="insights/:slug" component={InsightDetailPage} />
+        <Route path="data">
+          <IndexRoute component={DataPage} />
+          <Route path=":slug" component={DataDetailPage}></Route>
+        </Route>
+        <Route path="dashboards">
+          <IndexRoute component={DashboardsPage} />
+          <Route path=":slug(/:tab)" component={DashboardDetailPage}></Route>
+        </Route>
+        <Route path="insights">
+          <IndexRoute component={InsightsPage} />
+          <Route path=":slug" component={InsightDetailPage}></Route>
+        </Route>
         <Route path="partners" component={PartnersPage} />
         <Route path="about" component={AboutPage} />
         <Route path="faqs" component={FAQsPage} />

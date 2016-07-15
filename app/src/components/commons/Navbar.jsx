@@ -37,14 +37,14 @@ class Navbar extends React.Component {
             </button>
             <nav className="navbar">
               <ul className="links">
-                <li className={['link', /^data/.test(this.props.currentPage) ? '-active' : ''].join(' ')}>
-                  <Link to="/data">Data</Link>
+                <li className="link">
+                  <Link activeClassName="-active" to="/data">Data</Link>
                 </li>
-                <li className={['link', /^dashboards/.test(this.props.currentPage) ? '-active' : ''].join(' ')}>
-                  <Link to="/dashboards">Dashboards</Link>
+                <li className="link">
+                  <Link activeClassName="-active" to="/dashboards">Dashboards</Link>
                 </li>
-                <li className={['link', /^insights/.test(this.props.currentPage) ? '-active' : ''].join(' ')}>
-                  <Link to="/insights">Insights</Link>
+                <li className="link">
+                  <Link activeClassName="-active" to="/insights">Insights</Link>
                 </li>
                 <li className="link separator"></li>
                 <li className="link -secondary -disable">
