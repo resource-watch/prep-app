@@ -1,0 +1,40 @@
+.c-button {
+  font-family: $font-family-1;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-small;
+  text-transform: uppercase;
+  color: $color-1;
+  border: none;
+  outline: none;
+  padding: 7px 30px;
+  cursor: pointer;
+  background-color: transparent;
+
+  &.-theme-color {
+    color: $color-2;
+    .-theme-2 & { color: $color-4; }
+    .-theme-3 & { color: $color-3; }
+  }
+
+  &.-inverse { color: $color-6; }
+
+  &.-border {
+    border: 2px solid $color-2;
+    &.-fill { background-color: $color-2; }
+
+    .-theme-2 & {
+      border-color: $color-4;
+      &.-fill { background-color: $color-4; }
+    }
+
+    .-theme-3 & {
+      border-color: $color-3;
+      &.-fill { background-color: $color-3; }
+    }
+
+    &.-border-neutral {
+      border-color: $color-1;
+      &.-fill { background-color: $color-1; }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: $font-family-1;
+  font-size: $font-size-normal;
+  font-weight: $font-weight-normal;
+  color: $color-1;
+  height: 100%;
+}
+
+a {
+  color: $color-11;
+  text-decoration: none;
+}
+
+.-height100 {
+  height: 100%;
+}
+
+.wrapper, .wrapper-mini {
+  padding: 0 $wrapper-mobile-padding;
+
+  @media #{$mq-mobile-large} {
+    padding: 0 $wrapper-tablet-padding;
+  }
+
+  @media #{$mq-tablet} {
+    padding: 0 $wrapper-padding;
+  }
+
+  @media #{$mq-wrapper-width} {
+    padding: 0;
+    margin: 0 auto;
+    max-width: $wrapper-max-width;
+  }
+}
+
+.wrapper-mini {
+  max-width: $wrapper-mini-max-width;
+  margin: 0 auto;
+}

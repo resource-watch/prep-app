@@ -1,0 +1,34 @@
+.c-switch {
+  position: relative;
+  display: inline-block;
+  width: 22px;
+  height: 12px;
+  flex-shrink: 0;
+  line-height: 1;
+  border-radius: 22px;
+  background-color: rgba($color-1, 0.3);
+  cursor: pointer;
+  transition: background-color 0.15s ease-out;
+
+  &:after {
+    content: " ";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    left: 0;
+    top: 2px;
+    border-radius: 50%;
+    background-color: $color-5;
+    cursor: pointer;
+    transform: translateX(3px);
+    transition: transform 0.15s ease-out;
+  }
+
+  &.-checked {
+    background-color: $color-4;
+
+    &:after{
+      transform: translateX(11px);
+    }
+  }
+}
