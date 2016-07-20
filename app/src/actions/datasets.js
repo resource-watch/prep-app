@@ -1,9 +1,7 @@
 import {
   DATASET_LIST_RECEIVED,
   DATASET_FETCH_ERROR,
-  DATASET_DETAIL_RECEIVED,
-  SWITCH_CHANGED,
-  SET_SWITCH_STATUS
+  DATASET_DETAIL_RECEIVED
 } from '../constants';
 
 const { apiUrl } = config;
@@ -50,19 +48,5 @@ export function getDatasetBySlug(slug) {
           payload: error
         });
       });
-  };
-}
-
-export function switchChange(id) {
-  return {
-    type: SWITCH_CHANGED,
-    payload: { id }
-  };
-}
-
-export function setSwitchStatus(id, status) {
-  return {
-    type: SET_SWITCH_STATUS,
-    payload: { id, status }
   };
 }

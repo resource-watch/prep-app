@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import useScroll from 'react-router-scroll';
-import {IndexRoute, Router, Route, applyRouterMiddleware} from 'react-router';
-import ContainerPage from './containers/pages/ContainerPage';
+import {IndexRoute, IndexRedirect, Router, Route, applyRouterMiddleware} from 'react-router';
+import ContainerPage from './components/pages/ContainerPage';
 import HomePage from './components/pages/HomePage';
 import DataPage from './containers/pages/DataPage';
 import DataDetailPage from './containers/pages/DataDetailPage';
@@ -92,8 +92,9 @@ function Routes(props) {
       <Route path="/" component={ContainerPage}>
         <IndexRoute component={HomePage} />
         <Route path="data">
-          <IndexRoute component={DataPage} />
-          <Route path=":slug" component={DataDetailPage}></Route>
+          <IndexRedirect to={`map/${props.latLng.join('/')}/${props.zoom}`}/>
+          <Route path="map/:lat/:lng/:zoom" component={DataPage} />
+          <Route path="dataset/:slug" component={DataDetailPage}></Route>
         </Route>
         <Route path="dashboards">
           <IndexRoute component={DashboardsPage} />
@@ -116,7 +117,10 @@ Routes.propTypes = {
   history: React.PropTypes.object.isRequired
 };
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (state) => ({
+  zoom: state.datamap.zoom,
+  latLng: state.datamap.latLng
+});
 const mapDispatchToProps = () => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Routes);

@@ -12,6 +12,7 @@ class DataMap extends React.Component {
 
   componentDidMount() {
     this.initMap();
+    this.setMapListeners();
     this.updateLayers();
   }
 
@@ -24,15 +25,37 @@ class DataMap extends React.Component {
     this.map = L.map(this.refs.map, {
       scrollWheelZoom: false,
       zoomControl: false,
-      center: [48.46038, -123.889823],
-      zoom: 3,
+      center: [this.props.map.latLng[0], this.props.map.latLng[1]],
+      zoom: this.props.map.zoom,
     });
-    L.control.zoom({ position: 'topright' }).addTo(this.map);
+    L.control.zoom({ position: this.props.map.zoomPosition }).addTo(this.map);
 
     L.tileLayer(
-      'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
+      this.props.map.basemap,
       { maxZoom: 18 }
     ).addTo(this.map, 1);
+  }
+
+  setMapListeners() {
+    const { params } = this.context.location;
+
+    this.map.on('dragend', () => {
+      const latLng = this.map.getCenter();
+      const newParams = {
+        lat: latLng.lat,
+        lng: latLng.lng,
+      }
+      this.props.setMapParams(params, newParams);
+    });
+    this.map.on('zoomend', () => {
+      const latLng = this.map.getCenter();
+      const newParams = {
+        zoom: this.map.getZoom(),
+        lat: latLng.lat,
+        lng: latLng.lng,
+      }
+      this.props.setMapParams(params, newParams);
+    });
   }
 
   updateLayers() {
@@ -72,28 +95,6 @@ class DataMap extends React.Component {
       default:
         break;
     }
-  }
-
-  addArcgisImageLayer(layer) {
-    this.mapLayers[layer.id] = L.esri.imageMapLayer({
-      url: layer.url,
-      mosaicRule: layer.mosaicRule,
-      useCors: false
-    }).addTo(this.map);
-    this.mapLayers[layer.id].on('load', () => {
-      this.handleTileLoaded(layer);
-    });
-  }
-
-  addArcgisTileLayer(layer) {
-    this.mapLayers[layer.id] = L.esri.tiledMapLayer({
-      url: layer.url,
-      mosaicRule: layer.mosaicRule,
-      useCors: false
-    }).addTo(this.map);
-    this.mapLayers[layer.id].on('load', () => {
-      this.handleTileLoaded(layer);
-    });
   }
 
   addCartoLayer(layer) {
@@ -167,6 +168,10 @@ class DataMap extends React.Component {
     </div>);
   }
 }
+
+DataMap.contextTypes = {
+  location: React.PropTypes.object
+};
 
 DataMap.propTypes = {
   /**
