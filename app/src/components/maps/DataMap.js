@@ -20,13 +20,36 @@ class DataMap extends React.Component {
     this.updateLayers();
   }
 
+  setMapListeners() {
+    const { params } = this.context.location;
+
+    this.map.on('dragend', () => {
+      this.props.setMapParams(params, this.getMapParams());
+    });
+    this.map.on('zoomend', () => {
+      this.props.setMapParams(params, this.getMapParams());
+    });
+  }
+
+  getMapParams() {
+    const latLng = this.map.getCenter();
+    return {
+      zoom: this.map.getZoom(),
+      latLng: {
+        lat: latLng.lat,
+        lng: latLng.lng
+      }
+    };
+  }
+
   initMap() {
+    const { params } = this.context.location;
     this.mapLayers = {};
     this.map = L.map(this.refs.map, {
       scrollWheelZoom: false,
       zoomControl: false,
-      center: [this.props.map.latLng[0], this.props.map.latLng[1]],
-      zoom: this.props.map.zoom,
+      center: [+params.lat, +params.lng],
+      zoom: +params.zoom
     });
     L.control.zoom({ position: this.props.map.zoomPosition }).addTo(this.map);
 
@@ -34,28 +57,6 @@ class DataMap extends React.Component {
       this.props.map.basemap,
       { maxZoom: 18 }
     ).addTo(this.map, 1);
-  }
-
-  setMapListeners() {
-    const { params } = this.context.location;
-
-    this.map.on('dragend', () => {
-      const latLng = this.map.getCenter();
-      const newParams = {
-        lat: latLng.lat,
-        lng: latLng.lng,
-      }
-      this.props.setMapParams(params, newParams);
-    });
-    this.map.on('zoomend', () => {
-      const latLng = this.map.getCenter();
-      const newParams = {
-        zoom: this.map.getZoom(),
-        lat: latLng.lat,
-        lng: latLng.lng,
-      }
-      this.props.setMapParams(params, newParams);
-    });
   }
 
   updateLayers() {
@@ -179,9 +180,17 @@ DataMap.propTypes = {
   */
   data: React.PropTypes.array.isRequired,
   /**
+  * Define the mapa data config
+  */
+  map: React.PropTypes.object.isRequired,
+  /**
+  * Define the function to update the map params
+  */
+  setMapParams: React.PropTypes.func.isRequired,
+  /**
   * Define the function to handle a tile load erro
   */
-  onTileError: React.PropTypes.func.isRequired,
+  onTileError: React.PropTypes.func.isRequired
 };
 
 export default DataMap;

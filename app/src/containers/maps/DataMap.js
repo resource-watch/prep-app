@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import DataMap from '../../components/maps/DataMap';
 
-import { updateURLParams } from '../../actions/datamap';
+import { updateMapData } from '../../actions/datamap';
 import { setSwitchStatus } from '../../actions/datasets';
 
 const mapStateToProps = (state) => ({
@@ -11,7 +11,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     onTileError: (id) => dispatch(setSwitchStatus(id, false)),
-    setMapParams: (params, newParams) => dispatch(updateURLParams(params, newParams))
+    setMapParams: (params, newParams) => dispatch(updateMapData(params, newParams))
   }
 };
 

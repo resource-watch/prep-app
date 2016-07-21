@@ -92,7 +92,7 @@ function Routes(props) {
       <Route path="/" component={ContainerPage}>
         <IndexRoute component={HomePage} />
         <Route path="data">
-          <IndexRedirect to={`map/${props.latLng.join('/')}/${props.zoom}`}/>
+          <IndexRedirect to={`map/${props.latLng.lat}/${props.latLng.lng}/${props.zoom}`} />
           <Route path="map/:lat/:lng/:zoom" component={DataPage} />
           <Route path="dataset/:slug" component={DataDetailPage}></Route>
         </Route>
@@ -114,7 +114,11 @@ function Routes(props) {
 }
 
 Routes.propTypes = {
-  history: React.PropTypes.object.isRequired
+  history: React.PropTypes.object.isRequired,
+  // Default zoom level
+  zoom: React.PropTypes.number.isRequired,
+  // Default map position
+  latLng: React.PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
