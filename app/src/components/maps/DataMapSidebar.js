@@ -47,7 +47,7 @@ class DataMap extends React.Component {
     });
   }
 
-  render() {;
+  render() {
     let content = this.getContent();
     return (
       <div className={['c-data-map-sidebar', this.state.sidebarOpen ? '-open' : ''].join(' ')}>
@@ -88,7 +88,7 @@ DataMap.propTypes = {
   /**
   * Define the layers on change switch function
   */
-  switchChange: React.PropTypes.func.isRequired,
+  switchChange: React.PropTypes.func.isRequired
 };
 
 export default DataMap;

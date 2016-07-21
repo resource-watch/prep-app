@@ -1,22 +1,20 @@
 import {
-  MAP_ZOOM_CHANGED
+  MAP_DATA_CHANGED
 } from '../constants';
 
 const initialState = {
-  zoom: 3,
-  maxZoom: 18,
-  latLng:{
-    lat: 48.46038,
-    lng: -123.889823
+  zoom: null,
+  latLng: {
+    lat: null,
+    lng: null
   },
   zoomPosition: 'topright',
-  basemap: 'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
-  activeLayers: []
+  basemap: 'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png'
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case MAP_ZOOM_CHANGED: {
+    case MAP_DATA_CHANGED: {
       return Object.assign({}, state, action.payload);
     }
     default:

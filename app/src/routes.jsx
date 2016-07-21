@@ -1,7 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import useScroll from 'react-router-scroll';
-import {IndexRoute, IndexRedirect, Router, Route, applyRouterMiddleware} from 'react-router';
+import { IndexRoute, IndexRedirect, Router, Route, applyRouterMiddleware } from 'react-router';
 import ContainerPage from './components/pages/ContainerPage';
 import HomePage from './components/pages/HomePage';
 import DataPage from './containers/pages/DataPage';
@@ -15,7 +15,7 @@ import AboutPage from './components/pages/AboutPage';
 import FAQsPage from './components/pages/FAQsPage';
 import ContactPage from './components/pages/ContactPage';
 
-function shouldUpdateScroll(prevRouterProps, {location}) {
+function shouldUpdateScroll(prevRouterProps, { location }) {
   /**
    * Return whether the two pages match the regex and have the same matching
    * regex parameters
@@ -93,16 +93,19 @@ function Routes(props) {
         <IndexRoute component={HomePage} />
         <Route path="data">
           <IndexRedirect to={`map/${props.latLng.lat}/${props.latLng.lng}/${props.zoom}`} />
-          <Route path="map/:lat/:lng/:zoom" component={DataPage} />
-          <Route path="dataset/:slug" component={DataDetailPage}></Route>
+          <Route path="map">
+            <IndexRedirect to={`${props.latLng.lat}/${props.latLng.lng}/${props.zoom}`} />
+            <Route path=":lat/:lng/:zoom" component={DataPage} />
+          </Route>
+          <Route path="dataset/:slug" component={DataDetailPage} />
         </Route>
         <Route path="dashboards">
           <IndexRoute component={DashboardsPage} />
-          <Route path=":slug(/:tab)" component={DashboardDetailPage}></Route>
+          <Route path=":slug(/:tab)" component={DashboardDetailPage} />
         </Route>
         <Route path="insights">
           <IndexRoute component={InsightsPage} />
-          <Route path=":slug" component={InsightDetailPage}></Route>
+          <Route path=":slug" component={InsightDetailPage} />
         </Route>
         <Route path="partners" component={PartnersPage} />
         <Route path="about" component={AboutPage} />
@@ -122,8 +125,8 @@ Routes.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  zoom: state.datamap.zoom,
-  latLng: state.datamap.latLng
+  zoom: state.config.map.zoom,
+  latLng: state.config.map.latLng
 });
 const mapDispatchToProps = () => ({});
 

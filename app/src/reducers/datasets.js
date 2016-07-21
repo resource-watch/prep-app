@@ -1,7 +1,7 @@
 import {
   DATASET_LIST_RECEIVED,
   DATASET_DETAIL_RECEIVED,
-  SWITCH_CHANGED,
+  DATASET_LIST_UPDATED,
   SET_SWITCH_STATUS
 } from '../constants';
 
@@ -20,15 +20,8 @@ export default function (state = initialState, action) {
       obj[action.payload.data.slug] = action.payload.data;
       return Object.assign({}, state, { detail: obj });
     }
-    case SWITCH_CHANGED: {
-      const list = state.list.slice(0);
-      for (let i = 0, length = list.length; i < length; i++) {
-        if (list[i].id === action.payload.id) {
-          list[i].active = !list[i].active;
-          break;
-        }
-      }
-      return Object.assign({}, state, { list });
+    case DATASET_LIST_UPDATED: {
+      return Object.assign({}, state, { list: action.payload });
     }
     case SET_SWITCH_STATUS: {
       const list = state.list.slice(0);

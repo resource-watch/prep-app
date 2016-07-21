@@ -12,22 +12,21 @@ class DataMap extends React.Component {
 
   componentDidMount() {
     this.initMap();
+    this.initMapParams();
     this.setMapListeners();
     this.updateLayers();
   }
 
-  componentWillReceiveProps() {
-    this.updateLayers();
+  componentWillReceiveProps(props) {
+    this.updateLayers(props.data);
   }
 
   setMapListeners() {
-    const { params } = this.context.location;
-
     this.map.on('dragend', () => {
-      this.props.setMapParams(params, this.getMapParams());
+      this.props.setMapParams(this.getMapParams());
     });
     this.map.on('zoomend', () => {
-      this.props.setMapParams(params, this.getMapParams());
+      this.props.setMapParams(this.getMapParams());
     });
   }
 
@@ -40,6 +39,10 @@ class DataMap extends React.Component {
         lng: latLng.lng
       }
     };
+  }
+
+  initMapParams() {
+    this.props.initMapParams(this.getMapParams());
   }
 
   initMap() {
@@ -59,10 +62,11 @@ class DataMap extends React.Component {
     ).addTo(this.map, 1);
   }
 
-  updateLayers() {
+  updateLayers(newLayers) {
+    const layers = newLayers || this.props.data;
     this.hasActiveLayers = false;
-    if (this.props.data.length) {
-      this.props.data.forEach((layer) => {
+    if (layers.length) {
+      layers.forEach((layer) => {
         this.updateMapLayer(layer);
       });
     }
@@ -84,12 +88,6 @@ class DataMap extends React.Component {
       });
     }
     switch (layer.mapType) {
-      case 'ArcGISImageMapLayer':
-        this.addArcgisImageLayer(layer);
-        break;
-      case 'ArcGISTiledMapLayer':
-        this.addArcgisTileLayer(layer);
-        break;
       case 'CartoLayer':
         this.addCartoLayer(layer);
         break;
@@ -183,6 +181,10 @@ DataMap.propTypes = {
   * Define the mapa data config
   */
   map: React.PropTypes.object.isRequired,
+  /**
+  * Define the function to set the inital the map params
+  */
+  initMapParams: React.PropTypes.func.isRequired,
   /**
   * Define the function to update the map params
   */
