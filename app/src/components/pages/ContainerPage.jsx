@@ -27,7 +27,7 @@ class ContainerPage extends React.Component {
     const regexToPages = [
       /* Data */
       {
-        regex: /^\/data\/map\/.+$/,
+        regex: /^\/data\/map\/?.*$/,
         theme: 2,
         header: <Navbar small dark />,
         footer: '',
@@ -102,7 +102,11 @@ ContainerPage.propTypes = {
   /**
    * Define the location of the current page
    */
-  location: React.PropTypes.object.isRequired
+  location: React.PropTypes.object.isRequired,
+  /**
+   * Define the params of the url
+   */
+  params: React.PropTypes.object.isRequired
 };
 
 export default ContainerPage;

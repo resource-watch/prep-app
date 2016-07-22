@@ -47,6 +47,11 @@ class DataMap extends React.Component {
 
   initMap() {
     const { params } = this.context.location;
+
+    if (!params.zoom) params.zoom = 3;
+    if (!params.lat) params.lat = 48.46038;
+    if (!params.lng) params.lng = -123.889823;
+
     this.mapLayers = {};
     this.map = L.map(this.refs.map, {
       scrollWheelZoom: false,
