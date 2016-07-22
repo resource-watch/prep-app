@@ -1,7 +1,7 @@
 import {
   MAP_DATA_CHANGED,
-  DATASET_LIST_UPDATED,
-  SET_SWITCH_STATUS
+  TOGGLE_LAYER_STATUS,
+  SET_LAYER_STATUS
 } from '../constants';
 import { push } from 'react-router-redux';
 
@@ -32,25 +32,16 @@ export function updateMapParams(params) {
   };
 }
 
-export function switchChange(slug) {
-  return (dispatch, state) => {
-    const list = state().datasets.list.slice(0);
-    for (let i = 0, length = list.length; i < length; i++) {
-      if (list[i].slug === slug) {
-        list[i].active = !list[i].active;
-        break;
-      }
-    }
-    dispatch({
-      type: DATASET_LIST_UPDATED,
-      payload: list
-    });
+export function switchChange(id) {
+  return {
+    type: TOGGLE_LAYER_STATUS,
+    payload: id
   };
 }
 
 export function setSwitchStatus(id, status) {
   return {
-    type: SET_SWITCH_STATUS,
+    type: SET_LAYER_STATUS,
     payload: { id, status }
   };
 }

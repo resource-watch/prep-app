@@ -23,7 +23,7 @@ class DataMap extends React.Component {
       let icon;
       if (layer.type === 'map') {
         icon = (<Switch
-          onChange={() => this.props.switchChange(layer.slug)}
+          onChange={() => this.props.switchChange(layer.id)}
           checked={layer.active || false}
         />);
       } else {
