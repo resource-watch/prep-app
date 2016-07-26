@@ -17,42 +17,13 @@ npm install
 
 ## Usage
 
+Duplicate `.env.sample`, rename to `.env` and finally set your options in that file.
+
 Run server locally usgin npm:
 
 ```bash
 npm start
 ```
-
-Run server locally using Heroku environment:
-
-```bash
-heroku local web
-```
-
-### Deploy
-
-Configure existing heroku app:
-
-```bash
-heroku git:remote -a project
-```
-
-Run this command to publish master branch to Heroku:
-
-```bash
-git push heroku master
-```
-
-### NOTE
-
-We set NPM_CONFIG_PRODUCTION to true by default to install production dependencies only. If you would like to install devDependencies, you can disable production mode:
-
-```bash
-heroku config:set NPM_CONFIG_PRODUCTION=false
-```
-
-However, since you usually don’t want all development dependencies in your production builds, it’s preferable to move only the dependencies you actually need for production builds (bower, grunt, gulp, etc) into `dependencies`.
-
 
 ## Contributing
 
