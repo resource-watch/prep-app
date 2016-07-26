@@ -3,7 +3,6 @@ import { Link } from 'react-router';
 
 import Switch from '../commons/Switch';
 import Button from '../commons/Button';
-import FilterTab from '../../containers/commons/FilterTab';
 import LoadingSpinner from '../commons/LoadingSpinner';
 
 class DataMap extends React.Component {
@@ -60,9 +59,6 @@ class DataMap extends React.Component {
               <span></span>
             </button>
           </div>
-        </div>
-        <div className="header">
-          <FilterTab />
         </div>
         <div className="content">
           {content}

@@ -39,11 +39,10 @@
   }
 
   > .content {
-    //50px from the c-filter-tab
     padding: 1rem;
     overflow: auto;
     @media #{$mq-tablet} {
-      height: calc(100% - 50px);
+      height: 100%;
     }
     > .layer {
       margin: 15px 0;
