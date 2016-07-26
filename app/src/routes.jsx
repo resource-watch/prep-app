@@ -3,17 +3,17 @@ import {connect} from 'react-redux';
 import useScroll from 'react-router-scroll';
 import {IndexRoute, Router, Route, applyRouterMiddleware} from 'react-router';
 import ContainerPage from './containers/pages/ContainerPage';
-import HomePage from './containers/pages/HomePage';
+import HomePage from './components/pages/HomePage';
 import DataPage from './containers/pages/DataPage';
 import DataDetailPage from './containers/pages/DataDetailPage';
 import DashboardsPage from './containers/pages/DashboardsPage';
 import DashboardDetailPage from './containers/pages/DashboardDetailPage';
 import InsightsPage from './containers/pages/InsightsPage';
 import InsightDetailPage from './containers/pages/InsightDetailPage';
-import PartnersPage from './containers/pages/PartnersPage';
-import AboutPage from './containers/pages/AboutPage';
-import FAQsPage from './containers/pages/FAQsPage';
-import ContactPage from './containers/pages/ContactPage';
+import PartnersPage from './components/pages/PartnersPage';
+import AboutPage from './components/pages/AboutPage';
+import FAQsPage from './components/pages/FAQsPage';
+import ContactPage from './components/pages/ContactPage';
 
 function shouldUpdateScroll(prevRouterProps, {location}) {
   /**
