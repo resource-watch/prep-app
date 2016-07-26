@@ -7,7 +7,7 @@ import { setModalUnderDevelop } from '../../actions/modal';
 const mapStateToProps = (state, location) => ({
   currentPage: location.route.path,
   data: state.datasets,
-  modalOpen: state.modal.open
+  modalOpen: state.modal.underDevelop
 });
 
 const mapDispatchToProps = (dispatch) => ({

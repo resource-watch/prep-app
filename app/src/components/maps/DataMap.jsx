@@ -12,7 +12,7 @@ class DataMap extends React.Component {
 
   componentDidMount() {
     this.initMap();
-    this.initMapParams();
+    this.setMapParams();
     this.setMapListeners();
     this.updateLayers();
   }
@@ -23,10 +23,10 @@ class DataMap extends React.Component {
 
   setMapListeners() {
     this.map.on('dragend', () => {
-      this.props.setMapParams(this.getMapParams());
+      this.setMapParams();
     });
     this.map.on('zoomend', () => {
-      this.props.setMapParams(this.getMapParams());
+      this.setMapParams();
     });
   }
 
@@ -41,8 +41,8 @@ class DataMap extends React.Component {
     };
   }
 
-  initMapParams() {
-    this.props.initMapParams(this.getMapParams());
+  setMapParams() {
+    this.props.setMapParams(this.getMapParams());
   }
 
   initMap() {
@@ -186,10 +186,6 @@ DataMap.propTypes = {
   * Define the mapa data config
   */
   map: React.PropTypes.object.isRequired,
-  /**
-  * Define the function to set the inital the map params
-  */
-  initMapParams: React.PropTypes.func.isRequired,
   /**
   * Define the function to update the map params
   */

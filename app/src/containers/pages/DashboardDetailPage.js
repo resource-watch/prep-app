@@ -9,7 +9,7 @@ const mapStateToProps = (state, { params, route }) => ({
   dashboardSlug: params.slug,
   dashboardTab: params.tab || 'indicators',
   data: state.dashboards.detail[params.slug] || null,
-  modalOpen: state.modal.open
+  modalOpen: state.modal.underDevelop
 });
 
 const mapDispatchToProps = (dispatch) => ({

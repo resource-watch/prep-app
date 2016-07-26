@@ -16,7 +16,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(setSwitchStatus(id, false));
     dispatch(updateURL());
   },
-  initMapParams: (params) => dispatch(updateMapParams(params)),
   setMapParams: (params) => {
     dispatch(updateMapParams(params));
     dispatch(updateURL());
