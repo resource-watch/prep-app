@@ -4,6 +4,7 @@ import {
   DATASET_DETAIL_RECEIVED
 } from '../constants';
 
+import { updateURL } from './datamap';
 const { apiUrl } = config;
 
 export function getDatasets(defaultActiveLayers) {
@@ -30,6 +31,7 @@ export function getDatasets(defaultActiveLayers) {
             data: layers
           }
         });
+        dispatch(updateURL());
       })
       .catch((error) => {
         dispatch({
