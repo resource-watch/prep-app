@@ -10,6 +10,9 @@ import NavTab from '../commons/NavTab';
 import RelatedDatasets from '../commons/RelatedDatasets';
 import LoadingSpinner from '../commons/LoadingSpinner';
 
+import lightUWLogo from '../../../assets/logos/university-washington-light@2x.png';
+import lightNasaLogo from '../../../assets/logos/nasa-light@2x.png';
+
 class DashboardDetailPage extends React.Component {
 
   componentDidMount() {
@@ -117,7 +120,7 @@ class DashboardDetailPage extends React.Component {
                 </p>
                 <a href="#">
                   <img
-                    src={gon.assets.lightUniversityWashingtonLogo}
+                    src={lightUWLogo}
                     width="219"
                     className="logo"
                     alt="University of Washington"
@@ -137,7 +140,7 @@ class DashboardDetailPage extends React.Component {
                 </p>
                 <a href="#">
                   <img
-                    src={gon.assets.lightNasaLogo}
+                    src={lightNasaLogo}
                     width="73"
                     className="logo"
                     alt="NASA"

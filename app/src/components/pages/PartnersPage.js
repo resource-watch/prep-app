@@ -2,6 +2,17 @@ import React from 'react';
 import Header from '../commons/Header';
 import Title from '../commons/Title';
 
+import cartodbLogo from '../../../assets/logos/cartodb@2x.png';
+import descartesLogo from '../../../assets/logos/descartes@2x.png';
+import earthknowledgeLogo from '../../../assets/logos/earthknowledge@2x.png';
+import esriLogo from '../../../assets/logos/esri@2x.png';
+import vizzualityLogo from '../../../assets/logos/vizzuality@2x.png';
+import wriLogo from '../../../assets/logos/wri@2x.png';
+import departementInteriorLogo from '../../../assets/logos/department-interior@2x.png';
+import nasaLogo from '../../../assets/logos/nasa@2x.png';
+import noaaLogo from '../../../assets/logos/noaa@2x.png';
+import globalChangeProgramLogo from '../../../assets/logos/global-change-program@2x.jpg';
+
 export function PartnersPage() {
   return (
     <div className="l-partners">
@@ -35,26 +46,26 @@ export function PartnersPage() {
         </Title>
         <div className="partners-logos">
           <a href="https://cartodb.com" target="_blank" rel="noreferrer">
-            <img src={gon.assets.cartodbLogo} alt="CartoDB" />
+            <img src={cartodbLogo} alt="CartoDB" />
           </a>
           <a
             href="http://www.descarteslabs.com"
             target="_blank"
             rel="noreferrer"
           >
-            <img src={gon.assets.descartesLogo} alt="Descartes Labs" />
+            <img src={descartesLogo} alt="Descartes Labs" />
           </a>
           <a href="http://earthknowledge.net" target="_blank" rel="noreferrer">
-            <img src={gon.assets.earthknowledgeLogo} alt="Earth Knowledge" />
+            <img src={earthknowledgeLogo} alt="Earth Knowledge" />
           </a>
           <a href="http://www.esri.com/" target="_blank" rel="noreferrer">
-            <img src={gon.assets.esriLogo} alt="esri" />
+            <img src={esriLogo} alt="esri" />
           </a>
           <a href="http://www.vizzuality.com" target="_blank" rel="noreferrer">
-            <img src={gon.assets.vizzualityLogo} alt="Vizzuality" />
+            <img src={vizzualityLogo} alt="Vizzuality" />
           </a>
           <a href="http://www.wri.org/" target="_blank" rel="noreferrer">
-            <img src={gon.assets.wriLogo} alt="World Resources Institute" />
+            <img src={wriLogo} alt="World Resources Institute" />
           </a>
         </div>
 
@@ -64,16 +75,16 @@ export function PartnersPage() {
         <div className="partners-logos">
           <a href="https://www.doi.gov" target="_blank" rel="noreferrer">
             <img
-              src={gon.assets.departementInteriorLogo}
+              src={departementInteriorLogo}
               alt="U.S. Department of the Interior"
             />
           </a>
           <a href="https://www.nasa.gov" target="_blank" rel="noreferrer">
-            <img src={gon.assets.nasaLogo} alt="NASA" />
+            <img src={nasaLogo} alt="NASA" />
           </a>
           <a href="http://www.noaa.gov" target="_blank" rel="noreferrer">
             <img
-              src={gon.assets.noaaLogo}
+              src={noaaLogo}
               alt="National Oceanic and Atmospheric Administration"
             />
           </a>
@@ -83,7 +94,7 @@ export function PartnersPage() {
             rel="noreferrer"
           >
             <img
-              src={gon.assets.globalChangeProgramLogo}
+              src={globalChangeProgramLogo}
               alt="Global Change Research Program"
             />
           </a>

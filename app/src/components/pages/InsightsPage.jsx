@@ -45,7 +45,7 @@ class DashboardsPage extends React.Component {
           </p>
           <a href="#">
             <img
-              src={gon.assets[item.partner.logo]}
+              src={item.partner.logo}
               className="logo"
               alt={item.partner.name}
             />
