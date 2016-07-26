@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rm -rf dist/ && webpack --config ./config/webpack.config.js --progress --profile --colors",
     "postinstall": "npm run build",
-    "test": "./node_modules/.bin/xo"
+    "test": "./node_modules/.bin/eslint ."
   },
   "repository": {
     "type": "git",
