@@ -40,7 +40,7 @@ IFrame.propTypes = {
   /**
    * The source url to load iframe
    */
-  src: React.PropTypes.string.isRequired,
+  src: React.PropTypes.string.isRequired
 };
 
 export default IFrame;

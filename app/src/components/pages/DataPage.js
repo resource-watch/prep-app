@@ -62,7 +62,7 @@ DataPage.propTypes = {
   /**
    * Define the function to handle the modal
    */
-  setModalUnderDevelop: React.PropTypes.func.isRequired,
+  setModalUnderDevelop: React.PropTypes.func.isRequired
 };
 
 export default DataPage;

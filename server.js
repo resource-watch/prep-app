@@ -1,6 +1,4 @@
-'use strict';
-
-require('dotenv').config({silent: true});
+require('dotenv').config({ silent: true });
 
 const port = process.env.PORT || 3000;
 const app = require('./config/application');
@@ -10,7 +8,7 @@ const app = require('./config/application');
  */
 app.listen(port, '0.0.0.0', err => {
   if (err) {
-    console.log(err);
+    console.error(err);
   }
   console.info('==> 🌎 Listening on http://0.0.0.0:%s/', port);
 });

@@ -6,7 +6,7 @@ class Map extends React.Component {
     this.map = L.map(this.refs.map, {
       scrollWheelZoom: false,
       center: [48.246038, -122.589823],
-      zoom: 8,
+      zoom: 8
     });
 
     // adding basemap
@@ -24,7 +24,7 @@ Map.propTypes = {
   /**
   * Define the layers data of the map
   */
-  data: React.PropTypes.any.isRequired,
+  data: React.PropTypes.any.isRequired
 };
 
 export default Map;

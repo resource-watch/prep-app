@@ -1,17 +1,13 @@
-'use strict';
-
 const path = require('path');
 const logger = require('morgan');
 const PrettyError = require('pretty-error');
+const webpack = require('webpack');
+const webpackMiddleware = require('webpack-dev-middleware');
+const config = require('../webpack.config.js');
 
 const indexPath = path.join(process.cwd(), 'dist/index.html');
 
-module.exports = function(app) {
-  // Webpack middleware
-  const webpack = require('webpack');
-  const webpackMiddleware = require('webpack-dev-middleware');
-  const config = require('../webpack.config.js');
-
+module.exports = (app) => {
   const compiler = webpack(config);
   const middleware = webpackMiddleware(compiler, {
     publicPath: config.output.publicPath,
@@ -41,7 +37,7 @@ module.exports = function(app) {
   pe.skipPackage('express');
 
   app.use((err, req, res, next) => {
-    console.log(pe.render(err));
+    console.error(pe.render(err));
     next();
   });
 };

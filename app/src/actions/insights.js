@@ -16,10 +16,10 @@ export function getInsightsList() {
           payload: { data }
         });
       })
-      .catch(function(error) {
+      .catch((err) => {
         dispatch({
           type: INSIGHTS_FETCH_ERROR,
-          payload: error
+          payload: err
         });
       });
   };
@@ -35,10 +35,10 @@ export function getInsightBySlug(slug) {
           payload: { data }
         });
       })
-      .catch(function(error) {
+      .catch((err) => {
         dispatch({
           type: INSIGHTS_FETCH_ERROR,
-          payload: error
+          payload: err
         });
       });
   };

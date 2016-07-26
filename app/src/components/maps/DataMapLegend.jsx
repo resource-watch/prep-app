@@ -76,7 +76,7 @@ DataMapLegend.propTypes = {
   /**
   * Define the function to the actions click
   */
-  actionClick: React.PropTypes.func.isRequired,
+  actionClick: React.PropTypes.func.isRequired
 };
 
 export default DataMapLegend;

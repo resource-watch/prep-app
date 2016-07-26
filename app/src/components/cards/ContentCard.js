@@ -59,7 +59,7 @@ ContentCard.propTypes = {
    * Define the content of the card
    * Required
    */
-  children: React.PropTypes.object,
+  children: React.PropTypes.object
 };
 
 export default ContentCard;

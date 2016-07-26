@@ -123,7 +123,7 @@ AboutPage.propTypes = {
   /**
    * Define the route path (from the router)
    */
-  currentPage: React.PropTypes.string,
+  currentPage: React.PropTypes.string
 };
 
 export default AboutPage;
