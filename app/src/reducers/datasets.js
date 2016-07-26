@@ -1,8 +1,9 @@
 import {
   DATASET_LIST_RECEIVED,
   DATASET_DETAIL_RECEIVED,
-  SWITCH_CHANGED,
-  SET_SWITCH_STATUS
+  DATASET_LIST_UPDATED,
+  TOGGLE_LAYER_STATUS,
+  SET_LAYER_STATUS
 } from '../constants';
 
 const initialState = {
@@ -20,17 +21,20 @@ export default function (state = initialState, action) {
       obj[action.payload.data.slug] = action.payload.data;
       return Object.assign({}, state, { detail: obj });
     }
-    case SWITCH_CHANGED: {
+    case DATASET_LIST_UPDATED: {
+      return Object.assign({}, state, { list: action.payload });
+    }
+    case TOGGLE_LAYER_STATUS: {
       const list = state.list.slice(0);
       for (let i = 0, length = list.length; i < length; i++) {
-        if (list[i].id === action.payload.id) {
+        if (list[i].id === action.payload) {
           list[i].active = !list[i].active;
           break;
         }
       }
       return Object.assign({}, state, { list });
     }
-    case SET_SWITCH_STATUS: {
+    case SET_LAYER_STATUS: {
       const list = state.list.slice(0);
       for (let i = 0, length = list.length; i < length; i++) {
         if (list[i].id === action.payload.id) {

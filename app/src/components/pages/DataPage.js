@@ -9,7 +9,12 @@ class DataPage extends React.Component {
 
   componentDidMount() {
     if (!this.props.data.list.length) {
-      this.props.getDatasets();
+      const { query } = this.context.location;
+      if (query && query.activeLayers) {
+        this.props.getDatasets(query.activeLayers.split(','));
+      } else {
+        this.props.getDatasets();
+      }
     }
   }
 
@@ -32,6 +37,10 @@ class DataPage extends React.Component {
     );
   }
 }
+
+DataPage.contextTypes = {
+  location: React.PropTypes.object
+};
 
 DataPage.propTypes = {
   /**

@@ -11,7 +11,7 @@ const mapStateToProps = (state, location) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getDatasets: () => dispatch(getDatasets()),
+  getDatasets: (defaultActiveLayers) => dispatch(getDatasets(defaultActiveLayers)),
   setModalUnderDevelop: (status) =>
     dispatch(setModalUnderDevelop(status))
 });

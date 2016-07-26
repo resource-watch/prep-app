@@ -1,8 +1,8 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import useScroll from 'react-router-scroll';
-import {IndexRoute, Router, Route, applyRouterMiddleware} from 'react-router';
-import ContainerPage from './containers/pages/ContainerPage';
+import { IndexRoute, IndexRedirect, Router, Route, applyRouterMiddleware } from 'react-router';
+import ContainerPage from './components/pages/ContainerPage';
 import HomePage from './components/pages/HomePage';
 import DataPage from './containers/pages/DataPage';
 import DataDetailPage from './containers/pages/DataDetailPage';
@@ -15,7 +15,7 @@ import AboutPage from './components/pages/AboutPage';
 import FAQsPage from './components/pages/FAQsPage';
 import ContactPage from './components/pages/ContactPage';
 
-function shouldUpdateScroll(prevRouterProps, {location}) {
+function shouldUpdateScroll(prevRouterProps, { location }) {
   /**
    * Return whether the two pages match the regex and have the same matching
    * regex parameters
@@ -92,16 +92,17 @@ function Routes(props) {
       <Route path="/" component={ContainerPage}>
         <IndexRoute component={HomePage} />
         <Route path="data">
-          <IndexRoute component={DataPage} />
-          <Route path=":slug" component={DataDetailPage}></Route>
+          <IndexRedirect to="map" />
+          <Route path="map(/:lat)(/:lng)(/:zoom)" component={DataPage} />
+          <Route path="dataset/:slug" component={DataDetailPage} />
         </Route>
         <Route path="dashboards">
           <IndexRoute component={DashboardsPage} />
-          <Route path=":slug(/:tab)" component={DashboardDetailPage}></Route>
+          <Route path=":slug(/:tab)" component={DashboardDetailPage} />
         </Route>
         <Route path="insights">
           <IndexRoute component={InsightsPage} />
-          <Route path=":slug" component={InsightDetailPage}></Route>
+          <Route path=":slug" component={InsightDetailPage} />
         </Route>
         <Route path="partners" component={PartnersPage} />
         <Route path="about" component={AboutPage} />

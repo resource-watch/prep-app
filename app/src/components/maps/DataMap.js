@@ -12,33 +12,66 @@ class DataMap extends React.Component {
 
   componentDidMount() {
     this.initMap();
+    this.initMapParams();
+    this.setMapListeners();
     this.updateLayers();
   }
 
-  componentWillReceiveProps() {
-    this.updateLayers();
+  componentWillReceiveProps(props) {
+    this.updateLayers(props.data);
+  }
+
+  setMapListeners() {
+    this.map.on('dragend', () => {
+      this.props.setMapParams(this.getMapParams());
+    });
+    this.map.on('zoomend', () => {
+      this.props.setMapParams(this.getMapParams());
+    });
+  }
+
+  getMapParams() {
+    const latLng = this.map.getCenter();
+    return {
+      zoom: this.map.getZoom(),
+      latLng: {
+        lat: latLng.lat,
+        lng: latLng.lng
+      }
+    };
+  }
+
+  initMapParams() {
+    this.props.initMapParams(this.getMapParams());
   }
 
   initMap() {
+    const { params } = this.context.location;
+
+    if (!params.zoom) params.zoom = 3;
+    if (!params.lat) params.lat = 48.46038;
+    if (!params.lng) params.lng = -123.889823;
+
     this.mapLayers = {};
     this.map = L.map(this.refs.map, {
       scrollWheelZoom: false,
       zoomControl: false,
-      center: [48.46038, -123.889823],
-      zoom: 3,
+      center: [+params.lat, +params.lng],
+      zoom: +params.zoom
     });
-    L.control.zoom({ position: 'topright' }).addTo(this.map);
+    L.control.zoom({ position: this.props.map.zoomPosition }).addTo(this.map);
 
     L.tileLayer(
-      'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
+      this.props.map.basemap,
       { maxZoom: 18 }
     ).addTo(this.map, 1);
   }
 
-  updateLayers() {
+  updateLayers(newLayers) {
+    const layers = newLayers || this.props.data;
     this.hasActiveLayers = false;
-    if (this.props.data.length) {
-      this.props.data.forEach((layer) => {
+    if (layers.length) {
+      layers.forEach((layer) => {
         this.updateMapLayer(layer);
       });
     }
@@ -60,40 +93,12 @@ class DataMap extends React.Component {
       });
     }
     switch (layer.mapType) {
-      case 'ArcGISImageMapLayer':
-        this.addArcgisImageLayer(layer);
-        break;
-      case 'ArcGISTiledMapLayer':
-        this.addArcgisTileLayer(layer);
-        break;
       case 'CartoLayer':
         this.addCartoLayer(layer);
         break;
       default:
         break;
     }
-  }
-
-  addArcgisImageLayer(layer) {
-    this.mapLayers[layer.id] = L.esri.imageMapLayer({
-      url: layer.url,
-      mosaicRule: layer.mosaicRule,
-      useCors: false
-    }).addTo(this.map);
-    this.mapLayers[layer.id].on('load', () => {
-      this.handleTileLoaded(layer);
-    });
-  }
-
-  addArcgisTileLayer(layer) {
-    this.mapLayers[layer.id] = L.esri.tiledMapLayer({
-      url: layer.url,
-      mosaicRule: layer.mosaicRule,
-      useCors: false
-    }).addTo(this.map);
-    this.mapLayers[layer.id].on('load', () => {
-      this.handleTileLoaded(layer);
-    });
   }
 
   addCartoLayer(layer) {
@@ -168,15 +173,31 @@ class DataMap extends React.Component {
   }
 }
 
+DataMap.contextTypes = {
+  location: React.PropTypes.object
+};
+
 DataMap.propTypes = {
   /**
   * Define the layers data of the map
   */
   data: React.PropTypes.array.isRequired,
   /**
+  * Define the mapa data config
+  */
+  map: React.PropTypes.object.isRequired,
+  /**
+  * Define the function to set the inital the map params
+  */
+  initMapParams: React.PropTypes.func.isRequired,
+  /**
+  * Define the function to update the map params
+  */
+  setMapParams: React.PropTypes.func.isRequired,
+  /**
   * Define the function to handle a tile load erro
   */
-  onTileError: React.PropTypes.func.isRequired,
+  onTileError: React.PropTypes.func.isRequired
 };
 
 export default DataMap;
