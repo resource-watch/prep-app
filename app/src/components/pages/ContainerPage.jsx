@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from '../commons/Modal';
 import Footer from '../commons/Footer';
 import Navbar from '../commons/Navbar';
 
@@ -85,6 +86,16 @@ class ContainerPage extends React.Component {
         {page.header}
         {this.props.children}
         {page.footer}
+        <Modal
+          opened={this.props.modalOpen}
+          close={() => this.props.setModalShare(false)}
+        >
+          <div className="content">
+            <div className="c-share-url">
+              <span className="url" >{window.location.href}</span>
+            </div>
+          </div>
+        </Modal>
       </div>
     );
   }
@@ -106,7 +117,15 @@ ContainerPage.propTypes = {
   /**
    * Define the params of the url
    */
-  params: React.PropTypes.object.isRequired
+  params: React.PropTypes.object.isRequired,
+  /**
+   * Define the share modal status
+   */
+  modalOpen: React.PropTypes.bool.isRequired,
+  /**
+   * Define the share modal function to set status
+   */
+  setModalShare: React.PropTypes.func.isRequired
 };
 
 export default ContainerPage;

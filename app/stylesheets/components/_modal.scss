@@ -20,10 +20,12 @@
     position: relative;
     padding: 2rem;;
     background-color: $color-5;
+    width: 100%;
     max-width: $wrapper-max-width;
 
     @media #{$mq-mobile-large} {
       min-width: 370px;
+      width: auto;
     }
     @media #{$mq-tablet} {
       min-width: 620px;

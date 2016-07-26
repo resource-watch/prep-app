@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import useScroll from 'react-router-scroll';
 import { IndexRoute, IndexRedirect, Router, Route, applyRouterMiddleware } from 'react-router';
-import ContainerPage from './components/pages/ContainerPage';
+import ContainerPage from './containers/pages/ContainerPage';
 import HomePage from './components/pages/HomePage';
 import DataPage from './containers/pages/DataPage';
 import DataDetailPage from './containers/pages/DataDetailPage';
