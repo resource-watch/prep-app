@@ -1,6 +1,6 @@
 # The Climate Partnership for Resilience and Preparedness
 
-![Screenshot about PREP][./public/screenshot.png]
+![Screenshot about PREP](./public/screenshot.png)
 
 The Climate Partnership for Resilience and Preparedness (C-PREP) is a public-private collaboration whose mission is to help planners, investors, and resource managers around the globe rapidly assess and incorporate climate risks into their decisions by enhancing access to the best available data, and insights on climate change. Climate assessments have traditionally focused on building the case for climate action by publishing static written reports. Users of climate risk data have depended on science ‘translators’ to communicate key messages from assessments and related reports, without having direct access to the underlying data sets.
 
