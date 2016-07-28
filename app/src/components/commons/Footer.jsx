@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import PartnersLogos from '../../containers/commons/PartnersLogos';
 
 import wriLogoLight from '../../../assets/logos/wri-light@2x.png';
 import esriLogoLight from '../../../assets/logos/esri-light@2x.png';
@@ -11,27 +12,7 @@ function Footer(props) {
   return (
     <div className="c-footer">
       <div className="wrapper">
-        <div className="partners">
-          <a href="http://www.wri.org" rel="noreferrer" target="_blank">
-            <img src={wriLogoLight} alt="World Resources Institute" className="wri" />
-          </a>
-          <a href="http://www.esri.com" rel="noreferrer" target="_blank">
-            <img src={esriLogoLight} alt="esri" className="esri" />
-          </a>
-          <a href="http://www.vizzuality.com" rel="noreferrer" target="_blank">
-            <img src={vizzualityLogoLight} alt="Vizzuality" className="vizzuality" />
-          </a>
-          <a href="http://www.nasa.gov" rel="noreferrer" target="_blank">
-            <img src={nasaLogoLight} alt="NASA" className="nasa" />
-          </a>
-          <a
-            href="http://www.descarteslabs.com"
-            rel="noreferrer"
-            target="_blank"
-          >
-            <img src={descartesLogoLight} alt="Descartes Labs" className="descartes" />
-          </a>
-        </div>
+        <PartnersLogos/>
         <footer>
           <div className="media">
             <a>

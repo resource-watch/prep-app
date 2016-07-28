@@ -3,3 +3,4 @@ export { default as dashboards } from './dashboards';
 export { default as insights } from './insights';
 export { default as datasets } from './datasets';
 export { default as datamap } from './datamap';
+export { default as partners } from './partners';
