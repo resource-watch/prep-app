@@ -13,7 +13,7 @@ export function getPartners() {
       .catch((err) => {
         dispatch({
           type: PARTNERS_FETCH_ERROR,
-          payload: err
+          payload: err.message
         });
       });
   };

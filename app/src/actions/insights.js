@@ -19,7 +19,7 @@ export function getInsightsList() {
       .catch((err) => {
         dispatch({
           type: INSIGHTS_FETCH_ERROR,
-          payload: err
+          payload: err.message
         });
       });
   };
@@ -38,7 +38,7 @@ export function getInsightBySlug(slug) {
       .catch((err) => {
         dispatch({
           type: INSIGHTS_FETCH_ERROR,
-          payload: err
+          payload: err.message
         });
       });
   };

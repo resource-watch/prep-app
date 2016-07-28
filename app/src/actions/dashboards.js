@@ -19,7 +19,7 @@ export function getDashboardList() {
       .catch((err) => {
         dispatch({
           type: DASHBOARD_FETCH_ERROR,
-          payload: err
+          payload: err.message
         });
       });
   };
@@ -38,7 +38,7 @@ export function getDashboardBySlug(slug) {
       .catch((err) => {
         dispatch({
           type: DASHBOARD_FETCH_ERROR,
-          payload: err
+          payload: err.message
         });
       });
   };
