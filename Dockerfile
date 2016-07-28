@@ -8,6 +8,8 @@ RUN apk update && apk upgrade && \
     apk add --no-cache --update bash git openssh python \
     build-base cairo-dev
 
+RUN npm install -g pm2
+
 # Create app directory
 RUN mkdir -p /usr/src/$NAME
 WORKDIR /usr/src/$NAME
@@ -20,4 +22,4 @@ RUN npm install
 COPY . /usr/src/$NAME
 
 EXPOSE 3000
-CMD [ "npm", "start" ]
+CMD pm2 start --no-daemon processes.json
