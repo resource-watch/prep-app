@@ -13,8 +13,8 @@ function ChartCard(props) {
       header={header}
       dataTooltip={props.tooltip && props.data}
     >
-      {props.data && props.data.json_spec &&
-        <VegaChart data={JSON.parse(JSON.stringify(props.data.json_spec))} />
+      {props.data && props.data.widget_config &&
+        <VegaChart data={props.data.widget_config} />
       }
     </ContentCard>
   );
