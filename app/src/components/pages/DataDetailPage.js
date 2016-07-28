@@ -21,14 +21,14 @@ class DataPageDetail extends React.Component {
       <div className="wrapper">
         <SectionIntro
           data={this.props.data}
-          currentPage={this.props.currentPage}
+          currentSection={'data'}
         />
       </div>
 
       <div className="wrapper">
         <p>{this.props.data.summary}</p>
         <div className="chart-container">
-          <VegaChart data={JSON.parse(JSON.stringify(this.props.data.json_spec.data))} />
+          <VegaChart data={this.props.data.widget_config} />
         </div>
       </div>
     </div>);
@@ -37,10 +37,10 @@ class DataPageDetail extends React.Component {
   render() {
     let content = this.getContent();
     let title;
-    if (this.props.data && this.props.data.title) {
+    if (this.props.data && this.props.data.name) {
       title = (
         <Title inverse center border type="page">
-          {this.props.data.title}
+          {this.props.data.name}
         </Title>
       );
     }

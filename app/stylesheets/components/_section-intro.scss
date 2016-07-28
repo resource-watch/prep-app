@@ -13,7 +13,6 @@
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 10px;
 
       @media #{$mq-tablet} {
         flex-direction: row;
@@ -56,6 +55,7 @@
       position: relative;
       padding: 1rem;
       background-color: $color-5;
+      margin-top: 10px;
 
       @media #{$mq-tablet} {
         padding: 4rem;

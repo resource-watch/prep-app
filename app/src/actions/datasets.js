@@ -5,20 +5,20 @@ import {
 } from '../constants';
 
 import { updateURL } from './datamap';
-const { apiUrl } = config;
+const { apiUrlRW } = config;
 
 export function getDatasets(defaultActiveLayers) {
   return dispatch => {
-    fetch(`${apiUrl}/data/datasets/list.json`)
+    fetch(`${apiUrlRW}/datasets`)
       .then(response => {
         if (response.ok) return response.json();
         return {};
       })
       .then(data => {
-        const layers = data && data.layers || [];
-        if (layers.length && defaultActiveLayers && defaultActiveLayers.length) {
+        const layers = data || [];
+        if (layers.length) {
           for (let i = 0, length = layers.length; i < length; i++) {
-            if (defaultActiveLayers.indexOf(layers[i].slug) > -1) {
+            if (defaultActiveLayers && defaultActiveLayers.indexOf(layers[i].id) > -1) {
               layers[i].active = true;
             } else {
               layers[i].active = false;
@@ -33,32 +33,39 @@ export function getDatasets(defaultActiveLayers) {
         });
         dispatch(updateURL());
       })
-      .catch((error) => {
+      .catch((err) => {
         dispatch({
           type: DATASET_FETCH_ERROR,
-          payload: error
+          payload: err.message
         });
       });
   };
 }
 
-export function getDatasetBySlug(slug) {
+export function getDatasetBySlug(datasetId) {
   return dispatch => {
-    fetch(`${apiUrl}/data/datasets/${slug}.json`)
+    fetch(`${apiUrlRW}/widgets?app=prep&default=true&dataset=${datasetId}`)
       .then(response => {
         if (response.ok) return response.json();
         return {};
       })
       .then(data => {
-        dispatch({
-          type: DATASET_DETAIL_RECEIVED,
-          payload: { data }
-        });
+        fetch(`${apiUrlRW}/widgets/${data[0].id}`)
+          .then(response => {
+            if (response.ok) return response.json();
+            return {};
+          })
+          .then(widget => {
+            dispatch({
+              type: DATASET_DETAIL_RECEIVED,
+              payload: { data: widget }
+            });
+          });
       })
-      .catch((error) => {
+      .catch((err) => {
         dispatch({
           type: DATASET_FETCH_ERROR,
-          payload: error
+          payload: err.message
         });
       });
   };

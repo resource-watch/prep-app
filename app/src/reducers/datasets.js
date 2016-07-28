@@ -18,7 +18,7 @@ export default function (state = initialState, action) {
     }
     case DATASET_DETAIL_RECEIVED: {
       const obj = {};
-      obj[action.payload.data.slug] = action.payload.data;
+      obj[action.payload.data.dataset_id] = action.payload.data;
       return Object.assign({}, state, { detail: obj });
     }
     case DATASET_LIST_UPDATED: {
