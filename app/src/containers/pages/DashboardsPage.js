@@ -3,8 +3,7 @@ import DashboardsPage from '../../components/pages/DashboardsPage';
 
 import { getDashboardList } from '../../actions/dashboards';
 
-const mapStateToProps = (state, location) => ({
-  currentPage: location.route.path,
+const mapStateToProps = (state) => ({
   data: state.dashboards.list
 });
 const mapDispatchToProps = (dispatch) => ({

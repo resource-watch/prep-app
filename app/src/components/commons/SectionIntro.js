@@ -5,6 +5,7 @@ function SectionIntro(props) {
   return (
     <div className={"c-section-intro"}>
       <div className="container">
+      {props.data.partner &&
         <div className="top-bar">
           <div className="logo">
             <img src={props.data.partner.logo} alt={props.data.partner.name} />
@@ -14,10 +15,11 @@ function SectionIntro(props) {
             <span>{props.data.partner.contact_email}</span>
           </div>
         </div>
+      }
         <div className="content">
           <div className="wrapper-mini">
             <ToolbarActions
-              currentSection={props.currentPage.split('/')[0]}
+              currentSection={props.currentSection}
             />
             <p> {props.data.description} </p>
           </div>
@@ -38,9 +40,9 @@ SectionIntro.propTypes = {
    */
   data: React.PropTypes.object.isRequired,
   /**
-   * Define the route path (from the router)
+   * Define the current section
    */
-  currentPage: React.PropTypes.string
+  currentSection: React.PropTypes.string
 };
 
 export default SectionIntro;
