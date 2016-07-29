@@ -2,42 +2,6 @@
   color: $color-5;
   background-color: $color-7;
 
-  .partners {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 25px 0;
-    border-bottom: 3px solid rgba(lighten($color-7, 20%), .3);
-
-    a {
-      flex-basis: 100%;
-      text-align: center;
-      margin-bottom: 20px;
-      &:last-of-type { margin-bottom: 0; }
-
-      @media #{$mq-mobile-large} {
-        flex-basis: 50%;
-        &:last-of-type { flex-basis: 100%; }
-      }
-
-      @media #{$mq-tablet} {
-        flex-basis: auto;
-        margin-bottom: 0;
-        text-align: left;
-        &:last-of-type { flex-basis: auto; }
-      }
-    }
-
-    img.wri        { width: 114px; }
-    img.esri       { width:  99px; }
-    img.vizzuality { width: 105px; }
-    img.nasa       { width:  65px; }
-    img.descartes  { width: 126px; }
-
-    img { max-width: 100%; }
-  }
-
   footer {
     display: flex;
     justify-content: center;
