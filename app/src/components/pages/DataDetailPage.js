@@ -9,7 +9,7 @@ class DataPageDetail extends React.Component {
 
   componentDidMount() {
     if (!this.props.data) {
-      this.props.getDatasetBySlug(this.props.datasetSlug);
+      this.props.getDatasetData(this.props.datasetSlug);
     }
   }
 
@@ -69,7 +69,7 @@ DataPageDetail.propTypes = {
   /**
    * Define the function to get the datataset detail data
    */
-  getDatasetBySlug: React.PropTypes.func.isRequired,
+  getDatasetData: React.PropTypes.func.isRequired,
   /**
    * Define the dataset data
    */

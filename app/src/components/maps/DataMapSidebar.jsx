@@ -22,7 +22,7 @@ class DataMap extends React.Component {
       let icon;
       if (dataset.layers && dataset.layers.length) {
         icon = (<Switch
-          onChange={() => this.props.switchChange(dataset.id)}
+          onChange={() => this.props.switchChange(dataset)}
           checked={dataset.active || false}
         />);
       } else {

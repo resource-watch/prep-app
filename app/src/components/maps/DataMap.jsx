@@ -14,11 +14,11 @@ class DataMap extends React.Component {
     this.initMap();
     this.setMapParams();
     this.setMapListeners();
-    this.updateLayers();
+    this.updateDatasets();
   }
 
   componentWillReceiveProps(props) {
-    this.updateLayers(props.data);
+    this.updateDatasets(props.data, props.layers);
   }
 
   setMapListeners() {
@@ -67,41 +67,62 @@ class DataMap extends React.Component {
     ).addTo(this.map, 1);
   }
 
-  updateLayers(newLayers) {
-    const layers = newLayers || this.props.data;
+  updateDatasets(newData, newLayers) {
+    const datasets = newData || this.props.data;
+    const layers = newLayers || this.props.layers;
     this.hasActiveLayers = false;
-    if (layers.length) {
-      layers.forEach((layer) => {
-        this.updateMapLayer(layer);
+    if (datasets.length) {
+      datasets.forEach((dataset) => {
+        if (dataset.layers.length) {
+          this.updateMapLayer(dataset, layers);
+        }
       });
     }
   }
 
-  updateMapLayer(layer) {
-    if (layer.active && !this.mapLayers[layer.id]) {
-      this.hasActiveLayers = true;
-      this.addMapLayer(layer);
-    } else if (!layer.active && this.mapLayers[layer.id]) {
-      this.removeMapLayer(layer);
+  wasAlreadyAdded(dataset) {
+    return this.mapLayers[dataset.layers[0].layer_id] || false;
+  }
+
+  isLayerReady(dataset, layers) {
+    if (dataset.layers && dataset.layers.length) {
+      const layerId = dataset.layers[0].layer_id;
+      return layers && layers[layerId] || false;
+    }
+    return false;
+  }
+
+  updateMapLayer(dataset, layers) {
+    const layerId = dataset.layers[0].layer_id;
+    if (dataset.active) {
+      if (!this.wasAlreadyAdded(dataset) && this.isLayerReady(dataset, layers)) {
+        this.hasActiveLayers = true;
+        const layer = layers[layerId];
+        this.addMapLayer(dataset, layer);
+      }
+    } else if (this.mapLayers[layerId]) {
+      this.removeMapLayer(layerId);
     }
   }
 
-  addMapLayer(layer) {
+  addMapLayer(dataset, layer) {
     if (!this.state.loading) {
       this.setState({
         loading: true
       });
     }
-    switch (layer.mapType) {
-      case 'CartoLayer':
-        this.addCartoLayer(layer);
+    switch (layer.attributes.provider) {
+      case 'cartodb':
+        this.addCartoLayer(dataset, layer);
         break;
       default:
         break;
     }
   }
 
-  addCartoLayer(layer) {
+  addCartoLayer(dataset, apiLayer) {
+    const layer = apiLayer.attributes['layer-config'];
+    layer.id = apiLayer.id;
     const request = new Request(`https://${layer.account}.cartodb.com/api/v1/map`, {
       method: 'POST',
       headers: new Headers({
@@ -119,17 +140,20 @@ class DataMap extends React.Component {
         }]
       })
     });
+    // add to the load layers lists before the fetch
+    // to avoid multiples loads while the layer is loading
+    this.mapLayers[layer.id] = true;
 
     fetch(request)
       .then(res => {
         if (res.ok) {
           return res.json();
         }
-        return this.handleTileError(layer);
+        throw new Error(res.statusText);
       })
       .then((data) => {
         // we can switch off the layer while it is loading
-        if (layer.active) {
+        if (dataset.active) {
           const tileUrl = `https://${layer.account}.cartodb.com/api/v1/map/${data.layergroupid}/{z}/{x}/{y}.png`;
           this.mapLayers[layer.id] = L.tileLayer(tileUrl).addTo(this.map, 1);
           this.mapLayers[layer.id].on('load', () => {
@@ -138,14 +162,16 @@ class DataMap extends React.Component {
           this.mapLayers[layer.id].on('tileerror', () => {
             this.handleTileError(layer);
           });
+        } else {
+          delete this.mapLayers[layer.id];
         }
       })
       .catch(() => this.props.onTileError(layer.id));
   }
 
-  removeMapLayer(layer) {
-    this.map.removeLayer(this.mapLayers[layer.id]);
-    this.mapLayers[layer.id] = null;
+  removeMapLayer(layerId) {
+    this.map.removeLayer(this.mapLayers[layerId]);
+    delete this.mapLayers[layerId];
   }
 
   handleTileLoaded() {
@@ -179,9 +205,13 @@ DataMap.contextTypes = {
 
 DataMap.propTypes = {
   /**
-  * Define the layers data of the map
+  * Define the datasets data of the map
   */
   data: React.PropTypes.array.isRequired,
+  /**
+  * Define the layers data of the map
+  */
+  layers: React.PropTypes.object,
   /**
   * Define the mapa data config
   */
