@@ -18,7 +18,9 @@ COPY . /usr/src/$NAME
 # Install app dependencies
 COPY package.json /usr/src/$NAME/
 RUN npm install
-# generate statics
+
+# Generate statics files
 RUN npm run build
+
 EXPOSE 3000
 CMD pm2 start --no-daemon processes.json
