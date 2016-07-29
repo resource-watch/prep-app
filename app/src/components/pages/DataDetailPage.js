@@ -28,7 +28,9 @@ class DataPageDetail extends React.Component {
       <div className="wrapper">
         <p>{this.props.data.summary}</p>
         <div className="chart-container">
-          <VegaChart data={this.props.data.widget_config} />
+          {this.props.data.widget_config &&
+            <VegaChart data={this.props.data.widget_config} />
+          }
         </div>
       </div>
     </div>);

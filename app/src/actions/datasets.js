@@ -87,10 +87,11 @@ export function getDatasetDefaultWidget(datasetId) {
     fetch(`${apiUrlRW}/widgets?app=prep&default=true&dataset=${datasetId}`)
       .then(response => {
         if (response.ok) return response.json();
-        return {};
+        throw new Error(response.statusText);
       })
       .then(data => {
-        fetch(`${apiUrlRW}/widgets/${data[0].id}`)
+        if (data.length) {
+          fetch(`${apiUrlRW}/widgets/${data[0].id}`)
           .then(response => {
             if (response.ok) return response.json();
             throw new Error(response.statusText);
@@ -101,6 +102,18 @@ export function getDatasetDefaultWidget(datasetId) {
               payload: { data: widget }
             });
           });
+        } else {
+          dispatch({
+            type: DATASET_DETAIL_RECEIVED,
+            payload: {
+              data: {
+                name: 'Contact us',
+                description: 'There was an error getting the visualization, please contact us hello@vizzuality.com',
+                dataset_id: datasetId
+              }
+            }
+          });
+        }
       })
       .catch((err) => {
         dispatch({
