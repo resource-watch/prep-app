@@ -41,8 +41,8 @@ docker-compose up
 Maybe, first time you will need run these tasks:
 
 ```bash
-docker-compose run app rake db:create
-docker-compose run app rake db:migrate
+docker-compose run prod rake db:create
+docker-compose run prod rake db:migrate
 ```
 
 
