@@ -19,14 +19,14 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, { list: action.payload.data });
     }
     case DATASET_DETAIL_RECEIVED: {
-      const obj = {};
-      obj[action.payload.data.dataset_id] = action.payload.data;
-      return Object.assign({}, state, { details: obj });
+      const details = Object.assign({}, state.details, {});
+      details[action.payload.data.dataset_id] = action.payload.data;
+      return Object.assign({}, state, { details });
     }
     case DATASET_LAYER_RECEIVED: {
-      const obj = {};
-      obj[action.payload.data.id] = action.payload.data;
-      return Object.assign({}, state, { layers: obj });
+      const layers = Object.assign({}, state.layers, {});
+      layers[action.payload.data.id] = action.payload.data;
+      return Object.assign({}, state, { layers });
     }
     case DATASET_LAYER_FETCH_ERROR: {
       const list = state.list.slice(0);
