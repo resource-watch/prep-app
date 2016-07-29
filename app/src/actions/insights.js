@@ -9,7 +9,10 @@ const { apiUrl } = config;
 export function getInsightsList() {
   return dispatch => {
     fetch(`${apiUrl}/api/insights`)
-      .then(response => (response.json()))
+      .then(response => {
+        if (response.ok) return response.json();
+        throw new Error(response.statusText);
+      })
       .then(data => {
         dispatch({
           type: INSIGHTS_LIST_RECEIVED,
@@ -19,7 +22,7 @@ export function getInsightsList() {
       .catch((err) => {
         dispatch({
           type: INSIGHTS_FETCH_ERROR,
-          payload: err
+          payload: err.message
         });
       });
   };
@@ -28,7 +31,10 @@ export function getInsightsList() {
 export function getInsightBySlug(slug) {
   return dispatch => {
     fetch(`${apiUrl}/api/insights/${slug}`)
-      .then(response => (response.json()))
+      .then(response => {
+        if (response.ok) return response.json();
+        throw new Error(response.statusText);
+      })
       .then(data => {
         dispatch({
           type: INSIGHTS_DETAIL_RECEIVED,
@@ -38,7 +44,7 @@ export function getInsightBySlug(slug) {
       .catch((err) => {
         dispatch({
           type: INSIGHTS_FETCH_ERROR,
-          payload: err
+          payload: err.message
         });
       });
   };

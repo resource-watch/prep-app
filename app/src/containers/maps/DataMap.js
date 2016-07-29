@@ -9,6 +9,7 @@ import {
 
 const mapStateToProps = (state) => ({
   data: state.datasets.list,
+  layers: state.datasets.layers,
   map: state.datamap
 });
 const mapDispatchToProps = (dispatch) => ({

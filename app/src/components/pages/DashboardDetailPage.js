@@ -66,7 +66,7 @@ class DashboardDetailPage extends React.Component {
           <SectionIntro
             data={this.props.data}
             dashboardSlug={this.props.dashboardSlug}
-            currentPage={this.props.currentPage}
+            currentSection="dashboards"
           />
         </div>
 

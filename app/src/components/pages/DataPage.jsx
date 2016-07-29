@@ -10,8 +10,8 @@ class DataPage extends React.Component {
   componentDidMount() {
     if (!this.props.data.list.length) {
       const { query } = this.context.location;
-      if (query && query.activeLayers) {
-        this.props.getDatasets(query.activeLayers.split(','));
+      if (query && query.activeDatasets) {
+        this.props.getDatasets(query.activeDatasets.split(','));
       } else {
         this.props.getDatasets();
       }

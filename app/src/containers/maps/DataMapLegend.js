@@ -3,19 +3,33 @@ import DataMapLegend from '../../components/maps/DataMapLegend';
 
 import { setModalUnderDevelop } from '../../actions/modal';
 
-function getActiveLayers(layers) {
-  if (!layers.length) {
+function isLayerReady(dataset, layers) {
+  if (dataset.layers && dataset.layers.length) {
+    const layerId = dataset.layers[0].layer_id;
+    if (layers && layers[layerId]) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function getActiveLayers(datasets, layers) {
+  if (!datasets.length) {
     return [];
   }
   const activeLayers = [];
-  layers.forEach((layer) => {
-    if (layer.active) activeLayers.push(layer);
+  datasets.forEach((dataset) => {
+    if (dataset.active && isLayerReady(dataset, layers)) {
+      const layer = layers[dataset.layers[0].layer_id];
+      layer.title = dataset.name;
+      activeLayers.push(layer);
+    }
   });
   return activeLayers;
 }
 
 const mapStateToProps = (state) => ({
-  data: getActiveLayers(state.datasets.list)
+  data: getActiveLayers(state.datasets.list, state.datasets.layers)
 });
 const mapDispatchToProps = (dispatch) => ({
   actionClick: () => dispatch(setModalUnderDevelop(true))

@@ -34,7 +34,8 @@ const webpackConfig = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       config: {
-        apiUrl: JSON.stringify(process.env.API_URL)
+        apiUrl: JSON.stringify(process.env.API_URL),
+        apiUrlRW: JSON.stringify(process.env.RW_API_URL)
       }
     })
   ],

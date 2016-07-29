@@ -4,8 +4,7 @@ import DashboardsPage from '../../components/pages/DashboardDetailPage';
 import { getDashboardBySlug } from '../../actions/dashboards';
 import { setModalUnderDevelop } from '../../actions/modal';
 
-const mapStateToProps = (state, { params, route }) => ({
-  currentPage: route.path,
+const mapStateToProps = (state, { params }) => ({
   dashboardSlug: params.slug,
   dashboardTab: params.tab || 'indicators',
   data: state.dashboards.detail[params.slug] || null,
