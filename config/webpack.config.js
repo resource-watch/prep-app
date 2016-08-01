@@ -25,11 +25,6 @@ const webpackConfig = {
       inject: 'body',
       filename: 'index.html'
     }),
-    new ExtractTextPlugin('styles-[hash].css', {
-      allChunks: true
-    }),
-    new webpack.DefinePlugin({
-    }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
@@ -82,6 +77,7 @@ if (process.env.NODE_ENV === 'production') {
     },
     comments: false
   }));
+  webpackConfig.plugins.push(new ExtractTextPlugin('styles-[hash].css'));
 } else {
   webpackConfig.devtool = 'source-map';
 }
