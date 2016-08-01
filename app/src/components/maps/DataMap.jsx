@@ -128,17 +128,7 @@ class DataMap extends React.Component {
       headers: new Headers({
         'Content-Type': 'application/json'
       }),
-      body: JSON.stringify({
-        layers: [{
-          user_name: layer.account,
-          type: 'cartodb',
-          options: {
-            sql: layer.query,
-            cartocss: layer.cartocss,
-            cartocss_version: '2.3.0'
-          }
-        }]
-      })
+      body: JSON.stringify(layer)
     });
     // add to the load layers lists before the fetch
     // to avoid multiples loads while the layer is loading
