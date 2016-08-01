@@ -2,6 +2,7 @@ import React from 'react';
 import L from 'leaflet';
 
 class Map extends React.Component {
+
   componentDidMount() {
     this.map = L.map(this.refs.map, {
       scrollWheelZoom: false,

@@ -15,6 +15,11 @@ class DataMap extends React.Component {
     this.setMapParams();
     this.setMapListeners();
     this.updateDatasets();
+
+    // Fixing height of map
+    setTimeout(function() {
+      this.map.invalidateSize();
+    }.bind(this), 0)
   }
 
   componentWillReceiveProps(props) {
@@ -59,6 +64,7 @@ class DataMap extends React.Component {
       center: [+params.lat, +params.lng],
       zoom: +params.zoom
     });
+
     L.control.zoom({ position: this.props.map.zoomPosition }).addTo(this.map);
 
     L.tileLayer(
@@ -123,13 +129,22 @@ class DataMap extends React.Component {
   addCartoLayer(dataset, apiLayer) {
     const layer = apiLayer.attributes['layer-config'];
     layer.id = apiLayer.id;
+
+    // TODO: change this please @ra
+    const bodyStringified = JSON.stringify(layer.body || {})
+      .replace(/"cartocss-version":/g, '"cartocss_version":')
+      .replace(/"geom-column"/g, '"geom_column"')
+      .replace(/"geom-type"/g, '"geom_type"')
+      .replace(/"raster-band"/g, '"raster_band"');
+
     const request = new Request(`https://${layer.account}.cartodb.com/api/v1/map`, {
       method: 'POST',
       headers: new Headers({
         'Content-Type': 'application/json'
       }),
-      body: JSON.stringify(layer)
+      body: bodyStringified
     });
+
     // add to the load layers lists before the fetch
     // to avoid multiples loads while the layer is loading
     this.mapLayers[layer.id] = true;
