@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Card(props) {
-  const classes = ['c-card'];
+  const classes = ['c-card', '-testing'];
 
   if (props.inverse) classes.push('-inverse');
   if (props.border) classes.push('-border');
