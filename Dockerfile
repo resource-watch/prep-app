@@ -18,7 +18,7 @@ COPY . /usr/src/$NAME
 
 # Install app dependencies
 COPY package.json /usr/src/$NAME/
-RUN npm install --silent --dev
+RUN npm install --dev
 
 # Generate statics files
 RUN npm run build
