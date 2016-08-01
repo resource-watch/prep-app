@@ -49,8 +49,9 @@ const webpackConfig = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('css?sourceMap&importLoaders=1&' +
-          'localI‌​dentName=[name]__[local]!sass?sourceMap')
+        loader: process.env.NODE_ENV === 'production' ?
+          ExtractTextPlugin.extract(['css', 'sass']) :
+          'style!css?sourceMap!sass?sourceMap'
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
@@ -80,7 +81,7 @@ if (process.env.NODE_ENV === 'production') {
     comments: false
   }));
 } else {
-  webpackConfig.devtool = 'eval-source-map';
+  webpackConfig.devtool = 'source-map';
 }
 
 module.exports = webpackConfig;

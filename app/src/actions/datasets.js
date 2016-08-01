@@ -57,7 +57,8 @@ export function getDatasets(defaultActiveLayers) {
         const datasets = data || [];
         if (datasets.length) {
           for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
-            if (defaultActiveLayers && defaultActiveLayers.indexOf(datasets[i].id) > -1) {
+            if (defaultActiveLayers &&
+              defaultActiveLayers.indexOf(datasets[i].id) > -1) {
               datasets[i].active = true;
             } else {
               datasets[i].active = false;
@@ -108,7 +109,8 @@ export function getDatasetDefaultWidget(datasetId) {
             payload: {
               data: {
                 name: 'Contact us',
-                description: 'There was an error getting the visualization, please contact us hello@vizzuality.com',
+                description: 'There was an error getting the visualization, ' +
+                  'please contact us hello@vizzuality.com',
                 dataset_id: datasetId
               }
             }
