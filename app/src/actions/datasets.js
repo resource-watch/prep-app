@@ -91,7 +91,7 @@ export function getDatasetDefaultWidget(datasetId) {
       })
       .then(data => {
         if (data.length) {
-          fetch(`${apiUrlRW}/widgets/${data[0].id}`)
+          fetch(`${config.apiUrlRW}/widgets/${data[0].id}`)
           .then(response => {
             if (response.ok) return response.json();
             throw new Error(response.statusText);
