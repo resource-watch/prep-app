@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import {
   DATASET_LIST_RECEIVED,
   DATASET_FETCH_ERROR,
@@ -7,12 +8,10 @@ import {
 } from '../constants';
 
 import { updateURL } from './datamap';
-const { apiUrlRW } = config;
-
 
 export function getDatasetLayer(dataset) {
   return dispatch => {
-    fetch(`${apiUrlRW}/layers/${dataset.layers[0].layer_id}`)
+    fetch(`${config.apiUrlRW}/layers/${dataset.layers[0].layer_id}`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
@@ -48,7 +47,7 @@ export function getActiveDatasetLayers(datasets) {
 
 export function getDatasets(defaultActiveLayers) {
   return dispatch => {
-    fetch(`${apiUrlRW}/datasets?app=prep`)
+    fetch(`${config.apiUrlRW}/datasets?app=prep`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
@@ -85,7 +84,7 @@ export function getDatasets(defaultActiveLayers) {
 
 export function getDatasetDefaultWidget(datasetId) {
   return dispatch => {
-    fetch(`${apiUrlRW}/widgets?app=prep&default=true&dataset=${datasetId}`)
+    fetch(`${config.apiUrlRW}/widgets?app=prep&default=true&dataset=${datasetId}`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);

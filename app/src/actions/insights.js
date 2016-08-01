@@ -1,14 +1,13 @@
+import 'whatwg-fetch';
 import {
   INSIGHTS_FETCH_ERROR,
   INSIGHTS_LIST_RECEIVED,
   INSIGHTS_DETAIL_RECEIVED
 } from '../constants';
 
-const { apiUrl } = config;
-
 export function getInsightsList() {
   return dispatch => {
-    fetch(`${apiUrl}/api/insights`)
+    fetch(`${config.apiUrl}/api/insights`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
@@ -30,7 +29,7 @@ export function getInsightsList() {
 
 export function getInsightBySlug(slug) {
   return dispatch => {
-    fetch(`${apiUrl}/api/insights/${slug}`)
+    fetch(`${config.apiUrl}/api/insights/${slug}`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);

@@ -1,14 +1,13 @@
+import 'whatwg-fetch';
 import {
   DASHBOARD_FETCH_ERROR,
   DASHBOARD_LIST_RECEIVED,
   DASHBOARD_DETAIL_RECEIVED
 } from '../constants';
 
-const { apiUrl } = config;
-
 export function getDashboardList() {
   return dispatch => {
-    fetch(`${apiUrl}/api/dashboards`)
+    fetch(`${config.apiUrl}/api/dashboards`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
@@ -30,7 +29,7 @@ export function getDashboardList() {
 
 export function getDashboardBySlug(slug) {
   return dispatch => {
-    fetch(`${apiUrl}/api/dashboards/${slug}`)
+    fetch(`${config.apiUrl}/api/dashboards/${slug}`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
