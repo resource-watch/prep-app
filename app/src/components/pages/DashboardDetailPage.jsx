@@ -21,18 +21,18 @@ class DashboardDetailPage extends React.Component {
     }
   }
 
-  shouldComponentUpdate(nextProps) {
-    if (this.props.dashboardSlug !== nextProps.dashboardSlug) {
-      this.props.getDashboardBySlug(nextProps.dashboardSlug);
-    }
+  // shouldComponentUpdate(nextProps) {
+  //   // if (this.props.dashboardSlug !== nextProps.dashboardSlug) {
+  //   //   this.props.getDashboardBySlug(nextProps.dashboardSlug);
+  //   // }
 
-    if (this.props.data !== nextProps.data ||
-      this.props.dashboardTab !== nextProps.dashboardTab) {
-      return true;
-    }
+  //   if (this.props.data !== nextProps.data ||
+  //     this.props.dashboardTab !== nextProps.dashboardTab) {
+  //     return true;
+  //   }
 
-    return false;
-  }
+  //   return false;
+  // }
 
   getContent() {
     if (!this.props.data) {
@@ -40,6 +40,7 @@ class DashboardDetailPage extends React.Component {
     }
 
     let content;
+
     switch (this.props.dashboardTab) {
       case 'insights':
         content = (<DashboardDetailInsights

@@ -14,6 +14,11 @@ class Map extends React.Component {
     L.tileLayer(this.props.data.tile, {
       maxZoom: 18
     }).addTo(this.map, 1);
+
+    // Fixing height of map
+    setTimeout(function() {
+      this.map.invalidateSize();
+    }.bind(this), 0)
   }
 
   render() {

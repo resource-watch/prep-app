@@ -42,19 +42,10 @@ class Tooltip extends React.Component {
             <span>Data: </span>
             {this.props.data.data_url}
           </p>
-          { /* <p>
-            <span>Topic:</span>
-            topic
-          </p>
-          <p>
-            <span>Area:</span>
-            area
-          </p>*/}
           <div className="img-container">
-            <img
-              src={this.props.data.partner.logo}
+            <img src={this.props.data.partner ? this.props.data.partner.logo : ''}
               className="logo"
-              alt={this.props.data.partner.name}
+              alt={this.props.data.partner ? this.props.data.partner.name : ''}
             />
           </div>
         </div>

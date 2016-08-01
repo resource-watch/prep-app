@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-const Slider = require('react-slick');
-
-const { apiUrl } = config;
+import {lory} from 'lory.js';
 
 class PartnersLogos extends Component {
 
@@ -11,36 +9,40 @@ class PartnersLogos extends Component {
     }
   }
 
-  render() {
-    const settings = {
-      dots: false,
-      arrows: false,
-      autoplay: true,
-      autoplaySpeed: 6000,
-      speed: 400,
-      infinite: true,
-      slidesToShow: 2,
-      slidesToScroll: 2
-    };
+  componentDidUpdate(prevProps, prevState) {
+    if (this.refs.slider) {
+      const slider = lory(this.refs.slider, {infinite: 5});
+      if (this.timer) {
+        clearInterval(this.timer);
+      }
+      this.timer = setInterval(() => {
+        slider.next();
+      }, 5000);
+    }
+  }
 
-    const partners = this.props.data.map((d, i) => (
-      <div className="logo-container" key={`slide-'${i}`}>
+  render() {
+    const partners = this.props.data.map(d => (
+      <li className="js_slide" key={`partner-slider-${d.id}`}>
         <a href={d.url} rel="noreferrer" target="_blank" className="logo">
           <img
-            src={`${apiUrl}/${d.logo}`}
+            src={`${config.apiUrl}/${d.logo}`}
             width={d.logo_size.width}
             height={d.logo_size.height}
+            style={{width: d.logo_size.width / 2, height: d.logo_size.height / 2}}
             alt={d.name}
           />
         </a>
-      </div>
+      </li>
     ));
 
     return (
-      <div className="c-partners-logos">
-        <Slider className="slider-container" {...settings}>
-          {partners}
-        </Slider>
+      <div ref="slider" className="c-partners-logos slider js_slider">
+        <div className="frame js_frame">
+          <ul className="slides js_slides">
+            {partners}
+          </ul>
+        </div>
       </div>
     );
   }
