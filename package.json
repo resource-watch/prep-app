@@ -1,7 +1,7 @@
 {
   "name": "prep-app",
   "version": "1.0.0",
-  "description": "Preparedness for resilience",
+  "description": "The Climate Partnership for Resilience and Preparedness",
   "main": "server.js",
   "scripts": {
     "build": "rm -rf dist/ && webpack --config ./config/webpack.config.js --progress --profile --colors",
