@@ -1,5 +1,7 @@
 .c-share-url {
   position: relative;
+  min-height: 40px;
+
   .url-container {
     display: flex;
     flex-direction: column;
@@ -9,9 +11,13 @@
     > .url {
       display: block;
       width: 100%;
-
       padding-bottom: 7px;
+
+      font-size: $font-size-normal;
       color: $color-13;
+
+      cursor: text;
+      border: 0;
       border-bottom: 1px solid rgba($color-1, 0.3);
     }
 

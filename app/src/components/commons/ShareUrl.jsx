@@ -8,15 +8,26 @@ class ShareUrl extends React.Component {
     this.props.getShortLink(window.location.href);
   }
 
+  onCopyClick() {
+    const copyTextarea = this.refs.url;
+    copyTextarea.select();
+
+    try {
+      document.execCommand('copy');
+    } catch (err) {
+      console.warn('Oops, unable to copy');
+    }
+  }
+
   render() {
     const shortUrl = this.props.links[window.location.href]
       ? this.props.links[window.location.href]
       : false;
     let content = !shortUrl
-      ? <LoadingSpinner />
+      ? <LoadingSpinner transparent />
       : <div className="url-container">
-        <span className="url">{shortUrl}</span>
-        <Button fill border>
+        <input ref="url" defaultValue={shortUrl} className="url" readOnly />
+        <Button click={() => this.onCopyClick()} fill border>
           Copy
         </Button>
       </div>;
