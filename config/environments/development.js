@@ -1,4 +1,5 @@
 const path = require('path');
+const express = require('express');
 const logger = require('morgan');
 const PrettyError = require('pretty-error');
 const webpack = require('webpack');
@@ -11,7 +12,7 @@ module.exports = (app) => {
   const compiler = webpack(config);
   const middleware = webpackMiddleware(compiler, {
     publicPath: config.output.publicPath,
-    contentBase: 'src',
+    contentBase: 'app',
     stats: {
       colors: true,
       hash: false,

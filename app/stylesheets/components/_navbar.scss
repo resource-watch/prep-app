@@ -79,7 +79,7 @@ $navbar-breakpoint: 870px;
       }
 
       .link {
-        margin: 5px;
+        margin: 5px 15px;
         &:first-of-type { margin-left: 0; }
 
         > a {
@@ -91,7 +91,7 @@ $navbar-breakpoint: 870px;
           line-height: 1.6;
           letter-spacing: .5px;
           text-transform: uppercase;
-          
+
           &.-active {
             border-bottom: 2px solid $color-2;
             .-theme-2 & { border-color: $color-4; }
