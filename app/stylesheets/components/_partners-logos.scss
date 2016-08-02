@@ -29,8 +29,11 @@
     justify-content: center;
 
     img {
+      display: block;
       opacity: .8;
       max-width: 100%;
+      height: auto;
+      max-height: 40px;
       // -webkit-filter: grayscale(100%) invert(100%) brightness(5);
       // -moz-filter: grayscale(100%) invert(100%) brightness(5);
       // filter: grayscale(100%) invert(100%) brightness(5);

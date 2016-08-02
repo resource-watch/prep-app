@@ -11,11 +11,13 @@ class PartnersLogos extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.refs.slider && !this.slider) {
-      this.slider = lory(this.refs.slider, {infinite: 5});
-      if (this.timer) {
-        clearInterval(this.timer);
-      }
-      this.timer = setInterval(this.slider.next, 7000);
+      setTimeout(() => {
+        this.slider = lory(this.refs.slider, {infinite: 5});
+        if (this.timer) {
+          clearInterval(this.timer);
+        }
+        this.timer = setInterval(this.slider.next, 7000);
+      }, 300);
     }
   }
 
@@ -25,9 +27,6 @@ class PartnersLogos extends Component {
         <a href={d.url} rel="noreferrer" target="_blank" className="logo">
           <img
             src={config.apiUrl + d.white_logo}
-            width={d.logo_size.width}
-            height={d.logo_size.height}
-            style={{width: d.logo_size.width / 2, height: d.logo_size.height / 2}}
             alt={d.name}
           />
         </a>
