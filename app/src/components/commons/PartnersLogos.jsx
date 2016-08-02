@@ -24,7 +24,7 @@ class PartnersLogos extends Component {
       <li className="js_slide" key={`partner-slider-${d.id}`}>
         <a href={d.url} rel="noreferrer" target="_blank" className="logo">
           <img
-            src={config.apiUrl + d.logo}
+            src={config.apiUrl + d.white_logo}
             width={d.logo_size.width}
             height={d.logo_size.height}
             style={{width: d.logo_size.width / 2, height: d.logo_size.height / 2}}
