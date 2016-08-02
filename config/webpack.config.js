@@ -33,8 +33,6 @@ const webpackConfig = {
       config: {
         apiUrl: JSON.stringify(process.env.API_URL),
         apiUrlRW: JSON.stringify(process.env.RW_API_URL),
-        apiUrlShorter: JSON.stringify(process.env.SHORT_URL_API_URL),
-        userUrlShorter: JSON.stringify(process.env.SHORT_URL_API_USER),
         tokenUrlShorter: JSON.stringify(process.env.SHORT_URL_API_TOKEN)
       }
     })
