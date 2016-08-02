@@ -8,7 +8,10 @@ function SectionIntro(props) {
       {props.data.partner &&
         <div className="top-bar">
           <div className="logo">
-            <img src={props.data.partner.logo} alt={props.data.partner.name} />
+            <img
+              src={config.apiUrl + props.data.partner.logo}
+              alt={props.data.partner.name}
+            />
           </div>
           <div className="author">
             {props.data.partner.contact_name}
