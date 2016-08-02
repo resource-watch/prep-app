@@ -10,14 +10,14 @@ class PartnersLogos extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.refs.slider) {
-      const slider = lory(this.refs.slider, {infinite: 5});
+    if (this.refs.slider && !this.slider) {
+      this.slider = lory(this.refs.slider, {infinite: 5});
       if (this.timer) {
         clearInterval(this.timer);
       }
       this.timer = setInterval(() => {
-        slider.next();
-      }, 5000);
+        this.slider.next();
+      }, 7000);
     }
   }
 

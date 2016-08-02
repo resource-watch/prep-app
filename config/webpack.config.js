@@ -43,19 +43,6 @@ const webpackConfig = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel'
-      },
-      {
-        test: /\.scss$/,
-        loader: process.env.NODE_ENV === 'production' ?
-          ExtractTextPlugin.extract(['css', 'sass']) :
-          'style!css?sourceMap!sass?sourceMap'
-      },
-      {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        loaders: [
-          'file?hash=sha512&digest=hex&name=[hash].[ext]',
-          'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
-        ]
       }
     ]
   },
@@ -68,6 +55,19 @@ const webpackConfig = {
 
 // Environment configuration
 if (process.env.NODE_ENV === 'production') {
+  // Loaders
+  webpackConfig.module.loaders.push({
+    test: /\.scss$/,
+    loader: ExtractTextPlugin.extract(['css', 'sass'])
+  });
+  webpackConfig.module.loaders.push({
+    test: /\.(jpe?g|png|gif|svg)$/i,
+    loaders: [
+      'file?hash=sha512&digest=hex&name=[hash].[ext]',
+      'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
+    ]
+  });
+  // Plugins
   webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin({
     compress: {
       warnings: false,
@@ -79,7 +79,17 @@ if (process.env.NODE_ENV === 'production') {
   }));
   webpackConfig.plugins.push(new ExtractTextPlugin('styles-[hash].css'));
 } else {
+  // Activating source map
   webpackConfig.devtool = 'source-map';
+  // Loaders
+  webpackConfig.module.loaders.push({
+    test: /\.scss$/,
+    loaders: ['style', 'css', 'sass']
+  });
+  webpackConfig.module.loaders.push({
+    test: /\.(jpe?g|png|gif|svg)$/i,
+    loaders: ['file?name=[path][name].[ext]']
+  });
 }
 
 module.exports = webpackConfig;

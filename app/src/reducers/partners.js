@@ -4,7 +4,7 @@ const initialState = {
   list: []
 };
 
-export default function (state = initialState, action) {
+export default function partners(state = initialState, action) {
   switch (action.type) {
     case PARTNERS_LIST_RECEIVED: {
       return Object.assign({}, state, { list: action.payload.data });
