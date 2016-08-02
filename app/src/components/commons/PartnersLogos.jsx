@@ -15,9 +15,7 @@ class PartnersLogos extends Component {
       if (this.timer) {
         clearInterval(this.timer);
       }
-      this.timer = setInterval(() => {
-        this.slider.next();
-      }, 7000);
+      this.timer = setInterval(this.slider.next, 7000);
     }
   }
 

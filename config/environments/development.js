@@ -1,5 +1,4 @@
 const path = require('path');
-const express = require('express');
 const logger = require('morgan');
 const PrettyError = require('pretty-error');
 const webpack = require('webpack');
