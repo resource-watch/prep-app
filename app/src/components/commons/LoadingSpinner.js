@@ -1,8 +1,11 @@
 import React from 'react';
 
-export default function LoadingSpinner() {
+function LoadingSpinner(props) {
+  const classNames = ['c-loading-spinner'];
+  if (props.transparent) classNames.push('-transparent');
+
   return (
-    <div className="c-loading-spinner">
+    <div className={classNames.join(' ')}>
       <svg>
         <circle
           cx="30"
@@ -16,3 +19,10 @@ export default function LoadingSpinner() {
     </div>
   );
 }
+
+LoadingSpinner.propTypes = {
+  // Set the loading background transparent
+  transparent: React.PropTypes.bool
+};
+
+export default LoadingSpinner;
