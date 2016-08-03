@@ -157,9 +157,9 @@ $navbar-breakpoint: 870px;
   }
 
   &.-dark {
-    background-color: rgba($color-7, 0.8);
+    background-color: rgba($color-14, 0.8);
     .navbar {
-      background-color: rgba($color-7, 0.8);
+      background-color: rgba($color-14, 0.8);
       @media screen and (min-width: #{$navbar-breakpoint}){
         background-color: transparent;
       }
