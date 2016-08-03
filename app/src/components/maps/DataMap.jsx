@@ -118,6 +118,9 @@ class DataMap extends React.Component {
       });
     }
     switch (layer.attributes.provider) {
+      case 'leaflet':
+        this.addLeafletLayer(dataset, layer);
+        break;
       case 'arcgis':
         this.addEsriLayer(dataset, layer);
         break;
@@ -126,6 +129,22 @@ class DataMap extends React.Component {
         break;
       default:
         break;
+    }
+  }
+
+  addLeafletLayer(dataset, layerSpec) {
+    const layer = layerSpec.attributes['layer-config'];
+    layer.id = layerSpec.id;
+
+    if (layer.type === 'wms') {
+      const newLayer = L.tileLayer.wms(layer.url, layer.body);
+      newLayer.addTo(this.map);
+      newLayer.on('load', () => {
+        this.handleTileLoaded(layer);
+      });
+      this.mapLayers[layer.id] = newLayer;
+    } else {
+      throw new Error('"type" specified in layer spec doesn`t exist');
     }
   }
 
@@ -148,7 +167,7 @@ class DataMap extends React.Component {
       });
       this.mapLayers[layer.id] = newLayer;
     } else {
-      console.error('"type" specified in layer spec doesn`t exist');
+      throw new Error('"type" specified in layer spec doesn`t exist');
     }
   }
 
