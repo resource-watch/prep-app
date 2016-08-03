@@ -2,6 +2,7 @@ import React from 'react';
 import Title from '../commons/Title';
 import Header from '../commons/Header';
 import SectionIntro from '../commons/SectionIntro';
+import MetadataList from '../commons/MetadataList';
 import LoadingSpinner from '../commons/LoadingSpinner';
 import VegaChart from '../commons/VegaChart';
 
@@ -13,25 +14,39 @@ class DataPageDetail extends React.Component {
     }
   }
 
+  getTitle() {
+    const data = this.props.data && this.props.data.attributes.info.attributes;
+
+    if (data && data.title && !data.error) {
+      return data.title;
+    } else if (this.props.widget && this.props.widget.name) {
+      return this.props.widget.name;
+    } else if (data && data.error) {
+      return data.title;
+    }
+    return '';
+  }
+
   getContent() {
     if (!this.props.data) {
       return <LoadingSpinner />;
     }
+
+    const data = this.props.data.attributes.info;
+
     return (<div>
       <div className="wrapper">
-        <SectionIntro
-          data={this.props.data}
-          currentSection={'data'}
-        />
+        <SectionIntro data={{}} currentSection={'data'} >
+          <MetadataList data={data} />
+        </SectionIntro>
       </div>
 
       <div className="wrapper">
-        <p>{this.props.data.summary}</p>
-        <div className="chart-container">
-          {this.props.data.widget_config &&
-            <VegaChart data={this.props.data.widget_config} />
-          }
-        </div>
+        {this.props.widget && this.props.widget.widget_config &&
+          <div className="chart-container">
+            <VegaChart data={this.props.widget.widget_config} />
+          </div>
+        }
       </div>
     </div>);
   }
@@ -39,13 +54,11 @@ class DataPageDetail extends React.Component {
   render() {
     let content = this.getContent();
     let title;
-    if (this.props.data && this.props.data.name) {
-      title = (
-        <Title inverse center border type="page">
-          {this.props.data.name}
-        </Title>
-      );
-    }
+    title = (
+      <Title inverse center border type="page">
+        {this.getTitle()}
+      </Title>
+    );
     return (
       <div className="l-dashboards">
         <Header type="small">
@@ -75,7 +88,11 @@ DataPageDetail.propTypes = {
   /**
    * Define the dataset data
    */
-  data: React.PropTypes.any
+  data: React.PropTypes.any,
+  /**
+   * Define the dataset widget
+   */
+  widget: React.PropTypes.any
 };
 
 export default DataPageDetail;

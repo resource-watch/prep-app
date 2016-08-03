@@ -8,7 +8,6 @@ import {
   DATASET_LAYER_RECEIVED
 } from '../constants';
 
-import { setModalMetadata } from './modal';
 import { updateURL } from './datamap';
 
 export function getDatasetLayer(dataset) {
@@ -104,18 +103,6 @@ export function getDatasetDefaultWidget(datasetId) {
               payload: { data: widget }
             });
           });
-        } else {
-          dispatch({
-            type: DATASET_DETAIL_RECEIVED,
-            payload: {
-              data: {
-                name: 'Contact us',
-                description: 'There was an error getting the visualization, ' +
-                  'please contact us hello@vizzuality.com',
-                dataset_id: datasetId
-              }
-            }
-          });
         }
       })
       .catch((err) => {
@@ -140,7 +127,22 @@ export function getDatasetMetadata(datasetId) {
             type: DATASET_METADATA_RECEIVED,
             payload: data.data[0]
           });
-          dispatch(setModalMetadata(true, datasetId));
+        } else {
+          dispatch({
+            type: DATASET_METADATA_RECEIVED,
+            payload: {
+              attributes: {
+                dataset: datasetId,
+                info: {
+                  attributes: {
+                    title: 'Contact us',
+                    error: 'There was an error getting the metadata info, ' +
+                    'please contact us hello@vizzuality.com'
+                  }
+                }
+              }
+            }
+          });
         }
       })
       .catch((err) => {

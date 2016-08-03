@@ -24,7 +24,7 @@ function SectionIntro(props) {
             <ToolbarActions
               currentSection={props.currentSection}
             />
-            <p> {props.data.description} </p>
+            {props.children}
           </div>
         </div>
       </div>

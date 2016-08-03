@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import DataMapLegend from '../../components/maps/DataMapLegend';
 
+import { setModalMetadata } from '../../actions/modal';
 import { getDatasetMetadata } from '../../actions/datasets';
 
 function isLayerReady(dataset, layers) {
@@ -32,7 +33,10 @@ const mapStateToProps = (state) => ({
   data: getActiveLayers(state.datasets.list, state.datasets.layers)
 });
 const mapDispatchToProps = (dispatch) => ({
-  onInfoClick: (datasetId) => dispatch(getDatasetMetadata(datasetId))
+  onInfoClick: (datasetId) => {
+    dispatch(getDatasetMetadata(datasetId));
+    dispatch(setModalMetadata(true, datasetId));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataMapLegend);
