@@ -4,9 +4,11 @@ import {
   DATASET_FETCH_ERROR,
   DATASET_LAYER_FETCH_ERROR,
   DATASET_DETAIL_RECEIVED,
+  DATASET_METADATA_RECEIVED,
   DATASET_LAYER_RECEIVED
 } from '../constants';
 
+import { setModalMetadata } from './modal';
 import { updateURL } from './datamap';
 
 export function getDatasetLayer(dataset) {
@@ -114,6 +116,31 @@ export function getDatasetDefaultWidget(datasetId) {
               }
             }
           });
+        }
+      })
+      .catch((err) => {
+        dispatch({
+          type: DATASET_FETCH_ERROR,
+          payload: err.message
+        });
+      });
+  };
+}
+
+export function getDatasetMetadata(datasetId) {
+  return dispatch => {
+    fetch(`${config.apiUrlRW}/metadata/${datasetId}`)
+      .then(response => {
+        if (response.ok) return response.json();
+        throw new Error(response.statusText);
+      })
+      .then(data => {
+        if (data.data[0]) {
+          dispatch({
+            type: DATASET_METADATA_RECEIVED,
+            payload: data.data[0]
+          });
+          dispatch(setModalMetadata(true, datasetId));
         }
       })
       .catch((err) => {

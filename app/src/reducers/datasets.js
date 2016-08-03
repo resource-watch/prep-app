@@ -2,6 +2,7 @@ import {
   DATASET_LIST_RECEIVED,
   DATASET_DETAIL_RECEIVED,
   DATASET_LAYER_RECEIVED,
+  DATASET_METADATA_RECEIVED,
   TOGGLE_LAYER_STATUS,
   SET_LAYER_STATUS,
   DATASET_LAYER_FETCH_ERROR
@@ -10,7 +11,8 @@ import {
 const initialState = {
   list: [],
   details: {},
-  layers: {}
+  layers: {},
+  metadatas: {}
 };
 
 export default function (state = initialState, action) {
@@ -27,6 +29,11 @@ export default function (state = initialState, action) {
       const layers = Object.assign({}, state.layers, {});
       layers[action.payload.data.id] = action.payload.data;
       return Object.assign({}, state, { layers });
+    }
+    case DATASET_METADATA_RECEIVED: {
+      const metadatas = Object.assign({}, state.metadatas, {});
+      metadatas[action.payload.attributes.dataset] = action.payload;
+      return Object.assign({}, state, { metadatas });
     }
     case DATASET_LAYER_FETCH_ERROR: {
       const list = state.list.slice(0);
