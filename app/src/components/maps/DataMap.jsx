@@ -69,7 +69,7 @@ class DataMap extends React.Component {
 
     L.tileLayer(
       this.props.map.basemap,
-      { maxZoom: 18 }
+      this.props.map.basemapOptions
     ).addTo(this.map, 1);
   }
 
@@ -137,11 +137,14 @@ class DataMap extends React.Component {
     layer.id = layerSpec.id;
 
     if (layer.type === 'wms') {
+      if (layer.body.crs && L.CRS[layer.body.crs]) {
+        layer.body.crs = L.CRS[layer.body.crs.replace(':', '')];
+      }
       const newLayer = L.tileLayer.wms(layer.url, layer.body);
-      newLayer.addTo(this.map);
       newLayer.on('load', () => {
         this.handleTileLoaded(layer);
       });
+      newLayer.addTo(this.map);
       this.mapLayers[layer.id] = newLayer;
     } else {
       throw new Error('"type" specified in layer spec doesn`t exist');
@@ -161,10 +164,10 @@ class DataMap extends React.Component {
     if (L.esri[layer.type]) {
       const layerConfig = JSON.parse(bodyStringified);
       const newLayer = L.esri[layer.type](layerConfig);
-      newLayer.addTo(this.map);
       newLayer.on('load', () => {
         this.handleTileLoaded(layer);
       });
+      newLayer.addTo(this.map);
       this.mapLayers[layer.id] = newLayer;
     } else {
       throw new Error('"type" specified in layer spec doesn`t exist');
