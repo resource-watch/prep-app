@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
-import {lory} from 'lory.js';
+import Slider from '../../../lib/react-slick';
+
+const settings = {
+  dots: false,
+  arrows: false,
+  autoplay: true,
+  autoplaySpeed: 3000,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 6
+};
 
 class PartnersLogos extends Component {
 
@@ -9,37 +19,23 @@ class PartnersLogos extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.refs.slider && !this.slider) {
-      setTimeout(() => {
-        this.slider = lory(this.refs.slider, {infinite: 5});
-        if (this.timer) {
-          clearInterval(this.timer);
-        }
-        this.timer = setInterval(this.slider.next, 7000);
-      }, 300);
-    }
-  }
-
   render() {
     const partners = this.props.data.map(d => (
-      <li className="js_slide" key={`partner-slider-${d.id}`}>
+      <div key={`partner-slider-${d.id}`}>
         <a href={d.url} rel="noreferrer" target="_blank" className="logo">
           <img
             src={config.apiUrl + d.white_logo}
             alt={d.name}
           />
         </a>
-      </li>
+      </div>
     ));
 
     return (
-      <div ref="slider" className="c-partners-logos slider js_slider">
-        <div className="frame js_frame">
-          <ul className="slides js_slides">
-            {partners}
-          </ul>
-        </div>
+      <div className="c-partners-logos">
+        <Slider {...settings}>
+          {partners}
+        </Slider>
       </div>
     );
   }
