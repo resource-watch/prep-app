@@ -46,6 +46,10 @@ Button.propTypes = {
    */
   border: React.PropTypes.any,
   /**
+   * TODO: write doc for that
+   */
+  action: React.PropTypes.any,
+  /**
    * Define the filling of the button
    * Accepted values:
    * 	- true:  the button is filled with the same color of the border
