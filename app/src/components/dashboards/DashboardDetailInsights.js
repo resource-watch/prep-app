@@ -12,13 +12,13 @@ function DashboardDetailInsights(props) {
         </Title>
       </Link>
       <p className="content">
-        {card.content}
+        {card.summary}
       </p>
 
       {card.partner &&
         <a target="_blank" href={card.partner.href}>
           <img
-            src={card.partner.logo}
+            src={config.apiUrl + card.partner.logo}
             className="logo"
             alt={card.partner.name}
           />

@@ -10,11 +10,11 @@ class Modal extends React.Component {
         e.preventDefault();
       }
     };
-    document.addEventListener('keypress', this.onKeyPress);
+    document.addEventListener('keydown', this.onKeyPress);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keypress', this.onKeyPress);
+    document.removeEventListener('keydown', this.onKeyPress);
   }
 
   onClickOverlay(e) {
