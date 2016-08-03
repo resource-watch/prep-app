@@ -7,7 +7,7 @@ function Header(props) {
   if (props.type) classes.push(`-${props.type}`);
   if (props.image) {
     bgImage = {
-      backgroundImage: `url(${props.image})`
+      backgroundImage: `url(${config.apiUrl}${props.image})`
     };
   } else if (props.pageType) {
     classes.push(`-type-${props.pageType}`);

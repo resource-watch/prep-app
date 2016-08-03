@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import Header from '../commons/Header';
 import Title from '../commons/Title';
+import LoadingSpinner from '../commons/LoadingSpinner';
 import Card from '../cards/Card';
 import Button from '../commons/Button';
 import Modal from '../commons/Modal';
@@ -23,10 +24,10 @@ class DashboardsPage extends React.Component {
   }
 
   getContent() {
-    if (!this.props.data) {
+    if (!this.props.data || this.props.data.length === 0) {
       return (
         <div>
-          TODO: loading component
+          <LoadingSpinner />
         </div>
       );
     }
@@ -43,13 +44,15 @@ class DashboardsPage extends React.Component {
           <p className="content">
             {item.summary}
           </p>
-          <a href="#">
-            <img
-              src={config.apiUrl + item.partner.logo}
-              className="logo"
-              alt={item.partner.name}
-            />
-          </a>
+          {item.partner &&
+            <a href="#">
+              <img
+                src={config.apiUrl + item.partner.logo}
+                className="logo"
+                alt={item.partner.name}
+              />
+            </a>
+          }
         </Card>
       );
     });
