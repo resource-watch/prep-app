@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Slider from '../../../lib/react-slick';
+import Slider from '../../../lib/react-slick/react-slick';
 
 const settings = {
   dots: false,
