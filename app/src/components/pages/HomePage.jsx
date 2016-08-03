@@ -182,7 +182,7 @@ class HomePage extends React.Component {
               </div>
             </div>
             <div className="link">
-              <Link to="/dashboards/framer-assesses-crops-impact">
+              <Link to="/insights/framer-assesses-crops-impact">
                 Go to Framer assesses possible impacts of climate change on his
                 crops (grapes) dashboard
               </Link>
