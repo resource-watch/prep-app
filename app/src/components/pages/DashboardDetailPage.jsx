@@ -60,7 +60,6 @@ class DashboardDetailPage extends React.Component {
         />);
         break;
     }
-
     return (
       <div>
         <div className="wrapper">
@@ -68,7 +67,9 @@ class DashboardDetailPage extends React.Component {
             data={this.props.data}
             dashboardSlug={this.props.dashboardSlug}
             currentSection="dashboards"
-          />
+          >
+            <p> {this.props.data.summary} </p>
+          </SectionIntro>
         </div>
 
         <NavTab

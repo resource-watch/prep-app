@@ -45,7 +45,11 @@ SectionIntro.propTypes = {
   /**
    * Define the current section
    */
-  currentSection: React.PropTypes.string
+  currentSection: React.PropTypes.string,
+  /**
+   * Define the component childrens
+   */
+  children: React.PropTypes.any
 };
 
 export default SectionIntro;
