@@ -62,9 +62,12 @@ class DataMap extends React.Component {
         </div>
         <div className="content">
           {content}
-          <Button
-            click={() => this.props.setModalShare(true)}
-          > Share </Button>
+          <div className="tools">
+            <Button border click={() => this.props.setModalShare(true)}>
+              Share
+            </Button>
+            <a className="c-button -border" href="http://prepdata.sdgs.opendata.arcgis.com/" target="_blank">Download data</a>
+          </div>
         </div>
         <div className="actions-mobile">
           <Button

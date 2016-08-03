@@ -64,6 +64,14 @@
         }
       }
     }
+    > .tools {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      > .c-button {
+        margin: 10px 0;
+      }
+    }
   }
 
   > .actions-mobile {
