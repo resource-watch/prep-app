@@ -5,6 +5,7 @@
   height: 100%;
   position: absolute;
   > .map {
+    background: rgb(22, 49, 75);
     height: 100%;
   }
   .c-loading-spinner {
@@ -29,7 +30,7 @@
 
       border: none;
       border-radius: 0;
-      background-color: rgba($color-7, 0.9);
+      background-color: rgba($color-14, 0.8);
     }
     .leaflet-control-zoom-in {
       position: relative;
