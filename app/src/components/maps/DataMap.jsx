@@ -118,6 +118,9 @@ class DataMap extends React.Component {
       });
     }
     switch (layer.attributes.provider) {
+      case 'arcgis':
+        this.addEsriLayer(dataset, layer);
+        break;
       case 'cartodb':
         this.addCartoLayer(dataset, layer);
         break;
@@ -126,10 +129,34 @@ class DataMap extends React.Component {
     }
   }
 
-  addCartoLayer(dataset, apiLayer) {
-    const layer = apiLayer.attributes['layer-config'];
-    layer.id = apiLayer.id;
+  addEsriLayer(dataset, layerSpec) {
+    const layer = layerSpec.attributes['layer-config'];
+    layer.id = layerSpec.id;
 
+    // Transforming layer
+    // TODO: change this please @ra
+    const bodyStringified = JSON.stringify(layer.body || {})
+      .replace(/"mosaic-rule":/g, '"mosaicRule":')
+      .replace(/"use-cors"/g, '"useCors"');
+
+    if (L.esri[layer.type]) {
+      const layerConfig = JSON.parse(bodyStringified);
+      const newLayer = L.esri[layer.type](layerConfig);
+      newLayer.addTo(this.map);
+      newLayer.on('load', () => {
+        this.handleTileLoaded(layer);
+      });
+      this.mapLayers[layer.id] = newLayer;
+    } else {
+      console.error('"type" specified in layer spec doesn`t exist');
+    }
+  }
+
+  addCartoLayer(dataset, layerSpec) {
+    const layer = layerSpec.attributes['layer-config'];
+    layer.id = layerSpec.id;
+
+    // Transforming layerSpec
     // TODO: change this please @ra
     const bodyStringified = JSON.stringify(layer.body || {})
       .replace(/"cartocss-version":/g, '"cartocss_version":')

@@ -2,25 +2,9 @@
   padding: 30px 0;
   border-bottom: 3px solid rgba(lighten($color-7, 20%), .3);
 
-  // .frame {
-  //   position: relative;
-  //   font-size: 0;
-  //   line-height: 0;
-  //   overflow: hidden;
-  //   white-space: nowrap;
-  // }
-
-  // .slides {
-  //   display: inline-block;
-  // }
-
-  // li {
-  //   position: relative;
-  //   width: 22%;
-  //   max-width: 228px;
-  //   display: inline-block;
-  //   vertical-align: middle;
-  // }
+  .slick-slider {
+    margin-bottom: 0;
+  }
 
   .logo {
     display: flex;
