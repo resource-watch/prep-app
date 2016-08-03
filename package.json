@@ -60,6 +60,7 @@
     "redux-thunk": "^2.1.0",
     "request": "^2.73.0",
     "sass-loader": "^4.0.0",
+    "serve-favicon": "^2.3.0",
     "style-loader": "^0.13.1",
     "vega": "^2.6.0",
     "webpack": "^1.13.0",
