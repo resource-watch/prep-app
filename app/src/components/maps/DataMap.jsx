@@ -181,7 +181,9 @@ class DataMap extends React.Component {
         if (res.ok) {
           return res.json();
         }
-        throw new Error(res.statusText);
+        var error = new Error(response.statusText);
+        error.response = response;
+        throw error;
       })
       .then((data) => {
         // we can switch off the layer while it is loading
@@ -198,7 +200,10 @@ class DataMap extends React.Component {
           delete this.mapLayers[layer.id];
         }
       })
-      .catch(() => this.props.onTileError(layer.id));
+      .catch((err) => {
+        console.error('Request failed', err);
+        this.props.onTileError(layer.id);
+      });
   }
 
   removeMapLayer(layerId) {
