@@ -8,6 +8,7 @@ function Button(props) {
   if (props.border) classes.push('-border');
   if (props.border === 'neutral') classes.push('-border-neutral');
   if (props.fill) classes.push('-fill');
+  if (props.action) classes.push('-action');
 
   return (
     <button
@@ -57,7 +58,7 @@ Button.propTypes = {
    * Define the text content of the button
    * Required
    */
-  children: React.PropTypes.string.isRequired,
+  children: React.PropTypes.any.isRequired,
   /**
    * Define click handler function
    */
