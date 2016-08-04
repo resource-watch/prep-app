@@ -46,6 +46,10 @@ SectionIntro.propTypes = {
    */
   data: React.PropTypes.object.isRequired,
   /**
+   * Define the insight url to the embed
+   */
+  insightUrl: React.PropTypes.string,
+  /**
    * Define the current section
    */
   currentSection: React.PropTypes.string,
