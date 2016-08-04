@@ -132,25 +132,51 @@ class DataMap extends React.Component {
     }
   }
 
+  /**
+   * Adding support for Leaflet layers
+   * @param {Object} dataset
+   * @param {Object} layerSpec
+   */
   addLeafletLayer(dataset, layerSpec) {
-    const layer = layerSpec.attributes['layer-config'];
-    layer.id = layerSpec.id;
+    const layerData = layerSpec.attributes['layer-config'];
 
-    if (layer.type === 'wms') {
-      if (layer.body.crs && L.CRS[layer.body.crs]) {
-        layer.body.crs = L.CRS[layer.body.crs.replace(':', '')];
-      }
-      const newLayer = L.tileLayer.wms(layer.url, layer.body);
-      newLayer.on('load', () => {
+    let layer;
+
+    layerData.id = layerSpec.id;
+
+    // Transforming data layer
+    // TODO: improve this
+    if (layerData.body.crs && L.CRS[layerData.body.crs]) {
+      layerData.body.crs = L.CRS[layerData.body.crs.replace(':', '')];
+    }
+
+    switch(layerData.type) {
+      case 'wms':
+          layer = new L.tileLayer.wms(layerData.url, layerData.body);
+        break;
+      case 'tileLayer':
+          layer = new L.tileLayer(layerData.url, layerData.body);
+        break;
+      default:
+        throw new Error('"type" specified in layer spec doesn`t exist');
+    }
+
+    if (layer) {
+      const eventName = (layerData.type === 'wms' ||
+        layerData.type === 'tileLayer') ? 'tileload' : 'load';
+      layer.on(eventName, () => {
         this.handleTileLoaded(layer);
       });
-      newLayer.addTo(this.map);
-      this.mapLayers[layer.id] = newLayer;
-    } else {
-      throw new Error('"type" specified in layer spec doesn`t exist');
+      layer.addTo(this.map);
+      this.mapLayers[layerData.id] = layer;
     }
   }
 
+  /**
+   * Adding support for ESRI layers
+   * @param {Object} dataset
+   * @param {Object} layerSpec
+   */
   addEsriLayer(dataset, layerSpec) {
     const layer = layerSpec.attributes['layer-config'];
     layer.id = layerSpec.id;
@@ -174,6 +200,11 @@ class DataMap extends React.Component {
     }
   }
 
+  /**
+   * Adding support for carto layers
+   * @param {Object} dataset
+   * @param {Object} layerSpec
+   */
   addCartoLayer(dataset, layerSpec) {
     const layer = layerSpec.attributes['layer-config'];
     layer.id = layerSpec.id;
