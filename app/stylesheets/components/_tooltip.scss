@@ -15,7 +15,7 @@
     border: 1px solid $color-10;
     border-radius: 50%;
   }
-  .modal{
+  .c-modal{
     > .header {
       margin-bottom: 15px;
     }
@@ -30,7 +30,7 @@
           flex-basis: calc(50% - 10px);
         }
       }
-      .col-r {
+      .description {
         display: flex;
         flex-direction: column;
         > p {
