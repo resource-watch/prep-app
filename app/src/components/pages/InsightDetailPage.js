@@ -43,6 +43,7 @@ class DashboardDetailPage extends React.Component {
           <SectionIntro
             data={this.props.data}
             insightSlug={this.props.insightSlug}
+            insightUrl={this.props.data.content_url}
             currentSection={'insights'}
           >
             <p> {this.props.data.summary} </p>

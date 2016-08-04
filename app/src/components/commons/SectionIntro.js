@@ -5,23 +5,26 @@ function SectionIntro(props) {
   return (
     <div className={"c-section-intro"}>
       <div className="container">
-      {props.data.partner &&
         <div className="top-bar">
-          <div className="logo">
-            <img
-              src={config.apiUrl + props.data.partner.white_logo}
-              alt={props.data.partner.name}
-            />
-          </div>
-          <div className="author">
-            {props.data.partner.contact_name}
-            <span>{props.data.partner.contact_email}</span>
-          </div>
+          {props.data.partner &&
+            <div className="logo">
+              <img
+                src={config.apiUrl + props.data.partner.white_logo}
+                alt={props.data.partner.name}
+              />
+            </div>
+          }
+          {props.data.partner &&
+            <div className="author">
+              {props.data.partner.contact_name}
+              <span>{props.data.partner.contact_email}</span>
+            </div>
+          }
         </div>
-      }
         <div className="content">
           <div className="wrapper-mini">
             <ToolbarActions
+              insightUrl={props.insightUrl}
               currentSection={props.currentSection}
             />
             {props.children}

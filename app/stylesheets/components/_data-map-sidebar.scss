@@ -80,6 +80,7 @@
         }
         > .detail-link {
           width: 17px;
+          flex-shrink: 0;
           text-align: center;
           > svg {
             height: 10px;
