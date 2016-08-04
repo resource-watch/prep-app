@@ -5,7 +5,7 @@ import LoadingSpinner from './LoadingSpinner';
 class ShareUrl extends React.Component {
 
   componentDidMount() {
-    this.props.getShortLink(window.location.href);
+    this.props.getShortLink(this.props.url);
   }
 
   onCopyClick() {
@@ -20,8 +20,8 @@ class ShareUrl extends React.Component {
   }
 
   render() {
-    const shortUrl = this.props.links[window.location.href]
-      ? this.props.links[window.location.href]
+    const shortUrl = this.props.links[this.props.url]
+      ? this.props.links[this.props.url]
       : false;
     let content = !shortUrl
       ? <LoadingSpinner transparent />
@@ -44,6 +44,10 @@ ShareUrl.propTypes = {
    * Function to get the short link url
    */
   getShortLink: React.PropTypes.func.isRequired,
+  /**
+   * Urls to generate
+   */
+  url: React.PropTypes.string,
   /**
    * Short urls generated
    */
