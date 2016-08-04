@@ -55,13 +55,13 @@ class DataPageDetail extends React.Component {
     let content = this.getContent();
     let title;
     title = (
-      <Title inverse center border type="page">
+      <Title inverse center border type="data-page">
         {this.getTitle()}
       </Title>
     );
     return (
       <div className="l-dashboards">
-        <Header type="small">
+        <Header type="medium" pageType="dataset-detail">
           {title}
         </Header>
 
