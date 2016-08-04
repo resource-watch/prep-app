@@ -8,7 +8,10 @@ function MetadataInfo(props) {
     </li>
     : <li>
       <span>Description: </span>
-      <span>{props.data.attributes.description}</span>
+      <span>{props.data.attributes['short-description']
+        ? props.data.attributes['short-description']
+        :  props.data.attributes.description}
+      </span>
     </li>;
   return (
     <div className="c-metadata-list">
