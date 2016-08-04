@@ -3,6 +3,7 @@ import DataMapSidebar from '../../containers/maps/DataMapSidebar';
 import DataMap from '../../containers/maps/DataMap';
 import DataMapLegend from '../../containers/maps/DataMapLegend';
 import Modal from '../commons/Modal';
+import Title from '../commons/Title';
 import MetadataList from '../commons/MetadataList';
 
 class DataPage extends React.Component {
@@ -23,7 +24,14 @@ class DataPage extends React.Component {
     if (metadatas && metadatas[this.props.metadataModal.datasetId]) {
       const metadataInfo = metadatas[this.props.metadataModal.datasetId].attributes.info;
 
-      return <MetadataList data={metadataInfo} />;
+      return (
+        <div className="content">
+          <Title type="content" subtitle={{ title: metadataInfo.attributes.subtitle }}>
+            {metadataInfo.attributes.title}
+          </Title>
+          <MetadataList data={metadataInfo} />
+        </div>
+      );
     }
     return null;
   }
@@ -40,9 +48,8 @@ class DataPage extends React.Component {
           opened={this.props.metadataModal.open}
           close={() => this.props.setModalMetadata(false)}
         >
-          <div className="content">
-            {modalContent}
-          </div>
+
+          {modalContent}
 
         </Modal>
       </div>

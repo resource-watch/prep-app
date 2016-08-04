@@ -24,7 +24,7 @@ function SectionIntro(props) {
             <ToolbarActions
               currentSection={props.currentSection}
             />
-            <p> {props.data.description} </p>
+            {props.children}
           </div>
         </div>
       </div>
@@ -45,7 +45,11 @@ SectionIntro.propTypes = {
   /**
    * Define the current section
    */
-  currentSection: React.PropTypes.string
+  currentSection: React.PropTypes.string,
+  /**
+   * Define the component childrens
+   */
+  children: React.PropTypes.any
 };
 
 export default SectionIntro;
