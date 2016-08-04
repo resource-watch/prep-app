@@ -17,9 +17,9 @@ class DataMap extends React.Component {
     this.updateDatasets();
 
     // Fixing height of map
-    setTimeout(function() {
+    setTimeout(() => {
       this.map.invalidateSize();
-    }.bind(this), 0)
+    }, 0);
   }
 
   componentWillReceiveProps(props) {
@@ -150,12 +150,12 @@ class DataMap extends React.Component {
       layerData.body.crs = L.CRS[layerData.body.crs.replace(':', '')];
     }
 
-    switch(layerData.type) {
+    switch (layerData.type) {
       case 'wms':
-          layer = new L.tileLayer.wms(layerData.url, layerData.body);
+        layer = new L.tileLayer.wms(layerData.url, layerData.body);
         break;
       case 'tileLayer':
-          layer = new L.tileLayer(layerData.url, layerData.body);
+        layer = new L.tileLayer(layerData.url, layerData.body);
         break;
       default:
         throw new Error('"type" specified in layer spec doesn`t exist');
@@ -234,8 +234,8 @@ class DataMap extends React.Component {
         if (res.ok) {
           return res.json();
         }
-        var error = new Error(response.statusText);
-        error.response = response;
+        const error = new Error(res.statusText);
+        error.response = res;
         throw error;
       })
       .then((data) => {

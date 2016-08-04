@@ -10,7 +10,7 @@ function MetadataInfo(props) {
       <span>Description: </span>
       <span>{props.data.attributes['short-description']
         ? props.data.attributes['short-description']
-        :  props.data.attributes.description}
+        : props.data.attributes.description}
       </span>
     </li>;
   return (

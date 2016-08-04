@@ -30,7 +30,7 @@ class ToolbarActions extends React.Component {
 
           {this.props.currentSection === 'insights' &&
             <button className="action" onClick={() => this.setState({ modalInsight: true })}>
-              <svg className="icon" width="10" height="12" viewBox="0 0 10 12"><title>Embed</title><path d="M0 10h10v2H0v-2zM0 0h10v8H0V0zm2 2h6v4H2V2z" fillRule="evenodd"/></svg>
+              <svg className="icon" width="10" height="12" viewBox="0 0 10 12"><title>Embed</title><path d="M0 10h10v2H0v-2zM0 0h10v8H0V0zm2 2h6v4H2V2z" fillRule="evenodd" /></svg>
               Embed
             </button>
           }
