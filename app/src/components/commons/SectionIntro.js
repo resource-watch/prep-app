@@ -9,7 +9,7 @@ function SectionIntro(props) {
           {props.data.partner &&
             <div className="logo">
               <img
-                src={config.apiUrl + props.data.partner.white_logo}
+                src={config.apiUrl + props.data.partner.white_logo_medium}
                 alt={props.data.partner.name}
               />
             </div>
