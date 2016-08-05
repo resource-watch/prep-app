@@ -41,6 +41,7 @@ Header.propTypes = {
    * 	- 2: insight background
    * 	- 3: data background
    * 	- 4: home background
+   * 	- 5: dataset background
    * Default: none (blue background)
    */
   pageType: React.PropTypes.number,

@@ -61,7 +61,7 @@ class DataPageDetail extends React.Component {
     );
     return (
       <div className="l-dashboards">
-        <Header type="medium" pageType="dataset-detail">
+        <Header type="medium" pageType={5}>
           {title}
         </Header>
 
