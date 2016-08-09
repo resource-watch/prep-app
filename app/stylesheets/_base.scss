@@ -14,34 +14,43 @@ html, body {
   height: 100%;
 }
 
+p {
+  line-height: 1.7;
+}
+
 a {
   color: $color-11;
   text-decoration: none;
 }
 
-.-height100 {
-  height: 100%;
+h1, h2, h3 {
+  font-family: $font-family-2;
+  color: $color-1;
 }
 
-.wrapper, .wrapper-mini {
-  padding: 0 $wrapper-mobile-padding;
+h1 {
+  font-size: $font-size-huge;
+}
 
-  @media #{$mq-mobile-large} {
-    padding: 0 $wrapper-tablet-padding;
-  }
+h2 {
+  position: relative;
+  font-size: $font-size-big;
+  padding-bottom: 26px;
 
-  @media #{$mq-tablet} {
-    padding: 0 $wrapper-padding;
-  }
+  &::after {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 0;
+    width: 150px;
+    height: 3px;
 
-  @media #{$mq-wrapper-width} {
-    padding: 0;
-    margin: 0 auto;
-    max-width: $wrapper-max-width;
+    background-color: $color-2;
+
+    content: "";
   }
 }
 
-.wrapper-mini {
-  max-width: $wrapper-mini-max-width;
-  margin: 0 auto;
+h3 {
+  font-size: $font-size-medium;
 }
