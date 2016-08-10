@@ -75,7 +75,7 @@ function PartnershipPage() {
         	</p>
         </div>
         <div className="text-content">
-        	<h2>Join the PREP partnership</h2>
+        	<h2>Join the PREP partners</h2>
         	<p>To become a partner, prepare a short “letter of intent” expressing your entity’s interest in PREP, your intended workgroup, and how you meet the partner criteria. Members of the Steering Committee will review the letter to ensure the partnership criteria are met. Partners, and a description of their role in and contribution to PREP, will be publicly listed in the “Partners” portion of the PREP website. Partner criteria are:
         	</p>
         	<ul>
@@ -102,6 +102,15 @@ function PartnershipPage() {
 	            
 	          </div>
 	        </section>
+	        <div className="-partner">
+	        	<div className="-partner-card">
+	        		<div className="imagepending"></div>
+	        		<h4>Partner Name</h4>
+	        		<div className="-partner-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+	        		</div>
+	        	</div>
+	        </div>
+
         </div>
       </div>
 
