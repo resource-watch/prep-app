@@ -28,7 +28,7 @@ function PartnershipPage() {
           <p>
             We will seek to reduce the barriers to access, contribute, and use data for climate resilience.
           </p>
-          <p><a href="#">GO TO DATA ACCESSIBILITY</a></p>
+          <p><a href="/partnershipdata">GO TO DATA ACCESSIBILITY</a></p>
           <h3>Platform Development</h3>
           <p>
             We will develop platforms to enhance access to and usability of climate-relevant data and information.

@@ -83,6 +83,13 @@ class ContainerPage extends React.Component {
         header: <Navbar />,
         footer: <Footer />
       },
+      /* Partnership Engagement detail */
+      {
+        regex: /^\/partnershipdata\/.+$/,
+        theme: 3,
+        header: <Navbar />,
+        footer: <Footer />
+      },
       /* Default rule - Statics */
       {
         regex: /.*/,
