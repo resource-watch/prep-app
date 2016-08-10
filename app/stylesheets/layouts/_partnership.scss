@@ -1,0 +1,20 @@
+.l-partnership {
+
+  .text-content {
+    position: relative;
+    min-height: calc(100vh - 560px);
+    z-index: 1;
+    background: white;
+    box-shadow: 0px -2px 1px 0px #c0c0c0;
+    padding: 30px 60px;
+    @media #{$mq-mobile-large} {
+      margin: -100px 0 40px 0;
+    }
+
+    > p {
+      font-size: 15px;
+      line-height: 1.7;
+      font-family: $font-family-1;
+    }
+  }
+}
