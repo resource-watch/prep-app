@@ -5,4 +5,5 @@ export { default as datasets } from './datasets';
 export { default as datamap } from './datamap';
 export { default as partners } from './partners';
 export { default as partnership } from './partnership';
+export { default as partnershipengagement } from './partnershipengagement';
 export { default as links } from './links';

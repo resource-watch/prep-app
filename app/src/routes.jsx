@@ -12,6 +12,7 @@ import InsightsPage from './containers/pages/InsightsPage';
 import InsightDetailPage from './containers/pages/InsightDetailPage';
 import PartnersPage from './components/pages/PartnersPage';
 import PartnershipPage from './components/pages/PartnershipPage';
+import PartnershipEngagementPage from './components/pages/PartnershipEngagementPage';
 import AboutPage from './components/pages/AboutPage';
 import FAQsPage from './components/pages/FAQsPage';
 import ContactPage from './components/pages/ContactPage';
@@ -106,6 +107,7 @@ function Routes(props) {
           <Route path=":slug" component={InsightDetailPage} />
         </Route>
         <Route path="partnership" component={PartnershipPage} />
+        <Route path="partnershipengagement" component={PartnershipEngagementPage} />
         <Route path="partners" component={PartnersPage} />
         <Route path="about" component={AboutPage} />
         <Route path="faqs" component={FAQsPage} />
