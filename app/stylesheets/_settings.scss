@@ -6,18 +6,19 @@ $wrapper-tablet-padding:   30px;
 $wrapper-mobile-padding:   15px;
 
 /* Font families */
-$font-family-1: "Open Sans", sans-serif;
-$font-family-2: "PT Serif", serif;
+$font-family-1: "Open Sans", Helvetica, Arial, sans-serif;
+$font-family-2: "PT Serif", Georgia, serif;
 
 /* Font sizes */
+$font-size-small:   13px;
+$font-size-normal:  15px;
+$font-size-medium:  22px;
+$font-size-big:     37px;
+$font-size-huge:    62px;
+
 $font-size-tiny:    10px;
 $font-size-x-small: 12px;
-$font-size-small:   14px;
-$font-size-normal:  18px;
-$font-size-medium:  30px;
-$font-size-big:     36px;
 $font-size-x-big:   52px;
-$font-size-huge:    72px;
 
 /* Font weights */
 $font-weight-light:  300;

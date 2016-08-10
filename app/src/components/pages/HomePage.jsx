@@ -49,15 +49,17 @@ class HomePage extends React.Component {
               <Title border type="section">
                 Our mission
               </Title>
-              <p>
-                The C-PREP platform seeks to help planners, investors, and
-                resource managers around the globe rapidly assess and
-                incorporate climate risks into their decisions by enhancing
-                access to the best available data, and insights on climate
-                change. It leverages innovations in information and
-                communication technologies to strengthen climate risks
-                assessments and resilience planning.
-              </p>
+              <p>The Partnership for Resilience and Preparedness (PREP) is a public-private collaboration to empower a data-driven approach to building climate resilience. The Partnership aims to help planners, investors, and resource managers around the globe to more easily incorporate climate risks into their decisions by enhancing access to relevant data and facilitate collective learning through insights on climate variability and change. PREP will do this through:</p>
+              <h3>Community Engagement</h3>
+              <p>We will facilitate sustained dialogues among data/information producers and users for climate resilience.</p>
+
+              <h3>Data Accessibility</h3>
+              <p>We will seek to reduce the barriers to access, contribute, and use data for climate resilience.</p>
+
+              <h3>Platform Development</h3>
+              <p>We will develop platforms to enhance access to and usability of climate-relevant data and information.</p>
+
+              <p>PREP is a Data Collaborative of the Global Partnership for Sustainable Development Data.</p>
             </div>
             <div className="floating-card">
               <img
@@ -65,17 +67,14 @@ class HomePage extends React.Component {
                 alt="Accessible, authoritative assessments"
               />
               <Title border type="section">
-                Accessible, authoritative assessments
+                The challenge
               </Title>
-              <p>
-                This platform supports a next generation of living climate
-                assessment and resilience plans. It provides access to relevant
-                data, tools and case studies from authoritative sources, and
-                allows you to seamlessly incorporate your own local content,
-                regardless of scale. Create unique data visualizations or
-                explore those created by others to easily disseminate and
-                discover climate risk data.
-              </p>
+              <p>With climate change already upon us, a growing number of communities, companies, and civil society organizations are looking to conduct climate vulnerability assessments, risk screening, and develop resilience plans. As a result, the demand for climate risk information is on the rise, however efforts to turn data into actionable plans are constrained by two challenges:</p>
+              <ul>
+                <li>The availability of robust, actionable information is limited.</li>
+                <li>It is difficult to find, access, and use existing data and information.</li>
+              </ul>
+              <p>Prep seeks to overcome these challenges by facilitating sustained dialogues among producers and users of information, promoting standards to enhance accessibility and interoperability of data and information products, and developing platforms that enhance data accessibility and knowledge sharing.</p>
             </div>
           </section>
         </div>
@@ -97,15 +96,7 @@ class HomePage extends React.Component {
                 Understanding the problem
               </Title>
               <p className="text">
-                Around the world, there is a growing recognition that, no matter
-                what steps may be taken to control greenhouse gas emissions, we
-                must prepare for the impacts of greater climate variability and
-                change. Municipalities are making commitments to take action
-                under the Paris Agreement and the UN Sustainable Development
-                Goals. To facilitate a clear path forward, we must increase
-                access to robust and actionable information, give guidance on
-                using data to manage risks, and make the results easy to
-                understand and share.
+                Our changing climate is accelerating the intensity and frequency of shocks and stresses facing communities across the globe. There is now a growing recognition that even with aggressive reductions in greenhouse gas emissions continued changes in the Earth’s climate are inevitable. As a result, society is increasingly focused on building its capacity to anticipate and prepare for climate variability and change.
               </p>
               <div className="indicators">
                 <div className="indicator">
@@ -129,8 +120,7 @@ class HomePage extends React.Component {
               <div className="insight">
                 <img src={homeUnderstanding} alt="New York" />
                 <Link to="/insights/framer-assesses-crops-impact">
-                  Go to Framer assesses possible impacts of climate change on
-                  his crops (grapes) insight
+                  GO TO PORTO ALEGRE CITY INSIGHT
                 </Link>
               </div>
             </div>
@@ -148,14 +138,10 @@ class HomePage extends React.Component {
                   href: '/dashboards'
                 }}
               >
-                Urgent and accurate analysis
+                Assembling the information you need
               </Title>
               <p className="text">
-                Dashboards give rapid insights on climate risk indicators,
-                showing the most pressing issues and the impacts of actions
-                taken against them. View some of the dashboards that users have
-                already submitted, suggest edits or create your own to highlight
-                key issues in your area.
+                Dashboards are a collection of data, insight and tools that users compile to support their climate resilience and preparedness planning. View some of the dashboards that others have create, or create your own to track to key issues in your area.
               </p>
             </div>
             <div className="cards">
@@ -227,10 +213,7 @@ class HomePage extends React.Component {
                   We want to hear from you
                 </Title>
                 <p className="text">
-                  C-PREP aims to enhance access to climate risk data, and can
-                  only achieve that with thorough feedback from users like you.
-                  <br />Interested in formally joining the collaboration? Please
-                  contact us here.
+                  PREP aims to enhance access and use of data and information to help communities build climate  resilience. We can only do this with input from users like you.
                 </p>
               </div>
               <form className="contact-box">
