@@ -10,7 +10,7 @@ const rootPath = process.cwd();
 const webpackConfig = {
 
   entry: [
-    path.join(rootPath, 'app/src/main.jsx')
+    path.join(rootPath, 'src/index.jsx')
   ],
 
   output: {
@@ -21,7 +21,7 @@ const webpackConfig = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'app/index.html',
+      template: 'src/index.html',
       inject: 'body',
       filename: 'index.html'
     }),
@@ -63,6 +63,10 @@ if (process.env.NODE_ENV === 'production') {
     loader: ExtractTextPlugin.extract(['css', 'sass'])
   });
   webpackConfig.module.loaders.push({
+    test: /\.css$/,
+    loader: ExtractTextPlugin.extract(['css'])
+  });
+  webpackConfig.module.loaders.push({
     test: /\.(jpe?g|png|gif|svg)$/i,
     loaders: [
       'file?hash=sha512&digest=hex&name=[hash].[ext]',
@@ -85,6 +89,10 @@ if (process.env.NODE_ENV === 'production') {
   // Activating source map
   webpackConfig.devtool = 'source-map';
   // Loaders
+  webpackConfig.module.loaders.push({
+    test: /\.css$/,
+    loaders: ['style', 'css']
+  });
   webpackConfig.module.loaders.push({
     test: /\.scss$/,
     loaders: ['style', 'css', 'sass']
