@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import useScroll from 'react-router-scroll';
 import { IndexRoute, IndexRedirect, Router, Route, applyRouterMiddleware } from 'react-router';
-import Layout from './components/Layout';
-import Home from './components/pages/Home';
+import App from './components/App';
+import Home from './components/Home';
 
 // import ContainerPage from './containers/pages/ContainerPage';
 // import DataPage from './containers/pages/DataPage';
@@ -91,7 +91,7 @@ function Routes(props) {
       history={props.history}
       render={applyRouterMiddleware(useScroll(shouldUpdateScroll))}
     >
-      <Route path="/" component={Layout}>
+      <Route path="/" component={App}>
         <IndexRoute component={Home} />
       </Route>
     </Router>

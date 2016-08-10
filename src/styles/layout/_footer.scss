@@ -1,0 +1,11 @@
+$footer-top-bg-color: $dark-slate-blue;
+$footer-down-bg-color: $dark-slate-blue-2;
+
+.l-footer-top {
+  background-color: $footer-top-bg-color;
+}
+
+.l-footer-down {
+  padding: $small-margin 0;
+  background-color: $footer-down-bg-color;
+}

@@ -1,14 +1,49 @@
-// Fonts
+// Color definition
+$white: #fff;
+$light-gold: #ffc94e;
+// dos amarillos
+$dark-blue: #263e57;
+
+$pale-grey: #eee;
+$silver: #c4cad0;
+$navy: #001e3c;
+$dark-grey-blue: #263e57;
+$dark-slate-blue: #1a3e62;
+$dark-slate-blue-2: #173554;
+
+// General settings
 $base-font-family: "Open Sans", Helvetica, Arial, sans-serif;
 $base-font-size: rem(15);
 
+$base-bg-color: $white;
+$base-font-color: $dark-blue;
+
+$inverse-bg-color: $dark-blue;
+$inverse-font-color: $white;
+
+// Fonts
 $header-font-family: "PT Serif", Georgia, serif;
+$header-font-color: $dark-blue;
 
 $h1-font-size: rem(62) !default;
 $h2-font-size: rem(37) !default;
 $h3-font-size: rem(22) !default;
-// $h4-font-size: rem(15) !default;
-// $h5-font-size: rem(13) !default;
 
-// Theme definition
-$body-bg: white;
+// Borders
+$box-border-color: $pale-grey;
+$sep-border-color: $silver;
+
+// Links and buttons
+$link-font-color: $light-gold;
+
+$button-bg-color: $light-gold;
+$button-font-color: $dark-blue;
+
+// App palette
+$main-color: $dark-grey-blue;
+$secondary-color: $light-gold;
+
+// Margins
+$large-margin: 80px;
+$medium-margin: 50px;
+$small-margin: 30px;
