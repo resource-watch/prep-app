@@ -6,7 +6,26 @@
   .text-content {
     &:first-of-type {
       margin: -100px 0 40px 0;
-      box-shadow: 0px -2px 1px 0px #c0c0c0;
+      &:before {
+        left: 0;
+        box-shadow: -2px 0px 15px 0px rgba(0, 0, 0, 0.5);
+        content: "";
+        width: 1px;
+        height: 150px;
+        position: absolute;
+        top: 0;
+        z-index: -1;
+      }
+      &:after {
+        right: 0;
+        box-shadow: -2px 0px 15px 0px rgba(0, 0, 0, 0.5);
+        content: "";
+        width: 1px;
+        height: 150px;
+        position: absolute;
+        top: 0;
+        z-index: -1;
+      }
       min-height: calc(100vh - 560px);
     }
     position: relative;
