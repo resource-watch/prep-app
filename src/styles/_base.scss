@@ -1,15 +1,73 @@
-*, *:before, *:after {
-  box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 html,
 body {
-  height: 100%;
   font-size: $base-font-size;
 }
 
 body {
+  color: $base-font-color;
   font-family: $base-font-family;
+
+  background-color: $base-bg-color;
+}
+
+h1, h2, h3 {
+  font-family: $header-font-family;
+  color: $header-font-color;
+
+  .-inverse & {
+    color: $inverse-font-color;
+  }
+}
+
+h1 {
+  font-size: $h1-font-size;
+}
+
+h2 {
+  position: relative;
+  font-size: $h2-font-size;
+  padding-bottom: rem(26);
+
+  &::after {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 0;
+    width: 150px;
+    height: 3px;
+
+    background-color: $secondary-color;
+
+    content: "";
+  }
+}
+
+h3 {
+  font-size: $h3-font-size;
+}
+
+a {
+  color: $link-font-color;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+input, textarea, select, a, button {
+  &:focus {
+    outline: 0;
+  }
+}
+
+nav > ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  & > li {
+    margin: 0;
+  }
 }

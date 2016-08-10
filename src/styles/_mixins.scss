@@ -1,4 +1,4 @@
-@function rem($size: 16px) {
-  $base: 16px;
-  @return #{$size / $base}rem;
+@function rem($size: 16) {
+  $base: 16;
+  @return #{($size / $base)}rem;
 }

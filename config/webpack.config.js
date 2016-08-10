@@ -29,8 +29,9 @@ const webpackConfig = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       config: {
+        facebookUser: JSON.stringify(process.env.FACEBOOK_USER),
+        twitterUser: JSON.stringify(process.env.TWITTER_USER),
         apiUrl: JSON.stringify(process.env.API_URL),
         apiUrlRW: JSON.stringify(process.env.RW_API_URL),
         tokenUrlShorter: JSON.stringify(process.env.SHORT_URL_API_TOKEN),

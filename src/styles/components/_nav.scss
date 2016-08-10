@@ -1,0 +1,21 @@
+.c-nav {
+  &.-main, &.-secondary {
+    & > ul {
+      justify-content: flex-end;
+    }
+  }
+
+  &.-secondary {
+    & > ul {
+      & > li {
+        margin-left: 1rem;
+      }
+    }
+  }
+
+  &.-social {
+    ul > li {
+      margin-right: 1rem;
+    }
+  }
+}
