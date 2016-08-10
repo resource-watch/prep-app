@@ -32,4 +32,88 @@
       }
     }
   }
+  .homepage-contact {
+    background-color: $color-8;
+    .wrapper {
+      padding: 0;
+    }
+
+    @media #{$mq-mobile-large} {
+    }
+
+    @media #{$mq-tablet} {
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      @media #{$mq-tablet} {
+        flex-direction: row;
+      }
+
+      > .content {
+        color: $color-6;
+
+        @media #{$mq-tablet} {
+          flex-basis: 100%;
+        }
+      }
+    }
+
+    .contact-box {
+      position: relative;
+      margin-top: 20px;
+      padding: 15px;
+      padding-bottom: 35px;
+      background-color: $color-6;
+      box-shadow: 0 5px 20px 0 rgba(0, 0, 0, .2);
+
+      @media #{$mq-tablet} {
+        flex-basis: 100%;
+        margin-top: 0;
+      }
+
+      > .email {
+        width: 100%;
+        font-family: "Open Sans", sans-serif;
+        font-size: 17px;
+        line-height: 28px;
+        color: $color-13;
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid rgba($color-1, .3);
+        outline: 0;
+        margin-bottom: 40px;
+        background-color: $color-6;
+      }
+
+      > .message {
+        width: 100%;
+        min-height: 170px;
+        font-family: "Open Sans", sans-serif;
+        font-size: 17px;
+        line-height: 32px;
+        color: $color-13;
+        border: 0;
+        outline: 0;
+        background-image: repeating-linear-gradient(to bottom, transparent, transparent 30.5px, rgba($color-1, .3) 32px);
+        /* Issue with FF: https://bugzilla.mozilla.org/show_bug.cgi?id=1007064 */
+        background-attachment: local;
+        background-color: $color-6;
+      }
+
+      > button {
+        position: absolute;
+        bottom: -10px;
+        left: calc(100% - 75px);
+        transform: translateX(-50%);
+        width: 180px;
+
+        @media #{$mq-tablet} {
+        }
+      }
+    }
+  }
 }

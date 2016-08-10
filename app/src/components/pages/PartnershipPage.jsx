@@ -1,6 +1,8 @@
 import React from 'react';
 import Header from '../commons/Header';
 import Title from '../commons/Title';
+import Button from '../commons/Button';
+import Modal from '../commons/Modal';
 
 function PartnershipPage() {
   return (
@@ -81,6 +83,25 @@ function PartnershipPage() {
         		<li>A commitment to contribute to the Partnership\'s mission through in-kind or direct contribution (e.g. engagement, data, platform).</li>
         		<li>Delegation of at least one person to be the point of contact who is actively involved as needed.</li>
         	</ul>
+        	<section className="homepage-contact">
+	          <div className="wrapper">
+	            <div className="container">
+	              <form className="contact-box">
+	                <input type="email" placeholder="your@email.org" className="email" />
+	                <textarea placeholder="Your message here" className="message"></textarea>
+	                <Button
+	                  fill
+	                  border
+	                  click={e => this.onSubmitForm(e)}
+	                >
+	                  Send message
+	                </Button>
+	              </form>
+
+	            </div>
+	            
+	          </div>
+	        </section>
         </div>
       </div>
 
