@@ -1,4 +1,7 @@
 .l-partnership {
+  h1,h2,h3 {
+    text-align: center;
+  }
 
   .text-content {
     position: relative;
@@ -10,11 +13,23 @@
     @media #{$mq-mobile-large} {
       margin: -100px 0 40px 0;
     }
+    h2:after {
+      left: calc(50% - 75px);
+    }
 
     > p {
       font-size: 15px;
       line-height: 1.7;
       font-family: $font-family-1;
+      a {
+        font-weight: $font-weight-bold;
+      }
+    }
+    ul {
+      span {
+        display: block;
+        font-weight: $font-weight-bold;
+      }
     }
   }
 }
