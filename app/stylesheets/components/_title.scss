@@ -1,4 +1,4 @@
-// .c-title {
+.c-title {
 //   > h1, h2, h3 {
 //     position: relative;
 //     margin: 0;
@@ -23,21 +23,21 @@
 //     text-decoration: none;
 //   }
 
-//   &.-mega {
-//     > h1, h2, h3 {
-//       font-family: $font-family-1;
-//       font-weight: $font-weight-light;
-//       font-size: $font-size-big;
+  &.-mega {
+    > h1, h2, h3 {
+      font-family: $font-family-1;
+      font-weight: $font-weight-light;
+      font-size: $font-size-big;
 
-//       @media #{$mq-mobile-large} {
-//         font-size: $font-size-x-big;
-//       }
+      @media #{$mq-mobile-large} {
+        font-size: $font-size-x-big;
+      }
 
-//       @media #{$mq-tablet} {
-//         font-size: $font-size-huge;
-//       }
-//     }
-//   }
+      @media #{$mq-tablet} {
+        font-size: $font-size-huge;
+      }
+    }
+  }
 
 //   &.-page {
 //     > h1, h2, h3 {
@@ -75,15 +75,15 @@
 //   }
 
 //   &.-center { text-align: center; }
-//   &.-inverse {
-//     > h1,
-//     > h2,
-//     > h3,
-//     > h4,
-//     > h4 > a { color: $color-5; }
-//   }
+  &.-inverse {
+    > h1,
+    > h2,
+    > h3,
+    > h4,
+    > h4 > a { color: $color-5; }
+  }
 
-//   &.-border {
+  &.-border {
 //     > h1, h2, h3 {
 //       padding-bottom: 40px;
 
@@ -128,15 +128,19 @@
 //       }
 //     }
 
-//     &.-mega {
-//       > h1, h2, h3 {
-//         &:after {
-//           content: '|';
-//           display: inline;
-//           position: static;
-//           background-color: transparent;
-//         }
-//       }
-//     }
-//   }
-// }
+    &.-mega {
+      > h1, h2, h3 {
+        &:after {
+          display: inline;
+          position: static;
+
+          color: $color-2;
+
+          background-color: transparent;
+
+          content: '|';
+        }
+      }
+    }
+  }
+}
