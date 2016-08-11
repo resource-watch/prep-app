@@ -8,7 +8,7 @@ const settings = {
   autoplaySpeed: 3000,
   infinite: true,
   speed: 500,
-  slidesToShow: 6
+  slidesToShow: 5
 };
 
 class PartnersSlider extends Component {
@@ -32,7 +32,7 @@ class PartnersSlider extends Component {
     ));
 
     return (
-      <div className="c-partners-logos">
+      <div className="c-partners-slider">
         <h2>Our partners</h2>
         <Slider {...settings}>
           {partners}

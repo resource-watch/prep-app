@@ -1,11 +1,20 @@
-$footer-top-bg-color: $dark-slate-blue;
-$footer-down-bg-color: $dark-slate-blue-2;
+$footer-bg-color: $dark-slate-blue-2;
+$footer-border-color: $dark-slate-blue;
+
+.l-footer {
+  background-color: $footer-bg-color;
+}
 
 .l-footer-top {
-  background-color: $footer-top-bg-color;
+  padding: $small-margin 0;
 }
 
 .l-footer-down {
   padding: $small-margin 0;
-  background-color: $footer-down-bg-color;
+}
+
+.footer-sep-item {
+  width: 100%;
+  height: 0;
+  border: 1px solid $footer-border-color;
 }

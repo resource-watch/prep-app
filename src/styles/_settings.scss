@@ -14,6 +14,7 @@ $dark-slate-blue-2: #173554;
 // General settings
 $base-font-family: "Open Sans", Helvetica, Arial, sans-serif;
 $base-font-size: rem(15);
+$base-line-height: 1.7;
 
 $base-bg-color: $white;
 $base-font-color: $dark-blue;
@@ -28,6 +29,8 @@ $header-font-color: $dark-blue;
 $h1-font-size: rem(62) !default;
 $h2-font-size: rem(37) !default;
 $h3-font-size: rem(22) !default;
+
+$small-font-size: rem(13);
 
 // Borders
 $box-border-color: $pale-grey;

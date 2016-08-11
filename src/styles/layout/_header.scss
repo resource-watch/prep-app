@@ -1,0 +1,52 @@
+$header-bg-color: $dark-slate-blue-2;
+$header-height: 100px;
+
+$banner-big-height: 775px;
+$banner-medium-height: 632px;
+$banner-small-height: 400px;
+
+.l-header-nav {
+  position: relative;
+  background-color: rgba($navy, .45);
+  height: $header-height;
+  z-index: 1;
+
+  &.-no-bg {
+    background-color: transparent;
+  }
+
+  .logo {
+    position: relative;
+    display: block;
+    float: left;
+
+    &:after {
+      display: block;
+      content: "BETA";
+      position: absolute;
+      top: 100%;
+      right: 0;
+
+      font-family: Georgia, sans-serif;
+      font-weight: bold;
+      font-style: italic;
+      font-size: 12px;
+    }
+  }
+}
+
+.l-header-banner {
+  position: relative;
+  min-height: $banner-medium-height;
+  margin-top: -$header-height;
+
+  background-color: $header-bg-color;
+
+  &.-big {
+    min-height: $banner-big-height;
+  }
+
+  &.-small {
+    min-height: $banner-small-height;
+  }
+}

@@ -1,0 +1,19 @@
+$banner-padding-top: 100px;
+$banner-padding-bottom: 90px;
+
+.c-banner {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  padding-top: $banner-padding-top;
+  padding-bottom: $banner-padding-bottom;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+
+  .-big &, .-small & {
+    padding-bottom: 0;
+  }
+}
