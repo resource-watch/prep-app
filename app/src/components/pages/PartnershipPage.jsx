@@ -9,7 +9,7 @@ function PartnershipPage() {
     <div className="l-partnership">
       <Header type="small">
         <Title inverse center border type="page">
-          Partnership for Resilience and Preparedness
+          Partnership for Resilience and Preparedness
         </Title>
       </Header>
 
