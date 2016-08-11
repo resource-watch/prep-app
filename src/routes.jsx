@@ -5,17 +5,11 @@ import { IndexRoute, IndexRedirect, Router, Route, applyRouterMiddleware } from 
 import App from './components/App';
 import Home from './components/Home';
 
-// import ContainerPage from './containers/pages/ContainerPage';
-// import DataPage from './containers/pages/DataPage';
-// import DataDetailPage from './containers/pages/DataDetailPage';
-// import DashboardsPage from './containers/pages/DashboardsPage';
-// import DashboardDetailPage from './containers/pages/DashboardDetailPage';
-// import InsightsPage from './containers/pages/InsightsPage';
-// import InsightDetailPage from './containers/pages/InsightDetailPage';
-// import PartnersPage from './components/pages/PartnersPage';
-// import AboutPage from './components/pages/AboutPage';
-// import FAQsPage from './components/pages/FAQsPage';
-// import ContactPage from './components/pages/ContactPage';
+import Partnership from './components/Partnership';
+import EngagementWorkgroup from './components/Partnership/EngagementWorkgroup';
+import DataAccessibility from './components/Partnership/DataAccessibility';
+
+import metadata from 'json!./metadata.json';
 
 function shouldUpdateScroll(prevRouterProps, { location }) {
   /**
@@ -85,14 +79,34 @@ function shouldUpdateScroll(prevRouterProps, { location }) {
   return true;
 }
 
+function getData(name) {
+  let currentData = null;
+  for (let i = metadata.length - 1; i >= 0; i--) {
+    if (metadata[i].name === name) {
+      currentData = metadata[i];
+      break;
+    }
+  }
+  return currentData;
+}
+
 function Routes(props) {
   return (
     <Router
       history={props.history}
       render={applyRouterMiddleware(useScroll(shouldUpdateScroll))}
     >
-      <Route path="/" component={App}>
+      <Route path={getData('home').pathname} component={App}>
         <IndexRoute component={Home} />
+        <Route path={getData('partnership').pathname}>
+          <IndexRoute component={Partnership} />
+          <Route path={getData('engagement-workgroup').pathname}
+            component={EngagementWorkgroup} />
+          <Route path={getData('data-accessibility').pathname}
+            component={DataAccessibility} />
+          <Route path={getData('platform-development').pathname}
+            component={DataAccessibility} />
+        </Route>
       </Route>
     </Router>
   );

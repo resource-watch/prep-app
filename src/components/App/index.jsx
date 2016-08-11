@@ -6,17 +6,34 @@ import SocialNav from '../../components/Navigation/SocialNav';
 import MainNav from '../../components/Navigation/MainNav';
 import Banner from '../../components/Banner';
 
-import logoImage from '../../images/preplogo@2x.png';
+import metadata from 'json!../../metadata.json';
+import logoImage from '../../images/prep-logo.png';
 
 class App extends React.Component {
+
+  getData(key, value) {
+    let data = null;
+    for (let i = metadata.length - 1; i >= 0; i--) {
+      if (metadata[i][key] === value) {
+        data = metadata[i];
+        break;
+      }
+    }
+    return data;
+  }
+
   render() {
+    const pathname = this.props.location.pathname;
+    const currentData = this.getData('pathname', (pathname !== '/') ?
+      pathname.split('/')[1] : pathname);
+
     return (
       <div>
         <header className="l-header">
-          <div className="l-header-nav">
+          <div className={`l-header-nav ${currentData.name === 'home' ? '-no-bg' : ''}`}>
             <div className="row align-middle">
               <div className="column small-10 medium-4">
-                <Link to={"/"} className="logo">
+                <Link to={this.getData('name', 'home').pathname} className="logo">
                   <img src={logoImage} alt="Partnership for Resilience and Preparedness" />
                 </Link>
               </div>
@@ -26,12 +43,14 @@ class App extends React.Component {
             </div>
           </div>
           <div className="l-header-banner">
-            <Banner />
+            <Banner metadata={currentData} />
           </div>
         </header>
 
         <div className="l-main">
-          {this.props.children}
+          <div className="main-content -sliced">
+            {this.props.children}
+          </div>
         </div>
 
         <footer className="l-footer">
@@ -63,6 +82,7 @@ class App extends React.Component {
       </div>
     );
   }
+
 }
 
 App.childContextTypes = {

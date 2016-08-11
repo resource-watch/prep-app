@@ -5,7 +5,6 @@ $light-gold: #ffc94e;
 $dark-blue: #263e57;
 
 $pale-grey: #eee;
-$silver: #c4cad0;
 $navy: #001e3c;
 $dark-grey-blue: #263e57;
 $dark-slate-blue: #1a3e62;
@@ -29,12 +28,12 @@ $header-font-color: $dark-blue;
 $h1-font-size: rem(62) !default;
 $h2-font-size: rem(37) !default;
 $h3-font-size: rem(22) !default;
+$h4-font-size: rem(15) !default;
 
 $small-font-size: rem(13);
 
 // Borders
-$box-border-color: $pale-grey;
-$sep-border-color: $silver;
+$border-color: $pale-grey;
 
 // Links and buttons
 $link-font-color: $light-gold;

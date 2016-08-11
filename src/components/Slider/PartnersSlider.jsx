@@ -33,7 +33,7 @@ class PartnersSlider extends Component {
 
     return (
       <div className="c-partners-slider">
-        <h2>Our partners</h2>
+        <h2 className="-left">Our partners</h2>
         <Slider {...settings}>
           {partners}
         </Slider>

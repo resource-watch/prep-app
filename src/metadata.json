@@ -1,0 +1,37 @@
+[
+  {
+    "name": "home",
+    "pathname": "/",
+    "metaTitle": "Welcome",
+    "metaDescription": "",
+    "title": "Enabling collective action to manage climate risks"
+  },
+  {
+    "name": "partnership",
+    "pathname": "partnership",
+    "metaTitle": "Partnership",
+    "metaDescription": "",
+    "title": "Partnership for Resilience and Preparedness"
+  },
+  {
+    "name": "engagement-workgroup",
+    "pathname": "engagement-workgroup",
+    "metaTitle": "Partnership Engagement Workgroup",
+    "metaDescription": "",
+    "title": "Partnership Engagement Workgroup"
+  },
+  {
+    "name": "data-accessibility",
+    "pathname": "data-accessibility",
+    "metaTitle": "Data Accesibility Workgroup",
+    "metaDescription": "",
+    "title": "Data Accesibility Workgroup"
+  },
+  {
+    "name": "platform-development",
+    "pathname": "platform-development",
+    "metaTitle": "Platform Development Workgroup",
+    "metaDescription": "",
+    "title": "Platform Development"
+  }
+]

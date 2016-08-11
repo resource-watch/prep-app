@@ -1,0 +1,8 @@
+.c-article {
+  padding: $medium-margin 0;
+  border-bottom: 2px solid $border-color;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}

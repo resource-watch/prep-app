@@ -22,33 +22,50 @@ h1, h2, h3 {
 
 h1, h2 {
   position: relative;
-  padding-bottom: rem(26);
+  text-align: center;
   line-height: 1.1;
 
-  &::after {
+  &:after {
     position: absolute;
     display: block;
     bottom: 0;
     left: 0;
-    width: 147px;
+    width: 148px;
     height: 3px;
+    left: 50%;
+    margin-left: -74px;
 
     background-color: $secondary-color;
 
     content: "";
   }
+
+  &.-left {
+    text-align: left;
+
+    &:after {
+      left: 0;
+      margin-left: 0;
+    }
+  }
 }
 
 h1 {
   font-size: $h1-font-size;
+  padding-bottom: rem(29);
 }
 
 h2 {
+  padding-bottom: rem(26);
   font-size: $h2-font-size;
 }
 
 h3 {
   font-size: $h3-font-size;
+}
+
+h4 {
+  font-size: $h4-font-size;
 }
 
 a {
@@ -73,6 +90,21 @@ nav > ul {
   padding: 0;
 
   & > li {
+    list-style: none;
     margin: 0;
   }
+}
+
+ul > li {
+  list-style: square;
+  margin: 1rem 0;
+
+  h4 {
+    margin-bottom: 0;
+  }
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
