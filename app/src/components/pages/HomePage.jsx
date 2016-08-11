@@ -187,7 +187,7 @@ class HomePage extends React.Component {
                 href: '/data'
               }}
             >
-              Explore the latest data
+              Explore the data
             </Title>
             <p className="text">
               Interact with national, regional, and local data on this web map.
