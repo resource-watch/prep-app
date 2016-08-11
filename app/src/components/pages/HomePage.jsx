@@ -78,7 +78,7 @@ class HomePage extends React.Component {
                 <li>The availability of robust, actionable information is limited.</li>
                 <li>It is difficult to find, access, and use existing data and information.</li>
               </ul>
-              <p>Prep seeks to overcome these challenges by facilitating sustained dialogues among producers and users of information, promoting standards to enhance accessibility and interoperability of data and information products, and developing platforms that enhance data accessibility and knowledge sharing.</p>
+              <p>PREP seeks to overcome these challenges by facilitating sustained dialogues among producers and users of information, promoting standards to enhance accessibility and interoperability of data and information products, and developing platforms that enhance data accessibility and knowledge sharing.</p>
             </div>
           </section>
         </div>
@@ -100,7 +100,7 @@ class HomePage extends React.Component {
                 Understanding the problem
               </Title>
               <p className="text">
-                Our changing climate is accelerating the intensity and frequency of shocks and stresses facing communities across the globe. There is now a growing recognition that even with aggressive reductions in greenhouse gas emissions continued changes in the Earth’s climate are inevitable. As a result, society is increasingly focused on building its capacity to anticipate and prepare for climate variability and change.
+                Our changing climate is accelerating the intensity and frequency of shocks and stresses facing communities across the globe. There is now a growing recognition that even with aggressive reductions in greenhouse gas emissions, continued changes in the Earth’s climate are inevitable. As a result, society is increasingly focused on building its capacity to anticipate and prepare for climate variability and change.
               </p>
               <p>Data from: <a href="http://climate.nasa.gov/vital-signs/carbon-dioxide/" target="_blank">NASA: Global Climate Change</a></p>
               <div className="indicators">
