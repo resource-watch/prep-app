@@ -3,6 +3,41 @@ $slice-size: -90px;
 $shadow-size: 150px;
 
 .l-main {
+
+  ul > li {
+    position: relative;
+    list-style: none;
+
+    &:before {
+      display: block;
+      position: absolute;
+      content: "◼";
+      top: 0.04rem;
+      left: -1.5rem;
+      font-size: rem(14);
+
+      color: $secondary-color;
+    }
+  }
+
+  a {
+    display: block;
+    margin: 1rem 0;
+
+    font-size: $small-font-size;
+    font-weight: bold;
+
+    text-transform: uppercase;
+  }
+
+  p > a,
+  li > a {
+    display: inline;
+    font-size: inherit;
+    text-transform: none;
+    margin: inherit;
+  }
+
   & > .main-content {
     position: relative;
     max-width: $max-content-width;

@@ -1,6 +1,6 @@
 import React from 'react';
 import Article from '../Content/Article';
-import JoinPartnership from './articles/JoinPartnership';
+import JoinPartnership from './Articles/JoinPartnership';
 
 class EngagementWorkgroup extends React.Component {
 

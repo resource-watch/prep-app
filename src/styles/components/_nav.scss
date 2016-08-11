@@ -26,8 +26,8 @@
         transition: all .3s ease-out;
       }
 
-      &:hover > a,
-      &.-current > a {
+      & > a.-current,
+      & > a:hover {
         border-top-color: $secondary-color;
         text-decoration: none;
       }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import Article from '../Content/Article';
-import JoinPartnership from './articles/JoinPartnership';
+import JoinPartnership from './Articles/JoinPartnership';
 
 class Partnership extends React.Component {
 
@@ -24,7 +24,7 @@ class Partnership extends React.Component {
           <p>We will develop platforms to enhance access to and usability of climate-relevant data and information.</p>
           <Link to="partnership/platform-development">Go to platform development</Link>
 
-          <p>PREP includes representatives from several U.S. government agencies with vast data holdings, leading technology companies, and civil society organizations. We welcome other entities committed to our mission to join the partnership.</p>
+          <p>PREP includes representatives from several U.S. government agencies with vast data holdings, leading technology companies, and civil society organizations. We welcome other entities committed to our mission to <a href="#join">join the partnership</a>.</p>
         </Article>
 
         <Article>
@@ -53,7 +53,7 @@ class Partnership extends React.Component {
           </div>
           <div className="row">
             <div className="column small-12">
-              <p>Slider</p>
+              {/* TODO: Slider here */}
             </div>
           </div>
           <div className="row align-center">

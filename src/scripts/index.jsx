@@ -8,8 +8,8 @@ import {syncHistoryWithStore, routerReducer, routerMiddleware} from 'react-route
 import * as reducers from './reducers';
 import Routes from './routes';
 
-import './styles/lib/custom-foundation.css';
-import './styles/index.scss';
+import '../styles/lib/custom-foundation.css';
+import '../styles/index.scss';
 
 /**
  * Reducers

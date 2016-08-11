@@ -72,6 +72,10 @@ a {
   color: $link-font-color;
   text-decoration: none;
 
+  .-inverse & {
+    color: $inverse-link-font-color;
+  }
+
   &:hover {
     text-decoration: underline;
   }

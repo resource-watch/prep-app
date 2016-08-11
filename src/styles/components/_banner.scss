@@ -16,7 +16,8 @@ $banner-small-height: 400px;
   background-size: cover;
   background-repeat: no-repeat;
 
-  .-big &, .-small & {
+  &.-big,
+  &.-small {
     padding-bottom: 0;
   }
 
@@ -42,6 +43,7 @@ $banner-small-height: 400px;
       width: 4px;
       height: 95px;
       top: 17px;
+      left: auto;
     }
   }
 }

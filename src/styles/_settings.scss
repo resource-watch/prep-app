@@ -1,7 +1,7 @@
 // Color definition
 $white: #fff;
 $light-gold: #ffc94e;
-// dos amarillos
+$yellow-orange: #efa600;
 $dark-blue: #263e57;
 
 $pale-grey: #eee;
@@ -36,7 +36,8 @@ $small-font-size: rem(13);
 $border-color: $pale-grey;
 
 // Links and buttons
-$link-font-color: $light-gold;
+$link-font-color: $yellow-orange;
+$inverse-link-font-color: $light-gold;
 
 $button-bg-color: $light-gold;
 $button-font-color: $dark-blue;

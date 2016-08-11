@@ -7,7 +7,7 @@ import MainNav from '../../components/Navigation/MainNav';
 import Banner from '../../components/Banner';
 
 import metadata from 'json!../../metadata.json';
-import logoImage from '../../images/prep-logo.png';
+import logoImage from '../../../images/prep-logo.png';
 
 class App extends React.Component {
 
@@ -23,9 +23,11 @@ class App extends React.Component {
   }
 
   render() {
+    // TODO: improve this
     const pathname = this.props.location.pathname;
     const currentData = this.getData('pathname', (pathname !== '/') ?
-      pathname.split('/')[1] : pathname);
+      pathname.split('/').slice(-1)[0] : pathname);
+    const isHomepage = (currentData.name === 'home');
 
     return (
       <div>
@@ -33,7 +35,7 @@ class App extends React.Component {
           <div className={`l-header-nav ${currentData.name === 'home' ? '-no-bg' : ''}`}>
             <div className="row align-middle">
               <div className="column small-10 medium-4">
-                <Link to={this.getData('name', 'home').pathname} className="logo">
+                <Link to={'/'} className="logo">
                   <img src={logoImage} alt="Partnership for Resilience and Preparedness" />
                 </Link>
               </div>
@@ -43,12 +45,18 @@ class App extends React.Component {
             </div>
           </div>
           <div className="l-header-banner">
-            <Banner metadata={currentData} />
+            <Banner
+              bg={currentData.bannerBg}
+              size={currentData.bannerSize}
+              landing={isHomepage}
+            >
+              <h1>{currentData.title}</h1>
+            </Banner>
           </div>
         </header>
 
         <div className="l-main">
-          <div className="main-content -sliced">
+          <div className={`main-content ${currentData.bannerSize === 'medium' ? '-sliced' : ''}`}>
             {this.props.children}
           </div>
         </div>

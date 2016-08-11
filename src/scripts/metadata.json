@@ -4,34 +4,44 @@
     "pathname": "/",
     "metaTitle": "Welcome",
     "metaDescription": "",
-    "title": "Enabling collective action to manage climate risks"
+    "title": "Enabling collective action to manage climate risks",
+    "bannerSize": "big",
+    "bg": "home"
   },
   {
     "name": "partnership",
     "pathname": "partnership",
     "metaTitle": "Partnership",
     "metaDescription": "",
-    "title": "Partnership for Resilience and Preparedness"
+    "title": "Partnership for Resilience and Preparedness",
+    "bannerSize": "medium",
+    "bannerBg": "partnership"
   },
   {
     "name": "engagement-workgroup",
     "pathname": "engagement-workgroup",
     "metaTitle": "Partnership Engagement Workgroup",
     "metaDescription": "",
-    "title": "Partnership Engagement Workgroup"
+    "title": "Partnership Engagement Workgroup",
+    "bannerSize": "small",
+    "bannerBg": "partnership"
   },
   {
     "name": "data-accessibility",
     "pathname": "data-accessibility",
     "metaTitle": "Data Accesibility Workgroup",
     "metaDescription": "",
-    "title": "Data Accesibility Workgroup"
+    "title": "Data Accesibility Workgroup",
+    "bannerSize": "small",
+    "bannerBg": "partnership"
   },
   {
     "name": "platform-development",
     "pathname": "platform-development",
     "metaTitle": "Platform Development Workgroup",
     "metaDescription": "",
-    "title": "Platform Development"
+    "title": "Platform Development",
+    "bannerSize": "small",
+    "bannerBg": "partnership"
   }
 ]

@@ -2,14 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import useScroll from 'react-router-scroll';
 import { IndexRoute, IndexRedirect, Router, Route, applyRouterMiddleware } from 'react-router';
+
 import App from './components/App';
 import Home from './components/Home';
-
 import Partnership from './components/Partnership';
 import EngagementWorkgroup from './components/Partnership/EngagementWorkgroup';
 import DataAccessibility from './components/Partnership/DataAccessibility';
-
-import metadata from 'json!./metadata.json';
 
 function shouldUpdateScroll(prevRouterProps, { location }) {
   /**
@@ -79,33 +77,19 @@ function shouldUpdateScroll(prevRouterProps, { location }) {
   return true;
 }
 
-function getData(name) {
-  let currentData = null;
-  for (let i = metadata.length - 1; i >= 0; i--) {
-    if (metadata[i].name === name) {
-      currentData = metadata[i];
-      break;
-    }
-  }
-  return currentData;
-}
-
 function Routes(props) {
   return (
     <Router
       history={props.history}
       render={applyRouterMiddleware(useScroll(shouldUpdateScroll))}
     >
-      <Route path={getData('home').pathname} component={App}>
+      <Route path={'/'} component={App}>
         <IndexRoute component={Home} />
-        <Route path={getData('partnership').pathname}>
+        <Route path={'partnership'}>
           <IndexRoute component={Partnership} />
-          <Route path={getData('engagement-workgroup').pathname}
-            component={EngagementWorkgroup} />
-          <Route path={getData('data-accessibility').pathname}
-            component={DataAccessibility} />
-          <Route path={getData('platform-development').pathname}
-            component={DataAccessibility} />
+          <Route path={'engagement-workgroup'} component={EngagementWorkgroup} />
+          <Route path={'data-accessibility'} component={DataAccessibility} />
+          <Route path={'platform-development'} component={DataAccessibility} />
         </Route>
       </Route>
     </Router>

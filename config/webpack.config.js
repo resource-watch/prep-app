@@ -10,7 +10,7 @@ const rootPath = process.cwd();
 const webpackConfig = {
 
   entry: [
-    path.join(rootPath, 'src/index.jsx')
+    path.join(rootPath, 'src/scripts/index.jsx')
   ],
 
   output: {
