@@ -101,19 +101,19 @@ class HomePage extends React.Component {
               <div className="indicators">
                 <div className="indicator">
                   <h3 className="name">Global temperature</h3>
-                  <div className="value">1.4<sup>ºF</sup></div>
-                  <div className="context">Since 1880</div>
+                  <div className="value">+0.87<sup>ºC</sup></div>
+                  <div className="context">In January 2015 (relative to 1951-1880)</div>
                 </div>
                 <div className="separator"></div>
                 <div className="indicator">
                   <h3 className="name">Carbon Dioxide</h3>
-                  <div className="value">402.56</div>
-                  <div className="context">Parts per million</div>
+                  <div className="value">404.48</div>
+                  <div className="context">Parts per million (July 2016)</div>
                 </div>
                 <div className="separator"></div>
                 <div className="indicator">
                   <h3 className="name">Sea Level</h3>
-                  <div className="value">3.39</div>
+                  <div className="value">3.5</div>
                   <div className="context">mm per year</div>
                 </div>
               </div>
