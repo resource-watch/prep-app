@@ -192,7 +192,7 @@ class HomePage extends React.Component {
                 href: '/data'
               }}
             >
-              Explore the latest data
+              Explore the data
             </Title>
 
             <div className="rows">
