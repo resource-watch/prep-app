@@ -41,7 +41,7 @@ class Navbar extends React.Component {
                   <Link activeClassName="-active" to="/partnership">Partnership</Link>
                 </li>
                 <li className="link">
-                  <Link activeClassName="-active" to="/data">Data</Link>
+                  <Link activeClassName="-active" to="/data">Explore</Link>
                 </li>
                 <li className="link">
                   <Link activeClassName="-active" to="/dashboards">Dashboards</Link>
