@@ -9,7 +9,7 @@ function PartnershipDataPage() {
     <div className="l-partnership">
       <Header type="small">
         <Title inverse center border type="page">
-          Data Accessibility Workgroup
+          Data Workgroup
         </Title>
       </Header>
 
