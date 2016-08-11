@@ -56,9 +56,7 @@ class App extends React.Component {
         </header>
 
         <div className="l-main">
-          <div className={`main-content ${currentData.bannerSize === 'medium' ? '-sliced' : ''}`}>
-            {this.props.children}
-          </div>
+          {this.props.children}
         </div>
 
         <footer className="l-footer">

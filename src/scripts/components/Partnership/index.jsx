@@ -8,6 +8,7 @@ class Partnership extends React.Component {
   render() {
     return (
       <div className="c-partnership">
+        <div className="sliced"></div>
 
         <Article>
           <p>The Partnership for Resilience and Preparedness (PREP) is a public-private collaboration to empower a data-driven approach to building climate resilience. The Partnership aims to help planners, investors, and resource managers around the globe to more easily incorporate climate risks into their decisions by enhancing access to relevant data and insights on climate variability and change, and facilitating peer-to-peer learning. PREP will do this through: </p>

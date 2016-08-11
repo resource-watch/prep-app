@@ -43,5 +43,14 @@
     "title": "Platform Development",
     "bannerSize": "small",
     "bannerBg": "partnership"
+  },
+  {
+    "name": "explore",
+    "pathname": "explore",
+    "metaTitle": "Explore",
+    "metaDescription": "",
+    "title": "Explore",
+    "bannerSize": "medium",
+    "bannerBg": "explore"
   }
 ]

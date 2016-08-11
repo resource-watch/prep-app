@@ -8,6 +8,7 @@ import Home from './components/Home';
 import Partnership from './components/Partnership';
 import EngagementWorkgroup from './components/Partnership/EngagementWorkgroup';
 import DataAccessibility from './components/Partnership/DataAccessibility';
+import Explore from './components/Explore';
 
 function shouldUpdateScroll(prevRouterProps, { location }) {
   /**
@@ -92,6 +93,7 @@ function Routes(props) {
           <Route path={'platform-development'} component={DataAccessibility} />
         </Route>
       </Route>
+      <Route path={'explore'} component={Explore} />
     </Router>
   );
 }

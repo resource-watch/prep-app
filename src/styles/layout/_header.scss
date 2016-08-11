@@ -37,3 +37,7 @@ $header-height: 100px;
 
   background-color: $header-bg-color;
 }
+
+.l-header.-expanded .l-header-nav .row {
+  max-width: none;
+}
