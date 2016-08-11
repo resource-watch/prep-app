@@ -15,7 +15,7 @@ function Title(props) {
     title = <h1>{props.children}</h1>;
   } else if (props.type && props.type === 'data-page') {
     title = <h2>{props.children}</h2>;
-  }else if (props.type && props.type === 'content' || props.type === 'mini') {
+  } else if (props.type && props.type === 'content' || props.type === 'mini') {
     title = <h3>{props.children}</h3>;
   }
 
