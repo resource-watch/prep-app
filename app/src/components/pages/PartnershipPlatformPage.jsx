@@ -4,12 +4,12 @@ import Title from '../commons/Title';
 import Button from '../commons/Button';
 import Modal from '../commons/Modal';
 
-function PartnershipDataPage() {
+function PartnershipPlatformPage() {
   return (
     <div className="l-partnership">
       <Header type="small">
         <Title inverse center border type="page">
-          Data Accessibility Workgroup
+          Platform Development Workgroup
         </Title>
       </Header>
 
@@ -17,14 +17,10 @@ function PartnershipDataPage() {
 
         <div className="text-content">
           <p>
-            Entities that work to establish ensure interoperability in access and use of climate-relevant data and information produce.
-          </p>
-          <p>
-            This Data Accessibility Workgroup works to identify and reduce the barriers to access, contribute, and use data for climate resilience.  The group promote standards to ensure interoperability in access and use of climate-relevant data and information.
-          </p>
-          <p>
-            The Data Accessibility WorkGroup is lead by the Federation of Earth Science Information Partners (ESIP).
-          </p>
+            Entities collaborate on the building of platforms to enhance access and usability of data.</p>
+          <p>The Partnership for Resilience and Preparedness works to promote the development of interoperable platforms that enhance access and usability of information for climate resilience and preparedness.</p>
+          <p>The PREP platform is currently in beta.  This helps communities access <strong>climate relevant data</strong>, explore <strong>insights from those data</strong>, and compile relevant data and tools in their own <strong>dashboards</strong>.</p>
+          <p>The Platform WorkGroup is led by WRI.</p>
         </div>
 
         <div className="text-content">
@@ -67,11 +63,11 @@ function PartnershipDataPage() {
   );
 }
 
-PartnershipDataPage.propTypes = {
+PartnershipPlatformPage.propTypes = {
   /**
    * Define the route path (from the router)
    */
   currentPage: React.PropTypes.string
 };
 
-export default PartnershipDataPage;
+export default PartnershipPlatformPage;

@@ -1,5 +1,6 @@
 .l-partnership {
-  h1,h2,h3 {
+
+  h1, h2 {
     text-align: center;
   }
 
@@ -26,7 +27,7 @@
         top: 0;
         z-index: -1;
       }
-      min-height: calc(100vh - 560px);
+      min-height: calc(50vh - 560px);
     }
     position: relative;
     z-index: 1;

@@ -53,7 +53,7 @@ function PartnershipEngagementPage() {
         	</p>
         	<ul>
         		<li>A commitment to the PREP mission.</li>
-        		<li>A commitment to contribute to the Partnership\'s mission through in-kind or direct contribution (e.g. engagement, data, platform).</li>
+        		<li>A commitment to contribute to the Partnership{"'"}s mission through in-kind or direct contribution (e.g. engagement, data, platform).</li>
         		<li>Delegation of at least one person to be the point of contact who is actively involved as needed.</li>
         	</ul>
         	<section className="homepage-contact">
@@ -72,17 +72,10 @@ function PartnershipEngagementPage() {
 	              </form>
 
 	            </div>
-	            
+
 	          </div>
 	        </section>
-	        <div className="-partner">
-	        	<div className="-partner-card">
-	        		<div className="imagepending"></div>
-	        		<h4>Partner Name</h4>
-	        		<div className="-partner-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
-	        		</div>
-	        	</div>
-	        </div>
+
         </div>
       </div>
 

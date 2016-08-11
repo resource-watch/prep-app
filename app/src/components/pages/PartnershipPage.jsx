@@ -17,7 +17,7 @@ function PartnershipPage() {
 
         <div className="text-content">
           <p>
-            The Partnership for Resilience and Preparedness (PREP) is a public-private collaboration to empower a data-driven approach to building climate resilience. The Partnership aims to help planners, investors, and resource managers around the globe to more easily incorporate climate risks into their decisions by enhancing access to relevant data and insights on climate variability and change, and facilitating peer-to-peer learning. PREP will do this through: 
+            The Partnership for Resilience and Preparedness (PREP) is a public-private collaboration to empower a data-driven approach to building climate resilience. The Partnership aims to help planners, investors, and resource managers around the globe to more easily incorporate climate risks into their decisions by enhancing access to relevant data and insights on climate variability and change, and facilitating peer-to-peer learning. PREP will do this through:
           </p>
           <h3>Community Engagement</h3>
           <p>
@@ -33,7 +33,7 @@ function PartnershipPage() {
           <p>
             We will develop platforms to enhance access to and usability of climate-relevant data and information.
           </p>
-          <p><a href="#">GO TO PLATFORM DEVELOPMENT</a></p>
+          <p><a href="/partnershipplatform">GO TO PLATFORM DEVELOPMENT</a></p>
           <p>PREP includes representatives from several U.S. government agencies with vast data holdings, leading technology companies, and civil society organizations. We welcome other entities committed to our mission to <a href="#">join the partnership.</a>
           </p>
 
@@ -42,14 +42,14 @@ function PartnershipPage() {
           </p>
 	      	<ul>
 	      		<li><span>The availability of robust, actionable information is limited</span>
-	      			Despite extensive data collection and analysis conducted by government and research institutions, the specific information needs of resource managers and of decision makers in communities and corporations across the globe are not being met. 
+	      			Despite extensive data collection and analysis conducted by government and research institutions, the specific information needs of resource managers and of decision makers in communities and corporations across the globe are not being met.
 	      		</li>
 	      		<li><span>It is difficult to find, access, and use existing data and information</span>
 	      			Much of the climate-relevant data that do exist are difficult to access and use because the often sit in incompatible formats in silos of a multitude of government, university, and other data servers.
 	      		</li>
 	      	</ul>
 	      	<p>
-	      		Overcoming these challenges will require maintaining a sustained dialogue among producers and users of information, promoting standards to enhance accessibility and interoperability of data and information products, and developing platforms that enhance data accessibility in ways that meet the specific needs of users seeking to understand and manage climate risks. The goal of PREP is to meet this need. 
+	      		Overcoming these challenges will require maintaining a sustained dialogue among producers and users of information, promoting standards to enhance accessibility and interoperability of data and information products, and developing platforms that enhance data accessibility in ways that meet the specific needs of users seeking to understand and manage climate risks. The goal of PREP is to meet this need.
 	      	</p>
 	      	<p>
 	      		We seek to reduce the barriers to access, contribute, and use data for climate resilience.
@@ -71,7 +71,7 @@ function PartnershipPage() {
         </div>
         <div className="text-content">
         	<p>
-        	PREP is managed by a Steering Committee that provides the governance of the Partnership and the design of the initial PREP data and dashboard platform. PREP partners are anchored in one workgroup. A representative from the Steering Committee chairs each of the four workgroups. Partners that become actively engaged in the Platform, Data Accessibility, and/or the Engagement Workgroup can become eligible to serve on the Steering Committee. 
+        	PREP is managed by a Steering Committee that provides the governance of the Partnership and the design of the initial PREP data and dashboard platform. PREP partners are anchored in one workgroup. A representative from the Steering Committee chairs each of the four workgroups. Partners that become actively engaged in the Platform, Data Accessibility, and/or the Engagement Workgroup can become eligible to serve on the Steering Committee.
         	</p>
         </div>
         <div className="text-content">
@@ -99,7 +99,7 @@ function PartnershipPage() {
 	              </form>
 
 	            </div>
-	            
+
 	          </div>
 	        </section>
         </div>

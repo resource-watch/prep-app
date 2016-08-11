@@ -8,7 +8,7 @@ const settings = {
   autoplaySpeed: 3000,
   infinite: true,
   speed: 500,
-  slidesToShow: 6
+  slidesToShow: 5
 };
 
 class PartnersLogos extends Component {
