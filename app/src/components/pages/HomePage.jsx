@@ -52,13 +52,17 @@ class HomePage extends React.Component {
               <p>The Partnership for Resilience and Preparedness (PREP) is a public-private collaboration to empower a data-driven approach to building climate resilience. The Partnership aims to help planners, investors, and resource managers around the globe to more easily incorporate climate risks into their decisions by enhancing access to relevant data and facilitate collective learning through insights on climate variability and change. PREP will do this through:</p>
               <h3>Community Engagement</h3>
               <p>We will facilitate sustained dialogues among data/information producers and users for climate resilience.</p>
+              <Link to="partnershipengagement">Go to partnership engagement</Link>
 
               <h3>Data Accessibility</h3>
               <p>We will seek to reduce the barriers to access, contribute, and use data for climate resilience.</p>
+              <Link to="partnershipdata">Go to data accessibility</Link>
 
               <h3>Platform Development</h3>
               <p>We will develop platforms to enhance access to and usability of climate-relevant data and information.</p>
+              <Link to="partnershipplatform">Go to platform development</Link>
 
+              <p>&nbsp;</p>
               <p>PREP is a Data Collaborative of the Global Partnership for Sustainable Development Data.</p>
             </div>
             <div className="floating-card">
@@ -98,6 +102,7 @@ class HomePage extends React.Component {
               <p className="text">
                 Our changing climate is accelerating the intensity and frequency of shocks and stresses facing communities across the globe. There is now a growing recognition that even with aggressive reductions in greenhouse gas emissions continued changes in the Earth’s climate are inevitable. As a result, society is increasingly focused on building its capacity to anticipate and prepare for climate variability and change.
               </p>
+              <p>Data from: <a href="http://climate.nasa.gov/vital-signs/carbon-dioxide/" target="_blank">NASA: Global Climate Change</a></p>
               <div className="indicators">
                 <div className="indicator">
                   <h3 className="name">Global temperature</h3>
@@ -189,12 +194,36 @@ class HomePage extends React.Component {
             >
               Explore the latest data
             </Title>
-            <p className="text">
-              Interact with national, regional, and local data on this web map.
-              Filter by topic, projection models, and an area of impact to
-              create a custom map within seconds.  When you’re ready, publish or
-              share your findings to raise awareness in your community.
-            </p>
+
+            <div className="rows">
+              <div className="columns">
+                <p>
+                  Interact with national, regional, and local data on this web map.
+                  Filter by topic, projection models, and an area of impact to
+                  create a custom map within seconds.  When you’re ready, publish or
+                  share your findings to raise awareness in your community.
+                </p>
+              </div>
+
+              <div className="columns">
+                <p>
+                  Tell us what data you need and how you will use it.
+                </p>
+
+                <form className="contact-box">
+                  <input type="email" placeholder="your@email.org" className="email" />
+                  <textarea placeholder="Your message here" className="message"></textarea>
+                  <Button
+                    fill
+                    border
+                    click={e => this.onSubmitForm(e)}
+                  >
+                    Send message
+                  </Button>
+                </form>
+              </div>
+            </div>
+
             <div className="map">
               <Map data={data.map} />
             </div>
