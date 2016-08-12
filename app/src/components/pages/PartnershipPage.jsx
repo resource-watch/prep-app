@@ -1,10 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router';
 import Header from '../commons/Header';
 import Title from '../commons/Title';
 import Button from '../commons/Button';
 import Modal from '../commons/Modal';
+import Slider from '../../../lib/react-slick/react-slick';
 
 function PartnershipPage() {
+  const settings = {
+    dots: false,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    infinite: true,
+    speed: 500
+  };
+
   return (
     <div className="l-partnership">
       <Header type="small">
@@ -65,10 +76,27 @@ function PartnershipPage() {
           		Actionable plans are constrained by two challenges:
           	</p>
         </div>
+
         <div className="text-content -banner">
-        	<h2>Data Accessibility Workgroup</h2>
-        	<p>Entities that work to establish ensure interoperability in access and use of climate-relevant data and information produce.</p>
+          <h2>Data Accessibility Workgroup</h2>
+          <p>Entities that work to establish ensure interoperability in access and use of climate-relevant data and information produce.</p>
         </div>
+
+        <Slider className="workgroup-slider" {...settings}>
+          <div>
+            <h2><Link to="/partnershipengagement">Engagement workgroup</Link></h2>
+            <p>Entities that work to establish ensure interoperability in access and use of climate-relevant data and information produce.</p>
+          </div>
+          <div>
+            <h2><Link to="/partnershipdata">Data accessibility</Link></h2>
+            <p>Lorem ipsum.</p>
+          </div>
+          <div>
+            <h2><Link to="/partnershipplatform">Platform development group</Link></h2>
+            <p>Lorem ipsum.</p>
+          </div>
+        </Slider>
+
         <div className="text-content">
         	<p>
         	PREP is managed by a Steering Committee that provides the governance of the Partnership and the design of the initial PREP data and dashboard platform. PREP partners are anchored in one workgroup. A representative from the Steering Committee chairs each of the four workgroups. Partners that become actively engaged in the Platform, Data Accessibility, and/or the Engagement Workgroup can become eligible to serve on the Steering Committee.
