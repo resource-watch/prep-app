@@ -169,7 +169,7 @@ DashboardDetailPage.propTypes = {
   dashboardSlug: React.PropTypes.string.isRequired,
   /**
    * Define the selected tab of the dashboard
-   * Default: "indicators"
+   * Default: "Data"
    */
   dashboardTab: React.PropTypes.string.isRequired,
   /**
