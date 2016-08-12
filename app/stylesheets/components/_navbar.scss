@@ -20,6 +20,8 @@ $navbar-breakpoint: 870px;
   }
 
   .logo {
+    display: block;
+    position: relative;
     max-width: 260px;
 
     img {
@@ -28,6 +30,19 @@ $navbar-breakpoint: 870px;
       @media #{$mq-mobile-large} {
         max-width: 100%;
       }
+    }
+
+    &:after {
+      display: block;
+      content: "BETA";
+      position: absolute;
+      top: 100%;
+      right: 0;
+
+      font-family: Georgia, sans-serif;
+      font-weight: bold;
+      font-style: italic;
+      font-size: 12px;
     }
   }
 
@@ -135,19 +150,6 @@ $navbar-breakpoint: 870px;
       img {
         height: 100%;
         max-width: none;
-      }
-
-      &:after {
-        display: block;
-        content: "BETA";
-        position: absolute;
-        top: 100%;
-        right: 0;
-
-        font-family: Georgia, sans-serif;
-        font-weight: bold;
-        font-style: italic;
-        font-size: 12px;
       }
     }
     .navbar .links .link > a {
