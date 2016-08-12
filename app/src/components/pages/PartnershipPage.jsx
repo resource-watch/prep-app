@@ -87,7 +87,7 @@ function PartnershipPage() {
             <p>ntities that work to establish ensure interoperability in access and use of climate-relevant data and information produce.</p>
           </div>
           <div>
-            <h2><Link to="/partnershipplatform">Platforms workgroupgroup</Link></h2>
+            <h2><Link to="/partnershipplatform">Platforms workgroup</Link></h2>
             <p>Entities collaborate on the building of platforms to enhance access and usability of data.</p>
           </div>
         </Slider>
