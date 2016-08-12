@@ -84,7 +84,7 @@ function PartnershipPage() {
           </div>
           <div>
             <h2><Link to="/partnershipdata">Data workgroup</Link></h2>
-            <p>ntities that work to establish ensure interoperability in access and use of climate-relevant data and information produce.</p>
+            <p>Entities that work to establish ensure interoperability in access and use of climate-relevant data and information produce.</p>
           </div>
           <div>
             <h2><Link to="/partnershipplatform">Platforms workgroup</Link></h2>
