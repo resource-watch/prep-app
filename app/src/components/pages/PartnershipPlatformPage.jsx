@@ -9,7 +9,7 @@ function PartnershipPlatformPage() {
     <div className="l-partnership">
       <Header type="small">
         <Title inverse center border type="page">
-          Platform Development Workgroup
+          Platforms Workgroup
         </Title>
       </Header>
 
