@@ -72,28 +72,23 @@ function PartnershipPage() {
 	      	<h2>The role of PREP partners</h2>
           	<p>PREP is built on a global network of collaborators from the public and private sectors and from civil society. Each participates in at least one of the PREP workgroups
           	</p>
-          	<p>
-          		Actionable plans are constrained by two challenges:
-          	</p>
+     
         </div>
 
-        <div className="text-content -banner">
-          <h2>Data Accessibility Workgroup</h2>
-          <p>Entities that work to establish ensure interoperability in access and use of climate-relevant data and information produce.</p>
-        </div>
+
 
         <Slider className="workgroup-slider" {...settings}>
           <div>
             <h2><Link to="/partnershipengagement">Engagement workgroup</Link></h2>
-            <p>Entities that work to establish ensure interoperability in access and use of climate-relevant data and information produce.</p>
+            <p>Entities that help develop, engage, or mobilize user communities to understand the information needs of those seeking to build preparedness and resilience.</p>
           </div>
           <div>
-            <h2><Link to="/partnershipdata">Data accessibility</Link></h2>
-            <p>Lorem ipsum.</p>
+            <h2><Link to="/partnershipdata">Data workgroup</Link></h2>
+            <p>ntities that work to establish ensure interoperability in access and use of climate-relevant data and information produce.</p>
           </div>
           <div>
-            <h2><Link to="/partnershipplatform">Platform development group</Link></h2>
-            <p>Lorem ipsum.</p>
+            <h2><Link to="/partnershipplatform">Platforms workgroupgroup</Link></h2>
+            <p>Entities collaborate on the building of platforms to enhance access and usability of data.</p>
           </div>
         </Slider>
 
