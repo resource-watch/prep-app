@@ -7,7 +7,7 @@ function NavBar(props) {
       <div className="wrapper-mini">
         <ul>
           <li className={props.activeTab === 'indicators' ? '-active' : ''}>
-            <Link to={`${props.baseUrl}/indicators`}>Indicators</Link>
+            <Link to={`${props.baseUrl}/indicators`}>Data</Link>
           </li>
           <li className={props.activeTab === 'insights' ? '-active' : ''}>
             <Link to={`${props.baseUrl}/insights`}>Insights</Link>
