@@ -30,21 +30,21 @@ function PartnershipPage() {
           <p>
             The Partnership for Resilience and Preparedness (PREP) is a public-private collaboration to empower a data-driven approach to building climate resilience. The Partnership aims to help planners, investors, and resource managers around the globe to more easily incorporate climate risks into their decisions by enhancing access to relevant data and insights on climate variability and change, and facilitating peer-to-peer learning. PREP will do this through:
           </p>
-          <h3>Community Engagement</h3>
+          <h3>Engagement</h3>
           <p>
             We will facilitate sustained dialogues among data/information producers and users for climate resilience.
           </p>
-          <p><a href="/partnershipengagement">GO TO COMMUNITY ENGAGEMENT</a></p>
-          <h3>Data Accessibility</h3>
+          <p><a href="/partnershipengagement">GO TO ENGAGEMENT</a></p>
+          <h3>Data</h3>
           <p>
             We will seek to reduce the barriers to access, contribute, and use data for climate resilience.
           </p>
-          <p><a href="/partnershipdata">GO TO DATA ACCESSIBILITY</a></p>
-          <h3>Platform Development</h3>
+          <p><a href="/partnershipdata">GO TO DATA</a></p>
+          <h3>Platforms</h3>
           <p>
             We will develop platforms to enhance access to and usability of climate-relevant data and information.
           </p>
-          <p><a href="/partnershipplatform">GO TO PLATFORM DEVELOPMENT</a></p>
+          <p><a href="/partnershipplatform">GO TO PLATFORMS</a></p>
           <p>PREP includes representatives from several U.S. government agencies with vast data holdings, leading technology companies, and civil society organizations. We welcome other entities committed to our mission to <a href="#">join the partnership.</a>
           </p>
 
