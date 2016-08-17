@@ -30,7 +30,9 @@ $h2-font-size: rem(37) !default;
 $h3-font-size: rem(22) !default;
 $h4-font-size: rem(15) !default;
 
+$normal-font-size: rem(15);
 $small-font-size: rem(13);
+$x-small-font-size: rem(11);
 
 // Borders
 $border-color: $pale-grey;
@@ -41,11 +43,13 @@ $inverse-link-font-color: $light-gold;
 
 $button-bg-color: $light-gold;
 $button-font-color: $dark-blue;
+$button-font-color-inverse: $white;
 
 // App palette
 $main-color: $dark-grey-blue;
 $secondary-color: $light-gold;
-$thirth-color: #25b5cd;
+$thirth-color: #6bbf51;
+$fourth-color: #25b5cd;
 
 // Margins
 $large-margin: 80px;

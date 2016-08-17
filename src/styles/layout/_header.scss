@@ -1,5 +1,6 @@
 $header-bg-color: $dark-slate-blue-2;
 $header-height: 100px;
+$header-height-short: 60px;
 
 .l-header-nav {
   position: relative;
@@ -9,6 +10,10 @@ $header-height: 100px;
 
   &.-no-bg {
     background-color: transparent;
+  }
+
+  &.-short {
+    height: $header-height-short;
   }
 
   .logo {

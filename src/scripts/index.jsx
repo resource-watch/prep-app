@@ -35,7 +35,7 @@ const store = createStore(
     applyMiddleware(middlewareRouter, thunk),
     /* Redux dev tool, install chrome extension in
     * https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi */
-    process.env.NODE_ENV==='development' && typeof window === 'object' &&
+    typeof window === 'object' &&
       typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
   )
 );

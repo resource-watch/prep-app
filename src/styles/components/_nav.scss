@@ -24,14 +24,33 @@
         border-top: 5px solid transparent;
 
         transition: all .3s ease-out;
+
+        .l-header-nav.-short & {
+          padding: 15px 0;
+        }
       }
 
       & > a.-current,
       & > a:hover {
-        border-top-color: $secondary-color;
         text-decoration: none;
+        cursor: pointer;
       }
 
+      &:nth-of-type(1), &:nth-of-type(3) {
+        > a:hover, > a.-current {
+          border-top-color: $secondary-color;
+        }
+      }
+      &:nth-of-type(2) {
+        > a:hover, > a.-current {
+          border-top-color: $thirth-color;
+        }
+      }
+      &:nth-of-type(4) {
+        > a:hover, > a.-current {
+          border-top-color: $fourth-color;
+        }
+      }
       &:last-child {
         margin-right: 0;
       }
