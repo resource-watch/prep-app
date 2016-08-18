@@ -34,7 +34,7 @@ class Explore extends React.Component {
   componentWillMount() {
     this.currentData = this.getData('pathname', 'explore');
     if (!this.props.data.list.length) {
-      const { query } = this.props.params;
+      const { query } = this.props.location;
       if (query && query.activeDatasets) {
         this.props.getDatasets(query.activeDatasets.split(','));
       } else {
