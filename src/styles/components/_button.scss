@@ -1,0 +1,66 @@
+.c-button {
+  font-size: $small-font-size;
+  font-weight: 700;
+  color: $button-font-color;
+  text-transform: uppercase;
+  border: none;
+  outline: none;
+  padding: rem(15) rem(30);
+  cursor: pointer;
+  background-color: transparent;
+
+  &.-theme-color {
+    color: $secondary-color;
+    .-theme-2 & { color: $thirth-color; }
+    .-theme-3 & { color: $fourth-color; }
+  }
+
+  &.-inverse { color: $button-font-color-inverse; }
+
+  &.-action {
+    display: flex;
+    align-items: center;
+    padding: .3rem .5rem;
+
+    font-size: $small-font-size;
+    line-height: 1.8;
+    letter-spacing: 0.3px;
+
+    background: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    > .icon {
+      margin-right: 5px;
+
+      path {
+        fill: $secondary-color;
+        .-theme-2 & { fill: $thirth-color; }
+        .-theme-3 & { fill: $fourth-color; }
+      }
+
+    }
+  }
+
+  &.-border {
+    border: 2px solid $secondary-color;
+    &.-fill { background-color: $secondary-color; }
+
+    .-theme-2 & {
+      border-color: $thirth-color;
+      &.-fill { background-color: $thirth-color; }
+    }
+
+    .-theme-3 & {
+      border-color: $fourth-color;
+      &.-fill { background-color: $fourth-color; }
+    }
+
+    &.-border-neutral {
+      border-color: $button-font-color;
+      &.-fill { background-color: $button-font-color; }
+    }
+  }
+}

@@ -10,7 +10,7 @@ const rootPath = process.cwd();
 const webpackConfig = {
 
   entry: [
-    path.join(rootPath, 'app/src/main.jsx')
+    path.join(rootPath, 'src/scripts/index.jsx')
   ],
 
   output: {
@@ -21,7 +21,7 @@ const webpackConfig = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'app/index.html',
+      template: 'src/index.html',
       inject: 'body',
       filename: 'index.html'
     }),
@@ -29,8 +29,9 @@ const webpackConfig = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       config: {
+        facebookUser: JSON.stringify(process.env.FACEBOOK_USER),
+        twitterUser: JSON.stringify(process.env.TWITTER_USER),
         apiUrl: JSON.stringify(process.env.API_URL),
         apiUrlRW: JSON.stringify(process.env.RW_API_URL),
         tokenUrlShorter: JSON.stringify(process.env.SHORT_URL_API_TOKEN),
@@ -63,6 +64,10 @@ if (process.env.NODE_ENV === 'production') {
     loader: ExtractTextPlugin.extract(['css', 'sass'])
   });
   webpackConfig.module.loaders.push({
+    test: /\.css$/,
+    loader: ExtractTextPlugin.extract(['css'])
+  });
+  webpackConfig.module.loaders.push({
     test: /\.(jpe?g|png|gif|svg)$/i,
     loaders: [
       'file?hash=sha512&digest=hex&name=[hash].[ext]',
@@ -85,6 +90,10 @@ if (process.env.NODE_ENV === 'production') {
   // Activating source map
   webpackConfig.devtool = 'source-map';
   // Loaders
+  webpackConfig.module.loaders.push({
+    test: /\.css$/,
+    loaders: ['style', 'css']
+  });
   webpackConfig.module.loaders.push({
     test: /\.scss$/,
     loaders: ['style', 'css', 'sass']

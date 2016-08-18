@@ -1,0 +1,49 @@
+$banner-padding-top: 100px;
+$banner-padding-bottom: 90px;
+
+$banner-big-height: 775px;
+$banner-medium-height: 632px;
+$banner-small-height: 400px;
+
+.c-banner {
+  display: flex;
+  align-items: center;
+  padding-top: $banner-padding-top;
+  padding-bottom: $banner-padding-bottom;
+  min-height: $banner-medium-height;
+  box-sizing: border-box;
+
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  &.-big,
+  &.-small {
+    padding-bottom: 0;
+  }
+
+  &.-big {
+    min-height: $banner-big-height;
+  }
+
+  &.-small {
+    min-height: $banner-small-height;
+  }
+
+  &.-landing h1 {
+    font-family: $base-font-family;
+    font-size: rem(95);
+    font-weight: lighter;
+    letter-spacing: -2.7px;
+    text-align: left;
+
+    &:after {
+      display: inline-block;
+      position: relative;
+      margin-left: 1.2rem;
+      width: 4px;
+      height: 95px;
+      top: 17px;
+      left: auto;
+    }
+  }
+}
