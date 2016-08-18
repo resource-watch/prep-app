@@ -79,5 +79,23 @@
     "title": "FAQ",
     "bannerSize": "medium",
     "bannerBg": "home"
+  },
+  {
+    "name": "dashboards",
+    "pathname": "dashboards",
+    "metaTitle": "Dashboards",
+    "metaDescription": "",
+    "title": "Dashboards",
+    "bannerSize": "small",
+    "bannerBg": "dashboards"
+  },
+  {
+    "name": "insights",
+    "pathname": "insights",
+    "metaTitle": "Insights",
+    "metaDescription": "",
+    "title": "Insights",
+    "bannerSize": "small",
+    "bannerBg": "insights"
   }
 ]

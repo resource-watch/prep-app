@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import useScroll from 'react-router-scroll';
-import { IndexRoute, IndexRedirect, Router, Route, applyRouterMiddleware } from 'react-router';
+import { IndexRoute, Router, Route, applyRouterMiddleware } from 'react-router';
 
 import App from './components/App';
 import Home from './components/Home';
@@ -12,6 +12,10 @@ import Explore from './containers/Explore';
 import DatasetDetail from './containers/Dataset';
 import About from './components/About';
 import FAQ from './components/FAQ';
+import Dashboards from './containers/Dashboards';
+import DashboardsDetail from './containers/Dashboards/DashboardDetail';
+import Insights from './containers/Insights';
+import InsightsDetail from './containers/Insights/InsightDetail';
 
 function shouldUpdateScroll(prevRouterProps, { location }) {
   /**
@@ -98,6 +102,14 @@ function Routes(props) {
         <Route path={'dataset/:slug'} component={DatasetDetail} />
         <Route path={'about'} component={About} />
         <Route path={'faqs'} component={FAQ} />
+        <Route path="dashboards">
+          <IndexRoute component={Dashboards} />
+          <Route path=":slug(/:tab)" component={DashboardsDetail} />
+        </Route>
+        <Route path="insights">
+          <IndexRoute component={Insights} />
+          <Route path=":slug" component={InsightsDetail} />
+        </Route>
       </Route>
       <Route path={'explore(/:lat)(/:lng)(/:zoom)'} component={Explore} />
     </Router>
