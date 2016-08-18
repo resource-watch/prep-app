@@ -26,7 +26,7 @@ class App extends React.Component {
     // TODO: improve this
     const pathname = this.props.location.pathname;
     const currentData = this.getData('pathname', (pathname !== '/') ?
-      pathname.split('/').slice(-1)[0] : pathname);
+      pathname.split('/').slice(1)[0] : pathname);
     const isHomepage = (currentData.name === 'home');
 
     return (

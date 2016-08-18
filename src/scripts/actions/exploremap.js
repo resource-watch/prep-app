@@ -21,7 +21,7 @@ export function updateURL() {
       });
     }
 
-    dispatch(push(`/explore/map/${url}${query}`));
+    dispatch(push(`/explore/${url}${query}`));
   };
 }
 

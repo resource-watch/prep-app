@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import ExploreDetailPage from '../../components/Explore/ExploreDetailPage';
+import DatasetDetailPage from '../../components/Dataset';
 
 import { getDatasetDefaultWidget, getDatasetMetadata } from '../../actions/datasets';
 
@@ -17,4 +17,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExploreDetailPage);
+export default connect(mapStateToProps, mapDispatchToProps)(DatasetDetailPage);
