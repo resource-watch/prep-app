@@ -60,8 +60,21 @@ class DataMap extends React.Component {
             </button>
           </div>
         </div>
-        <div className="content">
-          <div className="dataset-items">
+        <div className="row content">
+          <div className="filters-tab">
+            <ul>
+              <li>
+                <Button themeColor click={() => console.log('TODO: topics')}> Topics </Button>
+              </li>
+              <li>
+                <Button themeColor click={() => console.log('TODO: areas')}> Areas </Button>
+              </li>
+              <li>
+                <Button themeColor click={() => console.log('TODO: date')}> Date </Button>
+              </li>
+            </ul>
+          </div>
+          <div className="columns small-12 dataset-items">
             {content}
           </div>
         </div>

@@ -5,6 +5,8 @@ import MainNav from '../../components/Navigation/MainNav';
 import ExploreMap from '../../containers/Explore/ExploreMap';
 import ExploreMapSidebar from '../../containers/Explore/ExploreSidebar';
 
+import Button from '../Button/Button'
+
 import metadata from 'json!../../metadata.json';
 import logoImage from '../../../images/prep-logo.png';
 
@@ -48,7 +50,7 @@ class Explore extends React.Component {
     const currentData = this.getData('pathname', 'explore');
 
     return (
-      <div className="l-explore">
+      <div className="l-explore -theme-2">
         <header className="l-header -expanded">
           <div className={`l-header-nav -short ${currentData.name === 'home' ? '-no-bg' : ''}`}>
             <div className="row align-middle">
@@ -61,6 +63,10 @@ class Explore extends React.Component {
                 <MainNav />
               </div>
             </div>
+          </div>
+          <div className="l-header-tools-map">
+            <Button themeColor click={() => console.log('TODO: open data portal')}> Open data portal </Button>
+            <Button themeColor click={() => console.log('TODO: share')}> Share </Button>
           </div>
         </header>
 

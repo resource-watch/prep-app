@@ -1,5 +1,6 @@
 // Color definition
 $white: #fff;
+$dark-white: #f4f7f8;
 $light-gold: #ffc94e;
 $yellow-orange: #efa600;
 $dark-blue: #263e57;
@@ -21,6 +22,8 @@ $base-font-color: $dark-blue;
 $inverse-bg-color: $dark-blue;
 $inverse-font-color: $white;
 
+$alternative-bg-color: $dark-white;
+
 // Fonts
 $header-font-family: "PT Serif", Georgia, serif;
 $header-font-color: $dark-blue;
@@ -32,7 +35,6 @@ $h4-font-size: rem(15) !default;
 
 $normal-font-size: rem(15);
 $small-font-size: rem(13);
-$x-small-font-size: rem(11);
 
 // Borders
 $border-color: $pale-grey;
@@ -55,3 +57,11 @@ $fourth-color: #25b5cd;
 $large-margin: 80px;
 $medium-margin: 50px;
 $small-margin: 30px;
+
+// Breakpoints
+$bp-medium: 40em;
+$bp-large: 65em;
+
+// Mediaquerys
+$mq-medium: "screen and (min-width: #{$bp-medium})";
+$mq-large: "screen and (min-width: #{$bp-large})";
