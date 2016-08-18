@@ -32,18 +32,23 @@ class DashboardsPage extends React.Component {
     let items = [];
     this.props.data.forEach((item, index) => {
       items.push(
-        <div className="columns small-12 medium-6" key={`insight-item-${index}`}>
+        <div className="columns small-12 medium-6 align-stretch"
+          key={`insight-item-${index}`}
+          style={{display: 'flex'}}
+        >
           <Card border="neutral">
-            <Link to={`/insights/${item.slug}`}>
-              <h3> {item.title} </h3>
-            </Link>
+            <h3>
+              <Link to={`/insights/${item.slug}`}>
+               {item.title}
+              </Link>
+            </h3>
             <p className="content">
               {item.summary}
             </p>
             {item.partner &&
               <a href="#">
                 <img
-                  src={config.apiUrl + item.partner.white_logo}
+                  src={config.apiUrl + item.partner.logo_medium}
                   className="logo"
                   alt={item.partner.name}
                 />
@@ -55,7 +60,7 @@ class DashboardsPage extends React.Component {
     });
 
     return (
-      <div className="row">
+      <div className="row align-stretch">
         {items}
       </div>
     );

@@ -1,6 +1,10 @@
 .c-card {
-  padding: 1rem $small-margin;
+  padding: $small-margin;
   margin-bottom: $medium-margin;
+
+  h3 {
+    margin-top: 0;
+  }
 
   > .content {
     margin-top: $small-margin;
