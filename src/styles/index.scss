@@ -1,17 +1,7 @@
 @import
-  "mixins",
   "settings",
+  "mixins",
   "base",
 
-  "layout/grid",
-  "layout/header",
-  "layout/main",
-  "layout/footer",
-
-  "components/homepage",
-
-  "components/nav",
-  "components/banner",
-  "components/article",
-  "components/climate-change",
-  "components/partners-slider";
+  "layouts",
+  "components";
