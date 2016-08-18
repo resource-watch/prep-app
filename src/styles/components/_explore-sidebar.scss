@@ -68,8 +68,17 @@
         }
 
         > li {
+          display: relative;
+          display: flex;
+          flex: 1;
           margin:  0;
           list-style: none;
+
+          > button {
+            flex: 1;
+            padding: 10px;
+            line-height: 19px;
+          }
         }
       }
     }

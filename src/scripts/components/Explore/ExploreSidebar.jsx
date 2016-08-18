@@ -67,10 +67,10 @@ class DataMap extends React.Component {
                 <Button themeColor click={() => console.log('TODO: topics')}> Topics </Button>
               </li>
               <li>
-                <Button themeColor click={() => console.log('TODO: areas')}> Areas </Button>
+                <Button themeColor click={() => console.log('TODO: areas')}> Spatial extent </Button>
               </li>
               <li>
-                <Button themeColor click={() => console.log('TODO: date')}> Date </Button>
+                <Button themeColor click={() => console.log('TODO: date')}> Data type </Button>
               </li>
             </ul>
           </div>
