@@ -15,7 +15,7 @@ class PartnersSlider extends Component {
 
   componentDidMount() {
     if (!this.props.data.length) {
-      this.props.getPartners();
+      this.props.getFeaturedPartners();
     }
   }
 
@@ -51,7 +51,7 @@ PartnersSlider.propTypes = {
   // Define the partners list
   data: React.PropTypes.array,
   // Define the function to get the partners list
-  getPartners: React.PropTypes.func.isRequired
+  getFeaturedPartners: React.PropTypes.func.isRequired
 };
 
 export default PartnersSlider;

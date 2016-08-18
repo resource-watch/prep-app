@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getPartners } from '../actions/partners';
+import { getPartners, getFeaturedPartners } from '../actions/partners';
 import PartnersSlider from '../components/Slider/PartnersSlider';
 
 const mapStateToProps = (state) => ({
@@ -7,7 +7,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getPartners: () => dispatch(getPartners())
+  getPartners: () => dispatch(getPartners()),
+  getFeaturedPartners: () => dispatch(getFeaturedPartners())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PartnersSlider);
