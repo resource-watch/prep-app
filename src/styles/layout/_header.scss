@@ -1,6 +1,7 @@
 $header-bg-color: $dark-slate-blue-2;
 $header-height: 100px;
 $header-height-short: 60px;
+$header-height-tools: 30px;
 
 .l-header-nav {
   position: relative;
@@ -41,6 +42,19 @@ $header-height-short: 60px;
       font-size: 10px;
     }
   }
+}
+
+.l-header-tools-map {
+  height: $header-height-tools;
+  position: relative;
+  margin-right: 140px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  background-color: rgba($navy, .9);
+  z-index: 1;
 }
 
 .l-header-banner {

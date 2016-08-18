@@ -18,10 +18,13 @@
   }
   .leaflet-control-zoom {
     box-shadow: none;
+    margin-top: 0;
+    margin-right: 0;
     a, a:hover {
-      width: 30px;
+      width: 70px;
       height: 30px;
-      margin-bottom: 2px;
+      margin: 0;
+      display: inline-block;
 
       font-size: $normal-font-size;
       -webkit-font-smoothing: subpixel-antialiased;
@@ -29,7 +32,8 @@
 
       border: none;
       border-radius: 0;
-      background-color: rgba($inverse-bg-color, 0.8);
+      border-left: 1px solid rgba($base-bg-color, 0.1);
+      background-color: rgba($navy, .9);
     }
     .leaflet-control-zoom-in {
       position: relative;
@@ -45,14 +49,14 @@
 
       &:before {
         top: 10px;
-        left: 14px;
+        left: 34px;
         width: 2px;
         height: 10px;
 
       }
       &:after {
         top: 14px;
-        left: 10px;
+        left: 30px;
         width: 10px;
         height: 2px;
       }
@@ -68,7 +72,7 @@
         content: "";
         position: absolute;
         top: 14px;
-        left: 10px;
+        left: 30px;
         width: 10px;
         height: 2px;
 

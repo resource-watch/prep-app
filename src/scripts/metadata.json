@@ -52,5 +52,14 @@
     "title": "Explore",
     "bannerSize": "medium",
     "bannerBg": "explore"
+  },
+  {
+    "name": "datasets",
+    "pathname": "datasets",
+    "metaTitle": "Datasets",
+    "metaDescription": "",
+    "title": "Datasets",
+    "bannerSize": "small",
+    "bannerBg": "explore"
   }
 ]
