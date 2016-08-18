@@ -72,69 +72,6 @@ class DashboardsPage extends React.Component {
 
         {content}
 
-        <div className="other-links">
-          <div className="wrapper">
-            <div className="cards-container">
-              <div className="card -map">
-                <h2> Data on the map </h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                <Link to="/data">
-                  <Button themeColor>Explore the map</Button>
-                </Link>
-              </div>
-              <div className="card -image">
-                <h2> Insights </h2>
-                <p>
-                  Integer id placerat ligula, eget consequat sapien. Duis nec
-                  neque scelerisque
-                </p>
-                <Link to="/insights">
-                  <Button themeColor>Explore the insights</Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="pre-header">
-          <div className="wrapper">
-            <div className="content -centered">
-              <div>
-                <h2> Do you have relevant data about climate? </h2>
-                <div className="button-container">
-                  <Button
-                    inverse
-                    border
-                    click={() => this.setState({
-                      createDashboardModalOpen: true
-                    })}
-                  >
-                    Create your dashboard
-                  </Button>
-                </div>
-              </div>
-              <div>
-                <h2> Would you like to improve a dashboard? </h2>
-                <Link to="/contact" className="button-container">
-                  <Button inverse border>
-                    Get in touch
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <Modal
-          opened={this.state.createDashboardModalOpen}
-          close={() => this.setState({ createDashboardModalOpen: false })}
-        >
-          <div className="content">
-            The website is under development. The feature will be available
-            later.
-          </div>
-        </Modal>
-
       </div>
     );
   }
