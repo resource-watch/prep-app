@@ -93,7 +93,7 @@ function Routes(props) {
           <Route path={'data'} component={DataAccessibility} />
           <Route path={'platforms'} component={DataAccessibility} />
         </Route>
-        <Route path={'datasets/:slug'} component={DatasetDetail} />
+        <Route path={'dataset/:slug'} component={DatasetDetail} />
       </Route>
       <Route path={'explore(/:lat)(/:lng)(/:zoom)'} component={Explore} />
     </Router>

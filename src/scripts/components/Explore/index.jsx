@@ -4,13 +4,22 @@ import MainNav from '../../components/Navigation/MainNav';
 
 import ExploreMap from '../../containers/Explore/ExploreMap';
 import ExploreMapSidebar from '../../containers/Explore/ExploreSidebar';
+import ExploreMapLegend from '../../containers/Explore/ExploreLegend';
 
-import Button from '../Button/Button'
+import ShareModal from '../Modal/ShareModal';
+import Button from '../Button/Button';
 
 import metadata from 'json!../../metadata.json';
 import logoImage from '../../../images/prep-logo.png';
 
 class Explore extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      modalShareOpen: false
+    };
+  }
 
   getChildContext() {
     return {
@@ -70,13 +79,23 @@ class Explore extends React.Component {
             </div>
           </div>
           <div className="l-header-tools-map">
-            <Button themeColor click={() => console.log('TODO: open data portal')}> Open data portal </Button>
-            <Button themeColor click={() => console.log('TODO: share')}> Share </Button>
+            <a className="c-button -action -theme-color" href="http://prepdata.sdgs.opendata.arcgis.com/" target="_blank"> Open data portal </a>
+            <Button themeColor click={() => this.setState({ modalShareOpen: true })}> Share </Button>
           </div>
         </header>
 
         <ExploreMapSidebar />
         <ExploreMap />
+        <ExploreMapLegend />
+
+        {this.state.modalShareOpen &&
+          <ShareModal
+            title={"Share this page"}
+            url={window.location.href}
+            opened={this.state.modalShareOpen}
+            close={() => this.setState({ modalShareOpen: false })}
+          />
+        }
 
       </div>
     );

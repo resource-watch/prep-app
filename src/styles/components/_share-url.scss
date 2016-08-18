@@ -1,0 +1,40 @@
+.c-share-url {
+  position: relative;
+  min-height: rem(40);
+
+  .url-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    > .url {
+      display: block;
+      width: 100%;
+      padding-bottom: rem(7);
+
+      font-size: $normal-font-size;
+      color: $main-color;
+
+      cursor: text;
+      border: 0;
+      border-bottom: 1px solid rgba($main-color, 0.3);
+    }
+
+    > .c-button {
+      margin-top: 1rem;
+    }
+
+    @media #{$mq-medium} {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+      > .url {
+        margin-right: 1rem;
+      }
+      > .c-button {
+        margin-top: 0;
+      }
+    }
+  }
+}
