@@ -32,34 +32,31 @@ class DashboardsPage extends React.Component {
     let items = [];
     this.props.data.forEach((item, index) => {
       items.push(
-        <Card border="neutral" key={`insight-item-${index}`}>
-          <Link to={`/insights/${item.slug}`}>
-            <h3> {item.title} </h3>
-          </Link>
-          <p className="content">
-            {item.summary}
-          </p>
-          {item.partner &&
-            <a href="#">
-              <img
-                src={config.apiUrl + item.partner.white_logo}
-                className="logo"
-                alt={item.partner.name}
-              />
-            </a>
-          }
-        </Card>
+        <div className="columns small-12 medium-6" key={`insight-item-${index}`}>
+          <Card border="neutral">
+            <Link to={`/insights/${item.slug}`}>
+              <h3> {item.title} </h3>
+            </Link>
+            <p className="content">
+              {item.summary}
+            </p>
+            {item.partner &&
+              <a href="#">
+                <img
+                  src={config.apiUrl + item.partner.white_logo}
+                  className="logo"
+                  alt={item.partner.name}
+                />
+              </a>
+            }
+          </Card>
+        </div>
       );
     });
 
     return (
-      <div className="wrapper">
-        <div className="cards">
-          {items}
-          <div className="button-container">
-            <Button border="neutral">Show more results</Button>
-          </div>
-        </div>
+      <div className="row">
+        {items}
       </div>
     );
   }
