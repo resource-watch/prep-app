@@ -34,6 +34,13 @@ $header-height-short: 60px;
       font-size: 12px;
     }
   }
+
+  &.-short .logo {
+    max-width: 170px;
+    &:after {
+      font-size: 10px;
+    }
+  }
 }
 
 .l-header-banner {

@@ -13,6 +13,7 @@
       color: $inverse-font-color;
       font-weight: bold;
       letter-spacing: 0.5px;
+      line-height: 1;
       text-transform: uppercase;
 
       & > a {
@@ -26,7 +27,7 @@
         transition: all .3s ease-out;
 
         .l-header-nav.-short & {
-          padding: 15px 0;
+          padding: 20px 0;
         }
       }
 
