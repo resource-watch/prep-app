@@ -9,9 +9,20 @@ $shadow-size: 150px;
   min-height: 30vh;
   z-index: 1;
 
+  .c-modal & {
+    padding: 0;
+    min-height: auto;
+  }
+
   ul > li {
     position: relative;
     list-style: none;
+
+    > span {
+      &:first-of-type {
+        font-weight: 700;
+      }
+    }
 
     &:before {
       display: block;
@@ -22,6 +33,14 @@ $shadow-size: 150px;
       font-size: rem(14);
 
       color: $secondary-color;
+
+      .-theme-2 & {
+        color: $thirth-color;
+      }
+
+      .-theme-3 & {
+        color: $fourth-color;
+      }
     }
   }
 

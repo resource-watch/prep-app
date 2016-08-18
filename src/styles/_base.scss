@@ -85,6 +85,14 @@ a {
   &:hover {
     text-decoration: underline;
   }
+
+  .-theme-2 & {
+    color: $thirth-color;
+  }
+
+  .-theme-3 & {
+    color: $fourth-color;
+  }
 }
 
 input, textarea, select, a, button {

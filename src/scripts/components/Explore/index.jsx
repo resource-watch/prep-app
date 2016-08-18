@@ -6,7 +6,11 @@ import ExploreMap from '../../containers/Explore/ExploreMap';
 import ExploreMapSidebar from '../../containers/Explore/ExploreSidebar';
 import ExploreMapLegend from '../../containers/Explore/ExploreLegend';
 
+import MetadataList from './MetadataList';
+
 import ShareModal from '../Modal/ShareModal';
+import Modal from '../Modal/Modal';
+
 import Button from '../Button/Button';
 
 import metadata from 'json!../../metadata.json';
@@ -60,8 +64,25 @@ class Explore extends React.Component {
     return data;
   }
 
+  getModalContent() {
+    const { metadatas } = this.props.data;
+    if (metadatas && metadatas[this.props.metadataModal.datasetId]) {
+      const metadataInfo = metadatas[this.props.metadataModal.datasetId].attributes.info;
+
+      return (
+        <div className="content">
+          <h3> {metadataInfo.attributes.title} </h3>
+          <h4> {metadataInfo.attributes.subtitle} </h4>
+          <MetadataList data={metadataInfo} />
+        </div>
+      );
+    }
+    return null;
+  }
+
   render() {
     const currentData = this.currentData;
+    let modalContent = this.props.metadataModal.datasetId ? this.getModalContent() : null;
 
     return (
       <div className="l-explore -theme-2">
@@ -97,6 +118,26 @@ class Explore extends React.Component {
           />
         }
 
+        {this.state.modalShareOpen &&
+          <ShareModal
+            title={"Share this page"}
+            url={window.location.href}
+            opened={this.state.modalShareOpen}
+            close={() => this.setState({ modalShareOpen: false })}
+          />
+        }
+
+        {this.props.metadataModal &&
+          <Modal
+            opened={this.props.metadataModal.open}
+            close={() => this.props.setModalMetadata(false)}
+          >
+
+            {modalContent}
+
+          </Modal>
+        }
+
       </div>
     );
   }
@@ -110,7 +151,9 @@ Explore.propTypes = {
   getDatasets: React.PropTypes.func.isRequired,
   data: React.PropTypes.any.isRequired,
   location: React.PropTypes.object.isRequired,
-  params: React.PropTypes.object.isRequired
+  params: React.PropTypes.object.isRequired,
+  metadataModal: React.PropTypes.object,
+  setModalMetadata: React.PropTypes.func.isRequired
 };
 
 export default Explore;

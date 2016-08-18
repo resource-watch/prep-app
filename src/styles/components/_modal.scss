@@ -18,7 +18,7 @@
 
   > .c-modal {
     position: relative;
-    padding: 2rem;;
+    padding: $small-margin;
     background-color:$base-bg-color;
     width: 100%;
     max-width: rem($max-width);
@@ -31,15 +31,13 @@
     &.share {
       width: auto;
       min-width: auto;
-      padding: 2.5rem;
-
       @media #{$mq-medium} {
-        padding: 2.5rem 5rem;
+        padding: $medium-margin $large-margin;
         width: rem(620);
       }
 
       .c-share-url {
-        margin: 5rem 0 1.25rem;
+        margin: $small-margin 0 1rem;
       }
     }
 
