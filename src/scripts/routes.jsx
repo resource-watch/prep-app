@@ -102,16 +102,12 @@ function Routes(props) {
         <Route path={'dataset/:slug'} component={DatasetDetail} />
         <Route path={'about'} component={About} />
         <Route path={'faqs'} component={FAQ} />
-        <Route path="dashboards">
-          <IndexRoute component={Dashboards} />
-          <Route path=":slug(/:tab)" component={DashboardsDetail} />
-        </Route>
-        <Route path="insights">
-          <IndexRoute component={Insights} />
-          <Route path=":slug" component={InsightsDetail} />
-        </Route>
+        <Route path={'dashboards'} component={Dashboards} />
+        <Route path={'insights'} component={Insights} />
       </Route>
       <Route path={'explore(/:lat)(/:lng)(/:zoom)'} component={Explore} />
+      <Route path="dashboards/:slug(/:tab)" component={DashboardsDetail} />
+      <Route path="insights/:slug" component={InsightsDetail} />
     </Router>
   );
 }
