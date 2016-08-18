@@ -9,6 +9,11 @@
     background: $inverse-bg-color;
     height: 100%;
   }
+  .c-loading-spinner {
+    top: $header-height-short + $header-height-tools;
+    left: $sidebar-width;
+    width: calc(100% - 380px);
+  }
   .leaflet-pane { z-index: 0}
   .leaflet-top, .leaflet-bottom {
     z-index: 1;
