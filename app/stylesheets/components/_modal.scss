@@ -16,7 +16,7 @@
     padding: 20px 60px;
   }
 
-  > .modal {
+  > .c-modal {
     position: relative;
     padding: 2rem;;
     background-color: $color-5;
@@ -27,12 +27,53 @@
       min-width: 370px;
       width: auto;
     }
+
     @media #{$mq-tablet} {
       min-width: 620px;
     }
 
     @media #{$mq-laptop} {
       min-width: 860px;
+    }
+
+    &.share {
+      width: auto;
+      min-width: auto;
+      padding: 40px;
+
+      @media #{$mq-tablet} {
+        padding: 40px 80px;
+        width: 620px;
+      }
+
+      .c-share-url {
+        margin: 60px 0 20px;
+      }
+    }
+
+    .media {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100px;
+      padding: 20px 20px 0 20px;
+
+      > a {
+        padding: 20px;
+
+        > svg {
+          fill: $color-2;
+          .-theme-2 & {
+            fill: $color-4;
+          }
+          .-theme-3 & {
+            fill: $color-3;
+          }
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
     }
 
     > .close-button {

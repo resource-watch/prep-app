@@ -21,18 +21,18 @@ class DashboardDetailPage extends React.Component {
     }
   }
 
-  shouldComponentUpdate(nextProps) {
-    if (this.props.dashboardSlug !== nextProps.dashboardSlug) {
-      this.props.getDashboardBySlug(nextProps.dashboardSlug);
-    }
+  // shouldComponentUpdate(nextProps) {
+  //   // if (this.props.dashboardSlug !== nextProps.dashboardSlug) {
+  //   //   this.props.getDashboardBySlug(nextProps.dashboardSlug);
+  //   // }
 
-    if (this.props.data !== nextProps.data ||
-      this.props.dashboardTab !== nextProps.dashboardTab) {
-      return true;
-    }
+  //   if (this.props.data !== nextProps.data ||
+  //     this.props.dashboardTab !== nextProps.dashboardTab) {
+  //     return true;
+  //   }
 
-    return false;
-  }
+  //   return false;
+  // }
 
   getContent() {
     if (!this.props.data) {
@@ -40,6 +40,7 @@ class DashboardDetailPage extends React.Component {
     }
 
     let content;
+
     switch (this.props.dashboardTab) {
       case 'insights':
         content = (<DashboardDetailInsights
@@ -59,15 +60,16 @@ class DashboardDetailPage extends React.Component {
         />);
         break;
     }
-
     return (
       <div>
         <div className="wrapper">
           <SectionIntro
             data={this.props.data}
             dashboardSlug={this.props.dashboardSlug}
-            currentPage={this.props.currentPage}
-          />
+            currentSection="dashboards"
+          >
+            <p> {this.props.data.summary} </p>
+          </SectionIntro>
         </div>
 
         <NavTab
@@ -167,7 +169,7 @@ DashboardDetailPage.propTypes = {
   dashboardSlug: React.PropTypes.string.isRequired,
   /**
    * Define the selected tab of the dashboard
-   * Default: "indicators"
+   * Default: "Data"
    */
   dashboardTab: React.PropTypes.string.isRequired,
   /**

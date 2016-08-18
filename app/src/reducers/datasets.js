@@ -1,14 +1,18 @@
 import {
   DATASET_LIST_RECEIVED,
   DATASET_DETAIL_RECEIVED,
-  DATASET_LIST_UPDATED,
+  DATASET_LAYER_RECEIVED,
+  DATASET_METADATA_RECEIVED,
   TOGGLE_LAYER_STATUS,
-  SET_LAYER_STATUS
+  SET_LAYER_STATUS,
+  DATASET_LAYER_FETCH_ERROR
 } from '../constants';
 
 const initialState = {
   list: [],
-  detail: {}
+  details: {},
+  layers: {},
+  metadatas: {}
 };
 
 export default function (state = initialState, action) {
@@ -17,12 +21,29 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, { list: action.payload.data });
     }
     case DATASET_DETAIL_RECEIVED: {
-      const obj = {};
-      obj[action.payload.data.slug] = action.payload.data;
-      return Object.assign({}, state, { detail: obj });
+      const details = Object.assign({}, state.details, {});
+      details[action.payload.data.dataset_id] = action.payload.data;
+      return Object.assign({}, state, { details });
     }
-    case DATASET_LIST_UPDATED: {
-      return Object.assign({}, state, { list: action.payload });
+    case DATASET_LAYER_RECEIVED: {
+      const layers = Object.assign({}, state.layers, {});
+      layers[action.payload.data.id] = action.payload.data;
+      return Object.assign({}, state, { layers });
+    }
+    case DATASET_METADATA_RECEIVED: {
+      const metadatas = Object.assign({}, state.metadatas, {});
+      metadatas[action.payload.attributes.dataset] = action.payload;
+      return Object.assign({}, state, { metadatas });
+    }
+    case DATASET_LAYER_FETCH_ERROR: {
+      const list = state.list.slice(0);
+      for (let i = 0, length = list.length; i < length; i++) {
+        if (list[i].id === action.payload.id) {
+          list[i].active = false;
+          break;
+        }
+      }
+      return Object.assign({}, state, { list });
     }
     case TOGGLE_LAYER_STATUS: {
       const list = state.list.slice(0);

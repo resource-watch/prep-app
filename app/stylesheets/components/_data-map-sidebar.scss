@@ -39,28 +39,54 @@
   }
 
   > .content {
-    padding: 1rem;
-    overflow: auto;
+    position: relative;
+
     @media #{$mq-tablet} {
       height: 100%;
     }
-    > .layer {
-      margin: 15px 0;
+
+    > .tools {
+      position: absolute;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: flex-start;
-      > .title {
-        margin-left: 8px;
-        font-size: $font-size-small;
-        font-family: $font-family-1;
-      }
-      > .detail-link {
-        width: 22px;
-        text-align: center;
-        > svg {
-          height: 12px;
-          width: 100%;
-          fill: rgba($color-1, 0.3);
+      width: 100%;
+      padding: .5rem 1rem;
+
+      background-color: rgba($color-1, 0.05);
+
+      // > .c-button {
+      //   margin: 10px 0;
+      // }
+    }
+    > .dataset-items {
+      position: absolute;
+      bottom: 0;
+      top: 50px;
+      padding: 0 1rem 1rem 1rem;
+      width: 100%;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+
+      > .layer {
+        margin: 15px 0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        > .title {
+          margin-left: 8px;
+          font-size: $font-size-small;
+          font-family: $font-family-1;
+        }
+        > .detail-link {
+          width: 17px;
+          flex-shrink: 0;
+          text-align: center;
+          > svg {
+            height: 10px;
+            width: 100%;
+            fill: rgba($color-1, 0.3);
+          }
         }
       }
     }

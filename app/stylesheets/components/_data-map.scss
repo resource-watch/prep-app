@@ -1,11 +1,12 @@
 .c-data-map {
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
-  position: relative;
+  position: absolute;
   > .map {
+    background: rgb(22, 49, 75);
     height: 100%;
-  }
-  .c-loading-spinner {
-    z-index: 1;
   }
   .leaflet-top, .leaflet-bottom {
     z-index: 0;
@@ -26,7 +27,7 @@
 
       border: none;
       border-radius: 0;
-      background-color: rgba($color-7, 0.9);
+      background-color: rgba($color-14, 0.8);
     }
     .leaflet-control-zoom-in {
       position: relative;

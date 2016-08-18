@@ -1,15 +1,17 @@
+import 'whatwg-fetch';
 import {
   DASHBOARD_FETCH_ERROR,
   DASHBOARD_LIST_RECEIVED,
   DASHBOARD_DETAIL_RECEIVED
 } from '../constants';
 
-const { apiUrl } = config;
-
 export function getDashboardList() {
   return dispatch => {
-    fetch(`${apiUrl}/api/dashboards`)
-      .then(response => (response.json()))
+    fetch(`${config.apiUrl}/api/dashboards`)
+      .then(response => {
+        if (response.ok) return response.json();
+        throw new Error(response.statusText);
+      })
       .then(data => {
         dispatch({
           type: DASHBOARD_LIST_RECEIVED,
@@ -19,7 +21,7 @@ export function getDashboardList() {
       .catch((err) => {
         dispatch({
           type: DASHBOARD_FETCH_ERROR,
-          payload: err
+          payload: err.message
         });
       });
   };
@@ -27,8 +29,11 @@ export function getDashboardList() {
 
 export function getDashboardBySlug(slug) {
   return dispatch => {
-    fetch(`${apiUrl}/api/dashboards/${slug}`)
-      .then(response => (response.json()))
+    fetch(`${config.apiUrl}/api/dashboards/${slug}`)
+      .then(response => {
+        if (response.ok) return response.json();
+        throw new Error(response.statusText);
+      })
       .then(data => {
         dispatch({
           type: DASHBOARD_DETAIL_RECEIVED,
@@ -38,7 +43,7 @@ export function getDashboardBySlug(slug) {
       .catch((err) => {
         dispatch({
           type: DASHBOARD_FETCH_ERROR,
-          payload: err
+          payload: err.message
         });
       });
   };

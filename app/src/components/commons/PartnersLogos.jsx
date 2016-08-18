@@ -1,4 +1,15 @@
 import React, { Component } from 'react';
+import Slider from '../../../lib/react-slick/react-slick';
+
+const settings = {
+  dots: false,
+  arrows: false,
+  autoplay: true,
+  autoplaySpeed: 3000,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 5
+};
 
 class PartnersLogos extends Component {
 
@@ -9,19 +20,22 @@ class PartnersLogos extends Component {
   }
 
   render() {
-    const partners = this.props.data.map((d, i) => {
-      return (
-        <a href={d.url} rel="noreferrer" target="_blank" className="logo" key={i}>
-          <img src={`${config.assetsUrl}/${d.logo_file_name}`}
-            width={d.logo_size.width}
-            height={d.logo_size.height}
-            alt={d.name} />
+    const partners = this.props.data.map(d => (
+      <div key={`partner-slider-${d.id}`}>
+        <a href={d.url} rel="noreferrer" target="_blank" className="logo">
+          <img
+            src={config.apiUrl + d.white_logo_medium}
+            alt={d.name}
+          />
         </a>
-      );
-    });
+      </div>
+    ));
+
     return (
       <div className="c-partners-logos">
-        {partners}
+        <Slider {...settings}>
+          {partners}
+        </Slider>
       </div>
     );
   }
@@ -30,6 +44,13 @@ class PartnersLogos extends Component {
 
 PartnersLogos.defaultProps = {
   data: []
+};
+
+PartnersLogos.propTypes = {
+  // Define the partners list
+  data: React.PropTypes.array,
+  // Define the function to get the partners list
+  getPartners: React.PropTypes.func.isRequired
 };
 
 export default PartnersLogos;

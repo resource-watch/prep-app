@@ -2,36 +2,55 @@ import React from 'react';
 import DataMapSidebar from '../../containers/maps/DataMapSidebar';
 import DataMap from '../../containers/maps/DataMap';
 import DataMapLegend from '../../containers/maps/DataMapLegend';
-import { Link } from 'react-router';
 import Modal from '../commons/Modal';
+import Title from '../commons/Title';
+import MetadataList from '../commons/MetadataList';
 
 class DataPage extends React.Component {
 
   componentDidMount() {
     if (!this.props.data.list.length) {
       const { query } = this.context.location;
-      if (query && query.activeLayers) {
-        this.props.getDatasets(query.activeLayers.split(','));
+      if (query && query.activeDatasets) {
+        this.props.getDatasets(query.activeDatasets.split(','));
       } else {
         this.props.getDatasets();
       }
     }
   }
 
+  getModalContent() {
+    const { metadatas } = this.props.data;
+    if (metadatas && metadatas[this.props.metadataModal.datasetId]) {
+      const metadataInfo = metadatas[this.props.metadataModal.datasetId].attributes.info;
+
+      return (
+        <div className="content">
+          <Title type="content" subtitle={{ title: metadataInfo.attributes.subtitle }}>
+            {metadataInfo.attributes.title}
+          </Title>
+          <MetadataList data={metadataInfo} />
+        </div>
+      );
+    }
+    return null;
+  }
+
   render() {
+    let modalContent = this.props.metadataModal.datasetId ? this.getModalContent() : null;
     return (
       <div className="l-data">
         <DataMapSidebar />
         <DataMap />
         <DataMapLegend />
+
         <Modal
-          opened={this.props.modalOpen}
-          close={() => this.props.setModalUnderDevelop(false)}
+          opened={this.props.metadataModal.open}
+          close={() => this.props.setModalMetadata(false)}
         >
-          <div className="content">
-            This page is currently under development.
-            Please reach us <Link to="/contact">here</Link>.
-          </div>
+
+          {modalContent}
+
         </Modal>
       </div>
     );
@@ -56,13 +75,13 @@ DataPage.propTypes = {
    */
   data: React.PropTypes.any.isRequired,
   /**
-   * Define the status of the modal
+   * Define the data of the metadata modal
    */
-  modalOpen: React.PropTypes.bool,
+  metadataModal: React.PropTypes.object,
   /**
    * Define the function to handle the modal
    */
-  setModalUnderDevelop: React.PropTypes.func.isRequired
+  setModalMetadata: React.PropTypes.func.isRequired
 };
 
 export default DataPage;

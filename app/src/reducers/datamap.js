@@ -9,7 +9,8 @@ const initialState = {
     lng: null
   },
   zoomPosition: 'topright',
-  basemap: 'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png'
+  basemap: config.basemapTileUrl || 'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
+  basemapOptions: { maxZoom: 18 }
 };
 
 export default function (state = initialState, action) {

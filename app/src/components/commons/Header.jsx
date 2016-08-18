@@ -7,7 +7,7 @@ function Header(props) {
   if (props.type) classes.push(`-${props.type}`);
   if (props.image) {
     bgImage = {
-      backgroundImage: `url(${props.image})`
+      backgroundImage: `url(${config.apiUrl}${props.image})`
     };
   } else if (props.pageType) {
     classes.push(`-type-${props.pageType}`);
@@ -41,6 +41,7 @@ Header.propTypes = {
    * 	- 2: insight background
    * 	- 3: data background
    * 	- 4: home background
+   * 	- 5: dataset background
    * Default: none (blue background)
    */
   pageType: React.PropTypes.number,

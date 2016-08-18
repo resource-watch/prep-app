@@ -2,17 +2,11 @@ import React from 'react';
 import { Link } from 'react-router';
 import PartnersLogos from '../../containers/commons/PartnersLogos';
 
-import wriLogoLight from '../../../assets/logos/wri-light@2x.png';
-import esriLogoLight from '../../../assets/logos/esri-light@2x.png';
-import vizzualityLogoLight from '../../../assets/logos/vizzuality-light@2x.png';
-import nasaLogoLight from '../../../assets/logos/nasa-light@2x.png';
-import descartesLogoLight from '../../../assets/logos/descartes-light@2x.png';
-
-function Footer(props) {
+function Footer() {
   return (
     <div className="c-footer">
       <div className="wrapper">
-        <PartnersLogos/>
+        <PartnersLogos />
         <footer>
           <div className="media">
             <a>

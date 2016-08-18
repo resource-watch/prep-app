@@ -20,17 +20,15 @@ class Tooltip extends React.Component {
   render() {
     let content = (
       <div className="content">
-        <div>
-          {this.props.data &&
-            <ChartCard
-              noBorder
-              title={this.props.data.title}
-              subtitle={this.props.data.subtitle}
-              data={this.props.data}
-            />
-          }
-        </div>
-        <div className="col-r">
+        {this.props.data &&
+          <ChartCard
+            noBorder
+            title={this.props.data.title}
+            subtitle={this.props.data.subtitle}
+            data={this.props.data}
+          />
+        }
+        <div className="description">
           <div className="btn-container">
             <Button border> Download </Button>
           </div>
@@ -42,20 +40,14 @@ class Tooltip extends React.Component {
             <span>Data: </span>
             {this.props.data.data_url}
           </p>
-          { /* <p>
-            <span>Topic:</span>
-            topic
-          </p>
-          <p>
-            <span>Area:</span>
-            area
-          </p>*/}
           <div className="img-container">
-            <img
-              src={this.props.data.partner.logo}
-              className="logo"
-              alt={this.props.data.partner.name}
-            />
+            {this.props.data.partner &&
+              <img
+                src={config.apiUrl + this.props.data.partner.logo}
+                className="logo"
+                alt={this.props.data.partner.name}
+              />
+            }
           </div>
         </div>
       </div>

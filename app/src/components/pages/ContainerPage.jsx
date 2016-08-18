@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from '../commons/Modal';
+import ShareModal from '../../components/modals/ShareModal';
 import Footer from '../commons/Footer';
 import Navbar from '../commons/Navbar';
 
@@ -69,6 +69,27 @@ class ContainerPage extends React.Component {
         header: <Navbar />,
         footer: <Footer />
       },
+      /* Partnership detail */
+      {
+        regex: /^\/partnership\/.+$/,
+        theme: 3,
+        header: <Navbar />,
+        footer: <Footer />
+      },
+      /* Partnership Engagement detail */
+      {
+        regex: /^\/partnershipengagement\/.+$/,
+        theme: 3,
+        header: <Navbar />,
+        footer: <Footer />
+      },
+      /* Partnership Engagement detail */
+      {
+        regex: /^\/partnershipdata\/.+$/,
+        theme: 3,
+        header: <Navbar />,
+        footer: <Footer />
+      },
       /* Default rule - Statics */
       {
         regex: /.*/,
@@ -86,16 +107,13 @@ class ContainerPage extends React.Component {
         {page.header}
         {this.props.children}
         {page.footer}
-        <Modal
+
+        <ShareModal
+          title="Share this page"
+          url={window.location.href}
           opened={this.props.modalOpen}
           close={() => this.props.setModalShare(false)}
-        >
-          <div className="content">
-            <div className="c-share-url">
-              <span className="url" >{window.location.href}</span>
-            </div>
-          </div>
-        </Modal>
+        />
       </div>
     );
   }

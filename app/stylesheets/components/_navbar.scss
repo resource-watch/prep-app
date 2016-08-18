@@ -20,6 +20,8 @@ $navbar-breakpoint: 870px;
   }
 
   .logo {
+    display: block;
+    position: relative;
     max-width: 260px;
 
     img {
@@ -28,6 +30,19 @@ $navbar-breakpoint: 870px;
       @media #{$mq-mobile-large} {
         max-width: 100%;
       }
+    }
+
+    &:after {
+      display: block;
+      content: "BETA";
+      position: absolute;
+      top: 100%;
+      right: 0;
+
+      font-family: Georgia, sans-serif;
+      font-weight: bold;
+      font-style: italic;
+      font-size: 12px;
     }
   }
 
@@ -79,7 +94,7 @@ $navbar-breakpoint: 870px;
       }
 
       .link {
-        margin: 5px;
+        margin: 5px 15px;
         &:first-of-type { margin-left: 0; }
 
         > a {
@@ -91,7 +106,7 @@ $navbar-breakpoint: 870px;
           line-height: 1.6;
           letter-spacing: .5px;
           text-transform: uppercase;
-          
+
           &.-active {
             border-bottom: 2px solid $color-2;
             .-theme-2 & { border-color: $color-4; }
@@ -157,9 +172,9 @@ $navbar-breakpoint: 870px;
   }
 
   &.-dark {
-    background-color: rgba($color-7, 0.8);
+    background-color: rgba($color-14, 0.8);
     .navbar {
-      background-color: rgba($color-7, 0.8);
+      background-color: rgba($color-14, 0.8);
       @media screen and (min-width: #{$navbar-breakpoint}){
         background-color: transparent;
       }

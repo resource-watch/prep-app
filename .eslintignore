@@ -1,2 +1,2 @@
 dist/**/*.js
-_src/**/*.js
+app/lib/**/*.js

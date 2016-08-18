@@ -8,16 +8,16 @@ import { push } from 'react-router-redux';
 export function updateURL() {
   return (dispatch, state) => {
     const params = state().datamap;
-    const activeLayers = state().datasets.list.filter(layer => layer.active);
+    const activeDatasets = state().datasets.list.filter(layer => layer.active);
 
     const url = `${params.latLng.lat}/${params.latLng.lng}/${params.zoom}`;
     let query = '';
-    if (activeLayers.length) {
-      query = '?activeLayers=';
+    if (activeDatasets.length) {
+      query = '?activeDatasets=';
 
-      activeLayers.forEach((layer, index) => {
+      activeDatasets.forEach((layer, index) => {
         if (index > 0) query += ',';
-        query += layer.slug;
+        query += layer.id;
       });
     }
 

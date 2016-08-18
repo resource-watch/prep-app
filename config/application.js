@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
+const Bitly = require('bitly');
 
 const rootPath = path.join(process.cwd());
 
@@ -28,6 +29,18 @@ app.get('/proxy', (req, res) => {
   } else {
     res.sendStatus(400);
   }
+});
+
+const bitly = new Bitly(process.env.SHORT_URL_API_TOKEN);
+
+// Url shorter
+app.get('/short', (req, res) => {
+  bitly.shorten(req.query.url)
+    .then((response) => {
+      res.send(response);
+    }, (error) => {
+      throw error;
+    });
 });
 
 // Load environment config

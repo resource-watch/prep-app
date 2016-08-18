@@ -8,6 +8,7 @@ function Button(props) {
   if (props.border) classes.push('-border');
   if (props.border === 'neutral') classes.push('-border-neutral');
   if (props.fill) classes.push('-fill');
+  if (props.action) classes.push('-action');
 
   return (
     <button
@@ -45,6 +46,10 @@ Button.propTypes = {
    */
   border: React.PropTypes.any,
   /**
+   * TODO: write doc for that
+   */
+  action: React.PropTypes.any,
+  /**
    * Define the filling of the button
    * Accepted values:
    * 	- true:  the button is filled with the same color of the border
@@ -57,7 +62,7 @@ Button.propTypes = {
    * Define the text content of the button
    * Required
    */
-  children: React.PropTypes.string.isRequired,
+  children: React.PropTypes.any.isRequired,
   /**
    * Define click handler function
    */

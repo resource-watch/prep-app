@@ -1,8 +1,8 @@
-# The Climate Partnership for Resilience and Preparedness
+# Partnership for Resilience and Preparedness
 
 [![Build Status](https://travis-ci.org/resource-watch/prep-app.svg?branch=master)](https://travis-ci.org/resource-watch/prep-app)
 
-![Screenshot about PREP](./public/screenshot.png)
+![PREP](screenshot.png?raw=true "Partnership for Resilience and Preparedness")
 
 The Climate Partnership for Resilience and Preparedness (C-PREP) is a public-private collaboration whose mission is to help planners, investors, and resource managers around the globe rapidly assess and incorporate climate risks into their decisions by enhancing access to the best available data, and insights on climate change. Climate assessments have traditionally focused on building the case for climate action by publishing static written reports. Users of climate risk data have depended on science ‘translators’ to communicate key messages from assessments and related reports, without having direct access to the underlying data sets.
 
@@ -19,6 +19,30 @@ To install run this command:
 
 ```bash
 npm install
+```
+
+### Install with Docker (recommended)
+
+Very useful for **development**, it ensures everybody have the same environment. Also you can test production environment.
+You can install Docker from [here](https://www.docker.com).
+
+Building docker container:
+
+```bash
+docker-compose build
+```
+
+Runing container:
+
+```bash
+docker-compose up
+```
+
+Maybe, first time you will need run these tasks:
+
+```bash
+docker-compose run app rake db:create
+docker-compose run app rake db:migrate
 ```
 
 

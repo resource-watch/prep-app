@@ -14,11 +14,16 @@ class DataMap extends React.Component {
     this.initMap();
     this.setMapParams();
     this.setMapListeners();
-    this.updateLayers();
+    this.updateDatasets();
+
+    // Fixing height of map
+    setTimeout(() => {
+      this.map.invalidateSize();
+    }, 0);
   }
 
   componentWillReceiveProps(props) {
-    this.updateLayers(props.data);
+    this.updateDatasets(props.data, props.layers);
   }
 
   setMapListeners() {
@@ -59,77 +64,183 @@ class DataMap extends React.Component {
       center: [+params.lat, +params.lng],
       zoom: +params.zoom
     });
+
     L.control.zoom({ position: this.props.map.zoomPosition }).addTo(this.map);
 
     L.tileLayer(
       this.props.map.basemap,
-      { maxZoom: 18 }
+      this.props.map.basemapOptions
     ).addTo(this.map, 1);
   }
 
-  updateLayers(newLayers) {
-    const layers = newLayers || this.props.data;
+  updateDatasets(newData, newLayers) {
+    const datasets = newData || this.props.data;
+    const layers = newLayers || this.props.layers;
     this.hasActiveLayers = false;
-    if (layers.length) {
-      layers.forEach((layer) => {
-        this.updateMapLayer(layer);
+    if (datasets.length) {
+      datasets.forEach((dataset) => {
+        if (dataset.layers.length) {
+          this.updateMapLayer(dataset, layers);
+        }
       });
     }
   }
 
-  updateMapLayer(layer) {
-    if (layer.active && !this.mapLayers[layer.id]) {
-      this.hasActiveLayers = true;
-      this.addMapLayer(layer);
-    } else if (!layer.active && this.mapLayers[layer.id]) {
-      this.removeMapLayer(layer);
+  wasAlreadyAdded(dataset) {
+    return this.mapLayers[dataset.layers[0].layer_id] || false;
+  }
+
+  isLayerReady(dataset, layers) {
+    if (dataset.layers && dataset.layers.length) {
+      const layerId = dataset.layers[0].layer_id;
+      return layers && layers[layerId] || false;
+    }
+    return false;
+  }
+
+  updateMapLayer(dataset, layers) {
+    const layerId = dataset.layers[0].layer_id;
+    if (dataset.active) {
+      if (!this.wasAlreadyAdded(dataset) && this.isLayerReady(dataset, layers)) {
+        this.hasActiveLayers = true;
+        const layer = layers[layerId];
+        this.addMapLayer(dataset, layer);
+      }
+    } else if (this.mapLayers[layerId]) {
+      this.removeMapLayer(layerId);
     }
   }
 
-  addMapLayer(layer) {
+  addMapLayer(dataset, layer) {
     if (!this.state.loading) {
       this.setState({
         loading: true
       });
     }
-    switch (layer.mapType) {
-      case 'CartoLayer':
-        this.addCartoLayer(layer);
+    switch (layer.attributes.provider) {
+      case 'leaflet':
+        this.addLeafletLayer(dataset, layer);
+        break;
+      case 'arcgis':
+        this.addEsriLayer(dataset, layer);
+        break;
+      case 'cartodb':
+        this.addCartoLayer(dataset, layer);
         break;
       default:
         break;
     }
   }
 
-  addCartoLayer(layer) {
+  /**
+   * Adding support for Leaflet layers
+   * @param {Object} dataset
+   * @param {Object} layerSpec
+   */
+  addLeafletLayer(dataset, layerSpec) {
+    const layerData = layerSpec.attributes['layer-config'];
+
+    let layer;
+
+    layerData.id = layerSpec.id;
+
+    // Transforming data layer
+    // TODO: improve this
+    if (layerData.body.crs && L.CRS[layerData.body.crs]) {
+      layerData.body.crs = L.CRS[layerData.body.crs.replace(':', '')];
+    }
+
+    switch (layerData.type) {
+      case 'wms':
+        layer = new L.tileLayer.wms(layerData.url, layerData.body);
+        break;
+      case 'tileLayer':
+        layer = new L.tileLayer(layerData.url, layerData.body);
+        break;
+      default:
+        throw new Error('"type" specified in layer spec doesn`t exist');
+    }
+
+    if (layer) {
+      const eventName = (layerData.type === 'wms' ||
+        layerData.type === 'tileLayer') ? 'tileload' : 'load';
+      layer.on(eventName, () => {
+        this.handleTileLoaded(layer);
+      });
+      layer.addTo(this.map);
+      this.mapLayers[layerData.id] = layer;
+    }
+  }
+
+  /**
+   * Adding support for ESRI layers
+   * @param {Object} dataset
+   * @param {Object} layerSpec
+   */
+  addEsriLayer(dataset, layerSpec) {
+    const layer = layerSpec.attributes['layer-config'];
+    layer.id = layerSpec.id;
+
+    // Transforming layer
+    // TODO: change this please @ra
+    const bodyStringified = JSON.stringify(layer.body || {})
+      .replace(/"mosaic-rule":/g, '"mosaicRule":')
+      .replace(/"use-cors"/g, '"useCors"');
+
+    if (L.esri[layer.type]) {
+      const layerConfig = JSON.parse(bodyStringified);
+      const newLayer = L.esri[layer.type](layerConfig);
+      newLayer.on('load', () => {
+        this.handleTileLoaded(layer);
+      });
+      newLayer.addTo(this.map);
+      this.mapLayers[layer.id] = newLayer;
+    } else {
+      throw new Error('"type" specified in layer spec doesn`t exist');
+    }
+  }
+
+  /**
+   * Adding support for carto layers
+   * @param {Object} dataset
+   * @param {Object} layerSpec
+   */
+  addCartoLayer(dataset, layerSpec) {
+    const layer = layerSpec.attributes['layer-config'];
+    layer.id = layerSpec.id;
+
+    // Transforming layerSpec
+    // TODO: change this please @ra
+    const bodyStringified = JSON.stringify(layer.body || {})
+      .replace(/"cartocss-version":/g, '"cartocss_version":')
+      .replace(/"geom-column"/g, '"geom_column"')
+      .replace(/"geom-type"/g, '"geom_type"')
+      .replace(/"raster-band"/g, '"raster_band"');
+
     const request = new Request(`https://${layer.account}.cartodb.com/api/v1/map`, {
       method: 'POST',
       headers: new Headers({
         'Content-Type': 'application/json'
       }),
-      body: JSON.stringify({
-        layers: [{
-          user_name: layer.account,
-          type: 'cartodb',
-          options: {
-            sql: layer.query,
-            cartocss: layer.cartocss,
-            cartocss_version: '2.3.0'
-          }
-        }]
-      })
+      body: bodyStringified
     });
+
+    // add to the load layers lists before the fetch
+    // to avoid multiples loads while the layer is loading
+    this.mapLayers[layer.id] = true;
 
     fetch(request)
       .then(res => {
         if (res.ok) {
           return res.json();
         }
-        return this.handleTileError(layer);
+        const error = new Error(res.statusText);
+        error.response = res;
+        throw error;
       })
       .then((data) => {
         // we can switch off the layer while it is loading
-        if (layer.active) {
+        if (dataset.active) {
           const tileUrl = `https://${layer.account}.cartodb.com/api/v1/map/${data.layergroupid}/{z}/{x}/{y}.png`;
           this.mapLayers[layer.id] = L.tileLayer(tileUrl).addTo(this.map, 1);
           this.mapLayers[layer.id].on('load', () => {
@@ -138,14 +249,19 @@ class DataMap extends React.Component {
           this.mapLayers[layer.id].on('tileerror', () => {
             this.handleTileError(layer);
           });
+        } else {
+          delete this.mapLayers[layer.id];
         }
       })
-      .catch(() => this.props.onTileError(layer.id));
+      .catch((err) => {
+        console.error('Request failed', err);
+        this.props.onTileError(layer.id);
+      });
   }
 
-  removeMapLayer(layer) {
-    this.map.removeLayer(this.mapLayers[layer.id]);
-    this.mapLayers[layer.id] = null;
+  removeMapLayer(layerId) {
+    this.map.removeLayer(this.mapLayers[layerId]);
+    delete this.mapLayers[layerId];
   }
 
   handleTileLoaded() {
@@ -179,9 +295,13 @@ DataMap.contextTypes = {
 
 DataMap.propTypes = {
   /**
-  * Define the layers data of the map
+  * Define the datasets data of the map
   */
   data: React.PropTypes.array.isRequired,
+  /**
+  * Define the layers data of the map
+  */
+  layers: React.PropTypes.object,
   /**
   * Define the mapa data config
   */

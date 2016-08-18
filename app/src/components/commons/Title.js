@@ -13,6 +13,8 @@ function Title(props) {
   let title = <h2>{props.children}</h2>;
   if (props.type && (props.type === 'mega' || props.type === 'page')) {
     title = <h1>{props.children}</h1>;
+  } else if (props.type && props.type === 'data-page') {
+    title = <h2>{props.children}</h2>;
   } else if (props.type && props.type === 'content' || props.type === 'mini') {
     title = <h3>{props.children}</h3>;
   }

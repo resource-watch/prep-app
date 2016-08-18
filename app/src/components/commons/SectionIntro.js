@@ -6,20 +6,28 @@ function SectionIntro(props) {
     <div className={"c-section-intro"}>
       <div className="container">
         <div className="top-bar">
-          <div className="logo">
-            <img src={props.data.partner.logo} alt={props.data.partner.name} />
-          </div>
-          <div className="author">
-            {props.data.partner.contact_name}
-            <span>{props.data.partner.contact_email}</span>
-          </div>
+          {props.data.partner &&
+            <div className="logo">
+              <img
+                src={config.apiUrl + props.data.partner.white_logo_medium}
+                alt={props.data.partner.name}
+              />
+            </div>
+          }
+          {props.data.partner &&
+            <div className="author">
+              {props.data.partner.contact_name}
+              <span>{props.data.partner.contact_email}</span>
+            </div>
+          }
         </div>
         <div className="content">
           <div className="wrapper-mini">
             <ToolbarActions
-              currentSection={props.currentPage.split('/')[0]}
+              insightUrl={props.insightUrl}
+              currentSection={props.currentSection}
             />
-            <p> {props.data.description} </p>
+            {props.children}
           </div>
         </div>
       </div>
@@ -38,9 +46,17 @@ SectionIntro.propTypes = {
    */
   data: React.PropTypes.object.isRequired,
   /**
-   * Define the route path (from the router)
+   * Define the insight url to the embed
    */
-  currentPage: React.PropTypes.string
+  insightUrl: React.PropTypes.string,
+  /**
+   * Define the current section
+   */
+  currentSection: React.PropTypes.string,
+  /**
+   * Define the component childrens
+   */
+  children: React.PropTypes.any
 };
 
 export default SectionIntro;

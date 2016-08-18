@@ -24,7 +24,7 @@ class DashboardsPage extends React.Component {
   }
 
   getContent() {
-    if (!this.props.data) {
+    if (!this.props.data || this.props.data.length === 0) {
       return (
         <div>
           <LoadingSpinner />
@@ -44,13 +44,15 @@ class DashboardsPage extends React.Component {
           <p className="content">
             {item.summary}
           </p>
-          <a href="#">
-            <img
-              src={item.partner.logo}
-              className="logo"
-              alt={item.partner.name}
-            />
-          </a>
+          {item.partner &&
+            <a href="#">
+              <img
+                src={config.apiUrl + item.partner.logo}
+                className="logo"
+                alt={item.partner.name}
+              />
+            </a>
+          }
         </Card>
       );
     });
