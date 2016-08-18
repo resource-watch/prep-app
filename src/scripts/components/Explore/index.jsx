@@ -21,6 +21,7 @@ class Explore extends React.Component {
   }
 
   componentWillMount() {
+    this.currentData = this.getData('pathname', 'explore');
     if (!this.props.data.list.length) {
       const { query } = this.props.params;
       if (query && query.activeDatasets) {
@@ -29,6 +30,12 @@ class Explore extends React.Component {
         this.props.getDatasets();
       }
     }
+    document.title = this.currentData.title;
+  }
+
+  componentWillUpdate() {
+    this.currentData = this.getData('pathname', 'explore');
+    document.title = this.currentData.title;
   }
 
   getData(key, value) {
@@ -43,9 +50,7 @@ class Explore extends React.Component {
   }
 
   render() {
-    // TODO: improve this
-    const pathname = this.props.location.pathname;
-    const currentData = this.getData('pathname', 'explore');
+    const currentData = this.currentData;
 
     return (
       <div className="l-explore">

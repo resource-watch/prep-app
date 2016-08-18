@@ -19,7 +19,7 @@
   },
   {
     "name": "engagement-workgroup",
-    "pathname": "engagement-workgroup",
+    "pathname": "engagement",
     "metaTitle": "Partnership Engagement Workgroup",
     "metaDescription": "",
     "title": "Partnership Engagement Workgroup",
@@ -28,7 +28,7 @@
   },
   {
     "name": "data-accessibility",
-    "pathname": "data-accessibility",
+    "pathname": "data",
     "metaTitle": "Data Accesibility Workgroup",
     "metaDescription": "",
     "title": "Data Accesibility Workgroup",
@@ -37,7 +37,7 @@
   },
   {
     "name": "platform-development",
-    "pathname": "platform-development",
+    "pathname": "platforms",
     "metaTitle": "Platform Development Workgroup",
     "metaDescription": "",
     "title": "Platform Development",

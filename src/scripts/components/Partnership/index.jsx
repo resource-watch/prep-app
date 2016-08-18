@@ -13,17 +13,17 @@ class Partnership extends React.Component {
         <Article>
           <p>The Partnership for Resilience and Preparedness (PREP) is a public-private collaboration to empower a data-driven approach to building climate resilience. The Partnership aims to help planners, investors, and resource managers around the globe to more easily incorporate climate risks into their decisions by enhancing access to relevant data and insights on climate variability and change, and facilitating peer-to-peer learning. PREP will do this through: </p>
 
-          <h3>Community Engagement</h3>
+          <h3>Engagement</h3>
           <p>We will facilitate sustained dialogues among data/information producers and users for climate resilience.</p>
-          <Link to="partnership/engagement-workgroup">Go to commnunity engagement</Link>
+          <Link to="partnership/engagement">Go to engagement</Link>
 
-          <h3>Data Accessibility</h3>
+          <h3>Data</h3>
           <p>We will seek to reduce the barriers to access, contribute, and use data for climate resilience.</p>
-          <Link to="partnership/data-accessibility">Go to data accessibility</Link>
+          <Link to="partnership/data">Go to data</Link>
 
-          <h3>Platform Development</h3>
+          <h3>Platforms</h3>
           <p>We will develop platforms to enhance access to and usability of climate-relevant data and information.</p>
-          <Link to="partnership/platform-development">Go to platform development</Link>
+          <Link to="partnership/platforms">Go to platforms</Link>
 
           <p>PREP includes representatives from several U.S. government agencies with vast data holdings, leading technology companies, and civil society organizations. We welcome other entities committed to our mission to <a href="#join">join the partnership</a>.</p>
         </Article>

@@ -22,11 +22,25 @@ class App extends React.Component {
     return data;
   }
 
-  render() {
-    // TODO: improve this
+  getCurrentData() {
     const pathname = this.props.location.pathname;
     const currentData = this.getData('pathname', (pathname !== '/') ?
       pathname.split('/').slice(-1)[0] : pathname);
+    return currentData;
+  }
+
+  componentWillMount() {
+    this.currentData = this.getCurrentData();
+    document.title = this.currentData.title;
+  }
+
+  componentWillUpdate() {
+    this.currentData = this.getCurrentData();
+    document.title = this.currentData.title;
+  }
+
+  render() {
+    const currentData = this.currentData;
     const isHomepage = (currentData.name === 'home');
 
     return (

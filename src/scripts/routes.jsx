@@ -89,9 +89,9 @@ function Routes(props) {
         <IndexRoute component={Home} />
         <Route path={'partnership'}>
           <IndexRoute component={Partnership} />
-          <Route path={'engagement-workgroup'} component={EngagementWorkgroup} />
-          <Route path={'data-accessibility'} component={DataAccessibility} />
-          <Route path={'platform-development'} component={DataAccessibility} />
+          <Route path={'engagement'} component={EngagementWorkgroup} />
+          <Route path={'data'} component={DataAccessibility} />
+          <Route path={'platforms'} component={DataAccessibility} />
         </Route>
       </Route>
       <Route path={'explore'}>
