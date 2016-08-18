@@ -29,19 +29,11 @@ class App extends React.Component {
     return currentData;
   }
 
-  componentWillMount() {
-    this.currentData = this.getCurrentData();
-    document.title = this.currentData.title;
-  }
-
-  componentWillUpdate() {
-    this.currentData = this.getCurrentData();
-    document.title = this.currentData.title;
-  }
-
   render() {
-    const currentData = this.currentData;
+    const currentData = this.getCurrentData();
     const isHomepage = (currentData.name === 'home');
+
+    document.title = currentData.title;
 
     return (
       <div>

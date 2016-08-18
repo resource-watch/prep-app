@@ -10,6 +10,8 @@ import EngagementWorkgroup from './components/Partnership/EngagementWorkgroup';
 import DataAccessibility from './components/Partnership/DataAccessibility';
 import Explore from './containers/Explore';
 import DatasetDetail from './containers/Dataset';
+import About from './components/About';
+import FAQ from './components/FAQ';
 
 function shouldUpdateScroll(prevRouterProps, { location }) {
   /**
@@ -94,6 +96,8 @@ function Routes(props) {
           <Route path={'platforms'} component={DataAccessibility} />
         </Route>
         <Route path={'dataset/:slug'} component={DatasetDetail} />
+        <Route path={'about'} component={About} />
+        <Route path={'faqs'} component={FAQ} />
       </Route>
       <Route path={'explore(/:lat)(/:lng)(/:zoom)'} component={Explore} />
     </Router>

@@ -61,5 +61,23 @@
     "title": "Dataset",
     "bannerSize": "small",
     "bannerBg": "explore"
+  },
+  {
+    "name": "about",
+    "pathname": "about",
+    "metaTitle": "About",
+    "metaDescription": "",
+    "title": "About",
+    "bannerSize": "medium",
+    "bannerBg": "home"
+  },
+  {
+    "name": "faq",
+    "pathname": "faqs",
+    "metaTitle": "FAQ",
+    "metaDescription": "",
+    "title": "FAQ",
+    "bannerSize": "medium",
+    "bannerBg": "home"
   }
 ]

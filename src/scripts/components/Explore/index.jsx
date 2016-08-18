@@ -48,11 +48,6 @@ class Explore extends React.Component {
     document.title = this.currentData.title;
   }
 
-  componentWillUpdate() {
-    this.currentData = this.getData('pathname', 'explore');
-    document.title = this.currentData.title;
-  }
-
   getData(key, value) {
     let data = null;
     for (let i = metadata.length - 1; i >= 0; i--) {
@@ -81,8 +76,11 @@ class Explore extends React.Component {
   }
 
   render() {
-    const currentData = this.currentData;
+    const currentData = this.getData('pathname', 'explore');
+
     let modalContent = this.props.metadataModal.datasetId ? this.getModalContent() : null;
+
+    document.title = currentData.title;
 
     return (
       <div className="l-explore -theme-2">
