@@ -25,7 +25,7 @@ export function getPartners() {
 
 export function getFeaturedPartners() {
   return dispatch => {
-    fetch(`${config.apiUrl}/api/partners`)
+    fetch(`${config.apiUrl}/api/partners?featured=true`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
