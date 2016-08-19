@@ -1,14 +1,16 @@
 import { connect } from 'react-redux';
-import ExploreMap from '../../components/Explore/ExploreMap';
+import FilterTabs from '../../components/Explore/FilterTabs';
 
-import { getFilteredDatasetsByTag } from '../../actions/datasets';
+import { setDatasetsTagFilter } from '../../actions/datasets';
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (state) => ({
+  filterSelected: state.datasets.filters.tag
+});
 
 const mapDispatchToProps = (dispatch) => ({
-  onFilterClick: (tagName) => {
-    dispatch(getFilteredDatasetsByTag(tagName));
+  setDatasetFilter: (tagName) => {
+    dispatch(setDatasetsTagFilter(tagName));
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExploreMap);
+export default connect(mapStateToProps, mapDispatchToProps)(FilterTabs);

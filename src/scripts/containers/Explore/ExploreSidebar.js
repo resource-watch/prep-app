@@ -5,7 +5,8 @@ import { switchChange, updateURL } from '../../actions/exploremap';
 import { getDatasetLayer } from '../../actions/datasets';
 
 const mapStateToProps = (state) => ({
-  data: state.datasets.list
+  data: state.datasets.list,
+  filters: state.datasets.filters
 });
 const mapDispatchToProps = (dispatch) => ({
   switchChange: (dataset) => {

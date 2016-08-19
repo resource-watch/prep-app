@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import FilterTabs from './FilterTabs';
+import FilterTabs from '../../containers/Explore/FilterTabs';
 import Switch from '../Button/Switch';
 import Button from '../Button/Button';
 import LoadingSpinner from '../Loading/LoadingSpinner';
@@ -18,8 +18,20 @@ class DataMap extends React.Component {
     if (!this.props.data.length) {
       return <LoadingSpinner />;
     }
+    const datasets = this.props.data;
 
-    const layers = this.props.data.map((dataset, index) => {
+    let filteredDatasets = [];
+    if (this.props.filters.tag) {
+      for (var i = datasets.length - 1; i >= 0; i--) {
+        if (datasets[i].tags.indexOf(this.props.filters.tag) > -1) {
+          filteredDatasets.push(datasets[i]);
+        }
+      }
+    } else {
+      filteredDatasets = datasets;
+    }
+
+    const layers = filteredDatasets.map((dataset, index) => {
 
       let layerIcon = (
         <div className="detail-space"></div>
