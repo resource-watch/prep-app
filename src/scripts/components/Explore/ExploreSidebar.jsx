@@ -27,6 +27,16 @@ class DataMap extends React.Component {
 
       let datasetIcon = null;
 
+      const subtitle = dataset.metadata && dataset.metadata.length ?
+        dataset.metadata[0].info.attributes.subtitle : "";
+
+      const partner = dataset.metadata && dataset.metadata.length ?
+        (
+          <span>
+            from <strong>{dataset.metadata[0].info.attributes.organization}</strong>
+          </span>
+        ) : "";
+
       if (dataset.layers && dataset.layers.length) {
         layerIcon = (
           <Switch
@@ -48,7 +58,7 @@ class DataMap extends React.Component {
           {layerIcon}
           <span className="layerItem">
             <strong className="title">{dataset.name}</strong>
-            <span className="subtitle">{dataset.sub_title}</span>
+            <span className="subtitle">{subtitle} {partner}</span>
           </span>
           {datasetIcon}
         </div>

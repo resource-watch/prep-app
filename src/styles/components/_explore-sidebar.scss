@@ -111,7 +111,7 @@
     }
 
     .dataset-items {
-      height: 100%;
+      height: calc(100% - 40px);
       overflow: auto;
       -webkit-overflow-scrolling: touch;
     }
@@ -126,13 +126,17 @@
         margin-left: 8px;
         flex: 1;
 
+        > .title, .subtitle {
+          display: block;
+        }
+
         > .title {
           font-size: $small-font-size;
           font-weight: bold;
         }
 
         > .subtitle {
-          font-size: $small-font-size;
+          font-size: $micro-font-size;
         }
       }
 
