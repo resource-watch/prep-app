@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+import FilterTabs from './FilterTabs';
 import Switch from '../Button/Switch';
 import Button from '../Button/Button';
 import LoadingSpinner from '../Loading/LoadingSpinner';
@@ -61,19 +62,7 @@ class DataMap extends React.Component {
           </div>
         </div>
         <div className="row content">
-          <div className="filters-tab">
-            <ul>
-              <li>
-                <Button themeColor click={() => console.log('TODO: topics')}> Topics </Button>
-              </li>
-              <li>
-                <Button themeColor click={() => console.log('TODO: areas')}> Spatial extent </Button>
-              </li>
-              <li>
-                <Button themeColor click={() => console.log('TODO: date')}> Data type </Button>
-              </li>
-            </ul>
-          </div>
+          <FilterTabs />
           <div className="columns small-12 dataset-items">
             {content}
           </div>
