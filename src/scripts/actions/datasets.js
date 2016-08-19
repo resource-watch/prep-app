@@ -46,6 +46,24 @@ export function getActiveDatasetLayers(datasets) {
   };
 }
 
+export function getFilteredDatasetsByTag(tagName) {
+  return (dispatch, state) => {
+    debugger;
+    let filteredDatasets = [];
+    for (var i = datasets.length - 1; i >= 0; i--) {
+      if (datasets[i].tags.indexOf(tagName) > -1) {
+        filteredDatasets.push(datasets[i]);
+      }
+    }
+    dispatch({
+      type: DATASET_LIST_FILTERED,
+      payload: {
+        data: filteredDatasets
+      }
+    });
+  };
+}
+
 export function getDatasets(defaultActiveLayers) {
   return dispatch => {
     fetch(`${config.apiUrlRW}/datasets?app=prep&complete=true`)
@@ -57,11 +75,8 @@ export function getDatasets(defaultActiveLayers) {
         const datasets = data || [];
         if (datasets.length) {
           for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
-            if (defaultActiveLayers &&
-              defaultActiveLayers.indexOf(datasets[i].id) > -1) {
-              datasets[i].active = true;
-            } else {
-              datasets[i].active = false;
+            if (defaultActiveLayers) {
+              datasets[i].active = (defaultActiveLayers.indexOf(datasets[i].id) > -1);
             }
           }
         }
