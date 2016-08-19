@@ -29,7 +29,6 @@ class App extends React.Component {
   }
 
   render() {
-    debugger;
     const currentData = this.getCurrentData();
     const isHomepage = (currentData.name === 'home');
 
