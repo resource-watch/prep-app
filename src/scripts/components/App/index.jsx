@@ -14,7 +14,7 @@ class App extends React.Component {
   getData(key, value) {
     let data = null;
     for (let i = metadata.length - 1; i >= 0; i--) {
-      if (metadata[i][key] === value) {
+      if (value.indexOf(metadata[i][key]) > -1) {
         data = metadata[i];
         break;
       }
