@@ -11,7 +11,7 @@ function DashboardDetailInsights(props) {
             {card.title}
           </Link>
         </h3>
-        <p className="content">
+        <p>
           {card.summary}
         </p>
 

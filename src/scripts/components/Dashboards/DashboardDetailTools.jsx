@@ -13,11 +13,11 @@ function DashboardDetailTools(props) {
                 {card.title}
               </a>
               </h3>
-            <p className="content">
+            <p>
               {card.summary}
             </p>
 
-            <a className="link" target="_blank" href={card.url}>
+            <a target="_blank" href={card.url}>
               Read more
             </a>
           </Card>
