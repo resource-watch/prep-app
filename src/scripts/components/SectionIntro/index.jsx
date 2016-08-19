@@ -21,15 +21,17 @@ function SectionIntro(props) {
         }
       </div>
       <div className="sliced"></div>
-      <div className="row">
-        <div className="columns small-8 small-offset-2 c-article">
-          <ToolbarActions
-            insightUrl={props.insightUrl}
-            currentSection={props.currentSection}
-          />
-          {props.children}
+      <article className="c-article">
+        <div className="row align-center">
+          <div className="columns small-12 medium-8">
+            <ToolbarActions
+              insightUrl={props.insightUrl}
+              currentSection={props.currentSection}
+            />
+            {props.children}
+          </div>
         </div>
-      </div>
+      </article>
     </div>
   );
 }

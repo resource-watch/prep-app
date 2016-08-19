@@ -94,12 +94,10 @@ class DashboardDetail extends React.Component {
 
   render() {
     const currentData = this.getCurrentData();
-
+    const content = this.getContent();
     const title = this.props.data ? this.props.data.title : currentData.title;
 
     document.title = title;
-
-    let content = this.getContent();
 
     return (
       <div>
