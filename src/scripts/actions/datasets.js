@@ -48,7 +48,7 @@ export function getActiveDatasetLayers(datasets) {
 
 export function getDatasets(defaultActiveLayers) {
   return dispatch => {
-    fetch(`${config.apiUrlRW}/datasets?app=prep`)
+    fetch(`${config.apiUrlRW}/datasets?app=prep&complete=true`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);

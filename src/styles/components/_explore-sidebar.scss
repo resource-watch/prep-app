@@ -93,11 +93,25 @@
       margin: 1rem 0;
       display: flex;
       align-items: flex-start;
-      justify-content: flex-start;
+      justify-content: space-between;
 
-      > .title {
+      > .layerItem {
         margin-left: 8px;
-        font-size: $small-font-size;
+        flex: 1;
+
+        > .title {
+          font-size: $small-font-size;
+          font-weight: bold;
+        }
+
+        > .subtitle {
+          font-size: $small-font-size;
+        }
+      }
+
+      .detail-space {
+        width: 17px;
+        height: 10px;
       }
 
       > .detail-link {
