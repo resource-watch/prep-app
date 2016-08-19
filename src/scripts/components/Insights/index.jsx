@@ -42,11 +42,11 @@ class DashboardsPage extends React.Component {
                {item.title}
               </Link>
             </h3>
-            <p className="content">
+            <p>
               {item.summary}
             </p>
             {item.partner &&
-              <a href="#">
+              <a href={item.partner.url} target="_blank">
                 <img
                   src={config.apiUrl + item.partner.logo_medium}
                   className="logo"

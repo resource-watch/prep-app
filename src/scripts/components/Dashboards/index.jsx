@@ -29,20 +29,19 @@ class DashboardsPage extends React.Component {
       );
     }
 
-    let items = [];
-    this.props.data.forEach((item, index) => {
-      items.push(
+    const items = this.props.data.map((item, index) => {
+      return (
         <div className="columns small-12 medium-6 align-stretch"
           key={`dashboard-item-${index}`}
           style={{display: 'flex'}}
         >
-          <Card border="neutral" key={`dashboard-item-${index}`}>
+          <Card border="neutral">
             <h3>
               <Link to={`/dashboards/${item.slug}`}>
                {item.title}
               </Link>
             </h3>
-            <p className="content">
+            <p>
               {item.summary}
             </p>
             {item.partner &&
