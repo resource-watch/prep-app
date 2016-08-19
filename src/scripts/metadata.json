@@ -106,5 +106,14 @@
     "title": "Insights",
     "bannerSize": "small",
     "bannerBg": "insights"
+  },
+  {
+    "name": "insight",
+    "pathname": "insight",
+    "metaTitle": "Insight",
+    "metaDescription": "",
+    "title": "Insight",
+    "bannerSize": "medium",
+    "bannerBg": "insight"
   }
 ]

@@ -36,7 +36,7 @@ class DashboardsPage extends React.Component {
         >
           <Card border="neutral">
             <h3>
-              <Link to={`/insights/${item.slug}`}>
+              <Link to={`/insight/${item.slug}`}>
                {item.title}
               </Link>
             </h3>

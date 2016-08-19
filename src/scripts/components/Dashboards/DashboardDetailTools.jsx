@@ -8,9 +8,11 @@ function DashboardDetailTools(props) {
       content.push(
         <div className="columns small-12 medium-6" key={`tool-card-${index}`}>
           <Card border="neutral">
-            <a target="_blank" href={card.url}>
-              <h3> {card.title} </h3>
-            </a>
+            <h3>
+              <a target="_blank" href={card.url}>
+                {card.title}
+              </a>
+              </h3>
             <p className="content">
               {card.summary}
             </p>
