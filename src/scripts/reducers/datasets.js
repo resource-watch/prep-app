@@ -5,14 +5,18 @@ import {
   DATASET_METADATA_RECEIVED,
   TOGGLE_LAYER_STATUS,
   SET_LAYER_STATUS,
-  DATASET_LAYER_FETCH_ERROR
+  DATASET_LAYER_FETCH_ERROR,
+  DATASET_SET_FILTER
 } from '../constants';
 
 const initialState = {
   list: [],
   details: {},
   layers: {},
-  metadatas: {}
+  metadatas: {},
+  filters: {
+    tag: ''
+  }
 };
 
 export default function (state = initialState, action) {
@@ -44,6 +48,9 @@ export default function (state = initialState, action) {
         }
       }
       return Object.assign({}, state, { list });
+    }
+    case DATASET_SET_FILTER: {
+      return Object.assign({}, state, { filters: action.payload });
     }
     case TOGGLE_LAYER_STATUS: {
       const list = state.list.slice(0);

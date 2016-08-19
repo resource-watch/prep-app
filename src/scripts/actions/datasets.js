@@ -6,7 +6,7 @@ import {
   DATASET_DETAIL_RECEIVED,
   DATASET_METADATA_RECEIVED,
   DATASET_LAYER_RECEIVED,
-  DATASET_LIST_FILTERED
+  DATASET_SET_FILTER
 } from '../constants';
 
 import { updateURL } from './exploremap';
@@ -47,20 +47,12 @@ export function getActiveDatasetLayers(datasets) {
   };
 }
 
-export function getFilteredDatasetsByTag(tagName, datasets) {
-  return (dispatch) => {
-    const filteredDatasets = [];
-    for (let i = datasets.length - 1; i >= 0; i--) {
-      if (datasets[i].tags.indexOf(tagName) > -1) {
-        filteredDatasets.push(datasets[i]);
-      }
+export function setDatasetsTagFilter(tagName) {
+  return {
+    type: DATASET_SET_FILTER,
+    payload: {
+      tag: tagName
     }
-    dispatch({
-      type: DATASET_LIST_FILTERED,
-      payload: {
-        data: filteredDatasets
-      }
-    });
   };
 }
 
