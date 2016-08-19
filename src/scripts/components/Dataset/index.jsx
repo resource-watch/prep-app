@@ -40,12 +40,12 @@ class DatasetDetail extends React.Component {
   }
 
   getContent() {
-    if (!this.props.data || !this.props.widget) {
+    if (!this.props.data) {
       return <LoadingSpinner />;
     }
 
     const data = this.props.data.attributes.info;
-    const widget = this.props.widget.attributes;
+    const widget = this.props.widget ? this.props.widget.attributes : {};
 
     return (<div>
       <SectionIntro data={{}} currentSection={'explore'} >
