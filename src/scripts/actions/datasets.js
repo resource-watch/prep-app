@@ -91,8 +91,8 @@ export function getDatasetDefaultWidget(datasetId) {
         throw new Error(response.statusText);
       })
       .then(data => {
-        if (data.length) {
-          fetch(`${config.apiUrlRW}/widgets/${data[0].id}`)
+        if (data.data.length) {
+          fetch(`${config.apiUrlRW}/widgets/${data.data[0].id}`)
           .then(response => {
             if (response.ok) return response.json();
             throw new Error(response.statusText);
@@ -100,7 +100,7 @@ export function getDatasetDefaultWidget(datasetId) {
           .then(widget => {
             dispatch({
               type: DATASET_DETAIL_RECEIVED,
-              payload: { data: widget }
+              payload: { data: widget.data }
             });
           });
         }

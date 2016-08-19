@@ -99,15 +99,15 @@ function Routes(props) {
           <Route path={'data'} component={DataAccessibility} />
           <Route path={'platforms'} component={DataAccessibility} />
         </Route>
-        <Route path={'dataset/:slug'} component={DatasetDetail} />
         <Route path={'about'} component={About} />
         <Route path={'faqs'} component={FAQ} />
         <Route path={'dashboards'} component={Dashboards} />
         <Route path={'insights'} component={Insights} />
       </Route>
-      <Route path={'explore(/:lat)(/:lng)(/:zoom)'} component={Explore} />
+      <Route path="explore(/:lat)(/:lng)(/:zoom)" component={Explore} />
       <Route path="dashboard/:slug(/:tab)" component={DashboardsDetail} />
       <Route path="insight/:slug" component={InsightsDetail} />
+      <Route path="dataset/:slug" component={DatasetDetail} />
     </Router>
   );
 }
