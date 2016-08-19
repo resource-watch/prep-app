@@ -1,0 +1,119 @@
+[
+  {
+    "name": "home",
+    "pathname": "/",
+    "metaTitle": "Welcome",
+    "metaDescription": "",
+    "title": "Enabling collective action to manage climate risks",
+    "bannerSize": "big",
+    "bg": "home"
+  },
+  {
+    "name": "partnership",
+    "pathname": "/partnership",
+    "metaTitle": "Partnership",
+    "metaDescription": "",
+    "title": "Partnership for Resilience and Preparedness",
+    "bannerSize": "medium",
+    "bannerBg": "partnership"
+  },
+  {
+    "name": "engagement-workgroup",
+    "pathname": "/partnership/engagement",
+    "metaTitle": "Partnership Engagement Workgroup",
+    "metaDescription": "",
+    "title": "Partnership Engagement Workgroup",
+    "bannerSize": "small",
+    "bannerBg": "partnershipEngagement"
+  },
+  {
+    "name": "data-accessibility",
+    "pathname": "/partnership/data",
+    "metaTitle": "Data Accesibility Workgroup",
+    "metaDescription": "",
+    "title": "Data Accesibility Workgroup",
+    "bannerSize": "small",
+    "bannerBg": "partnershipEnga"
+  },
+  {
+    "name": "platform-development",
+    "pathname": "/partnership/platforms",
+    "metaTitle": "Platform Development Workgroup",
+    "metaDescription": "",
+    "title": "Platform Development",
+    "bannerSize": "small",
+    "bannerBg": "partnershipPlatforms"
+  },
+  {
+    "name": "explore",
+    "pathname": "/explore",
+    "metaTitle": "Explore",
+    "metaDescription": "",
+    "title": "Explore",
+    "bannerSize": "medium",
+    "bannerBg": "explore"
+  },
+  {
+    "name": "dataset",
+    "pathname": "/dataset",
+    "metaTitle": "Dataset",
+    "metaDescription": "",
+    "title": "Dataset",
+    "bannerSize": "small",
+    "bannerBg": "explore"
+  },
+  {
+    "name": "about",
+    "pathname": "/about",
+    "metaTitle": "About",
+    "metaDescription": "",
+    "title": "About",
+    "bannerSize": "medium",
+    "bannerBg": "home"
+  },
+  {
+    "name": "faq",
+    "pathname": "/faqs",
+    "metaTitle": "FAQ",
+    "metaDescription": "",
+    "title": "FAQ",
+    "bannerSize": "medium",
+    "bannerBg": "home"
+  },
+  {
+    "name": "dashboards",
+    "pathname": "/dashboards",
+    "metaTitle": "Dashboards",
+    "metaDescription": "",
+    "title": "Dashboards",
+    "bannerSize": "small",
+    "bannerBg": "dashboards"
+  },
+  {
+    "name": "dashboard",
+    "pathname": "dashboard",
+    "metaTitle": "Dashboard",
+    "metaDescription": "",
+    "title": "Dashboard",
+    "bannerSize": "medium",
+    "bannerBg": "dashboard"
+  },
+  {
+    "name": "insights",
+    "pathname": "/insights",
+    "metaTitle": "Insights",
+    "metaDescription": "",
+    "title": "Insights",
+    "bannerSize": "small",
+    "bannerBg": "insights"
+  },
+  {
+    "name": "insight",
+    "pathname": "insight",
+    "metaTitle": "Insight",
+    "metaDescription": "",
+    "title": "Insight",
+    "bannerSize": "medium",
+    "bannerBg": "insight"
+  }
+]

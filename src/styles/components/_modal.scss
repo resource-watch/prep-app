@@ -1,0 +1,139 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1001;
+  background-color: rgba($inverse-bg-color, .7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+
+  @media #{$mq-medium} {
+    padding: 1.25rem 4rem;
+  }
+
+  > .c-modal {
+    position: relative;
+    padding: $small-margin;
+    background-color:$base-bg-color;
+    width: 100%;
+    max-width: rem($max-width);
+
+    @media #{$mq-medium} {
+      min-width: rem(370);
+      width: auto;
+    }
+
+    &.share {
+      width: auto;
+      min-width: auto;
+      @media #{$mq-medium} {
+        padding: $medium-margin $large-margin;
+        width: rem(620);
+      }
+
+      .c-share-url {
+        margin: $small-margin 0 1rem;
+      }
+    }
+
+    .media {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100px;
+      padding: 1.25rem 1.25rem 0 1.25rem;
+
+      > a {
+        padding: 1.25rem;
+
+        > svg {
+          fill: $secondary-color;
+          .-theme-2 & {
+            fill: $thirth-color;
+          }
+          .-theme-3 & {
+            fill: $fourth-color;
+          }
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    > .close-button {
+      position: absolute;
+      top: -20px;
+      right: 0px;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      fill: $base-bg-color;
+      transition: fill .3s;
+      &:hover {
+        fill: $secondary-color;
+        .-theme-2 & {
+          fill: $thirth-color;
+        }
+        .-theme-3 & {
+          fill: $fourth-color;
+        }
+      }
+    }
+  }
+}
+
+/* React animations for when the modal will appear */
+.animation-appear {
+  opacity: 0;
+  .modal { transform: scale(1.1); }
+
+  &.animation-appear-active {
+    opacity: 1;
+    transition: opacity .3s ease;
+
+    .modal {
+      transform: scale(1);
+      transition: transform .2s ease-out;
+      transition-delay: transform .1s;
+    }
+  }
+}
+
+/* Global animations for the modal */
+.modal-enter, .modal-appear {
+  opacity: 0;
+  .modal { transform: scale(1.1); }
+
+  &.modal-enter-active, &.modal-appear-active {
+    opacity: 1;
+    transition: opacity .3s ease;
+
+    .modal {
+      transform: scale(1);
+      transition: transform .2s ease-out;
+      transition-delay: transform .1s;
+    }
+  }
+}
+
+.modal-leave {
+  opacity: 1;
+  .modal { transform: scale(1); }
+
+  &.modal-leave-active {
+    opacity: 0;
+    transition: opacity .3s ease;
+
+    .modal {
+      transform: scale(1.1);
+      transition: transform .2s ease-out;
+      transition-delay: transform .1s;
+    }
+  }
+}

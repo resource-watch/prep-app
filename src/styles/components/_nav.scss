@@ -1,0 +1,106 @@
+.c-nav {
+  &.-main, &.-secondary {
+    & > ul {
+      justify-content: flex-end;
+    }
+  }
+
+  &.-main {
+    & > ul > li {
+      margin-left: 1rem;
+      margin-right: 1rem;
+
+      color: $inverse-font-color;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      line-height: 1;
+      text-transform: uppercase;
+
+      & > a {
+        display: block;
+        padding: $small-margin 0;
+
+        color: $inverse-font-color;
+
+        border-top: 5px solid transparent;
+
+        transition: all .3s ease-out;
+
+        .l-header-nav.-short & {
+          padding: 20px 0;
+        }
+      }
+
+      & > a.-current,
+      & > a:hover {
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      &:nth-of-type(1), &:nth-of-type(3) {
+        > a:hover, > a.-current {
+          border-top-color: $secondary-color;
+        }
+      }
+      &:nth-of-type(2) {
+        > a:hover, > a.-current {
+          border-top-color: $thirth-color;
+        }
+      }
+      &:nth-of-type(4) {
+        > a:hover, > a.-current {
+          border-top-color: $fourth-color;
+        }
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &.-secondary {
+    & > ul > li {
+      position: relative;
+      margin-left: .5rem;
+      margin-right: .5rem;
+
+      color: $inverse-font-color;
+      font-size: $small-font-size;
+      font-weight: bold;
+      line-height: 1;
+      text-transform: uppercase;
+
+      & > a {
+        color: $inverse-font-color;
+      }
+
+      &:after {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 100%;
+        margin-left: .5rem;
+        width: 1px;
+        height: 100%;
+
+        background-color: $secondary-color;
+
+        content: "";
+      }
+
+      &:last-child {
+        margin-right: 0;
+
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &.-social {
+    & > ul > li {
+      margin-right: 1rem;
+    }
+  }
+}

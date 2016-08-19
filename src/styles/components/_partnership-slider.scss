@@ -1,0 +1,26 @@
+.c-partnership-slider {
+  position: relative;
+  margin: 1rem 0;
+
+  .partnership-slider-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 460px;
+
+    color: $inverse-font-color;
+    text-align: center;
+
+    background-color: $main-color;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .slick-prev {
+    left: $medium-margin;
+  }
+
+  .slick-next {
+    right: $medium-margin;
+  }
+}

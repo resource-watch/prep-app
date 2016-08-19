@@ -1,0 +1,21 @@
+.c-homepage {
+  margin-top: -$small-margin;
+
+  .insight-float-image {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 1038px;
+    height: 494px;
+    margin-top: -48px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: $small-margin;
+
+    background-size: cover;
+
+    box-shadow: 0 7px 15px 0 rgba(0, 0, 0, 0.15);
+
+    z-index: 1;
+  }
+}
