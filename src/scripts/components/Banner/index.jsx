@@ -4,13 +4,17 @@ import homepageBg from '../../../images/bg/bg-home.jpg';
 import partnershipBg from '../../../images/bg/bg-partnership.jpg';
 import dashboardsBg from '../../../images/bg/bg-dashboards.jpg';
 import insightsBg from '../../../images/bg/bg-insights.jpg';
+import partnershipEngagementBg from '../../../images/bg/bg-partnership-engagement.jpg';
+import partnershipPlatformsBg from '../../../images/bg/bg-partnership-platforms.jpg';
 
 const bg = {
   defaults: homepageBg,
   home: homepageBg,
   partnership: partnershipBg,
   dashboards: dashboardsBg,
-  insights: insightsBg
+  insights: insightsBg,
+  partnershipEngagement: partnershipEngagementBg,
+  partnershipPlatforms: partnershipPlatformsBg
 };
 
 class Banner extends React.Component {

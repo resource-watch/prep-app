@@ -36,7 +36,6 @@ class Explore extends React.Component {
   }
 
   componentWillMount() {
-    this.currentData = this.getData('pathname', 'explore');
     if (!this.props.data.list.length) {
       const { query } = this.props.location;
       if (query && query.activeDatasets) {
@@ -45,7 +44,6 @@ class Explore extends React.Component {
         this.props.getDatasets();
       }
     }
-    document.title = this.currentData.title;
   }
 
   getData(key, value) {
@@ -76,9 +74,8 @@ class Explore extends React.Component {
   }
 
   render() {
-    const currentData = this.getData('pathname', 'explore');
-
-    let modalContent = this.props.metadataModal.datasetId ? this.getModalContent() : null;
+    const currentData = this.getData('pathname', '/explore');
+    const modalContent = this.props.metadataModal.datasetId ? this.getModalContent() : null;
 
     document.title = currentData.title;
 

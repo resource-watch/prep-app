@@ -10,7 +10,7 @@
   },
   {
     "name": "partnership",
-    "pathname": "partnership",
+    "pathname": "/partnership",
     "metaTitle": "Partnership",
     "metaDescription": "",
     "title": "Partnership for Resilience and Preparedness",
@@ -19,34 +19,34 @@
   },
   {
     "name": "engagement-workgroup",
-    "pathname": "engagement",
+    "pathname": "/partnership/engagement",
     "metaTitle": "Partnership Engagement Workgroup",
     "metaDescription": "",
     "title": "Partnership Engagement Workgroup",
     "bannerSize": "small",
-    "bannerBg": "partnership"
+    "bannerBg": "partnershipEngagement"
   },
   {
     "name": "data-accessibility",
-    "pathname": "data",
+    "pathname": "/partnership/data",
     "metaTitle": "Data Accesibility Workgroup",
     "metaDescription": "",
     "title": "Data Accesibility Workgroup",
     "bannerSize": "small",
-    "bannerBg": "partnership"
+    "bannerBg": "partnershipEnga"
   },
   {
     "name": "platform-development",
-    "pathname": "platforms",
+    "pathname": "/partnership/platforms",
     "metaTitle": "Platform Development Workgroup",
     "metaDescription": "",
     "title": "Platform Development",
     "bannerSize": "small",
-    "bannerBg": "partnership"
+    "bannerBg": "partnershipPlatforms"
   },
   {
     "name": "explore",
-    "pathname": "explore",
+    "pathname": "/explore",
     "metaTitle": "Explore",
     "metaDescription": "",
     "title": "Explore",
@@ -55,7 +55,7 @@
   },
   {
     "name": "dataset",
-    "pathname": "dataset",
+    "pathname": "/dataset",
     "metaTitle": "Dataset",
     "metaDescription": "",
     "title": "Dataset",
@@ -64,7 +64,7 @@
   },
   {
     "name": "about",
-    "pathname": "about",
+    "pathname": "/about",
     "metaTitle": "About",
     "metaDescription": "",
     "title": "About",
@@ -73,7 +73,7 @@
   },
   {
     "name": "faq",
-    "pathname": "faqs",
+    "pathname": "/faqs",
     "metaTitle": "FAQ",
     "metaDescription": "",
     "title": "FAQ",
@@ -82,7 +82,7 @@
   },
   {
     "name": "dashboards",
-    "pathname": "dashboards",
+    "pathname": "/dashboards",
     "metaTitle": "Dashboards",
     "metaDescription": "",
     "title": "Dashboards",
@@ -91,7 +91,7 @@
   },
   {
     "name": "insights",
-    "pathname": "insights",
+    "pathname": "/insights",
     "metaTitle": "Insights",
     "metaDescription": "",
     "title": "Insights",

@@ -24,8 +24,7 @@ class App extends React.Component {
 
   getCurrentData() {
     const pathname = this.props.location.pathname;
-    const currentData = this.getData('pathname', (pathname !== '/') ?
-      pathname.split('/').slice(1)[0] : pathname);
+    const currentData = this.getData('pathname', pathname);
     return currentData;
   }
 
