@@ -7,8 +7,8 @@ class FilterTabs extends React.Component {
 
     this.filters = {
       topics: { 'flooding': 'Flooding', 'Energy': 'Energy', 'weather-climate': 'Weather climate', 'infrastructure': 'Infrastructure' },
-      spatialExtent: { global: 'global', country: 'country', region: 'region' },
-      dataType: { model: 'model', observation: 'observation', historical: 'historical', projections: 'projections' }
+      spatialExtent: { global: 'Global', country: 'Country', region: 'Region' },
+      dataType: { model: 'Model', observation: 'Observation', historical: 'Historical', projections: 'Projections' }
     };
 
     this.state = {
@@ -25,11 +25,11 @@ class FilterTabs extends React.Component {
     }
     const filterSelected = this.filters[this.state.filterSelected];
     Object.keys(filterSelected).forEach((key, index) => {
-      layers.push(
-        <li className="layer" key={`map-layer-${index}`}>
-          <span className="title">{filterSelected[key]}</span>
+      layers.push((
+        <li key={`filter-tag-${index}`} onClick={this.onClickTag.bind(this, key)}>
+          <span>{filterSelected[key]}</span>
         </li>
-      );
+      ));
     });
     return layers;
   }
@@ -38,8 +38,17 @@ class FilterTabs extends React.Component {
     this.setState({ filterOpen: true, filterSelected: filter });
   }
 
+  closeFilter() {
+    this.setState({ filterOpen: false });
+  }
+
   selectTag(tag) {
     this.setState({ tagSelected: tag });
+  }
+
+  onClickTag(tag) {
+    this.selectTag(tag);
+    this.closeFilter();
   }
 
   render() {
@@ -47,7 +56,7 @@ class FilterTabs extends React.Component {
 
     return (
       <div className="filters-tab">
-        <ul>
+        <ul className="filters-toolbar">
           <li>
             <Button themeColor click={() => this.openFilter('topics')}> Topics </Button>
           </li>
@@ -60,7 +69,7 @@ class FilterTabs extends React.Component {
         </ul>
 
         {this.state.filterOpen &&
-          { filters }
+          <ul className="filters-list">{ filters }</ul>
         }
       </div>
     );
