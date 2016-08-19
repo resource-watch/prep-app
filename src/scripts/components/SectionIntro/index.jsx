@@ -1,27 +1,27 @@
 import React from 'react';
-import ToolbarActions from '../../containers/commons/ToolbarActions';
+import ToolbarActions from '../ToolbarActions';
 
 function SectionIntro(props) {
   return (
     <div className={"c-section-intro"}>
-      <div className="row">
-        <div className="top-bar">
-          {props.data.partner &&
+      <div className="top-bar">
+        {props.data.partner &&
+          <div className="row">
             <div className="logo">
               <img
                 src={config.apiUrl + props.data.partner.white_logo_medium}
                 alt={props.data.partner.name}
               />
             </div>
-          }
-          {props.data.partner &&
             <div className="author">
               {props.data.partner.contact_name}
               <span>{props.data.partner.contact_email}</span>
             </div>
-          }
-        </div>
-        <div className="sliced"></div>
+          </div>
+        }
+      </div>
+      <div className="sliced"></div>
+      <div className="row">
         <div className="columns small-8 small-offset-2 c-article">
           <ToolbarActions
             insightUrl={props.insightUrl}

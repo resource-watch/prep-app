@@ -3,21 +3,19 @@ import { Link } from 'react-router';
 
 function NavBar(props) {
   return (
-    <div className="c-nav-tab">
-      <div className="row">
-        <div className="columns small-8 small-offset-2">
-          <ul>
-            <li className={props.activeTab === 'indicators' ? '-active' : ''}>
-              <Link to={`${props.baseUrl}/indicators`}>Data</Link>
-            </li>
-            <li className={props.activeTab === 'insights' ? '-active' : ''}>
-              <Link to={`${props.baseUrl}/insights`}>Insights</Link>
-            </li>
-            <li className={props.activeTab === 'tools' ? '-active' : ''}>
-              <Link to={`${props.baseUrl}/tools`}>Tools</Link>
-            </li>
-          </ul>
-        </div>
+    <div className="row c-nav-tab">
+      <div className="columns small-8 small-offset-2">
+        <ul>
+          <li className={props.activeTab === 'indicators' ? '-active' : ''}>
+            <Link to={`${props.baseUrl}/indicators`}>Data</Link>
+          </li>
+          <li className={props.activeTab === 'insights' ? '-active' : ''}>
+            <Link to={`${props.baseUrl}/insights`}>Insights</Link>
+          </li>
+          <li className={props.activeTab === 'tools' ? '-active' : ''}>
+            <Link to={`${props.baseUrl}/tools`}>Tools</Link>
+          </li>
+        </ul>
       </div>
     </div>
   );

@@ -1,0 +1,43 @@
+.c-toolbar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: .5rem;
+
+  .action {
+    font-size: $small-font-size;
+    font-weight: 700;
+    margin: .5rem;
+    line-height: 1.8;
+    letter-spacing: 0.3px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    outline: none;
+
+    color: $secondary-color;
+    .-theme-2 & { color: $thirth-color; }
+    .-theme-3 & { color: $fourth-color; }
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+
+    > .icon {
+      margin-right: 5px;
+
+      path {
+        fill: $secondary-color;
+        .-theme-2 & { fill: $thirth-color; }
+        .-theme-3 & { fill: $fourth-color; }
+      }
+
+    }
+  }
+}

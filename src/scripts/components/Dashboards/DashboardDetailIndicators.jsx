@@ -7,7 +7,7 @@ function DashboardDetailIndicators(props) {
     props.data.widgets.forEach((indicator, index) => {
       // if (indicator.widget_type.name === 'chart') {
       content.push(
-        <div key={`indicator-${index}`}>
+        <div className="columns small-12 medium-6" key={`indicator-${index}`}>
           <ChartCard
             tooltip
             title={indicator.title}
@@ -29,7 +29,7 @@ function DashboardDetailIndicators(props) {
     });
   }
   return (
-    <div className="cards">
+    <div className="row">
       {content}
     </div>
   );

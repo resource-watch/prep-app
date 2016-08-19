@@ -9,6 +9,7 @@ import MainNav from '../../components/Navigation/MainNav';
 import Banner from '../../components/Banner';
 import logoImage from '../../../images/prep-logo.png';
 
+import SectionIntro from '../SectionIntro';
 import DashboardDetailIndicators from './DashboardDetailIndicators';
 import DashboardDetailInsights from './DashboardDetailInsights';
 import DashboardDetailTools from './DashboardDetailTools';
@@ -21,7 +22,6 @@ import lightNasaLogo from '../../../images/partners/nasa-light@2x.png';
 class DashboardDetail extends React.Component {
 
   componentWillMount() {
-    console.log(this.props.data);
     if (!this.props.data) {
       this.props.getDashboardBySlug(this.props.dashboardSlug);
     }
@@ -75,6 +75,14 @@ class DashboardDetail extends React.Component {
     return (
       <div>
 
+      <SectionIntro
+        data={this.props.data}
+        dashboardSlug={this.props.dashboardSlug}
+        currentSection="dashboards"
+      >
+        <p> {this.props.data.summary} </p>
+      </SectionIntro>
+
         <NavTab
           activeTab={this.props.dashboardTab}
           baseUrl={`/dashboards/${this.props.dashboardSlug}`}
@@ -90,7 +98,9 @@ class DashboardDetail extends React.Component {
   render() {
     const currentData = this.getCurrentData();
 
-    document.title = currentData.title;
+    const title = this.props.data ? this.props.data.title : currentData.title;
+
+    document.title = title;
 
     let content = this.getContent();
 
@@ -114,7 +124,7 @@ class DashboardDetail extends React.Component {
               bg={currentData.bannerBg}
               size={currentData.bannerSize}
             >
-              <h1>{currentData.title}</h1>
+              <h1>{title}</h1>
             </Banner>
           </div>
         </header>
@@ -122,55 +132,6 @@ class DashboardDetail extends React.Component {
         <div className="l-main">
 
           {content}
-
-          <div className="other-dashboards">
-            <div className="wrapper">
-              <h3>Other dashboards</h3>
-              <div className="other-cards">
-                <Card inverse border>
-                  <h3>
-                    Framer assesses possible impacts of climate change on his
-                    crops (grapes)
-                  </h3>
-                  <p className="content">
-                    Farmer X would need to understand how to best prepare for any
-                    future changes in climate that may impact his grapes. Based on
-                    key thresholds for climate variables of interest (temperature
-                    and precipitation), Farmer X evaluate the suitability to grow
-                    different types of grapes...
-                  </p>
-                  <a href="#">
-                    <img
-                      src={lightUWLogo}
-                      width="219"
-                      className="logo"
-                      alt="University of Washington"
-                    />
-                  </a>
-                </Card>
-                <Card inverse border>
-                  <h3>
-                    City Planner assesses possible impacts of Climate Change on
-                    Puget Sound's built environment
-                  </h3>
-                  <p className="content">
-                    Most climate change effects are likely to increase the
-                    potential for damage to infrastructure and service disruptions
-                    (unplanned transportation closures, delays, or detours) in the
-                    Puget Sound region, although some risks may decrease.
-                  </p>
-                  <a href="#">
-                    <img
-                      src={lightNasaLogo}
-                      width="73"
-                      className="logo"
-                      alt="NASA"
-                    />
-                  </a>
-                </Card>
-              </div>
-            </div>
-          </div>
 
         </div>
 
