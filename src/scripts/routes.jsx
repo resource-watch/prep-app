@@ -72,7 +72,7 @@ function shouldUpdateScroll(prevRouterProps, { location }) {
    * both the old path and the new one match (i.e. if the global regex and the
    * regex params match the two paths) */
   const regexes = [
-    /\/dashboards\/((?:[A-z]|[1-9]|-)+)(?:\/(?:.*))?/,
+    /\/dashboard\/((?:[A-z]|[1-9]|-)+)(?:\/(?:.*))?/,
     /\/insights\/((?:[A-z]|[1-9]|-)+)/
   ];
 
@@ -106,8 +106,8 @@ function Routes(props) {
         <Route path={'insights'} component={Insights} />
       </Route>
       <Route path={'explore(/:lat)(/:lng)(/:zoom)'} component={Explore} />
-      <Route path="dashboards/:slug(/:tab)" component={DashboardsDetail} />
-      <Route path="insights/:slug" component={InsightsDetail} />
+      <Route path="dashboard/:slug(/:tab)" component={DashboardsDetail} />
+      <Route path="insight/:slug" component={InsightsDetail} />
     </Router>
   );
 }

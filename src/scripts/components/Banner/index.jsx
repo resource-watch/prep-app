@@ -2,11 +2,15 @@ import React from 'react';
 
 import homepageBg from '../../../images/bg/bg-home.jpg';
 import partnershipBg from '../../../images/bg/bg-partnership.jpg';
+import dashboardsBg from '../../../images/bg/bg-dashboards.jpg';
+import dashboardBg from '../../../images/bg/bg-dashboard.png';
 
 const bg = {
   defaults: homepageBg,
   home: homepageBg,
-  partnership: partnershipBg
+  partnership: partnershipBg,
+  dashboards:dashboardsBg,
+  dashboard:dashboardBg
 };
 
 class Banner extends React.Component {

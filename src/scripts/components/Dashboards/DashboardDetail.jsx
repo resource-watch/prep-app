@@ -14,10 +14,7 @@ import DashboardDetailIndicators from './DashboardDetailIndicators';
 import DashboardDetailInsights from './DashboardDetailInsights';
 import DashboardDetailTools from './DashboardDetailTools';
 import NavTab from './NavTab';
-import Card from '../Cards/Card';
 import LoadingSpinner from '../Loading/LoadingSpinner';
-import lightUWLogo from '../../../images/partners/university-washington-light@2x.png';
-import lightNasaLogo from '../../../images/partners/nasa-light@2x.png';
 
 class DashboardDetail extends React.Component {
 
@@ -75,17 +72,17 @@ class DashboardDetail extends React.Component {
     return (
       <div>
 
-      <SectionIntro
-        data={this.props.data}
-        dashboardSlug={this.props.dashboardSlug}
-        currentSection="dashboards"
-      >
-        <p> {this.props.data.summary} </p>
-      </SectionIntro>
+        <SectionIntro
+          data={this.props.data}
+          dashboardSlug={this.props.dashboardSlug}
+          currentSection="dashboards"
+        >
+          <p> {this.props.data.summary} </p>
+        </SectionIntro>
 
         <NavTab
           activeTab={this.props.dashboardTab}
-          baseUrl={`/dashboards/${this.props.dashboardSlug}`}
+          baseUrl={`/dashboard/${this.props.dashboardSlug}`}
         />
 
         <div className="wrapper tab-container">

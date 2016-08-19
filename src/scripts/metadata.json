@@ -86,8 +86,17 @@
     "metaTitle": "Dashboards",
     "metaDescription": "",
     "title": "Dashboards",
-    "bannerSize": "medium",
+    "bannerSize": "small",
     "bannerBg": "dashboards"
+  },
+  {
+    "name": "dashboard",
+    "pathname": "dashboard",
+    "metaTitle": "Dashboard",
+    "metaDescription": "",
+    "title": "Dashboard",
+    "bannerSize": "medium",
+    "bannerBg": "dashboard"
   },
   {
     "name": "insights",

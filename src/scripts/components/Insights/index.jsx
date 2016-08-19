@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 import Card from '../Cards/Card';
-import Button from '../Button/Button';
-import Modal from '../Modal/Modal';
 
 class DashboardsPage extends React.Component {
 
