@@ -90,6 +90,15 @@
     "bannerBg": "dashboards"
   },
   {
+    "name": "dashboard",
+    "pathname": "dashboard",
+    "metaTitle": "Dashboard",
+    "metaDescription": "",
+    "title": "Dashboard",
+    "bannerSize": "medium",
+    "bannerBg": "dashboard"
+  },
+  {
     "name": "insights",
     "pathname": "/insights",
     "metaTitle": "Insights",
@@ -97,5 +106,14 @@
     "title": "Insights",
     "bannerSize": "small",
     "bannerBg": "insights"
+  },
+  {
+    "name": "insight",
+    "pathname": "insight",
+    "metaTitle": "Insight",
+    "metaDescription": "",
+    "title": "Insight",
+    "bannerSize": "medium",
+    "bannerBg": "insight"
   }
 ]

@@ -3,6 +3,7 @@ import React from 'react';
 import homepageBg from '../../../images/bg/bg-home.jpg';
 import partnershipBg from '../../../images/bg/bg-partnership.jpg';
 import dashboardsBg from '../../../images/bg/bg-dashboards.jpg';
+import dashboardBg from '../../../images/bg/bg-dashboard.png';
 import insightsBg from '../../../images/bg/bg-insights.jpg';
 import partnershipEngagementBg from '../../../images/bg/bg-partnership-engagement.jpg';
 import partnershipPlatformsBg from '../../../images/bg/bg-partnership-platforms.jpg';
@@ -12,9 +13,11 @@ const bg = {
   home: homepageBg,
   partnership: partnershipBg,
   dashboards: dashboardsBg,
-  insights: insightsBg,
+  dashboard: dashboardBg,
   partnershipEngagement: partnershipEngagementBg,
-  partnershipPlatforms: partnershipPlatformsBg
+  partnershipPlatforms: partnershipPlatformsBg,
+  insights: insightsBg,
+  insight: insightsBg
 };
 
 class Banner extends React.Component {

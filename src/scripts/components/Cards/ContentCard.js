@@ -1,6 +1,4 @@
 import React from 'react';
-import Title from '../commons/Title';
-import Tooltip from '../commons/Tooltip';
 
 function ContentCard(props) {
   let legend;
@@ -18,16 +16,8 @@ function ContentCard(props) {
     <div className={['c-content-card', props.noBorder ? '-no-border' : ''].join(' ')}>
       <div className="header">
         {legend}
-        <Title type="mini">
-          {props.header.title}
-        </Title>
+        <h3> {props.header.title} </h3>
         {subtitle}
-
-        {props.dataTooltip &&
-          <div className="tooltip">
-            <Tooltip data={props.dataTooltip} />
-          </div>
-        }
       </div>
       <div className="content">
         {props.children}

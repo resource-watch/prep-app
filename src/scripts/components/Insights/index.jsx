@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 import Card from '../Cards/Card';
-import Button from '../Button/Button';
-import Modal from '../Modal/Modal';
 
 class DashboardsPage extends React.Component {
 
@@ -38,7 +36,7 @@ class DashboardsPage extends React.Component {
         >
           <Card border="neutral">
             <h3>
-              <Link to={`/insights/${item.slug}`}>
+              <Link to={`/insight/${item.slug}`}>
                {item.title}
               </Link>
             </h3>
