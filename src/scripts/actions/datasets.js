@@ -47,12 +47,10 @@ export function getActiveDatasetLayers(datasets) {
   };
 }
 
-export function setDatasetsTagFilter(tagName) {
+export function setDatasetsTagFilter(filter, tag) {
   return {
     type: DATASET_SET_FILTER,
-    payload: {
-      tag: tagName
-    }
+    payload: { filter, tag }
   };
 }
 

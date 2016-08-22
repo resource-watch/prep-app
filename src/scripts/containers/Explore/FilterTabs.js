@@ -4,12 +4,12 @@ import FilterTabs from '../../components/Explore/FilterTabs';
 import { setDatasetsTagFilter } from '../../actions/datasets';
 
 const mapStateToProps = (state) => ({
-  filterSelected: state.datasets.filters.tag
+  filtersChoosen: state.datasets.filters
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setDatasetFilter: (tagName) => {
-    dispatch(setDatasetsTagFilter(tagName));
+  setDatasetFilter: (filter, tag) => {
+    dispatch(setDatasetsTagFilter(filter, tag));
   }
 });
 

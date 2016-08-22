@@ -17,17 +17,22 @@ class FilterTabs extends React.Component {
     };
   }
 
+  onClickTag(tag) {
+    this.props.setDatasetFilter(this.state.filterSelected, tag);
+    this.closeFilter();
+  }
+
   getFilters() {
     const layers = [];
     if (!this.state.filterOpen) {
       return null;
     }
-    const filterSelected = this.props.filterSelected;
+    const filterChoosen = this.props.filtersChoosen[this.state.filterSelected];
     const filters = this.filters[this.state.filterSelected];
     Object.keys(filters).forEach((key, index) => {
       layers.push((
         <li key={`filter-tag-${index}`} onClick={() => this.onClickTag(key)}>
-          <span className={key === filterSelected ? 'selected' : ''}></span>
+          <span className={filterChoosen && filterChoosen.indexOf(key) > -1 ? 'selected' : ''}></span>
           <span>{filters[key]}</span>
         </li>
       ));
@@ -41,11 +46,6 @@ class FilterTabs extends React.Component {
 
   closeFilter() {
     this.setState({ filterOpen: false });
-  }
-
-  onClickTag(tag) {
-    this.props.setDatasetFilter(tag);
-    this.closeFilter();
   }
 
   render() {
@@ -66,7 +66,7 @@ class FilterTabs extends React.Component {
         </ul>
 
         {this.state.filterOpen &&
-          <ul className="filters-list">{ filters }</ul>
+          <ul className="filters-list">{filters}</ul>
         }
       </div>
     );
@@ -74,10 +74,8 @@ class FilterTabs extends React.Component {
 }
 
 FilterTabs.propTypes = {
-  /**
-   * Define functin to set the tag filter
-   */
-  setDatasetFilter: React.PropTypes.func.isRequired
+  setDatasetFilter: React.PropTypes.func.isRequired,
+  filtersChoosen: React.PropTypes.object
 };
 
 export default FilterTabs;
