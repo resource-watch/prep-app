@@ -3,27 +3,6 @@ import {
   TOGGLE_LAYER_STATUS,
   SET_LAYER_STATUS
 } from '../constants';
-import { push } from 'react-router-redux';
-
-export function updateURL() {
-  return (dispatch, state) => {
-    const params = state().exploremap;
-    const activeDatasets = state().datasets.list.filter(layer => layer.active);
-
-    const url = `${params.latLng.lat}/${params.latLng.lng}/${params.zoom}`;
-    let query = '';
-    if (activeDatasets.length) {
-      query = '?activeDatasets=';
-
-      activeDatasets.forEach((layer, index) => {
-        if (index > 0) query += ',';
-        query += layer.id;
-      });
-    }
-
-    dispatch(push(`/explore/${url}${query}`));
-  };
-}
 
 export function updateMapParams(params) {
   return {

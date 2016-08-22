@@ -48,7 +48,9 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, { list });
     }
     case DATASET_SET_FILTER: {
-      let filters = {};
+
+      // update the filters object
+      const list = state.list.slice(0);
       const filtersChoosen = Object.assign({}, state.filters);
       if (filtersChoosen[action.payload.filter]) {
         const index = filtersChoosen[action.payload.filter].indexOf(action.payload.tag);
@@ -57,11 +59,28 @@ export default function (state = initialState, action) {
         } else {
           filtersChoosen[action.payload.filter].push(action.payload.tag);
         }
-        filters = filtersChoosen;
       } else {
-        filters[action.payload.filter] = [action.payload.tag];
+        filtersChoosen[action.payload.filter] = [action.payload.tag];
       }
-      return Object.assign({}, state, { filters });
+
+      // deactivate a layer out of the filters
+      let filtersFlatten = [];
+      if (Object.keys(filtersChoosen).length > 0) {
+        Object.keys(filtersChoosen).forEach((key) => {
+          filtersFlatten = filtersFlatten.concat(filtersChoosen[key]);
+        });
+        if (filtersFlatten.length) {
+          for (let i = list.length - 1; i >= 0; i--) {
+            for (let j = filtersFlatten.length - 1; j >= 0; j--) {
+              if (list[i].tags.indexOf(filtersFlatten[j]) === -1 && list[i].active === true) {
+                list[i].active = false;
+                break;
+              }
+            }
+          }
+        }
+      }
+      return Object.assign({}, state, { list, filters: filtersChoosen });
     }
     case TOGGLE_LAYER_STATUS: {
       const list = state.list.slice(0);

@@ -17,6 +17,22 @@ class FilterTabs extends React.Component {
     };
   }
 
+  componentWillMount() {
+    let { activeFilters } = this.context.location.query;
+    const setDatasetFilter = this.props.setDatasetFilter;
+    const filters = this.filters;
+    if (activeFilters) {
+      activeFilters = activeFilters.split(',');
+      Object.keys(filters).forEach((key) => {
+        for (let i = activeFilters.length - 1; i >= 0; i--) {
+          if (filters[key][activeFilters[i]]) {
+            setDatasetFilter(key, activeFilters[i]);
+          }
+        }
+      });
+    }
+  }
+
   onClickTag(tag) {
     this.props.setDatasetFilter(this.state.filterSelected, tag);
     this.closeFilter();
@@ -50,18 +66,27 @@ class FilterTabs extends React.Component {
 
   render() {
     const filters = this.getFilters();
+    const filterChoosen = this.props.filtersChoosen;
+    const filtersCount = {
+      topics: filterChoosen['topics'] && filterChoosen['topics'].length ? filterChoosen['topics'].length : '',
+      spatialExtent: filterChoosen['spatialExtent'] && filterChoosen['spatialExtent'].length ? filterChoosen['spatialExtent'].length : '',
+      dataType: filterChoosen['dataType'] && filterChoosen['dataType'].length ? filterChoosen['dataType'].length : '',
+    };
 
     return (
       <div className="filters-tab">
         <ul className="filters-toolbar">
           <li>
             <Button themeColor click={() => this.openFilter('topics')}> Topics </Button>
+            <span>{filtersCount.topics}</span>
           </li>
           <li>
             <Button themeColor click={() => this.openFilter('spatialExtent')}> Spatial extent </Button>
+            <span>{filtersCount.spatialExtent}</span>
           </li>
           <li>
             <Button themeColor click={() => this.openFilter('dataType')}> Data type </Button>
+            <span>{filtersCount.dataType}</span>
           </li>
         </ul>
 
@@ -72,6 +97,10 @@ class FilterTabs extends React.Component {
     );
   }
 }
+
+FilterTabs.contextTypes = {
+  location: React.PropTypes.object
+};
 
 FilterTabs.propTypes = {
   setDatasetFilter: React.PropTypes.func.isRequired,

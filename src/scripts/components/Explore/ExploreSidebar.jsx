@@ -18,6 +18,7 @@ class DataMap extends React.Component {
     if (!this.props.data.length) {
       return <LoadingSpinner />;
     }
+
     const { filters, data } = this.props;
     let filtersFlatten = [];
     let filteredDatasets = [];
@@ -27,10 +28,14 @@ class DataMap extends React.Component {
       });
       if (filtersFlatten.length) {
         for (let i = data.length - 1; i >= 0; i--) {
+          let isInsideFilter = true;
           for (let j = filtersFlatten.length - 1; j >= 0; j--) {
             if (data[i].tags.indexOf(filtersFlatten[j]) === -1) {
+              isInsideFilter = false;
               break;
             }
+          }
+          if (isInsideFilter) {
             filteredDatasets.push(data[i]);
           }
         }
