@@ -4,6 +4,7 @@ import Article from '../Content/Article';
 import InsightsHome from './Articles/InsightsHome';
 import ExploreHome from './Articles/ExploreHome';
 import DashboardsHome from './Articles/DashboardsHome';
+import TwitterFeed from '../../containers/TwitterFeed';
 
 import ladyInLand from '../../../images/home/lady-in-land.jpg';
 import iceberg from '../../../images/home/iceberg.jpg';
@@ -51,6 +52,12 @@ class Home extends React.Component {
         </div>
 
         <img src={iceberg} />
+
+        <div className="row">
+          <div className="column small-12">
+            <TwitterFeed sliced />
+          </div>
+        </div>
 
         <Article grid={'small-12 medium-12'}>
           <InsightsHome />
