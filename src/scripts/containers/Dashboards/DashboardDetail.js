@@ -7,7 +7,7 @@ import { setModalUnderDevelop } from '../../actions/modal';
 const mapStateToProps = (state, { params }) => ({
   dashboardSlug: params.slug,
   dashboardTab: params.tab || 'indicators',
-  data: state.dashboards.detail[params.slug],
+  data: state.dashboards.widgets[params.slug],
   modalOpen: state.modal.underDevelop
 });
 

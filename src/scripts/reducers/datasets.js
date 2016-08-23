@@ -1,6 +1,7 @@
 import {
   DATASET_LIST_RECEIVED,
   DATASET_DETAIL_RECEIVED,
+  DATASET_WIDGET_RECEIVED,
   DATASET_LAYER_RECEIVED,
   DATASET_METADATA_RECEIVED,
   TOGGLE_LAYER_STATUS,
@@ -12,6 +13,7 @@ import {
 const initialState = {
   list: [],
   details: {},
+  widgets: {},
   layers: {},
   metadatas: {},
   filters: {}
@@ -22,10 +24,10 @@ export default function (state = initialState, action) {
     case DATASET_LIST_RECEIVED: {
       return Object.assign({}, state, { list: action.payload.data });
     }
-    case DATASET_DETAIL_RECEIVED: {
-      const details = Object.assign({}, state.details, {});
-      details[action.payload.data.attributes.datasetId] = action.payload.data;
-      return Object.assign({}, state, { details });
+    case DATASET_WIDGET_RECEIVED: {
+      const widgets = Object.assign({}, state.widgets, {});
+      widgets[action.payload.data.attributes.datasetId] = action.payload.data;
+      return Object.assign({}, state, { widgets });
     }
     case DATASET_LAYER_RECEIVED: {
       const layers = Object.assign({}, state.layers, {});

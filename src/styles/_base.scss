@@ -85,6 +85,12 @@ a {
     color: $inverse-link-font-color;
   }
 
+  .-inverse h1 &,
+  .-inverse h2 &,
+  .-inverse h3 & {
+    color: inherit;
+  }
+
   &:hover {
     text-decoration: underline;
   }
@@ -131,5 +137,9 @@ p {
 
   img {
     margin: $small-margin 0;
+  }
+
+  .-inverse & {
+    color: $inverse-font-color;
   }
 }

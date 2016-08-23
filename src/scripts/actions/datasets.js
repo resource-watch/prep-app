@@ -3,6 +3,7 @@ import {
   DATASET_LIST_RECEIVED,
   DATASET_FETCH_ERROR,
   DATASET_LAYER_FETCH_ERROR,
+  DATASET_WIDGET_RECEIVED,
   DATASET_DETAIL_RECEIVED,
   DATASET_METADATA_RECEIVED,
   DATASET_LAYER_RECEIVED,
@@ -88,6 +89,30 @@ export function getDatasets(defaultActiveLayers) {
   };
 }
 
+export function getDatasetById(datasetId) {
+  return dispatch => {
+    fetch(`${config.apiUrlRW}/datasets/${datasetId}`)
+      .then(response => {
+        if (response.ok) return response.json();
+        throw new Error(response.statusText);
+      })
+      .then(data => {
+        if (data.data) {
+          dispatch({
+            type: DATASET_DETAIL_RECEIVED,
+            payload: { data: data.data }
+          });
+        }
+      })
+      .catch((err) => {
+        dispatch({
+          type: DATASET_FETCH_ERROR,
+          payload: err.message
+        });
+      });
+  };
+}
+
 export function getDatasetDefaultWidget(datasetId) {
   return dispatch => {
     fetch(`${config.apiUrlRW}/widgets?app=prep&default=true&dataset=${datasetId}`)
@@ -104,7 +129,7 @@ export function getDatasetDefaultWidget(datasetId) {
           })
           .then(widget => {
             dispatch({
-              type: DATASET_DETAIL_RECEIVED,
+              type: DATASET_WIDGET_RECEIVED,
               payload: { data: widget.data }
             });
           });

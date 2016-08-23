@@ -13,6 +13,8 @@ import SectionIntro from '../SectionIntro';
 import DashboardDetailIndicators from './DashboardDetailIndicators';
 import DashboardDetailInsights from './DashboardDetailInsights';
 import DashboardDetailTools from './DashboardDetailTools';
+import RelatedDatasets from '../../containers/Dashboards/RelatedDatasets';
+import RelatedDashboards from './RelatedDashboards';
 import NavTab from './NavTab';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
@@ -125,10 +127,16 @@ class DashboardDetail extends React.Component {
         </header>
 
         <div className="l-main">
-
           {content}
-
         </div>
+
+        {this.props.data && this.props.data.related_datasets &&
+          <RelatedDatasets slugs={this.props.data.related_datasets} />
+        }
+
+        {this.props.data && this.props.data.dashboards &&
+          <RelatedDashboards data={this.props.data.dashboards} />
+        }
 
         <footer className="l-footer">
           <div className="l-footer-top -inverse">
