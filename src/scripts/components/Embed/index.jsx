@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import ChartCard from '../Cards/ChartCard';
+import EmbedCard from '../Cards/EmbedCard';
 
 
 class EmbedDetail extends React.Component {
@@ -12,31 +13,41 @@ class EmbedDetail extends React.Component {
   }
 
   getContent(data) {
-    let content = [];
-
-    if ( !data.widget_type || data.widget_type === 'Chart' ) {
+    if (data.widget_type && data.widget_type.name === 'Embed') {
       return (
-        <div className="columns small-12 medium-12">
-          <ChartCard
+        <div className="row large-12">
+          <EmbedCard
             tooltip
             title={data.title}
             subtitle={data.subtitle}
             data={data}
+            noBorder={true}
           />
         </div>
       );
     } else {
       return (
-        <div>Embed</div>
+        <div className="row">
+          <div className="columns small-12 medium-12">
+            <ChartCard
+              tooltip
+              title={ data.title }
+              subtitle={ data.subtitle}
+              data={data}
+              noBorder={true}
+            />
+          </div>
+        </div>
       );
     }
   }
 
   render() {
     const { data } = this.props;
+
     return (
       <div>
-        { data ? this.getContent(data) : ''}
+        { data && this.getContent(data) }
       </div>
     );
   }
