@@ -4,6 +4,7 @@ import LoadingSpinner from '../Loading/LoadingSpinner';
 class IFrame extends React.Component {
   constructor() {
     super();
+    this.allowGoInside = true;
     this.state = {
       loaded: false,
       height: 400
@@ -11,6 +12,7 @@ class IFrame extends React.Component {
   }
 
   componentDidMount() {
+    this.allowGoInside = this.props.src.indexOf('/proxy?url=') > -1;
     this.refs.iframe.addEventListener('load', () => this.onLoad());
   }
 
@@ -19,7 +21,10 @@ class IFrame extends React.Component {
   }
 
   onLoad() {
-    const height = this.refs.iframe.contentDocument.body.scrollHeight;
+    let height = this.props.src.indexOf('maps.arcgis.com') ? 650 : 400;
+    if (this.allowGoInside) {
+      height = this.refs.iframe.contentDocument.body.scrollHeight;
+    }
     this.setState({ loaded: true, height });
   }
 
