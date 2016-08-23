@@ -5,32 +5,33 @@ function DashboardDetailIndicators(props) {
   let content = [];
   if (props.data && props.data.widgets.length) {
     props.data.widgets.forEach((indicator, index) => {
-      // if (indicator.widget_type.name === 'chart') {
-      content.push(
-        <div className="columns small-12 medium-6" key={`indicator-${index}`}>
-          <ChartCard
-            tooltip
-            title={indicator.title}
-            subtitle={indicator.subtitle}
-            data={indicator}
-          />
-        </div>
-      );
-      // } else if (indicator.widget_type.name === 'map') {
-      //   content.push(
-      //     <div className="-large" key={`indicator-${index}`}>
-      //       <MapCard
-      //         title="Skagit River Near Mount Vernon"
-      //         data={indicator.data}
-      //       />
-      //     </div>
-      //   );
-      // }
+      if ( indicator.widget_type === 'Chart' || !indicator.widget_type ) {
+        content.push(
+          <div className="columns small-12 medium-6" key={`indicator-${index}`}>
+            <ChartCard
+              tooltip
+              title={indicator.title}
+              subtitle={indicator.subtitle}
+              data={indicator}
+            />
+          </div>
+        );
+      } else if ( indicator.widget_type === 'Embed' ) {
+        content.push(
+          <div className="-large" key={`indicator-${index}`}>
+           {/* <MapCard
+              title="Skagit River Near Mount Vernon"
+              data={indicator.data}
+            /> */}
+            {/* <EmbedCard />*/}
+          </div>
+        );
+      }
     });
   }
   return (
     <div className="row">
-      {content}
+      { content }
     </div>
   );
 }

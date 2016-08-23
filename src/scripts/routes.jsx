@@ -16,6 +16,8 @@ import Dashboards from './containers/Dashboards';
 import DashboardsDetail from './containers/Dashboards/DashboardDetail';
 import Insights from './containers/Insights';
 import InsightsDetail from './containers/Insights/InsightDetail';
+import Embed from './containers/Embed';
+
 
 function shouldUpdateScroll(prevRouterProps, { location }) {
   /**
@@ -108,6 +110,7 @@ function Routes(props) {
       <Route path="dashboard/:slug(/:tab)" component={DashboardsDetail} />
       <Route path="insight/:slug" component={InsightsDetail} />
       <Route path="dataset/:slug" component={DatasetDetail} />
+      <Route path="embed/:slug" component={Embed} />
     </Router>
   );
 }
