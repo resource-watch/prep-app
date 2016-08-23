@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import ExploreSidebar from '../../components/Explore/ExploreSidebar';
 
-import { switchChange, updateURL } from '../../actions/exploremap';
+import { switchChange } from '../../actions/exploremap';
+import { updateURL } from '../../actions/links';
 import { getDatasetLayer } from '../../actions/datasets';
 
 const mapStateToProps = (state) => ({

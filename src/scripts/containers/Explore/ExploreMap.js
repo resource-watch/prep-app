@@ -1,11 +1,8 @@
 import { connect } from 'react-redux';
 import ExploreMap from '../../components/Explore/ExploreMap';
 
-import {
-  updateMapParams,
-  updateURL,
-  setSwitchStatus
-} from '../../actions/exploremap';
+import { updateMapParams, setSwitchStatus } from '../../actions/exploremap';
+import { updateURL } from '../../actions/links';
 
 const mapStateToProps = (state) => ({
   data: state.datasets.list,

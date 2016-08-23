@@ -9,7 +9,7 @@ import {
   DATASET_SET_FILTER
 } from '../constants';
 
-import { updateURL } from './exploremap';
+import { updateURL } from './links';
 
 export function getDatasetLayer(dataset) {
   return dispatch => {
@@ -47,12 +47,10 @@ export function getActiveDatasetLayers(datasets) {
   };
 }
 
-export function setDatasetsTagFilter(tagName) {
+export function setDatasetsTagFilter(filter, tag) {
   return {
     type: DATASET_SET_FILTER,
-    payload: {
-      tag: tagName
-    }
+    payload: { filter, tag }
   };
 }
 
@@ -66,7 +64,7 @@ export function getDatasets(defaultActiveLayers) {
       .then(data => {
         const datasets = data || [];
         if (datasets.length) {
-          for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
+          for (let i = datasets.length - 1; i > 0; i--) {
             if (defaultActiveLayers) {
               datasets[i].active = (defaultActiveLayers.indexOf(datasets[i].id) > -1);
             }
