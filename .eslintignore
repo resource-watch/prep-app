@@ -1,3 +1,2 @@
 dist/**/*.js
-app/lib/**/*.js
-src/scripts/lib/**/*.js
+app/scripts/lib/**/*.js

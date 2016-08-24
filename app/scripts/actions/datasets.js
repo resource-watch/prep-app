@@ -100,7 +100,7 @@ export function getDatasetById(datasetId) {
         if (data) {
           dispatch({
             type: DATASET_DETAIL_RECEIVED,
-            payload: { data: data }
+            payload: { data }
           });
         }
       })
