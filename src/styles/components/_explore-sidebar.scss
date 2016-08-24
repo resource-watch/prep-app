@@ -108,7 +108,7 @@
         position: absolute;
         flex-direction: column;
         margin:  0;
-        padding-left: 2rem;
+        padding: $small-margin;
         top: 100%;
         left: 50%;
         margin-left: -175px;
@@ -132,7 +132,7 @@
         }
 
         > h3 {
-          margin-bottom: 0;
+          margin: 0;
           color: $inverse-font-color;
         }
 
@@ -151,7 +151,7 @@
 
         > .filters-list {
           flex-direction: column;
-          margin: .5rem 0;
+          margin: .5rem 0 0 0;
           padding: 0;
 
           > li {
