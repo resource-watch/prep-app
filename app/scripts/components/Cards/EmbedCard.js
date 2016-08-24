@@ -1,8 +1,8 @@
 import React from 'react';
 import ContentCard from './ContentCard';
-import VegaChart from '../Chart/VegaChart';
+import IFrame from '../IFrame';
 
-class ChartCard extends React.Component {
+class EmbedCard extends React.Component {
 
   setShareModal() {
     this.props.setShareModal(this.props.data.data_url, 'widget', this.props.data.slug);
@@ -21,15 +21,16 @@ class ChartCard extends React.Component {
         dataTooltip={this.props.tooltip && this.props.data}
         setShareModal={() => this.setShareModal()}
       >
-        {this.props.data && this.props.data.widget_config &&
-          <VegaChart data={this.props.data.widget_config} />
+        { this.props.data && this.props.data.data_url ?
+          <IFrame src={ this.props.data.data_url } /> :
+          <p style={{paddingLeft: '60px' }}>Data url not given.</p>
         }
       </ContentCard>
     );
   }
 }
 
-ChartCard.propTypes = {
+EmbedCard.propTypes = {
   /**
    * Define the card title
    */
@@ -56,4 +57,4 @@ ChartCard.propTypes = {
   setShareModal: React.PropTypes.func
 };
 
-export default ChartCard;
+export default EmbedCard;

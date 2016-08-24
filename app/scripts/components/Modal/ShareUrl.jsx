@@ -28,9 +28,13 @@ class ShareUrl extends React.Component {
   }
 
   render() {
-    const shortUrl = this.props.links[this.props.url]
+    let shortUrl = this.props.links[this.props.url]
       ? this.props.links[this.props.url]
       : false;
+    if ( this.props.iframe ) {
+      shortUrl = `<iframe src="${shortUrl}"></iframe>`;
+    }
+
     let content = !shortUrl
       ? <LoadingSpinner transparent />
       : <div className="url-container">
@@ -39,6 +43,7 @@ class ShareUrl extends React.Component {
           Copy
         </Button>
       </div>;
+
     return (
       <div className="c-share-url">
         {content}

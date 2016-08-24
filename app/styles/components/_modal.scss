@@ -28,6 +28,37 @@
       width: auto;
     }
 
+    > .c-nav-tab {
+
+      @media #{$mq-medium} {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        margin:0;
+        padding-left: 80px;
+        padding-right: 80px;
+      }
+
+      ul {
+        justify-content: center;
+
+        @media #{$mq-medium} {
+          justify-content: flex-start;
+        }
+      }
+
+      li {
+        cursor: pointer;
+        border-bottom: 3px solid transparent;
+
+        @media #{$mq-medium} {
+          margin-right: 80px;
+          &.-active { border-bottom: 3px solid #263e57; }
+        }
+      }
+    }
+
     &.share {
       width: auto;
       min-width: auto;
