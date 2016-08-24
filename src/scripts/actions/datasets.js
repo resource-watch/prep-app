@@ -91,16 +91,16 @@ export function getDatasets(defaultActiveLayers) {
 
 export function getDatasetById(datasetId) {
   return dispatch => {
-    fetch(`${config.apiUrlRW}/datasets/${datasetId}`)
+    fetch(`${config.apiUrlRW}/datasets/${datasetId}?app=prep`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
       })
       .then(data => {
-        if (data.data) {
+        if (data) {
           dispatch({
             type: DATASET_DETAIL_RECEIVED,
-            payload: { data: data.data }
+            payload: { data: data }
           });
         }
       })

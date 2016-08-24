@@ -9,17 +9,21 @@ class RelatedDatasets extends React.Component {
     }
   }
 
+
   render() {
-    const data = this.props.data;
+    const { data, metadata } = this.props;
     return (
       <div className="l-related-datasets">
         <div className="row">
-          <h2 className="-left"> Related datasets </h2>
+          <div className="columns small-12">
+            <h2 className="-left"> Related datasets </h2>
+          </div>
         </div>
         <div className="row">
           {this.props.slugs.map((item, index) => {
-            if (data[item]) {
-              const metadata = data[item].attributes.info.attributes;
+            if (data[item] && metadata[item]) {
+              const datasetData = data[item];
+              const datasetMetadata = metadata[item].attributes.info.attributes;
               return (
                 <div
                   className="columns small-12 medium-4 align-stretch"
@@ -28,15 +32,19 @@ class RelatedDatasets extends React.Component {
                 >
                   <div className="dataset">
                     <Link to={`/dataset/${item}`} className="title">
-                      {metadata.title}
+                      {datasetData.name}
                     </Link>
                     <div className="links">
-                      <a href="http://www.wri.org" rel="noreferrer" target="_blank">
-                        WRI
-                      </a>
-                      <a href="http://www.wri.org" rel="noreferrer" target="_blank">
-                        WRI
-                      </a>
+                      {datasetData.connector_url &&
+                        <a href={datasetData.connector_url} rel="noreferrer" target="_blank">
+                          {datasetData.provider}
+                        </a>
+                      }
+                      {datasetMetadata.source &&
+                        <a className="-ellipsis" href={datasetMetadata.source} rel="noreferrer" target="_blank">
+                          {datasetMetadata.organization}
+                        </a>
+                      }
                     </div>
                   </div>
                 </div>
@@ -51,8 +59,9 @@ class RelatedDatasets extends React.Component {
 }
 
 RelatedDatasets.propTypes = {
-  slugs: React.PropTypes.array,
+  slugs: React.PropTypes.array.isRequired,
   data: React.PropTypes.object,
+  metadata: React.PropTypes.object,
   getDatasetById: React.PropTypes.func.isRequired
 };
 

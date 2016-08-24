@@ -13,12 +13,24 @@ $rel-datasets-bg-color: $alternative-bg-color;
     }
 
     > .links {
+      display: flex;
+      align-items: center;
+
       a {
         position: relative;
         display: inline-block;
         margin-right: 13px;
         font-weight: bold;
         cursor: pointer;
+        text-transform: uppercase;
+
+        &.-ellipsis {
+          max-width: 300px;
+          overflow: hidden;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
 
         &:after {
           content: '';

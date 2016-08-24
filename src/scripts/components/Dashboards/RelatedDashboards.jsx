@@ -6,7 +6,9 @@ function RelatedDasboards(props) {
   return (
     <div className="l-related-dashboards -inverse">
       <div className="row">
-        <h2 className="-left"> Other dashboards </h2>
+        <div className="columns small-12">
+          <h2 className="-left"> Other dashboards </h2>
+        </div>
       </div>
       <div className="row">
         {props.data.map((item, index) => {
