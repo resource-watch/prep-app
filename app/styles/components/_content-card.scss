@@ -1,0 +1,48 @@
+.c-content-card {
+  flex: 1;
+  margin: $medium-margin 0;
+  position: relative;
+  border: solid 2px $border-color;
+  transition: box-shadow .3s ease-out, border-color .3s ease-out;
+
+  &.-no-border {
+    border: none;
+  }
+
+  &:not(&.-no-border):hover {
+    border-color: transparent;
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  > .header {
+    padding: 0 1rem;
+
+    > .legend {
+      font-size: $small-font-size;
+      font-weight: 700;
+      line-height: 1.8;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      color: $secondary-color;
+
+      .-theme-2 & { color: $thirth-color; }
+      .-theme-3 & { color: $fourth-color; }
+    }
+
+    > .title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      widows: 100%;
+
+      > .card-options {
+      }
+    }
+
+    >.tooltip {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+  }
+}

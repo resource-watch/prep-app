@@ -1,0 +1,11 @@
+$rel-dashboards-bg-color: $dark-slate-blue-2;
+$rel-dashboards-border-color: $dark-slate-blue;
+
+.l-related-dashboards {
+  background-color: $rel-dashboards-bg-color;
+  padding: $medium-margin 0;
+
+  .c-card {
+    margin: 0 0 $medium-margin;
+  }
+}

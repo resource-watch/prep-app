@@ -1,0 +1,55 @@
+$rel-datasets-bg-color: $alternative-bg-color;
+
+.l-related-datasets {
+  background-color: $rel-datasets-bg-color;
+  padding: $medium-margin 0;
+
+  .dataset {
+    margin-bottom: 25px;
+
+    > .title {
+      color: $base-font-color;
+      cursor: pointer;
+    }
+
+    > .links {
+      display: flex;
+      align-items: center;
+
+      a {
+        position: relative;
+        display: inline-block;
+        margin-right: 13px;
+        font-weight: bold;
+        cursor: pointer;
+        text-transform: uppercase;
+
+        &.-ellipsis {
+          max-width: 300px;
+          overflow: hidden;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        &:after {
+          content: '';
+          display: block;
+          position: absolute;
+          top: 50%;
+          right: -7px;
+          height: 60%;
+          width: 1px;
+          background-color: $link-font-color;
+          cursor: default;
+          transform: translateY(-50%);
+        }
+
+        &:last-of-type {
+          margin-right: 0;
+          &:after { content: none; }
+        }
+      }
+    }
+  }
+}
