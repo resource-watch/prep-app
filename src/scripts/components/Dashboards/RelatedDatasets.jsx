@@ -11,6 +11,8 @@ class RelatedDatasets extends React.Component {
 
 
   render() {
+    if (!this.props.slugs.length) return null;
+
     const { data, metadata } = this.props;
     return (
       <div className="l-related-datasets">
