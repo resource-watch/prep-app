@@ -48,7 +48,6 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, { list });
     }
     case DATASET_SET_FILTER: {
-
       // update the filters object
       const list = state.list.slice(0);
       const filtersChoosen = Object.assign({}, state.filters);
