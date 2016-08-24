@@ -1,7 +1,6 @@
 import 'whatwg-fetch';
 import {
   WIDGET_FETCH_ERROR,
-  WIDGET_LIST_RECEIVED,
   WIDGET_DETAIL_RECEIVED
 } from '../constants';
 
