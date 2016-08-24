@@ -55,7 +55,7 @@ class FilterTabs extends React.Component {
       layers.push((
         <li key={`filter-tag-${index}`} onClick={() => this.onClickTag(key)}>
           <span className={filterChoosen && filterChoosen.indexOf(key) > -1 ? 'checkbox -selected' : 'checkbox'}>
-            <svg width="13" height="9" viewBox="0 0 13 9" xmlns="http://www.w3.org/2000/svg"><title>Selected</title><path d="M5.744 6.997l6.514-5.465L10.972 0 4.46 5.464 1.176 3.078 0 4.696l4.854 3.527.89-1.226z" fill="#FFF" fillRule="evenodd"/></svg>
+            <svg width="13" height="9" viewBox="0 0 13 9"><title>Selected</title><path d="M5.744 6.997l6.514-5.465L10.972 0 4.46 5.464 1.176 3.078 0 4.696l4.854 3.527.89-1.226z" fill="#FFF" fillRule="evenodd"/></svg>
           </span>
           <span>{filters[key]}</span>
         </li>
