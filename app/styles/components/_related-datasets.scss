@@ -1,0 +1,64 @@
+.c-related-datasets {
+  padding: 30px 0 25px 0;
+  background-color: $color-9;
+
+  @media #{$mq-tablet} {
+    padding: 50px 0 75px 0;
+  }
+
+  .datasets {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 25px 0 0 0;
+  }
+
+  .dataset {
+    flex-basis: calc(100%);
+    margin-bottom: 25px;
+
+    @media #{$mq-medium} {
+      flex-basis: calc(50% - 25px);
+    }
+
+    @media #{$mq-medium} {
+      flex-basis: calc(30% - 25px);
+    }
+
+    > .title a {
+      color: $color-1;
+      letter-spacing: .3px;
+      line-height: 18px;
+    }
+
+    > .links {
+      a {
+        position: relative;
+        display: inline-block;
+        margin-right: 13px;
+        font-weight: bold;
+        color: rgba($color-1, .5);
+        cursor: pointer;
+
+        &:after {
+          content: '';
+          display: block;
+          position: absolute;
+          top: 50%;
+          right: -7px;
+          height: 60%;
+          width: 1px;
+          background-color: rgba($color-1, .5);
+          cursor: default;
+          transform: translateY(-50%);
+        }
+
+        &:last-of-type {
+          margin-right: 0;
+          &:after { content: none; }
+        }
+      }
+    }
+  }
+}

@@ -10,7 +10,7 @@ const rootPath = process.cwd();
 const webpackConfig = {
 
   entry: [
-    path.join(rootPath, 'src/scripts/index.jsx')
+    path.join(rootPath, 'app/scripts/index.jsx')
   ],
 
   output: {
@@ -21,7 +21,7 @@ const webpackConfig = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'src/index.html',
+      template: 'app/index.html',
       inject: 'body',
       filename: 'index.html'
     }),
