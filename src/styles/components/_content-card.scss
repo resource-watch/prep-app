@@ -28,6 +28,16 @@
       .-theme-3 & { color: $fourth-color; }
     }
 
+    > .title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      widows: 100%;
+
+      > .card-options {
+      }
+    }
+
     >.tooltip {
       position: absolute;
       top: 20px;

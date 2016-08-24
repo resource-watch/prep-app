@@ -2,24 +2,32 @@ import React from 'react';
 import ContentCard from './ContentCard';
 import IFrame from '../IFrame';
 
-function EmbedCard(props) {
-  const header = {
-    title: props.title,
-    subtitle: props.subtitle
-  };
+class EmbedCard extends React.Component {
 
-  return (
-    <ContentCard
-      noBorder={props.noBorder}
-      header={header}
-      dataTooltip={props.tooltip && props.data}
-    >
-      { props.data && props.data.data_url ?
-        <IFrame src={ props.data.data_url } /> :
-        <p style={{paddingLeft: '60px' }}>Data url not given.</p>
-      }
-    </ContentCard>
-  );
+  setShareModal() {
+    this.props.setShareModal(this.props.data.data_url, 'widget', this.props.data.slug);
+  }
+
+  render() {
+    const header = {
+      title: this.props.title,
+      subtitle: this.props.subtitle
+    };
+
+    return (
+      <ContentCard
+        noBorder={this.props.noBorder}
+        header={header}
+        dataTooltip={this.props.tooltip && this.props.data}
+        setShareModal={() => this.setShareModal()}
+      >
+        { this.props.data && this.props.data.data_url ?
+          <IFrame src={ this.props.data.data_url } /> :
+          <p style={{paddingLeft: '60px' }}>Data url not given.</p>
+        }
+      </ContentCard>
+    );
+  }
 }
 
 EmbedCard.propTypes = {
@@ -42,7 +50,11 @@ EmbedCard.propTypes = {
   /**
    * Define layers data to the map
    */
-  data: React.PropTypes.any.isRequired
+  data: React.PropTypes.any.isRequired,
+  /**
+   * Set share modal state
+   */
+  setShareModal: React.PropTypes.func
 };
 
 export default EmbedCard;
