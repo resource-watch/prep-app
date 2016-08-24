@@ -12,6 +12,7 @@ class DashboardDetailIndicators extends React.Component {
       shareTitle: '',
       widgetSlug: ''
     };
+    this.setShareModal = this.setShareModal.bind(this);
   }
 
   setShareModal(url, section, widgetSlug) {
@@ -19,7 +20,7 @@ class DashboardDetailIndicators extends React.Component {
       modalShare: true,
       shareUrl: url,
       shareTitle: `Share this ${section}`,
-      widgetSlug: widgetSlug
+      widgetSlug
     });
   }
 
@@ -27,27 +28,27 @@ class DashboardDetailIndicators extends React.Component {
     let content = [];
     if (this.props.data && this.props.data.widgets.length) {
       this.props.data.widgets.forEach((indicator, index) => {
-        if ( indicator.widget_type && indicator.widget_type.name === 'Embed' ) {
+        if (indicator.widget_type && indicator.widget_type.name === 'Embed') {
           content.push(
-            <div className="large-12" key={`indicator-${index}`} style={{display: 'flex'}}>
-             <EmbedCard
-              tooltip
-              title={indicator.title}
-              subtitle={indicator.subtitle}
-              data={indicator}
-              setShareModal={(url, section, widgetSlug) => this.setShareModal(url, section, widgetSlug)}
-            />
+            <div className="large-12" key={`indicator-${index}`} style={{ display: 'flex' }}>
+              <EmbedCard
+                tooltip
+                title={indicator.title}
+                subtitle={indicator.subtitle}
+                data={indicator}
+                setShareModal={this.setShareModal}
+              />
             </div>
           );
         } else {
           content.push(
-            <div className="columns small-12 medium-6" key={`indicator-${index}`} style={{display: 'flex'}}>
+            <div className="columns small-12 medium-6" key={`indicator-${index}`} style={{ display: 'flex' }}>
               <ChartCard
                 tooltip
                 title={indicator.title}
                 subtitle={indicator.subtitle}
                 data={indicator}
-                setShareModal={(url, section, widgetSlug) => this.setShareModal(url, section, widgetSlug)}
+                setShareModal={this.setShareModal}
               />
             </div>
           );
@@ -57,7 +58,7 @@ class DashboardDetailIndicators extends React.Component {
 
     return (
       <div className="row align-stretch">
-        { content }
+        {content}
 
         <ShareModal
           title={this.state.shareTitle}
