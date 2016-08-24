@@ -69,6 +69,7 @@ class DatasetDetail extends React.Component {
     const title = data ? data.title : currentData.title;
 
     document.title = title;
+
     let content = this.getContent();
 
     return (
