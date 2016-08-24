@@ -15,6 +15,9 @@ function DashboardDetailInsights(props) {
         <p>
           {card.summary}
         </p>
+        <p>
+          {card.attribution}
+        </p>
 
         {card.partner &&
           <a target="_blank" href={card.partner.href}>
