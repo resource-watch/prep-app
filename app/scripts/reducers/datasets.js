@@ -77,11 +77,15 @@ export default function (state = initialState, action) {
         });
         if (filtersFlatten.length) {
           for (let i = list.length - 1; i >= 0; i--) {
+            let isOutsideFilter = true;
             for (let j = filtersFlatten.length - 1; j >= 0; j--) {
-              if (list[i].tags.indexOf(filtersFlatten[j]) === -1 && list[i].active === true) {
-                list[i].active = false;
+              if (list[i].tags.indexOf(filtersFlatten[j]) > -1) {
+                isOutsideFilter = false;
                 break;
               }
+            }
+            if (isOutsideFilter && list[i].active === true) {
+              list[i].active = false;
             }
           }
         }
