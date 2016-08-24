@@ -17,6 +17,9 @@ function DashboardDetailTools(props) {
             <p>
               {card.summary}
             </p>
+            <p>
+              {card.attribution}
+            </p>
 
             <a target="_blank" href={card.url}>
               Read more
