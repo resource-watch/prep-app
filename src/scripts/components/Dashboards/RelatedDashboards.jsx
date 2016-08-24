@@ -3,6 +3,8 @@ import { Link } from 'react-router';
 import Card from '../Cards/Card';
 
 function RelatedDasboards(props) {
+  if (!props.data.length) return null;
+
   return (
     <div className="l-related-dashboards -inverse">
       <div className="row">
