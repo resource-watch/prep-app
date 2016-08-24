@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 import Card from '../Cards/Card';
-import Button from '../Button/Button';
-import Modal from '../Modal/Modal';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
 class DashboardsPage extends React.Component {
