@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
 const Bitly = require('bitly');
+const Twitter = require('twitter');
 
 const rootPath = path.join(process.cwd());
 
@@ -41,6 +42,26 @@ app.get('/short', (req, res) => {
     }, (error) => {
       throw error;
     });
+});
+
+// Twitter feed
+const twitterClient = new Twitter({
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+});
+
+app.get('/api/twitter', (req, res) => {
+  const urlPath = 'statuses/user_timeline';
+  const params = { screen_name: process.env.TWITTER_USER, count: 10 };
+  twitterClient.get(urlPath, params, (err, timeline) => {
+    if (err) {
+      res.json({ error: err });
+    } else {
+      res.json(timeline);
+    }
+  });
 });
 
 // Load environment config

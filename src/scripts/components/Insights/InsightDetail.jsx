@@ -43,6 +43,10 @@ class DashboardDetail extends React.Component {
     if (!this.props.data) {
       return <LoadingSpinner />;
     }
+    const contentUrl = this.props.data.content_url;
+    let iframeUrl = contentUrl.indexOf('github.io') > -1
+      ? `/proxy?url=${contentUrl}`
+      : contentUrl;
 
     return (
       <div>
@@ -57,7 +61,7 @@ class DashboardDetail extends React.Component {
 
         <div className="row">
           <div className="columns small-12">
-            <IFrame src={`/proxy?url=${this.props.data.content_url}`} />
+            <IFrame src={iframeUrl} />
           </div>
         </div>
       </div>

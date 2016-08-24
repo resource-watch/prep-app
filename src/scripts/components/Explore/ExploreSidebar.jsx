@@ -18,21 +18,35 @@ class DataMap extends React.Component {
     if (!this.props.data.length) {
       return <LoadingSpinner />;
     }
-    const datasets = this.props.data;
 
+    const { filters, data } = this.props;
+    let filtersFlatten = [];
     let filteredDatasets = [];
-    if (this.props.filters.tag) {
-      for (var i = datasets.length - 1; i >= 0; i--) {
-        if (datasets[i].tags.indexOf(this.props.filters.tag) > -1) {
-          filteredDatasets.push(datasets[i]);
+    if (Object.keys(filters).length > 0) {
+      Object.keys(filters).forEach((key) => {
+        filtersFlatten = filtersFlatten.concat(filters[key]);
+      });
+      if (filtersFlatten.length) {
+        for (let i = data.length - 1; i >= 0; i--) {
+          let isInsideFilter = true;
+          for (let j = filtersFlatten.length - 1; j >= 0; j--) {
+            if (data[i].tags.indexOf(filtersFlatten[j]) === -1) {
+              isInsideFilter = false;
+              break;
+            }
+          }
+          if (isInsideFilter) {
+            filteredDatasets.push(data[i]);
+          }
         }
+      } else {
+        filteredDatasets = data;
       }
     } else {
-      filteredDatasets = datasets;
+      filteredDatasets = data;
     }
 
     const layers = filteredDatasets.map((dataset, index) => {
-
       let layerIcon = (
         <div className="detail-space"></div>
       );
@@ -40,14 +54,12 @@ class DataMap extends React.Component {
       let datasetIcon = null;
 
       const subtitle = dataset.metadata && dataset.metadata.length ?
-        dataset.metadata[0].info.attributes.subtitle : "";
+        dataset.metadata[0].info.attributes.subtitle : '';
 
       const partner = dataset.metadata && dataset.metadata.length ?
-        (
-          <span>
-            from <strong>{dataset.metadata[0].info.attributes.organization}</strong>
-          </span>
-        ) : "";
+        (<span>
+          from <strong>{dataset.metadata[0].info.attributes.organization}</strong>
+        </span>) : '';
 
       if (dataset.layers && dataset.layers.length) {
         layerIcon = (
@@ -75,7 +87,6 @@ class DataMap extends React.Component {
           {datasetIcon}
         </div>
       );
-
     });
 
     return layers;
@@ -129,7 +140,11 @@ DataMap.propTypes = {
   /**
   * Define the layers on change switch function
   */
-  switchChange: React.PropTypes.func.isRequired
+  switchChange: React.PropTypes.func.isRequired,
+  /**
+  * Define the dataset filters choosen
+  */
+  filters: React.PropTypes.object
 };
 
 export default DataMap;
