@@ -5,7 +5,7 @@ import { getWidgetBySlug } from '../../actions/widgets';
 
 const mapStateToProps = (state, { params }) => ({
   slug: params.slug,
-  data: state.embed[params.slug]
+  data: state.widgets[params.slug]
 });
 
 const mapDispatchToProps = (dispatch) => ({

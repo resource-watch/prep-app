@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import Article from '../Content/Article';
 import InsightsHome from './Articles/InsightsHome';
 import ExploreHome from './Articles/ExploreHome';
-import DashboardsHome from './Articles/DashboardsHome';
+import DashboardsHome from '../../containers/Home/DashboardsHome';
 import TwitterFeed from '../../containers/TwitterFeed';
 
 import ladyInLand from '../../../images/home/lady-in-land.jpg';

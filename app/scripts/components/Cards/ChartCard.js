@@ -11,11 +11,15 @@ class ChartCard extends React.Component {
   render() {
     const header = {
       title: this.props.title,
-      subtitle: this.props.subtitle
+      subtitle: this.props.subtitle,
+      legend: this.props.legend
     };
 
     return (
       <ContentCard
+        size={this.props.size}
+        background={this.props.background}
+        share={this.props.setShareModal ? true : false}
         noBorder={this.props.noBorder}
         header={header}
         dataTooltip={this.props.tooltip && this.props.data}

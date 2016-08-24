@@ -1,9 +1,22 @@
+$content-header-height: 80px;
+
 .c-content-card {
   flex: 1;
+  min-height: 500px;
   margin: $medium-margin 0;
   position: relative;
   border: solid 2px $border-color;
   transition: box-shadow .3s ease-out, border-color .3s ease-out;
+
+  &.-short {
+    height: 350px;
+    min-height: 0;
+  }
+
+  &.-large {
+    height: 650px;
+    min-height: 0;
+  }
 
   &.-no-border {
     border: none;
@@ -14,10 +27,29 @@
     box-shadow: 0 7px 15px rgba(0, 0, 0, 0.15);
   }
 
-  > .header {
-    padding: 0 1rem;
+  &.-bg {
+    border: none;
+    background-color: $secondary-color;
+    > .header .legend {
+      color: $inverse-font-color;
+    }
+  }
 
-    > .legend {
+  > .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    height: $content-header-height;
+
+    > .title {
+      overflow: hidden;
+      h3 {
+        white-space: nowrap;
+      }
+    }
+
+    .legend {
       font-size: $small-font-size;
       font-weight: 700;
       line-height: 1.8;
@@ -27,22 +59,14 @@
 
       .-theme-2 & { color: $thirth-color; }
       .-theme-3 & { color: $fourth-color; }
-    }
 
-    > .title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      widows: 100%;
-
-      > .card-options {
+      & + h3 {
+        margin: 0 0 5px;
       }
     }
+  }
 
-    >.tooltip {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-    }
+  > .content {
+    height: calc(100% - #{$content-header-height});
   }
 }

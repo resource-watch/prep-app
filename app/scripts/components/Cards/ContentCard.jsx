@@ -3,8 +3,15 @@ import Button from '../Button/Button';
 
 
 function ContentCard(props) {
-  let legend;
+  const classNames = ['c-content-card'];
+  if (props.noBorder) classNames.push('-no-border');
+  if (props.background) classNames.push('-bg');
+  if (props.size) {
+    if (props.size === 'large') classNames.push('-large');
+    if (props.size === 'short') classNames.push('-short');
+  }
 
+  let legend;
   if (props.header.legend) {
     legend = <span className="legend">{props.header.legend}</span>;
   }
@@ -14,12 +21,17 @@ function ContentCard(props) {
     subtitle = <span className="legend">{props.header.subtitle}</span>;
   }
 
+
   return (
-    <div className={['c-content-card', props.noBorder ? '-no-border' : ''].join(' ')}>
+    <div className={classNames.join(' ')}>
       <div className="header">
-        {legend}
-        <h3 className="title"><span>{props.header.title}</span>
-          <div className="card-options">
+        <div className="title">
+          {legend}
+          <h3>{props.header.title}</h3>
+          <span>{subtitle}</span>
+        </div>
+        <div className="card-options">
+          {props.share &&
             <Button action click={() => props.setShareModal()}>
               <svg className="icon" width="10" height="12" viewBox="0 0 10 12">
                 <title>icon-share</title>
@@ -27,10 +39,9 @@ function ContentCard(props) {
                   <path d="M6.45 1l1.414 1.414-4.95 4.95L1.5 5.95zM0 10h10v2H0z" /><path d="M9 1V0H2v2h5v5h2V1z" />
                 </g>
               </svg>
-           </Button>
-          </div>
-        </h3>
-        {subtitle}
+            </Button>
+          }
+        </div>
       </div>
       <div className="content">
         {props.children}
@@ -50,6 +61,15 @@ ContentCard.propTypes = {
    *  }
    */
   header: React.PropTypes.object.isRequired,
+  /**
+   * Define it the card size
+   * accepted: short or large
+   */
+  size: React.PropTypes.string,
+  /**
+   * Define it the card has background
+   */
+  background: React.PropTypes.bool,
   /**
    * Define it the card has border
    */

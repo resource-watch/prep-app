@@ -1,4 +1,25 @@
 /* Grid override */
 .row {
   max-width: rem($max-width);
+
+  &.-float {
+    display: block;
+    &:before,
+    &:after {
+      content: "";
+      display: table;
+    }
+
+    &:after {
+      clear: both;
+    }
+
+    & {
+      zoom: 1; /* ie 6/7 */
+    }
+    .column {
+      width: 100%;
+      float: left;
+    }
+  }
 }
