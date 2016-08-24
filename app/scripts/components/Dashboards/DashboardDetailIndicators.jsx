@@ -29,7 +29,7 @@ function DashboardDetailIndicators(props) {
     });
   }
   return (
-    <div className="row">
+    <div className="row align-stretch">
       {content}
     </div>
   );
