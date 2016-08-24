@@ -4,7 +4,8 @@ import Card from '../Cards/Card';
 
 function DashboardDetailInsights(props) {
   const content = props.data.map((card, index) => (
-    <div className="columns small-12 medium-6" key={`insight-card-${index}`}>
+    <div className="columns small-12 medium-6"
+      key={`insight-card-${index}`} style={{display: 'flex'}}>
       <Card border="neutral">
         <h3>
           <Link to={`/insight/${card.slug}`}>
@@ -29,7 +30,7 @@ function DashboardDetailInsights(props) {
   ));
 
   return (
-    <div className="row">
+    <div className="row align-stretch">
       {content}
     </div>
   );

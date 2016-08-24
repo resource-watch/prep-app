@@ -6,7 +6,8 @@ function DashboardDetailTools(props) {
   if (props.data) {
     props.data.forEach((card, index) => {
       content.push(
-        <div className="columns small-12 medium-6" key={`tool-card-${index}`}>
+        <div className="columns small-12 medium-6"
+          key={`tool-card-${index}`} style={{display: 'flex'}}>
           <Card border="neutral">
             <h3>
               <a target="_blank" href={card.url}>
@@ -26,7 +27,7 @@ function DashboardDetailTools(props) {
     });
   }
   return (
-    <div className="row">
+    <div className="row align-stretch">
       {content}
     </div>
   );

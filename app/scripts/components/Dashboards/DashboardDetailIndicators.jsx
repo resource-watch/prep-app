@@ -7,7 +7,11 @@ function DashboardDetailIndicators(props) {
     props.data.widgets.forEach((indicator, index) => {
       // if (indicator.widget_type.name === 'chart') {
       content.push(
-        <div className="columns small-12 medium-6" key={`indicator-${index}`}>
+        <div
+          className="columns small-12 medium-6"
+          key={`indicator-${index}`}
+          style={{display: 'flex'}}
+        >
           <ChartCard
             tooltip
             title={indicator.title}
