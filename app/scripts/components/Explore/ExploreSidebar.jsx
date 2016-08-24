@@ -28,15 +28,11 @@ class DataMap extends React.Component {
       });
       if (filtersFlatten.length) {
         for (let i = data.length - 1; i >= 0; i--) {
-          let isInsideFilter = true;
           for (let j = filtersFlatten.length - 1; j >= 0; j--) {
-            if (data[i].tags.indexOf(filtersFlatten[j]) === -1) {
-              isInsideFilter = false;
+            if (data[i].tags.indexOf(filtersFlatten[j]) > -1) {
+              filteredDatasets.push(data[i]);
               break;
             }
-          }
-          if (isInsideFilter) {
-            filteredDatasets.push(data[i]);
           }
         }
       } else {
