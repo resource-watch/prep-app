@@ -114,7 +114,6 @@ export function getDatasetById(datasetId) {
 }
 
 export function getDatasetDefaultWidget(datasetId) {
-  console.log('fired',datasetId);
   return dispatch => {
     fetch(`${config.apiUrlRW}/widgets?app=prep&default=true&dataset=${datasetId}`)
       .then(response => {
@@ -122,7 +121,6 @@ export function getDatasetDefaultWidget(datasetId) {
         throw new Error(response.statusText);
       })
       .then(data => {
-        console.log('data',data);
         if (data.data.length) {
           fetch(`${config.apiUrlRW}/widgets/${data.data[0].id}`)
           .then(response => {
