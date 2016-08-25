@@ -9,10 +9,12 @@ export function getTwitterFeed() {
         throw new Error(response.statusText);
       })
       .then(data => {
-        dispatch({
-          type: TWITTER_FEED_LIST_RECEIVED,
-          payload: { data }
-        });
+        if (!data.error) {
+          dispatch({
+            type: TWITTER_FEED_LIST_RECEIVED,
+            payload: { data }
+          });
+        }
       })
       .catch((err) => {
         dispatch({

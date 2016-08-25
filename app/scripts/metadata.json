@@ -6,7 +6,12 @@
     "metaDescription": "",
     "title": "Enabling collective action to manage climate risks",
     "bannerSize": "big",
-    "bg": "home"
+    "bg": "home",
+    "widgets": [
+      { "slug":"projected-changes-in-streamflow-rain-dominant", "category":"water"},
+      { "slug":"number-of-3-day-flow-events-in-the-russian-river-watershed", "category":"water"},
+      { "slug":"precipitation-change", "category":"forest"}
+    ]
   },
   {
     "name": "partnership",

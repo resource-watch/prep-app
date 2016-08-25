@@ -20,13 +20,18 @@ class TwitterFeed extends React.Component {
   }
 
   render() {
-    const tweets = this.props.data.map(tweet => {
-      return (
-        <div className="tweet-item" key={tweet.id}>
-          <p>{tweet.text}</p>
-        </div>
-      );
-    });
+    let tweets;
+    if (this.props.data.length) {
+      tweets = this.props.data.map(tweet => {
+        return (
+          <div className="tweet-item" key={tweet.id}>
+            <p>{tweet.text}</p>
+          </div>
+        );
+      });
+    } else {
+      tweets = (<div className="tweet-item" key={'no-tweets'}></div>);
+    }
     return (
       <div className={`c-twitter-feed ${this.props.sliced && '-sliced'}`}>
         <div className="twitter-icon">
@@ -39,7 +44,11 @@ class TwitterFeed extends React.Component {
       </div>
     );
   }
-
 }
+
+TwitterFeed.propTypes = {
+  data: React.PropTypes.array,
+  getTwitterFeed: React.PropTypes.func.isRequired
+};
 
 export default TwitterFeed;

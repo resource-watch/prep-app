@@ -6,3 +6,4 @@ export { default as links } from './links';
 export { default as dashboards } from './dashboards';
 export { default as insights } from './insights';
 export { default as twitterFeed } from './twitter';
+export { default as widgets } from './wigets';

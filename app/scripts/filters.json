@@ -1,0 +1,37 @@
+{
+  "filtersNames": {
+    "topics": "topics",
+    "geography": "geography",
+    "dataType": "data type"
+  },
+  "filters": {
+    "topics":
+      {
+        "arctic": "Arctic",
+        "coast": "Coast",
+        "flooding": "Flooding",
+        "ecosystems": "Ecosystems",
+        "energy": "Energy",
+        "foodResilience": "Food Resilience",
+        "health": "Health",
+        "transportation": "Transportation",
+        "tribalNations": "Tribal Nations",
+        "water": "Water",
+        "weaderClimate": "Weather/Climate",
+        "builtEnvironment": "Built Environment",
+        "oceans": "Oceans"
+      },
+    "geography":
+      {
+        "global": "Global",
+        "national": "National",
+        "local": "Local"
+      },
+    "dataType":
+      {
+        "modeledHistorical":"Modeled - historical",
+        "modeledProjections":"Modeled - projections",
+        "observed": "Observed"
+      }
+  }
+}
