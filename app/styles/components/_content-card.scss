@@ -8,7 +8,11 @@ $content-header-height: 80px;
 
   border: solid 2px $border-color;
 
-  transition: box-shadow .3s ease-out, border-color .3s ease-out;
+  transition: all .3s ease-out;
+
+  &:hover {
+    box-shadow: 0 7px 15px 0 rgba(0, 0, 0, 0.15);
+  }
 
   &.-short {
     > .content {
