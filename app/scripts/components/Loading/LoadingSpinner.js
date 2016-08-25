@@ -3,6 +3,7 @@ import React from 'react';
 function LoadingSpinner(props) {
   const classNames = ['c-loading-spinner'];
   if (props.transparent) classNames.push('-transparent');
+  if (props.inner) classNames.push('-inner');
 
   return (
     <div className={classNames.join(' ')}>
@@ -22,7 +23,9 @@ function LoadingSpinner(props) {
 
 LoadingSpinner.propTypes = {
   // Set the loading background transparent
-  transparent: React.PropTypes.bool
+  transparent: React.PropTypes.bool,
+  // Set the loading spinner inside a box
+  inner: React.PropTypes.bool
 };
 
 export default LoadingSpinner;

@@ -31,14 +31,15 @@ class ShareUrl extends React.Component {
     let shortUrl = this.props.links[this.props.url]
       ? this.props.links[this.props.url]
       : false;
-    if ( this.props.iframe ) {
+
+    if (this.props.iframe) {
       shortUrl = `<iframe src="${shortUrl}"></iframe>`;
     }
 
     let content = !shortUrl
-      ? <LoadingSpinner transparent />
+      ? <LoadingSpinner transparent inner />
       : <div className="url-container">
-        <input ref="url" defaultValue={shortUrl} className="url" readOnly />
+        <input ref="url" value={shortUrl} className="url" readOnly />
         <Button click={() => this.onCopyClick()} fill border>
           Copy
         </Button>
@@ -61,6 +62,10 @@ ShareUrl.propTypes = {
    * Urls to generate
    */
   url: React.PropTypes.string,
+  /**
+   * Set if the url will be inside a iframe
+   */
+  iframe: React.PropTypes.bool,
   /**
    * Short urls generated
    */
