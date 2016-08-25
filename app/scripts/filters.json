@@ -12,13 +12,13 @@
         "flooding": "Flooding",
         "ecosystems": "Ecosystems",
         "energy": "Energy",
-        "foodResilience": "Food Resilience",
+        "food-resilience": "Food Resilience",
         "health": "Health",
         "transportation": "Transportation",
-        "tribalNations": "Tribal Nations",
+        "tribal-nations": "Tribal Nations",
         "water": "Water",
-        "weatherClimate": "Weather/Climate",
-        "builtEnvironment": "Built Environment",
+        "weather-climate": "Weather/Climate",
+        "built-environment": "Built Environment",
         "oceans": "Oceans"
       },
     "geography":
@@ -29,8 +29,8 @@
       },
     "dataType":
       {
-        "modeledHistorical":"Modeled - historical",
-        "modeledProjections":"Modeled - projections",
+        "modeled-historical":"Modeled - historical",
+        "modeled-projections":"Modeled - projections",
         "observed": "Observed"
       }
   }
