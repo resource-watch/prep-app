@@ -1,127 +1,112 @@
 .c-explore-legend {
   position: absolute;
-  left: 0;
-  bottom: 0;
-  right: 0;
+  left: auto;
+  right: 10px;
+  bottom: 10px;
   background-color: rgba($navy, 0.8);
   z-index: 1;
-  transform: translateY(100%);
+  min-width: 600px;
+  transform: translateY(calc(100% + -40px));
   transition: transform 0.3s ease-out;
 
-  @media #{$mq-medium} {
-    left: auto;
-    right: 10px;
-    bottom: 10px;
-    min-width: 400px;
-    transform: translateY(calc(100% + 10px));
-  }
-
-  > .actions {
-    position: absolute;
-    top: -30px;
-    right: 0;
-    > div {
-      display: block;
+  > .action-container {
+    text-align: right;
+    > .help {
+      color: $inverse-font-color;
+      text-transform: uppercase;
+    }
+    > .action {
+      display: inline-block;
       width: 30px;
       height: 30px;
-      padding: 0;
-      background-color: rgba($navy, 0.9);
-      border: none;
-      outline: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      >.toggle-status {
-        @include hamburger-icon(10px, 2px, 2px, 1px, $base-bg-color, $thirth-color);
-      }
-    }
-  }
-
-  .layer{
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: .5rem 0;
-    justify-content: center;
-    border-bottom: 1px solid $main-color;
-    &:last-of-type {
-      border-bottom: none;
-    }
-    @media #{$mq-medium} {
-      flex-wrap: nowrap;
-    }
-    &:last-of-type {
-      margin: 0;
-    }
-    > .title {
-      flex-grow: 1;
-      flex-basis: 100%;
-      order: 0;
       color: $inverse-font-color;
-      text-align: center;
-      font-size: $small-font-size;
-      font-weight: 700;
-      text-transform: uppercase;
-      margin: 0 0 rem(3) 0;
-      @media #{$mq-medium} {
-        margin: 0 rem(10) rem(3) 0;
-        flex-basis: auto;
-        order: 1;
-        text-align: left;
-      }
     }
-    > .legend {
-      flex-grow: 0;
-      flex-basis: rem(50);
-      order: 1;
-      height: 10px;
-      background: linear-gradient(to right, #00009C , #0046FF , #00FFFF , #0CFFCD , #68FF8A , #FEFF00 , #FF8F00 , #FF0000 , #800000);
-      margin-right: .5rem;
-      @media #{$mq-medium} {
-        order: 0;
-      }
+    > .open {
+
     }
-    > .actions {
-      display: flex;
-      order: 3;
-      >.icon {
-        width: 21px;
-        height: 21px;
-        margin-right: rem(4);
-        border: 1px solid rgba($inverse-font-color, 0.2);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        > svg {
-          fill: $inverse-font-color;
-        }
-        &.-info {
-          font-family: $header-font-family;
-          font-size: $small-font-size;
-          font-weight: 700;
-          color: $inverse-font-color;
-        }
-        &:hover {
-          background-color: $inverse-font-color;
-          border-color: $inverse-font-color;
-          color: $base-font-color;
-          > svg {
-            fill: $base-font-color;
-          }
-        }
-      }
+    > .close {
+      display: none;
+      position: absolute;
+      top: -30px;
+      right: 0;
+      padding: 0;
+      background-color: rgba($navy, 0.8);
     }
   }
 
   &.-open {
     transform: translateY(0);
+
+    > .action-container  {
+      > .help, > .open {
+        display: none;
+      }
+      > .close {
+        display: block;
+      }
+    }
   }
 
   &.-empty {
     transform: translateY(calc(100% + 40px));
+  }
+}
+
+.legend-layer{
+  padding: .5rem 0;
+  border-bottom: 1px solid $main-color;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  .handler {
+    cursor: row-resize;
+  }
+
+  .title {
+    color: $inverse-font-color;
+    font-size: $small-font-size;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .legend {
+    display: block;
+    height: 10px;
+    background: linear-gradient(to right, #00009C , #0046FF , #00FFFF , #0CFFCD , #68FF8A , #FEFF00 , #FF8F00 , #FF0000 , #800000);
+  }
+
+  .layer-actions {
+    display: flex;
+    align-items: center;
+    >.icon {
+      width: 21px;
+      height: 21px;
+      margin-right: .5rem;
+      border: 1px solid rgba($inverse-font-color, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      > svg {
+        fill: $inverse-font-color;
+      }
+      &.-info {
+        font-family: $header-font-family;
+        font-size: $small-font-size;
+        font-weight: 700;
+        color: $inverse-font-color;
+      }
+      &:hover {
+        background-color: $inverse-font-color;
+        border-color: $inverse-font-color;
+        color: $base-font-color;
+        > svg {
+          fill: $base-font-color;
+        }
+      }
+    }
   }
 }
