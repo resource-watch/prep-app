@@ -1,7 +1,7 @@
 $content-header-height: 80px;
 
 .c-content-card {
-  flex: 1;
+  width: 100%;
   min-height: 500px;
   margin: $medium-margin 0;
   position: relative;
@@ -11,6 +11,13 @@ $content-header-height: 80px;
   &.-short {
     height: 350px;
     min-height: 0;
+    > .header > .title {
+      overflow: hidden;
+      margin-right: .5rem;
+      h3 {
+        white-space: nowrap;
+      }
+    }
   }
 
   &.-large {
@@ -41,13 +48,6 @@ $content-header-height: 80px;
     justify-content: space-between;
     padding: 0 1rem;
     height: $content-header-height;
-
-    > .title {
-      overflow: hidden;
-      h3 {
-        white-space: nowrap;
-      }
-    }
 
     .legend {
       font-size: $small-font-size;
