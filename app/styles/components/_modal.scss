@@ -18,7 +18,6 @@
 
   > .c-modal {
     position: relative;
-    // padding: $small-margin;
     background-color:$base-bg-color;
     width: 100%;
     max-width: rem($max-width);
@@ -35,11 +34,6 @@
     > .c-nav-tab {
 
       @media #{$mq-medium} {
-        // position: absolute;
-        width: 100%;
-        top: 0;
-        left: 0;
-        margin:0;
         padding-left: 80px;
         padding-right: 80px;
       }
