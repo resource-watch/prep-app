@@ -17,6 +17,7 @@ class EmbedCard extends React.Component {
     return (
       <ContentCard
         header={header}
+        autoHeight={this.props.autoHeight}
         attribution={this.props.data.attribution}
         noBorder={this.props.noBorder}
         dataTooltip={this.props.tooltip && this.props.data}

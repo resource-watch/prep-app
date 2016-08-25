@@ -5,6 +5,7 @@ import Button from '../Button/Button';
 function ContentCard(props) {
   const classNames = ['c-content-card'];
   if (props.noBorder) classNames.push('-no-border');
+  if (props.autoHeight) classNames.push('-auto-height');
   if (props.background) classNames.push('-bg');
   if (props.size) {
     if (props.size === 'large') classNames.push('-large');

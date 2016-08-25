@@ -28,11 +28,12 @@ class DashboardDetailIndicators extends React.Component {
     let content = [];
     if (this.props.data && this.props.data.widgets.length) {
       this.props.data.widgets.forEach((indicator, index) => {
-        if (indicator.widget_type && indicator.widget_type.name === 'Embed') {
+        if (indicator.widget_type_id && indicator.widget_type_id === 2) {
           content.push(
             <div className="large-12" key={`indicator-${index}`} style={{ display: 'flex' }}>
               <EmbedCard
                 tooltip
+                autoHeight
                 title={indicator.title}
                 subtitle={indicator.subtitle}
                 data={indicator}
