@@ -85,6 +85,9 @@
 
         background-color: $secondary-color;
 
+        .-theme-2 & { background-color: $thirth-color; }
+        .-theme-3 & { background-color: $fourth-color; }
+
         content: "";
       }
 

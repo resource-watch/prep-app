@@ -52,6 +52,9 @@ class DashboardsPage extends React.Component {
                 />
               </a>
             }
+            {item.attribution &&
+              <span className="attribution">{item.attribution}</span>
+            }
           </Card>
         </div>
       );

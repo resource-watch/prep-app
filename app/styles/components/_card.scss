@@ -20,6 +20,30 @@
     line-height: 28px;
   }
 
+  > .attribution {
+    display: block;
+    position: relative;
+    margin-top: 1.5rem;
+    color: rgba($main-color, 0.7);
+    font-size: $small-font-size;
+    line-height: 1.6;
+
+    &:before {
+      content: "";
+      position: absolute;
+      display: block;
+      top: -.5rem;
+      left: 0;
+      width: 50px;
+      height: 1px;
+
+      background-color: $secondary-color;
+
+      .-theme-2 & { background-color: $thirth-color; }
+      .-theme-3 & { background-color: $fourth-color; }
+    }
+  }
+
   > .link {
     display: block;
     margin-bottom: 1rem;
