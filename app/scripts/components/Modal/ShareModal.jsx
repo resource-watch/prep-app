@@ -13,6 +13,7 @@ class ShareModal extends React.Component {
   getContent() {
     const tab = this.state.tab;
     const url = this.props.widgetSlug ? `${window.location.origin}/embed/${this.props.widgetSlug}` : this.props.url;
+    const openEmbed = this.props.widgetSlug ? [<a href={`/embed/${this.props.widgetSlug}`} key="1" className="openEmbed" target="_blank">OPEN IN A NEW WINDOW</a>] : [];
 
     return (
       <div className="embed-content">
@@ -24,9 +25,7 @@ class ShareModal extends React.Component {
         </p>
         <ShareUrl url={url} iframe={tab === 'embed'} />
           {tab === 'embed' ?
-            // TODO: know where it should go
-            // <a href={`/embed/${this.props.widgetSlug}`} target="_blank">OPEN IN A NEW WINDOW</a> :
-            '':
+            openEmbed :
             (<div className="media">
               <a href={`http://www.facebook.com/sharer/sharer.php?u=${window.location.href}`} target="_blank">
                 <svg width="8.4" height="19" viewBox="0 0 8 16"><title>facebook</title><path d="M7.172 5.18H4.728V3.52c0-.623.403-.767.679-.767h1.727V.011L4.76 0C2.124 0 1.523 2.047 1.523 3.354v1.827H0v2.825h1.523V16h3.205V8.006h2.163l.281-2.825" fillRule="evenodd"></path></svg></a>
@@ -41,21 +40,19 @@ class ShareModal extends React.Component {
 
   navbar() {
     return (
-      <div className="row c-nav-tab">
-        <div className="columns small-12">
+      <div className="c-nav-tab">
           <ul>
             <li
               className={this.state.tab === 'link' ? '-active' : ''}
               onClick={ () => this.setState({ tab: 'link' }) }>
-                Link
+                <span className="link">Link</span>
             </li>
             <li
               className={this.state.tab === 'embed' ? '-active' : ''}
               onClick={ () => this.setState({ tab: 'embed' }) }>
-                Embed
+                <span className="link">Embed</span>
             </li>
           </ul>
-        </div>
       </div>
     );
   }
@@ -91,7 +88,7 @@ ShareModal.propTypes = {
   /**
    * Define the url to share
    */
-  url: React.PropTypes.string.isRequired,
+  url: React.PropTypes.string,
   /**
    * Define the share modal function to close the modal
    */
