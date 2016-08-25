@@ -66,7 +66,7 @@ class DashboardDetailIndicators extends React.Component {
           url={this.state.shareUrl}
           opened={this.state.modalShare}
           close={() => this.setState({ modalShare: false })}
-          slug={this.state.widgetSlug}
+          widgetSlug={this.state.widgetSlug}
         />
       </div>
     );

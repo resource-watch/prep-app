@@ -71,7 +71,6 @@ class DatasetDetail extends React.Component {
     document.title = title;
 
     const content = this.getContent();
-    console.log(currentData);
 
     return (
       <div className="-theme-2">

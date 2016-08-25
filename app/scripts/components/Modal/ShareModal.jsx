@@ -12,6 +12,7 @@ class ShareModal extends React.Component {
 
   getContent() {
     const tab = this.state.tab;
+    const url = this.props.widgetSlug ? `${window.location.origin}/embed/${this.props.widgetSlug}` : this.props.url;
 
     return (
       <div className="embed-content">
@@ -21,10 +22,10 @@ class ShareModal extends React.Component {
             'You may include this content on your webpage. To do this, copy the following html code and insert it into the source code of your page:' :
             'Click and paste link in email or IM'}
         </p>
-        <ShareUrl url={this.props.url} iframe={tab === 'embed'} />
+        <ShareUrl url={url} iframe={tab === 'embed'} />
           {tab === 'embed' ?
             // TODO: know where it should go
-            // <a href={`/embed/${this.props.slug}`} target="_blank">OPEN IN A NEW WINDOW</a> :
+            // <a href={`/embed/${this.props.widgetSlug}`} target="_blank">OPEN IN A NEW WINDOW</a> :
             '':
             (<div className="media">
               <a href={`http://www.facebook.com/sharer/sharer.php?u=${window.location.href}`} target="_blank">
