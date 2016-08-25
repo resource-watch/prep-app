@@ -11,6 +11,10 @@
     background-color: transparent;
   }
 
+  &.-inner {
+    position: absolute;
+  }
+
   > svg {
     position: absolute;
     top: 50%;
