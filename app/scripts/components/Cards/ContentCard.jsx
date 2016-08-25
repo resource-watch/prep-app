@@ -21,7 +21,6 @@ function ContentCard(props) {
     subtitle = <span className="legend">{props.header.subtitle}</span>;
   }
 
-
   return (
     <div className={classNames.join(' ')}>
       <div className="header">
@@ -46,6 +45,11 @@ function ContentCard(props) {
       <div className="content">
         {props.children}
       </div>
+      {props.attribution &&
+        <div className="attribution">
+          <span>{props.attribution}</span>
+        </div>
+      }
     </div>
   );
 }
@@ -61,6 +65,10 @@ ContentCard.propTypes = {
    *  }
    */
   header: React.PropTypes.object.isRequired,
+  /**
+   * Define the text below the card
+   */
+  attribution: React.PropTypes.string,
   /**
    * Define it the card size
    * accepted: short or large

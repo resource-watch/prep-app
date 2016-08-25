@@ -16,14 +16,15 @@ class EmbedCard extends React.Component {
 
     return (
       <ContentCard
-        noBorder={this.props.noBorder}
         header={header}
+        attribution={this.props.data.attribution}
+        noBorder={this.props.noBorder}
         dataTooltip={this.props.tooltip && this.props.data}
         setShareModal={() => this.setShareModal()}
       >
-        { this.props.data && this.props.data.data_url ?
-          <IFrame src={ this.props.data.data_url } /> :
-          <p style={{paddingLeft: '60px' }}>Data url not given.</p>
+        {this.props.data && this.props.data.data_url ?
+          <IFrame src={this.props.data.data_url} /> :
+          <p style={{ paddingLeft: '60px' }}>Data url not given.</p>
         }
       </ContentCard>
     );
