@@ -64,8 +64,8 @@
     "metaTitle": "Dataset",
     "metaDescription": "",
     "title": "Dataset",
-    "bannerSize": "small",
-    "bannerBg": "explore"
+    "bannerSize": "medium",
+    "bannerBg": "datasets"
   },
   {
     "name": "about",

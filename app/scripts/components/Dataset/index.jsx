@@ -70,7 +70,8 @@ class DatasetDetail extends React.Component {
 
     document.title = title;
 
-    let content = this.getContent();
+    const content = this.getContent();
+    console.log(currentData);
 
     return (
       <div className="-theme-2">
