@@ -1,28 +1,25 @@
 $content-header-height: 80px;
 
 .c-content-card {
-  width: 100%;
-  min-height: 500px;
-  margin: $medium-margin 0;
   position: relative;
+  width: 100%;
+  margin: $medium-margin 0;
+  padding: $small-margin;
+
   border: solid 2px $border-color;
+
   transition: box-shadow .3s ease-out, border-color .3s ease-out;
 
   &.-short {
-    height: 350px;
-    min-height: 0;
-    > .header > .title {
-      overflow: hidden;
-      margin-right: .5rem;
-      h3 {
-        white-space: nowrap;
-      }
+    > .content {
+      height: 280px;
     }
   }
 
   &.-large {
-    height: 650px;
-    min-height: 0;
+    > .content {
+      height: 480px;
+    }
   }
 
   &.-no-border {
@@ -46,8 +43,17 @@ $content-header-height: 80px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 1rem;
-    height: $content-header-height;
+    align-items: flex-start;
+
+    > .title {
+      h3 {
+        margin-top: 0;
+      }
+    }
+
+    > .card-options {
+      margin: 0.5rem 0;
+    }
 
     .legend {
       font-size: $small-font-size;
@@ -59,14 +65,14 @@ $content-header-height: 80px;
 
       .-theme-2 & { color: $thirth-color; }
       .-theme-3 & { color: $fourth-color; }
-
-      & + h3 {
-        margin: 0 0 5px;
-      }
     }
   }
 
   > .content {
-    height: calc(100% - #{$content-header-height});
+    height: 460px;
+  }
+
+  .c-vega-chart {
+    min-height: 0;
   }
 }
