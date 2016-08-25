@@ -17,7 +17,8 @@ const bg = {
   partnershipEngagement: partnershipEngagementBg,
   partnershipPlatforms: partnershipPlatformsBg,
   insights: insightsBg,
-  insight: insightsBg
+  insight: insightsBg,
+  datasets: homepageBg
 };
 
 class Banner extends React.Component {
