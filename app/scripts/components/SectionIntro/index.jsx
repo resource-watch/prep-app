@@ -7,15 +7,19 @@ function SectionIntro(props) {
       <div className="top-bar">
         {props.data.partner &&
           <div className="row">
-            <div className="logo">
-              <img
-                src={config.apiUrl + props.data.partner.white_logo_medium}
-                alt={props.data.partner.name}
-              />
+            <div className="column small-6">
+              <div className="logo">
+                <img
+                  src={config.apiUrl + props.data.partner.white_logo_medium}
+                  alt={props.data.partner.name}
+                />
+              </div>
             </div>
-            <div className="author">
-              {props.data.partner.contact_name}
-              <span>{props.data.partner.contact_email}</span>
+            <div className="column small-6">
+              <div className="author">
+                {props.data.partner.contact_name}
+                <span>{props.data.partner.contact_email}</span>
+              </div>
             </div>
           </div>
         }
