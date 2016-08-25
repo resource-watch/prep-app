@@ -28,9 +28,9 @@ class DashboardsHome extends React.Component {
             <p>Dashboards are a collection of data, insight and tools that users compile to support their climate resilience and preparedness planning. View some of the dashboards that others have create, or create your own to track to key issues in your area.</p>
           </div>
         </div>
-        <div className="row -float">
+        <div className="row">
           {this.widget1 && this.widget1.widget_config &&
-            <div className="column small-12 medium-8">
+            <div className="column small-12">
               <ChartCard
                 size="large"
                 title={this.widget1.title}
@@ -39,10 +39,11 @@ class DashboardsHome extends React.Component {
               />
             </div>
           }
+        </div>
+        <div className="row align-stretch">
           {this.widget2 && this.widget2.widget_config &&
-            <div className="column small-12 medium-4">
+            <div className="column small-12 medium-6" style={{display: 'flex'}}>
               <ChartCard
-                size="short"
                 title={this.widget2.title}
                 legend={metadata[0].widgets[1].category}
                 data={this.widget2}
@@ -50,9 +51,8 @@ class DashboardsHome extends React.Component {
             </div>
           }
           {this.widget3 && this.widget3.widget_config &&
-            <div className="column small-12 medium-4">
+            <div className="column small-12 medium-6" style={{display: 'flex'}}>
               <ChartCard
-                size="short"
                 background
                 title={this.widget3.title}
                 legend={metadata[0].widgets[2].category}
