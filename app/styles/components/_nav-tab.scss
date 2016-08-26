@@ -12,7 +12,7 @@
     align-items: center;
 
     @media #{$mq-medium} {
-      height: rem(60px);
+      height: rem(60);
       flex-direction: row;
     }
 
