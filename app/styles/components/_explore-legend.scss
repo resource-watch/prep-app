@@ -5,24 +5,32 @@
   bottom: 10px;
   background-color: rgba($navy, 0.8);
   z-index: 1;
-  min-width: 600px;
-  transform: translateY(calc(100% + -40px));
-  transition: transform 0.3s ease-out;
+  width: 500px;
+  transform: translateY(calc(100% - 40px));
+
+  color: $inverse-font-color;
+  font-size: $small-font-size;
+  font-weight: 700;
+  text-transform: uppercase;
 
   > .action-container {
-    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     > .help {
-      color: $inverse-font-color;
-      text-transform: uppercase;
+      margin-right: 1rem;
     }
     > .action {
-      display: inline-block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 30px;
       height: 30px;
+      cursor: pointer;
       color: $inverse-font-color;
-    }
-    > .open {
-
+      > svg {
+        fill: $inverse-font-color;
+      }
     }
     > .close {
       display: none;
@@ -35,14 +43,15 @@
   }
 
   &.-open {
-    transform: translateY(0);
+    transform: translateY(-10px);
+    transition: transform 0.3s ease-out;
 
     > .action-container  {
       > .help, > .open {
         display: none;
       }
       > .close {
-        display: block;
+        display: flex;
       }
     }
   }
@@ -53,7 +62,7 @@
 }
 
 .legend-layer{
-  padding: .5rem 0;
+  padding: .5rem 0 .5rem .5rem;
   border-bottom: 1px solid $main-color;
 
   &:last-of-type {
@@ -61,14 +70,13 @@
   }
 
   .handler {
+    display: flex;
     cursor: row-resize;
-  }
-
-  .title {
-    color: $inverse-font-color;
-    font-size: $small-font-size;
-    font-weight: 700;
-    text-transform: uppercase;
+    position: absolute;
+    left: .5rem;
+    > svg {
+      fill: rgba($inverse-font-color, .4)
+    }
   }
 
   .legend {
@@ -87,6 +95,7 @@
       border: 1px solid rgba($inverse-font-color, 0.2);
       border-radius: 50%;
       display: flex;
+      flex-shrink: 0;
       align-items: center;
       justify-content: center;
       cursor: pointer;
@@ -95,9 +104,7 @@
       }
       &.-info {
         font-family: $header-font-family;
-        font-size: $small-font-size;
-        font-weight: 700;
-        color: $inverse-font-color;
+        text-transform: none;
       }
       &:hover {
         background-color: $inverse-font-color;

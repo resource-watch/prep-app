@@ -2,15 +2,13 @@ import React from 'react';
 import { Link } from 'react-router';
 import { SortableContainer, SortableElement, SortableHandle, arrayMove } from 'react-sortable-hoc';
 
-const DragHandle = SortableHandle(() => <span className="handler">🔝</span>);
+const DragHandle = SortableHandle(() => <span className="handler"><svg width="6" height="18" viewBox="0 0 6 18"><title>Drag and drop</title><path d="M1 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-4 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-8a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fillRule="evenodd"/></svg></span>);
 
 const SortableItem = SortableElement(({layer, index, onInfoClick}) => {
   return (
-    <div className="legend-layer row" key={`map-layer-${index}`}>
-      <div className="column small-1">
-        <DragHandle />
-      </div>
-      <div className="column small-2 align-self-middle">
+    <div className="legend-layer row align-middle" key={`map-layer-${index}`}>
+      <DragHandle />
+      <div className="column small-3">
         <span className="legend"></span>
       </div>
       <div className="column small-7">
@@ -82,10 +80,14 @@ class DataMapLegend extends React.Component {
 
     return (
       <div className={legendClassNames.join(' ')}>
-        <div className={['action-container', this.state.legendOpen ? '-open' : ''].join(' ')}>
+        <div className="action-container">
           <span className="help">View legend</span>
-          <span className="action open" onClick={() => this.toggleToolbarStatus()}>^</span>
-          <span className="action close" onClick={() => this.toggleToolbarStatus()}>X</span>
+          <span className="action open" onClick={() => this.toggleToolbarStatus()}>
+            <svg width="10" height="7" viewBox="0 0 10 7"><title>Open</title><path d="M5.657.707L4.95 0 0 4.95l1.414 1.414L4.95 2.828l3.535 3.536L9.9 4.95 5.657.707z" fillRule="evenodd"/></svg>
+          </span>
+          <span className="action close" onClick={() => this.toggleToolbarStatus()}>
+            <svg width="9" height="9" viewBox="0 0 9 9"><title>Close</title><path d="M4.5 3l-3-3L0 1.5l3 3-3 3L1.5 9l3-3 3 3L9 7.5l-3-3 3-3L7.5 0l-3 3z" fillRule="evenodd"/></svg>
+          </span>
         </div>
 
         {content}
