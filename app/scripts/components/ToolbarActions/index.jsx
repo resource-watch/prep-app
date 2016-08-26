@@ -41,12 +41,6 @@ class ToolbarActions extends React.Component {
             </button>
           }
 
-          {this.props.currentSection === 'insights' &&
-            <button className="action" onClick={() => this.setShareModal(this.props.insightUrl, 'embed')}>
-              <svg className="icon" width="10" height="12" viewBox="0 0 10 12"><title>Embed</title><path d="M0 10h10v2H0v-2zM0 0h10v8H0V0zm2 2h6v4H2V2z" fillRule="evenodd" /></svg>
-              Embed
-            </button>
-          }
           <button className="action" onClick={() => this.setShareModal(window.location.href, 'page')}>
             <svg className="icon" width="10" height="12" viewBox="0 0 10 12"><title>icon-share</title><g fill="none" fillRule="evenodd"><path d="M6.45 1l1.414 1.414-4.95 4.95L1.5 5.95zM0 10h10v2H0z" /><path d="M9 1V0H2v2h5v5h2V1z" /></g></svg>
             Share

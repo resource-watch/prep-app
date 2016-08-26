@@ -18,7 +18,6 @@
 
   > .c-modal {
     position: relative;
-    padding: $small-margin;
     background-color:$base-bg-color;
     width: 100%;
     max-width: rem($max-width);
@@ -28,16 +27,19 @@
       width: auto;
     }
 
+    .m-content {
+      padding: $small-margin;
+    }
+
     > .c-nav-tab {
 
       @media #{$mq-medium} {
-        position: absolute;
-        width: 100%;
-        top: 0;
-        left: 0;
-        margin:0;
         padding-left: 80px;
         padding-right: 80px;
+      }
+
+      .columns {
+        padding: 0;
       }
 
       ul {
@@ -49,12 +51,8 @@
       }
 
       li {
-        cursor: pointer;
-        border-bottom: 3px solid transparent;
-
         @media #{$mq-medium} {
           margin-right: 80px;
-          &.-active { border-bottom: 3px solid #263e57; }
         }
       }
     }
@@ -62,13 +60,20 @@
     &.share {
       width: auto;
       min-width: auto;
+
       @media #{$mq-medium} {
-        padding: $medium-margin $large-margin;
         width: rem(620);
+        & .m-content {
+          padding: $medium-margin $large-margin;
+        }
       }
 
       .c-share-url {
         margin: $small-margin 0 1rem;
+      }
+
+      .openEmbed {
+        margin-top: rem(35);
       }
     }
 
