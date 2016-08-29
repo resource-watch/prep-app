@@ -8,11 +8,6 @@
   width: 500px;
   transform: translateY(calc(100% - 40px));
 
-  color: $inverse-font-color;
-  font-size: $small-font-size;
-  font-weight: 700;
-  text-transform: uppercase;
-
   > .action-container {
     display: flex;
     align-items: center;
@@ -64,6 +59,13 @@
 .legend-layer{
   padding: .5rem 0 .5rem .5rem;
   border-bottom: 1px solid $main-color;
+
+  color: $inverse-font-color;
+  font-size: $small-font-size;
+  font-weight: 700;
+  text-transform: uppercase;
+
+  z-index: 1;
 
   &:last-of-type {
     border-bottom: none;
