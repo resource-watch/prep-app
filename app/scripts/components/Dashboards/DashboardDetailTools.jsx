@@ -3,7 +3,7 @@ import Card from '../Cards/Card';
 
 function DashboardDetailTools(props) {
   let content = [];
-  if (props.data) {
+  if (props.data.length) {
     props.data.forEach((card, index) => {
       content.push(
         <div
@@ -28,7 +28,10 @@ function DashboardDetailTools(props) {
         </div>
       );
     });
+  } else {
+    content = (<div className="column small-12"><p>There is no tools associated with that dashboard yet</p></div>);
   }
+
   return (
     <div className="row align-stretch">
       {content}
