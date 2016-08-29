@@ -165,11 +165,12 @@ export function getDatasetMetadata(datasetId) {
           dispatch({
             type: DATASET_METADATA_RECEIVED,
             payload: {
+              id: datasetId,
               attributes: {
                 dataset: datasetId,
                 info: {
                   attributes: {
-                    title: 'Contact us',
+                    title: 'Dataset detail',
                     error: 'There was an error getting the metadata info, ' +
                     'please contact us hello@vizzuality.com'
                   }

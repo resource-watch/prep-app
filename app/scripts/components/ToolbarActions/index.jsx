@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import Modal from '../Modal/Modal';
 import ShareModal from '../Modal/ShareModal';
 
 class ToolbarActions extends React.Component {
@@ -9,7 +8,6 @@ class ToolbarActions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalDevelop: false,
       modalShare: false,
       shareUrl: '',
       shareTitle: ''
@@ -34,27 +32,17 @@ class ToolbarActions extends React.Component {
           </Link>
         </div>
         <div className="right">
-          {this.props.currentSection === 'explore' &&
-            <button className="action" onClick={() => this.setState({ modalDevelop: true })}>
-              <svg className="icon" width="10" height="12" viewBox="0 0 10 12"><title>icon download</title><g fill="none" fillRule="evenodd"><path d="M4 0h2v7H4zM0 10h10v2H0z" /><path d="M4.243 8.192l.707.707L9.9 3.95 8.484 2.537 4.95 6.07 1.414 2.536 0 3.95l4.243 4.242z" /></g></svg>
+          {this.props.currentSection === 'explore' && this.props.downloadUrl &&
+            <a href={this.props.downloadUrl} target="_blank" className="c-button -action">
+              <svg className="icon" width="10" height="12" viewBox="0 0 10 12"><title>Download</title><g fill="none" fillRule="evenodd"><path d="M4 0h2v7H4zM0 10h10v2H0z" /><path d="M4.243 8.192l.707.707L9.9 3.95 8.484 2.537 4.95 6.07 1.414 2.536 0 3.95l4.243 4.242z" /></g></svg>
               Download
-            </button>
+            </a>
           }
 
           <button className="action" onClick={() => this.setShareModal(window.location.href, 'page')}>
             <svg className="icon" width="10" height="12" viewBox="0 0 10 12"><title>icon-share</title><g fill="none" fillRule="evenodd"><path d="M6.45 1l1.414 1.414-4.95 4.95L1.5 5.95zM0 10h10v2H0z" /><path d="M9 1V0H2v2h5v5h2V1z" /></g></svg>
             Share
           </button>
-
-          <Modal
-            opened={this.state.modalDevelop}
-            close={() => this.setState({ modalDevelop: false })}
-          >
-            <div className="content">
-              The website is under development. Download
-              details will be added here.
-            </div>
-          </Modal>
 
           <ShareModal
             title={this.state.shareTitle}

@@ -44,6 +44,19 @@
     }
   }
 
+  &.-icon {
+    width: 22px;
+    height: 22px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid $border-color;
+    border-radius: 50%;
+    justify-content: center;
+    > .icon {
+      margin: 0;
+    }
+  }
+
   &.-border {
     border: 2px solid $secondary-color;
     &.-fill { background-color: $secondary-color; }

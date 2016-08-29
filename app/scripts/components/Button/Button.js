@@ -9,6 +9,7 @@ function Button(props) {
   if (props.border === 'neutral') classes.push('-border-neutral');
   if (props.fill) classes.push('-fill');
   if (props.action) classes.push('-action');
+  if (props.icon) classes.push('-icon');
 
   return (
     <button
@@ -49,6 +50,10 @@ Button.propTypes = {
    * TODO: write doc for that
    */
   action: React.PropTypes.any,
+  /**
+   * Set styles for circle icon button
+   */
+  icon: React.PropTypes.bool,
   /**
    * Define the filling of the button
    * Accepted values:

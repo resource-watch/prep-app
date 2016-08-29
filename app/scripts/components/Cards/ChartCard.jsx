@@ -14,10 +14,12 @@ class ChartCard extends React.Component {
       subtitle: this.props.subtitle,
       legend: this.props.legend
     };
+    const downloadUrl = this.props.data.data_url.replace('query', 'download') || false;
 
     return (
       <ContentCard
         header={header}
+        downloadUrl={downloadUrl}
         attribution={this.props.data.attribution}
         size={this.props.size}
         noBorder={this.props.noBorder}
