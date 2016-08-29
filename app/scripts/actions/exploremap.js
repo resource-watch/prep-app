@@ -1,7 +1,8 @@
 import {
   MAP_DATA_CHANGED,
   TOGGLE_LAYER_STATUS,
-  SET_LAYER_STATUS
+  SET_LAYER_STATUS,
+  MAP_LAYERS_ORDER_CHANGED
 } from '../constants';
 
 export function updateMapParams(params) {
@@ -22,5 +23,12 @@ export function setSwitchStatus(id, status) {
   return {
     type: SET_LAYER_STATUS,
     payload: { id, status }
+  };
+}
+
+export function setLayersOrder(layers) {
+  return {
+    type: MAP_LAYERS_ORDER_CHANGED,
+    payload: layers
   };
 }

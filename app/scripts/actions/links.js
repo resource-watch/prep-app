@@ -3,6 +3,12 @@ import { LINK_SHORTEN_RECEIVE, LINK_SHORTEN_ERROR } from '../constants';
 
 import { push } from 'react-router-redux';
 
+function sortArrayByIndex(a, b) {
+  if (a.index < b.index) return -1;
+  if (a.index > b.index) return 1;
+  return 0;
+}
+
 export function updateURL() {
   return (dispatch, state) => {
     const params = state().exploremap;
@@ -18,6 +24,7 @@ export function updateURL() {
     const url = `${params.latLng.lat}/${params.latLng.lng}/${params.zoom}`;
     let query = '';
     if (activeDatasets.length) {
+      activeDatasets.sort(sortArrayByIndex);
       query = '?activeDatasets=';
 
       activeDatasets.forEach((layer, index) => {

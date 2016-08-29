@@ -67,7 +67,11 @@ export function getDatasets(defaultActiveLayers) {
         if (datasets.length) {
           for (let i = datasets.length - 1; i > 0; i--) {
             if (defaultActiveLayers) {
-              datasets[i].active = (defaultActiveLayers.indexOf(datasets[i].id) > -1);
+              const index = defaultActiveLayers.indexOf(datasets[i].id);
+              if (index > -1) {
+                datasets[i].active = true;
+                datasets[i].index = index + 1;
+              }
             }
           }
         }

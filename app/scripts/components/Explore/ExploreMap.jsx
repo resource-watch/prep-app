@@ -90,6 +90,10 @@ class ExploreMap extends React.Component {
     return this.mapLayers[dataset.layers[0].layer_id] || false;
   }
 
+  hasChangedOrder(dataset) {
+    return dataset.index !== undefined && dataset.index !== this.mapLayers[dataset.layers[0].layer_id].index || false;
+  }
+
   isLayerReady(dataset, layers) {
     if (dataset.layers && dataset.layers.length) {
       const layerId = dataset.layers[0].layer_id;
@@ -101,13 +105,23 @@ class ExploreMap extends React.Component {
   updateMapLayer(dataset, layers) {
     const layerId = dataset.layers[0].layer_id;
     if (dataset.active) {
-      if (!this.wasAlreadyAdded(dataset) && this.isLayerReady(dataset, layers)) {
-        this.hasActiveLayers = true;
-        const layer = layers[layerId];
-        this.addMapLayer(dataset, layer);
+      if (this.isLayerReady(dataset, layers)) {
+        if (!this.wasAlreadyAdded(dataset)) {
+          this.hasActiveLayers = true;
+          const layer = layers[layerId];
+          this.addMapLayer(dataset, layer);
+        } else if (this.wasAlreadyAdded(dataset) && this.hasChangedOrder(dataset)) {
+          this.changeLayerOrder(dataset);
+        }
       }
     } else if (this.mapLayers[layerId]) {
       this.removeMapLayer(layerId);
+    }
+  }
+
+  changeLayerOrder(dataset) {
+    if (dataset.index && typeof this.mapLayers[dataset.layers[0].layer_id].setZIndex === 'function') {
+      this.mapLayers[dataset.layers[0].layer_id].setZIndex(dataset.index);
     }
   }
 
@@ -242,7 +256,7 @@ class ExploreMap extends React.Component {
         // we can switch off the layer while it is loading
         if (dataset.active) {
           const tileUrl = `https://${layer.account}.cartodb.com/api/v1/map/${data.layergroupid}/{z}/{x}/{y}.png`;
-          this.mapLayers[layer.id] = L.tileLayer(tileUrl).addTo(this.map, 1);
+          this.mapLayers[layer.id] = L.tileLayer(tileUrl).addTo(this.map).setZIndex(dataset.index);
           this.mapLayers[layer.id].on('load', () => {
             this.handleTileLoaded(layer);
           });
