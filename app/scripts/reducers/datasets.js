@@ -7,7 +7,8 @@ import {
   TOGGLE_LAYER_STATUS,
   SET_LAYER_STATUS,
   DATASET_LAYER_FETCH_ERROR,
-  DATASET_SET_FILTER
+  DATASET_SET_FILTER,
+  MAP_LAYERS_ORDER_CHANGED
 } from '../constants';
 
 const initialState = {
@@ -97,6 +98,9 @@ export default function (state = initialState, action) {
       for (let i = 0, length = list.length; i < length; i++) {
         if (list[i].id === action.payload) {
           list[i].active = !list[i].active;
+          if (list[i].active) {
+            list[i].index = state.list.filter(layer => layer.active).length;
+          }
           break;
         }
       }
@@ -111,6 +115,20 @@ export default function (state = initialState, action) {
         }
       }
       return Object.assign({}, state, { list });
+    }
+    case MAP_LAYERS_ORDER_CHANGED: {
+      const datasets = state.list.slice(0);
+      const idsOrdered = action.payload.map((item) => item.attributes['dataset-id']);
+
+      for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
+        const index = idsOrdered.indexOf(datasets[i].id);
+        if (index > -1) {
+          datasets[i].index = index + 1;
+        } else {
+          datasets[i].index = 0;
+        }
+      }
+      return Object.assign({}, state, { list: datasets });
     }
     default:
       return state;
