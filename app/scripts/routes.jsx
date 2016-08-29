@@ -16,6 +16,10 @@ import Dashboards from './containers/Dashboards';
 import DashboardsDetail from './containers/Dashboards/DashboardDetail';
 import Insights from './containers/Insights';
 import InsightsDetail from './containers/Insights/InsightDetail';
+import Create from './components/Create';
+import Partners from './components/Partners';
+import Resources from './components/Resources';
+import Contact from './components/Contact';
 import Embed from './containers/Embed';
 
 
@@ -101,10 +105,14 @@ function Routes(props) {
           <Route path={'data'} component={DataAccessibility} />
           <Route path={'platforms'} component={DataAccessibility} />
         </Route>
-        <Route path={'about'} component={About} />
+        <Route path={'about'} component={Partnership} />
         <Route path={'faqs'} component={FAQ} />
         <Route path={'dashboards'} component={Dashboards} />
         <Route path={'insights'} component={Insights} />
+        <Route path={'create'} component={Create} />
+        <Route path={'partners'} component={Partners} />
+        <Route path={'resources'} component={Resources} />
+        <Route path={'contact'} component={Contact} />
       </Route>
       <Route path="explore(/:lat)(/:lng)(/:zoom)" component={Explore} />
       <Route path="dashboard/:slug(/:tab)" component={DashboardsDetail} />

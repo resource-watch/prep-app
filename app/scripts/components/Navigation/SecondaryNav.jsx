@@ -9,13 +9,13 @@ function SecondaryNav() {
           <Link to="/partners">Partners</Link>
         </li>
         <li>
-          <Link to="/about">About</Link>
-        </li>
-        <li>
-          <Link to="/faqs">FAQS</Link>
+          <Link to="/resources">Recources</Link>
         </li>
         <li>
           <Link to="/contact">Contact</Link>
+        </li>
+        <li>
+          <Link to="/faqs">FAQS</Link>
         </li>
       </ul>
     </nav>
