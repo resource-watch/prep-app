@@ -7,13 +7,13 @@ function NavBar(props) {
       <div className="columns small-8 small-offset-2">
         <ul>
           <li className={props.activeTab === 'indicators' ? '-active' : ''}>
-            <Link to={`${props.baseUrl}/indicators`}>Data</Link>
+            <Link className="link" to={`${props.baseUrl}/indicators`}>Data</Link>
           </li>
           <li className={props.activeTab === 'insights' ? '-active' : ''}>
-            <Link to={`${props.baseUrl}/insights`}>Insights</Link>
+            <Link className="link" to={`${props.baseUrl}/insights`}>Insights</Link>
           </li>
           <li className={props.activeTab === 'tools' ? '-active' : ''}>
-            <Link to={`${props.baseUrl}/tools`}>Tools</Link>
+            <Link className="link" to={`${props.baseUrl}/tools`}>Tools</Link>
           </li>
         </ul>
       </div>
