@@ -42,7 +42,7 @@ export default function (state = initialState, action) {
     }
     case DATASET_METADATA_RECEIVED: {
       const metadatas = Object.assign({}, state.metadatas, {});
-      metadatas[action.payload.attributes.dataset] = action.payload;
+      metadatas[action.payload.dataset] = action.payload;
       return Object.assign({}, state, { metadatas });
     }
     case DATASET_LAYER_FETCH_ERROR: {

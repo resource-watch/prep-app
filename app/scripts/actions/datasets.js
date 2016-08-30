@@ -150,30 +150,27 @@ export function getDatasetDefaultWidget(datasetId) {
 
 export function getDatasetMetadata(datasetId) {
   return dispatch => {
-    fetch(`${config.apiUrlRW}/metadata/${datasetId}`)
+    fetch(`${config.apiUrlRW}/datasets/${datasetId}?includes=metadata`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
       })
       .then(data => {
-        if (data.data[0]) {
+        if (data.metadata[0]) {
           dispatch({
             type: DATASET_METADATA_RECEIVED,
-            payload: data.data[0]
+            payload: data.metadata[0]
           });
         } else {
           dispatch({
             type: DATASET_METADATA_RECEIVED,
             payload: {
-              id: datasetId,
-              attributes: {
-                dataset: datasetId,
-                info: {
-                  attributes: {
-                    title: 'Dataset detail',
-                    error: 'There was an error getting the metadata info, ' +
-                    'please contact us hello@vizzuality.com'
-                  }
+              dataset: datasetId,
+              info: {
+                attributes: {
+                  title: data.name,
+                  error: 'There was an error getting the metadata info, ' +
+                  'please contact us hello@vizzuality.com'
                 }
               }
             }

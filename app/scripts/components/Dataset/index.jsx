@@ -44,8 +44,8 @@ class DatasetDetail extends React.Component {
       return <LoadingSpinner />;
     }
 
-    const data = this.props.data.attributes.info;
-    data.id = this.props.data.id;
+    const data = this.props.data.info;
+    data.id = this.props.data.dataset;
     const widget = this.props.widget ? this.props.widget.attributes : {};
 
     return (<div>
@@ -66,7 +66,8 @@ class DatasetDetail extends React.Component {
   render() {
     const currentData = this.getCurrentData();
 
-    const data = this.props.data && this.props.data.attributes.info.attributes || null;
+    const data = this.props.data && this.props.data.info.attributes || null;
+
     const title = data ? data.title : currentData.title;
 
     document.title = title;
