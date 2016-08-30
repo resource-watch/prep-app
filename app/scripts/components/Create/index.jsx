@@ -24,7 +24,15 @@ class Create extends React.Component {
               <p className="error-message">Please, fill out the hightlighted fields bellow</p>
               {!this.state.success ?
                 <Form type='Request access' submit={()=>this.handleSubmit()}/> :
-                <div className="success-message"><p>Your message was sent successfully</p></div> }
+                <div className="success-message">
+                  <div className="check">
+                    <svg width="13" height="9" viewBox="0 0 13 9" xmlns="http://www.w3.org/2000/svg">
+                      <title>check</title>
+                      <path d="M5.744 6.997l6.514-5.465L10.972 0 4.46 5.464 1.176 3.078 0 4.696l4.854 3.527.89-1.226z" />
+                    </svg>
+                  </div>
+                  <p>Your message was sent successfully</p>
+                </div> }
             </div>
           </div>
         </div>

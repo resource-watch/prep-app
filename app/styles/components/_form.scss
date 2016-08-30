@@ -10,9 +10,23 @@
   }
 
   .success-message {
+    display: flex;
     color: $thirth-color;
-    padding: rem(60) rem(50);
-    border: rem(2) solid $thirth-color;
+    padding: rem(50) rem(60);
+    border: rem(2) solid $border-color;
+
+    .check{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: rem(25);
+      height: rem(25);
+      border-radius: 50%;
+      border: rem(2) solid $thirth-color;
+      margin-right: rem(10);
+
+      svg { fill: $thirth-color; }
+    }
 
     p { margin: 0; }
   }
