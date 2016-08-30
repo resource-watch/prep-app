@@ -87,8 +87,11 @@
 
   .legend {
     display: block;
-    height: 10px;
-    background: linear-gradient(to right, #00009C , #0046FF , #00FFFF , #0CFFCD , #68FF8A , #FEFF00 , #FF8F00 , #FF0000 , #800000);
+    margin: 5px 0;
+
+    &.-cloropeth {
+
+    }
   }
 
   .layer-actions {
