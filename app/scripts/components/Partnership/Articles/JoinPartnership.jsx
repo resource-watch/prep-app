@@ -1,4 +1,5 @@
 import React from 'react';
+import Form from '../../Form';
 
 function JoinPartnership() {
   return (
@@ -10,7 +11,8 @@ function JoinPartnership() {
         <li>A commitment to the PREP mission.</li>
         <li>A commitment to contribute to the Partnership{"'"}s mission through in-kind or direct contribution (e.g. engagement, data, platform).</li>
         <li>Delegation of at least one person to be the point of contact who is actively involved as needed.</li>
-      </ul>
+      </ul><br/>
+      <Form type="Join partnership" />
     </div>
   );
 }
