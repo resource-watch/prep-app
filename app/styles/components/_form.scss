@@ -1,0 +1,100 @@
+
+.c-form-container {
+  margin-top: rem(20);
+
+  .error-message {
+    display: none;
+    color: red;
+
+    &.-active { display: inherit; }
+  }
+
+  .success-message {
+    display: flex;
+    color: $thirth-color;
+    padding: rem(50) rem(60);
+    border: rem(2) solid $border-color;
+
+    .check{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: rem(25);
+      height: rem(25);
+      border-radius: 50%;
+      border: rem(2) solid $thirth-color;
+      margin-right: rem(10);
+
+      svg { fill: $thirth-color; }
+    }
+
+    p { margin: 0; }
+  }
+
+  /* Mailchimp form */
+  #mc_embed_signup {
+    position: relative;
+    padding: rem(50) rem(60);
+    border: rem(2) solid $border-color;
+
+    .mc-field-group {
+      display: flex;
+      flex-flow: column;
+      padding: rem(10) 0;
+
+      @media #{$mq-medium} {
+        flex-flow: row;
+      }
+
+      label {
+        padding-right: rem(30);
+        font-weight: bold;
+        margin-bottom: rem(15);
+
+        @media #{$mq-medium} {
+          width: 46%;
+          text-align: right;
+          margin-bottom: rem(15);
+        }
+      }
+
+      input, select {
+        flex-grow: 1;
+        background-color: transparent;
+        border: 0;
+        border-bottom: rem(2) solid $border-color;
+        margin-bottom: rem(20);
+      }
+
+      select {
+        width: auto;
+      }
+
+      &.textarea {
+        flex-flow: column !important;
+
+        & label {
+          width: 100%;
+          text-align: left;
+          font-weight: normal;
+        }
+
+        textarea {
+          border: rem(2) solid $border-color;
+        }
+      }
+    }
+
+    .clear {
+      position: absolute;
+      bottom: -7px;
+      right: -14px;
+    }
+
+    .-hidden {
+      position: absolute;
+      top: -10000px;
+      visibility: hidden;
+    }
+  }
+}
