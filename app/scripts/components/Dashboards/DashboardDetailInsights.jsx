@@ -34,7 +34,7 @@ function DashboardDetailInsights(props) {
       </div>
     ));
   } else {
-    content = (<div className="column small-12"><p>There is no insight associated with that dashboard yet</p></div>);
+    content = (<div className="column small-12"><p>There is no insight associated with this dashboard yet</p></div>);
   }
 
   return (
