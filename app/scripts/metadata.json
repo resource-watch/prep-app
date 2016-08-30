@@ -120,5 +120,41 @@
     "title": "Insight",
     "bannerSize": "medium",
     "bannerBg": "insight"
+  },
+  {
+    "name": "create",
+    "pathname": "create",
+    "metaTitle": "Create",
+    "metaDescription": "",
+    "title": "Create",
+    "bannerSize": "medium",
+    "bannerBg": "insight"
+  },
+  {
+    "name": "partners",
+    "pathname": "partners",
+    "metaTitle": "Partners",
+    "metaDescription": "",
+    "title": "Partners",
+    "bannerSize": "medium",
+    "bannerBg": "insight"
+  },
+  {
+    "name": "resources",
+    "pathname": "resources",
+    "metaTitle": "Resources",
+    "metaDescription": "",
+    "title": "Resources",
+    "bannerSize": "medium",
+    "bannerBg": "insight"
+  },
+  {
+    "name": "contact",
+    "pathname": "contact",
+    "metaTitle": "Contact",
+    "metaDescription": "",
+    "title": "Contact",
+    "bannerSize": "medium",
+    "bannerBg": "insight"
   }
 ]

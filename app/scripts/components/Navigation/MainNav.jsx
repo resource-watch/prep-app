@@ -6,10 +6,13 @@ function MainNav() {
     <nav className="c-nav -main">
       <ul>
         <li>
-          <Link activeClassName="-current" to="/partnership">Partnership</Link>
+          <Link activeClassName="-current" to="/about">About</Link>
         </li>
         <li>
           <Link activeClassName="-current" to="/explore">Explore</Link>
+        </li>
+        <li>
+          <Link activeClassName="-current" to="/create">Create</Link>
         </li>
         <li>
           <Link activeClassName="-current" to="/dashboards">Dashboards</Link>
