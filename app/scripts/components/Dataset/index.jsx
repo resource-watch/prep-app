@@ -44,31 +44,41 @@ class DatasetDetail extends React.Component {
       return <LoadingSpinner />;
     }
 
-    const data = this.props.data.info;
-    data.id = this.props.data.dataset;
+    const data = this.props.data.metadata.length > 0 ?
+      this.props.data.metadata[0].info :
+      {
+        id: this.props.data.id,
+        attributes: {
+          title: this.props.data.name,
+          message: 'There is not metadata for this dataset.'
+        }
+      };
+
     const widget = this.props.widget ? this.props.widget.attributes : {};
 
-    return (<div>
-      <SectionIntro data={data} currentSection={'explore'} >
-        <MetadataList data={data} />
-      </SectionIntro>
+    return (
+      <div>
+        <SectionIntro data={data} currentSection={'explore'} >
+          <MetadataList data={data} />
+        </SectionIntro>
 
-      {widget && widget.widgetConfig &&
-        <div className="row">
-          <div className="columns small-12">
-            <VegaChart data={widget.widgetConfig} />
+        {widget && widget.widgetConfig &&
+          <div className="row">
+            <div className="columns small-12">
+              <VegaChart data={widget.widgetConfig} />
+            </div>
           </div>
-        </div>
-      }
-    </div>);
+        }
+      </div>
+    );
   }
 
   render() {
     const currentData = this.getCurrentData();
 
-    const data = this.props.data && this.props.data.info.attributes || null;
+    const data = this.props.data && this.props.data || null;
 
-    const title = data ? data.title : currentData.title;
+    const title = data ? data.name : currentData.title;
 
     document.title = title;
 

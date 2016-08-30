@@ -93,9 +93,13 @@ export function getDatasets(defaultActiveLayers) {
   };
 }
 
-export function getDatasetById(datasetId) {
+export function getDatasetById(datasetId, includes) {
+  const includeQuery = includes.length > 0 ?
+    `&includes=${includes.join(',')}` :
+    '';
+
   return dispatch => {
-    fetch(`${config.apiUrlRW}/datasets/${datasetId}?app=prep`)
+    fetch(`${config.apiUrlRW}/datasets/${datasetId}?app=prep${includeQuery}`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
@@ -150,27 +154,29 @@ export function getDatasetDefaultWidget(datasetId) {
 
 export function getDatasetMetadata(datasetId) {
   return dispatch => {
-    fetch(`${config.apiUrlRW}/datasets/${datasetId}?includes=metadata`)
+    fetch(`${config.apiUrlRW}/metadata/${datasetId}`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
       })
       .then(data => {
-        if (data.metadata[0]) {
+        if (data.data[0]) {
           dispatch({
             type: DATASET_METADATA_RECEIVED,
-            payload: data.metadata[0]
+            payload: data.data[0]
           });
         } else {
           dispatch({
             type: DATASET_METADATA_RECEIVED,
             payload: {
-              dataset: datasetId,
-              info: {
-                attributes: {
-                  title: data.name,
-                  error: 'There was an error getting the metadata info, ' +
-                  'please contact us hello@vizzuality.com'
+              id: datasetId,
+              attributes: {
+                dataset: datasetId,
+                info: {
+                  attributes: {
+                    title: 'Dataset detail',
+                    message: 'There is not metadata for this dataset'
+                  }
                 }
               }
             }
