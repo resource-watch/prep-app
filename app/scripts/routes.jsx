@@ -21,6 +21,7 @@ import Partners from './components/Partners';
 import Resources from './components/Resources';
 import Contact from './components/Contact';
 import Embed from './containers/Embed';
+import Root from './components/Root'
 
 
 function shouldUpdateScroll(prevRouterProps, { location }) {
@@ -97,28 +98,32 @@ function Routes(props) {
       history={props.history}
       render={applyRouterMiddleware(useScroll(shouldUpdateScroll))}
     >
-      <Route path={'/'} component={App}>
-        <IndexRoute component={Home} />
-        <Route path={'partnership'}>
-          <IndexRoute component={Partnership} />
-          <Route path={'engagement'} component={EngagementWorkgroup} />
-          <Route path={'data'} component={DataAccessibility} />
-          <Route path={'platforms'} component={DataAccessibility} />
+      <Route path={''} component={Root}>
+        <Route path={'/'} component={App}>
+
+          <IndexRoute component={Home} />
+          <Route path={'partnership'}>
+            <IndexRoute component={Partnership} />
+            <Route path={'engagement'} component={EngagementWorkgroup} />
+            <Route path={'data'} component={DataAccessibility} />
+            <Route path={'platforms'} component={DataAccessibility} />
+          </Route>
+          <Route path={'about'} component={Partnership} />
+          <Route path={'faqs'} component={FAQ} />
+          <Route path={'dashboards'} component={Dashboards} />
+          <Route path={'insights'} component={Insights} />
+          <Route path={'create'} component={Create} />
+          <Route path={'partners'} component={Partners} />
+          <Route path={'resources'} component={Resources} />
+          <Route path={'contact'} component={Contact} />
         </Route>
-        <Route path={'about'} component={Partnership} />
-        <Route path={'faqs'} component={FAQ} />
-        <Route path={'dashboards'} component={Dashboards} />
-        <Route path={'insights'} component={Insights} />
-        <Route path={'create'} component={Create} />
-        <Route path={'partners'} component={Partners} />
-        <Route path={'resources'} component={Resources} />
-        <Route path={'contact'} component={Contact} />
+
+        <Route path="explore(/:lat)(/:lng)(/:zoom)" component={Explore} />
+        <Route path="dashboard/:slug(/:tab)" component={DashboardsDetail} />
+        <Route path="insight/:slug" component={InsightsDetail} />
+        <Route path="dataset/:slug" component={DatasetDetail} />
+        <Route path="embed/:slug" component={Embed} />
       </Route>
-      <Route path="explore(/:lat)(/:lng)(/:zoom)" component={Explore} />
-      <Route path="dashboard/:slug(/:tab)" component={DashboardsDetail} />
-      <Route path="insight/:slug" component={InsightsDetail} />
-      <Route path="dataset/:slug" component={DatasetDetail} />
-      <Route path="embed/:slug" component={Embed} />
     </Router>
   );
 }
