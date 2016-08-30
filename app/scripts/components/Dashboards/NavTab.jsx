@@ -6,8 +6,8 @@ function NavBar(props) {
     <div className="row c-nav-tab">
       <div className="columns small-8 small-offset-2">
         <ul>
-          <li className={props.activeTab === 'indicators' ? '-active' : ''}>
-            <Link className="link" to={`${props.baseUrl}/indicators`}>Data</Link>
+          <li className={props.activeTab === 'data' ? '-active' : ''}>
+            <Link className="link" to={`${props.baseUrl}/data`}>Data</Link>
           </li>
           <li className={props.activeTab === 'insights' ? '-active' : ''}>
             <Link className="link" to={`${props.baseUrl}/insights`}>Insights</Link>
@@ -24,7 +24,7 @@ function NavBar(props) {
 NavBar.propTypes = {
   /**
    * Define the active tab
-   * Values: "indicators", "insights" or "tools"
+   * Values: "data", "insights" or "tools"
    */
   activeTab: React.PropTypes.string.isRequired,
   /**

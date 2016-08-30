@@ -5,8 +5,12 @@ class Contact extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      successfull: false
+      success: false
     };
+  }
+
+  handleSubmit() {
+    this.setState({success: true});
   }
 
   render() {
@@ -17,11 +21,11 @@ class Contact extends React.Component {
             <div className="column small-12 medium-8">
               <h2>Submit your coments and questions</h2>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc finibus tortor a elit dignissim, vitae facilisis risus dignissim. Maecenas imperdiet laoreet ipsum id tincidunt. Ut ornare luctus scelerisque.</p>
-              <p>* Required field</p>
+              {!this.state.success && <p>* Required field</p>}
               <div className="c-form-container">
                 <p className="error-message">Please, fill out the hightlighted fields bellow</p>
-                {!this.state.successfull ?
-                  <Form type='Contact' /> :
+                {!this.state.success ?
+                  <Form type='Contact' submit={()=>this.handleSubmit()}/> :
                   <div className="success-message"><p>Your message was sent successfully</p></div> }
               </div>
             </div>
@@ -31,7 +35,6 @@ class Contact extends React.Component {
       </div>
     );
   }
-
 }
 
 export default Contact;

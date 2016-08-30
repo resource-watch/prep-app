@@ -64,7 +64,7 @@ class Home extends React.Component {
         </Article>
 
         <Article grid={'small-12 medium-12'}>
-          <ExploreHome />
+          <ExploreHome setModalUnderDevelop={()=>this.props.setModalUnderDevelop()} />
         </Article>
 
         <Article grid={'small-12 medium-12'}>

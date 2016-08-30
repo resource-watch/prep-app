@@ -16,9 +16,9 @@
 
     p { margin: 0; }
   }
-}
 
-#mc_embed_signup {
+  /* Mailchimp form */
+  #mc_embed_signup {
     position: relative;
     padding: rem(50) rem(60);
     border: rem(2) solid $border-color;
@@ -48,7 +48,7 @@
         flex-grow: 1;
         background-color: transparent;
         border: 0;
-        border-bottom: rem(1) solid rgba(0, 0, 0, .3);
+        border-bottom: rem(2) solid $border-color;
         margin-bottom: rem(20);
       }
 
@@ -83,3 +83,4 @@
       visibility: hidden;
     }
   }
+}

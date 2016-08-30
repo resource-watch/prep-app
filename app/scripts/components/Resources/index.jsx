@@ -1,15 +1,14 @@
 import React from 'react';
+import Article from '../Content/Article';
 
 function Resources(props) {
-
   return (
-    <div className="">
-      Resources
+    <div className="c-partners">
+      <Article>
+        <p>Content comming soon.</p>
+      </Article>
     </div>
   );
 }
-
-Resources.propTypes = {
-};
 
 export default Resources;

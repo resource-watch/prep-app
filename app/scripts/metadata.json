@@ -99,7 +99,7 @@
     "pathname": "dashboard",
     "metaTitle": "Dashboard",
     "metaDescription": "",
-    "title": "Dashboard",
+    "title": "Dashboards",
     "bannerSize": "medium",
     "bannerBg": "dashboard"
   },
@@ -115,9 +115,9 @@
   {
     "name": "insight",
     "pathname": "insight",
-    "metaTitle": "Insight",
+    "metaTitle": "Insights",
     "metaDescription": "",
-    "title": "Insight",
+    "title": "Insights",
     "bannerSize": "medium",
     "bannerBg": "insight"
   },

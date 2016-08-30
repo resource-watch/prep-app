@@ -4,6 +4,7 @@ import PartnersSlider from '../../containers/PartnersSlider';
 import SecondaryNav from '../../components/Navigation/SecondaryNav';
 import SocialNav from '../../components/Navigation/SocialNav';
 import MainNav from '../../components/Navigation/MainNav';
+import Breadcrumbs from '../../components/Navigation/Breadcrumbs';
 import Banner from '../../components/Banner';
 
 import metadata from 'json!../../metadata.json';
@@ -50,6 +51,7 @@ class App extends React.Component {
             </div>
           </div>
           <div className="l-header-banner">
+            <Breadcrumbs pathname={this.props.location.pathname} />
             <Banner
               bg={currentData.bannerBg}
               size={currentData.bannerSize}
@@ -101,7 +103,8 @@ App.childContextTypes = {
 };
 
 App.propTypes = {
-  children: React.PropTypes.any.isRequired
+  children: React.PropTypes.any.isRequired,
+  location: React.PropTypes.any.isRequired
 };
 
 export default App;

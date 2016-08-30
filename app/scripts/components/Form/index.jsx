@@ -46,7 +46,14 @@ function Form(props) {
             <input type="text" name="b_c99e39850f4acfe33f49fea68_ccad0f31c4" tabIndex="-1" value="" />
           </div>
           <div className="clear">
-            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" className="c-button -filled -secondary-color button" />
+            <input
+              type="submit"
+              value="Subscribe"
+              name="subscribe"
+              id="mc-embedded-subscribe"
+              className="c-button -filled -secondary-color button"
+              onClick={()=>props.submit()}
+            />
           </div>
         </div>
       </form>
