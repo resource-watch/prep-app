@@ -2,6 +2,7 @@ import React from 'react';
 import ToolbarActions from '../ToolbarActions';
 
 function SectionIntro(props) {
+  const downloadUrl = props.data && props.data.id ? `${config.apiUrlRW}/download/${props.data.id}` : false;
   return (
     <div className={"c-section-intro"}>
       <div className="top-bar">
@@ -29,6 +30,7 @@ function SectionIntro(props) {
         <div className="row align-center">
           <div className="columns small-12 medium-8">
             <ToolbarActions
+              downloadUrl={downloadUrl}
               insightUrl={props.insightUrl}
               currentSection={props.currentSection}
             />

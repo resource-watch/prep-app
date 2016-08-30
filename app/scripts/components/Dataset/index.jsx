@@ -45,10 +45,11 @@ class DatasetDetail extends React.Component {
     }
 
     const data = this.props.data.attributes.info;
+    data.id = this.props.data.id;
     const widget = this.props.widget ? this.props.widget.attributes : {};
 
     return (<div>
-      <SectionIntro data={{}} currentSection={'explore'} >
+      <SectionIntro data={data} currentSection={'explore'} >
         <MetadataList data={data} />
       </SectionIntro>
 
