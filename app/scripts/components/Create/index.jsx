@@ -1,15 +1,14 @@
 import React from 'react';
+import Article from '../Content/Article';
 
 function Create(props) {
-
   return (
-    <div className="">
-      Create
+    <div className="c-partners">
+      <Article>
+        <p>Content comming soon.</p>
+      </Article>
     </div>
   );
 }
-
-Create.propTypes = {
-};
 
 export default Create;

@@ -1,15 +1,14 @@
 import React from 'react';
+import Article from '../Content/Article';
 
 function Contact(props) {
-
   return (
-    <div className="">
-      Contact
+    <div className="c-partners">
+      <Article>
+        <p>Content comming soon.</p>
+      </Article>
     </div>
   );
 }
-
-Contact.propTypes = {
-};
 
 export default Contact;
