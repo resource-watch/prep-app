@@ -61,6 +61,8 @@
 }
 
 .legend-layer{
+  position: relative;
+
   padding: .5rem 0 .5rem .5rem;
   border-bottom: 1px solid $main-color;
 
@@ -80,6 +82,7 @@
     cursor: row-resize;
     position: absolute;
     left: .5rem;
+    top: 10px;
     > svg {
       fill: rgba($inverse-font-color, .4)
     }
@@ -87,10 +90,26 @@
 
   .legend {
     display: block;
-    margin: 5px 0;
+    margin: 5px 0 8px;
 
-    &.-cloropeth {
-
+    &.-gradient {
+      > .colors {
+        height: 7px;
+      }
+      > .values {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+    &.-cloropleth {
+      span {
+        width: 100%;
+        display: block;
+        text-align: center;
+        &.-color {
+          height: 7px;
+        }
+      }
     }
   }
 
