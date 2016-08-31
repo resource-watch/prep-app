@@ -2,6 +2,20 @@ import React from 'react';
 import { Link } from 'react-router';
 import { SortableContainer, SortableElement, SortableHandle, arrayMove } from 'react-sortable-hoc';
 
+function getBasicLegend(layer) {
+  return (<div className="legend -basic">
+    <div className="row">
+      {layer.attributes['legend-config'].items.map((item, index) => (
+        <div className="column small-6" key={index}>
+          <div className="item">
+            <span className="color" style={{ backgroundColor: item.color }}></span>
+            <span className="value"> {item.value} </span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>);
+}
 function getGradientLegend(layer) {
   const colors = [];
   const values = [];
@@ -10,15 +24,17 @@ function getGradientLegend(layer) {
     values.push(<span key={index}>{item.value}</span>);
   });
 
-  return (<div className="legend -gradient">
-    {colors.length &&
-      <div className="colors" style={{backgroundImage: `linear-gradient(to right, ${colors.join(',')})`}}></div>
-    }
-    {values.length &&
-      <div className="values">
-      {values}
-      </div>
-    }
+  return (<div className="row">
+    <div className="legend -gradient column small-12 ">
+      {colors.length &&
+        <div className="colors" style={{backgroundImage: `linear-gradient(to right, ${colors.join(',')})`}}></div>
+      }
+      {values.length &&
+        <div className="values">
+        {values}
+        </div>
+      }
+    </div>
   </div>);
 }
 
@@ -32,7 +48,7 @@ function getCloroplethLegend(layer) {
       </div>);
   });
 
-  return (<div className="legend -cloropleth">
+  return (<div className="legend -cloropleth column small-12 ">
     <div className="row small-collapse">
       {columns}
     </div>
@@ -42,50 +58,41 @@ function getCloroplethLegend(layer) {
 function getLegend(layer) {
   switch (layer.attributes['legend-config'].type) {
     case 'basic':
-      return <div className="legend -basic"></div>;
-    case 'lines':
-      return <div className="legend -lines"></div>;
+      return getBasicLegend(layer);
     case 'gradient':
       return getGradientLegend(layer);
     case 'choropleth':
       return getCloroplethLegend(layer);
     default:
-      return <div className="legend">No legend</div>;
+      return <div className="legend">No legend available</div>;
   }
 }
 
 const DragHandle = SortableHandle(() => <span className="handler"><svg width="6" height="18" viewBox="0 0 6 18"><title>Drag and drop</title><path d="M1 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-4 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-8a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fillRule="evenodd"/></svg></span>);
 
 const SortableItem = SortableElement(({layer, index, onInfoClick}) => {
-  //TODO: remove when has real legends
-  const newLayer = layer;
-  newLayer.attributes['legend-config'] = {
-    type: 'choropleth',
-    items: [{ 'name': 'value1', 'value': '1', 'color': '#feffcb' }, { 'name': 'value2', 'value': '2', 'color': '#f5863c' }, { 'name': 'value3', 'value': '3', 'color': '#790024' }],
-    unit: 'm.'
-  };
   return (
     <div className="legend-layer" key={`map-layer-${index}`}>
       <div className="row">
         <DragHandle />
         <div className="column small-10">
-          <span className="title">{newLayer.title} ({newLayer.attributes['legend-config'].unit})</span>
+          <span className="title">{layer.title}&nbsp;
+            {layer.attributes['legend-config'].unit &&
+              (layer.attributes['legend-config'].unit)
+            }
+          </span>
         </div>
         <div className="column small-2 layer-actions">
-          <Link className="icon" to={`/dataset/${newLayer.attributes['dataset-id']}`}>
+          <Link className="icon" to={`/dataset/${layer.attributes['dataset-id']}`}>
             <svg width="13" height="9" viewBox="0 0 13 9"><title>icon-eye</title><path d="M4.933 4.5c0 .855.698 1.545 1.567 1.545s1.567-.69 1.567-1.545S7.369 2.955 6.5 2.955s-1.567.69-1.567 1.545zM13 4.5C11.755 2.265 9.312 0 6.5 0 3.695 0 1.245 2.265 0 4.5 1.245 6.735 3.695 9 6.5 9c2.812 0 5.255-2.265 6.5-4.5zm-9.415 0c0-1.582 1.307-2.865 2.915-2.865S9.415 2.918 9.415 4.5c0 1.582-1.307 2.865-2.915 2.865S3.585 6.082 3.585 4.5z" fillRule="evenodd"/></svg>
           </Link>
           <span
             className="icon -info"
-            onClick={() => onInfoClick(newLayer.attributes['dataset-id'])}
+            onClick={() => onInfoClick(layer.attributes['dataset-id'])}
           > i </span>
         </div>
       </div>
-      <div className="row">
-        <div className="column small-12">
-          {getLegend(newLayer)}
-        </div>
-      </div>
+      {getLegend(layer)}
     </div>
   );
 });
