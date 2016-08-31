@@ -33,7 +33,7 @@ class ToolbarActions extends React.Component {
         </div>
         <div className="right">
           {this.props.currentSection === 'explore' && this.props.downloadUrl &&
-            <a href={this.props.downloadUrl} target="_blank" className="c-button -action">
+            <a href={this.props.downloadUrl} download target="_blank" className="c-button -action">
               <svg className="icon" width="10" height="12" viewBox="0 0 10 12"><title>Download</title><g fill="none" fillRule="evenodd"><path d="M4 0h2v7H4zM0 10h10v2H0z" /><path d="M4.243 8.192l.707.707L9.9 3.95 8.484 2.537 4.95 6.07 1.414 2.536 0 3.95l4.243 4.242z" /></g></svg>
               Download
             </a>
