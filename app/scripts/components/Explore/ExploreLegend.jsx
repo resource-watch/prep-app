@@ -76,9 +76,9 @@ const SortableItem = SortableElement(({layer, index, onInfoClick}) => {
       <div className="row">
         <DragHandle />
         <div className="column small-10">
-          <span className="title">{layer.title}&nbsp;
+          <span className="title">{layer.title}
             {layer.attributes['legend-config'].unit &&
-              (layer.attributes['legend-config'].unit)
+              ` (${layer.attributes['legend-config'].unit})`
             }
           </span>
         </div>
