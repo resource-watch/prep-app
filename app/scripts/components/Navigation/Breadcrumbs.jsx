@@ -14,10 +14,17 @@ function Breadcrumbs(props) {
               <li key="home"> <Link to={route}>Home</Link> </li>
               {patnames.map((item, index) => {
                 let itemName = item;
-                if (item === 'dashboard') itemName = 'dashboards';
-                if (item === 'insight') itemName = 'insights';
-                route += `${itemName}/`;
-                return <li key={index}> <Link to={route}>{itemName.replace(/-/g, ' ')}</Link> </li>;
+                let routeTemp = false;
+                if (item === 'dashboard') {
+                  itemName = 'dashboards';
+                  routeTemp = `/${itemName}`;
+                }
+                if (item === 'insight') {
+                  itemName = 'insights';
+                  routeTemp = `/${itemName}`;
+                }
+                route += `${item}/`;
+                return <li key={index}> <Link to={routeTemp ? routeTemp : route}>{itemName.replace(/-/g, ' ')}</Link> </li>;
               })}
             </ul>
           </nav>

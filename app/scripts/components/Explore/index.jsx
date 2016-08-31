@@ -113,15 +113,6 @@ class Explore extends React.Component {
           />
         }
 
-        {this.state.modalShareOpen &&
-          <ShareModal
-            title={"Share this page"}
-            url={window.location.href}
-            opened={this.state.modalShareOpen}
-            close={() => this.setState({ modalShareOpen: false })}
-          />
-        }
-
         {this.props.metadataModal &&
           <Modal
             opened={this.props.metadataModal.open}
