@@ -8,9 +8,10 @@ import insightsBg from '../../../images/bg/bg-insights.jpg';
 import partnershipEngagementBg from '../../../images/bg/bg-partnership-engagement.jpg';
 import partnershipPlatformsBg from '../../../images/bg/bg-partnership-platforms.jpg';
 import contactBg from '../../../images/bg/bg-contact.jpg';
-import createBg from '../../../images/bg/bg-create.jpg';
 import resourcesBg from '../../../images/bg/bg-resources.jpg';
+import createBg from '../../../images/bg/bg-create.jpg';
 import partnersBg from '../../../images/bg/bg-partners.jpg';
+
 
 const bg = {
   defaults: homepageBg,
@@ -24,8 +25,8 @@ const bg = {
   insight: insightsBg,
   datasets: homepageBg,
   contact: contactBg,
-  create: createBg,
   resources: resourcesBg,
+  create: createBg,
   partners: partnersBg
 };
 

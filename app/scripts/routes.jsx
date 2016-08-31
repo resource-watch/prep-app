@@ -21,8 +21,7 @@ import Partners from './components/Partners';
 import Resources from './components/Resources';
 import Contact from './components/Contact';
 import Embed from './containers/Embed';
-import Root from './components/Root'
-
+import Root from './components/Root';
 
 function shouldUpdateScroll(prevRouterProps, { location }) {
   /**
