@@ -62,7 +62,8 @@ class ExploreMap extends React.Component {
       scrollWheelZoom: false,
       zoomControl: false,
       center: [+params.lat, +params.lng],
-      zoom: +params.zoom
+      zoom: +params.zoom,
+      minZoom: 2
     });
 
     L.control.zoom({ position: this.props.map.zoomPosition }).addTo(this.map);
