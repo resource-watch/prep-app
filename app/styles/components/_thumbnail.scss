@@ -1,5 +1,9 @@
 .c-thumbnail {
   > a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: rem(150);
     margin: 0;
   }
 

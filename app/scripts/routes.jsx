@@ -17,7 +17,7 @@ import DashboardsDetail from './containers/Dashboards/DashboardDetail';
 import Insights from './containers/Insights';
 import InsightsDetail from './containers/Insights/InsightDetail';
 import Create from './components/Create';
-import Partners from './components/Partners';
+import Partners from './containers/Partners';
 import Resources from './components/Resources';
 import Contact from './components/Contact';
 import Embed from './containers/Embed';

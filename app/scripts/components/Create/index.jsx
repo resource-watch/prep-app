@@ -57,7 +57,7 @@ class Create extends React.Component {
               <div className="column align-middle small-12 medium-6">
                 <h3>Communicate Insights</h3>
                 <p>Choose from a range of open source tools to tell the story, share an insight about your data and how it can or is being used to inform and manage climate risks.</p>
-                <a href="#">KNOW MORE</a>
+                <a href="/insights">KNOW MORE</a>
               </div>
             </div>
           </div>
@@ -69,7 +69,7 @@ class Create extends React.Component {
                 <p>Collect and manage the data, tools and insights that are most relevant for your community in one place. Create and share your own online dashboard containing data, information, tools, interactive stories and other dynamic resources specific to your own geographic or topical area of interest.</p>
                 <p>Search for data on the explorer. Add aditional data sets.</p>
                 <p>Look at what data, tools and insights, others are using if they are useful to you add them  to your collection and include them in your dashboard.</p>
-                <a href="#">KNOW MORE</a>
+                <a href="/dashboards">KNOW MORE</a>
               </div>
 
               <div className="column align-middle small-12 medium-6">
