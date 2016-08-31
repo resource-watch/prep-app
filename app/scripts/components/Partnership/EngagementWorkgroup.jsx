@@ -10,7 +10,7 @@ class EngagementWorkgroup extends React.Component {
 
         <Article>
           <p>Entities that help develop, engage, or mobilize user communities to understand the information needs of those seeking to build preparedness and resilience.</p>
-          <p>Effective climate resilience and preparedness planning often requires information specific to a region or community—or even to a specific sector or project within that region or community. The research and data management groups need to understand those needs to be able to effectively prioritize information products. That is why the Partnership for Resilience and Preparedness engages with communities around the world to understand information needs below are the current engagement efforts involved in PREP.</p>
+          <p>Effective climate resilience and preparedness planning often requires information specific to a region or community—or even to a sector or project within that region or community. That is why PREP engages with communities around the world to understand information needs at the local, regional and sectoral levels.</p>
 
           <ul>
             <li>
@@ -35,7 +35,7 @@ class EngagementWorkgroup extends React.Component {
             </li>
           </ul>
 
-          <p>The Engagement WorkGroup is co-lead Future Earth and WRI.</p>
+          <p>The Engagement Workgroup is co-led by Future Earth and World Resources Institute</p>
         </Article>
 
         <Article>
