@@ -42,7 +42,7 @@
           border-top-color: $secondary-color;
         }
       }
-     &:nth-of-type(3) {
+     &:nth-of-type(3), &:nth-of-type(6) {
         > a:hover, > a.-current {
           border-top-color: $thirth-color;
         }
