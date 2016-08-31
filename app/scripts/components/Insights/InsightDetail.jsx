@@ -14,6 +14,8 @@ import SectionIntro from '../SectionIntro';
 import IFrame from '../IFrame';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
+import EthiopiaInsight from './Customs/Ethiopia';
+
 class DashboardDetail extends React.Component {
 
   componentWillMount() {
@@ -49,6 +51,21 @@ class DashboardDetail extends React.Component {
       ? `/proxy?url=${contentUrl}`
       : contentUrl;
 
+    let content;
+    //TODO: get externals type from cms
+    this.props.data.external = false;
+    if (this.props.data.external) {
+      content = <IFrame src={iframeUrl} />;
+    } else {
+      switch ('ethiopia') {
+        case 'ethiopia':
+          content = <EthiopiaInsight />;
+          break;
+        default:
+          break;
+      }
+    }
+
     return (
       <div>
         <SectionIntro
@@ -62,7 +79,7 @@ class DashboardDetail extends React.Component {
 
         <div className="row">
           <div className="columns small-12">
-            <IFrame src={iframeUrl} />
+            {content}
           </div>
         </div>
       </div>
