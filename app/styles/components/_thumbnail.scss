@@ -1,0 +1,19 @@
+.c-thumbnail {
+  > a {
+    margin: 0;
+  }
+
+  &.-border {
+    border: 2px solid $secondary-color;
+    .-theme-2 & {
+      border-color: $thirth-color;
+    }
+    .-theme-3 & {
+      border-color: $fourth-color;
+    }
+
+    &.-border-neutral {
+      border-color: $pale-grey;
+    }
+  }
+}
