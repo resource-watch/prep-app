@@ -70,7 +70,7 @@ class App extends React.Component {
           <div className="l-footer-top -inverse">
             <div className="row">
               <div className="column small-12">
-                <PartnersSlider />
+                <PartnersSlider route={window.location.pathname}/>
               </div>
             </div>
           </div>
