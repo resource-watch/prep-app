@@ -65,9 +65,13 @@ class Explore extends React.Component {
 
       return (
         <div className="content">
-          <h3> {metadataInfo.attributes.title} </h3>
+          <h3>
+            <Link to={`/dataset/${this.props.metadataModal.datasetId}`}>
+              {metadataInfo.attributes.title}
+            </Link>
+          </h3>
           <h4> {metadataInfo.attributes.subtitle} </h4>
-          <MetadataList short data={metadataInfo} />
+          <MetadataList short download data={metadataInfo} />
         </div>
       );
     }

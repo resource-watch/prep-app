@@ -95,6 +95,10 @@ class ExploreMap extends React.Component {
     return dataset.index !== undefined && dataset.index !== this.mapLayers[dataset.layers[0].layer_id].index || false;
   }
 
+  hasChangedOpacity(dataset) {
+    return dataset && dataset.opacity !== this.mapLayers[dataset.layers[0].layer_id].opacity || false;
+  }
+
   isLayerReady(dataset, layers) {
     if (dataset.layers && dataset.layers.length) {
       const layerId = dataset.layers[0].layer_id;
@@ -111,8 +115,13 @@ class ExploreMap extends React.Component {
           this.hasActiveLayers = true;
           const layer = layers[layerId];
           this.addMapLayer(dataset, layer);
-        } else if (this.wasAlreadyAdded(dataset) && this.hasChangedOrder(dataset)) {
-          this.changeLayerOrder(dataset);
+        } else if (this.wasAlreadyAdded(dataset)) {
+          if (this.hasChangedOrder(dataset)) {
+            this.changeLayerOrder(dataset);
+          }
+          if (this.hasChangedOpacity(dataset)) {
+            this.changeLayerOpacity(dataset);
+          }
         }
       }
     } else if (this.mapLayers[layerId]) {
@@ -121,8 +130,18 @@ class ExploreMap extends React.Component {
   }
 
   changeLayerOrder(dataset) {
-    if (dataset.index && typeof this.mapLayers[dataset.layers[0].layer_id].setZIndex === 'function') {
-      this.mapLayers[dataset.layers[0].layer_id].setZIndex(dataset.index);
+    const layer = this.mapLayers[dataset.layers[0].layer_id];
+    if (dataset.index !== undefined && layer && typeof layer.setZIndex === 'function') {
+      layer.index = dataset.index;
+      layer.setZIndex(dataset.index);
+    }
+  }
+
+  changeLayerOpacity(dataset) {
+    const layer = this.mapLayers[dataset.layers[0].layer_id];
+    if (dataset.opacity !== undefined && layer && typeof layer.setOpacity === 'function') {
+      layer.setOpacity(dataset.opacity);
+      layer.opacity = dataset.opacity;
     }
   }
 

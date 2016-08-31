@@ -163,6 +163,9 @@
       > svg {
         fill: $inverse-font-color;
       }
+      &.-hide {
+        opacity: .5;
+      }
       &.-info {
         font-family: $header-font-family;
         text-transform: none;
