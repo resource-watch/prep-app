@@ -19,6 +19,7 @@ class ChartCard extends React.Component {
     return (
       <ContentCard
         header={header}
+        link={this.props.link}
         downloadUrl={downloadUrl}
         attribution={this.props.data.attribution}
         size={this.props.size}
@@ -65,6 +66,10 @@ ChartCard.propTypes = {
    * Define it the card has border
    */
   noBorder: React.PropTypes.bool,
+  /**
+   * Define it the card has link
+   */
+  link: React.PropTypes.string,
   /**
    * Define layers data to the map
    */

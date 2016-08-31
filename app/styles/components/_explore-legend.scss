@@ -61,6 +61,8 @@
 }
 
 .legend-layer{
+  position: relative;
+
   padding: .5rem 0 .5rem .5rem;
   border-bottom: 1px solid $main-color;
 
@@ -80,6 +82,7 @@
     cursor: row-resize;
     position: absolute;
     left: .5rem;
+    top: 10px;
     > svg {
       fill: rgba($inverse-font-color, .4)
     }
@@ -87,8 +90,60 @@
 
   .legend {
     display: block;
-    height: 10px;
-    background: linear-gradient(to right, #00009C , #0046FF , #00FFFF , #0CFFCD , #68FF8A , #FEFF00 , #FF8F00 , #FF0000 , #800000);
+    margin-top: .5rem;
+
+    font-size: $micro-font-size;
+
+    &.-gradient {
+      > .colors {
+        height: 7px;
+        margin-bottom: 1px;
+      }
+      > .values {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+    &.-cloropleth {
+      span {
+        width: 100%;
+        display: block;
+        text-align: center;
+        &.-color {
+          height: 7px;
+          margin-bottom: 1px;
+        }
+      }
+    }
+    &.-basic, &.-line {
+      .item {
+        display: flex;
+        align-items: center;
+        margin: 5px 0;
+        > .color, >.icon {
+          flex-shrink: 0;
+          display: block;
+          height: 13px;
+          width: 13px;
+          margin-right: .5rem;
+        }
+        >.icon {
+          width: 18px;
+          height: 18px;
+          background-size: cover;
+        }
+        > .value {
+          opacity: 0.7;
+          line-height: 1.5;
+        }
+      }
+    }
+    &.-line {
+      .item > .color {
+        width: 20px;
+        height: 2px;
+      }
+    }
   }
 
   .layer-actions {

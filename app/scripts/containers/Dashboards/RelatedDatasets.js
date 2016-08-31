@@ -9,8 +9,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getDatasetById: (id) => {
-    dispatch(getDatasetById(id));
+  getDatasetById: (id, includes) => {
+    dispatch(getDatasetById(id, includes));
     dispatch(getDatasetMetadata(id));
   }
 });

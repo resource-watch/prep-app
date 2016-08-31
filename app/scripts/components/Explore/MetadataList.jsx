@@ -1,14 +1,14 @@
 import React from 'react';
 
 function MetadataInfo(props) {
-  let title = props.data.attributes.error
+  let title = props.data.attributes.message
     ? <li>
-      <span>Error: </span>
-      <span>{props.data.attributes.error}</span>
+      <span>Info: </span>
+      <span>{props.data.attributes.message}</span>
     </li>
     : <li>
       <span>Description: </span>
-      <span>{props.data.attributes['short-description']
+      <span>{props.short
         ? props.data.attributes['short-description']
         : props.data.attributes.description}
       </span>
@@ -45,6 +45,10 @@ function MetadataInfo(props) {
 }
 
 MetadataInfo.propTypes = {
+  /**
+   * Switch between short and long description
+   */
+  short: React.PropTypes.bool,
   /**
    * Define the metadata info
    */
