@@ -48,7 +48,7 @@ MetadataInfo.propTypes = {
   /**
    * Switch between short and long description
    */
-  short: React.PropTypes.boolean,
+  short: React.PropTypes.bool,
   /**
    * Define the metadata info
    */
