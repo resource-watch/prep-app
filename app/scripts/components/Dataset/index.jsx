@@ -44,13 +44,14 @@ class DatasetDetail extends React.Component {
       return <LoadingSpinner />;
     }
 
-    const data = this.props.data.metadata.length > 0 ?
-      this.props.data.metadata[0].info :
-      {
+    const downloadUrl = this.props.data.data_path || '';
+    const data = this.props.data.metadata.length > 0
+      ? this.props.data.metadata[0].info
+      : {
         id: this.props.data.id,
         attributes: {
           title: this.props.data.name,
-          message: 'There is not metadata for this dataset.'
+          message: 'Content cooming soon'
         }
       };
 
@@ -58,7 +59,7 @@ class DatasetDetail extends React.Component {
 
     return (
       <div>
-        <SectionIntro data={data} currentSection={'explore'} >
+        <SectionIntro data={data} downloadUrl={downloadUrl} currentSection={'explore'} >
           <MetadataList data={data} />
         </SectionIntro>
 
