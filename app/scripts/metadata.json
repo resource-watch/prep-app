@@ -145,8 +145,8 @@
     "metaTitle": "Resources",
     "metaDescription": "",
     "title": "Resources",
-    "bannerSize": "medium",
-    "bannerBg": "insight"
+    "bannerSize": "small",
+    "bannerBg": "resources"
   },
   {
     "name": "contact",
