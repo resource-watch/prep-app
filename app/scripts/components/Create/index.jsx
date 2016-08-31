@@ -1,14 +1,20 @@
 import React from 'react';
-import Article from '../Content/Article';
+import Form from '../Form';
 
-function Create(props) {
-  return (
-    <div className="c-partners">
-      <Article>
-        <p>Content comming soon.</p>
-      </Article>
-    </div>
-  );
+class Create extends React.Component {
+
+  render() {
+    return (
+      <article className="c-article">
+        <div className="row align-center">
+          <div className="column small-12 medium-8">
+            <h2>Request access</h2>
+            <Form type="Request access" />
+          </div>
+        </div>
+      </article>
+    );
+  }
 }
 
 export default Create;

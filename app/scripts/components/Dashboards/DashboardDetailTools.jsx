@@ -2,10 +2,10 @@ import React from 'react';
 import Card from '../Cards/Card';
 
 function DashboardDetailTools(props) {
-  let content = [];
-  if (props.data.length) {
-    props.data.forEach((card, index) => {
-      content.push(
+  return (
+    props.data.length
+    ? <div className="row align-stretch">
+      {props.data.map((card, index) => (
         <div
           className="columns small-12 medium-6"
           key={`tool-card-${index}`}
@@ -26,15 +26,14 @@ function DashboardDetailTools(props) {
             }
           </Card>
         </div>
-      );
-    });
-  } else {
-    content = (<div className="column small-12"><p>There is no tools associated with that dashboard yet</p></div>);
-  }
-
-  return (
-    <div className="row align-stretch">
-      {content}
+      ))}
+    </div>
+    : <div className="c-article">
+      <div className="row align-center">
+        <div className="column small-12 medium-8">
+          <p>There is no tools associated with this dashboard yet</p>
+        </div>
+      </div>
     </div>
   );
 }

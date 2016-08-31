@@ -17,6 +17,13 @@
 
   &.-inverse { color: $button-font-color-inverse; }
 
+  &.-filled {
+    color: $button-font-color-inverse;
+    background-color: $main-color;
+
+    &.-secondary-color { background-color: $secondary-color; }
+  }
+
   &.-action {
     display: flex;
     align-items: center;

@@ -1,0 +1,112 @@
+.c-form {
+  margin: $small-margin 0;
+
+  .error-message {
+    display: none;
+    color: red;
+    &.-active { display: inherit; }
+  }
+
+  .success-message {
+    display: flex;
+    color: $thirth-color;
+    padding: $medium-margin;
+    border: 1px solid $border-color;
+
+    .check{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: rem(25);
+      height: rem(25);
+      border-radius: 50%;
+      border: 1px solid $thirth-color;
+      margin-right: rem(10);
+
+      svg { fill: $thirth-color; }
+    }
+
+    p { margin: 0; }
+  }
+}
+
+.c-form-container {
+  position: relative;
+  padding: $medium-margin;
+  border: 2px solid $border-color;
+
+  label {
+    margin-right: $small-margin;
+    font-weight: bold;
+
+    @media #{$mq-medium} {
+      // width: 46%;
+      flex: 1;
+      text-align: right;
+    }
+  }
+
+  input,
+  select,
+  textarea {
+    color: $base-font-color;
+    font-family: $base-font-family;
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+  }
+
+  input,
+  select {
+    flex-grow: 1;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid $border-color;
+  }
+
+  textarea {
+    flex-grow: 1;
+    border: 2px solid $border-color;
+    min-height: rem(150);
+  }
+
+  /* Mailchimp classes */
+  .mc-field-group,
+  .form-row {
+    display: flex;
+    align-items: center;
+    margin: 0 0 $small-margin 0;
+
+    label {
+      min-width: 40%;
+    }
+
+    &.-hidden {
+      position: absolute;
+      width: 0;
+      height: 0;
+      visibility: hidden;
+    }
+
+    &.textarea {
+      flex-flow: column;
+
+      label {
+        min-width: 0;
+        text-align: left;
+        font-weight: normal;
+        margin-right: 0;
+        margin-bottom: 1rem;
+      }
+
+      label, textarea {
+        width: 100%;
+      }
+    }
+  }
+
+  .form-actions {
+    position: absolute;
+    bottom: -15px;
+    right: -15px;
+  }
+}
