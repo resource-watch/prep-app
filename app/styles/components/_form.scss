@@ -62,7 +62,7 @@
         flex-grow: 1;
         background-color: transparent;
         border: 0;
-        border-bottom: rem(2) solid $border-color;
+        border-bottom: rem(1) solid $border-color;
         margin-bottom: rem(20);
       }
 
@@ -80,7 +80,7 @@
         }
 
         textarea {
-          border: rem(2) solid $border-color;
+          border: rem(1) solid $border-color;
         }
       }
     }
