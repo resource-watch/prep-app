@@ -93,8 +93,8 @@ export function getDatasets(defaultActiveLayers) {
   };
 }
 
-export function getDatasetById(datasetId, includes) {
-  includes = includes || [];
+export function getDatasetById(datasetId, includesData) {
+  const includes = includesData || [];
   const includeQuery = includes.length > 0 ?
     `&includes=${includes.join(',')}` :
     '';
