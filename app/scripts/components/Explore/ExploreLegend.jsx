@@ -27,7 +27,7 @@ function getBasicLegend(layer) {
               ? <span className="icon" style={{ backgroundImage: `url(${item.icon})` }}></span>
               : <span className="color" style={{ backgroundColor: item.color }}></span>
             }
-            <span className="value"> {item.name} </span>
+            <span className="value"> {item.name ? item.name : item.value} </span>
           </div>
         </div>
       ))}
