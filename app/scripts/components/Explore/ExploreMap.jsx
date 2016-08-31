@@ -131,7 +131,7 @@ class ExploreMap extends React.Component {
 
   changeLayerOrder(dataset) {
     const layer = this.mapLayers[dataset.layers[0].layer_id];
-    if (dataset.index !== undefined && typeof layer.setZIndex === 'function') {
+    if (dataset.index !== undefined && layer && typeof layer.setZIndex === 'function') {
       layer.index = dataset.index;
       layer.setZIndex(dataset.index);
     }
@@ -139,7 +139,7 @@ class ExploreMap extends React.Component {
 
   changeLayerOpacity(dataset) {
     const layer = this.mapLayers[dataset.layers[0].layer_id];
-    if (dataset.opacity !== undefined && typeof layer.setOpacity === 'function') {
+    if (dataset.opacity !== undefined && layer && typeof layer.setOpacity === 'function') {
       layer.setOpacity(dataset.opacity);
       layer.opacity = dataset.opacity;
     }
