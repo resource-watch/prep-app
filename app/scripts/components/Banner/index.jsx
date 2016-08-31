@@ -7,8 +7,8 @@ import dashboardBg from '../../../images/bg/bg-dashboard.png';
 import insightsBg from '../../../images/bg/bg-insights.jpg';
 import partnershipEngagementBg from '../../../images/bg/bg-partnership-engagement.jpg';
 import partnershipPlatformsBg from '../../../images/bg/bg-partnership-platforms.jpg';
-import contactBg from '../../../images/bg/bg-contact.png';
-import resourcesBg from '../../../images/bg/bg-resources.png';
+import contactBg from '../../../images/bg/bg-contact.jpg';
+import resourcesBg from '../../../images/bg/bg-resources.jpg';
 import createBg from '../../../images/bg/bg-create.jpg';
 import partnersBg from '../../../images/bg/bg-partners.jpg';
 

@@ -30,48 +30,46 @@ function Resources() {
 
         <div className="row align-stretch">
           <div className="columns small-12 medium-4">
+            <div className="c-article-module">
+              <Thumbnail
+                url={'http://www.ipcc.ch/report/ars/'}
+                src={ipccLogo}
+                alt={'Intergovernmental Panel on Climate Change'}
+                border={'neutral'}
+              />
 
-
-            <Thumbnail
-              url={'http://www.ipcc.ch/report/ars/'}
-              src={ipccLogo}
-              alt={'Intergovernmental Panel on Climate Change'}
-              border={'neutral'}
-            />
-
-            <h3>IPCC 5th Assessment Report</h3>
-            <p>
-              The Intergovernmental Panel on Climate Change (IPCC) is the international
-              body for assessing the science related to climate change. The IPCC’s periodic
-              assessments of the causes, impacts and possible response strategies to climate
-              change are the most comprehensive and up-to-date reports available on the subject,
-              and form the standard reference for all concerned with climate change in academia,
-              government and industry worldwide.
-            </p>
-            <a href={'http://www.ipcc.ch/report/ar5/'} target="_blank">HTTP://WWW.IPCC.CH/REPORT/AR5/</a>
-
-
+              <h3>IPCC 5th Assessment Report</h3>
+              <p>
+                The Intergovernmental Panel on Climate Change (IPCC) is the international
+                body for assessing the science related to climate change. The IPCC’s periodic
+                assessments of the causes, impacts and possible response strategies to climate
+                change are the most comprehensive and up-to-date reports available on the subject,
+                and form the standard reference for all concerned with climate change in academia,
+                government and industry worldwide.
+              </p>
+              <a href={'http://www.ipcc.ch/report/ar5/'} target="_blank">HTTP://WWW.IPCC.CH/REPORT/AR5/</a>
+            </div>
           </div>
 
           <div className="columns small-12 medium-4">
+            <div className="c-article-module">
+              <Thumbnail
+                url={'http://nca2014.globalchange.gov/'}
+                src={ncaLogo}
+                alt={'National Climate Assessment'}
+                border={'neutral'}
+              />
 
-            <Thumbnail
-              url={'http://nca2014.globalchange.gov/'}
-              src={ncaLogo}
-              alt={'National Climate Assessment'}
-              border={'neutral'}
-            />
-
-            <h3>U.S. National Climate Assessment</h3>
-            <p>
-              The National Climate Assessment summarizes the impacts of climate change on the
-              United States, now and in the future. A team of more than 300 experts guided by a
-              60-member Federal Advisory Committee produced the report, which was extensively
-              reviewed by the public and experts, including federal agencies and a panel of the
-              National Academy of Sciences.
-            </p>
-            <a href={'http://nca2014.globalchange.gov/'} target="_blank">HTTP://NCA2014.GLOBALCHANGE.GOV/</a>
-
+              <h3>U.S. National Climate Assessment</h3>
+              <p>
+                The National Climate Assessment summarizes the impacts of climate change on the
+                United States, now and in the future. A team of more than 300 experts guided by a
+                60-member Federal Advisory Committee produced the report, which was extensively
+                reviewed by the public and experts, including federal agencies and a panel of the
+                National Academy of Sciences.
+              </p>
+              <a href={'http://nca2014.globalchange.gov/'} target="_blank">HTTP://NCA2014.GLOBALCHANGE.GOV/</a>
+            </div>
           </div>
         </div>
       </Article>
@@ -81,109 +79,104 @@ function Resources() {
 
         <div className="row align-stretch">
           <div className="columns small-12 medium-4">
-
-
-            <Thumbnail
-              url={'HTTPS://TOOLKIT.CLIMATE.GOV/'}
-              src={usToolkitLogo}
-              alt={'U.S. Climate Resilience Toolkit'}
-              border={'neutral'}
-            />
-
-            <h3>U.S. Climate Resilience Toolkit</h3>
-            <p>
-              The U.S. Climate Resilience Toolkit includes a framework and tools to understand and address climate
-              issues that impact people and their communities. The goal is to improve people’s ability to understand
-              and manage their climate-related risks and opportunities, and to help them make their communities and
-              businesses more resilient to extreme events.
-            </p>
-            <a href={'HTTPS://TOOLKIT.CLIMATE.GOV/'} target="_blank">HTTPS://TOOLKIT.CLIMATE.GOV/</a>
-
+            <div className="c-article-module">
+              <Thumbnail
+                url={'HTTPS://TOOLKIT.CLIMATE.GOV/'}
+                src={usToolkitLogo}
+                alt={'U.S. Climate Resilience Toolkit'}
+                border={'neutral'}
+              />
+              <h3>U.S. Climate Resilience Toolkit</h3>
+              <p>
+                The U.S. Climate Resilience Toolkit includes a framework and tools to understand and address climate
+                issues that impact people and their communities. The goal is to improve people’s ability to understand
+                and manage their climate-related risks and opportunities, and to help them make their communities and
+                businesses more resilient to extreme events.
+              </p>
+              <a href={'HTTPS://TOOLKIT.CLIMATE.GOV/'} target="_blank">HTTPS://TOOLKIT.CLIMATE.GOV/</a>
+            </div>
           </div>
 
           <div className="columns small-12 medium-4">
-
-
-            <Thumbnail
-              url={'HTTP://WWW.UKCIP.ORG.UK/WIZARD/'}
-              src={ukcipLogo}
-              alt={'UK Climate Impacts Wizard'}
-              border={'neutral'}
-            />
-
-            <h3>UK Climate Impacts Wizard</h3>
-            <p>
-              The UK Climate Wizard is a 5-step process to help you assess your organisation’s vulnerability to
-              current climate and future climate change, identify options to address your organisation’s key climate
-              risks, and help you develop and implement a climate change adaptation strategy.
-            </p>
-            <a href={'HTTP://WWW.UKCIP.ORG.UK/WIZARD/'} target="_blank">HTTP://WWW.UKCIP.ORG.UK/WIZARD/</a>
-
+            <div className="c-article-module">
+              <Thumbnail
+                url={'HTTP://WWW.UKCIP.ORG.UK/WIZARD/'}
+                src={ukcipLogo}
+                alt={'UK Climate Impacts Wizard'}
+                border={'neutral'}
+              />
+              <h3>UK Climate Impacts Wizard</h3>
+              <p>
+                The UK Climate Wizard is a 5-step process to help you assess your organisation’s vulnerability to
+                current climate and future climate change, identify options to address your organisation’s key climate
+                risks, and help you develop and implement a climate change adaptation strategy.
+              </p>
+              <a href={'HTTP://WWW.UKCIP.ORG.UK/WIZARD/'} target="_blank">HTTP://WWW.UKCIP.ORG.UK/WIZARD/</a>
+            </div>
           </div>
 
           <div className="columns small-12 medium-4">
+            <div className="c-article-module">
+              <Thumbnail
+                url={'HTTP://CAL-ADAPT.ORG/'}
+                src={calAdaptLogo}
+                alt={'Cal-Adapt'}
+                border={'neutral'}
+              />
 
-            <Thumbnail
-              url={'HTTP://CAL-ADAPT.ORG/'}
-              src={calAdaptLogo}
-              alt={'Cal-Adapt'}
-              border={'neutral'}
-            />
-
-            <h3>Cal-Adapt</h3>
-            <p>
-              Cal-Adapt is a web-based climate adaptation planning tool designed to provide access to up-to-date
-              information and data produced by the State of California's scientific and research community. The
-              website provides interactive visualization tools, access to data, a community forum, local climate
-              stories, climate education, and links to additional climate resources.
-            </p>
-            <a href={'HTTP://CAL-ADAPT.ORG/'} target="_blank">HTTP://CAL-ADAPT.ORG/</a>
-
+              <h3>Cal-Adapt</h3>
+              <p>
+                Cal-Adapt is a web-based climate adaptation planning tool designed to provide access to up-to-date
+                information and data produced by the State of California's scientific and research community. The
+                website provides interactive visualization tools, access to data, a community forum, local climate
+                stories, climate education, and links to additional climate resources.
+              </p>
+              <a href={'HTTP://CAL-ADAPT.ORG/'} target="_blank">HTTP://CAL-ADAPT.ORG/</a>
+            </div>
           </div>
         </div>
 
         <div className="row align-stretch">
           <div className="columns small-12 medium-4">
+            <div className="c-article-module">
+              <Thumbnail
+                url={'HTTP://C40-PRODUCTION-IMAGES.S3.AMAZONAWS.COM/OTHER_UPLOADS/IMAGES/445_C40_CRAFT_V11.ORIGINAL.PDF?1453129528'}
+                src={c40Logo}
+                alt={'The Climate Risk and Adaptation Framework and Taxonomy'}
+                border={'neutral'}
+              />
 
-            <Thumbnail
-              url={'HTTP://C40-PRODUCTION-IMAGES.S3.AMAZONAWS.COM/OTHER_UPLOADS/IMAGES/445_C40_CRAFT_V11.ORIGINAL.PDF?1453129528'}
-              src={c40Logo}
-              alt={'The Climate Risk and Adaptation Framework and Taxonomy'}
-              border={'neutral'}
-            />
-
-            <h3>The Climate Risk and Adaptation Framework and Taxonomy</h3>
-            <p>
-              (CRAFT) is a standardized reporting framework to help cities assess their progress in adaptation
-              planning, identify areas for improvement, and collectively advocate for resources to support their
-              adaptation efforts.
-            </p>
-            <a
-              href={'HTTP://C40-PRODUCTION-IMAGES.S3.AMAZONAWS.COM/OTHER_UPLOADS/IMAGES/445_C40_CRAFT_V11.ORIGINAL.PDF?1453129528'}
-              target="_blank">HTTP://C40-PRODUCTION-IMAGES.S3.AMAZONAWS.COM/OTHER_UPLOADS/
-              IMAGES/445_C40_CRAFT_V11.ORIGINAL.PDF?1453129528</a>
-
-
+              <h3>The Climate Risk and Adaptation Framework and Taxonomy</h3>
+              <p>
+                (CRAFT) is a standardized reporting framework to help cities assess their progress in adaptation
+                planning, identify areas for improvement, and collectively advocate for resources to support their
+                adaptation efforts.
+              </p>
+              <a
+                href={'HTTP://C40-PRODUCTION-IMAGES.S3.AMAZONAWS.COM/OTHER_UPLOADS/IMAGES/445_C40_CRAFT_V11.ORIGINAL.PDF?1453129528'}
+                target="_blank">HTTP://C40-PRODUCTION-IMAGES.S3.AMAZONAWS.COM/OTHER_UPLOADS/
+                IMAGES/445_C40_CRAFT_V11.ORIGINAL.PDF?1453129528</a>
+            </div>
           </div>
 
           <div className="columns small-12 medium-4">
+            <div className="c-article-module">
+              <Thumbnail
+                url={'HTTP://WWW.ADAPTATIONLEARNING.NET/'}
+                src={almLogo}
+                alt={'Adaptation Learning Mechanism'}
+                border={'neutral'}
+              />
 
-            <Thumbnail
-              url={'HTTP://WWW.ADAPTATIONLEARNING.NET/'}
-              src={almLogo}
-              alt={'Adaptation Learning Mechanism'}
-              border={'neutral'}
-            />
-
-            <h3>Adaptation Learning Mechanism</h3>
-            <p>
-              The ALM represents a collaborative, global learning process, with leadership, facilitation and strong
-              participation by Southern institutions. Seeking to provide stakeholders with a common platform for sharing
-              and learning, the ALM bridges knowledge gaps by bringing relevant knowledge and stakeholders together to
-              exchange information, experiences, and expertise.
-            </p>
-            <a href={'HTTP://WWW.ADAPTATIONLEARNING.NET/'} target="_blank">HTTP://WWW.ADAPTATIONLEARNING.NET/</a>
-
+              <h3>Adaptation Learning Mechanism</h3>
+              <p>
+                The ALM represents a collaborative, global learning process, with leadership, facilitation and strong
+                participation by Southern institutions. Seeking to provide stakeholders with a common platform for sharing
+                and learning, the ALM bridges knowledge gaps by bringing relevant knowledge and stakeholders together to
+                exchange information, experiences, and expertise.
+              </p>
+              <a href={'HTTP://WWW.ADAPTATIONLEARNING.NET/'} target="_blank">HTTP://WWW.ADAPTATIONLEARNING.NET/</a>
+            </div>
           </div>
         </div>
 
@@ -194,107 +187,102 @@ function Resources() {
 
         <div className="row align-stretch">
           <div className="columns small-12 medium-4">
+            <div className="c-article-module">
+              <Thumbnail
+                url={'HTTPS://CLIMATE.COPERNICUS.EU/'}
+                src={copernicusLogo}
+                alt={'Copernicus – Climate Service'}
+                border={'neutral'}
+              />
 
-
-            <Thumbnail
-              url={'HTTPS://CLIMATE.COPERNICUS.EU/'}
-              src={copernicusLogo}
-              alt={'Copernicus – Climate Service'}
-              border={'neutral'}
-            />
-
-            <h3>Copernicus – Climate Service</h3>
-            <p>
-              Copernicus consists of a complex set of systems which collect data from multiple sources: earth
-              observation satellites and in situ sensors such as ground stations, airborne and sea-borne sensors. It
-              processes these data and provides users with reliable and up-to-date information through a set of services
-              related to environmental and security issues.
-            </p>
-            <a href={'HTTPS://CLIMATE.COPERNICUS.EU/'} target="_blank">HTTPS://CLIMATE.COPERNICUS.EU/</a>
-
+              <h3>Copernicus – Climate Service</h3>
+              <p>
+                Copernicus consists of a complex set of systems which collect data from multiple sources: earth
+                observation satellites and in situ sensors such as ground stations, airborne and sea-borne sensors. It
+                processes these data and provides users with reliable and up-to-date information through a set of services
+                related to environmental and security issues.
+              </p>
+              <a href={'HTTPS://CLIMATE.COPERNICUS.EU/'} target="_blank">HTTPS://CLIMATE.COPERNICUS.EU/</a>
+            </div>
           </div>
 
           <div className="columns small-12 medium-4">
+            <div className="c-article-module">
+              <Thumbnail
+                url={'HTTP://CLIMATE.DATA.GOV'}
+                src={climateDataGovLogo}
+                alt={'Climate.Data.Gov'}
+                border={'neutral'}
+              />
 
-
-            <Thumbnail
-              url={'HTTP://CLIMATE.DATA.GOV'}
-              src={climateDataGovLogo}
-              alt={'Climate.Data.Gov'}
-              border={'neutral'}
-            />
-
-            <h3>Climate.Data.Gov</h3>
-            <p>
-              Climate.Data.Gov provides access to Federal data related to climate change that can help inform and
-              prepare America’s communities, businesses, and citizens for the changing climate. You can currently find
-              data and resources related to coastal flooding, food resilience, water, ecosystem vulnerability, human
-              health, energy infrastructure, transportation and the Arctic region.
-            </p>
-            <a href={'HTTP://CLIMATE.DATA.GOV'} target="_blank">CLIMATE.DATA.GOV</a>
-
+              <h3>Climate.Data.Gov</h3>
+              <p>
+                Climate.Data.Gov provides access to Federal data related to climate change that can help inform and
+                prepare America’s communities, businesses, and citizens for the changing climate. You can currently find
+                data and resources related to coastal flooding, food resilience, water, ecosystem vulnerability, human
+                health, energy infrastructure, transportation and the Arctic region.
+              </p>
+              <a href={'HTTP://CLIMATE.DATA.GOV'} target="_blank">CLIMATE.DATA.GOV</a>
+            </div>
           </div>
 
           <div className="columns small-12 medium-4">
-
-            <Thumbnail
-              url={'HTTP://IRIDL.LDEO.COLUMBIA.EDU/INDEX.HTML?SET-LANGUAGE=EN'}
-              src={iriLogo}
-              alt={'IRI/LDEO climate data Library'}
-              border={'neutral'}
-            />
-
-            <h3>IRI/LDEO climate data Library</h3>
-            <p>
-              The IRI Data Library is an online data repository and analysis tool that allows a user to view, analyze,
-              and download hundreds of terabytes of climate-related data through a standard web browser
-            </p>
-            <a href={'HTTP://IRIDL.LDEO.COLUMBIA.EDU/INDEX.HTML?SET-LANGUAGE=EN'} target="_blank">HTTP://IRIDL.LDEO.COLUMBIA.EDU/INDEX.HTML?SET-LANGUAGE=EN</a>
-
+            <div className="c-article-module">
+              <Thumbnail
+                url={'HTTP://IRIDL.LDEO.COLUMBIA.EDU/INDEX.HTML?SET-LANGUAGE=EN'}
+                src={iriLogo}
+                alt={'IRI/LDEO climate data Library'}
+                border={'neutral'}
+              />
+              <h3>IRI/LDEO climate data Library</h3>
+              <p>
+                The IRI Data Library is an online data repository and analysis tool that allows a user to view, analyze,
+                and download hundreds of terabytes of climate-related data through a standard web browser
+              </p>
+              <a href={'HTTP://IRIDL.LDEO.COLUMBIA.EDU/INDEX.HTML?SET-LANGUAGE=EN'} target="_blank">HTTP://IRIDL.LDEO.COLUMBIA.EDU/INDEX.HTML?SET-LANGUAGE=EN</a>
+            </div>
           </div>
         </div>
 
         <div className="row align-stretch">
           <div className="columns small-12 medium-4">
+            <div className="c-article-module">
+              <Thumbnail
+                url={'HTTP://WWW.SERVIRGLOBAL.NET/'}
+                src={servirLogo}
+                alt={'SERVIR'}
+                border={'neutral'}
+              />
 
-            <Thumbnail
-              url={'HTTP://WWW.SERVIRGLOBAL.NET/'}
-              src={servirLogo}
-              alt={'SERVIR'}
-              border={'neutral'}
-            />
-
-            <h3>SERVIR</h3>
-            <p>
-              A joint development initiative of National Aeronautics and Space Administration (NASA) and United States
-              Agency for International Development (USAID), SERVIR works in partnership with leading regional
-              organizations world-wide to help developing countries use information provided by Earth observing
-              satellites and geospatial technologies for managing climate risks and land use.
-            </p>
-            <a
-              href={'HTTP://WWW.SERVIRGLOBAL.NET/'}
-              target="_blank">HTTP://WWW.SERVIRGLOBAL.NET/</a>
-
-
+              <h3>SERVIR</h3>
+              <p>
+                A joint development initiative of National Aeronautics and Space Administration (NASA) and United States
+                Agency for International Development (USAID), SERVIR works in partnership with leading regional
+                organizations world-wide to help developing countries use information provided by Earth observing
+                satellites and geospatial technologies for managing climate risks and land use.
+              </p>
+              <a
+                href={'HTTP://WWW.SERVIRGLOBAL.NET/'}
+                target="_blank">HTTP://WWW.SERVIRGLOBAL.NET/</a>
+            </div>
           </div>
 
           <div className="columns small-12 medium-4">
-
-            <Thumbnail
-              url={'HTTP://SDWEBX.WORLDBANK.ORG/CLIMATEPORTAL/?PAGE=CLIMATE_DATA'}
-              src={worldBankLogo}
-              alt={'World Bank Climate Knowledge Portal'}
-              border={'neutral'}
-            />
-
-            <h3>World Bank Climate Knowledge Portal</h3>
-            <p>
-              The Climate Change Knowledge Portal (CCKP) Beta is a central hub of information, data and reports about
-              climate change around the world. In the CCKP you can query, map, compare, chart and summarize key climate
-              and climate-related information
-            </p>
-            <a href={'HTTP://SDWEBX.WORLDBANK.ORG/CLIMATEPORTAL/?PAGE=CLIMATE_DATA'} target="_blank">HTTP://SDWEBX.WORLDBANK.ORG/CLIMATEPORTAL/?PAGE=CLIMATE_DATA</a>
-
+            <div className="c-article-module">
+              <Thumbnail
+                url={'HTTP://SDWEBX.WORLDBANK.ORG/CLIMATEPORTAL/?PAGE=CLIMATE_DATA'}
+                src={worldBankLogo}
+                alt={'World Bank Climate Knowledge Portal'}
+                border={'neutral'}
+              />
+              <h3>World Bank Climate Knowledge Portal</h3>
+              <p>
+                The Climate Change Knowledge Portal (CCKP) Beta is a central hub of information, data and reports about
+                climate change around the world. In the CCKP you can query, map, compare, chart and summarize key climate
+                and climate-related information
+              </p>
+              <a href={'HTTP://SDWEBX.WORLDBANK.ORG/CLIMATEPORTAL/?PAGE=CLIMATE_DATA'} target="_blank">HTTP://SDWEBX.WORLDBANK.ORG/CLIMATEPORTAL/?PAGE=CLIMATE_DATA</a>
+            </div>
           </div>
         </div>
 
