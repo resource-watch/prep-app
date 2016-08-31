@@ -8,7 +8,7 @@ function MetadataInfo(props) {
     </li>
     : <li>
       <span>Description: </span>
-      <span>{props.data.attributes['short-description']
+      <span>{props.short
         ? props.data.attributes['short-description']
         : props.data.attributes.description}
       </span>
@@ -45,6 +45,10 @@ function MetadataInfo(props) {
 }
 
 MetadataInfo.propTypes = {
+  /**
+   * Switch between short and long description
+   */
+  short: React.PropTypes.boolean,
   /**
    * Define the metadata info
    */

@@ -67,7 +67,7 @@ class Explore extends React.Component {
         <div className="content">
           <h3> {metadataInfo.attributes.title} </h3>
           <h4> {metadataInfo.attributes.subtitle} </h4>
-          <MetadataList data={metadataInfo} />
+          <MetadataList short data={metadataInfo} />
         </div>
       );
     }
