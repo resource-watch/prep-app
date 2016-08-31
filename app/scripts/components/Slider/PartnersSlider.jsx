@@ -18,7 +18,6 @@ class PartnersSlider extends Component {
       this.props.getFeaturedPartners();
     }
   }
-
   render() {
     const partners = this.props.data.map(d => (
       <div key={`partner-slider-${d.id}`}>
@@ -33,7 +32,9 @@ class PartnersSlider extends Component {
 
     return (
       <div className="c-partners-slider">
-        <h2 className="-left">Our partners</h2>
+        {this.props.route && this.props.route === '/' &&
+          <h2 className="-left">Our partners</h2>
+        }
         <Slider {...settings}>
           {partners}
         </Slider>
