@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../Button/Button';
+import { Link } from 'react-router';
 
 
 function ContentCard(props) {
@@ -27,7 +28,12 @@ function ContentCard(props) {
       <div className="header">
         <div className="title">
           {legend}
-          <h3>{props.header.title}</h3>
+          <h3>
+            {props.link
+              ? <Link to={props.link}>{props.header.title}</Link>
+              : props.header.title
+            }
+          </h3>
           <span>{subtitle}</span>
         </div>
         <div className="card-options">

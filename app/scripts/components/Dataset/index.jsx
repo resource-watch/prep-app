@@ -44,7 +44,7 @@ class DatasetDetail extends React.Component {
       return <LoadingSpinner />;
     }
 
-    const downloadUrl = this.props.data.data_path || '';
+    const downloadUrl = this.props.data.connector_url || '';
     const data = this.props.data.metadata.length > 0
       ? this.props.data.metadata[0].info
       : {

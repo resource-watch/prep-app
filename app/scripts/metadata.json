@@ -82,7 +82,7 @@
     "metaTitle": "FAQ",
     "metaDescription": "",
     "title": "FAQ",
-    "bannerSize": "medium",
+    "bannerSize": "small",
     "bannerBg": "home"
   },
   {
@@ -128,7 +128,7 @@
     "metaDescription": "",
     "title": "Create",
     "bannerSize": "medium",
-    "bannerBg": "insight"
+    "bannerBg": "create"
   },
   {
     "name": "partners",
@@ -154,7 +154,7 @@
     "metaTitle": "Contact",
     "metaDescription": "",
     "title": "Contact",
-    "bannerSize": "medium",
+    "bannerSize": "small",
     "bannerBg": "contact"
   }
 ]
