@@ -19,16 +19,15 @@
   > .c-modal {
     position: relative;
     background-color:$base-bg-color;
-    width: 100%;
+    width: 80%;
     max-width: rem($max-width);
 
     @media #{$mq-medium} {
       min-width: rem(370);
-      width: auto;
     }
 
     .m-content {
-      padding: $small-margin;
+      padding: $medium-margin;
     }
 
     > .c-nav-tab {
