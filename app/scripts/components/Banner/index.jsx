@@ -9,6 +9,8 @@ import partnershipEngagementBg from '../../../images/bg/bg-partnership-engagemen
 import partnershipPlatformsBg from '../../../images/bg/bg-partnership-platforms.jpg';
 import contactBg from '../../../images/bg/bg-contact.jpg';
 import createBg from '../../../images/bg/bg-create.jpg';
+import resourcesBg from '../../../images/bg/bg-resources.jpg';
+import partnersBg from '../../../images/bg/bg-partners.jpg';
 
 const bg = {
   defaults: homepageBg,
@@ -22,7 +24,9 @@ const bg = {
   insight: insightsBg,
   datasets: homepageBg,
   contact: contactBg,
-  create: createBg
+  create: createBg,
+  resources: resourcesBg,
+  partners: partnersBg
 };
 
 class Banner extends React.Component {
