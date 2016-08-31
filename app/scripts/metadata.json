@@ -136,8 +136,8 @@
     "metaTitle": "Partners",
     "metaDescription": "",
     "title": "Partners",
-    "bannerSize": "medium",
-    "bannerBg": "insight"
+    "bannerSize": "small",
+    "bannerBg": "partners"
   },
   {
     "name": "resources",
