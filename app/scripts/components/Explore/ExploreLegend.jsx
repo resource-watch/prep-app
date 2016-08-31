@@ -8,8 +8,11 @@ function getBasicLegend(layer) {
       {layer.attributes['legend-config'].items.map((item, index) => (
         <div className="column small-6" key={index}>
           <div className="item">
-            <span className="color" style={{ backgroundColor: item.color }}></span>
-            <span className="value"> {item.value} </span>
+            {item.icon
+              ? <span className="icon" style={{ backgroundImage: `url(${item.icon})` }}></span>
+              : <span className="color" style={{ backgroundColor: item.color }}></span>
+            }
+            <span className="value"> {item.name} </span>
           </div>
         </div>
       ))}
