@@ -14,14 +14,14 @@ class Partnership extends React.Component {
         <article className="c-article">
           <div className="row align-center">
             <div className="column small-12 medium-8">
-              <p>The Partnership for Resilience and Preparedness (PREP) is a public-private collaboration to empower a data-driven approach to building climate resilience. The Partnership aims to help planners, investors, and resource managers around the globe to more easily incorporate climate risks into their decisions by enhancing access to relevant data and insights on climate variability and change, and facilitating peer-to-peer learning. PREP will do this through: </p>
+              <p>The Partnership for Resilience and Preparedness (PREP) is a public-private collaboration to empower a data-driven approach to building climate resilience. PREP aims to help planners, investors, and resource managers more easily incorporate climate risks into their decisions by enhancing access to relevant data and facilitating collective learning through insights on climate change. PREP will do this through:</p>
 
               <h3>Engagement</h3>
-              <p>We will facilitate sustained dialogues among data/information producers and users for climate resilience.</p>
+              <p>We will promote collaboration among data and information producers and users.</p>
               <Link to="/partnership/engagement">Go to engagement</Link>
 
               <h3>Data</h3>
-              <p>We will seek to reduce the barriers to access, contribute, and use data for climate resilience.</p>
+              <p>We will seek to reduce the barriers to accessing, contributing, and using data for climate resilience.</p>
               <Link to="/partnership/data">Go to data</Link>
 
               <h3>Platforms</h3>
@@ -57,26 +57,26 @@ class Partnership extends React.Component {
         </article>
 
         <Article>
-          <h2>The need for relevant, useable climate-risk data</h2>
-          <p>With climate change already upon us, a growing number of communities, companies, and civil society organizations are looking to conduct climate vulnerability assessments, risk screening, and develop resilience plans. As a result, the demand for climate risk information is on the rise, however efforts to turn data into actionable plans are constrained by two challenges:</p>
+          <h2>The need for useable climate-risk data</h2>
+          <p>With climate change already upon us, a growing number of communities, companies, and civil society organizations are looking to assess climate vulnerability and develop resilience plans. Demand for climate risk information is on the rise, but efforts to turn data into actionable plans are constrained by two challenges:</p>
           <ul>
             <li>
-              <h4>The availability of robust, actionable information is limited</h4>
-              <p>Despite extensive data collection and analysis conducted by government and research institutions, the specific information needs of resource managers and of decision makers in communities and corporations across the globe are not being met.</p>
+              <h4>Robust, actionable data are limited</h4>
+              <p>Despite extensive data collection and analysis by government and research institutions, the information needs of resource managers and decision makers are not being met.</p>
             </li>
             <li>
-              <h4>It is difficult to find, access, and use existing data and information</h4>
-              <p>Much of the climate-relevant data that do exist are difficult to access and use because the often sit in incompatible formats in silos of a multitude of government, university, and other data servers.</p>
+              <h4>Even when data and information exist, they are difficult to find, access, and use</h4>
+              <p>Much of the climate-relevant data are difficult to access and use because they sit in incompatible formats in silos of a multitude of government, university, and other data servers.</p>
             </li>
           </ul>
-          <p>Overcoming these challenges will require maintaining a sustained dialogue among producers and users of information, promoting standards to enhance accessibility and interoperability of data and information products, and developing platforms that enhance data accessibility in ways that meet the specific needs of users seeking to understand and manage climate risks. The goal of PREP is to meet this need.</p>
+          <p>Overcoming these challenges requires collaboration among producers and users of information, standards to enhance accessibility and interoperability of data and information products, and platforms that enhance data accessibility. PREP aims to meet this need.</p>
         </Article>
 
         <article className="c-article">
           <div className="row align-center">
             <div className="column small-12 medium-8">
               <h2>The role of PREP partners</h2>
-              <p>PREP is built on a global network of collaborators from the public and private sectors and from civil society. Each participates in at least one of the PREP workgroups.</p>
+              <p>PREP is built on a global network of collaborators from the public and private sectors and from civil society. Each partner participates in at least one PREP workgroup.</p>
               <p>Actionable plans are constrained by two challenges:</p>
             </div>
           </div>

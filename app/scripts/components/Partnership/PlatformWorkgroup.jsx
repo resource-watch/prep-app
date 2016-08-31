@@ -9,10 +9,9 @@ class PlatformWorkgroup extends React.Component {
       <div className="c-partnership">
 
         <Article>
-          <p>Entities collaborate on the building of platforms to enhance access and usability of data.</p>
-          <p>The Partnership for Resilience and Preparedness works to promote the development of interoperable platforms that enhance access and usability of information for climate resilience and preparedness.</p>
-          <p>The PREP platform is currently in beta.  This helps communities access climate relevant data, explore insights from those data, and compile relevant data and tools in their own dashboards.</p>
-          <p>The Platform WorkGroup is led by WRI.</p>
+          <p>Entities that collaborate on building platforms to enhance access and usability of data.</p>
+          <p>The PREP platform, currently in beta, is designed to help users access <strong>climate relevant data</strong>, explore <strong>insights from those data</strong>, and compile relevant data and tools in their own <strong>dashboards</strong>.</p>
+          <p>The Platform Workgroup is co-led by World Resources Institute and the U.S. Department of the Interior (DOI).</p>
         </Article>
 
         <Article>
