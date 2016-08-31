@@ -57,7 +57,7 @@ export function setDatasetsTagFilter(filter, tag) {
 
 export function getDatasets(defaultActiveLayers) {
   return dispatch => {
-    fetch(`${config.apiUrlRW}/datasets?app=prep&complete=true`)
+    fetch(`${config.apiUrlRW}/datasets?app=prep`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
@@ -93,8 +93,8 @@ export function getDatasets(defaultActiveLayers) {
   };
 }
 
-export function getDatasetById(datasetId, includes) {
-  includes = includes || [];
+export function getDatasetById(datasetId, includesData) {
+  const includes = includesData || [];
   const includeQuery = includes.length > 0 ?
     `&includes=${includes.join(',')}` :
     '';

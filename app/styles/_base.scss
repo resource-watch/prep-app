@@ -142,4 +142,8 @@ p {
   .-inverse & {
     color: $inverse-font-color;
   }
+
+  &.-small {
+    font-size: $micro-font-size;
+  }
 }

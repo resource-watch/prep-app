@@ -8,16 +8,6 @@ import dashboards from '../../../images/create/dashboards.png';
 
 
 class Create extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      success: false
-    };
-  }
-
-  handleSubmit() {
-    this.setState({success: true});
-  }
 
   render() {
     return (
@@ -42,7 +32,7 @@ class Create extends React.Component {
             </div>
           </div>
 
-          <div className="c-row-module">
+          <div className="c-article-module">
             <div className="row">
               <div className="column align-middle small-12 medium-6">
                 <h3>Share Data</h3>
@@ -58,7 +48,7 @@ class Create extends React.Component {
             </div>
           </div>
 
-          <div className="c-row-module">
+          <div className="c-article-module">
             <div className="row">
               <div className="column align-middle small-12 medium-6">
                 <img src={communicate} alt="Communicate Insights" />
@@ -72,7 +62,7 @@ class Create extends React.Component {
             </div>
           </div>
 
-          <div className="c-row-module">
+          <div className="c-article-module">
             <div className="row">
               <div className="column align-middle small-12 medium-6">
                 <h3>Create personalized dashboards</h3>
@@ -95,21 +85,7 @@ class Create extends React.Component {
               <h2>Become a beta user contributor</h2>
               <p>Would you like to develop a dashboard? Or share a data insight?  Over the coming months we plan to work with communities around the globe to help them develop their own dashboards.  Please complete this form if you are interested in becoming a beta user or contributor</p>
 
-              {!this.state.success && <p>* Required field</p>}
-              <div className="c-form-container">
-                <p className="error-message">Please, fill out the hightlighted fields bellow</p>
-                {!this.state.success ?
-                  <Form type="Request access" submit={() => this.handleSubmit()} /> :
-                  <div className="success-message">
-                    <div className="check">
-                      <svg width="13" height="9" viewBox="0 0 13 9">
-                        <title>check</title>
-                        <path d="M5.744 6.997l6.514-5.465L10.972 0 4.46 5.464 1.176 3.078 0 4.696l4.854 3.527.89-1.226z" />
-                      </svg>
-                    </div>
-                    <p>Your message was sent successfully</p>
-                  </div> }
-              </div>
+              <Form type="Request access" />
             </div>
           </div>
         </article>
