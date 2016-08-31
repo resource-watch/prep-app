@@ -2,6 +2,21 @@ import React from 'react';
 import { Link } from 'react-router';
 import { SortableContainer, SortableElement, SortableHandle, arrayMove } from 'react-sortable-hoc';
 
+function getLinesLegend(layer) {
+  return (<div className="legend -line">
+    <div className="row">
+      {layer.attributes['legend-config'].items.map((item, index) => (
+        <div className="column small-6" key={index}>
+          <div className="item">
+            <span className="color" style={{ backgroundColor: item.color }}></span>
+            <span className="value"> {item.name} </span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>);
+}
+
 function getBasicLegend(layer) {
   return (<div className="legend -basic">
     <div className="row">
@@ -60,6 +75,8 @@ function getCloroplethLegend(layer) {
 
 function getLegend(layer) {
   switch (layer.attributes['legend-config'].type) {
+    case 'lines':
+      return getLinesLegend(layer);
     case 'basic':
       return getBasicLegend(layer);
     case 'gradient':
