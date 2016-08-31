@@ -16,11 +16,19 @@
     background-size: cover;
   }
 
+  .slick-prev:before, .slick-next:before {
+    font-size: 30px;
+  }
+
   .slick-prev {
     left: $medium-margin;
   }
 
   .slick-next {
     right: $medium-margin;
+  }
+
+  .slick-prev:before, .slick-next:before {
+    color: $secondary-color;
   }
 }

@@ -28,4 +28,22 @@
   .tweet-item p {
     margin: 0;
   }
+
+  .slick-prev, .slick-next {
+    top: 0;
+    margin-top: -60px;
+  }
+
+  .slick-prev {
+    left: 0;
+  }
+
+  .slick-next {
+    right: 0;
+  }
+
+  .slick-prev:before, .slick-next:before {
+    color: $secondary-color;
+    font-size: 30px;
+  }
 }
