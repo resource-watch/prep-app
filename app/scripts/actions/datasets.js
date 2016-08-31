@@ -57,7 +57,7 @@ export function setDatasetsTagFilter(filter, tag) {
 
 export function getDatasets(defaultActiveLayers) {
   return dispatch => {
-    fetch(`${config.apiUrlRW}/datasets?app=prep`)
+    fetch(`${config.apiUrlRW}/datasets?app=prep&includes=metadata`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
