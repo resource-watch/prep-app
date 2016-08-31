@@ -94,6 +94,7 @@ export function getDatasets(defaultActiveLayers) {
 }
 
 export function getDatasetById(datasetId, includes) {
+  includes = includes || [];
   const includeQuery = includes.length > 0 ?
     `&includes=${includes.join(',')}` :
     '';
