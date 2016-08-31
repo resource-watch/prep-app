@@ -2,7 +2,8 @@ import {
   MAP_DATA_CHANGED,
   TOGGLE_LAYER_STATUS,
   SET_LAYER_STATUS,
-  MAP_LAYERS_ORDER_CHANGED
+  MAP_LAYERS_ORDER_CHANGED,
+  MAP_LAYER_OPACITY_CHANGED
 } from '../constants';
 
 export function updateMapParams(params) {
@@ -30,5 +31,12 @@ export function setLayersOrder(layers) {
   return {
     type: MAP_LAYERS_ORDER_CHANGED,
     payload: layers
+  };
+}
+
+export function toggleLayerOpacity(layerId) {
+  return {
+    type: MAP_LAYER_OPACITY_CHANGED,
+    payload: layerId
   };
 }

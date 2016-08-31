@@ -72,6 +72,7 @@ export function getDatasets(defaultActiveLayers) {
                 datasets[i].active = true;
                 datasets[i].index = index + 1;
               }
+              datasets[i].opacity = 1;
             }
           }
         }
