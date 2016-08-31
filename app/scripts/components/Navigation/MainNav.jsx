@@ -20,6 +20,9 @@ function MainNav() {
         <li>
           <Link activeClassName="-current" to="/insights">Insights</Link>
         </li>
+        <li>
+          <Link activeClassName="-current" to="/resources">Resources</Link>
+        </li>
       </ul>
     </nav>
   );
