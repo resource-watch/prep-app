@@ -11,8 +11,9 @@ class Root extends React.Component {
   }
 
   componentDidMount() {
-    if (localStorage.getItem('modalWelcomeOpened') === false || localStorage.getItem('modalWelcomeOpened') === null) {
-      this.setState({modalWelcomeOpen: true});
+    if (sessionStorage.getItem('modalWelcomeOpened') === false ||
+      sessionStorage.getItem('modalWelcomeOpened') === null) {
+      this.setState({ modalWelcomeOpen: true });
     }
   }
 

@@ -24,6 +24,13 @@ class WelcomeModal extends React.Component {
             laoreet. Nam finibus elit tellus, id bibendum purus aliquam vel. Mauris vitae vulputate justo, convallis
             hendrerit purus. Donec sem erat, aliquam ut aliquet ullamcorper, venenatis.</p>
         </article>
+        <aside>
+          <div className="small-12 align-center" style={{display: 'flex'}}>
+            <Button click={() => this.props.close()} themeColor border>
+              Continue
+            </Button>
+          </div>
+        </aside>
       </div>
     );
   }
@@ -35,21 +42,10 @@ class WelcomeModal extends React.Component {
         close={this.props.close}
         hideCloseButton={this.props.hideCloseButton}
       >
-
         <div className="content">
           {this.getContent()}
         </div>
-
-        <div className="row align-center">
-          <div className="small-2">
-            <Button click={() => this.props.close()} themeColor border>
-              Continue
-            </Button>
-          </div>
-        </div>
-
       </Modal>
-
     );
   }
 }
