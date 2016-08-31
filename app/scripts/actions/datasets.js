@@ -93,9 +93,14 @@ export function getDatasets(defaultActiveLayers) {
   };
 }
 
-export function getDatasetById(datasetId) {
+export function getDatasetById(datasetId, includes) {
+  includes = includes || [];
+  const includeQuery = includes.length > 0 ?
+    `&includes=${includes.join(',')}` :
+    '';
+
   return dispatch => {
-    fetch(`${config.apiUrlRW}/datasets/${datasetId}?app=prep`)
+    fetch(`${config.apiUrlRW}/datasets/${datasetId}?app=prep${includeQuery}`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
@@ -171,8 +176,7 @@ export function getDatasetMetadata(datasetId) {
                 info: {
                   attributes: {
                     title: 'Dataset detail',
-                    error: 'There was an error getting the metadata info, ' +
-                    'please contact us hello@vizzuality.com'
+                    message: 'There is not metadata for this dataset'
                   }
                 }
               }

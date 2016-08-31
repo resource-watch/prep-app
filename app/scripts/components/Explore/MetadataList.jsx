@@ -1,10 +1,10 @@
 import React from 'react';
 
 function MetadataInfo(props) {
-  let title = props.data.attributes.error
+  let title = props.data.attributes.message
     ? <li>
-      <span>Error: </span>
-      <span>{props.data.attributes.error}</span>
+      <span>Info: </span>
+      <span>{props.data.attributes.message}</span>
     </li>
     : <li>
       <span>Description: </span>

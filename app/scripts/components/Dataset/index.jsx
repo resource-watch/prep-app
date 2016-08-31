@@ -44,30 +44,42 @@ class DatasetDetail extends React.Component {
       return <LoadingSpinner />;
     }
 
-    const data = this.props.data.attributes.info;
-    data.id = this.props.data.id;
+    const downloadUrl = this.props.data.data_path || '';
+    const data = this.props.data.metadata.length > 0
+      ? this.props.data.metadata[0].info
+      : {
+        id: this.props.data.id,
+        attributes: {
+          title: this.props.data.name,
+          message: 'Content cooming soon'
+        }
+      };
+
     const widget = this.props.widget ? this.props.widget.attributes : {};
 
-    return (<div>
-      <SectionIntro data={data} currentSection={'explore'} >
-        <MetadataList data={data} />
-      </SectionIntro>
+    return (
+      <div>
+        <SectionIntro data={data} downloadUrl={downloadUrl} currentSection={'explore'} >
+          <MetadataList data={data} />
+        </SectionIntro>
 
-      {widget && widget.widgetConfig &&
-        <div className="row">
-          <div className="columns small-12">
-            <VegaChart data={widget.widgetConfig} />
+        {widget && widget.widgetConfig &&
+          <div className="row">
+            <div className="columns small-12">
+              <VegaChart data={widget.widgetConfig} />
+            </div>
           </div>
-        </div>
-      }
-    </div>);
+        }
+      </div>
+    );
   }
 
   render() {
     const currentData = this.getCurrentData();
 
-    const data = this.props.data && this.props.data.attributes.info.attributes || null;
-    const title = data ? data.title : currentData.title;
+    const data = this.props.data && this.props.data || null;
+
+    const title = data ? data.name : currentData.title;
 
     document.title = title;
 
