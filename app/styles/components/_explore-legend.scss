@@ -41,6 +41,11 @@
     }
   }
 
+  > .content {
+    overflow: auto;
+    max-height: 50vh;
+  }
+
   &.-open {
     transform: translateY(-10px);
     transition: transform 0.3s ease-out;

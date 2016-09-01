@@ -15,7 +15,7 @@ function Partners(props) {
                 <div className="c-article-module">
                   <Thumbnail
                     url={partner.url}
-                    src={config.apiUrl + partner.logo_medium}
+                    src={config.apiUrl + partner.logo_large}
                     alt={partner.name}
                     border={'neutral'}
                   />

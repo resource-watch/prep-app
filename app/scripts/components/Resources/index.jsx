@@ -1,6 +1,5 @@
 import React from 'react';
 import Article from '../Content/Article';
-import Card from '../Cards/Card';
 import Thumbnail from '../Thumbnails/Thumbnail';
 import ipccLogo from '../../../images/resources/ipcc_logo.png';
 import ncaLogo from '../../../images/resources/nationalClimateAsset_logo.png';
@@ -19,8 +18,8 @@ function Resources() {
   return (
     <div className="c-partners">
       <div className="sliced"></div>
-      
-      <Article>
+
+      <Article no-border>
         <p>Here are selected resources for understanding the impacts of climate change,
           tools for building resilience to climate change, and finding additional
           climate relevant data.
