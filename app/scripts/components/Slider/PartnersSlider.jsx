@@ -23,7 +23,7 @@ class PartnersSlider extends Component {
       <div key={`partner-slider-${d.id}`}>
         <a href={d.url} rel="noreferrer" target="_blank" className="logo">
           <img
-            src={config.apiUrl + d.white_logo_medium}
+            src={config.apiUrl + d.images.white_logo}
             alt={d.name}
           />
         </a>
