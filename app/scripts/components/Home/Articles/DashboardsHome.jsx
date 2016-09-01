@@ -34,7 +34,6 @@ class DashboardsHome extends React.Component {
               <ChartCard
                 size="large"
                 title={this.widget1.title}
-                legend={metadata[0].widgets[0].category}
                 data={this.widget1}
               />
             </div>
@@ -45,7 +44,6 @@ class DashboardsHome extends React.Component {
             <div className="column small-12 medium-6" style={{display: 'flex'}}>
               <ChartCard
                 title={this.widget2.title}
-                legend={metadata[0].widgets[1].category}
                 data={this.widget2}
               />
             </div>
@@ -55,7 +53,6 @@ class DashboardsHome extends React.Component {
               <ChartCard
                 background
                 title={this.widget3.title}
-                legend={metadata[0].widgets[2].category}
                 data={this.widget3}
               />
             </div>
