@@ -11,7 +11,7 @@ import contactBg from '../../../images/bg/bg-contact.jpg';
 import resourcesBg from '../../../images/bg/bg-resources.jpg';
 import createBg from '../../../images/bg/bg-create.jpg';
 import partnersBg from '../../../images/bg/bg-partners.jpg';
-
+import faqBg from '../../../images/bg/bg-faq.jpg';
 
 const bg = {
   defaults: homepageBg,
@@ -27,7 +27,8 @@ const bg = {
   contact: contactBg,
   resources: resourcesBg,
   create: createBg,
-  partners: partnersBg
+  partners: partnersBg,
+  faq: faqBg
 };
 
 class Banner extends React.Component {

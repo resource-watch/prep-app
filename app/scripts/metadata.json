@@ -74,7 +74,7 @@
     "metaDescription": "",
     "title": "About",
     "bannerSize": "medium",
-    "bannerBg": "home"
+    "bannerBg": "partnership"
   },
   {
     "name": "faq",
@@ -83,7 +83,7 @@
     "metaDescription": "",
     "title": "FAQ",
     "bannerSize": "small",
-    "bannerBg": "home"
+    "bannerBg": "faq"
   },
   {
     "name": "dashboards",
@@ -91,7 +91,7 @@
     "metaTitle": "Dashboards",
     "metaDescription": "",
     "title": "Dashboards",
-    "bannerSize": "small",
+    "bannerSize": "medium",
     "bannerBg": "dashboards"
   },
   {
@@ -109,7 +109,7 @@
     "metaTitle": "Insights",
     "metaDescription": "",
     "title": "Insights",
-    "bannerSize": "small",
+    "bannerSize": "medium",
     "bannerBg": "insights"
   },
   {
@@ -145,7 +145,7 @@
     "metaTitle": "Resources",
     "metaDescription": "",
     "title": "Resources",
-    "bannerSize": "small",
+    "bannerSize": "medium",
     "bannerBg": "resources"
   },
   {

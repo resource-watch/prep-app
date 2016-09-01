@@ -43,7 +43,6 @@ class App extends React.Component {
     const currentData = this.getCurrentData();
     const isHomepage = (currentData.name === 'home');
 
-    console.log(currentData);
     document.title = currentData.title;
 
     return (
