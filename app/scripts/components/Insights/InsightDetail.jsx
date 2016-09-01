@@ -16,7 +16,7 @@ import LoadingSpinner from '../Loading/LoadingSpinner';
 
 import EthiopiaInsight from './Customs/Ethiopia';
 
-class DashboardDetail extends React.Component {
+class InsightsDetail extends React.Component {
 
   componentWillMount() {
     if (!this.props.data) {
@@ -77,11 +77,7 @@ class DashboardDetail extends React.Component {
           <p> {this.props.data.summary} </p>
         </SectionIntro>
 
-        <div className="row">
-          <div className="columns small-12">
-            {content}
-          </div>
-        </div>
+        {content}
       </div>
     );
   }
@@ -158,7 +154,7 @@ class DashboardDetail extends React.Component {
   }
 }
 
-DashboardDetail.propTypes = {
+InsightsDetail.propTypes = {
   /**
    * Define the route path (from the router)
    */
@@ -182,4 +178,4 @@ DashboardDetail.propTypes = {
   getInsightBySlug: React.PropTypes.func.isRequired
 };
 
-export default DashboardDetail;
+export default InsightsDetail;

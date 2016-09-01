@@ -1,0 +1,227 @@
+{
+  "width": 600,
+  "height": 400,
+  "padding": {"top": 30,"left": 40,"right": 5,"bottom": 50},
+  "data": [
+    {
+      "name": "hist",
+      "url": "https://prep-admin.carto.com/api/v2/sql?q=select index, month, region, type from eth_crop_calendar order by index asc, region asc",
+      "format": {
+        "type": "json",
+        "property": "rows"
+      }
+    },
+    {
+      "name": "stats",
+      "source": "hist",
+      "transform": [
+        {"type": "filter","test": "datum.type != null"},
+        {
+          "type": "aggregate",
+          "groupby": ["region","type"],
+          "summarize": [{"field": "type", "ops": ["count"], "as":["counts"]}, {"field": "index", "ops": ["min"], "as":["min"]}]
+        },
+        {"type": "sort", "by":["region","min"]},
+        {"type": "formula", "field": "max", "expr": "(+datum.min + +datum.counts)"}
+      ]
+    },
+    {
+      "name": "legend",
+      "values": [
+        {"cat": "Sowing"},
+        {"cat": "Growing"},
+        {"cat": "Harvesting"}
+      ]
+    }
+    
+  ],
+  "signals": [
+    {
+      "name": "tooltip",
+      "init": {},
+      "streams": [
+        {"type": "rect:mouseover", "expr": "datum"},
+        {"type": "rect:mouseout", "expr": "{}"}
+      ]
+    },
+    {
+      "name": "pos",
+      "init": {},
+      "streams": [
+        {"type": "rect:mouseover", "expr": "{xval: +eventX(),yval: +eventY()}"}
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "x",
+      "type": "ordinal",
+      "domain": {"fields": [{"data": "hist","field": "index"}]},
+      "range": "width"
+      
+    },
+    {
+      "name": "xlabels",
+      "type": "ordinal",
+      "domain": {"fields": [{"data": "hist","field": "index"}]},
+      "range":  {"fields": [{"data": "hist","field": "month"}]}
+      
+    },
+    {
+      "name": "y",
+      "type": "ordinal",
+      "range": "height",
+      "padding":0.68,
+      "domain": {"fields": [{"data": "hist","field": "region"}]}
+    },
+    {
+      "name": "color",
+      "type": "ordinal",
+      "range": ["#DE585A","#FEC859","#6EBD57"],
+      "domain": {"data": "legend", "field": "cat"}
+    }
+  ],
+  "axes": [
+    {
+      "type": "x",
+      "scale": "x",
+      "ticks": 12,
+      "layer":"front",
+      "grid": true,
+      "properties": {
+        "ticks": {"stroke": {"value": "#EEEEEE"},"offset":0.5, "strokeOpacity": {"value": 1}},
+        "grid": {"stroke": {"value": "#EEEEEE"}, "strokeOpacity": {"value": 1}},
+        "labels": {
+          "text":{"scale": "xlabels"},
+          "font": {"value": "\"Montserrat\", sans-serif"},
+          "fill": {"value": "#9BA2AA"},
+          "fontSize": {"value": 10},
+          "align": {"value": "center"},
+          "baseline": {"value": "bottom"},
+          "dy": {"value": 10}
+        },
+        "axis": {
+          "stroke": {"value": "#E6E6E6"},
+          "opacity": {"value": 1},
+          "strokeWidth": {"value": 1.5}
+        }
+      }
+    },
+    {
+      "type": "y",
+      "scale": "y",
+      "title": "mm",
+      "titleOffset": 15,
+      "layer":"front",
+      "grid": true,
+      "ticks": 3,
+      "tickSize":1.5,
+      "properties": {
+        "axis": {
+          "stroke": {"value": "#E6E6E6"},
+          "opacity": {"value": 0},
+          "strokeWidth": {"value": 1.5}
+        },
+        "ticks": {"stroke": {"value": "#EEEEEE"}, "strokeOpacity": {"value": 1}},
+        "grid": {"stroke": {"value": "#EEEEEE"}, "strokeOpacity": {"value": 1}},
+        "labels": {
+          "font": {"value": "\"Montserrat\", sans-serif"},
+          "fill": {"value": "#9BA2AA"},
+          "fontSize": {"value": 10},
+          "align": {"value": "right"},
+          "baseline": {"value": "middle"}
+        },
+        "title": {
+          "font": {"value": "\"Montserrat\", sans-serif"},
+          "fontSize": {"value": 12},
+          "opacity": {"value": 0.5},
+          "y": {"value": -20},
+          "angle": 90
+        }
+      }
+    }
+  ],
+  "marks": [
+    {
+      "name": "columns",
+      "type": "rect",
+      "from": {
+        "data": "stats"
+      },
+      "properties": {
+        "enter": {
+          "x": {"scale": "x", "field": "min", "offset":23.5},
+          "x2": {"scale": "x", "field": "max", "offset":23.5},
+          "y": {"scale": "y", "field": "region"},
+          "height": {"scale": "x", "band": true},
+          "fill": {"scale": "color", "field": "type"},
+          "fillOpacity": {"value": 1}
+        },
+        "update":{"fillOpacity": {"value": 1}},
+        "hover":{
+          "fillOpacity":{"value": 0.8}
+        }
+      }
+    },
+    {"name":"tooltips",
+      "type":"group",
+      "marks":[{
+        "name":"tooltip",
+      "type":"text",
+      "properties": {
+        "update": {
+          "x": {"value": 35},
+          "y": {"value": 20},
+          "text": {"signal": "tooltip.type"},
+          "align": {"value": "center"},
+          "fill": {"value": "#3B4F63"},
+          "font": {"value": "\"Montserrat\", sans-serif"},
+          "opacity": {"value": 0.8},
+          "fontSize": {"value": 11},
+          "fontWeight": {"value": "bold"}
+        }
+      }
+      
+    }],
+      "properties": {
+        "update": {
+          "fill": {"value": "#eee"},
+          "width": {"value": 70},
+          "height": {"value": 40},
+          "x":{"signal":"pos.xval","offset":"0"},
+          "y": {"field": {"group": "height"},"mult": 0.45}
+        }
+      }
+      
+    }
+  ],
+  "legends": [
+    {
+      "fill": "color",
+      "offset": 50,
+      "properties": {
+        "legend": {
+          "fill": {"value": "#eee"},
+          "fillOpacity": {"value": 0.5},
+          "width": {"value": 90},
+          "height":{"value": 45},
+          "x": {"field": {"group": "width"},"mult": 0.8, "offset": 5},
+          "y": {"field": {"group": "height"},"mult": 0.1, "offset": 0}
+        },
+        "title": {"fontSize": {"value": 12},"dy": {"value": -2},"dx": {"value": 0}},
+        "labels": {
+          "fontSize": {"value": 10},
+          "fill": {"value": "#9BA2AA"},
+          "text": {
+           "template": "{{datum.data| upper-locale}}"
+          }
+        },
+        "symbols": {
+          "stroke": {"value": "rgba(255,255,255,0)"},
+         "shape":{"value":"square"},
+         "size":{"value":30}
+        }
+      }
+    }
+  ]
+}
