@@ -18,7 +18,9 @@ const initialState = {
   widgets: {},
   layers: {},
   metadatas: {},
-  filters: {}
+  filters: {
+    geography: ['global', 'national']
+  }
 };
 
 export default function (state = initialState, action) {
