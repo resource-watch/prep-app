@@ -14,10 +14,20 @@ class App extends React.Component {
 
   getData(key, value) {
     let data = null;
+    // First search for exactly match
     for (let i = metadata.length - 1; i >= 0; i--) {
-      if (value.indexOf(metadata[i][key]) > -1) {
+      if (value === metadata[i][key]) {
         data = metadata[i];
         break;
+      }
+    }
+    // If no data, search for close result
+    if (!data) {
+      for (let i = metadata.length - 1; i >= 0; i--) {
+        if (value.indexOf(metadata[i][key]) > -1) {
+          data = metadata[i];
+          break;
+        }
       }
     }
     return data;
@@ -33,6 +43,7 @@ class App extends React.Component {
     const currentData = this.getCurrentData();
     const isHomepage = (currentData.name === 'home');
 
+    console.log(currentData);
     document.title = currentData.title;
 
     return (

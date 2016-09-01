@@ -25,27 +25,27 @@
   {
     "name": "engagement-workgroup",
     "pathname": "/partnership/engagement",
-    "metaTitle": "Partnership Engagement Workgroup",
+    "metaTitle": "Engagement Workgroup",
     "metaDescription": "",
-    "title": "Partnership Engagement Workgroup",
+    "title": "Engagement Workgroup",
     "bannerSize": "small",
     "bannerBg": "partnershipEngagement"
   },
   {
     "name": "data-accessibility",
     "pathname": "/partnership/data",
-    "metaTitle": "Data Accesibility Workgroup",
+    "metaTitle": "Data Workgroup",
     "metaDescription": "",
-    "title": "Data Accesibility Workgroup",
+    "title": "Data Workgroup",
     "bannerSize": "small",
     "bannerBg": "partnershipEnga"
   },
   {
     "name": "platform-development",
     "pathname": "/partnership/platforms",
-    "metaTitle": "Platform Development Workgroup",
+    "metaTitle": "Platform Workgroup",
     "metaDescription": "",
-    "title": "Platform Development",
+    "title": "Platform Workgroup",
     "bannerSize": "small",
     "bannerBg": "partnershipPlatforms"
   },
