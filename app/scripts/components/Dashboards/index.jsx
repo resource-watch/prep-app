@@ -29,7 +29,7 @@ class DashboardsPage extends React.Component {
 
     const items = this.props.data.map((item, index) => {
       return (
-        <div className="columns small-12 medium-6 align-stretch"
+        <div className={`columns small-10 medium-5 align-stretch ${index % 2 === 0 ? 'small-offset-1' : ''}`}
           key={`dashboard-item-${index}`}
           style={{display: 'flex'}}
         >
@@ -71,6 +71,7 @@ class DashboardsPage extends React.Component {
 
     return (
       <div className="l-dashboards">
+        <div className="sliced"></div>
 
         {content}
 

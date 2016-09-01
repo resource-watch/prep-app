@@ -59,7 +59,6 @@ class ExploreMap extends React.Component {
 
     this.mapLayers = {};
     this.map = L.map(this.refs.map, {
-      scrollWheelZoom: false,
       zoomControl: false,
       center: [+params.lat, +params.lng],
       zoom: +params.zoom,

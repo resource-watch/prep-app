@@ -100,7 +100,6 @@ class Explore extends React.Component {
             </div>
           </div>
           <div className="l-header-tools-map">
-            <a className="c-button -action -theme-color" href="http://prepdata.sdgs.opendata.arcgis.com/" target="_blank"> Open data portal </a>
             <Button themeColor click={() => this.setState({ modalShareOpen: true })}> Share </Button>
           </div>
         </header>

@@ -25,27 +25,27 @@
   {
     "name": "engagement-workgroup",
     "pathname": "/partnership/engagement",
-    "metaTitle": "Partnership Engagement Workgroup",
+    "metaTitle": "Engagement Workgroup",
     "metaDescription": "",
-    "title": "Partnership Engagement Workgroup",
+    "title": "Engagement Workgroup",
     "bannerSize": "small",
     "bannerBg": "partnershipEngagement"
   },
   {
     "name": "data-accessibility",
     "pathname": "/partnership/data",
-    "metaTitle": "Data Accesibility Workgroup",
+    "metaTitle": "Data Workgroup",
     "metaDescription": "",
-    "title": "Data Accesibility Workgroup",
+    "title": "Data Workgroup",
     "bannerSize": "small",
     "bannerBg": "partnershipEnga"
   },
   {
     "name": "platform-development",
     "pathname": "/partnership/platforms",
-    "metaTitle": "Platform Development Workgroup",
+    "metaTitle": "Platform Workgroup",
     "metaDescription": "",
-    "title": "Platform Development",
+    "title": "Platform Workgroup",
     "bannerSize": "small",
     "bannerBg": "partnershipPlatforms"
   },
@@ -74,7 +74,7 @@
     "metaDescription": "",
     "title": "About",
     "bannerSize": "medium",
-    "bannerBg": "home"
+    "bannerBg": "partnership"
   },
   {
     "name": "faq",
@@ -83,7 +83,7 @@
     "metaDescription": "",
     "title": "FAQ",
     "bannerSize": "small",
-    "bannerBg": "home"
+    "bannerBg": "faq"
   },
   {
     "name": "dashboards",
@@ -91,7 +91,7 @@
     "metaTitle": "Dashboards",
     "metaDescription": "",
     "title": "Dashboards",
-    "bannerSize": "small",
+    "bannerSize": "medium",
     "bannerBg": "dashboards"
   },
   {
@@ -109,7 +109,7 @@
     "metaTitle": "Insights",
     "metaDescription": "",
     "title": "Insights",
-    "bannerSize": "small",
+    "bannerSize": "medium",
     "bannerBg": "insights"
   },
   {
@@ -145,7 +145,7 @@
     "metaTitle": "Resources",
     "metaDescription": "",
     "title": "Resources",
-    "bannerSize": "small",
+    "bannerSize": "medium",
     "bannerBg": "resources"
   },
   {

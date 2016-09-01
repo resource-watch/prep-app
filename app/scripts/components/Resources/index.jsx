@@ -17,6 +17,8 @@ import worldBankLogo from '../../../images/resources/WorldBankGorup_logo.png';
 function Resources() {
   return (
     <div className="c-partners">
+      <div className="sliced"></div>
+
       <Article no-border>
         <p>Here are selected resources for understanding the impacts of climate change,
           tools for building resilience to climate change, and finding additional
