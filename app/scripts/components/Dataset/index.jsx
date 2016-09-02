@@ -58,7 +58,7 @@ class DatasetDetail extends React.Component {
 
     return (
       <div>
-        <SectionIntro data={data} downloadUrl={data.dataDownload || ''} currentSection={'explore'} >
+        <SectionIntro data={data} downloadUrl={this.props.data.connector_url || ''} currentSection={'explore'} >
           <MetadataList data={data} />
         </SectionIntro>
 
