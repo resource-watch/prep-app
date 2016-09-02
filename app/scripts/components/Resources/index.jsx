@@ -13,6 +13,8 @@ import climateDataGovLogo from '../../../images/resources/datagovclimate_logo.pn
 import iriLogo from '../../../images/resources/iri_logo.png';
 import servirLogo from '../../../images/resources/servilglobal_logo.png';
 import worldBankLogo from '../../../images/resources/WorldBankGorup_logo.png';
+import weAdaptLogo from '../../../images/resources/logo-weAdapt-resource.png';
+import ccafsLogo from '../../../images/resources/logo-CCAFS-resource.png'
 
 function Resources() {
   return (
@@ -172,11 +174,30 @@ function Resources() {
               <h3>Adaptation Learning Mechanism</h3>
               <p>
                 The ALM represents a collaborative, global learning process, with leadership, facilitation and strong
-                participation by Southern institutions. Seeking to provide stakeholders with a common platform for sharing
+                participation by Southern institutions. Seeking to provide stakeholders with a common platform for
+                sharing
                 and learning, the ALM bridges knowledge gaps by bringing relevant knowledge and stakeholders together to
                 exchange information, experiences, and expertise.
               </p>
               <a href={'HTTP://WWW.ADAPTATIONLEARNING.NET/'} target="_blank">HTTP://WWW.ADAPTATIONLEARNING.NET/</a>
+            </div>
+          </div>
+
+          <div className="columns small-12 medium-4">
+            <div className="c-article-module">
+              <Thumbnail
+                url="https://www.weadapt.org/"
+                src={weAdaptLogo}
+                alt="weADAPT"
+                border={'neutral'}
+              />
+
+              <h3>weADAPT</h3>
+              <p>
+                weADAPT is a collaborative platform on climate adaptation issues. It allows practitioners, researchers
+                and policy-makers to access credible, high-quality information and connect with one another.
+              </p>
+              <a href={'https://www.weadapt.org/'} target="_blank">HTTPS://WWW.WEADAPT.ORG/</a>
             </div>
           </div>
         </div>
@@ -200,7 +221,8 @@ function Resources() {
               <p>
                 Copernicus consists of a complex set of systems which collect data from multiple sources: earth
                 observation satellites and in situ sensors such as ground stations, airborne and sea-borne sensors. It
-                processes these data and provides users with reliable and up-to-date information through a set of services
+                processes these data and provides users with reliable and up-to-date information through a set of
+                services
                 related to environmental and security issues.
               </p>
               <a href={'HTTPS://CLIMATE.COPERNICUS.EU/'} target="_blank">HTTPS://CLIMATE.COPERNICUS.EU/</a>
@@ -279,10 +301,29 @@ function Resources() {
               <h3>World Bank Climate Knowledge Portal</h3>
               <p>
                 The Climate Change Knowledge Portal (CCKP) Beta is a central hub of information, data and reports about
-                climate change around the world. In the CCKP you can query, map, compare, chart and summarize key climate
-                and climate-related information
+                climate change around the world. In the CCKP you can query, map, compare, chart and summarize key
+                climate
+                and climate-related information.
               </p>
               <a href={'HTTP://SDWEBX.WORLDBANK.ORG/CLIMATEPORTAL/?PAGE=CLIMATE_DATA'} target="_blank">HTTP://SDWEBX.WORLDBANK.ORG/CLIMATEPORTAL/?PAGE=CLIMATE_DATA</a>
+            </div>
+          </div>
+
+          <div className="columns small-12 medium-4">
+            <div className="c-article-module">
+              <Thumbnail
+                url="http://ccafs-climate.org/"
+                src={ccafsLogo}
+                alt="CCFAS Climate-Data Portal"
+                border={'neutral'}
+              />
+              <h3>CCFAS Climate-Data Portal</h3>
+              <p>
+                The CCAFS-Climate data portal provides global and regional future high-resolution climate datasets that
+                serve as a basis for assessing the climate change impacts and adaptation in a variety of fields
+                including biodiversity, agricultural and livestock production, and ecosystem services and hydrology.
+              </p>
+              <a href="http://ccafs-climate.org" target="_blank">HTTP://CCAFS-CLIMATE.ORG</a>
             </div>
           </div>
         </div>
