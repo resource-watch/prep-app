@@ -80,7 +80,7 @@ class EthiopiaInsight extends React.Component {
           <div className="c-article-module -no-top">
             <div className="row align-right">
               <div className="column small-12 medium-1">
-                <button className="c-button -action">
+                <button className="c-button -action" onClick={()=>this.setShareModal('http://climateserv.nsstc.nasa.gov', 'map')}>
                   <span>Share </span>
                   <div className="c-button -icon">
                     <svg className="-icon" width="10" height="12" viewBox="0 0 10 12">

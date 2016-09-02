@@ -30,7 +30,6 @@ class ShareUrl extends React.Component {
   render() {
     let shortUrl = this.props.links[this.props.url];
 
-
     let content = <LoadingSpinner transparent inner />;
 
     if (shortUrl || shortUrl === false) {
