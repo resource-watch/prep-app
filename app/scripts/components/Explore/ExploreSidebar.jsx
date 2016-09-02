@@ -72,12 +72,19 @@ class DataMap extends React.Component {
           </Link>
         );
       }
+      
+      var cdiTag = false;
+      for (let i=0; i< dataset.tags.length; i++){
+        if(dataset.tags[i] == "CDI"){
+          cdiTag = true;
+        };
+      };
 
       return (
         <div className="layer" key={`map-layer-${index}`}>
           {layerIcon}
           <span className="layerItem">
-            <strong className="title">{dataset.name}</strong>
+            <strong className={cdiTag ? "title -cdi-tag" : "title"}>{dataset.name}</strong>
             <span className="subtitle">{subtitle} {partner}</span>
           </span>
           {datasetIcon}
