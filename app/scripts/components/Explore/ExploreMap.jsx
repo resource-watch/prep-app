@@ -139,7 +139,9 @@ class ExploreMap extends React.Component {
   changeLayerOpacity(dataset) {
     const layer = this.mapLayers[dataset.layers[0].layer_id];
     if (dataset.opacity !== undefined && layer && typeof layer.setOpacity === 'function') {
-      layer.setOpacity(dataset.opacity);
+      setTimeout(() => {
+        layer.setOpacity(dataset.opacity);
+      }, 100);
       layer.opacity = dataset.opacity;
     }
   }
