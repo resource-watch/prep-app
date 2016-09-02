@@ -31,7 +31,7 @@
       align-items: center;
       justify-content: center;
 
-      >.toggle-status {
+      > .toggle-status {
         @include hamburger-icon(10px, 2px, 2px, 1px, $thirth-color, $thirth-color);
       }
     }
@@ -55,7 +55,7 @@
 
       > .filters-toolbar {
         position: relative;
-        margin:  0;
+        margin: 0;
         padding: 0;
         list-style: none;
         display: flex;
@@ -74,7 +74,7 @@
           justify-content: center;
           align-items: center;
           flex: 1;
-          margin:  0;
+          margin: 0;
           list-style: none;
 
           > button {
@@ -107,7 +107,7 @@
         width: 350px;
         position: absolute;
         flex-direction: column;
-        margin:  0;
+        margin: 0;
         padding: $small-margin;
         top: 100%;
         left: 50%;
@@ -215,6 +215,21 @@
         > .title {
           font-size: $small-font-size;
           font-weight: bold;
+
+          .-highlighted-tag {
+
+            position: relative;
+            display: inline;
+            width: 29px;
+            height: 18px;
+            margin-left: 8px;
+            padding-left: 5px;
+            padding-right: 5px;
+
+            background-color: $pale-grey;
+            color: $thirth-color;
+
+          }
         }
 
         > .subtitle {
