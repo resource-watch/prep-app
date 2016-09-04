@@ -14,15 +14,9 @@ class WelcomeModal extends React.Component {
       <div className="m-content">
         <article>
           <h2>{this.props.title}</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas sollicitudin pulvinar. Class aptent
-            taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc pharetra, tortor a
-            imperdiet
-            ultrices, nunc augue ornare lacus, quis ultrices sem lorem id sapien. Sed sodales vitae nisl ut consectetur.
-            Vivamus leo felis, efficitur vel massa a, auctor cursus est. Etiam tortor turpis, dictum et rhoncus in,
-            lacinia
-            feugiat est. Sed lobortis maximus diam, vel malesuada tortor pulvinar sed. Sed vulputate vehicula erat nec
-            laoreet. Nam finibus elit tellus, id bibendum purus aliquam vel. Mauris vitae vulputate justo, convallis
-            hendrerit purus. Donec sem erat, aliquam ut aliquet ullamcorper, venenatis.</p>
+          <p>The PREP Platform is currently in beta. While we hope everything is running smoothly, we're still in the process of testing and validating the platform. Please feel free to send us a message at info@prepdata.org if you see any errors or issues.</p>
+          <br>
+          <p><small><strong>DISCLAIMER:</strong> YOU AGREE THAT YOUR USE OF THE SITE AND ITS CONTENT IS AT YOUR SOLE RISK. WE MAKE NO PROMISES OR COMMITMENTS ABOUT THE SITE OR ITS CONTENT, AND THE SITE AND CONTENT ARE PROVIDED ON AN “AS IS” BASIS AND WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED. TO THE FULLEST EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, STATUTORY, EXPRESS OR IMPLIED, INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT</small></p>
         </article>
         <aside>
           <div className="small-12 align-center" style={{display: 'flex'}}>

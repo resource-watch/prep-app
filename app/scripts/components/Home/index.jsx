@@ -16,22 +16,21 @@ class Home extends React.Component {
         <div className="row">
           <div className="column small-12 medium-6">
             <Article grid="small-12" no-border>
+              <div className="padded">
               <h2 className="-left">Our mission</h2>
-              <p>The Partnership for Resilience and Preparedness (PREP) is a public-private collaboration to empower a data-driven approach to building climate resilience. PREP aims to help planners, investors, and resource managers more easily incorporate climate risks into their decisions by enhancing access to relevant data and facilitating collective learning through insights on climate change. PREP will do this through:</p>
+              <p>The Partnership for Resilience and Preparedness (PREP) is a public-private collaboration to empower a data-driven approach to building climate resilience. PREP aims to help planners, investors, and resource managers more easily incorporate climate risks into their decisions by enhancing access to relevant data and facilitating collective learning. PREP does this through:</p>
 
-              <h3>Community Engagement</h3>
-              <p>We will promote collaboration among data and information producers and users.</p>
-              <Link to="partnership/engagement">Go to partnership engagement</Link>
+              <h3>Engagement</h3>
+              <p>We promote collaboration among data and information producers and users.</p>
 
-              <h3>Data Accessibility</h3>
+              <h3>Data</h3>
               <p>We will seek to reduce the barriers to accessing, contributing, and using data for climate resilience.</p>
-              <Link to="partnership/data">Go to data accessibility</Link>
 
-              <h3>Platform Development</h3>
+              <h3>Platforms</h3>
               <p>We will develop platforms to enhance access to and usability of climate-relevant data and information.</p>
-              <Link to="partnership/platforms">Go to platform development</Link>
 
-              <p>PREP is a Data Collaborative of the Global Partnership for Sustainable Development Data.</p>
+              <Link to="/partnership">Learn more</Link>
+              </div>
             </Article>
           </div>
 
