@@ -46,8 +46,12 @@ class Form extends React.Component {
               <label htmlFor="mce-EMAIL">Email Address *<span className="asterisk"></span></label>
               <input type="email" name="EMAIL" className="required email" id="mce-EMAIL" required/>
             </div>
+            <div className="mc-field-group">
+              <label htmlFor="mce-MMERGE5">Organization<span className="asterisk"></span></label>
+              <input type="text" name="MMERGE5" id="mce-MMERGE5"/>
+            </div>
             <div className="mc-field-group textarea">
-              <label htmlFor="mce-MMERGE4">What would you like to say? *<span className="asterisk"></span></label>
+              <label htmlFor="mce-MMERGE4">Message *<span className="asterisk"></span></label>
               <textarea name="MMERGE4" className="required" id="mce-MMERGE4" required/>
             </div>
             <div id="mce-responses" className="clear">
@@ -60,7 +64,7 @@ class Form extends React.Component {
             <div className="form-actions">
               <input
                 type="submit"
-                value="Subscribe"
+                value="Submit"
                 name="subscribe"
                 id="mc-embedded-subscribe"
                 className="c-button -filled -secondary-color button"
