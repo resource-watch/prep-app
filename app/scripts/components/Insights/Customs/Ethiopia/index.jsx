@@ -254,7 +254,7 @@ class EthiopiaInsight extends React.Component {
           </div>
         </article>
 
-        <article className="c-article">
+        <article className="c-article -no-border">
           <div className="row align-center">
             <div className="column small-12 medium-8">
               <h2>Conclusion</h2>
