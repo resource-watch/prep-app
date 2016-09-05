@@ -101,13 +101,12 @@ function Routes(props) {
         <Route path={'/'} component={App}>
 
           <IndexRoute component={Home} />
-          <Route path={'partnership'}>
+          <Route path={'about'}>
             <IndexRoute component={Partnership} />
             <Route path={'engagement'} component={EngagementWorkgroup} />
             <Route path={'data'} component={DataAccessibility} />
             <Route path={'platforms'} component={DataAccessibility} />
           </Route>
-          <Route path={'about'} component={Partnership} />
           <Route path={'faqs'} component={FAQ} />
           <Route path={'dashboards'} component={Dashboards} />
           <Route path={'insights'} component={Insights} />
