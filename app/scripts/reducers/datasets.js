@@ -8,7 +8,8 @@ import {
   SET_LAYER_STATUS,
   DATASET_LAYER_FETCH_ERROR,
   DATASET_SET_FILTER,
-  MAP_LAYERS_ORDER_CHANGED
+  MAP_LAYERS_ORDER_CHANGED,
+  MAP_LAYER_OPACITY_CHANGED
 } from '../constants';
 
 const initialState = {
@@ -17,7 +18,9 @@ const initialState = {
   widgets: {},
   layers: {},
   metadatas: {},
-  filters: {}
+  filters: {
+    geography: ['global', 'national']
+  }
 };
 
 export default function (state = initialState, action) {
@@ -126,6 +129,17 @@ export default function (state = initialState, action) {
           datasets[i].index = index + 1;
         } else {
           datasets[i].index = 0;
+        }
+      }
+      return Object.assign({}, state, { list: datasets });
+    }
+    case MAP_LAYER_OPACITY_CHANGED: {
+      const datasets = state.list.slice(0);
+
+      for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
+        if (datasets[i].id === action.payload) {
+          datasets[i].opacity = datasets[i].opacity ? 0 : 1;
+          break;
         }
       }
       return Object.assign({}, state, { list: datasets });

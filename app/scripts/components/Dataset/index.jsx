@@ -44,7 +44,6 @@ class DatasetDetail extends React.Component {
       return <LoadingSpinner />;
     }
 
-    const downloadUrl = this.props.data.connector_url || '';
     const data = this.props.data.metadata.length > 0
       ? this.props.data.metadata[0].info
       : {
@@ -59,7 +58,7 @@ class DatasetDetail extends React.Component {
 
     return (
       <div>
-        <SectionIntro data={data} downloadUrl={downloadUrl} currentSection={'explore'} >
+        <SectionIntro data={data} downloadUrl={this.props.data.connector_url || ''} currentSection={'explore'} >
           <MetadataList data={data} />
         </SectionIntro>
 

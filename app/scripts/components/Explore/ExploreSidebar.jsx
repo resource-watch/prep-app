@@ -68,16 +68,23 @@ class DataMap extends React.Component {
       if (dataset.id) {
         datasetIcon = (
           <Link className="detail-link" to={`/dataset/${dataset.id}`}>
-            <svg width="13" height="9" viewBox="0 0 13 9"><title>icon-eye</title><path d="M4.933 4.5c0 .855.698 1.545 1.567 1.545s1.567-.69 1.567-1.545S7.369 2.955 6.5 2.955s-1.567.69-1.567 1.545zM13 4.5C11.755 2.265 9.312 0 6.5 0 3.695 0 1.245 2.265 0 4.5 1.245 6.735 3.695 9 6.5 9c2.812 0 5.255-2.265 6.5-4.5zm-9.415 0c0-1.582 1.307-2.865 2.915-2.865S9.415 2.918 9.415 4.5c0 1.582-1.307 2.865-2.915 2.865S3.585 6.082 3.585 4.5z" fillRule="evenodd" /></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16"><title>View page</title><path d="M0 0v16h14v-2H2V2h12V0H0zm12 4l4 4-4 4V4zM6 7h6v2H6V7z" fillRule="evenodd"/></svg>
           </Link>
         );
       }
+      
+      var cdiTag = false;
+      for (let i=0; i< dataset.tags.length; i++){
+        if(dataset.tags[i] == "CDI"){
+          cdiTag = true;
+        };
+      };
 
       return (
         <div className="layer" key={`map-layer-${index}`}>
           {layerIcon}
           <span className="layerItem">
-            <strong className="title">{dataset.name}</strong>
+            {cdiTag ? <strong className="title">{dataset.name} <div className="-highlighted-tag">CDI</div></strong> : <strong className="title">{dataset.name}</strong>}
             <span className="subtitle">{subtitle} {partner}</span>
           </span>
           {datasetIcon}

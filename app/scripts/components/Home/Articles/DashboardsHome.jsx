@@ -23,9 +23,9 @@ class DashboardsHome extends React.Component {
       <div>
         <div className="row">
           <div className="column small-12 medium-8">
-            <h2 className="-left">Assembling the information you need</h2>
+            <h2 className="-left">Assembling the information</h2>
             <Link to="/dashboards">Go to dashboards</Link>
-            <p>Dashboards are a collection of data, insight and tools that users compile to support their climate resilience and preparedness planning. View some of the dashboards that others have create, or create your own to track to key issues in your area.</p>
+            <p>Dashboards are a collection of data, insights, and tools that users compile to support their climate resilience and preparedness planning. View dashboards that others have created, or create your own to track key issues in your area.</p>
           </div>
         </div>
         <div className="row">
@@ -34,7 +34,6 @@ class DashboardsHome extends React.Component {
               <ChartCard
                 size="large"
                 title={this.widget1.title}
-                legend={metadata[0].widgets[0].category}
                 data={this.widget1}
               />
             </div>
@@ -45,7 +44,6 @@ class DashboardsHome extends React.Component {
             <div className="column small-12 medium-6" style={{display: 'flex'}}>
               <ChartCard
                 title={this.widget2.title}
-                legend={metadata[0].widgets[1].category}
                 data={this.widget2}
               />
             </div>
@@ -55,7 +53,6 @@ class DashboardsHome extends React.Component {
               <ChartCard
                 background
                 title={this.widget3.title}
-                legend={metadata[0].widgets[2].category}
                 data={this.widget3}
               />
             </div>

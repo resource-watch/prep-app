@@ -3,7 +3,7 @@ import ExploreMapLegend from '../../components/Explore/ExploreLegend';
 
 import { setModalMetadata } from '../../actions/modal';
 import { getDatasetMetadata } from '../../actions/datasets';
-import { setLayersOrder } from '../../actions/exploremap';
+import { setLayersOrder, toggleLayerOpacity } from '../../actions/exploremap';
 import { updateURL } from '../../actions/links';
 
 function isLayerReady(dataset, layers) {
@@ -32,6 +32,7 @@ function getActiveLayers(datasets, layers) {
       const layer = layers[dataset.layers[0].layer_id];
       layer.title = dataset.name;
       layer.index = dataset.index;
+      layer.opacity = dataset.opacity;
       activeLayers.push(layer);
     }
   });
@@ -50,6 +51,9 @@ const mapDispatchToProps = (dispatch) => ({
   setLayersOrder: (layers) => {
     dispatch(setLayersOrder(layers));
     dispatch(updateURL());
+  },
+  toggleLayerOpacity: (layerId) => {
+    dispatch(toggleLayerOpacity(layerId));
   }
 });
 

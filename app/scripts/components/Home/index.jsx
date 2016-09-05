@@ -17,19 +17,19 @@ class Home extends React.Component {
           <div className="column small-12 medium-6">
             <Article grid="small-12" no-border>
               <h2 className="-left">Our mission</h2>
-              <p>The Partnership for Resilience and Preparedness (PREP) is a public-private collaboration to empower a data-driven approach to building climate resilience. The Partnership aims to help planners, investors, and resource managers around the globe to more easily incorporate climate risks into their decisions by enhancing access to relevant data and facilitate collective learning through insights on climate variability and change. PREP will do this through:</p>
+              <p>The Partnership for Resilience and Preparedness (PREP) is a public-private collaboration to empower a data-driven approach to building climate resilience. PREP aims to help planners, investors, and resource managers more easily incorporate climate risks into their decisions by enhancing access to relevant data and facilitating collective learning through insights on climate change. PREP will do this through:</p>
 
-              <h3>Engagement</h3>
-              <p>We will facilitate sustained dialogues among data/information producers and users for climate resilience.</p>
-              <Link to="partnership/engagement">Go to engagement</Link>
+              <h3>Community Engagement</h3>
+              <p>We will promote collaboration among data and information producers and users.</p>
+              <Link to="partnership/engagement">Go to partnership engagement</Link>
 
-              <h3>Data</h3>
-              <p>We will seek to reduce the barriers to access, contribute, and use data for climate resilience.</p>
-              <Link to="partnership/data">Go to data</Link>
+              <h3>Data Accessibility</h3>
+              <p>We will seek to reduce the barriers to accessing, contributing, and using data for climate resilience.</p>
+              <Link to="partnership/data">Go to data accessibility</Link>
 
-              <h3>Platforms</h3>
+              <h3>Platform Development</h3>
               <p>We will develop platforms to enhance access to and usability of climate-relevant data and information.</p>
-              <Link to="partnership/platforms">Go to platforms</Link>
+              <Link to="partnership/platforms">Go to platform development</Link>
 
               <p>PREP is a Data Collaborative of the Global Partnership for Sustainable Development Data.</p>
             </Article>
@@ -40,12 +40,12 @@ class Home extends React.Component {
               <img src={ladyInLand} />
               <div className="padded">
                 <h2 className="-left">The Challenge</h2>
-                <p>With climate change already upon us, a growing number of communities, companies, and civil society organizations are looking to conduct climate vulnerability assessments, risk screening, and develop resilience plans. As a result, the demand for climate risk information is on the rise, however efforts to turn data into actionable plans are constrained by two challenges: </p>
+                <p>With climate change already upon us, a growing number of communities, companies, and civil society organizations are looking to assess climate vulnerability and to develop resilience plans. However, efforts to turn data into actionable plans are constrained by two challenges:</p>
                 <ul>
-                  <li>The availability of robust, actionable information is limited.</li>
-                  <li>It is difficult to find, access, and use existing data and information.</li>
+                  <li>Robust, actionable data are limited.</li>
+                  <li>Even when data and information exist, they are difficult to find, access, and use.</li>
                 </ul>
-                <p>Prep seeks to overcome these challenges by facilitating sustained dialogues among producers and users of information, promoting standards to enhance accessibility and interoperability of data and information products, and developing platforms that enhance data accessibility and knowledge sharing.</p>
+                <p>PREP addresses these challenges by promoting collaboration among producers and users of information, fostering standards to enhance accessibility and interoperability of data and information products, and developing platforms that improve data accessibility and knowledge sharing.</p>
               </div>
             </Article>
           </div>

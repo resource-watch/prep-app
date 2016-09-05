@@ -40,6 +40,16 @@ function MetadataInfo(props) {
           </span>
         </li>
       }
+      {props.download && props.data.attributes.dataDownload &&
+        <li>
+          <span>Download: </span>
+          <span>
+            <a href={props.data.attributes.dataDownload} target="_blank" download>
+              {props.data.attributes.dataDownload}
+            </a>
+          </span>
+        </li>
+      }
     </ul>
   );
 }
@@ -49,6 +59,10 @@ MetadataInfo.propTypes = {
    * Switch between short and long description
    */
   short: React.PropTypes.bool,
+  /**
+   * Include the download link if exists
+   */
+  download: React.PropTypes.bool,
   /**
    * Define the metadata info
    */

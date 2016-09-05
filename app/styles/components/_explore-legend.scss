@@ -41,6 +41,11 @@
     }
   }
 
+  > .content {
+    overflow: auto;
+    max-height: 50vh;
+  }
+
   &.-open {
     transform: translateY(-10px);
     transition: transform 0.3s ease-out;
@@ -162,6 +167,9 @@
       cursor: pointer;
       > svg {
         fill: $inverse-font-color;
+      }
+      &.-hide {
+        opacity: .5;
       }
       &.-info {
         font-family: $header-font-family;

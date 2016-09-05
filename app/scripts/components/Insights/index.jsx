@@ -30,7 +30,7 @@ class DashboardsPage extends React.Component {
     let items = [];
     this.props.data.forEach((item, index) => {
       items.push(
-        <div className="columns small-12 medium-6 align-stretch"
+        <div className={`columns small-10 medium-5 align-stretch ${index % 2 === 0 ? 'small-offset-1' : ''}`}
           key={`insight-item-${index}`}
           style={{display: 'flex'}}
         >
@@ -46,7 +46,7 @@ class DashboardsPage extends React.Component {
             {item.partner &&
               <a href={item.partner.url} target="_blank">
                 <img
-                  src={config.apiUrl + item.partner.logo_medium}
+                  src={config.apiUrl + item.partner.images.logo}
                   className="logo"
                   alt={item.partner.name}
                 />
@@ -72,6 +72,7 @@ class DashboardsPage extends React.Component {
 
     return (
       <div className="">
+        <div className="sliced"></div>
 
         {content}
 
