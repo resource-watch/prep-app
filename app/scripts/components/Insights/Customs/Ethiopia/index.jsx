@@ -6,8 +6,8 @@ import IFrame from '../../../IFrame';
 import EmbedMap from '../../../EmbedMap';
 import ShareModal from '../../../Modal/ShareModal';
 
-import ethiopia01 from '../../../../../images/Insights/Ethiopia/Insight_Ethiopia01.png';
-import ethiopiaMap from '../../../../../images/Insights/Ethiopia/Insight_Ethiopia02.png';
+import ethiopia01 from '../../../../../images/insights/ethiopia/Insight_Ethiopia01.png';
+import ethiopiaMap from '../../../../../images/insights/ethiopia/Insight_Ethiopia02.png';
 
 import seasonal from 'json!./jsons/seasonal.json';
 import tigray from 'json!./jsons/tigray.json';
