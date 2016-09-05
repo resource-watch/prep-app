@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router';
+import {Link} from 'react-router';
 
 import FilterTabs from '../../containers/Explore/FilterTabs';
 import Switch from '../Button/Switch';
 import Button from '../Button/Button';
 import LoadingSpinner from '../Loading/LoadingSpinner';
+import Tooltip from '../Tooltip/Tooltip';
 
 class DataMap extends React.Component {
   constructor() {
@@ -19,7 +20,7 @@ class DataMap extends React.Component {
       return <LoadingSpinner />;
     }
 
-    const { filters, data } = this.props;
+    const {filters, data} = this.props;
     let filtersFlatten = [];
     let filteredDatasets = [];
     if (Object.keys(filters).length > 0) {
@@ -68,23 +69,32 @@ class DataMap extends React.Component {
       if (dataset.id) {
         datasetIcon = (
           <Link className="detail-link" to={`/dataset/${dataset.id}`}>
-            <svg width="16" height="16" viewBox="0 0 16 16"><title>View page</title><path d="M0 0v16h14v-2H2V2h12V0H0zm12 4l4 4-4 4V4zM6 7h6v2H6V7z" fillRule="evenodd"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16"><title>View page</title>
+              <path d="M0 0v16h14v-2H2V2h12V0H0zm12 4l4 4-4 4V4zM6 7h6v2H6V7z" fillRule="evenodd"/>
+            </svg>
           </Link>
         );
       }
 
       var cdiTag = false;
-      for (let i=0; i< dataset.tags.length; i++){
-        if(dataset.tags[i] == "cdi"){
+      for (let i = 0; i < dataset.tags.length; i++) {
+        if (dataset.tags[i] == "cdi") {
           cdiTag = true;
-        };
-      };
+        }
+        ;
+      }
+      ;
 
       return (
         <div className="layer" key={`map-layer-${index}`}>
           {layerIcon}
           <span className="layerItem">
-            {cdiTag ? <strong className="title">{dataset.name} <div className="-highlighted-tag">CDI</div></strong> : <strong className="title">{dataset.name}</strong>}
+            {cdiTag ?
+              <strong className="title">{dataset.name}
+                <Tooltip text="Climate Data Initiative dataset">
+                  <div className="-highlighted-tag">CDI</div>
+                </Tooltip>
+              </strong> : <strong className="title">{dataset.name}</strong>}
             <span className="subtitle">{subtitle} {partner}</span>
           </span>
           {datasetIcon}
@@ -137,16 +147,16 @@ class DataMap extends React.Component {
 
 DataMap.propTypes = {
   /**
-  * Define the layers data of the map
-  */
+   * Define the layers data of the map
+   */
   data: React.PropTypes.array,
   /**
-  * Define the layers on change switch function
-  */
+   * Define the layers on change switch function
+   */
   switchChange: React.PropTypes.func.isRequired,
   /**
-  * Define the dataset filters choosen
-  */
+   * Define the dataset filters choosen
+   */
   filters: React.PropTypes.object
 };
 
