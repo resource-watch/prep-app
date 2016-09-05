@@ -1,4 +1,15 @@
 
 .c-article-module {
   margin: $small-margin 0;
+
+  &.-no-top, &.-medium-margin.-no-top, &.-large-margin.-no-top {
+    margin-top: 0;
+  }
+
+  &.-no-bottom, &.-medium-margin.-no-bottom, &.-large-margin.-no-bottom {
+    margin-bottom: 0;
+  }
+
+  &.-medium-margin { margin: $large-margin 0; }
+  &.-large-margin { margin: $medium-margin 0; }
 }

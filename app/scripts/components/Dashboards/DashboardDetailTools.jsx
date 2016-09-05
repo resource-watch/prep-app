@@ -31,7 +31,7 @@ function DashboardDetailTools(props) {
     : <div className="c-article">
       <div className="row align-center">
         <div className="column small-12 medium-8">
-          <p>There is no tools associated with this dashboard yet</p>
+          <p>There are no tools associated with this dashboard yet.</p>
         </div>
       </div>
     </div>

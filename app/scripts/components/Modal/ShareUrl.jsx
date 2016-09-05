@@ -28,22 +28,24 @@ class ShareUrl extends React.Component {
   }
 
   render() {
-    let shortUrl = this.props.links[this.props.url]
-      ? this.props.links[this.props.url]
-      : false;
+    let shortUrl = this.props.links[this.props.url];
 
-    if (this.props.iframe) {
-      shortUrl = `<iframe src="${shortUrl}"></iframe>`;
+    let content = <LoadingSpinner transparent inner />;
+
+    if (shortUrl || shortUrl === false) {
+      if (this.props.iframe && shortUrl) {
+        shortUrl = `<iframe src="${shortUrl}"></iframe>`;
+      }
+
+      content = shortUrl !== false ?
+        (<div className="url-container">
+          <input ref="url" value={shortUrl} className="url" readOnly />
+          <Button click={() => this.onCopyClick()} fill border>
+            Copy
+          </Button>
+        </div>) :
+        <p>The url is not available.</p>;
     }
-
-    let content = !shortUrl
-      ? <LoadingSpinner transparent inner />
-      : <div className="url-container">
-        <input ref="url" value={shortUrl} className="url" readOnly />
-        <Button click={() => this.onCopyClick()} fill border>
-          Copy
-        </Button>
-      </div>;
 
     return (
       <div className="c-share-url">
