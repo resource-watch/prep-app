@@ -82,8 +82,9 @@ class InsightsDetail extends React.Component {
 
   render() {
     const currentData = this.getCurrentData();
-
     const title = this.props.data ? this.props.data.title : currentData.title;
+    const imageUrl = !this.props.data || this.props.data.image.indexOf('missing.png') >= 0 ?
+      null : `${config.apiUrl}${this.props.data.image}`;
 
     document.title = title;
 
@@ -107,7 +108,7 @@ class InsightsDetail extends React.Component {
           <div className="l-header-banner">
             <Breadcrumbs pathname={this.props.location.pathname} />
             <Banner
-              imageUrl={this.props.data ? `${config.apiUrl}${this.props.data.image}` : currentData.bannerBg}
+              imageUrl={imageUrl}
               size={currentData.bannerSize}
             >
               <h1>{title}</h1>
