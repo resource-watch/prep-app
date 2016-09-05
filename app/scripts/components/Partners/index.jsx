@@ -19,8 +19,7 @@ function Partners(props) {
                     border={'neutral'}
                   />
                   <h3>{partner.name}</h3>
-                  <p>{partner.description}</p>
-                </div>
+                 </div>
               </div>
             );
           })}
