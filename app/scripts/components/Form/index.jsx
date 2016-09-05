@@ -10,7 +10,18 @@ class Form extends React.Component {
   }
 
   handleSubmit() {
-    this.setState({ success: true });
+    this.checkFormFill().length === 0 &&
+      this.setState({ success: true });
+  }
+
+  checkFormFill() {
+    const fields = ['mce-FNAME', 'mce-EMAIL', 'mce-MMERGE4'];
+    !this.props.simple && fields.push('mce-LNAME');
+
+    return fields.filter((field)=>{
+      const element = document.getElementById(field);
+      return element && element.value === '';
+    });
   }
 
   renderForm() {

@@ -12,6 +12,9 @@ class ContactForm extends React.Component {
     document.getElementById('mce-EMAIL').placeholder = 'your@email.org';
     document.getElementById('mce-MMERGE4').placeholder = 'Your message here';
     document.getElementById('mc-embedded-subscribe').value = 'Send message';
+
+    // As it's required by default can't be focused and triggers an error
+    document.getElementById('mce-LNAME').required = false;
   }
 
   render() {
@@ -24,7 +27,7 @@ class ContactForm extends React.Component {
               <p>PREP aims to enhance access and use of data and information to help communities build climate resilience. We can only do this with input from users like you.</p>
             </div>
             <div className="column small-12 medium-6">
-              <Form type="Contact" />
+              <Form type="Contact" simple={true} />
             </div>
           </div>
         </article>
