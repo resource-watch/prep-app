@@ -12,6 +12,7 @@ import logoImage from '../../../images/prep-logo.png';
 import SectionIntro from '../SectionIntro';
 import MetadataList from '../Explore/MetadataList';
 import VegaChart from '../Chart/VegaChart';
+import SimpleMap from '../../containers/Map/SimpleMap';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
 class DatasetDetail extends React.Component {
@@ -55,17 +56,28 @@ class DatasetDetail extends React.Component {
       };
 
     const widget = this.props.widget ? this.props.widget.attributes : {};
-
+    let widgetComponent = null;
+    if (widget && widget.widgetConfig) {
+      switch (widget.widgetConfig.type) {
+        case 'map':
+          // widgetComponent = <SimpleMap layerId={widget.widgetConfig.layerId} />;
+          widgetComponent = <SimpleMap layerId={'3fe1e76c-e017-44c2-9d3a-c95558e48d59'} />;
+          break;
+        default:
+          widgetComponent = <VegaChart data={widget.widgetConfig} />;
+          break;
+      }
+    }
     return (
       <div>
         <SectionIntro data={data} downloadUrl={this.props.data.connector_url || ''} currentSection={'explore'} >
           <MetadataList data={data} />
         </SectionIntro>
 
-        {widget && widget.widgetConfig &&
+        {widgetComponent &&
           <div className="row">
             <div className="columns small-12">
-              <VegaChart data={widget.widgetConfig} />
+              {widgetComponent}
             </div>
           </div>
         }

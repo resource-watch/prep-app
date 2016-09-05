@@ -1,0 +1,15 @@
+.c-simple-map {
+  height: 400px;
+  position: relative;
+  > .map {
+    height: 100%;
+
+    a {
+      margin: 0;
+      font-size: inherit;
+      font-weight: inherit;
+      text-transform: inherit;
+    }
+  }
+
+}
