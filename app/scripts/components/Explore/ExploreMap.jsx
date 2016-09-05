@@ -190,6 +190,9 @@ class ExploreMap extends React.Component {
         layer = new L.tileLayer.wms(layerData.url, layerData.body);
         break;
       case 'tileLayer':
+        if (layerData.body.indexOf('style: "function') >= 0) {
+          layerData.body.style = eval(`(${layerData.body.style})`);
+        }
         layer = new L.tileLayer(layerData.url, layerData.body);
         break;
       default:
@@ -224,6 +227,10 @@ class ExploreMap extends React.Component {
 
     if (L.esri[layer.type]) {
       const layerConfig = JSON.parse(bodyStringified);
+      if (layerConfig.style &&
+        layerConfig.style.indexOf('function') >= 0) {
+        layerConfig.style = eval(`(${layerConfig.style})`);
+      }
       const newLayer = L.esri[layer.type](layerConfig);
       newLayer.on('load', () => {
         this.handleTileLoaded(layer);
