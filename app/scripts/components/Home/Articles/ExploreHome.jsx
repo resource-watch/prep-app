@@ -41,6 +41,7 @@ class ExploreHome extends React.Component {
           close={() => this.setState({ modal: false })}
         >
           <h2>Request data</h2>
+          <p>Our goal is to make climate related information more accessible. Let us know what data you want and how you would use it.</p>
           <Form type="Request data" />
         </Modal>
 
