@@ -52,13 +52,11 @@ class InsightsDetail extends React.Component {
       : contentUrl;
 
     let content;
-    //TODO: get externals type from cms
-    this.props.data.external = false;
-    if (this.props.data.external) {
+    if (this.props.data.template_type === 0) {
       content = <IFrame src={iframeUrl} />;
     } else {
-      switch ('ethiopia') {
-        case 'ethiopia':
+      switch (this.props.data.id) {
+        case 16:
           content = <EthiopiaInsight />;
           break;
         default:
