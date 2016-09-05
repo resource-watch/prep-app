@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import ExploreMapLegend from '../../components/Explore/ExploreLegend';
 
 import { setModalMetadata } from '../../actions/modal';
-import { getDatasetMetadata } from '../../actions/datasets';
+import { getDatasetById } from '../../actions/datasets';
 import { setLayersOrder, toggleLayerOpacity } from '../../actions/exploremap';
 import { updateURL } from '../../actions/links';
 
@@ -45,7 +45,7 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = (dispatch) => ({
   onInfoClick: (datasetId) => {
-    dispatch(getDatasetMetadata(datasetId));
+    dispatch(getDatasetById(datasetId, ['metadata']));
     dispatch(setModalMetadata(true, datasetId));
   },
   setLayersOrder: (layers) => {
