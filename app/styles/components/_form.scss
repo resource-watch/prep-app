@@ -64,9 +64,14 @@
   }
 
   textarea {
+    resize: none;
     flex-grow: 1;
     border: 2px solid $border-color;
     min-height: rem(150);
+  }
+
+  .c-button {
+    border: 0;
   }
 
   /* Mailchimp classes */

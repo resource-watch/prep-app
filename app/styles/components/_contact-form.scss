@@ -1,0 +1,41 @@
+
+.c-contact-form {
+  background-color: $dark-slate-blue;
+
+  .c-form > p { display: none; }
+
+  .c-form-container {
+    border: 0;
+    background-color: #fafafa;
+
+    .mc-field-group {
+      label { display: none; }
+
+      input {
+        border-bottom: rem(1) solid rgba(59, 79, 99, .3);
+      }
+
+      textarea {
+        padding: rem(14) rem(20);
+      }
+
+      input::-webkit-input-placeholder,
+      textarea::-webkit-input-placeholder {
+         color: $dark-blue;
+      }
+
+      &.email {
+        margin-bottom: rem(50);
+      }
+
+      /* Hide last name input */
+      &.last-name, &.organization {
+        display: none;
+      }
+    }
+
+    .c-button {
+      color: $button-font-color;
+    }
+  }
+}
