@@ -1,5 +1,6 @@
 import React from 'react';
 import Form from '../Form';
+import SummaryCards from '../SummaryCards';
 
 class Contact extends React.Component {
 
@@ -15,7 +16,6 @@ class Contact extends React.Component {
             </div>
           </div>
         </article>
-
       </div>
     );
   }

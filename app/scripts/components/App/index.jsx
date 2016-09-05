@@ -6,6 +6,7 @@ import SocialNav from '../../components/Navigation/SocialNav';
 import MainNav from '../../components/Navigation/MainNav';
 import Breadcrumbs from '../../components/Navigation/Breadcrumbs';
 import Banner from '../../components/Banner';
+import SummaryCards from '../../components/SummaryCards';
 
 import metadata from 'json!../../metadata.json';
 import logoImage from '../../../images/prep-logo.png';
@@ -42,6 +43,8 @@ class App extends React.Component {
   render() {
     const currentData = this.getCurrentData();
     const isHomepage = (currentData.name === 'home');
+    const pathname = window.location.pathname;
+    const summaryCardsPages  = ['/contact', '/insights', '/dashboards'];
 
     document.title = currentData.title;
 
@@ -76,11 +79,17 @@ class App extends React.Component {
           {this.props.children}
         </div>
 
+        {summaryCardsPages.indexOf(pathname) !== -1 &&
+          <SummaryCards extraCard={pathname === '/insights' ?
+            'dashboards' :
+            'insights'}/>
+        }
+
         <footer className="l-footer">
           <div className="l-footer-top -inverse">
             <div className="row">
               <div className="column small-12">
-                <PartnersSlider route={window.location.pathname}/>
+                <PartnersSlider route={pathname}/>
               </div>
             </div>
           </div>
