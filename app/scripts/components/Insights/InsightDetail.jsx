@@ -107,7 +107,7 @@ class InsightsDetail extends React.Component {
           <div className="l-header-banner">
             <Breadcrumbs pathname={this.props.location.pathname} />
             <Banner
-              bg={currentData.bannerBg}
+              imageUrl={this.props.data ? `${config.apiUrl}${this.props.data.image}` : currentData.bannerBg}
               size={currentData.bannerSize}
             >
               <h1>{title}</h1>
