@@ -72,6 +72,13 @@ class DashboardsPage extends React.Component {
     return (
       <div className="l-dashboards">
         <div className="sliced"></div>
+        <article className="c-article -no-border">
+          <div className="row align-center">
+            <div className="column small-12 medium-8">
+              <p>Find collections of climate risk data, insights, and tools contributed by partner communities. In PREP’s next phase, any user will be able to <Link to="create">create</Link> and share their own dashboards and insights.</p>
+            </div>
+          </div>
+        </article>
 
         {content}
 

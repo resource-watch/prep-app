@@ -30,7 +30,7 @@ class PartnersSlider extends Component {
             <div className="row align-center">
               <div className="column small-12 medium-8">
                 <h2>Data workgroup</h2>
-                <p>Entities that work to ensure interoperability in access and use of climate-relevant data and information..</p>
+                <p>Entities that work to ensure interoperability in access and use of climate-relevant data and information.</p>
               </div>
             </div>
           </div>

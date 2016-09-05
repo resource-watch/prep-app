@@ -55,13 +55,23 @@ export function getShortLink(longUrl) {
         throw new Error(response.statusText);
       })
       .then(data => {
-        dispatch({
-          type: LINK_SHORTEN_RECEIVE,
-          payload: {
-            shortUrl: data.data.url,
-            longUrl
-          }
-        });
+        if (data.data.url) {
+          dispatch({
+            type: LINK_SHORTEN_RECEIVE,
+            payload: {
+              shortUrl: data.data.url,
+              longUrl
+            }
+          });
+        } else {
+          dispatch({
+            type: LINK_SHORTEN_RECEIVE,
+            payload: {
+              shortUrl: false,
+              longUrl
+            }
+          });
+        }
       })
       .catch((err) => {
         dispatch({

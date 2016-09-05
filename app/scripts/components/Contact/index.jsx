@@ -9,9 +9,8 @@ class Contact extends React.Component {
         <article className="c-article">
           <div className="row align-center">
             <div className="column small-12 medium-8">
-              <h2>Submit your coments and questions</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc finibus tortor a elit dignissim, vitae facilisis risus dignissim. Maecenas imperdiet laoreet ipsum id tincidunt. Ut ornare luctus scelerisque.</p>
-
+              <h2>Submit your comments and suggestions</h2>
+              <p>Have questions, feedback, or suggestions? Send us a note at <a href="mailto:info@prepdata.org">info@prepdata.org</a> or fill out the form below.</p>
               <Form type="Contact" />
             </div>
           </div>
