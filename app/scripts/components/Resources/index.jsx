@@ -22,7 +22,7 @@ function Resources() {
       <div className="sliced"></div>
 
       <Article no-border>
-        <p>Here are selected resources for understanding the impacts of climate change,
+        <p>Find selected resources for understanding the impacts of climate change,
           tools for building resilience to climate change, and finding additional
           climate relevant data.
         </p>
@@ -35,7 +35,7 @@ function Resources() {
           <div className="columns small-12 medium-4">
             <div className="c-article-module">
               <Thumbnail
-                url={'http://www.ipcc.ch/report/ars/'}
+                url={'http://www.ipcc.ch/report/ar5/'}
                 src={ipccLogo}
                 alt={'Intergovernmental Panel on Climate Change'}
                 border={'neutral'}
@@ -143,28 +143,6 @@ function Resources() {
           <div className="columns small-12 medium-4">
             <div className="c-article-module">
               <Thumbnail
-                url={'HTTP://C40-PRODUCTION-IMAGES.S3.AMAZONAWS.COM/OTHER_UPLOADS/IMAGES/445_C40_CRAFT_V11.ORIGINAL.PDF?1453129528'}
-                src={c40Logo}
-                alt={'The Climate Risk and Adaptation Framework and Taxonomy'}
-                border={'neutral'}
-              />
-
-              <h3>The Climate Risk and Adaptation Framework and Taxonomy</h3>
-              <p>
-                (CRAFT) is a standardized reporting framework to help cities assess their progress in adaptation
-                planning, identify areas for improvement, and collectively advocate for resources to support their
-                adaptation efforts.
-              </p>
-              <a
-                href={'HTTP://C40-PRODUCTION-IMAGES.S3.AMAZONAWS.COM/OTHER_UPLOADS/IMAGES/445_C40_CRAFT_V11.ORIGINAL.PDF?1453129528'}
-                target="_blank">HTTP://C40-PRODUCTION-IMAGES.S3.AMAZONAWS.COM/OTHER_UPLOADS/
-                IMAGES/445_C40_CRAFT_V11.ORIGINAL.PDF?1453129528</a>
-            </div>
-          </div>
-
-          <div className="columns small-12 medium-4">
-            <div className="c-article-module">
-              <Thumbnail
                 url={'HTTP://WWW.ADAPTATIONLEARNING.NET/'}
                 src={almLogo}
                 alt={'Adaptation Learning Mechanism'}
@@ -252,7 +230,7 @@ function Resources() {
           <div className="columns small-12 medium-4">
             <div className="c-article-module">
               <Thumbnail
-                url={'HTTP://IRIDL.LDEO.COLUMBIA.EDU/INDEX.HTML?SET-LANGUAGE=EN'}
+                url={'http://iridl.ldeo.columbia.edu/index.html'}
                 src={iriLogo}
                 alt={'IRI/LDEO climate data Library'}
                 border={'neutral'}
@@ -262,7 +240,7 @@ function Resources() {
                 The IRI Data Library is an online data repository and analysis tool that allows a user to view, analyze,
                 and download hundreds of terabytes of climate-related data through a standard web browser
               </p>
-              <a href={'HTTP://IRIDL.LDEO.COLUMBIA.EDU/INDEX.HTML?SET-LANGUAGE=EN'} target="_blank">HTTP://IRIDL.LDEO.COLUMBIA.EDU/INDEX.HTML?SET-LANGUAGE=EN</a>
+              <a href={'http://iridl.ldeo.columbia.edu'} target="_blank">http://iridl.ldeo.columbia.edu</a>
             </div>
           </div>
         </div>
