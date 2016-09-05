@@ -28,6 +28,7 @@ class ChartCard extends React.Component {
         share={typeof this.props.setShareModal === 'function'}
         dataTooltip={this.props.tooltip && this.props.data}
         setShareModal={() => this.setShareModal()}
+        noMargin={this.props.noMargin}
       >
         {this.props.data && this.props.data.widget_config &&
           <VegaChart data={this.props.data.widget_config} />

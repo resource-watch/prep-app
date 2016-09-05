@@ -14,43 +14,44 @@ class Partnership extends React.Component {
         <article className="c-article">
           <div className="row align-center">
             <div className="column small-12 medium-8">
-              <p>The Partnership for Resilience and Preparedness (PREP) is a public-private collaboration to empower a data-driven approach to building climate resilience. PREP aims to help planners, investors, and resource managers more easily incorporate climate risks into their decisions by enhancing access to relevant data and facilitating collective learning through insights on climate change. PREP will do this through:</p>
+              <p>The Partnership for Resilience and Preparedness (PREP) is a public-private collaboration to empower a data-driven approach to building climate resilience that emerged out of the White House Climate Data Initiative. PREP aims to help planners, investors, and resource managers more easily incorporate climate risks into their decisions by enhancing access to relevant data and facilitating collective learning through insights on climate change. PREP does this through:</p>
 
               <h3>Engagement</h3>
+
               <p>We will promote collaboration among data and information producers and users.</p>
-              <Link to="/partnership/engagement">Go to engagement</Link>
+              <Link to="/about/engagement">Go to engagement</Link>
 
               <h3>Data</h3>
               <p>We will seek to reduce the barriers to accessing, contributing, and using data for climate resilience.</p>
-              <Link to="/partnership/data">Go to data</Link>
+              <Link to="/about/data">Go to data</Link>
 
               <h3>Platforms</h3>
               <p>We will develop platforms to enhance access to and usability of climate-relevant data and information.</p>
-              <Link to="/partnership/platforms">Go to platforms</Link>
+              <Link to="/about/platforms">Go to platforms</Link>
 
-              <p>PREP includes representatives from several U.S. government agencies with vast data holdings, leading technology companies, and civil society organizations. We welcome other entities committed to our mission to <a href="#join">join the partnership</a>.</p>
+              <p>PREP includes representatives from several U.S. government agencies with vast data holdings, leading technology companies, and civil society organizations, and is a Data Collaborative of the Global Partnership for Sustainable Development Data. We welcome other entities committed to our mission to <a href="#join">join the partnership</a>.</p>
             </div>
           </div>
           <aside className="row">
             <div className="column small-12 medium-4">
               <div className="c-card -border -border-neutral">
                 <h3>The Need</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Socis natoque penatibus et magnis mus.</p>
-                <a href="#">Know more</a>
+                <p>Demand for climate information is on the rise, but data are often hard to find.</p>
+                <a href="#need">Know more</a>
               </div>
             </div>
             <div className="column small-12 medium-4">
               <div className="c-card -border -border-neutral">
                 <h3>The Role</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Socis natoque penatibus et magnis mus.</p>
-                <a href="#">Know more</a>
+                <p>We work through three channels, engagement, data, and platforms.</p>
+                <a href="#role">Know more</a>
               </div>
             </div>
             <div className="column small-12 medium-4">
               <div className="c-card -border -border-neutral">
                 <h3>Join</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Socis natoque penatibus et magnis mus.</p>
-                <a href="#">Know more</a>
+                <p>We welcome other entities committed to our mission to join the partnership.</p>
+                <a href="#join">Know more</a>
               </div>
             </div>
           </aside>
@@ -76,18 +77,14 @@ class Partnership extends React.Component {
           <div className="row align-center">
             <div className="column small-12 medium-8">
               <h2>The role of PREP partners</h2>
-              <p>PREP is built on a global network of collaborators from the public and private sectors and from civil society. Each partner participates in at least one PREP workgroup.</p>
-              <p>Actionable plans are constrained by two challenges:</p>
+              <p>PREP is built on a global network of collaborators from the public and private sectors and from civil society. Each partner participates in at least one PREP workgroup.
+              </p>
+
             </div>
           </div>
 
           <PartnershipSlider />
 
-          <div className="row align-center">
-            <div className="column small-12 medium-8">
-              <p>PREP is managed by a Steering Committee that provides the governance of the Partnership and the design of the initial PREP data and dashboard platform. PREP partners are anchored in one workgroup. A representative from the Steering Committee chairs each of the four workgroups. Partners that become actively engaged in the Platform, Data Accessibility, and/or the Engagement Workgroup can become eligible to serve on the Steering Committee.</p>
-            </div>
-          </div>
         </article>
 
         <Article>

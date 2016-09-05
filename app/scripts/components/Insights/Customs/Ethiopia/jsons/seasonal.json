@@ -1,0 +1,235 @@
+{
+  "width": 474,
+  "height": 460,
+  "padding": {"top": 30,"left": 40,"right": 5,"bottom": 60},
+  "data": [
+    {
+      "name": "hist",
+      "url": "https://prep-admin.carto.com/api/v2/sql?q=select index, month, region, type from eth_crop_calendar order by index asc, region asc",
+      "format": {
+        "type": "json",
+        "property": "rows"
+      }
+    },
+    {
+      "name": "stats",
+      "source": "hist",
+      "transform": [
+        {"type": "filter","test": "datum.type != null"},
+        {
+          "type": "aggregate",
+          "groupby": ["region","type"],
+          "summarize": [{"field": "type", "ops": ["count"], "as":["counts"]}, {"field": "index", "ops": ["min"], "as":["min"]}]
+        },
+        {"type": "sort", "by":["region","min"]},
+        {"type": "formula", "field": "max", "expr": "(+datum.min + +datum.counts)"}
+      ]
+    },
+    {
+      "name": "legend",
+      "values": [
+        {"cat": "Sowing"},
+        {"cat": "Growing"},
+        {"cat": "Harvesting"}
+      ]
+    }
+
+  ],
+  "signals": [
+    {
+      "name": "tooltip",
+      "init": {},
+      "streams": [
+        {"type": "rect:mouseover", "expr": "datum"},
+        {"type": "rect:mouseout", "expr": "{}"}
+      ]
+    },
+    {
+      "name": "pos",
+      "init": {"opac":0},
+      "streams": [
+        {"type": "rect:mouseover", "expr": "{xval: +eventX(),yval: +eventY(), opac:0.8}"},
+        {"type": "rect:mouseout", "expr": "{opac:0}"}
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "x",
+      "type": "ordinal",
+      "domain": {"fields": [{"data": "hist","field": "index"}]},
+      "range": "width"
+
+    },
+    {
+      "name": "xlabels",
+      "type": "ordinal",
+      "domain": {"fields": [{"data": "hist","field": "index"}]},
+      "range":  {"fields": [{"data": "hist","field": "month"}]}
+
+    },
+    {
+      "name": "y",
+      "type": "ordinal",
+      "points":true,
+      "padding":2,
+      "range": "height",
+      "domain": {"fields": [{"data": "hist","field": "region"}]}
+    },
+    {
+      "name": "color",
+      "type": "ordinal",
+      "range": ["#DE585A","#FEC859","#6EBD57"],
+      "domain": {"data": "legend", "field": "cat"}
+    },
+    {
+      "name": "legend-series-x",
+      "type": "ordinal",
+      "domain": {"data": "legend", "field": "cat"},
+      "range": [0, 112.5, 225]
+    },
+    {
+      "name": "legend-series-y",
+      "type": "ordinal",
+      "domain": {"data": "legend", "field": "cat"},
+      "range": [0, 0, 0]
+    }
+  ],
+  "axes": [
+    {
+      "type": "x",
+      "scale": "x",
+      "ticks": 12,
+      "layer":"front",
+      "grid": true,
+      "tickPadding": 5,
+      "properties": {
+        "ticks": {"stroke": {"value": "#EEEEEE"}, "strokeOpacity": {"value": 1}},
+        "grid": {"stroke": {"value": "#EEEEEE"}, "strokeOpacity": {"value": 1}},
+        "labels": {
+          "text":{"scale": "xlabels"},
+          "font": {"value": "\"Montserrat\", sans-serif"},
+          "fill": {"value": "#9BA2AA"},
+          "fontSize": {"value": 10},
+          "align": {"value": "center"},
+          "baseline": {"value": "bottom"},
+          "dy": {"value": 10}
+        },
+        "axis": {
+          "stroke": {"value": "#E6E6E6"},
+          "opacity": {"value": 1},
+          "strokeWidth": {"value": 1.5}
+        }
+      }
+    },
+    {
+      "type": "y",
+      "scale": "y",
+      "titleOffset": 15,
+      "layer":"front",
+      "grid": true,
+      "ticks": 3,
+
+      "tickSize":1.5,
+      "properties": {
+        "axis": {
+          "stroke": {"value": "#E6E6E6"},
+          "opacity": {"value": 0},
+          "strokeWidth": {"value": 1.5}
+        },
+        "ticks": {"stroke": {"value": "#EEEEEE"}, "strokeOpacity": {"value": 1}},
+        "grid": {"stroke": {"value": "#EEEEEE"}, "strokeOpacity": {"value": 1}},
+        "labels": {
+          "font": {"value": "\"Montserrat\", sans-serif"},
+          "fill": {"value": "#9BA2AA"},
+          "fontSize": {"value": 10},
+          "align": {"value": "right"},
+          "baseline": {"value": "middle"}
+        }
+      }
+    }
+  ],
+  "marks": [
+    {
+      "name": "columns",
+      "type": "rect",
+      "from": {
+        "data": "stats"
+      },
+      "properties": {
+        "enter": {
+          "x": {"scale": "x", "field": "min",  "offset":17},
+          "x2": {"scale": "x", "field": "max", "offset":17},
+          "y": {"scale": "y", "field": "region","offset":-17},
+          "height": {"scale": "x", "band": true},
+          "fill": {"scale": "color", "field": "type"},
+          "fillOpacity": {"value": 1}
+        },
+        "update":{"fillOpacity": {"value": 1}},
+        "hover":{
+          "fillOpacity":{"value": 0.8}
+        }
+      }
+    },
+    {"name":"tooltips",
+      "type":"group",
+      "marks":[{
+        "name":"tooltip",
+      "type":"text",
+      "properties": {
+        "update": {
+          "x": {"value": 35},
+          "y": {"value": 20},
+          "text": {"signal": "tooltip.type"},
+          "align": {"value": "center"},
+          "fill": {"value": "#3B4F63"},
+          "font": {"value": "\"Montserrat\", sans-serif"},
+          "opacity": {"value": 0.8},
+          "fontSize": {"value": 11},
+          "fontWeight": {"value": "bold"}
+        }
+      }
+
+    }],
+      "properties": {
+        "update": {
+          "fill": {"value": "#eee"},
+          "fillOpacity": {"signal":"pos.opac"},
+          "width": {"value": 70},
+          "height": {"value": 40},
+          "x":{"signal":"pos.xval","offset":"0"},
+          "y": {"signal":"pos.yval","offset":"30"}
+        }
+      }
+
+    }
+  ],
+  "legends": [
+    {
+      "fill": "color",
+      "offset": 50,
+      "properties": {
+        "legend": {
+          "x": {"field": {"group": "width"},"mult": 0.05, "offset": 5},
+          "y": {"field": {"group": "height"},"mult": 1.1, "offset": 0}
+        },
+        "labels": {
+          "fontSize": {"value": 10},
+          "fill": {"value": "#9BA2AA"},
+          "text": {
+           "template": "{{datum.data| upper-locale | pad:40,10}}"
+          },
+          "x": {"scale": "legend-series-x", "offset":15},
+          "y": {"scale": "legend-series-y"}
+        },
+        "symbols": {
+          "stroke": {"value": "rgba(255,255,255,0)"},
+         "shape":{"value":"square"},
+         "size":[{"value":30},{"value":60}],
+         "x": {"scale": "legend-series-x"},
+          "y": {"scale": "legend-series-y"}
+        }
+      }
+    }
+  ]
+}

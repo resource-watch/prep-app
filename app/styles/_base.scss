@@ -147,3 +147,15 @@ p {
     font-size: $micro-font-size;
   }
 }
+
+.highlighted {
+  color: $link-font-color;
+
+  &.-theme-2 {
+    color: $thirth-color;
+  }
+
+  &.-theme-3 {
+    color: $fourth-color;
+  }
+}

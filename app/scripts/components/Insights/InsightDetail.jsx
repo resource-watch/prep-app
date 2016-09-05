@@ -14,7 +14,9 @@ import SectionIntro from '../SectionIntro';
 import IFrame from '../IFrame';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
-class DashboardDetail extends React.Component {
+import EthiopiaInsight from './Customs/Ethiopia';
+
+class InsightsDetail extends React.Component {
 
   componentWillMount() {
     if (!this.props.data) {
@@ -49,6 +51,19 @@ class DashboardDetail extends React.Component {
       ? `/proxy?url=${contentUrl}`
       : contentUrl;
 
+    let content;
+    if (this.props.data.template_type === 0) {
+      content = <IFrame src={iframeUrl} />;
+    } else {
+      switch (this.props.data.id) {
+        case 16:
+          content = <EthiopiaInsight />;
+          break;
+        default:
+          break;
+      }
+    }
+
     return (
       <div>
         <SectionIntro
@@ -60,19 +75,16 @@ class DashboardDetail extends React.Component {
           <p> {this.props.data.summary} </p>
         </SectionIntro>
 
-        <div className="row">
-          <div className="columns small-12">
-            <IFrame src={iframeUrl} />
-          </div>
-        </div>
+        {content}
       </div>
     );
   }
 
   render() {
     const currentData = this.getCurrentData();
-
     const title = this.props.data ? this.props.data.title : currentData.title;
+    const imageUrl = !this.props.data || this.props.data.image.indexOf('missing.png') >= 0 ?
+      null : `${config.apiUrl}${this.props.data.image}`;
 
     document.title = title;
 
@@ -96,7 +108,7 @@ class DashboardDetail extends React.Component {
           <div className="l-header-banner">
             <Breadcrumbs pathname={this.props.location.pathname} />
             <Banner
-              bg={currentData.bannerBg}
+              imageUrl={imageUrl}
               size={currentData.bannerSize}
             >
               <h1>{title}</h1>
@@ -141,7 +153,7 @@ class DashboardDetail extends React.Component {
   }
 }
 
-DashboardDetail.propTypes = {
+InsightsDetail.propTypes = {
   /**
    * Define the route path (from the router)
    */
@@ -165,4 +177,4 @@ DashboardDetail.propTypes = {
   getInsightBySlug: React.PropTypes.func.isRequired
 };
 
-export default DashboardDetail;
+export default InsightsDetail;
