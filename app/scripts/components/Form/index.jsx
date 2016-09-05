@@ -34,15 +34,15 @@ class Form extends React.Component {
                 <option value="Request access">Request access</option>
               </select>
             </div>
-            <div className="mc-field-group">
+            <div className="mc-field-group name">
               <label htmlFor="mce-FNAME">First Name *<span className="asterisk"></span></label>
               <input type="text" name="FNAME" className="required" id="mce-FNAME" required/>
             </div>
-            <div className="mc-field-group">
+            <div className="mc-field-group last-name">
               <label htmlFor="mce-LNAME">Last Name *<span className="asterisk"></span></label>
               <input type="text" name="LNAME" className="required" id="mce-LNAME" required/>
             </div>
-            <div className="mc-field-group">
+            <div className="mc-field-group email">
               <label htmlFor="mce-EMAIL">Email Address *<span className="asterisk"></span></label>
               <input type="email" name="EMAIL" className="required email" id="mce-EMAIL" required/>
             </div>

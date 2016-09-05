@@ -6,6 +6,7 @@ import SocialNav from '../../components/Navigation/SocialNav';
 import MainNav from '../../components/Navigation/MainNav';
 import Breadcrumbs from '../../components/Navigation/Breadcrumbs';
 import Banner from '../../components/Banner';
+import ContactForm from '../../components/ContactForm';
 
 import metadata from 'json!../../metadata.json';
 import logoImage from '../../../images/prep-logo.png';
@@ -75,6 +76,10 @@ class App extends React.Component {
         <div className="l-main">
           {this.props.children}
         </div>
+
+        {window.location.pathname === '/' &&
+          <ContactForm />
+        }
 
         <footer className="l-footer">
           <div className="l-footer-top -inverse">
