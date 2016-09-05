@@ -23,8 +23,17 @@
     "bannerBg": "partnership"
   },
   {
+    "name": "about",
+    "pathname": "/about",
+    "metaTitle": "About",
+    "metaDescription": "",
+    "title": "About",
+    "bannerSize": "medium",
+    "bannerBg": "partnership"
+  },
+  {
     "name": "engagement-workgroup",
-    "pathname": "/partnership/engagement",
+    "pathname": "/about/engagement",
     "metaTitle": "Engagement Workgroup",
     "metaDescription": "",
     "title": "Engagement Workgroup",
@@ -33,7 +42,7 @@
   },
   {
     "name": "data-accessibility",
-    "pathname": "/partnership/data",
+    "pathname": "/about/data",
     "metaTitle": "Data Workgroup",
     "metaDescription": "",
     "title": "Data Workgroup",
@@ -42,7 +51,7 @@
   },
   {
     "name": "platform-development",
-    "pathname": "/partnership/platforms",
+    "pathname": "/about/platforms",
     "metaTitle": "Platform Workgroup",
     "metaDescription": "",
     "title": "Platform Workgroup",
@@ -66,15 +75,6 @@
     "title": "Dataset",
     "bannerSize": "medium",
     "bannerBg": "datasets"
-  },
-  {
-    "name": "about",
-    "pathname": "/about",
-    "metaTitle": "About",
-    "metaDescription": "",
-    "title": "About",
-    "bannerSize": "medium",
-    "bannerBg": "partnership"
   },
   {
     "name": "faq",

@@ -17,16 +17,17 @@ class Partnership extends React.Component {
               <p>The Partnership for Resilience and Preparedness (PREP) is a public-private collaboration to empower a data-driven approach to building climate resilience that emerged out of the White House Climate Data Initiative. PREP aims to help planners, investors, and resource managers more easily incorporate climate risks into their decisions by enhancing access to relevant data and facilitating collective learning through insights on climate change. PREP does this through:</p>
 
               <h3>Engagement</h3>
-              <p>We promote collaboration among data and information producers and users.</p>
-              <Link to="/partnership/engagement">Go to engagement</Link>
+
+              <p>We will promote collaboration among data and information producers and users.</p>
+              <Link to="/about/engagement">Go to engagement</Link>
 
               <h3>Data</h3>
-              <p>We seek to reduce the barriers to accessing, contributing, and using data for climate resilience.</p>
-              <Link to="/partnership/data">Go to data</Link>
+              <p>We will seek to reduce the barriers to accessing, contributing, and using data for climate resilience.</p>
+              <Link to="/about/data">Go to data</Link>
 
               <h3>Platforms</h3>
-              <p>We develop platforms to enhance access to and usability of climate-relevant data and information.</p>
-              <Link to="/partnership/platforms">Go to platforms</Link>
+              <p>We will develop platforms to enhance access to and usability of climate-relevant data and information.</p>
+              <Link to="/about/platforms">Go to platforms</Link>
 
               <p>PREP includes representatives from several U.S. government agencies with vast data holdings, leading technology companies, and civil society organizations, and is a Data Collaborative of the Global Partnership for Sustainable Development Data. We welcome other entities committed to our mission to <a href="#join">join the partnership</a>.</p>
             </div>
