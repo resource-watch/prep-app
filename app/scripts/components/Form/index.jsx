@@ -57,7 +57,7 @@ class Form extends React.Component {
               <label htmlFor="mce-EMAIL">Email Address *<span className="asterisk"></span></label>
               <input type="email" name="EMAIL" className="required email" id="mce-EMAIL" required/>
             </div>
-            <div className="mc-field-group">
+            <div className="mc-field-group organization">
               <label htmlFor="mce-MMERGE5">Organization<span className="asterisk"></span></label>
               <input type="text" name="MMERGE5" id="mce-MMERGE5"/>
             </div>

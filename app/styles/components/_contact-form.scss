@@ -29,7 +29,9 @@
       }
 
       /* Hide last name input */
-      &.last-name { display: none; }
+      &.last-name, &.organization {
+        display: none;
+      }
     }
 
     .c-button {
