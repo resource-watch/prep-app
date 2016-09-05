@@ -47,11 +47,11 @@ class EthiopiaInsight extends React.Component {
         <article className="c-article">
           <div className="c-article-module -no-top">
             <div className="row align-center">
-              <div className="column small-12 medium-6">
+              <div className="column small-12 medium-6 flex align-stretch">
                 <img src={ethiopia01} alt="Ethiopia" />
               </div>
 
-              <div className="column align-middle small-12 medium-6">
+              <div className="column align-middle small-12 medium-6 flex align-stretch">
                 <ChartCard
                   tooltip
                   link=""
@@ -78,20 +78,20 @@ class EthiopiaInsight extends React.Component {
 
         <article className="c-article">
           <div className="c-article-module -no-top">
-            <div className="row align-right">
-              <div className="column small-12 medium-1">
-                <button className="c-button -action" onClick={()=>this.setShareModal('http://climateserv.nsstc.nasa.gov', 'map')}>
-                  <span>Share </span>
-                  <div className="c-button -icon">
-                    <svg className="-icon" width="10" height="12" viewBox="0 0 10 12">
-                      <title>icon-share</title>
-                      <g fill="#01517b">
-                        <path d="M6.45 1l1.414 1.414-4.95 4.95L1.5 5.95zM0 10h10v2H0z"></path>
-                        <path d="M9 1V0H2v2h5v5h2V1z"></path>
-                      </g>
-                    </svg>
-                  </div>
+            <div className="row">
+              <div className="column small-12 medium-12 flex align-right align-middle">
+                <button className="c-button -action highlighted -theme-3" onClick={()=>this.setShareModal('http://climateserv.nsstc.nasa.gov', 'map')}>
+                  <span>Share</span>
                 </button>
+                <div className="c-button -icon flex" onClick={()=>this.setShareModal('http://climateserv.nsstc.nasa.gov', 'map')}>
+                  <svg className="-icon" width="10" height="12" viewBox="0 0 10 12">
+                    <title>icon-share</title>
+                    <g fill="#25b5cd">
+                      <path d="M6.45 1l1.414 1.414-4.95 4.95L1.5 5.95zM0 10h10v2H0z"></path>
+                      <path d="M9 1V0H2v2h5v5h2V1z"></path>
+                    </g>
+                  </svg>
+                </div>
               </div>
             </div>
           </div>
@@ -115,8 +115,8 @@ class EthiopiaInsight extends React.Component {
                 <p>The goal of these case studies is to show how climate data provided by NASA SERVIR’s ClimateServ system (<a href="http://climateserv.nsstc.nasa.gov/">http://climateserv.nsstc.nasa.gov/</a>) can be used by end-users to understand historical and near-term seasonal forecasts as related to agricultural productivity. </p>
                 <p>Potential end-users include the following</p>
                 <ul>
-                  <li>The Ethiopia Ministry of Agriculture and Natural Resources, which seeks to create an agricultural system that uses advanced technology to prevent poverty in its society</li>
-                  <li>The Ethiopia National Meteorology Agency, which analyzes and reports weather and climate conditions in Ethiopia for the benefit of Ethiopian economic and social development.</li>
+                  <li><strong className="highlighted -theme-3">The Ethiopia Ministry of Agriculture and Natural Resources</strong>, which seeks to create an agricultural system that uses advanced technology to prevent poverty in its society</li>
+                  <li><strong className="highlighted -theme-3">The Ethiopia National Meteorology Agency</strong>, which analyzes and reports weather and climate conditions in Ethiopia for the benefit of Ethiopian economic and social development.</li>
                 </ul>
               </div>
             </div>
