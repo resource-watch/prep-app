@@ -72,10 +72,10 @@ class DataMap extends React.Component {
           </Link>
         );
       }
-      
+
       var cdiTag = false;
       for (let i=0; i< dataset.tags.length; i++){
-        if(dataset.tags[i] == "CDI"){
+        if(dataset.tags[i] == "cdi"){
           cdiTag = true;
         };
       };
