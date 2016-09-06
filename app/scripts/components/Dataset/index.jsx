@@ -79,12 +79,14 @@ class DatasetDetail extends React.Component {
           <MetadataList data={data} />
         </SectionIntro>
 
-        {widgetComponents && widgetComponents.length &&
+        {
+          (widgetComponents && widgetComponents.length) ?
           <div className="row">
             <div className="columns small-12">
               {widgetComponents}
             </div>
           </div>
+          : null
         }
       </div>
     );
