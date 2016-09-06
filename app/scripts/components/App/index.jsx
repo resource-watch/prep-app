@@ -12,6 +12,11 @@ import ContactForm from '../../components/ContactForm';
 import metadata from 'json!../../metadata.json';
 import logoImage from '../../../images/prep-logo.png';
 
+const theme = {
+  '/resources': '-theme-2',
+  '/insights': '-theme-3'
+};
+
 class App extends React.Component {
 
   getData(key, value) {
@@ -50,7 +55,7 @@ class App extends React.Component {
     document.title = currentData.title;
 
     return (
-      <div>
+      <div className={theme[pathname]}>
         <header className="l-header">
           <div className={`l-header-nav ${currentData.name === 'home' ? '-no-bg' : ''}`}>
             <div className="row align-middle">
