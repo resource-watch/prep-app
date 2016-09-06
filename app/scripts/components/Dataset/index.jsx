@@ -55,16 +55,21 @@ class DatasetDetail extends React.Component {
         }
       };
 
-    const widget = this.props.widget ? this.props.widget.attributes : {};
-    let widgetComponent = null;
-    if (widget && widget.widgetConfig) {
-      switch (widget.widgetConfig.type) {
-        case 'map':
-          widgetComponent = <SimpleMap layerId={widget.widgetConfig.layerId} />;
-          break;
-        default:
-          widgetComponent = <VegaChart data={widget.widgetConfig} />;
-          break;
+    const widgetComponents = [];
+    const { widgets } = this.props;
+    if (widgets && widgets.length) {
+      for (let i = 0, wLength = widgets.length; i < wLength; i++) {
+        const widget = widgets[i].attributes;
+        if (widget.widgetConfig) {
+          switch (widget.widgetConfig.type) {
+            case 'map':
+              widgetComponents.push(<div className="c-article" key={i} ><SimpleMap layerId={widget.widgetConfig.layerId} /></div>);
+              break;
+            default:
+              widgetComponents.push(<div className="c-article" key={i} ><VegaChart data={widget.widgetConfig} /></div>);
+              break;
+          }
+        }
       }
     }
     return (
@@ -73,10 +78,10 @@ class DatasetDetail extends React.Component {
           <MetadataList data={data} />
         </SectionIntro>
 
-        {widgetComponent &&
+        {widgetComponents && widgetComponents.length &&
           <div className="row">
             <div className="columns small-12">
-              {widgetComponent}
+              {widgetComponents}
             </div>
           </div>
         }
@@ -177,7 +182,7 @@ DatasetDetail.propTypes = {
   /**
    * Define the dataset widget
    */
-  widget: React.PropTypes.any
+  widgets: React.PropTypes.array
 };
 
 export default DatasetDetail;

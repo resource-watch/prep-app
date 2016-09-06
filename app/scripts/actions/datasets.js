@@ -132,17 +132,19 @@ export function getDatasetDefaultWidget(datasetId) {
       })
       .then(data => {
         if (data.data.length) {
-          fetch(`${config.apiUrlRW}/widgets/${data.data[0].id}`)
-          .then(response => {
-            if (response.ok) return response.json();
-            throw new Error(response.statusText);
-          })
-          .then(widget => {
-            dispatch({
-              type: DATASET_WIDGET_RECEIVED,
-              payload: { data: widget.data }
+          for (let i = 0, wLength = data.data.length; i < wLength; i++) {
+            fetch(`${config.apiUrlRW}/widgets/${data.data[i].id}`)
+            .then(response => {
+              if (response.ok) return response.json();
+              throw new Error(response.statusText);
+            })
+            .then(widget => {
+              dispatch({
+                type: DATASET_WIDGET_RECEIVED,
+                payload: { data: widget.data }
+              });
             });
-          });
+          }
         }
       })
       .catch((err) => {

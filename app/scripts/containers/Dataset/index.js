@@ -7,7 +7,7 @@ const mapStateToProps = (state, { params, route }) => ({
   currentPage: route.path,
   datasetSlug: params.slug,
   data: state.datasets.details[params.slug] || null,
-  widget: state.datasets.widgets[params.slug] || null
+  widgets: state.datasets.widgets[params.slug] || []
 });
 
 const mapDispatchToProps = (dispatch) => ({
