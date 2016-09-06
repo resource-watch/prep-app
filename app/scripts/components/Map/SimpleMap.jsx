@@ -1,6 +1,8 @@
-import LoadingSpinner from '../Loading/LoadingSpinner';
-
 import React from 'react';
+
+import LoadingSpinner from '../Loading/LoadingSpinner';
+import SimpleLegend from './SimpleLegend';
+
 
 class SimpleMap extends React.Component {
   constructor() {
@@ -26,11 +28,11 @@ class SimpleMap extends React.Component {
   }
 
   initMap() {
-    const params = {};
-
-    if (!params.zoom) params.zoom = 2;
-    if (!params.lat) params.lat = 48.46038;
-    if (!params.lng) params.lng = -123.889823;
+    const params = {
+      zoom: 2,
+      lat: 48.46038,
+      lng: -123.889823
+    };
 
     this.mapLayers = {};
     this.map = L.map(this.refs.map, {
@@ -198,11 +200,16 @@ class SimpleMap extends React.Component {
 
   render() {
     let loading;
+    const layer = this.props.data[this.props.layerId] || false;
     if (this.state.loading) {
       loading = <LoadingSpinner inner />;
     }
+
     return (<div className="c-simple-map">
       <div className="map" ref="map"></div>
+      {layer &&
+        <SimpleLegend layer={layer} />
+      }
       {loading}
     </div>);
   }

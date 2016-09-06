@@ -60,8 +60,7 @@ class DatasetDetail extends React.Component {
     if (widget && widget.widgetConfig) {
       switch (widget.widgetConfig.type) {
         case 'map':
-          // widgetComponent = <SimpleMap layerId={widget.widgetConfig.layerId} />;
-          widgetComponent = <SimpleMap layerId={'3fe1e76c-e017-44c2-9d3a-c95558e48d59'} />;
+          widgetComponent = <SimpleMap layerId={widget.widgetConfig.layerId} />;
           break;
         default:
           widgetComponent = <VegaChart data={widget.widgetConfig} />;

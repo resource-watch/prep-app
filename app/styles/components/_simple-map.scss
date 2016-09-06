@@ -3,6 +3,7 @@
   position: relative;
   > .map {
     height: 100%;
+    z-index: 1;
 
     a {
       margin: 0;
