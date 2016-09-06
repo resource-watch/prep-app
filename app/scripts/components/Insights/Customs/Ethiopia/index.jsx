@@ -53,7 +53,6 @@ class EthiopiaInsight extends React.Component {
 
               <div className="column align-middle small-12 medium-6 flex align-stretch">
                 <ChartCard
-                  tooltip
                   link=""
                   title="Ethiopia crop calendar"
                   subtitle=""
@@ -158,7 +157,6 @@ class EthiopiaInsight extends React.Component {
             <div className="row align-center">
               <div className="column align-middle small-12 medium-6">
                 <ChartCard
-                  tooltip
                   link=""
                   title="East Africa eMODIS NDVI"
                   subtitle="NDVI FOR TIGRAY REGION IN ETHIOPIA"
@@ -169,7 +167,6 @@ class EthiopiaInsight extends React.Component {
 
               <div className="column align-middle small-12 medium-6">
                 <ChartCard
-                  tooltip
                   link=""
                   title="CHIRPS Rainfall"
                   subtitle="RAINFALL FOR TIGRAY REGION IN ETHIOPIA"
@@ -205,7 +202,6 @@ class EthiopiaInsight extends React.Component {
             <div className="row align-center">
               <div className="column align-middle small-12 medium-6">
                 <ChartCard
-                  tooltip
                   link=""
                   title="Somali seasonal forecast"
                   subtitle="NORTH AMERICAN MULTIMODEL ENSEMBLE (N MME)"
@@ -216,7 +212,6 @@ class EthiopiaInsight extends React.Component {
 
               <div className="column align-middle small-12 medium-6">
                 <ChartCard
-                  tooltip
                   link=""
                   title="Tigray seasonal forecast"
                   subtitle="NORTH AMERICAN MULTIMODEL ENSEMBLE (N MME)"

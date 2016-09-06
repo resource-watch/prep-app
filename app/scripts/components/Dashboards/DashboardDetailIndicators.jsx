@@ -1,4 +1,5 @@
 import React from 'react';
+import MapCard from '../Cards/MapCard';
 import ChartCard from '../Cards/ChartCard';
 import EmbedCard from '../Cards/EmbedCard';
 import ShareModal from '../Modal/ShareModal';
@@ -28,32 +29,44 @@ class DashboardDetailIndicators extends React.Component {
     let content = [];
     if (this.props.data && this.props.data.widgets.length) {
       this.props.data.widgets.forEach((indicator, index) => {
-        if (indicator.widget_type_id && indicator.widget_type_id === 2) {
-          content.push(
-            <div className="large-12" key={`indicator-${index}`} style={{ display: 'flex' }}>
-              <EmbedCard
-                tooltip
-                autoHeight
-                title={indicator.title}
-                subtitle={indicator.subtitle}
-                data={indicator}
-                setShareModal={this.setShareModal}
-              />
-            </div>
-          );
-        } else {
-          content.push(
-            <div className="columns small-12 medium-6" key={`indicator-${index}`} style={{ display: 'flex' }}>
-              <ChartCard
-                tooltip
-                link={`/dataset/${indicator.dataset}`}
-                title={indicator.title}
-                subtitle={indicator.subtitle}
-                data={indicator}
-                setShareModal={this.setShareModal}
-              />
-            </div>
-          );
+        if (indicator.widget_config) {
+          const widgetConfig = typeof indicator.widget_config === 'string'
+            ? JSON.parse(indicator.widget_config)
+            : indicator.widget_config;
+          if (widgetConfig.type === 'map') {
+            content.push(
+              <div className="large-12" key={`indicator-${index}`} style={{ display: 'flex' }}>
+                <MapCard
+                  data={indicator}
+                  layerId={widgetConfig.layerId}
+                  setShareModal={this.setShareModal}
+                />
+              </div>
+            );
+          } else if (widgetConfig.type === 'embed') {
+            content.push(
+              <div className="large-12" key={`indicator-${index}`} style={{ display: 'flex' }}>
+                <EmbedCard
+                  autoHeight
+                  data={indicator}
+                  url={widgetConfig.url}
+                  setShareModal={this.setShareModal}
+                />
+              </div>
+            );
+          } else {
+            content.push(
+              <div className="columns small-12 medium-6" key={`indicator-${index}`} style={{ display: 'flex' }}>
+                <ChartCard
+                  link={`/dataset/${indicator.dataset}`}
+                  title={indicator.title}
+                  subtitle={indicator.subtitle}
+                  data={indicator}
+                  setShareModal={this.setShareModal}
+                />
+              </div>
+            );
+          }
         }
       });
     }

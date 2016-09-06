@@ -65,6 +65,7 @@
     "serve-favicon": "^2.3.0",
     "style-loader": "^0.13.1",
     "twitter": "^1.4.0",
+    "urijs": "^1.18.1",
     "vega": "2.5.2",
     "webpack": "^1.13.0",
     "webpack-dev-middleware": "^1.6.1",

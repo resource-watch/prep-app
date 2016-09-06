@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 
 function ContentCard(props) {
   const classNames = ['c-content-card'];
+  if (props.inner) classNames.push('-inner');
   if (props.noBorder) classNames.push('-no-border');
   if (props.noMargin) classNames.push('-no-margin');
   if (props.autoHeight) classNames.push('-auto-height');
@@ -95,6 +96,10 @@ ContentCard.propTypes = {
    * Define it the card has border
    */
   noBorder: React.PropTypes.bool,
+  /**
+   * Define it the card has no padding
+   */
+  inner: React.PropTypes.bool,
   /**
    * Define tooltip content data
    */

@@ -30,7 +30,7 @@ class IFrame extends React.Component {
 
   render() {
     let loading;
-    if (!this.state.loaded) loading = <LoadingSpinner />;
+    if (!this.state.loaded) loading = <LoadingSpinner inner />;
 
     return (
       <div className="c-iframe" style={{ height: this.state.height }}>

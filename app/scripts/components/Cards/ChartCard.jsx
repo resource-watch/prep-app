@@ -26,7 +26,6 @@ class ChartCard extends React.Component {
         noBorder={this.props.noBorder}
         background={this.props.background}
         share={typeof this.props.setShareModal === 'function'}
-        dataTooltip={this.props.tooltip && this.props.data}
         setShareModal={() => this.setShareModal()}
         noMargin={this.props.noMargin}
       >
@@ -39,14 +38,6 @@ class ChartCard extends React.Component {
 }
 
 ChartCard.propTypes = {
-  /**
-   * Define the card title
-   */
-  title: React.PropTypes.string.isRequired,
-  /**
-   * Define the card subtitle
-   */
-  subtitle: React.PropTypes.string,
   /**
    * Define the card legend
    */
