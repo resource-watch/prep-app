@@ -27,19 +27,21 @@ $shadow-size: 150px;
     &:before {
       display: block;
       position: absolute;
-      content: "◼";
-      top: 0.04rem;
+      content: "";
+      width: rem(7);
+      height: rem(7);
+      top: 0.57rem;
       left: -1.5rem;
       font-size: rem(14);
 
-      color: $secondary-color;
+      background-color: $secondary-color;
 
       .-theme-2 & {
-        color: $thirth-color;
+        background-color: $thirth-color;
       }
 
       .-theme-3 & {
-        color: $fourth-color;
+        background-color: $fourth-color;
       }
     }
   }
