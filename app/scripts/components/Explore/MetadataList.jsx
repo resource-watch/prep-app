@@ -2,7 +2,8 @@ import React from 'react';
 
 function MetadataInfo(props) {
   const downloadUrl = props.data.attributes.dataDownload || props.data.attributes.connectorUrl;
-  let title = props.data.attributes.message
+
+  const title = props.data.attributes.message
     ? <li>
       <span>Info: </span>
       <span>{props.data.attributes.message}</span>

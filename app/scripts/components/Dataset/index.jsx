@@ -74,7 +74,7 @@ class DatasetDetail extends React.Component {
     }
     return (
       <div>
-        <SectionIntro data={data} downloadUrl={this.props.data.connector_url || ''} currentSection={'explore'} >
+        <SectionIntro data={data} downloadUrl={this.getDownloadUrl(this.props.data)} currentSection={'explore'} >
           <MetadataList data={data} />
         </SectionIntro>
 
@@ -87,6 +87,30 @@ class DatasetDetail extends React.Component {
         }
       </div>
     );
+  }
+
+  getDownloadUrl(data) {
+    let url = null;
+    let metadataUrl = null;
+    if (data.metadata && data.metadata.length &&
+        data.metadata[0].info.attributes.dataDownload) {
+      metadataUrl = data.metadata[0].info.attributes.dataDownload;
+    }
+    switch(data.provider) {
+      case 'wms':
+        url = null;
+        break;
+      case 'cartodb':
+        if (data.connector_url.indexOf('tables') === -1) {
+          url = data.connector_url + '?format=csv';
+        } else {
+          url = data.connector_url;
+        }
+        break;
+      default:
+        url =  metadataUrl || data.connector_url;
+    }
+    return url;
   }
 
   render() {
