@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 import Card from '../Cards/Card';
 
-class DashboardsPage extends React.Component {
+class InsightsPage extends React.Component {
 
   constructor(props) {
     super(props);
@@ -87,7 +87,7 @@ class DashboardsPage extends React.Component {
   }
 }
 
-DashboardsPage.propTypes = {
+InsightsPage.propTypes = {
   /**
    * Define the route path (from the router)
    */
@@ -102,4 +102,4 @@ DashboardsPage.propTypes = {
   data: React.PropTypes.array
 };
 
-export default DashboardsPage;
+export default InsightsPage;

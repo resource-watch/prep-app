@@ -191,7 +191,7 @@ class ExploreMap extends React.Component {
         break;
       case 'tileLayer':
         if (layerData.body.indexOf('style: "function') >= 0) {
-          layerData.body.style = eval(layerData.body.style);
+          layerData.body.style = eval(`(${layerData.body.style})`);
         }
         layer = new L.tileLayer(layerData.url, layerData.body);
         break;
@@ -228,8 +228,8 @@ class ExploreMap extends React.Component {
     if (L.esri[layer.type]) {
       const layerConfig = JSON.parse(bodyStringified);
       if (layerConfig.style &&
-        layerConfig.style.indexOf('style: "function') >= 0) {
-        layerConfig.style = eval(layerConfig.style);
+        layerConfig.style.indexOf('function') >= 0) {
+        layerConfig.style = eval(`(${layerConfig.style})`);
       }
       const newLayer = L.esri[layer.type](layerConfig);
       newLayer.on('load', () => {
