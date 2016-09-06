@@ -102,6 +102,7 @@ class DashboardDetail extends React.Component {
 
     document.title = title;
 
+
     return (
       <div>
         <header className="l-header">
