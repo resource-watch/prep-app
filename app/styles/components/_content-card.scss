@@ -16,6 +16,13 @@ $content-header-height: 80px;
 
   &.-no-margin { margin: 0; }
 
+  &.-inner {
+    padding: 0;
+    > .header {
+      padding: $small-margin $small-margin 0
+    }
+  }
+
   &.-auto-height {
     > .content {
       height: auto;

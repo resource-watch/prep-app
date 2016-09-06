@@ -1,11 +1,11 @@
 import React from 'react';
 import ContentCard from './ContentCard';
-import IFrame from '../IFrame';
+import SimpleMap from '../../containers/Map/SimpleMap';
 
-class EmbedCard extends React.Component {
+class MapCard extends React.Component {
 
   setShareModal() {
-    this.props.setShareModal(this.props.url, 'widget', this.props.data.slug);
+    this.props.setShareModal(this.props.layerId, 'widget', this.props.data.slug);
   }
 
   render() {
@@ -18,38 +18,37 @@ class EmbedCard extends React.Component {
       <ContentCard
         inner
         header={header}
-        autoHeight={this.props.autoHeight}
         attribution={this.props.data.attribution}
         noBorder={this.props.noBorder}
         share={typeof this.props.setShareModal === 'function'}
         setShareModal={() => this.setShareModal()}
       >
-        {this.props.url ?
-          <IFrame src={this.props.url} /> :
-          <p style={{ paddingLeft: '60px' }}>Data url not given.</p>
+        {this.props.layerId ?
+          <SimpleMap layerId={this.props.layerId} /> :
+          <p style={{ paddingLeft: '60px' }}>Layer id not given.</p>
         }
       </ContentCard>
     );
   }
 }
 
-EmbedCard.propTypes = {
+MapCard.propTypes = {
   /**
-   * Define it the card has border
-   */
+  * Define it the card has border
+  */
   noBorder: React.PropTypes.bool,
   /**
-   * Define widget data details
+   * Define the card data
    */
   data: React.PropTypes.any.isRequired,
   /**
-   * Define url to embed
+   * Define layer id to add in map
    */
-  url: React.PropTypes.string.isRequired,
+  layerId: React.PropTypes.string.isRequired,
   /**
    * Set share modal state
    */
   setShareModal: React.PropTypes.func
 };
 
-export default EmbedCard;
+export default MapCard;
