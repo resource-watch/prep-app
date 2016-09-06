@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import URI from 'urijs';
 
 import metadata from 'json!../../metadata.json';
 import PartnersSlider from '../../containers/PartnersSlider';
@@ -102,10 +103,26 @@ class DatasetDetail extends React.Component {
         break;
       case 'cartodb':
         if (data.connector_url.indexOf('tables') === -1) {
-          url = data.connector_url + '?format=csv';
+          const uri = new URI(data.connector_url);
+          uri.search({ format: 'csv' });
+          url = uri.toString();
         } else {
           url = data.connector_url;
         }
+        break;
+      case 'featureservice':
+        const uri = new URI(data.connector_url);
+        uri.segment('query');
+        uri.search({
+          where: '1=1',
+          returnGeometry: 'true',
+          returnDistinctValues: 'false',
+          returnIdsOnly: 'false',
+          returnCountOnly: 'false',
+          outFields: '*',
+          f: 'json'
+        });
+        url = uri.toString();
         break;
       default:
         url =  metadataUrl || data.connector_url;
