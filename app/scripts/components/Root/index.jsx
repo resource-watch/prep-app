@@ -13,26 +13,32 @@ class Root extends React.Component {
   componentDidMount() {
     if (sessionStorage.getItem('modalWelcomeOpened') === false ||
       sessionStorage.getItem('modalWelcomeOpened') === null) {
+      this.setModalWelcome();
+    }
+  }
+
+  setModalWelcome() {
+    if (this.props.location.pathname.indexOf('embed') === -1) {
       this.setState({ modalWelcomeOpen: true });
     }
   }
 
   render() {
     return (
-      <div style={{height: '100%'}}>
+      <div style={{ height: '100%' }}>
         {this.props.children}
 
         {this.state.modalWelcomeOpen &&
-        <WelcomeModal
-          title={"Welcome to Partnership for Resilience & Preparedness Beta Platform"}
-          opened={this.state.modalWelcomeOpen}
-          close={() => {
-            this.setState({modalWelcomeOpen: false});
-            localStorage.setItem('modalWelcomeOpened', JSON.stringify(true));
-          }
-          }
-          hideCloseButton
-        />
+          <WelcomeModal
+            title={"Welcome to Partnership for Resilience & Preparedness Beta Platform"}
+            opened={this.state.modalWelcomeOpen}
+            close={() => {
+              this.setState({ modalWelcomeOpen: false });
+              localStorage.setItem('modalWelcomeOpened', JSON.stringify(true));
+            }
+            }
+            hideCloseButton
+          />
         }
       </div>
     );

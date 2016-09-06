@@ -1,7 +1,9 @@
 import React from 'react';
 
 function MetadataInfo(props) {
-  let title = props.data.attributes.message
+  const downloadUrl = props.data.attributes.dataDownload || props.data.attributes.connectorUrl;
+
+  const title = props.data.attributes.message
     ? <li>
       <span>Info: </span>
       <span>{props.data.attributes.message}</span>
@@ -40,12 +42,12 @@ function MetadataInfo(props) {
           </span>
         </li>
       }
-      {props.download && props.data.attributes.dataDownload &&
+      {props.download && downloadUrl &&
         <li>
           <span>Download: </span>
           <span>
-            <a href={props.data.attributes.dataDownload} target="_blank" download>
-              {props.data.attributes.dataDownload}
+            <a href={downloadUrl} target="_blank">
+              {downloadUrl}
             </a>
           </span>
         </li>

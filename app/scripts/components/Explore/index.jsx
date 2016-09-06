@@ -59,9 +59,12 @@ class Explore extends React.Component {
   }
 
   getModalContent() {
-    const { metadatas } = this.props.data;
-    if (metadatas && metadatas[this.props.metadataModal.datasetId]) {
-      const metadataInfo = metadatas[this.props.metadataModal.datasetId].attributes.info;
+    const { details } = this.props.data;
+    const datasetData = details[this.props.metadataModal.datasetId];
+
+    if (datasetData) {
+      const metadataInfo = datasetData.metadata[0].info;
+      metadataInfo.attributes.connectorUrl = datasetData.connector_url || false;
 
       return (
         <div className="content">
