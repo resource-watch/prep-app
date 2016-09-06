@@ -121,7 +121,7 @@ class DataMapLegend extends React.Component {
         </div>
 
         {this.state.legendOpen &&
-          <div className="row legend-layer">
+          <div className="legend-layer">
             <div className="column small-12 ">
               <span className="title">{this.props.layer.attributes.name}</span>
               {this.getLegend(this.props.layer)}
