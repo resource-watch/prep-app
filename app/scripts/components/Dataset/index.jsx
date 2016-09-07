@@ -46,7 +46,7 @@ class DatasetDetail extends React.Component {
       return <LoadingSpinner />;
     }
 
-    const data = this.props.data.metadata.length > 0
+    const data = this.props.data.metadata && this.props.data.metadata.length > 0
       ? this.props.data.metadata[0].info
       : {
         id: this.props.data.id,
