@@ -24,7 +24,7 @@ class ExploreHome extends React.Component {
         <div className="row">
           <div className="column small-12 medium-8">
             <h2 className="-left">Exploring the data</h2>
-            <Link to="/insights">Go to explore</Link>
+            <Link to="/explore">Go to explore</Link>
           </div>
         </div>
         <div className="row">

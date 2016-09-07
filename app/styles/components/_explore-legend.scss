@@ -1,12 +1,19 @@
 .c-explore-legend {
   position: absolute;
   left: auto;
-  right: 10px;
-  bottom: 10px;
   background-color: rgba($navy, 0.8);
   z-index: 1;
-  width: 500px;
-  transform: translateY(calc(100% - 40px));
+  width: 100%;
+  right: 0;
+  bottom: 0;
+  transform: translateY(0);
+
+  @media #{$mq-large} {
+    width: 500px;
+    right: 10px;
+    bottom: 10px;
+    transform: translateY(calc(100% - 40px));
+  }
 
   > .action-container {
     display: flex;
@@ -47,8 +54,11 @@
   }
 
   &.-open {
-    transform: translateY(-10px);
+    transform: translateY(0);
     transition: transform 0.3s ease-out;
+    @media #{$mq-large} {
+      transform: translateY(-10px);
+    }
 
     > .action-container  {
       > .help, > .open {

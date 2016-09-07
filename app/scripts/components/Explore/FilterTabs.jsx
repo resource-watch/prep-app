@@ -24,8 +24,12 @@ class FilterTabs extends React.Component {
       activeFilters = activeFilters.split(',');
       Object.keys(filtersConfig.filters).forEach((key) => {
         for (let i = activeFilters.length - 1; i >= 0; i--) {
-          if (filtersConfig.filters[key][activeFilters[i]]) {
-            setDatasetFilter(key, activeFilters[i]);
+          const filter = activeFilters[i];
+          if (filtersConfig.filters[key][filter]) {
+            // defaults filters
+            if (filter !== 'global' && filter !== 'national') {
+              setDatasetFilter(key, filter);
+            }
           }
         }
       });

@@ -50,13 +50,20 @@ class DataMap extends React.Component {
 
       let datasetIcon = null;
 
-      const subtitle = dataset.metadata && dataset.metadata.length ?
-        dataset.metadata[0].info.attributes.subtitle : '';
+      let subtitle = '';
+      let partner = '';
 
-      const partner = dataset.metadata && dataset.metadata.length ?
-        (<span>
-          from <strong>{dataset.metadata[0].info.attributes.organization}</strong>
-        </span>) : '';
+      if (dataset.metadata && dataset.metadata.length) {
+        const metadata = dataset.metadata[0].info.attributes;
+        if (metadata) {
+          if (metadata.subtitle) {
+            subtitle = metadata.subtitle;
+          }
+          if (metadata.organization) {
+            partner = <span>from <strong>{metadata.organization}</strong></span>;
+          }
+        }
+      }
 
       if (dataset.layers && dataset.layers.length) {
         layerIcon = (
@@ -76,14 +83,12 @@ class DataMap extends React.Component {
         );
       }
 
-      var cdiTag = false;
+      let cdiTag = false;
       for (let i = 0; i < dataset.tags.length; i++) {
-        if (dataset.tags[i] == "cdi") {
+        if (dataset.tags[i] === 'cdi') {
           cdiTag = true;
         }
-        ;
       }
-      ;
 
       return (
         <div className="layer" key={`map-layer-${index}`}>
@@ -95,7 +100,7 @@ class DataMap extends React.Component {
                   <div className="-highlighted-tag">CDI</div>
                 </Tooltip>
               </strong> : <strong className="title">{dataset.name}</strong>}
-            <span className="subtitle">{subtitle} {partner}</span>
+              <span className="subtitle">{subtitle} {partner}</span>
           </span>
           {datasetIcon}
         </div>
