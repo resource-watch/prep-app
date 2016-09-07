@@ -1,4 +1,5 @@
 import React from 'react';
+import URI from 'urijs';
 
 function getDownloadUrl(data) {
   let url = null;
@@ -88,7 +89,10 @@ function MetadataInfo(props) {
           <span>Download: </span>
           <span>
             <a href={downloadUrl} target="_blank">
-              {downloadUrl}
+              {downloadUrl.length > 120
+                ? `${downloadUrl.substring(0, 120)}...`
+                : downloadUrl
+              }
             </a>
           </span>
         </li>
