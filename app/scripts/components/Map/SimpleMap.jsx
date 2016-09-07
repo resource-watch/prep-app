@@ -23,6 +23,7 @@ class SimpleMap extends React.Component {
   componentWillReceiveProps(props) {
     const layer = props.data[props.layerId] || false;
     if (layer) {
+      this.updateMapPosition(layer);
       this.addMapLayer(layer);
     }
   }
@@ -46,6 +47,14 @@ class SimpleMap extends React.Component {
       'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
       { maxZoom: 18 }
     ).addTo(this.map, 1);
+  }
+
+  updateMapPosition(layer) {
+    const center = layer.attributes['layer-config'].center;
+    const zoom = layer.attributes['layer-config'].zoom;
+    if (center && center.lat && center.lng && zoom) {
+      this.map.setView(new L.LatLng(center.lat, center.lng), zoom);
+    }
   }
 
   addMapLayer(layer) {
@@ -92,6 +101,9 @@ class SimpleMap extends React.Component {
         layer = new L.tileLayer.wms(layerData.url, layerData.body);
         break;
       case 'tileLayer':
+        if (layerData.body.indexOf('style: "function') >= 0) {
+          layerData.body.style = eval(`(${layerData.body.style})`);
+        }
         layer = new L.tileLayer(layerData.url, layerData.body);
         break;
       default:
@@ -125,6 +137,10 @@ class SimpleMap extends React.Component {
 
     if (L.esri[layer.type]) {
       const layerConfig = JSON.parse(bodyStringified);
+      if (layerConfig.style &&
+        layerConfig.style.indexOf('function') >= 0) {
+        layerConfig.style = eval(`(${layerConfig.style})`);
+      }
       const newLayer = L.esri[layer.type](layerConfig);
       newLayer.on('load', () => {
         this.handleTileLoaded(layer);
