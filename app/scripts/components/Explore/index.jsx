@@ -64,7 +64,6 @@ class Explore extends React.Component {
 
     if (datasetData) {
       const metadataInfo = datasetData.metadata[0].info;
-      metadataInfo.attributes.connectorUrl = datasetData.connector_url || false;
 
       return (
         <div className="content">
@@ -74,7 +73,7 @@ class Explore extends React.Component {
             </Link>
           </h3>
           <h4> {metadataInfo.attributes.subtitle} </h4>
-          <MetadataList short download data={metadataInfo} />
+          <MetadataList short download data={datasetData} />
         </div>
       );
     }
