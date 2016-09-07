@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import URI from 'urijs';
 
 import metadata from 'json!../../metadata.json';
 import PartnersSlider from '../../containers/PartnersSlider';
@@ -12,6 +13,7 @@ import logoImage from '../../../images/prep-logo.png';
 import SectionIntro from '../SectionIntro';
 import MetadataList from '../Explore/MetadataList';
 import VegaChart from '../Chart/VegaChart';
+import SimpleMap from '../../containers/Map/SimpleMap';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
 class DatasetDetail extends React.Component {
@@ -44,7 +46,7 @@ class DatasetDetail extends React.Component {
       return <LoadingSpinner />;
     }
 
-    const data = this.props.data.metadata.length > 0
+    const data = this.props.data.metadata && this.props.data.metadata.length > 0
       ? this.props.data.metadata[0].info
       : {
         id: this.props.data.id,
@@ -54,23 +56,80 @@ class DatasetDetail extends React.Component {
         }
       };
 
-    const widget = this.props.widget ? this.props.widget.attributes : {};
-
+    const widgetComponents = [];
+    const { widgets } = this.props;
+    if (widgets && widgets.length) {
+      for (let i = 0, wLength = widgets.length; i < wLength; i++) {
+        const widget = widgets[i].attributes;
+        if (widget.widgetConfig) {
+          switch (widget.widgetConfig.type) {
+            case 'map':
+              widgetComponents.push(<div className="c-article" key={i} ><SimpleMap layerId={widget.widgetConfig.layerId} /></div>);
+              break;
+            default:
+              widgetComponents.push(<div className="c-article" key={i} ><VegaChart data={widget.widgetConfig} /></div>);
+              break;
+          }
+        }
+      }
+    }
     return (
       <div>
-        <SectionIntro data={data} downloadUrl={this.props.data.connector_url || ''} currentSection={'explore'} >
-          <MetadataList data={data} />
+        <SectionIntro data={data} downloadUrl={this.getDownloadUrl(this.props.data)} currentSection={'explore'} >
+          <MetadataList data={this.props.data} />
         </SectionIntro>
 
-        {widget && widget.widgetConfig &&
+        {
+          (widgetComponents && widgetComponents.length) ?
           <div className="row">
             <div className="columns small-12">
-              <VegaChart data={widget.widgetConfig} />
+              {widgetComponents}
             </div>
           </div>
+          : null
         }
       </div>
     );
+  }
+
+  getDownloadUrl(data) {
+    let url = null;
+    let metadataUrl = null;
+    if (data.metadata && data.metadata.length &&
+        data.metadata[0].info.attributes.dataDownload) {
+      metadataUrl = data.metadata[0].info.attributes.dataDownload;
+    }
+    switch(data.provider) {
+      case 'wms':
+        url = null;
+        break;
+      case 'cartodb':
+        if (data.connector_url.indexOf('tables') === -1) {
+          const uri = new URI(data.connector_url);
+          uri.search({ format: 'csv' });
+          url = uri.toString();
+        } else {
+          url = data.connector_url;
+        }
+        break;
+      case 'featureservice':
+        const uri = new URI(data.connector_url);
+        uri.segment('query');
+        uri.search({
+          where: '1=1',
+          returnGeometry: 'true',
+          returnDistinctValues: 'false',
+          returnIdsOnly: 'false',
+          returnCountOnly: 'false',
+          outFields: '*',
+          f: 'json'
+        });
+        url = uri.toString();
+        break;
+      default:
+        url =  metadataUrl || data.connector_url;
+    }
+    return url;
   }
 
   render() {
@@ -166,7 +225,7 @@ DatasetDetail.propTypes = {
   /**
    * Define the dataset widget
    */
-  widget: React.PropTypes.any
+  widgets: React.PropTypes.array
 };
 
 export default DatasetDetail;

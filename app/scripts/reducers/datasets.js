@@ -35,7 +35,12 @@ export default function (state = initialState, action) {
     }
     case DATASET_WIDGET_RECEIVED: {
       const widgets = Object.assign({}, state.widgets, {});
-      widgets[action.payload.data.attributes.datasetId] = action.payload.data;
+      if (!widgets[action.payload.data.attributes.datasetId]) {
+        widgets[action.payload.data.attributes.datasetId] = [];
+      }
+      const newWidgets = widgets[action.payload.data.attributes.datasetId].slice(0);
+      newWidgets.push(action.payload.data);
+      widgets[action.payload.data.attributes.datasetId] = newWidgets;
       return Object.assign({}, state, { widgets });
     }
     case DATASET_LAYER_RECEIVED: {

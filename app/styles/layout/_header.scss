@@ -26,7 +26,7 @@ $header-bg-color: $dark-slate-blue-2;
       top: 100%;
       right: 0;
 
-      font-family: Georgia, sans-serif;
+      font-family: $header-font-family;
       font-weight: bold;
       font-style: italic;
       font-size: 12px;

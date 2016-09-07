@@ -24,7 +24,7 @@ class DataMap extends React.Component {
   }
 
   onTagHover(e) {
-    // Get elements first
+    // Get elements
     const tag = e.target;
     const tooltip = ReactDOM.findDOMNode(this.refs.tagTooltip);
     const tooltipParent = tooltip.parentNode;
@@ -87,13 +87,20 @@ class DataMap extends React.Component {
 
       let datasetIcon = null;
 
-      const subtitle = dataset.metadata && dataset.metadata.length ?
-        dataset.metadata[0].info.attributes.subtitle : '';
+      let subtitle = '';
+      let partner = '';
 
-      const partner = dataset.metadata && dataset.metadata.length ?
-        (<span>
-          from <strong>{dataset.metadata[0].info.attributes.organization}</strong>
-        </span>) : '';
+      if (dataset.metadata && dataset.metadata.length) {
+        const metadata = dataset.metadata[0].info.attributes;
+        if (metadata) {
+          if (metadata.subtitle) {
+            subtitle = metadata.subtitle;
+          }
+          if (metadata.organization) {
+            partner = <span>from <strong>{metadata.organization}</strong></span>;
+          }
+        }
+      }
 
       if (dataset.layers && dataset.layers.length) {
         layerIcon = (
@@ -113,7 +120,7 @@ class DataMap extends React.Component {
         );
       }
 
-      var cdiTag = false;
+      let cdiTag = false;
       for (let i = 0; i < dataset.tags.length; i++) {
         if (dataset.tags[i] === 'cdi') {
           cdiTag = true;

@@ -51,13 +51,13 @@ function Create() {
         <div className="c-article-module">
           <div className="row">
             <div className="column align-middle small-12 medium-6">
-              <img src={dashboards} alt="Communicate Insights" />
+              <img src={dashboards} alt="Create Personalized Dashboards" />
             </div>
 
             <div className="column align-middle small-12 medium-6">
               <h3>Create Personalized Dashboards</h3>
               <p>Collect data, tools and insights relevant to you and your community in one place. Create and share your own online dashboard containing data, information, tools, interactive stories and other dynamic resources specific to your own geographic or topical area of interest. Look at what data, tools, and insights others are using and add them to your dashboard.</p>
-              <Link to="/insights"> See dashboards </Link>
+              <Link to="/dashboards"> See dashboards </Link>
             </div>
           </div>
         </div>
@@ -68,11 +68,11 @@ function Create() {
               <h3>Share Insights</h3>
               <p>Choose from a range of open source tools to share an insight about your data and how it can or is being used to inform and manage climate risk. Embed your dashboard or insights on your own website and share them with your community.
               </p>
-              <Link to="/dashboards"> See insights </Link>
+              <Link to="/insights"> See insights </Link>
             </div>
 
             <div className="column align-middle small-12 medium-6">
-              <img src={communicate} alt="Create personalized dashboards" />
+              <img src={communicate} alt="See insights" />
             </div>
           </div>
         </div>

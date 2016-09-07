@@ -1,0 +1,30 @@
+
+.c-summary-cards {
+  display: flex;
+  justify-content: center;
+  padding: rem(90) rem(70);
+  background-color: $alternative-bg-color;
+
+  .simple-card {
+    max-width: rem(540);
+    width: 47%;
+    background-color: $dark-blue;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding: rem(55) rem(80);
+    margin-right: 6%;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    & * {
+      text-align: center;
+    }
+
+    a {
+      font-weight: bold;
+    }
+  }
+}

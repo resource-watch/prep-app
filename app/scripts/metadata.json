@@ -43,18 +43,18 @@
   {
     "name": "data-accessibility",
     "pathname": "/about/data",
-    "metaTitle": "Data Workgroup",
+    "metaTitle": "Data Accessibility Workgroup",
     "metaDescription": "",
-    "title": "Data Workgroup",
+    "title": "Data Accessibility Workgroup",
     "bannerSize": "small",
-    "bannerBg": "partnershipEnga"
+    "bannerBg": "partnershipData"
   },
   {
     "name": "platform-development",
     "pathname": "/about/platforms",
-    "metaTitle": "Platform Workgroup",
+    "metaTitle": "Platform Development Workgroup",
     "metaDescription": "",
-    "title": "Platform Workgroup",
+    "title": "Platform Development Workgroup",
     "bannerSize": "small",
     "bannerBg": "partnershipPlatforms"
   },

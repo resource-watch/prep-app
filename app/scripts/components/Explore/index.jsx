@@ -59,9 +59,11 @@ class Explore extends React.Component {
   }
 
   getModalContent() {
-    const { metadatas } = this.props.data;
-    if (metadatas && metadatas[this.props.metadataModal.datasetId]) {
-      const metadataInfo = metadatas[this.props.metadataModal.datasetId].attributes.info;
+    const { details } = this.props.data;
+    const datasetData = details[this.props.metadataModal.datasetId];
+
+    if (datasetData) {
+      const metadataInfo = datasetData.metadata[0].info;
 
       return (
         <div className="content">
@@ -71,7 +73,7 @@ class Explore extends React.Component {
             </Link>
           </h3>
           <h4> {metadataInfo.attributes.subtitle} </h4>
-          <MetadataList short download data={metadataInfo} />
+          <MetadataList short download data={datasetData} />
         </div>
       );
     }
