@@ -35,7 +35,7 @@ class IFrame extends React.Component {
     return (
       <div className="c-iframe" style={{ height: this.state.height }}>
         {loading}
-        <iframe ref="iframe" src={this.props.src}></iframe>
+        <iframe ref="iframe" src={this.props.src} sandbox={true}></iframe>
       </div>
     );
   }
