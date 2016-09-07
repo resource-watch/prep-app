@@ -19,7 +19,7 @@ class DataMap extends React.Component {
   componentDidMount() {
     this.props.setTooltip({
       text: 'Climate Data Initiative dataset',
-      width: '120px'
+      width: '120'
     });
   }
 

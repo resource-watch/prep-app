@@ -7,12 +7,13 @@ class Tooltip extends React.Component {
     let styles = {
       top: this.props.position.top,
       left: this.props.position.left,
-      width: this.props.width
+      width: this.props.width !== 'auto' ? this.props.width + 'px' : this.props.width
     };
+    let border = this.props.width !== 'auto' ? this.props.width * 0.1 : 10;
     return (
       <div className="c-tooltip">
         <div className={classes} style={styles}>{this.props.text}
-          <span className="-pointer"></span>
+          <div className="-pointer" style={{ borderWidth: border}}></div>
         </div>
       </div>
     );
