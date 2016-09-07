@@ -1,23 +1,42 @@
 import React from 'react';
 
-function Tooltip(props) {
-  const classes = ['c-tooltip'];
+class Tooltip extends React.Component {
 
-  return (
-    <div className={classes}>
-      {props.children}
-      <div className="-tooltip-text">{props.text}
-      <span className="-pointer"></span>
+  render() {
+    let classes = this.props.hidden ? '-tooltip-text -hidden' : '-tooltip-text -visible';
+    let styles = {
+      top: this.props.position.top,
+      left: this.props.position.left,
+      width: this.props.width
+    };
+    return (
+      <div className="c-tooltip">
+        <div className={classes} style={styles}>{this.props.text}
+          <span className="-pointer"></span>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
+
 
 Tooltip.propTypes = {
   /**
-   * Defines the text of the tooltip
+   * Define the text of the tooltip
    */
-  text: React.PropTypes.string
+  text: React.PropTypes.string,
+  /**
+   * Define whether the tooltip is hidden or not
+   */
+  hidden: React.PropTypes.bool,
+  /**
+   * Define the position of the target element on the viewport
+   */
+  position: React.PropTypes.object,
+  /**
+   * Define the width of the tooltip
+   */
+  width: React.PropTypes.string
 };
 
 export default Tooltip;

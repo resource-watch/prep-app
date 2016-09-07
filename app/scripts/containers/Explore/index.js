@@ -1,8 +1,8 @@
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import Explore from '../../components/Explore';
 
-import { getDatasets } from '../../actions/datasets';
-import { setModalMetadata } from '../../actions/modal';
+import {getDatasets} from '../../actions/datasets';
+import {setModalMetadata} from '../../actions/modal';
 
 const mapStateToProps = (state, { location, params }) => ({
   data: state.datasets,

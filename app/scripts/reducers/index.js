@@ -7,3 +7,4 @@ export { default as dashboards } from './dashboards';
 export { default as insights } from './insights';
 export { default as twitterFeed } from './twitter';
 export { default as widgets } from './wigets';
+export { default as tooltip } from './tooltip';
