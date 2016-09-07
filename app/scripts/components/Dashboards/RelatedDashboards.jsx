@@ -22,7 +22,7 @@ function RelatedDasboards(props) {
             >
               <Card border>
                 <h3>
-                  <Link to={`/dashboard/${item.slug}`}>
+                  <Link to={`/dashboard/${item.slug}/data`}>
                    {item.title}
                   </Link>
                 </h3>

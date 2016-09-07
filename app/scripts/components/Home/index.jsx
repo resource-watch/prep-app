@@ -29,7 +29,7 @@ class Home extends React.Component {
               <h3>Platforms</h3>
               <p>We will develop platforms to enhance access to and usability of climate-relevant data and information.</p>
 
-              <Link to="/partnership">Learn more</Link>
+              <Link to="/about">Learn more</Link>
               </div>
             </Article>
           </div>

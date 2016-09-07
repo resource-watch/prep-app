@@ -27,6 +27,12 @@ class DashboardDetail extends React.Component {
     }
   }
 
+  componentWillReceiveProps(newProps) {
+    if (!newProps.data) {
+      newProps.getDashboardBySlug(newProps.dashboardSlug);
+    }
+  }
+
   getData(key, value) {
     let data = null;
     for (let i = metadata.length - 1; i >= 0; i--) {

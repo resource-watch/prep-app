@@ -20,6 +20,7 @@ const bg = {
   dashboards: dashboardsBg,
   dashboard: dashboardBg,
   partnershipEngagement: partnershipEngagementBg,
+  partnershipData: homepageBg,
   partnershipPlatforms: partnershipPlatformsBg,
   insights: insightsBg,
   insight: insightsBg,
