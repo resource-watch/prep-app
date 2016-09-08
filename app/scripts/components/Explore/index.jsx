@@ -17,12 +17,15 @@ import LoadingSpinner from '../Loading/LoadingSpinner';
 import metadata from 'json!../../metadata.json';
 import logoImage from '../../../images/prep-logo.png';
 
+import Form from '../Form';
+
 class Explore extends React.Component {
 
   constructor() {
     super();
     this.state = {
-      modalShareOpen: false
+      modalShareOpen: false,
+      modalRequestData: false
     };
   }
 
@@ -46,6 +49,7 @@ class Explore extends React.Component {
       }
     }
   }
+
   componentWillUnmount() {
     this.props.resetExplore();
   }
@@ -76,7 +80,7 @@ class Explore extends React.Component {
             </Link>
           </h3>
           <h4> {metadataInfo.attributes.subtitle} </h4>
-          <MetadataList short download data={datasetData} />
+          <MetadataList short download data={datasetData}/>
         </div>
       );
     }
@@ -96,7 +100,7 @@ class Explore extends React.Component {
             <div className="row align-middle">
               <div className="column small-10 medium-4">
                 <Link to={'/'} className="logo">
-                  <img src={logoImage} alt="Partnership for Resilience and Preparedness" />
+                  <img src={logoImage} alt="Partnership for Resilience and Preparedness"/>
                 </Link>
               </div>
               <div className="column small-2 medium-8">
@@ -105,7 +109,12 @@ class Explore extends React.Component {
             </div>
           </div>
           <div className="l-header-tools-map">
-            <Button themeColor click={() => this.setState({ modalShareOpen: true })}> Share </Button>
+            <Button themeColor click={() => this.setState({ modalShareOpen: true })}>
+              Share
+            </Button>
+            <Button themeColor click={() => this.setState({ modalRequestData: true })}>
+              Request data
+            </Button>
           </div>
         </header>
 
@@ -114,23 +123,36 @@ class Explore extends React.Component {
         <ExploreMapLegend />
 
         {this.state.modalShareOpen &&
-          <ShareModal
-            title={"Share this page"}
-            url={window.location.href}
-            opened={this.state.modalShareOpen}
-            close={() => this.setState({ modalShareOpen: false })}
-          />
+        <ShareModal
+          title={"Share this page"}
+          url={window.location.href}
+          opened={this.state.modalShareOpen}
+          close={() => this.setState({ modalShareOpen: false })}
+        />
         }
 
-        {this.props.metadataModal &&
+        { this.state.modalRequestData &&
           <Modal
-            opened={this.props.metadataModal.open}
-            close={() => this.props.setModalMetadata(false)}
+            opened={this.state.modalRequestData}
+            close={() => this.setState({ modalRequestData: false })}
           >
-
-            {modalContent}
-
+            <h2>Request data</h2>
+            <p>Our goal is to make climate related information more accessible. Let us
+              know what data you want and how you would use it.
+            </p>
+            <Form type="Request data"/>
           </Modal>
+          }
+
+        {this.props.metadataModal &&
+        <Modal
+          opened={this.props.metadataModal.open}
+          close={() => this.props.setModalMetadata(false)}
+        >
+
+          {modalContent}
+
+        </Modal>
         }
 
       </div>
