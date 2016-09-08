@@ -17,12 +17,15 @@ import LoadingSpinner from '../Loading/LoadingSpinner';
 import metadata from 'json!../../metadata.json';
 import logoImage from '../../../images/prep-logo.png';
 
+import Form from '../Form';
+
 class Explore extends React.Component {
 
   constructor() {
     super();
     this.state = {
-      modalShareOpen: false
+      modalShareOpen: false,
+      modalRequestData: false
     };
   }
 
@@ -46,6 +49,7 @@ class Explore extends React.Component {
       }
     }
   }
+
   componentWillUnmount() {
     this.props.resetExplore();
   }
@@ -105,7 +109,12 @@ class Explore extends React.Component {
             </div>
           </div>
           <div className="l-header-tools-map">
-            <Button themeColor click={() => this.setState({ modalShareOpen: true })}> Share </Button>
+            <Button themeColor click={() => this.setState({ modalRequestData: true })}>
+              Request data
+            </Button>
+            <Button themeColor click={() => this.setState({ modalShareOpen: true })}>
+              Share
+            </Button>
           </div>
         </header>
 
@@ -121,6 +130,19 @@ class Explore extends React.Component {
             close={() => this.setState({ modalShareOpen: false })}
           />
         }
+
+        {this.state.modalRequestData &&
+          <Modal
+            opened={this.state.modalRequestData}
+            close={() => this.setState({ modalRequestData: false })}
+          >
+            <h2>Request data</h2>
+            <p>Our goal is to make climate related information more accessible. Let us
+              know what data you want and how you would use it.
+            </p>
+            <Form type="Request data" />
+          </Modal>
+          }
 
         {this.props.metadataModal &&
           <Modal
