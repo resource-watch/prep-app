@@ -32,7 +32,7 @@ function ContentCard(props) {
           {legend}
           <h3>
             {props.link
-              ? <Link to={props.link}>{props.header.title}</Link>
+              ? <Link state={{ prevPath: `dashboard/${props.dashboardSlug}` }} to={props.link}>{props.header.title}</Link>
               : props.header.title
             }
           </h3>

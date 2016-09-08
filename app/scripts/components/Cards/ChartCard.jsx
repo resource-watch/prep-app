@@ -20,6 +20,7 @@ class ChartCard extends React.Component {
       <ContentCard
         header={header}
         link={this.props.link}
+        dashboardSlug={this.props.dashboardSlug}
         downloadUrl={downloadUrl}
         attribution={this.props.data.attribution}
         size={this.props.size}
