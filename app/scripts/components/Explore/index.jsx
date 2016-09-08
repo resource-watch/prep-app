@@ -46,6 +46,9 @@ class Explore extends React.Component {
       }
     }
   }
+  componentWillUnmount() {
+    this.props.resetExplore();
+  }
 
   getData(key, value) {
     let data = null;
@@ -145,7 +148,8 @@ Explore.propTypes = {
   location: React.PropTypes.object.isRequired,
   params: React.PropTypes.object.isRequired,
   metadataModal: React.PropTypes.object,
-  setModalMetadata: React.PropTypes.func.isRequired
+  setModalMetadata: React.PropTypes.func.isRequired,
+  resetExplore: React.PropTypes.func.isRequired
 };
 
 export default Explore;
