@@ -52,12 +52,13 @@ class DataMapLegend extends React.Component {
     return (<div className="row">
       <div className="legend -gradient column small-12 ">
         {colors.length &&
-          <div className="colors" style={{backgroundImage: `linear-gradient(to right, ${colors.join(',')})`}}></div>
+        <div className="colors"
+             style={{ backgroundImage: `linear-gradient(to right, ${colors.join(',')})` }}></div>
         }
         {values.length &&
-          <div className="values">
+        <div className="values">
           {values}
-          </div>
+        </div>
         }
       </div>
     </div>);
@@ -113,20 +114,24 @@ class DataMapLegend extends React.Component {
         <div className="action-container">
           <span className="help">View legend</span>
           <span className="action open" onClick={() => this.toggleToolbarStatus()}>
-            <svg width="10" height="7" viewBox="0 0 10 7"><title>Open</title><path d="M5.657.707L4.95 0 0 4.95l1.414 1.414L4.95 2.828l3.535 3.536L9.9 4.95 5.657.707z" fillRule="evenodd"/></svg>
+            <svg width="10" height="7" viewBox="0 0 10 7"><title>Open</title><path
+              d="M5.657.707L4.95 0 0 4.95l1.414 1.414L4.95 2.828l3.535 3.536L9.9 4.95 5.657.707z"
+              fillRule="evenodd"/></svg>
           </span>
           <span className="action close" onClick={() => this.toggleToolbarStatus()}>
-            <svg width="9" height="9" viewBox="0 0 9 9"><title>Close</title><path d="M4.5 3l-3-3L0 1.5l3 3-3 3L1.5 9l3-3 3 3L9 7.5l-3-3 3-3L7.5 0l-3 3z" fillRule="evenodd"/></svg>
+            <svg width="9" height="9" viewBox="0 0 9 9"><title>Close</title><path
+              d="M4.5 3l-3-3L0 1.5l3 3-3 3L1.5 9l3-3 3 3L9 7.5l-3-3 3-3L7.5 0l-3 3z"
+              fillRule="evenodd"/></svg>
           </span>
         </div>
 
         {this.state.legendOpen &&
-          <div className="legend-layer">
-            <div className="column small-12 ">
-              <span className="title">{this.props.layer.attributes.name}</span>
-              {this.getLegend(this.props.layer)}
-            </div>
+        <div className="legend-layer">
+          <div className="column small-12 ">
+            <span className="title">{this.props.layer.attributes.name}</span>
+            {this.getLegend(this.props.layer)}
           </div>
+        </div>
         }
 
       </div>
@@ -136,8 +141,8 @@ class DataMapLegend extends React.Component {
 
 DataMapLegend.propTypes = {
   /**
-  * Define the layer legend data
-  */
+   * Define the layer legend data
+   */
   layer: React.PropTypes.object
 };
 

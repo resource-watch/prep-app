@@ -50,7 +50,7 @@ class App extends React.Component {
     const currentData = this.getCurrentData();
     const isHomepage = (currentData.name === 'home');
     const pathname = window.location.pathname;
-    const summaryCardsPages  = ['/contact', '/insights', '/dashboards'];
+    const summaryCardsPages = ['/contact', '/insights', '/dashboards'];
 
     document.title = currentData.title;
 
@@ -61,7 +61,7 @@ class App extends React.Component {
             <div className="row align-middle">
               <div className="column small-10 medium-4">
                 <Link to={'/'} className="logo">
-                  <img src={logoImage} alt="Partnership for Resilience and Preparedness" />
+                  <img src={logoImage} alt="Partnership for Resilience and Preparedness"/>
                 </Link>
               </div>
               <div className="column small-2 medium-8">
@@ -70,7 +70,7 @@ class App extends React.Component {
             </div>
           </div>
           <div className="l-header-banner">
-            <Breadcrumbs pathname={this.props.location.pathname} />
+            <Breadcrumbs pathname={this.props.location.pathname}/>
             <Banner
               bg={currentData.bannerBg}
               size={currentData.bannerSize}
@@ -86,13 +86,13 @@ class App extends React.Component {
         </div>
 
         {summaryCardsPages.indexOf(pathname) !== -1 &&
-          <SummaryCards extraCard={pathname === '/insights' ?
-            'dashboards' :
-            'insights'}/>
+        <SummaryCards extraCard={pathname === '/insights' ?
+          'dashboards' :
+          'insights'}/>
         }
 
         {pathname === '/' &&
-          <ContactForm />
+        <ContactForm />
         }
 
         <footer className="l-footer">
