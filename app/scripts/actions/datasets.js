@@ -94,7 +94,7 @@ export function getDatasets(defaultActiveLayers) {
       });
   };
 }
-export function resetDatasets() {
+export function resetDatasetList() {
   return {
     type: DATASET_LIST_RESET
   };
