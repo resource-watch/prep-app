@@ -11,14 +11,14 @@ class Form extends React.Component {
 
   handleSubmit() {
     this.checkFormFill().length === 0 &&
-      this.setState({ success: true });
+    this.setState({ success: true });
   }
 
   checkFormFill() {
     const fields = ['mce-FNAME', 'mce-EMAIL', 'mce-MMERGE4'];
     !this.props.simple && fields.push('mce-LNAME');
 
-    return fields.filter((field)=>{
+    return fields.filter((field)=> {
       const element = document.getElementById(field);
       return element && element.value === '';
     });
@@ -37,8 +37,10 @@ class Form extends React.Component {
         >
           <div id="mc_embed_signup_scroll">
             <div className="mc-field-group -hidden">
-              <label htmlFor="mce-MMERGE3">Who would you like to contact? *<span className="asterisk"></span></label>
-              <select name="MMERGE3" className="required" id="mce-MMERGE3" required defaultValue={this.props.type}>
+              <label htmlFor="mce-MMERGE3">Who would you like to contact? *<span
+                className="asterisk"></span></label>
+              <select name="MMERGE3" className="required" id="mce-MMERGE3" required
+                      defaultValue={this.props.type}>
                 <option value="Contact">Contact</option>
                 <option value="Request data">Request data</option>
                 <option value="Join partnership">Join partnership</option>
@@ -66,11 +68,12 @@ class Form extends React.Component {
               <textarea name="MMERGE4" className="required" id="mce-MMERGE4" required/>
             </div>
             <div id="mce-responses" className="clear">
-              <div className="response" id="mce-error-response" style={{display: 'none'}}></div>
-              <div className="response" id="mce-success-response" style={{display: 'none'}}></div>
+              <div className="response" id="mce-error-response" style={{ display: 'none' }}></div>
+              <div className="response" id="mce-success-response" style={{ display: 'none' }}></div>
             </div>
-            <div style={{position: 'absolute', left: '-5000px', ariaHidden: 'true'}}>
-              <input type="text" name="b_c99e39850f4acfe33f49fea68_ccad0f31c4" tabIndex="-1" value="" />
+            <div style={{ position: 'absolute', left: '-5000px', ariaHidden: 'true' }}>
+              <input type="text" name="b_c99e39850f4acfe33f49fea68_ccad0f31c4" tabIndex="-1"
+                     value=""/>
             </div>
             <div className="form-actions">
               <input
@@ -100,7 +103,8 @@ class Form extends React.Component {
         <div className="check">
           <svg width="13" height="9" viewBox="0 0 13 9">
             <title>check</title>
-            <path d="M5.744 6.997l6.514-5.465L10.972 0 4.46 5.464 1.176 3.078 0 4.696l4.854 3.527.89-1.226z" />
+            <path
+              d="M5.744 6.997l6.514-5.465L10.972 0 4.46 5.464 1.176 3.078 0 4.696l4.854 3.527.89-1.226z"/>
           </svg>
         </div>
         <p>Your message was sent successfully</p>

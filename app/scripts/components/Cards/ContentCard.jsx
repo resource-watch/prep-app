@@ -40,19 +40,27 @@ function ContentCard(props) {
         </div>
         <div className="card-options">
           {props.downloadUrl &&
-            <a href={`${config.apiUrlRW}/${props.downloadUrl}`} target="_blank" className="c-button -action -icon">
-              <svg className="icon" width="10" height="12" viewBox="0 0 10 12"><title>Download</title><g fill="none" fillRule="evenodd"><path d="M4 0h2v7H4zM0 10h10v2H0z" /><path d="M4.243 8.192l.707.707L9.9 3.95 8.484 2.537 4.95 6.07 1.414 2.536 0 3.95l4.243 4.242z" /></g></svg>
-            </a>
+          <a href={`${config.apiUrlRW}/${props.downloadUrl}`} target="_blank"
+             className="c-button -action -icon">
+            <svg className="icon" width="10" height="12" viewBox="0 0 10 12"><title>Download</title>
+              <g fill="none" fillRule="evenodd">
+                <path d="M4 0h2v7H4zM0 10h10v2H0z"/>
+                <path
+                  d="M4.243 8.192l.707.707L9.9 3.95 8.484 2.537 4.95 6.07 1.414 2.536 0 3.95l4.243 4.242z"/>
+              </g>
+            </svg>
+          </a>
           }
           {props.share &&
-            <Button action icon click={() => props.setShareModal()}>
-              <svg className="icon" width="10" height="12" viewBox="0 0 10 12">
-                <title>icon-share</title>
-                <g fill="none" fillRule="evenodd">
-                  <path d="M6.45 1l1.414 1.414-4.95 4.95L1.5 5.95zM0 10h10v2H0z" /><path d="M9 1V0H2v2h5v5h2V1z" />
-                </g>
-              </svg>
-            </Button>
+          <Button action icon click={() => props.setShareModal()}>
+            <svg className="icon" width="10" height="12" viewBox="0 0 10 12">
+              <title>icon-share</title>
+              <g fill="none" fillRule="evenodd">
+                <path d="M6.45 1l1.414 1.414-4.95 4.95L1.5 5.95zM0 10h10v2H0z"/>
+                <path d="M9 1V0H2v2h5v5h2V1z"/>
+              </g>
+            </svg>
+          </Button>
           }
         </div>
       </div>
@@ -60,9 +68,9 @@ function ContentCard(props) {
         {props.children}
       </div>
       {props.attribution &&
-        <div className="attribution">
-          <span>{props.attribution}</span>
-        </div>
+      <div className="attribution">
+        <span>{props.attribution}</span>
+      </div>
       }
     </div>
   );
@@ -72,7 +80,7 @@ ContentCard.propTypes = {
   /**
    * Define the text below the title
    * Accepted values:
-   * 	{
+   *  {
    *    title: [String],
    *    legend: [String, optional],
    *    subtitle: [String, optional]

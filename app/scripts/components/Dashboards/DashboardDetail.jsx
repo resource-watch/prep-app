@@ -86,7 +86,8 @@ class DashboardDetail extends React.Component {
           dashboardSlug={this.props.dashboardSlug}
           currentSection="dashboards"
         >
-          <p> {this.props.data.summary} </p>
+          <p>This is an initial list of insights, data and tools that are important for our work</p>
+          <p dangerouslySetInnerHTML={{__html:this.props.data.summary }}></p>
         </SectionIntro>
 
         <NavTab
@@ -115,7 +116,7 @@ class DashboardDetail extends React.Component {
             <div className="row align-middle">
               <div className="column small-10 medium-4">
                 <Link to={'/'} className="logo">
-                  <img src={logoImage} alt="Partnership for Resilience and Preparedness" />
+                  <img src={logoImage} alt="Partnership for Resilience and Preparedness"/>
                 </Link>
               </div>
               <div className="column small-2 medium-8">
@@ -124,7 +125,7 @@ class DashboardDetail extends React.Component {
             </div>
           </div>
           <div className="l-header-banner">
-            <Breadcrumbs pathname={this.props.location.pathname} />
+            <Breadcrumbs pathname={this.props.location.pathname}/>
             <Banner
               bg={currentData.bannerBg}
               size={currentData.bannerSize}
@@ -139,11 +140,11 @@ class DashboardDetail extends React.Component {
         </div>
 
         {this.props.data && this.props.data.related_datasets &&
-          <RelatedDatasets slugs={this.props.data.related_datasets} />
+        <RelatedDatasets slugs={this.props.data.related_datasets}/>
         }
 
         {this.props.data && this.props.data.dashboards &&
-          <RelatedDashboards data={this.props.data.dashboards} />
+        <RelatedDashboards data={this.props.data.dashboards}/>
         }
 
         <footer className="l-footer">

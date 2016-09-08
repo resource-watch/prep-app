@@ -12,13 +12,13 @@ function MainNav() {
           <Link activeClassName="-current" to="/explore">Explore</Link>
         </li>
         <li>
-          <Link activeClassName="-current" to="/create">Create</Link>
-        </li>
-        <li>
           <Link activeClassName="-current" to="/dashboards">Dashboards</Link>
         </li>
         <li>
           <Link activeClassName="-current" to="/insights">Insights</Link>
+        </li>
+        <li>
+          <Link activeClassName="-current" to="/create">Create</Link>
         </li>
         <li>
           <Link activeClassName="-current" to="/resources">Resources</Link>
