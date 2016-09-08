@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Explore from '../../components/Explore';
 
-import { getDatasets } from '../../actions/datasets';
+import { getDatasets, resetDatasetList } from '../../actions/datasets';
 import { setModalMetadata } from '../../actions/modal';
 
 const mapStateToProps = (state, { location, params }) => ({
@@ -13,8 +13,11 @@ const mapStateToProps = (state, { location, params }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getDatasets: (defaultActiveLayers) => dispatch(getDatasets(defaultActiveLayers)),
-  setModalMetadata: (status) =>
-    dispatch(setModalMetadata(status))
+  setModalMetadata: (status) => dispatch(setModalMetadata(status)),
+  resetExplore: () => {
+    dispatch(resetDatasetList());
+    dispatch(setModalMetadata(false));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Explore);

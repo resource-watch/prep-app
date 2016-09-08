@@ -73,6 +73,7 @@ class DashboardDetail extends React.Component {
 
       default:
         content = (<DashboardDetailIndicators
+          dashboardSlug={this.props.dashboardSlug}
           data={this.props.data.indicator}
         />);
         break;

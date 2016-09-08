@@ -1,5 +1,6 @@
 import {
   DATASET_LIST_RECEIVED,
+  DATASET_LIST_RESET,
   DATASET_DETAIL_RECEIVED,
   DATASET_WIDGET_RECEIVED,
   DATASET_LAYER_RECEIVED,
@@ -27,6 +28,9 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case DATASET_LIST_RECEIVED: {
       return Object.assign({}, state, { list: action.payload.data });
+    }
+    case DATASET_LIST_RESET: {
+      return Object.assign({}, state, { list: [] });
     }
     case DATASET_DETAIL_RECEIVED: {
       const details = Object.assign({}, state.details, {});
