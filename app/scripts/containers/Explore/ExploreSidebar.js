@@ -3,8 +3,9 @@ import ExploreSidebar from '../../components/Explore/ExploreSidebar';
 
 import { switchChange } from '../../actions/exploremap';
 import { updateURL } from '../../actions/links';
-import { getDatasetLayer } from '../../actions/datasets';
+import { getDatasetLayer, getDatasetById } from '../../actions/datasets';
 import { setTooltip } from '../../actions/tooltip';
+import { setModalMetadata } from '../../actions/modal';
 
 const mapStateToProps = (state) => ({
   data: state.datasets.list,
@@ -19,6 +20,10 @@ const mapDispatchToProps = (dispatch) => ({
   },
   setTooltip: (tooltip) => {
     dispatch(setTooltip(tooltip));
+  },
+  onInfoClick: (datasetId) => {
+    dispatch(getDatasetById(datasetId, ['metadata']));
+    dispatch(setModalMetadata(true, datasetId));
   }
 });
 
