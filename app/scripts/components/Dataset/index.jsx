@@ -73,9 +73,11 @@ class DatasetDetail extends React.Component {
         }
       }
     }
+
+    const currentSection = this.props.location.state && this.props.location.state.prevPath || 'explore';
     return (
       <div>
-        <SectionIntro data={data} downloadUrl={this.getDownloadUrl(this.props.data)} currentSection={'explore'} >
+        <SectionIntro data={data} downloadUrl={this.getDownloadUrl(this.props.data)} currentSection={currentSection} >
           <MetadataList data={this.props.data} />
         </SectionIntro>
 

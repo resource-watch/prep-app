@@ -23,12 +23,16 @@ class ToolbarActions extends React.Component {
   }
 
   render() {
+    let currentSectionTitle = this.props.currentSection.split('/');
+    if (currentSectionTitle.length) {
+      currentSectionTitle = currentSectionTitle[0];
+    }
     return (
       <div className="c-toolbar-actions">
         <div className="left">
           <Link to={`/${this.props.currentSection}`} className="action" >
             <svg className="icon" width="7" height="10" viewBox="0 0 7 10"><title>icon-back</title><path d="M.707 4.243L0 4.95 4.95 9.9l1.414-1.415L2.828 4.95l3.536-3.536L4.95 0 .707 4.243z" fillRule="evenodd" /></svg>
-            {this.props.currentSection}
+            {currentSectionTitle}
           </Link>
         </div>
         <div className="right">

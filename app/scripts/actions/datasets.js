@@ -1,6 +1,7 @@
 import 'whatwg-fetch';
 import {
   DATASET_LIST_RECEIVED,
+  DATASET_LIST_RESET,
   DATASET_FETCH_ERROR,
   DATASET_LAYER_FETCH_ERROR,
   DATASET_WIDGET_RECEIVED,
@@ -91,6 +92,11 @@ export function getDatasets(defaultActiveLayers) {
           payload: err.message
         });
       });
+  };
+}
+export function resetDatasetList() {
+  return {
+    type: DATASET_LIST_RESET
   };
 }
 
