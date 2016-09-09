@@ -97,7 +97,7 @@ class DataMap extends React.Component {
             subtitle = metadata.subtitle;
           }
           if (metadata.organization) {
-            partner = <span><br/>Source: <strong>{metadata.organization}</strong></span>;
+            partner = metadata.organization;
           }
         }
       }
@@ -131,8 +131,12 @@ class DataMap extends React.Component {
         <div className="layer" key={`map-layer-${index}`}>
           {layerIcon}
           <span className="layerItem">
-            {cdiTag ?
-              <strong className="title">{dataset.name}
+            {cdiTag
+              ? <strong
+                className="title"
+                onClick={() => this.props.onInfoClick(dataset.id)}
+              >
+                {dataset.name}
                 <div
                   onMouseEnter={(e) => this.onTagHover(e)}
                   onMouseLeave={() => this.onTagLeave()}
@@ -140,10 +144,16 @@ class DataMap extends React.Component {
                 >
                   CDI
                 </div>
-
-              </strong> : <strong className="title">{dataset.name}</strong>
+              </strong>
+              : <strong
+                className="title"
+                onClick={() => this.props.onInfoClick(dataset.id)}
+              >
+                {dataset.name}
+              </strong>
             }
-            <span className="subtitle">{subtitle} {partner}</span>
+            <span className="subtitle">{subtitle}</span>
+            <span className="subtitle">Source: <strong>{partner}</strong></span>
           </span>
           {datasetIcon}
         </div>
@@ -218,6 +228,10 @@ DataMap.propTypes = {
    * Define the tooltip text and position
    */
   setTooltip: React.PropTypes.func.isRequired,
+  /**
+   * Define function to show the dataset metadata
+   */
+  onInfoClick: React.PropTypes.func.isRequired,
   /**
    * Define the tooltip properties.
    */
