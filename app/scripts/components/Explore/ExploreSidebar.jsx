@@ -97,7 +97,7 @@ class DataMap extends React.Component {
             subtitle = metadata.subtitle;
           }
           if (metadata.organization) {
-            partner = <span><br/>Source: <strong>{metadata.organization}</strong></span>;
+            partner = metadata.organization;
           }
         }
       }
@@ -143,7 +143,8 @@ class DataMap extends React.Component {
 
               </strong> : <strong className="title">{dataset.name}</strong>
             }
-            <span className="subtitle">{subtitle} {partner}</span>
+            <span className="subtitle">{subtitle}</span>
+            <span className="subtitle">Source: <strong>{partner}</strong></span>
           </span>
           {datasetIcon}
         </div>
