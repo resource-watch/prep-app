@@ -8,7 +8,7 @@ import { setTooltip } from '../../actions/tooltip';
 import { setModalMetadata } from '../../actions/modal';
 
 const mapStateToProps = (state) => ({
-  data: state.datasets.list,
+  data: state.datasets.filteredList,
   filters: state.datasets.filters,
   tooltip: state.tooltip
 });

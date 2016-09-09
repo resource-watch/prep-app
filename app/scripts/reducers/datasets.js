@@ -15,6 +15,7 @@ import {
 
 const initialState = {
   list: [],
+  filteredList: [],
   details: {},
   widgets: {},
   layers: {},
@@ -70,40 +71,39 @@ export default function (state = initialState, action) {
     case DATASET_SET_FILTER: {
       // update the filters object
       const list = state.list.slice(0);
+      const filteredList = [];
       const filtersChoosen = Object.assign({}, state.filters);
-      if (filtersChoosen[action.payload.filter]) {
-        const index = filtersChoosen[action.payload.filter].indexOf(action.payload.tag);
-        if (index > -1) {
-          filtersChoosen[action.payload.filter].splice(index, 1);
-        } else {
-          filtersChoosen[action.payload.filter].push(action.payload.tag);
-        }
-      } else {
-        filtersChoosen[action.payload.filter] = [action.payload.tag];
-      }
 
-      // deactivate a layer out of the filters
-      let filtersFlatten = [];
-      if (Object.keys(filtersChoosen).length > 0) {
-        Object.keys(filtersChoosen).forEach((key) => {
-          filtersFlatten = filtersFlatten.concat(filtersChoosen[key]);
-        });
-        if (filtersFlatten.length) {
-          for (let i = list.length - 1; i >= 0; i--) {
-            let isOutsideFilter = true;
-            for (let j = filtersFlatten.length - 1; j >= 0; j--) {
-              if (list[i].tags.indexOf(filtersFlatten[j]) > -1) {
-                isOutsideFilter = false;
-                break;
+      if (list && list.length) {
+        if (action.payload.filter && filtersChoosen[action.payload.filter]) {
+          const index = filtersChoosen[action.payload.filter].indexOf(action.payload.tag);
+          if (index > -1) {
+            filtersChoosen[action.payload.filter].splice(index, 1);
+          } else {
+            filtersChoosen[action.payload.filter].push(action.payload.tag);
+          }
+        } else {
+          filtersChoosen[action.payload.filter] = [action.payload.tag];
+        }
+
+        // deactivate a layer out of the filters
+        if (Object.keys(filtersChoosen).length > 0) {
+          Object.keys(filtersChoosen).forEach((key) => {
+            for (let i = list.length - 1; i >= 0; i--) {
+              for (let j = filtersChoosen[key].length - 1; j >= 0; j--) {
+                if (list[i].tags.indexOf(filtersChoosen[key][j]) > -1) {
+                  if (list[i].active === true) {
+                    list[i].active = false;
+                  }
+                  filteredList.push(list[i]);
+                  break;
+                }
               }
             }
-            if (isOutsideFilter && list[i].active === true) {
-              list[i].active = false;
-            }
-          }
+          });
         }
-      }
-      return Object.assign({}, state, { list, filters: filtersChoosen });
+    }
+      return Object.assign({}, state, { list, filteredList, filters: filtersChoosen });
     }
     case TOGGLE_LAYER_STATUS: {
       const list = state.list.slice(0);
