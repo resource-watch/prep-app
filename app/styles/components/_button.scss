@@ -27,7 +27,7 @@
   &.-action {
     display: flex;
     align-items: center;
-    padding: .3rem .5rem;
+    padding: .3rem .9rem;
 
     font-size: $small-font-size;
     line-height: 1.8;
@@ -44,6 +44,23 @@
 
       path {
         fill: $secondary-color;
+        .-theme-2 & { fill: $thirth-color; }
+        .-theme-3 & { fill: $fourth-color; }
+      }
+
+    }
+  }
+
+  &.-alternative {
+    color: $link-font-color;
+    .-theme-2 & { color: $thirth-color; }
+    .-theme-3 & { color: $fourth-color; }
+
+    > .icon {
+      margin-right: 5px;
+
+      path {
+        fill: $link-font-color;
         .-theme-2 & { fill: $thirth-color; }
         .-theme-3 & { fill: $fourth-color; }
       }
@@ -68,8 +85,13 @@
 
   &.-border {
     border: 2px solid $secondary-color;
+    border-radius: 0;
     &.-fill { background-color: $secondary-color; }
 
+    &.-border-alternative {
+      border-color: $link-font-color;
+      &.-fill { background-color: $link-font-color; }
+    }
     .-theme-2 & {
       border-color: $thirth-color;
       &.-fill { background-color: $thirth-color; }
@@ -83,6 +105,11 @@
     &.-border-neutral {
       border-color: $button-font-color;
       &.-fill { background-color: $button-font-color; }
+    }
+
+    &.-action {
+      position: relative;
+      height: ($small-margin / 2) + $small-margin;
     }
   }
 }
