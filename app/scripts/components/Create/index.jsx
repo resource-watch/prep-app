@@ -15,12 +15,11 @@ function Create() {
       <article className="c-article">
         <div className="row align-center">
           <div className="column small-12 medium-8">
-            <h2>Find, collect and share climate-relevant data from different sources in one place.
+            <h2>Find, collect and share climate-relevant data from different sources in one place
             </h2>
-            <p>The next phase of the PREP platform will enable users to <Link
-              to="create">create</Link> personalized dashboards of climate risks that combine
+            <p>The next phase of the PREP platform will enable users to create personalized dashboards of climate risks that combine
               top-down data with local information. Upload your own data or pull in data from
-              authoritative global sources, build a Dashboard of indicators and interactive
+              authoritative global sources, build a dashboard of indicators and interactive
               data-driven stories, and share with or learn from peers others.
             </p>
             <p>The customization feature is currently under development, see how it will work.
@@ -63,10 +62,10 @@ function Create() {
             <div className="column align-middle small-12 medium-6">
               <h3>Create Personalized Dashboards</h3>
               <p>Collect data, tools and insights relevant to you and your community in one place.
-                Create and share your own online Dashboard containing data, information, tools,
+                Create and share your own online dashboard containing data, information, tools,
                 interactive stories and other dynamic resources specific to your own geographic or
-                topical area of interest. Look at what data, tools, and insights others are using,
-                get regular updates and add them to your dashboard.
+                topical area of interest. Look at what data, tools, and insights others are using
+                and add them to your dashboard. Get updates when datasets are added.
               </p>
               <Link to="/dashboards"> See dashboards </Link>
             </div>
@@ -78,7 +77,7 @@ function Create() {
             <div className="column align-middle small-12 medium-6">
               <h3>Share Insights</h3>
               <p>Choose from a range of open source tools to share an insight about your data and
-                how it can or is being used to inform and manage climate risk. Embed your Dashboard
+                how it can or is being used to inform and manage climate risk. Embed your dashboard
                 or insights on your own website and share them with your community.
               </p>
               <Link to="/insights"> See insights </Link>
@@ -94,7 +93,7 @@ function Create() {
       <article className="c-article">
         <div className="row align-center">
           <div className="column small-12 medium-8">
-            <h2>Become a Pilot User</h2>
+            <h2>Become a pilot user</h2>
             <p>Would you like to develop a dashboard? Or share insights from your community? Over
               the coming months we plan to work with communities around the globe to help them
               develop their own dashboards.</p>

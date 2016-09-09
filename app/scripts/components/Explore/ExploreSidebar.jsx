@@ -60,7 +60,7 @@ class DataMap extends React.Component {
             subtitle = metadata.subtitle;
           }
           if (metadata.organization) {
-            partner = <span>from <strong>{metadata.organization}</strong></span>;
+            partner = <span><br/>Source: <strong>{metadata.organization}</strong></span>;
           }
         }
       }

@@ -57,12 +57,10 @@ class FAQ extends React.Component {
             climate resilience.
           </p>
           <p>You can find additional information about climate projections on <a
-            href="https://www.climate.gov/maps-data/primer/predicting-climate" target="_blank">Climate.gov</a>
-            and in the <a
+            href="https://www.climate.gov/maps-data/primer/predicting-climate" target="_blank">Climate.gov</a> and in the <a
               href="http://nca2014.globalchange.gov/report/appendices/climate-science-supplement#statement-38714"
               target="_blank">U.S. National Climate Assessment</a>. You can also find a list of
-            climate resilience tools and services on the <Link to="/resources">Resources</Link>
-            page.
+            climate resilience tools and services on the <Link to="/resources">Resources</Link> page.
           </p>
 
           <h3>How can I get involved?</h3>
@@ -70,26 +68,29 @@ class FAQ extends React.Component {
             href="mailto:info@prepdata.org">info@prepdata.org</a> or fill out this <Link
             to='/contact'>form</Link>.
           </p>
-          <p>If you would like to join PREP, prepare a short letter of intent expressing your
+          <p>If you would like to <Link to="/about">join</Link> PREP, prepare a short letter of intent expressing your
             entity’s interest in PREP, your intended workgroup, and how you meet the partner
-            criteria. Learn more <Link to="/about">here</Link>.
+            criteria.
           </p>
 
           <h3>Who do I contact about media inquiries?</h3>
           <p>Please contact us at <a href="mailto:info@prepdata.org">info@prepdata.org</a> “Media
             Inquiry” in the subject line.
           </p>
+
+          <h3>What is coming next for PREP?</h3>
+          <p>The next phase of the PREP platform will enable users to create personalized dashboards of climate risks that combine top-down data with local information. To learn more about this feature or to apply to be a pilot user, see the <Link to='/create'>Create</Link> page.
+          </p>
         </Article>
         <Article>
           <h2>The PREP Platfrom</h2>
           <h3>How do I find data in PREP?</h3>
-          <p>All data on the PREP platform can be found in the <Link to="/explore">Explore</Link>
-            section. You can also find a list of climate-related data portals or the <Link
+          <p>All data on the PREP platform can be found in the <Link to="/explore">Explore</Link> section. You can also find a list of climate-related data portals or the <Link
               to="/resources">Resources</Link> page.
           </p>
 
           <h3>What if I have difficulty downloading data?</h3>
-          <p>Please let us know! <Link to="/contact">contact us</Link> at info@prepdata.org with the
+          <p>Please let us know! <Link to="/contact">Contact us</Link> at info@prepdata.org with the
             name of the dataset and a description of your issue.
           </p>
 
@@ -109,10 +110,9 @@ class FAQ extends React.Component {
 
           <h3>How do I create a dashboard or insight in PREP?</h3>
           <p>The ability to create and customize dashboards and insights is currently under
-            development. To learn more about this feature or to apply to be a pilot user, see the
-            <Link to='/create'>Create</Link> page.
+            development. To learn more about this feature or to apply to be a pilot user, see the <Link to='/create'>Create</Link> page.
           </p>
-          <p>If you are interested in data storytelling, we also recommend trying Esri <a
+          <p>If you are interested in data storytelling, you may wish to try Esri <a
             href="https://storymaps.arcgis.com/en/" target="_blank">Story Maps</a>.</p>
 
           <h3>Which web browser should I use to explore this site?</h3>
@@ -127,9 +127,8 @@ class FAQ extends React.Component {
           </p>
 
           <h3>I see an error or have a suggestion for the site. Where do I report it?</h3>
-          <p>We are eager for feedback and suggestions. Please <Link to="/contact">contact us</Link>
-            at info@prepdata.org.</p>
-
+          <p>We are eager for feedback and suggestions. Please <Link to="/contact">contact us</Link> at info@prepdata.org.
+          </p>
         </Article>
       </div>
     );

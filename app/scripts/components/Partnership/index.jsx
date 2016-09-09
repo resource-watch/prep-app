@@ -24,16 +24,16 @@ class Partnership extends React.Component {
 
               <h3>Engagement</h3>
 
-              <p>We will promote collaboration among data and information producers and users.</p>
+              <p>We promote collaboration among data and information producers and users.</p>
               <Link to="/about/engagement">Go to engagement</Link>
 
               <h3>Data</h3>
-              <p>We will seek to reduce the barriers to accessing, contributing, and using data for
+              <p>We seek to reduce the barriers to accessing, contributing, and using data for
                 climate resilience.</p>
               <Link to="/about/data">Go to data</Link>
 
               <h3>Platforms</h3>
-              <p>We will develop platforms to enhance access to and usability of climate-relevant
+              <p>We develop platforms to enhance access to and usability of climate-relevant
                 data and information.</p>
               <Link to="/about/platforms">Go to platforms</Link>
 
@@ -103,8 +103,8 @@ class Partnership extends React.Component {
           <div className="row align-center">
             <div className="column small-12 medium-8">
               <h2>The role of PREP partners</h2>
-              <p>PREP is built on a global network of collaborators from the public and private
-                sectors and from civil society. Each partner participates in at least one PREP
+              <p>PREP is built on a global network of collaborators from the public sector, private
+                sector and civil society. Each partner participates in at least one PREP
                 workgroup.
               </p>
 
