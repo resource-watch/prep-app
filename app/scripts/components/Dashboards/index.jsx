@@ -29,30 +29,31 @@ class DashboardsPage extends React.Component {
 
     const items = this.props.data.map((item, index) => {
       return (
-        <div className={`columns small-10 medium-5 align-stretch ${index % 2 === 0 ? 'small-offset-1' : ''}`}
+        <div
+          className={`columns small-10 medium-5 align-stretch ${index % 2 === 0 ? 'small-offset-1' : ''}`}
           key={`dashboard-item-${index}`}
-          style={{display: 'flex'}}
+          style={{ display: 'flex' }}
         >
           <Card border="neutral">
             <h3>
               <Link to={`/dashboard/${item.slug}/data`}>
-               {item.title}
+                {item.title}
               </Link>
             </h3>
             <p>
               {item.summary}
             </p>
             {item.partner &&
-              <a href={item.partner.url} target="_blank">
-                <img
-                  src={config.apiUrl + item.partner.images.logo}
-                  className="logo"
-                  alt={item.partner.name}
-                />
-              </a>
+            <a href={item.partner.url} target="_blank">
+              <img
+                src={config.apiUrl + item.partner.images.logo}
+                className="logo"
+                alt={item.partner.name}
+              />
+            </a>
             }
             {item.attribution &&
-              <span className="attribution">{item.attribution}</span>
+            <span className="attribution">{item.attribution}</span>
             }
           </Card>
         </div>
@@ -75,7 +76,10 @@ class DashboardsPage extends React.Component {
         <article className="c-article -no-border">
           <div className="row align-center">
             <div className="column small-12 medium-8">
-              <p>Find collections of climate risk data, insights, and tools contributed by partner communities. In PREP’s next phase, any user will be able to <Link to="create">create</Link> and share their own dashboards and insights.</p>
+              <h2>Find collections of climate risk data, insights, and tools contributed by partner
+                communities
+              </h2>
+              <p>This is a list of initial dashboards for the beta version of the PREP Platform. In PREP’s next phase, any user will be able to <Link to="/create">create</Link> and share their own dashboards and insights.</p>
             </div>
           </div>
         </article>

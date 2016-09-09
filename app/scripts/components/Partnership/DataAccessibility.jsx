@@ -9,9 +9,19 @@ class DataAccessibility extends React.Component {
       <div className="c-partnership">
 
         <Article>
-          <p>Entities that work to ensure interoperability in access and use of climate-relevant data and information.</p>
-          <p>The Data Workgroup endeavors to identify and reduce the barriers to accessing, contributing, and using data for climate resilience. It promotes standards to ensure interoperability in access and use of climate-relevant data and information.</p>
-          <p>The Data Workgroup is co-led by the Federation of Earth Science Information Partners (ESIP) and NASA.</p>
+          <p>The Data Workgroup strives to ensure interoperability in access and use of climate-relevant data and information. The group aims to identify and reduce the barriers to discovering, accessing, contributing, and using data for climate resilience. It promotes standards and best practices for data interoperability across the private and public sectors.
+          </p>
+          <p>The Data Workgroup is co-led by the Federation of Earth Science Information Partners (ESIP) and NASA.
+          </p>
+          <p>PREP Data Workgroup activities will include:
+          </p>
+          <ol>
+            <li>Providing a forum to discuss and document lessons learned discovering and accessing climate data.</li>
+            <li>Prototyping solutions for improved climate data interoperability.</li>
+            <li>Providing feedback to improve datasets, closing the loop between data providers and users.</li>
+          </ol>
+          <p>To get involved please submit your letter of interest below.
+          </p>
         </Article>
 
         <Article>

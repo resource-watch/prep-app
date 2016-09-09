@@ -23,7 +23,7 @@ function Resources() {
 
       <Article no-border>
         <p>Find selected resources for understanding the impacts of climate change,
-          tools for building resilience to climate change, and finding additional
+          tools for building resilience to climate change, and additional
           climate relevant data.
         </p>
       </Article>
@@ -78,7 +78,7 @@ function Resources() {
       </Article>
 
       <Article grid="small-12">
-        <h2>Climate Resilience Tools and Services</h2>
+        <h2>Climate resilience tools and services</h2>
 
         <div className="row align-stretch">
           <div className="columns small-12 medium-4">
@@ -183,7 +183,7 @@ function Resources() {
       </Article>
 
       <Article grid="small-12">
-        <h2>Climate Data Portals</h2>
+        <h2>Climate data portals</h2>
 
         <div className="row align-stretch">
           <div className="columns small-12 medium-4">
@@ -232,10 +232,10 @@ function Resources() {
               <Thumbnail
                 url={'http://iridl.ldeo.columbia.edu/index.html'}
                 src={iriLogo}
-                alt={'IRI/LDEO climate data Library'}
+                alt={'IRI/LDEO Climate Data Library'}
                 border={'neutral'}
               />
-              <h3>IRI/LDEO climate data Library</h3>
+              <h3>IRI/LDEO Climate Data Library</h3>
               <p>
                 The IRI Data Library is an online data repository and analysis tool that allows a user to view, analyze,
                 and download hundreds of terabytes of climate-related data through a standard web browser

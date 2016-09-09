@@ -1,5 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router';
+import ReactDOM from 'react-dom';
+import { Link } from 'react-router';
 
 import FilterTabs from '../../containers/Explore/FilterTabs';
 import Switch from '../Button/Switch';
@@ -15,12 +16,48 @@ class DataMap extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.props.setTooltip({
+      text: 'Climate Data Initiative dataset',
+      width: '120'
+    });
+  }
+
+  onTagHover(e) {
+    // Get elements
+    const tag = e.target;
+    const tooltip = ReactDOM.findDOMNode(this.refs.tagTooltip);
+    const tooltipParent = tooltip.parentNode;
+    const tooltipText = tooltip.firstChild;
+    // Get elements' position
+    const tParentBounds = tooltipParent.getBoundingClientRect();
+    const tagBounds = tag.getBoundingClientRect();
+    // Get elements' height and width
+    const tagWidth = tag.offsetWidth;
+    const tagHeight = tag.offsetHeight;
+    const tooltipTextWidth = tooltipText.offsetWidth;
+    const tooltipTextHeight = tooltipText.offsetHeight;
+    // Update the state of the tooltip
+    this.props.setTooltip(
+      {
+        hidden: false,
+        position: {
+          top: (tagBounds.top - (tParentBounds.top + (tagHeight + tooltipTextHeight))),
+          left: (tagBounds.left - (tooltipTextWidth / 2) + (tagWidth / 2))
+        }
+      });
+  }
+
+  onTagLeave() {
+    this.props.setTooltip({ hidden: true });
+  }
+
   getContent() {
     if (!this.props.data.length) {
       return <LoadingSpinner />;
     }
 
-    const {filters, data} = this.props;
+    const { filters, data } = this.props;
     let filtersFlatten = [];
     let filteredDatasets = [];
     if (Object.keys(filters).length > 0) {
@@ -60,7 +97,7 @@ class DataMap extends React.Component {
             subtitle = metadata.subtitle;
           }
           if (metadata.organization) {
-            partner = <span>from <strong>{metadata.organization}</strong></span>;
+            partner = <span><br/>Source: <strong>{metadata.organization}</strong></span>;
           }
         }
       }
@@ -96,11 +133,17 @@ class DataMap extends React.Component {
           <span className="layerItem">
             {cdiTag ?
               <strong className="title">{dataset.name}
-                <Tooltip text="Climate Data Initiative dataset">
-                  <div className="-highlighted-tag">CDI</div>
-                </Tooltip>
-              </strong> : <strong className="title">{dataset.name}</strong>}
-              <span className="subtitle">{subtitle} {partner}</span>
+                <div
+                  onMouseEnter={(e) => this.onTagHover(e)}
+                  onMouseLeave={() => this.onTagLeave()}
+                  className="-highlighted-tag"
+                >
+                  CDI
+                </div>
+
+              </strong> : <strong className="title">{dataset.name}</strong>
+            }
+            <span className="subtitle">{subtitle} {partner}</span>
           </span>
           {datasetIcon}
         </div>
@@ -119,6 +162,7 @@ class DataMap extends React.Component {
   render() {
     const content = this.getContent();
     return (
+
       <div className={['c-explore-sidebar', this.state.sidebarOpen ? '-open' : ''].join(' ')}>
         <div className="actions">
           <div>
@@ -130,6 +174,13 @@ class DataMap extends React.Component {
             </button>
           </div>
         </div>
+        <Tooltip
+          ref="tagTooltip"
+          text={this.props.tooltip.text}
+          hidden={this.props.tooltip.hidden}
+          position={this.props.tooltip.position}
+          width={this.props.tooltip.width}
+        />
         <div className="row content">
           <FilterTabs />
           <div className="columns small-12 dataset-items">
@@ -160,9 +211,17 @@ DataMap.propTypes = {
    */
   switchChange: React.PropTypes.func.isRequired,
   /**
-   * Define the dataset filters choosen
+   * Define the dataset filters chosen
    */
-  filters: React.PropTypes.object
+  filters: React.PropTypes.object,
+  /**
+   * Define the tooltip text and position
+   */
+  setTooltip: React.PropTypes.func.isRequired,
+  /**
+   * Define the tooltip properties.
+   */
+  tooltip: React.PropTypes.object
 };
 
 export default DataMap;

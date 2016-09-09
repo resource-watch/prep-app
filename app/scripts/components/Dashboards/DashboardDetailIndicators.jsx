@@ -58,6 +58,7 @@ class DashboardDetailIndicators extends React.Component {
             content.push(
               <div className="column small-12 medium-6" key={`indicator-${index}`} style={{ display: 'flex' }}>
                 <ChartCard
+                  dashboardSlug={this.props.dashboardSlug}
                   link={`/dataset/${indicator.dataset}`}
                   title={indicator.title}
                   subtitle={indicator.subtitle}

@@ -21,6 +21,15 @@ function DashboardDetailTools(props) {
               {card.summary}
             </p>
 
+            {card.partner &&
+              <a target="_blank" href={card.partner.href}>
+                <img
+                  src={config.apiUrl + card.partner.images.logo}
+                  className="logo"
+                  alt={card.partner.name}
+                />
+              </a>
+            }
             {card.attribution &&
               <span className="attribution">{card.attribution}</span>
             }

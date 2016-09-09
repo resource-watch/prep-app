@@ -1495,9 +1495,10 @@ return /******/ (function(modules) { // webpackBootstrap
   //   // key could be a zero
   //   return child.key === null || child.key === undefined ? fallbackKey : child.key;
   // };
+  var keyCounter = 0;
   var getKey = function getKey(child, fallbackKey) {
     // key could be a zero
-    return child.key === null || child.key === undefined ? fallbackKey : child.key + fallbackKey;
+    return child.key === null || child.key === undefined ? fallbackKey : (child.key + (fallbackKey + new Date().getTime() + (keyCounter++)));
   };
 
 	var renderSlides = function renderSlides(spec) {

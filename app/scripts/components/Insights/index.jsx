@@ -30,30 +30,31 @@ class InsightsPage extends React.Component {
     let items = [];
     this.props.data.forEach((item, index) => {
       items.push(
-        <div className={`columns small-10 medium-5 align-stretch ${index % 2 === 0 ? 'small-offset-1' : ''}`}
+        <div
+          className={`columns small-10 medium-5 align-stretch ${index % 2 === 0 ? 'small-offset-1' : ''}`}
           key={`insight-item-${index}`}
-          style={{display: 'flex'}}
+          style={{ display: 'flex' }}
         >
           <Card border="neutral">
             <h3>
               <Link to={`/insight/${item.slug}`}>
-               {item.title}
+                {item.title}
               </Link>
             </h3>
             <p>
               {item.summary}
             </p>
             {item.partner &&
-              <a href={item.partner.url} target="_blank">
-                <img
-                  src={config.apiUrl + item.partner.images.logo}
-                  className="logo"
-                  alt={item.partner.name}
-                />
-              </a>
+            <a href={item.partner.url} target="_blank">
+              <img
+                src={config.apiUrl + item.partner.images.logo}
+                className="logo"
+                alt={item.partner.name}
+              />
+            </a>
             }
             {item.attribution &&
-              <span className="attribution">{item.attribution}</span>
+            <span className="attribution">{item.attribution}</span>
             }
           </Card>
         </div>
@@ -76,7 +77,11 @@ class InsightsPage extends React.Component {
         <article className="c-article -no-border">
           <div className="row align-center">
             <div className="column small-12 medium-8">
-              <p>Find data-driven stories and tools that spotlight specific climate-related risks and solutions. In PREP’s next phase, any user will be able to <Link to="create">create</Link> and share their own dashboards and insights.</p>
+              <h2>Find data-driven stories and tools that spotlight specific climate-related risks
+                and solutions
+              </h2>
+              <p>In PREP’s next phase, any user will be able to <Link to="create">create</Link> and
+                share their own dashboards and insights.</p>
             </div>
           </div>
         </article>

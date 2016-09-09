@@ -1,10 +1,10 @@
 import React from 'react';
-import {render} from 'react-dom';
-import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
-import {Provider} from 'react-redux';
+import { render } from 'react-dom';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import {browserHistory} from 'react-router';
-import {syncHistoryWithStore, routerReducer, routerMiddleware} from 'react-router-redux';
+import { browserHistory } from 'react-router';
+import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux';
 import * as reducers from './reducers';
 import Routes from './routes';
 
@@ -31,12 +31,12 @@ const store = createStore(
   reducer,
   compose(
     /* The router middleware MUST be before thunk otherwise the URL changes
-    * inside a thunk function won't work properly */
+     * inside a thunk function won't work properly */
     applyMiddleware(middlewareRouter, thunk),
     /* Redux dev tool, install chrome extension in
-    * https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en */
+     * https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en */
     typeof window === 'object' &&
-      typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
+    typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
   )
 );
 
@@ -49,7 +49,7 @@ const history = syncHistoryWithStore(browserHistory, store);
 
 render(
   <Provider store={store}>
-    <Routes history={history} />
+    <Routes history={history}/>
   </Provider>,
   document.getElementById('app')
 );
