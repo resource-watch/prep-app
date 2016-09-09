@@ -70,21 +70,27 @@ class Explore extends React.Component {
     const datasetData = details[this.props.metadataModal.datasetId];
 
     if (datasetData) {
-      const metadataInfo = datasetData.metadata[0].info;
+      if (datasetData.metadata && datasetData.metadata.length) {
+        const metadataInfo = datasetData.metadata[0].info;
 
-      return (
-        <div className="content">
+        return (
+          <div className="content">
           <h3>
-            <Link to={`/dataset/${this.props.metadataModal.datasetId}`}>
-              {metadataInfo.attributes.title}
-            </Link>
+          <Link to={`/dataset/${this.props.metadataModal.datasetId}`}>
+          {metadataInfo.attributes.title}
+          </Link>
           </h3>
           <h4> {metadataInfo.attributes.subtitle} </h4>
           <MetadataList short download data={datasetData} />
-        </div>
-      );
+          </div>
+        );
+      } else {
+        return (
+          <p>Metadata details cooming soon</p>
+        )
+      }
     }
-    return <LoadingSpinner />;
+    return <LoadingSpinner inner />;
   }
 
   render() {
