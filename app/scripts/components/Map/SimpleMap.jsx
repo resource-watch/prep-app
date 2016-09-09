@@ -40,7 +40,8 @@ class SimpleMap extends React.Component {
       zoomControl: false,
       center: [+params.lat, +params.lng],
       zoom: +params.zoom,
-      minZoom: 2
+      minZoom: 2,
+      scrollWheelZoom: false
     });
 
     L.tileLayer(
