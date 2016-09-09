@@ -40,7 +40,8 @@ class SimpleMap extends React.Component {
       zoomControl: false,
       center: [+params.lat, +params.lng],
       zoom: +params.zoom,
-      minZoom: 2
+      minZoom: 2,
+      scrollWheelZoom: false
     });
 
     L.tileLayer(
@@ -112,7 +113,7 @@ class SimpleMap extends React.Component {
 
     if (layer) {
       const eventName = (layerData.type === 'wms' ||
-        layerData.type === 'tileLayer') ? 'tileload' : 'load';
+      layerData.type === 'tileLayer') ? 'tileload' : 'load';
       layer.on(eventName, () => {
         this.handleTileLoaded(layer);
       });
@@ -218,13 +219,13 @@ class SimpleMap extends React.Component {
     let loading;
     const layer = this.props.data[this.props.layerId] || false;
     if (this.state.loading) {
-      loading = <LoadingSpinner inner />;
+      loading = <LoadingSpinner inner/>;
     }
 
     return (<div className="c-simple-map">
       <div className="map" ref="map"></div>
       {layer &&
-        <SimpleLegend layer={layer} />
+      <SimpleLegend layer={layer}/>
       }
       {loading}
     </div>);
@@ -233,16 +234,16 @@ class SimpleMap extends React.Component {
 
 SimpleMap.propTypes = {
   /**
-  * Define the layers data
-  */
+   * Define the layers data
+   */
   data: React.PropTypes.object.isRequired,
   /**
-  * Define the id of the layer desired
-  */
+   * Define the id of the layer desired
+   */
   layerId: React.PropTypes.string.isRequired,
   /**
-  * Define the function to get the desired layer
-  */
+   * Define the function to get the desired layer
+   */
   getLayerData: React.PropTypes.func.isRequired
 };
 

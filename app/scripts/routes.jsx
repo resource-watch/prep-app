@@ -10,7 +10,6 @@ import EngagementWorkgroup from './components/Partnership/EngagementWorkgroup';
 import DataAccessibility from './components/Partnership/DataAccessibility';
 import Explore from './containers/Explore';
 import DatasetDetail from './containers/Dataset';
-import About from './components/About';
 import FAQ from './components/FAQ';
 import Dashboards from './containers/Dashboards';
 import DashboardsDetail from './containers/Dashboards/DashboardDetail';

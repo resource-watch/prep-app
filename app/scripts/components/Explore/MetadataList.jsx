@@ -76,7 +76,7 @@ function MetadataInfo(props) {
       }
       {metadataInfo.attributes.source &&
         <li>
-          <span>Source: </span>
+          <span>Access: </span>
           <span>
             <a href={metadataInfo.attributes.source} target="_blank">
               {metadataInfo.attributes.source}
