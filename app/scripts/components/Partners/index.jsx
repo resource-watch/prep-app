@@ -25,6 +25,26 @@ function Partners(props) {
           })}
         </div>
       </Article>
+      <Article grid="small-12">
+        <div className="row">
+          <div className="columns small-12">
+            <p>The U.S. Global Change Research Program (USGCRP) will coordinate the U.S. government’s involvement in PREP.</p>
+          </div>
+        </div>
+        <div className="row">
+          <div className="columns small-12 medium-4">
+            <div className="c-article-module">
+              <Thumbnail
+                url={'http://www.globalchange.gov/'}
+                src={config.apiUrl + '/system/partners/logos/000/000/013/medium/logo-globalchange-small.png?1473415466'}
+                alt={'U.S. Global Change Research Program (USGCRP)'}
+                border={'neutral'}
+              />
+              <h3>U.S. Global Change Research Program (USGCRP)</h3>
+             </div>
+          </div>
+        </div>
+      </Article>
     </div>
   );
 }

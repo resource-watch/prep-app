@@ -103,11 +103,34 @@
 
   &.-social {
     color: $inverse-font-color;
+
+    & > ul {
+      align-items: center;
+    }
+
     & > ul > li {
       display: flex;
       margin-right: 1rem;
       > span {
         margin-right: .5rem;
+      }
+    }
+
+    .powered-by {
+      position: relative;
+      margin-top: rem(5);
+
+      &:before {
+        display: block;
+        content: "";
+        position: absolute;
+        top: rem(6);
+        right: 100%;
+        margin-right: .5rem;
+        width: 1px;
+        height: rem(13);
+
+        background-color: $secondary-color;
       }
     }
   }
