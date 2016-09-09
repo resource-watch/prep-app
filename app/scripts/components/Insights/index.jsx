@@ -78,7 +78,7 @@ class InsightsPage extends React.Component {
           <div className="row align-center">
             <div className="column small-12 medium-8">
               <h2>Find data-driven stories and tools that spotlight specific climate-related risks
-                and solutions.
+                and solutions
               </h2>
               <p>In PREP’s next phase, any user will be able to <Link to="create">create</Link> and
                 share their own dashboards and insights.</p>

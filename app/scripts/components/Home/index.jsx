@@ -24,10 +24,10 @@ class Home extends React.Component {
               <p>We promote collaboration among data and information producers and users.</p>
 
               <h3>Data</h3>
-              <p>We will seek to reduce the barriers to accessing, contributing, and using data for climate resilience.</p>
+              <p>We seek to reduce the barriers to accessing, contributing, and using data for climate resilience.</p>
 
               <h3>Platforms</h3>
-              <p>We will develop platforms to enhance access to and usability of climate-relevant data and information.</p>
+              <p>We develop platforms to enhance access to and usability of climate-relevant data and information.</p>
 
               <Link to="/about">Learn more</Link>
               </div>
@@ -38,7 +38,7 @@ class Home extends React.Component {
             <Article grid="small-12" no-border floating>
               <img src={ladyInLand} />
               <div className="padded">
-                <h2 className="-left">The Challenge</h2>
+                <h2 className="-left">The challenge</h2>
                 <p>With climate change already upon us, a growing number of communities, companies, and civil society organizations are looking to assess climate vulnerability and to develop resilience plans. However, efforts to turn data into actionable plans are constrained by two challenges:</p>
                 <ul>
                   <li>Robust, actionable data are limited.</li>
