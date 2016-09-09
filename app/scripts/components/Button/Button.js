@@ -5,8 +5,10 @@ function Button(props) {
 
   if (props.themeColor) classes.push('-theme-color');
   if (props.inverse) classes.push('-inverse');
+  if (props.alternative) classes.push('-alternative');
   if (props.border) classes.push('-border');
   if (props.border === 'neutral') classes.push('-border-neutral');
+  if (props.border === 'alternative') classes.push('-border-alternative');
   if (props.fill) classes.push('-fill');
   if (props.action) classes.push('-action');
   if (props.icon) classes.push('-icon');
@@ -39,10 +41,19 @@ Button.propTypes = {
    */
   inverse: React.PropTypes.bool,
   /**
+   * Define the color of the button's content
+   * Accepted values:
+   * 	- true:  the button's content is button secondary yellow
+   * 	- false: the button uses the color previously defined
+   * Default: false
+   */
+  alternative: React.PropTypes.bool,
+  /**
    * Define the color of the border of the button
    * Accepted values:
    *  - "": theme color (i.e. prop has no value)
    * 	- "neutral": dark blue
+   * 	- "alternative": button secondary yellow
    * Default: no border (i.e. prop not defined)
    */
   border: React.PropTypes.any,

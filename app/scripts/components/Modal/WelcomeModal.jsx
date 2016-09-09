@@ -1,7 +1,6 @@
 import React from 'react';
 import Modal from './Modal';
 import Button from '../Button/Button';
-import Article from '../Content/Article';
 
 class WelcomeModal extends React.Component {
 
@@ -18,8 +17,8 @@ class WelcomeModal extends React.Component {
           <p className="-small"><strong>DISCLAIMER:</strong> YOU AGREE THAT YOUR USE OF THE SITE AND ITS CONTENT IS AT YOUR SOLE RISK. WE MAKE NO PROMISES OR COMMITMENTS ABOUT THE SITE OR ITS CONTENT, AND THE SITE AND CONTENT ARE PROVIDED ON AN “AS IS” BASIS AND WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED. TO THE FULLEST EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, STATUTORY, EXPRESS OR IMPLIED, INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT.</p>
         </article>
         <aside>
-          <div className="small-12 align-center" style={{display: 'flex'}}>
-            <Button click={() => this.props.close()} themeColor border>
+          <div className="small-12 align-center" style={{ display: 'flex' }}>
+            <Button click={() => this.props.close()} alternative border="alternative">
               Continue
             </Button>
           </div>

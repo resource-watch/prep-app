@@ -43,5 +43,23 @@
       }
 
     }
+
+  }
+
+  .-alternative {
+    color: $link-font-color;
+    .-theme-2 & { color: $thirth-color; }
+    .-theme-3 & { color: $fourth-color; }
+
+    > .icon {
+      margin-right: 5px;
+
+      path {
+        fill: $link-font-color;
+        .-theme-2 & { fill: $thirth-color; }
+        .-theme-3 & { fill: $fourth-color; }
+      }
+
+    }
   }
 }
