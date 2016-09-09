@@ -76,8 +76,8 @@ class DashboardsPage extends React.Component {
         <article className="c-article -no-border">
           <div className="row align-center">
             <div className="column small-12 medium-8">
-              <h2>Find collections of climate risk data, insights, and tools contributed by partner
-                communities
+              <h2>Find collections of data, insights and tools that communities and organizations 
+                find important for managing climate risk
               </h2>
               <p>This is a list of initial dashboards for the beta version of the PREP Platform. In PREP’s next phase, any user will be able to <Link to="/create">create</Link> and share their own dashboards and insights.</p>
             </div>
