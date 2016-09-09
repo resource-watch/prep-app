@@ -2,10 +2,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: .5rem;
+  margin-bottom: $small-margin;
 
   > div {
     display: flex;
+  }
+
+  a {
+    margin: 0;
   }
 
   .action {
