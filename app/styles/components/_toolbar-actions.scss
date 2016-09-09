@@ -2,10 +2,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: .5rem;
+  margin-bottom: $small-margin;
 
   > div {
     display: flex;
+  }
+
+  a {
+    margin: 0;
   }
 
   .action {
@@ -38,6 +42,24 @@
 
       path {
         fill: $secondary-color;
+        .-theme-2 & { fill: $thirth-color; }
+        .-theme-3 & { fill: $fourth-color; }
+      }
+
+    }
+
+  }
+
+  .-alternative {
+    color: $link-font-color;
+    .-theme-2 & { color: $thirth-color; }
+    .-theme-3 & { color: $fourth-color; }
+
+    > .icon {
+      margin-right: 5px;
+
+      path {
+        fill: $link-font-color;
         .-theme-2 & { fill: $thirth-color; }
         .-theme-3 & { fill: $fourth-color; }
       }
