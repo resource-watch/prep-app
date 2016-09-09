@@ -57,30 +57,7 @@ class DataMap extends React.Component {
       return <LoadingSpinner />;
     }
 
-    const { filters, data } = this.props;
-    let filtersFlatten = [];
-    let filteredDatasets = [];
-    if (Object.keys(filters).length > 0) {
-      Object.keys(filters).forEach((key) => {
-        filtersFlatten = filtersFlatten.concat(filters[key]);
-      });
-      if (filtersFlatten.length) {
-        for (let i = data.length - 1; i >= 0; i--) {
-          for (let j = filtersFlatten.length - 1; j >= 0; j--) {
-            if (data[i].tags.indexOf(filtersFlatten[j]) > -1) {
-              filteredDatasets.push(data[i]);
-              break;
-            }
-          }
-        }
-      } else {
-        filteredDatasets = data;
-      }
-    } else {
-      filteredDatasets = data;
-    }
-
-    const layers = filteredDatasets.map((dataset, index) => {
+    const layers = this.props.data.map((dataset, index) => {
       let layerIcon = (
         <div className="detail-space"></div>
       );
