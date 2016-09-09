@@ -1,6 +1,5 @@
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import Explore from '../../components/Explore';
-
 import { getDatasets, resetDatasetList } from '../../actions/datasets';
 import { setModalMetadata } from '../../actions/modal';
 
