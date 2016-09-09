@@ -87,8 +87,9 @@ class DashboardDetail extends React.Component {
           dashboardSlug={this.props.dashboardSlug}
           currentSection="dashboards"
         >
-          <p dangerouslySetInnerHTML={{__html:this.props.data.summary }}></p>
-          <p>This is an initial list of insights, data and tools that are important for our work.</p>
+          <p dangerouslySetInnerHTML={{ __html:this.props.data.content }}></p>
+          <p>This is an initial list of insights, data and tools that are important for our work.
+          </p>
         </SectionIntro>
 
         <NavTab
