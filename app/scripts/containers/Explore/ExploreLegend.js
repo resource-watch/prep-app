@@ -41,7 +41,7 @@ function getActiveLayers(datasets, layers) {
 }
 
 const mapStateToProps = (state) => ({
-  data: getActiveLayers(state.datasets.list, state.datasets.layers)
+  data: getActiveLayers(state.datasets.filteredList, state.datasets.layers)
 });
 const mapDispatchToProps = (dispatch) => ({
   onInfoClick: (datasetId) => {
