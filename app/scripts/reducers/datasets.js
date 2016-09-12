@@ -31,7 +31,7 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, { list: action.payload.data });
     }
     case DATASET_LIST_RESET: {
-      return Object.assign({}, state, { list: [] });
+      return Object.assign({}, state, { list: [], filteredList: [] });
     }
     case DATASET_DETAIL_RECEIVED: {
       const details = Object.assign({}, state.details, {});
@@ -69,13 +69,12 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, { list });
     }
     case DATASET_SET_FILTER: {
-      // update the filters object
       const list = state.list.slice(0);
-      const filteredList = [];
+      let filteredList = [];
       const filtersChoosen = Object.assign({}, state.filters);
 
-      if (list && list.length) {
-        if (action.payload.filter && filtersChoosen[action.payload.filter]) {
+      if (action.payload.filter) {
+          if (filtersChoosen[action.payload.filter]) {
           const index = filtersChoosen[action.payload.filter].indexOf(action.payload.tag);
           if (index > -1) {
             filtersChoosen[action.payload.filter].splice(index, 1);
@@ -85,51 +84,57 @@ export default function (state = initialState, action) {
         } else {
           filtersChoosen[action.payload.filter] = [action.payload.tag];
         }
+      }
 
-        // deactivate a layer out of the filters
-        if (Object.keys(filtersChoosen).length > 0) {
-          Object.keys(filtersChoosen).forEach((key) => {
-            for (let i = list.length - 1; i >= 0; i--) {
-              for (let j = filtersChoosen[key].length - 1; j >= 0; j--) {
-                if (list[i].tags.indexOf(filtersChoosen[key][j]) > -1) {
-                  if (list[i].active === true) {
-                    list[i].active = false;
-                  }
-                  filteredList.push(list[i]);
-                  break;
-                }
+      if (list && list.length) {
+        const andFilters = Object.keys(filtersChoosen);
+        filteredList = list.filter((item, index) => {
+          for (let i = andFilters.length - 1 ; i >= 0; i--) {
+            let tags = filtersChoosen[andFilters[i]];
+            let j = tags.length - 1;
+            for (; j >= 0; j--) {
+              if (item.tags.indexOf(tags[j]) > -1) {
+                break;
               }
             }
-          });
-        }
-    }
-      return Object.assign({}, state, { list, filteredList, filters: filtersChoosen });
+            if (tags.length > 0 && j < 0) {
+              if (item.active === true) {
+                item.active = false;
+              }
+              return false;
+            }
+          }
+          return true;
+        })
+      }
+
+      return Object.assign({}, state, { filteredList, filters: filtersChoosen });
     }
     case TOGGLE_LAYER_STATUS: {
-      const list = state.list.slice(0);
-      for (let i = 0, length = list.length; i < length; i++) {
-        if (list[i].id === action.payload) {
-          list[i].active = !list[i].active;
-          if (list[i].active) {
-            list[i].index = state.list.filter(layer => layer.active).length;
+      const filteredList = state.filteredList.slice(0);
+      for (let i = 0, length = filteredList.length; i < length; i++) {
+        if (filteredList[i].id === action.payload) {
+          filteredList[i].active = !filteredList[i].active;
+          if (filteredList[i].active) {
+            filteredList[i].index = state.filteredList.filter(layer => layer.active).length;
           }
           break;
         }
       }
-      return Object.assign({}, state, { list });
+      return Object.assign({}, state, { filteredList });
     }
     case SET_LAYER_STATUS: {
-      const list = state.list.slice(0);
-      for (let i = 0, length = list.length; i < length; i++) {
-        if (list[i].id === action.payload.id) {
-          list[i].active = action.payload.status;
+      const filteredList = state.filteredList.slice(0);
+      for (let i = 0, length = filteredList.length; i < length; i++) {
+        if (filteredList[i].id === action.payload.id) {
+          filteredList[i].active = action.payload.status;
           break;
         }
       }
-      return Object.assign({}, state, { list });
+      return Object.assign({}, state, { filteredList });
     }
     case MAP_LAYERS_ORDER_CHANGED: {
-      const datasets = state.list.slice(0);
+      const datasets = state.filteredList.slice(0);
       const idsOrdered = action.payload.map((item) => item.attributes['dataset-id']);
 
       for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
@@ -140,10 +145,10 @@ export default function (state = initialState, action) {
           datasets[i].index = 0;
         }
       }
-      return Object.assign({}, state, { list: datasets });
+      return Object.assign({}, state, { filteredList: datasets });
     }
     case MAP_LAYER_OPACITY_CHANGED: {
-      const datasets = state.list.slice(0);
+      const datasets = state.filteredList.slice(0);
 
       for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
         if (datasets[i].id === action.payload) {
@@ -151,7 +156,7 @@ export default function (state = initialState, action) {
           break;
         }
       }
-      return Object.assign({}, state, { list: datasets });
+      return Object.assign({}, state, { filteredList: datasets });
     }
     default:
       return state;
