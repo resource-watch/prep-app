@@ -53,34 +53,14 @@ class DataMap extends React.Component {
   }
 
   getContent() {
-    if (!this.props.data.length) {
+    if (!this.props.listReceived) {
       return <LoadingSpinner />;
     }
-
-    const { filters, data } = this.props;
-    let filtersFlatten = [];
-    let filteredDatasets = [];
-    if (Object.keys(filters).length > 0) {
-      Object.keys(filters).forEach((key) => {
-        filtersFlatten = filtersFlatten.concat(filters[key]);
-      });
-      if (filtersFlatten.length) {
-        for (let i = data.length - 1; i >= 0; i--) {
-          for (let j = filtersFlatten.length - 1; j >= 0; j--) {
-            if (data[i].tags.indexOf(filtersFlatten[j]) > -1) {
-              filteredDatasets.push(data[i]);
-              break;
-            }
-          }
-        }
-      } else {
-        filteredDatasets = data;
-      }
-    } else {
-      filteredDatasets = data;
+    if (!this.props.data.length) {
+      return <p>No datasets with these filters selected</p>;
     }
 
-    const layers = filteredDatasets.map((dataset, index) => {
+    const layers = this.props.data.map((dataset, index) => {
       let layerIcon = (
         <div className="detail-space"></div>
       );
@@ -114,7 +94,7 @@ class DataMap extends React.Component {
         datasetIcon = (
           <Link className="detail-link" to={`/dataset/${dataset.id}`}>
             <svg width="16" height="16" viewBox="0 0 16 16"><title>View page</title>
-              <path d="M0 0v16h14v-2H2V2h12V0H0zm12 4l4 4-4 4V4zM6 7h6v2H6V7z" fillRule="evenodd"/>
+              <path d="M0 0v16h14v-2H2V2h12V0H0zm12 4l4 4-4 4V4zM6 7h6v2H6V7z" fillRule="evenodd" />
             </svg>
           </Link>
         );
@@ -221,9 +201,9 @@ DataMap.propTypes = {
    */
   switchChange: React.PropTypes.func.isRequired,
   /**
-   * Define the dataset filters chosen
+   * Define if got the dataset list
    */
-  filters: React.PropTypes.object,
+  listReceived: React.PropTypes.bool,
   /**
    * Define the tooltip text and position
    */

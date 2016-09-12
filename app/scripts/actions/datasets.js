@@ -84,6 +84,10 @@ export function getDatasets(defaultActiveLayers) {
           }
         });
         dispatch(getActiveDatasetLayers(datasets));
+        dispatch({
+          type: DATASET_SET_FILTER,
+          payload: {}
+        });
         dispatch(updateURL());
       })
       .catch((err) => {
