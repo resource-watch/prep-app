@@ -74,7 +74,7 @@ export default function (state = initialState, action) {
       const filtersChoosen = Object.assign({}, state.filters);
 
       if (action.payload.filter) {
-          if (filtersChoosen[action.payload.filter]) {
+        if (filtersChoosen[action.payload.filter]) {
           const index = filtersChoosen[action.payload.filter].indexOf(action.payload.tag);
           if (index > -1) {
             filtersChoosen[action.payload.filter].splice(index, 1);
@@ -89,26 +89,26 @@ export default function (state = initialState, action) {
       if (list && list.length) {
         const andFilters = Object.keys(filtersChoosen);
         filteredList = list.filter((item, index) => {
-          for (let i = andFilters.length - 1 ; i >= 0; i--) {
-            let tags = filtersChoosen[andFilters[i]];
+          for (let i = andFilters.length - 1; i >= 0; i--) {
+            const tags = filtersChoosen[andFilters[i]];
             let j = tags.length - 1;
-            for (; j >= 0; j--) {
+            for (j; j >= 0; j--) {
               if (item.tags.indexOf(tags[j]) > -1) {
                 break;
               }
             }
             if (tags.length > 0 && j < 0) {
-              if (item.active === true) {
-                item.active = false;
+              if (list[index].active === true) {
+                list[index].active = false;
               }
               return false;
             }
           }
           return true;
-        })
+        });
       }
 
-      return Object.assign({}, state, { filteredList, filters: filtersChoosen });
+      return Object.assign({}, state, { list, filteredList, filters: filtersChoosen });
     }
     case TOGGLE_LAYER_STATUS: {
       const filteredList = state.filteredList.slice(0);
