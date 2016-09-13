@@ -3,7 +3,7 @@ import ExploreMapLegend from '../../components/Explore/ExploreLegend';
 
 import { setModalMetadata } from '../../actions/modal';
 import { getDatasetById } from '../../actions/datasets';
-import { setLayersOrder, toggleLayerOpacity } from '../../actions/exploremap';
+import { setLayersOrder, toggleLayerOpacity, setDatasetSelected } from '../../actions/exploremap';
 import { updateURL } from '../../actions/links';
 
 function isLayerReady(dataset, layers) {
@@ -52,9 +52,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(setLayersOrder(layers));
     dispatch(updateURL());
   },
-  toggleLayerOpacity: (layerId) => {
-    dispatch(toggleLayerOpacity(layerId));
-  }
+  toggleLayerOpacity: (layerId) => dispatch(toggleLayerOpacity(layerId)),
+  setDatasetSelected: (datasetId) => dispatch(setDatasetSelected(datasetId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExploreMapLegend);

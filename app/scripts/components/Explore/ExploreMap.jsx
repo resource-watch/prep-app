@@ -33,6 +33,9 @@ class ExploreMap extends React.Component {
     this.map.on('zoomend', () => {
       this.setMapParams();
     });
+    this.map.on('click', (e) => {
+      this.handleMapClick(e);
+    });
   }
 
   getMapParams() {
@@ -48,6 +51,31 @@ class ExploreMap extends React.Component {
 
   setMapParams() {
     this.props.setMapParams(this.getMapParams());
+  }
+
+  handleMapClick(e) {
+    const { datasetId } = this.props.interactionData;
+    if (datasetId) {
+      const TOLENRANCE = 1;
+      const pointX = e.layerPoint.x;
+      const pointY = e.layerPoint.y;
+      const geo = [];
+      let latLngPoint = this.map.layerPointToLatLng(L.point(pointX - TOLENRANCE, pointY + TOLENRANCE));
+      geo.push([latLngPoint.lat, latLngPoint.lng]);
+      latLngPoint = this.map.layerPointToLatLng(L.point(pointX + TOLENRANCE, pointY + TOLENRANCE));
+      geo.push([latLngPoint.lat, latLngPoint.lng]);
+      latLngPoint = this.map.layerPointToLatLng(L.point(pointX + TOLENRANCE, pointY - TOLENRANCE));
+      geo.push([latLngPoint.lat, latLngPoint.lng]);
+      latLngPoint = this.map.layerPointToLatLng(L.point(pointX - TOLENRANCE, pointY - TOLENRANCE));
+      geo.push([latLngPoint.lat, latLngPoint.lng]);
+      latLngPoint = this.map.layerPointToLatLng(L.point(pointX - TOLENRANCE, pointY + TOLENRANCE));
+      geo.push([latLngPoint.lat, latLngPoint.lng]);
+      const geoJSON = {
+        type: 'Polygon',
+        coordinates: [geo]
+      };
+      this.props.setInteractionData(datasetId, geoJSON, { x: pointX, y: pointY });
+    }
   }
 
   initMap() {
@@ -353,9 +381,17 @@ ExploreMap.propTypes = {
   */
   setMapParams: React.PropTypes.func.isRequired,
   /**
-  * Define the function to handle a tile load erro
+  * Define the function to handle a tile load error
   */
-  onTileError: React.PropTypes.func.isRequired
+  onTileError: React.PropTypes.func.isRequired,
+  /**
+  * Define the function to get the geo data
+  */
+  setInteractionData: React.PropTypes.func.isRequired,
+  /**
+  * Define the interaction data: position, visibility and datasetId
+  */
+  interactionData: React.PropTypes.object
 };
 
 export default ExploreMap;
