@@ -5,7 +5,7 @@ import { updateMapParams, setSwitchStatus } from '../../actions/exploremap';
 import { updateURL } from '../../actions/links';
 
 const mapStateToProps = (state) => ({
-  data: state.datasets.list,
+  data: state.datasets.filteredList,
   layers: state.datasets.layers,
   map: state.exploremap
 });

@@ -88,7 +88,7 @@ export default function (state = initialState, action) {
 
       if (list && list.length) {
         const andFilters = Object.keys(filtersChoosen);
-        filteredList = list.filter((item, index) => {
+        filteredList = list.filter((item) => {
           for (let i = andFilters.length - 1; i >= 0; i--) {
             const tags = filtersChoosen[andFilters[i]];
             let j = tags.length - 1;
@@ -98,8 +98,8 @@ export default function (state = initialState, action) {
               }
             }
             if (tags.length > 0 && j < 0) {
-              if (list[index].active === true) {
-                list[index].active = false;
+              if (item.active === true) {
+                item.active = false; // eslint-disable-line no-param-reassign
               }
               return false;
             }
@@ -108,7 +108,7 @@ export default function (state = initialState, action) {
         });
       }
 
-      return Object.assign({}, state, { list, filteredList, filters: filtersChoosen });
+      return Object.assign({}, state, { filteredList, filters: filtersChoosen });
     }
     case TOGGLE_LAYER_STATUS: {
       const filteredList = state.filteredList.slice(0);
