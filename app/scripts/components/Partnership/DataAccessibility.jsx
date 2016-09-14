@@ -11,7 +11,7 @@ class DataAccessibility extends React.Component {
         <Article>
           <p>The Data Workgroup strives to ensure interoperability in access and use of climate-relevant data and information. The group aims to identify and reduce the barriers to discovering, accessing, contributing, and using data for climate resilience. It promotes standards and best practices for data interoperability across the private and public sectors.
           </p>
-          <p>The Data Workgroup is co-led by the Federation of Earth Science Information Partners (ESIP) and NASA.
+          <p>The Data Workgroup is led by the U.S. National Aeronautics and Space Administration (NASA).
           </p>
           <p>PREP Data Workgroup activities will include:
           </p>
