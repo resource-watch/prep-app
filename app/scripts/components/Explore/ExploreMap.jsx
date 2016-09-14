@@ -114,6 +114,7 @@ class ExploreMap extends React.Component {
           this.hasActiveLayers = true;
           const layer = layers[layerId];
           this.addMapLayer(dataset, layer);
+
         } else if (this.wasAlreadyAdded(dataset)) {
           if (this.hasChangedOrder(dataset)) {
             this.changeLayerOrder(dataset);
@@ -130,9 +131,20 @@ class ExploreMap extends React.Component {
 
   changeLayerOrder(dataset) {
     const layer = this.mapLayers[dataset.layers[0].layer_id];
-    if (dataset.index !== undefined && layer && typeof layer.setZIndex === 'function') {
-      layer.index = dataset.index;
-      layer.setZIndex(dataset.index);
+    if (dataset.index !== undefined && layer) {
+      if (typeof layer.setZIndex === 'function') {
+        layer.index = dataset.index;
+        layer.setZIndex(dataset.index);
+      } else {
+        const layerId = dataset.layers[0].layer_id;
+        const layersElements = this.map.getPane('tilePane').children;
+        for (let i = 0; i < layersElements.length; i++) {
+          if (layersElements[i].id === layerId) {
+            layersElements[i].style.zIndex = dataset.index;
+          }
+        }
+
+      }
     }
   }
 
@@ -183,6 +195,7 @@ class ExploreMap extends React.Component {
     // TODO: improve this
     if (layerData.body.crs && L.CRS[layerData.body.crs]) {
       layerData.body.crs = L.CRS[layerData.body.crs.replace(':', '')];
+      layerData.body.pane = 'tilePane';
     }
 
     switch (layerData.type) {
@@ -201,11 +214,11 @@ class ExploreMap extends React.Component {
 
     if (layer) {
       const eventName = (layerData.type === 'wms' ||
-        layerData.type === 'tileLayer') ? 'tileload' : 'load';
+      layerData.type === 'tileLayer') ? 'tileload' : 'load';
       layer.on(eventName, () => {
         this.handleTileLoaded(layer);
       });
-      layer.addTo(this.map);
+      layer.addTo(this.map).setZIndex(dataset.index);
       this.mapLayers[layerData.id] = layer;
     }
   }
@@ -227,6 +240,7 @@ class ExploreMap extends React.Component {
 
     if (L.esri[layer.type]) {
       const layerConfig = JSON.parse(bodyStringified);
+      layerConfig.pane = 'tilePane';
       if (layerConfig.style &&
         layerConfig.style.indexOf('function') >= 0) {
         layerConfig.style = eval(`(${layerConfig.style})`);
@@ -234,6 +248,9 @@ class ExploreMap extends React.Component {
       const newLayer = L.esri[layer.type](layerConfig);
       newLayer.on('load', () => {
         this.handleTileLoaded(layer);
+        const layerElement = this.map.getPane('tilePane').lastChild;
+        layerElement.style.zIndex = dataset.index;
+        layerElement.id = layer.id;
       });
       newLayer.addTo(this.map);
       this.mapLayers[layer.id] = newLayer;
@@ -324,8 +341,8 @@ class ExploreMap extends React.Component {
     if (this.state.loading && this.hasActiveLayers) {
       loading = <LoadingSpinner />;
     }
-    return (<div className="c-explore-map">
-      <div className="map" ref="map"></div>
+    return (<div className="c-explore-map" >
+      <div className="map" ref="map" ></div>
       {loading}
     </div>);
   }
@@ -337,24 +354,24 @@ ExploreMap.contextTypes = {
 
 ExploreMap.propTypes = {
   /**
-  * Define the datasets data of the map
-  */
+   * Define the datasets data of the map
+   */
   data: React.PropTypes.array.isRequired,
   /**
-  * Define the layers data of the map
-  */
+   * Define the layers data of the map
+   */
   layers: React.PropTypes.object,
   /**
-  * Define the mapa data config
-  */
+   * Define the mapa data config
+   */
   map: React.PropTypes.object.isRequired,
   /**
-  * Define the function to update the map params
-  */
+   * Define the function to update the map params
+   */
   setMapParams: React.PropTypes.func.isRequired,
   /**
-  * Define the function to handle a tile load erro
-  */
+   * Define the function to handle a tile load erro
+   */
   onTileError: React.PropTypes.func.isRequired
 };
 
