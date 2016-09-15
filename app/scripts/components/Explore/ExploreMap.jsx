@@ -80,7 +80,7 @@ class ExploreMap extends React.Component {
     if (datasets.length) {
       datasets.forEach((dataset) => {
         if (dataset.layers.length) {
-          this.updateMapLayer(dataset, layers);
+          this.updateMapLayer(dataset, layers, datasets.length);
         }
       });
     }
@@ -106,18 +106,18 @@ class ExploreMap extends React.Component {
     return false;
   }
 
-  updateMapLayer(dataset, layers) {
+  updateMapLayer(dataset, layers, datasetsLength) {
     const layerId = dataset.layers[0].layer_id;
     if (dataset.active) {
       if (this.isLayerReady(dataset, layers)) {
         if (!this.wasAlreadyAdded(dataset)) {
           this.hasActiveLayers = true;
           const layer = layers[layerId];
-          this.addMapLayer(dataset, layer);
+          this.addMapLayer(dataset, layer, datasetsLength);
 
         } else if (this.wasAlreadyAdded(dataset)) {
           if (this.hasChangedOrder(dataset)) {
-            this.changeLayerOrder(dataset);
+            this.changeLayerOrder(dataset, datasetsLength);
           }
           if (this.hasChangedOpacity(dataset)) {
             this.changeLayerOpacity(dataset);
@@ -129,18 +129,18 @@ class ExploreMap extends React.Component {
     }
   }
 
-  changeLayerOrder(dataset) {
+  changeLayerOrder(dataset, datasetsLength) {
     const layer = this.mapLayers[dataset.layers[0].layer_id];
     if (dataset.index !== undefined && layer) {
       if (typeof layer.setZIndex === 'function') {
         layer.index = dataset.index;
-        layer.setZIndex(dataset.index);
+        layer.setZIndex(datasetsLength - dataset.index);
       } else {
         const layerId = dataset.layers[0].layer_id;
         const layersElements = this.map.getPane('tilePane').children;
         for (let i = 0; i < layersElements.length; i++) {
           if (layersElements[i].id === layerId) {
-            layersElements[i].style.zIndex = dataset.index;
+            layersElements[i].style.zIndex = datasetsLength - dataset.index;
           }
         }
 
@@ -158,7 +158,7 @@ class ExploreMap extends React.Component {
     }
   }
 
-  addMapLayer(dataset, layer) {
+  addMapLayer(dataset, layer, datasetsLength) {
     if (!this.state.loading) {
       this.setState({
         loading: true
@@ -166,13 +166,13 @@ class ExploreMap extends React.Component {
     }
     switch (layer.attributes.provider) {
       case 'leaflet':
-        this.addLeafletLayer(dataset, layer);
+        this.addLeafletLayer(dataset, layer, datasetsLength);
         break;
       case 'arcgis':
-        this.addEsriLayer(dataset, layer);
+        this.addEsriLayer(dataset, layer, datasetsLength);
         break;
       case 'cartodb':
-        this.addCartoLayer(dataset, layer);
+        this.addCartoLayer(dataset, layer, datasetsLength);
         break;
       default:
         break;
@@ -184,7 +184,7 @@ class ExploreMap extends React.Component {
    * @param {Object} dataset
    * @param {Object} layerSpec
    */
-  addLeafletLayer(dataset, layerSpec) {
+  addLeafletLayer(dataset, layerSpec, datasetsLength) {
     const layerData = layerSpec.attributes['layer-config'];
 
     let layer;
@@ -218,7 +218,7 @@ class ExploreMap extends React.Component {
       layer.on(eventName, () => {
         this.handleTileLoaded(layer);
       });
-      layer.addTo(this.map).setZIndex(dataset.index);
+      layer.addTo(this.map).setZIndex(datasetsLength - dataset.index);
       this.mapLayers[layerData.id] = layer;
     }
   }
@@ -228,7 +228,7 @@ class ExploreMap extends React.Component {
    * @param {Object} dataset
    * @param {Object} layerSpec
    */
-  addEsriLayer(dataset, layerSpec) {
+  addEsriLayer(dataset, layerSpec, datasetsLength) {
     const layer = layerSpec.attributes['layer-config'];
     layer.id = layerSpec.id;
 
@@ -249,7 +249,7 @@ class ExploreMap extends React.Component {
       newLayer.on('load', () => {
         this.handleTileLoaded(layer);
         const layerElement = this.map.getPane('tilePane').lastChild;
-        layerElement.style.zIndex = dataset.index;
+        layerElement.style.zIndex = datasetsLength - dataset.index;
         layerElement.id = layer.id;
       });
       newLayer.addTo(this.map);
@@ -264,7 +264,7 @@ class ExploreMap extends React.Component {
    * @param {Object} dataset
    * @param {Object} layerSpec
    */
-  addCartoLayer(dataset, layerSpec) {
+  addCartoLayer(dataset, layerSpec, datasetsLength) {
     const layer = layerSpec.attributes['layer-config'];
     layer.id = layerSpec.id;
 
@@ -301,7 +301,7 @@ class ExploreMap extends React.Component {
         // we can switch off the layer while it is loading
         if (dataset.active) {
           const tileUrl = `https://${layer.account}.cartodb.com/api/v1/map/${data.layergroupid}/{z}/{x}/{y}.png`;
-          this.mapLayers[layer.id] = L.tileLayer(tileUrl).addTo(this.map).setZIndex(dataset.index);
+          this.mapLayers[layer.id] = L.tileLayer(tileUrl).addTo(this.map).setZIndex(datasetsLength - dataset.index);
           this.mapLayers[layer.id].on('load', () => {
             this.handleTileLoaded(layer);
           });
