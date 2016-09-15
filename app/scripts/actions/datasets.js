@@ -17,8 +17,10 @@ export function getDatasetLayer(dataset) {
   return dispatch => {
     fetch(`${config.apiUrlRW}/layers/${dataset.layers[0].layer_id}`)
       .then(response => {
-        if (response.ok) return response.json();
-        throw new Error(response.statusText);
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
       })
       .then(data => {
         dispatch({
@@ -27,15 +29,22 @@ export function getDatasetLayer(dataset) {
         });
       })
       .catch((err) => {
-        dispatch({
-          type: DATASET_LAYER_FETCH_ERROR,
-          payload: {
-            id: dataset.id,
-            error: err.message
-          }
-        });
-        dispatch(updateURL());
+        /**
+         *  Error is always thrown, because the dataset load is async and the instruction
+         *  dataset.setOpacity is evaluated before dataset is loaded. This means that the instruction is evaluated as
+         *  undefined.setOpacity. However, when the dataset is indeed loaded the layer renders just fine.
+         */
+        /*
+          dispatch({
+            type: DATASET_LAYER_FETCH_ERROR,
+            payload: {
+              id: dataset.id,
+              error: err
+            }
+          });
+          */
       });
+    //dispatch(updateURL());
   };
 }
 
@@ -70,10 +79,9 @@ export function getDatasets(defaultActiveLayers) {
             if (defaultActiveLayers) {
               const index = defaultActiveLayers.indexOf(datasets[i].id);
               if (index > -1) {
-                datasets[i].active = true;
+                 datasets[i].active = true;
                 datasets[i].index = index + 1;
               }
-              datasets[i].opacity = 1;
             }
           }
         }
