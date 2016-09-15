@@ -3,7 +3,7 @@ import {
   DATASET_LIST_RECEIVED,
   DATASET_LIST_RESET,
   DATASET_FETCH_ERROR,
-  DATASET_LAYER_FETCH_ERROR,
+  // DATASET_LAYER_FETCH_ERROR,
   DATASET_WIDGET_RECEIVED,
   DATASET_DETAIL_RECEIVED,
   DATASET_METADATA_RECEIVED,
@@ -27,24 +27,26 @@ export function getDatasetLayer(dataset) {
           type: DATASET_LAYER_RECEIVED,
           payload: data
         });
-      })
-      .catch((err) => {
-        /**
-         *  Error is always thrown, because the dataset load is async and the instruction
-         *  dataset.setOpacity is evaluated before dataset is loaded. This means that the instruction is evaluated as
-         *  undefined.setOpacity. However, when the dataset is indeed loaded the layer renders just fine.
-         */
-        /*
-          dispatch({
-            type: DATASET_LAYER_FETCH_ERROR,
-            payload: {
-              id: dataset.id,
-              error: err
-            }
-          });
-          */
+        dispatch(updateURL());
       });
-    //dispatch(updateURL());
+    /**
+     *  Error is always thrown, because the dataset load is async and the instruction
+     *  dataset.setOpacity is evaluated before dataset is loaded. This means that the instruction
+     *  is evaluated as undefined.setOpacity. However, when the dataset is indeed loaded the layer
+     *  renders just fine.
+     */
+    /*
+    .catch((err) => {
+     dispatch({
+     type: DATASET_LAYER_FETCH_ERROR,
+     payload: {
+     id: dataset.id,
+     error: err
+     }
+     });
+
+     });
+     */
   };
 }
 
@@ -79,7 +81,7 @@ export function getDatasets(defaultActiveLayers) {
             if (defaultActiveLayers) {
               const index = defaultActiveLayers.indexOf(datasets[i].id);
               if (index > -1) {
-                 datasets[i].active = true;
+                datasets[i].active = true;
                 datasets[i].index = index + 1;
               }
             }
@@ -152,16 +154,16 @@ export function getDatasetDefaultWidget(datasetId) {
         if (data.data.length) {
           for (let i = 0, wLength = data.data.length; i < wLength; i++) {
             fetch(`${config.apiUrlRW}/widgets/${data.data[i].id}`)
-            .then(response => {
-              if (response.ok) return response.json();
-              throw new Error(response.statusText);
-            })
-            .then(widget => {
-              dispatch({
-                type: DATASET_WIDGET_RECEIVED,
-                payload: { data: widget.data }
+              .then(response => {
+                if (response.ok) return response.json();
+                throw new Error(response.statusText);
+              })
+              .then(widget => {
+                dispatch({
+                  type: DATASET_WIDGET_RECEIVED,
+                  payload: { data: widget.data }
+                });
               });
-            });
           }
         }
       })
