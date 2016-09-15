@@ -3,14 +3,14 @@ import LoadingSpinner from '../Loading/LoadingSpinner';
 import React from 'react';
 
 class ExploreMap extends React.Component {
-  constructor() {
+  constructor () {
     super();
     this.state = {
       loading: false
     };
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.initMap();
     this.setMapParams();
     this.setMapListeners();
@@ -22,11 +22,11 @@ class ExploreMap extends React.Component {
     }, 0);
   }
 
-  componentWillReceiveProps(props) {
+  componentWillReceiveProps (props) {
     this.updateDatasets(props.data, props.layers);
   }
 
-  setMapListeners() {
+  setMapListeners () {
     this.map.on('dragend', () => {
       this.setMapParams();
     });
@@ -35,7 +35,7 @@ class ExploreMap extends React.Component {
     });
   }
 
-  getMapParams() {
+  getMapParams () {
     const latLng = this.map.getCenter();
     return {
       zoom: this.map.getZoom(),
@@ -46,11 +46,11 @@ class ExploreMap extends React.Component {
     };
   }
 
-  setMapParams() {
+  setMapParams () {
     this.props.setMapParams(this.getMapParams());
   }
 
-  initMap() {
+  initMap () {
     const { params } = this.context.location;
 
     if (!params.zoom) params.zoom = 3;
@@ -73,7 +73,7 @@ class ExploreMap extends React.Component {
     ).addTo(this.map, 1);
   }
 
-  updateDatasets(newData, newLayers) {
+  updateDatasets (newData, newLayers) {
     const datasets = newData || this.props.data;
     const layers = newLayers || this.props.layers;
     this.hasActiveLayers = false;
@@ -86,25 +86,27 @@ class ExploreMap extends React.Component {
     }
   }
 
-  wasAlreadyAdded(dataset) {
+  wasAlreadyAdded (dataset) {
     return this.mapLayers[dataset.layers[0].layer_id] || false;
   }
 
-  hasChangedOrder(dataset) {
+  hasChangedOrder (dataset) {
     return dataset.index !== undefined && dataset.index !== this.mapLayers[dataset.layers[0].layer_id].index || false;
   }
 
-  hasChangedOpacity(dataset) {
-    return dataset && dataset.opacity !== this.mapLayers[dataset.layers[0].layer_id].opacity || false;
+  hasChangedOpacity (dataset) {
+    let hasChanged = (dataset && dataset.opacity !== this.mapLayers[dataset.layers[0].layer_id].options.opacity) || false;
+    return hasChanged;
   }
 
-  isLayerReady(dataset, layers) {
+  isLayerReady (dataset, layers) {
     if (dataset.layers && dataset.layers.length) {
       const layerId = dataset.layers[0].layer_id;
       return layers && layers[layerId] || false;
     }
     return false;
   }
+
 
   updateMapLayer(dataset, layers, datasetsLength) {
     const layerId = dataset.layers[0].layer_id;
@@ -129,6 +131,7 @@ class ExploreMap extends React.Component {
     }
   }
 
+
   changeLayerOrder(dataset, datasetsLength) {
     const layer = this.mapLayers[dataset.layers[0].layer_id];
     if (dataset.index !== undefined && layer) {
@@ -148,14 +151,9 @@ class ExploreMap extends React.Component {
     }
   }
 
-  changeLayerOpacity(dataset) {
+  changeLayerOpacity (dataset) {
     const layer = this.mapLayers[dataset.layers[0].layer_id];
-    if (dataset.opacity !== undefined && layer && typeof layer.setOpacity === 'function') {
-      setTimeout(() => {
-        layer.setOpacity(dataset.opacity);
-      }, 100);
-      layer.opacity = dataset.opacity;
-    }
+    layer.setOpacity(dataset.opacity);
   }
 
   addMapLayer(dataset, layer, datasetsLength) {
@@ -184,6 +182,7 @@ class ExploreMap extends React.Component {
    * @param {Object} dataset
    * @param {Object} layerSpec
    */
+
   addLeafletLayer(dataset, layerSpec, datasetsLength) {
     const layerData = layerSpec.attributes['layer-config'];
 
@@ -228,6 +227,7 @@ class ExploreMap extends React.Component {
    * @param {Object} dataset
    * @param {Object} layerSpec
    */
+
   addEsriLayer(dataset, layerSpec, datasetsLength) {
     const layer = layerSpec.attributes['layer-config'];
     layer.id = layerSpec.id;
@@ -264,6 +264,7 @@ class ExploreMap extends React.Component {
    * @param {Object} dataset
    * @param {Object} layerSpec
    */
+
   addCartoLayer(dataset, layerSpec, datasetsLength) {
     const layer = layerSpec.attributes['layer-config'];
     layer.id = layerSpec.id;
@@ -287,15 +288,14 @@ class ExploreMap extends React.Component {
     // add to the load layers lists before the fetch
     // to avoid multiples loads while the layer is loading
     this.mapLayers[layer.id] = true;
-
     fetch(request)
       .then(res => {
-        if (res.ok) {
-          return res.json();
+        if (!res.ok) {
+          const error = new Error(res.statusText);
+          error.response = res;
+          throw error;
         }
-        const error = new Error(res.statusText);
-        error.response = res;
-        throw error;
+        return res.json();
       })
       .then((data) => {
         // we can switch off the layer while it is loading
@@ -318,31 +318,31 @@ class ExploreMap extends React.Component {
       });
   }
 
-  removeMapLayer(layerId) {
+  removeMapLayer (layerId) {
     this.map.removeLayer(this.mapLayers[layerId]);
     delete this.mapLayers[layerId];
   }
 
-  handleTileLoaded() {
+  handleTileLoaded () {
     this.setState({
       loading: false
     });
   }
 
-  handleTileError(layer) {
+  handleTileError (layer) {
     if (this.mapLayers[layer.id]) {
       this.removeMapLayer(layer);
     }
     this.props.onTileError(layer.id);
   }
 
-  render() {
+  render () {
     let loading;
     if (this.state.loading && this.hasActiveLayers) {
       loading = <LoadingSpinner />;
     }
-    return (<div className="c-explore-map" >
-      <div className="map" ref="map" ></div>
+    return (<div className="c-explore-map">
+      <div className="map" ref="map"></div>
       {loading}
     </div>);
   }
