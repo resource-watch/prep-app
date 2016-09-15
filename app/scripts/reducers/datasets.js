@@ -111,10 +111,11 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, { filteredList, filters: filtersChoosen });
     }
     case TOGGLE_LAYER_STATUS: {
-      const filteredList = state.filteredList.slice(0);
+      let filteredList = state.filteredList.slice(0);
       for (let i = 0, length = filteredList.length; i < length; i++) {
         if (filteredList[i].id === action.payload) {
           filteredList[i].active = !filteredList[i].active;
+          filteredList[i].opacity = 1;
           if (filteredList[i].active) {
             filteredList[i].index = state.filteredList.filter(layer => layer.active).length;
           }
