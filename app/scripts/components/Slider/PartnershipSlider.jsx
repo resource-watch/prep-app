@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Slider from '../../lib/react-slick/react-slick';
 import engagementSlide from '../../../images/partnerships/engagement-slide.jpg';
+import dataSlide from '../../../images/partnerships/data-slide.jpg';
+import platformsSlide from '../../../images/partnerships/platforms-slide.jpg';
 
 const settings = {
   dots: false,
@@ -26,7 +28,7 @@ class PartnersSlider extends Component {
               </div>
             </div>
           </div>
-          <div className="partnership-slider-item -inverse" style={{backgroundImage: `url(${engagementSlide})`}}>
+          <div className="partnership-slider-item -inverse" style={{backgroundImage: `url(${dataSlide})`}}>
             <div className="row align-center">
               <div className="column small-12 medium-8">
                 <h2>Data workgroup</h2>
@@ -34,7 +36,7 @@ class PartnersSlider extends Component {
               </div>
             </div>
           </div>
-          <div className="partnership-slider-item -inverse" style={{backgroundImage: `url(${engagementSlide})`}}>
+          <div className="partnership-slider-item -inverse" style={{backgroundImage: `url(${platformsSlide})`}}>
             <div className="row align-center">
               <div className="column small-12 medium-8">
                 <h2>Platforms workgroup</h2>
