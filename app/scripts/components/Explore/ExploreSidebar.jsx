@@ -19,7 +19,7 @@ class DataMap extends React.Component {
   componentDidMount() {
     this.props.setTooltip({
       text: 'Climate Data Initiative dataset',
-      width: '120'
+      width: '135'
     });
   }
 
@@ -170,7 +170,7 @@ class DataMap extends React.Component {
           hidden={this.props.tooltip.hidden}
           position={this.props.tooltip.position}
           width={this.props.tooltip.width}
-          padding='30px'
+          padding='15px'
         />
         <div className="row content">
           <FilterTabs />

@@ -9,11 +9,13 @@
   text-align: center;
   padding: $small-margin;
   z-index: 1;
-  overflow-y: auto;
   // TODO: exploreSidebar
   transform: translate(-50%, calc(-100% - 15px));
 
   & > .-tooltip-text {
+    overflow-y: auto;
+    max-height: 120px;
+
     h3 {
       margin-top: 0;
     }
@@ -34,9 +36,9 @@
   &:after {
     position: absolute;
     content: ' ';
-    bottom: 0;
+    bottom: -10px;
     left: 50%;
-    // transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-top: 10px solid $dark-slate-blue-2;

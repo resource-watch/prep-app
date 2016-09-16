@@ -3,7 +3,6 @@ import React from 'react';
 class Tooltip extends React.Component {
 
   render() {
-    console.log(this.props.hidden);
     const visibility = this.props.hidden ? '-hidden' : '-visible';
     let styles = {
       top: this.props.position.top,
@@ -12,7 +11,6 @@ class Tooltip extends React.Component {
     };
 
     if (this.props.padding) styles['padding'] = this.props.padding;
-    console.log(styles);
 
     // pointer's border must be 10% of the tooltiptext's width. Defaults to 10px
     const border = this.props.width !== 'auto' ? this.props.width * 0.1 : 10;
