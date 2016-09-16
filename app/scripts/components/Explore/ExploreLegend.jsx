@@ -97,9 +97,10 @@ const SortableItem = SortableElement(({layer, index, onInfoClick, toggleLayerOpa
         <DragHandle />
         <div className="column small-10">
           <span className="title">{layer.title}
-            {layer.attributes['legend-config'].unit &&
-              ` (${layer.attributes['legend-config'].unit})`
-            }
+            <span className="-units">
+              {layer.attributes['legend-config'].unit &&
+              ` (${layer.attributes['legend-config'].unit})`}
+            </span>
           </span>
         </div>
         <div className="column small-2 layer-actions">
@@ -201,7 +202,7 @@ DataMapLegend.propTypes = {
   */
   onInfoClick: React.PropTypes.func.isRequired,
   /**
-  * Define the function to the toglle the layer opacity
+  * Define the function to the toggle the layer opacity
   */
   toggleLayerOpacity: React.PropTypes.func.isRequired,
   /**
