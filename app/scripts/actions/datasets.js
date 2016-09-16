@@ -82,7 +82,7 @@ export function getDatasets(defaultActiveLayers) {
               const index = defaultActiveLayers.indexOf(datasets[i].id);
               if (index > -1) {
                 datasets[i].active = true;
-                datasets[i].index = i + 1;
+                datasets[i].index = index + 1;
                 datasets[i].opacity = 1;
               }
             }
