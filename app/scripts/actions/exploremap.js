@@ -69,6 +69,7 @@ export function getGeoDataInfo(datasetId, geo) {
       }
     }
     const geoString = JSON.stringify(geo);
+
     fetch(`${config.apiUrlRW}/query/${datasetId}?sql=SELECT * FROM ${datasetTableName} WHERE ST_INTERSECTS(ST_SetSRID(ST_GeomFromGeoJSON('${geoString}'), 4326), the_geom)`)
       .then(response => {
         if (response.ok) return response.json();

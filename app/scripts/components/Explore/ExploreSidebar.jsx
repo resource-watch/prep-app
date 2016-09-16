@@ -170,6 +170,7 @@ class DataMap extends React.Component {
           hidden={this.props.tooltip.hidden}
           position={this.props.tooltip.position}
           width={this.props.tooltip.width}
+          padding='30px'
         />
         <div className="row content">
           <FilterTabs />

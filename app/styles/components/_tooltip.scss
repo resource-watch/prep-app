@@ -1,34 +1,53 @@
 .c-tooltip {
-  width: 0;
-  height: 0;
+  position: absolute;
+  max-width: 300px;
+  max-height: 200px;
+  padding: 15px 10px;
+  font-size: $small-font-size;
+  background-color: $dark-slate-blue-2;
+  color: $white;
+  text-align: center;
+  padding: $small-margin;
+  z-index: 1;
+  overflow-y: auto;
+  // TODO: exploreSidebar
+  transform: translate(-50%, calc(-100% - 15px));
 
   & > .-tooltip-text {
-    font-size: $micro-font-size;
-    background-color: $dark-slate-blue-2;
-    color: $white;
-    text-align: center;
-    position: fixed;
-    padding: $small-margin / 6;
-    z-index: 1;
-
-    & > .-pointer {
-      position: relative;
-      top: 15px;
-      left: 40%;
-      width: 10%;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-top: 10px solid $dark-slate-blue-2;
+    h3 {
+      margin-top: 0;
     }
 
+    & * { color: $white; }
+
+    & .table-data {
+      text-align: left;
+
+      & th {
+        text-transform: capitalize;
+        padding-right: 10px;
+        font-size: $normal-font-size
+      }
+    }
   }
 
-  & > .-visible {
-    visibility: visible;
+  &:after {
+    position: absolute;
+    content: ' ';
+    bottom: 0;
+    left: 50%;
+    // transform: translate(-50%, -50%);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid $dark-slate-blue-2;
   }
 
-  & > .-hidden {
-    visibility: hidden;
+  &.-visible {
+    display: inherit;
+  }
+
+  &.-hidden {
+    display: none;
   }
 
 }

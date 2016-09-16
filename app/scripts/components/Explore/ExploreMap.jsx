@@ -1,12 +1,22 @@
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
 import React from 'react';
+import Tooltip from '../Tooltip/Tooltip';
+
 
 class ExploreMap extends React.Component {
   constructor() {
     super();
     this.state = {
-      loading: false
+      loading: false,
+      tooltip: {
+        hidden: true,
+        position: {
+          top: 0,
+          left: 0
+        },
+        width: 'auto'
+      }
     };
   }
 
@@ -24,6 +34,56 @@ class ExploreMap extends React.Component {
 
   componentWillReceiveProps(props) {
     this.updateDatasets(props.data, props.layers);
+
+    if (props.interactionData.open && props.interactionData.info) {
+      this.handleInteractivityTooltip(props.interactionData);
+    }
+  }
+
+  setTooltipText(data) {
+    let text = [];
+    if (data) {
+      const avoidedKeys = ['the_geom', 'the_geom_webmercator', 'cartodb_id'];
+      const item = data.attributes ? data.attributes : data;
+
+      Object.keys(item).map((key, i) => {
+        avoidedKeys.indexOf(key) === -1 &&
+          text.push(
+            <tr key={i}>
+              <th>{key}: </th><td>{item[key]}</td>
+            </tr>
+          );
+      });
+    }
+
+    return this.tooltipText(text, data);
+  }
+
+  tooltipText(text, data) {
+    return (
+      <div>
+        <h3>Dataset info:</h3>
+        {data ?
+          <table className="table-data">
+            <tbody>{text}</tbody>
+          </table> :
+          <p>- No data available.</p>}
+      </div>);
+  }
+
+  handleInteractivityTooltip(interactionData) {
+    const text = this.setTooltipText(interactionData.info.data[0]);
+    const tooltip = {
+      text,
+      hidden: false,
+      position: {
+        top: interactionData.position.y,
+        left: interactionData.position.x
+      },
+      width: 'auto'
+    };
+
+    this.setState({tooltip});
   }
 
   setMapListeners() {
@@ -61,19 +121,31 @@ class ExploreMap extends React.Component {
       const pointY = e.layerPoint.y;
       const geo = [];
       let latLngPoint = this.map.layerPointToLatLng(L.point(pointX - TOLENRANCE, pointY + TOLENRANCE));
-      geo.push([latLngPoint.lat, latLngPoint.lng]);
+      geo.push([latLngPoint.lng, latLngPoint.lat]);
       latLngPoint = this.map.layerPointToLatLng(L.point(pointX + TOLENRANCE, pointY + TOLENRANCE));
-      geo.push([latLngPoint.lat, latLngPoint.lng]);
+      geo.push([latLngPoint.lng, latLngPoint.lat]);
       latLngPoint = this.map.layerPointToLatLng(L.point(pointX + TOLENRANCE, pointY - TOLENRANCE));
-      geo.push([latLngPoint.lat, latLngPoint.lng]);
+      geo.push([latLngPoint.lng, latLngPoint.lat]);
       latLngPoint = this.map.layerPointToLatLng(L.point(pointX - TOLENRANCE, pointY - TOLENRANCE));
-      geo.push([latLngPoint.lat, latLngPoint.lng]);
+      geo.push([latLngPoint.lng, latLngPoint.lat]);
       latLngPoint = this.map.layerPointToLatLng(L.point(pointX - TOLENRANCE, pointY + TOLENRANCE));
-      geo.push([latLngPoint.lat, latLngPoint.lng]);
+      geo.push([latLngPoint.lng, latLngPoint.lat]);
       const geoJSON = {
         type: 'Polygon',
         coordinates: [geo]
       };
+
+      this.setState({
+        tooltip: {
+          text: '',
+          hidden: true,
+          position: {
+            top: 0,
+            left: 0
+          },
+          width: 'auto'
+        }
+      });
       this.props.setInteractionData(datasetId, geoJSON, { x: pointX, y: pointY });
     }
   }
@@ -355,6 +427,13 @@ class ExploreMap extends React.Component {
     return (<div className="c-explore-map">
       <div className="map" ref="map"></div>
       {loading}
+      <Tooltip
+        ref="tagTooltip"
+        text={this.state.tooltip.text}
+        hidden={this.state.tooltip.hidden}
+        position={this.state.tooltip.position}
+        width={this.state.tooltip.width}
+      />
     </div>);
   }
 }
