@@ -1,10 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router';
+import ReactDOM from 'react-dom';
 import Article from '../Content/Article';
 import JoinPartnership from './Articles/JoinPartnership';
 import PartnershipSlider from '../Slider/PartnershipSlider';
 
 class Partnership extends React.Component {
+
+  scrollTo(anchor) {
+    const element = ReactDOM.findDOMNode(this.refs[anchor]);
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
 
   render() {
     return (
@@ -40,8 +46,9 @@ class Partnership extends React.Component {
               <p>PREP includes representatives from several U.S. government agencies with vast data
                 holdings, leading technology companies, and civil society organizations, and is a
                 Data Collaborative of the Global Partnership for Sustainable Development Data. We
-                welcome other entities committed to our mission to <a href="#join">join the
-                  partnership</a>.</p>
+                welcome other entities committed to our mission to
+                <a style={{ cursor: 'pointer' }} onClick={() => this.scrollTo('join')}> join the
+                partnership</a>.</p>
             </div>
           </div>
           <aside className="row">
@@ -49,28 +56,29 @@ class Partnership extends React.Component {
               <div className="c-card -border -border-neutral">
                 <h3>The Need</h3>
                 <p>Demand for climate information is on the rise, but data are often hard to
-                  find.</p>
-                <a href="#need">Know more</a>
+                  find.
+                </p>
+                <a style={{ cursor: 'pointer' }} onClick={() => this.scrollTo('need')}>Know more</a>
               </div>
             </div>
             <div className="column small-12 medium-4">
               <div className="c-card -border -border-neutral">
                 <h3>The Role</h3>
                 <p>We work through three channels, engagement, data, and platforms.</p>
-                <a href="#role">Know more</a>
+                <a style={{ cursor: 'pointer' }} onClick={() => this.scrollTo('role')}>Know more</a>
               </div>
             </div>
             <div className="column small-12 medium-4">
               <div className="c-card -border -border-neutral">
                 <h3>Join</h3>
                 <p>We welcome other entities committed to our mission to join the partnership.</p>
-                <a href="#join">Know more</a>
+                <a style={{ cursor: 'pointer' }} onClick={() => this.scrollTo('join')}>Know more</a>
               </div>
             </div>
           </aside>
         </article>
 
-        <Article>
+        <Article ref="need">
           <h2>The need for useable climate-risk data</h2>
           <p>With climate change already upon us, a growing number of communities, companies, and
             civil society organizations are looking to assess climate vulnerability and develop
@@ -81,7 +89,8 @@ class Partnership extends React.Component {
               <h4>Robust, actionable data is limited</h4>
               <p>Despite extensive data collection and analysis by government and research
                 institutions, the information needs of resource managers and decision makers are not
-                being met.</p>
+                being met.
+              </p>
             </li>
             <li>
               <h4>Even when data and information exist, they are difficult to find, access, and
@@ -96,12 +105,14 @@ class Partnership extends React.Component {
           <p>Overcoming these challenges requires collaboration among producers and users of
             information, standards to enhance accessibility and interoperability of data and
             information products, and platforms that enhance data accessibility. PREP aims to meet
-            this need.</p>
+            this need.
+          </p>
         </Article>
 
-        <article className="c-article">
+        <article className="c-article" ref="role">
           <div className="row align-center">
             <div className="column small-12 medium-8">
+              <a name="role"> </a>
               <h2>The role of PREP partners</h2>
               <p>PREP is built on a global network of collaborators from the public sector, private
                 sector and civil society. Each partner participates in at least one PREP
@@ -115,7 +126,7 @@ class Partnership extends React.Component {
 
         </article>
 
-        <Article>
+        <Article ref="join">
           <JoinPartnership />
         </Article>
 

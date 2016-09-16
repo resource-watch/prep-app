@@ -3,14 +3,14 @@ import LoadingSpinner from '../Loading/LoadingSpinner';
 import React from 'react';
 
 class ExploreMap extends React.Component {
-  constructor () {
+  constructor() {
     super();
     this.state = {
       loading: false
     };
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.initMap();
     this.setMapParams();
     this.setMapListeners();
@@ -22,11 +22,11 @@ class ExploreMap extends React.Component {
     }, 0);
   }
 
-  componentWillReceiveProps (props) {
+  componentWillReceiveProps(props) {
     this.updateDatasets(props.data, props.layers);
   }
 
-  setMapListeners () {
+  setMapListeners() {
     this.map.on('dragend', () => {
       this.setMapParams();
     });
@@ -35,7 +35,7 @@ class ExploreMap extends React.Component {
     });
   }
 
-  getMapParams () {
+  getMapParams() {
     const latLng = this.map.getCenter();
     return {
       zoom: this.map.getZoom(),
@@ -46,11 +46,11 @@ class ExploreMap extends React.Component {
     };
   }
 
-  setMapParams () {
+  setMapParams() {
     this.props.setMapParams(this.getMapParams());
   }
 
-  initMap () {
+  initMap() {
     const { params } = this.context.location;
 
     if (!params.zoom) params.zoom = 3;
@@ -73,7 +73,7 @@ class ExploreMap extends React.Component {
     ).addTo(this.map, 1);
   }
 
-  updateDatasets (newData, newLayers) {
+  updateDatasets(newData, newLayers) {
     const datasets = newData || this.props.data;
     const layers = newLayers || this.props.layers;
     this.hasActiveLayers = false;
@@ -86,20 +86,20 @@ class ExploreMap extends React.Component {
     }
   }
 
-  wasAlreadyAdded (dataset) {
+  wasAlreadyAdded(dataset) {
     return this.mapLayers[dataset.layers[0].layer_id] || false;
   }
 
-  hasChangedOrder (dataset) {
+  hasChangedOrder(dataset) {
     return dataset.index !== undefined && dataset.index !== this.mapLayers[dataset.layers[0].layer_id].index || false;
   }
 
-  hasChangedOpacity (dataset) {
+  hasChangedOpacity(dataset) {
     let hasChanged = (dataset && dataset.opacity !== this.mapLayers[dataset.layers[0].layer_id].options.opacity) || false;
     return hasChanged;
   }
 
-  isLayerReady (dataset, layers) {
+  isLayerReady(dataset, layers) {
     if (dataset.layers && dataset.layers.length) {
       const layerId = dataset.layers[0].layer_id;
       return layers && layers[layerId] || false;
@@ -151,7 +151,7 @@ class ExploreMap extends React.Component {
     }
   }
 
-  changeLayerOpacity (dataset) {
+  changeLayerOpacity(dataset) {
     const layer = this.mapLayers[dataset.layers[0].layer_id];
     layer.setOpacity(dataset.opacity);
   }
@@ -318,25 +318,25 @@ class ExploreMap extends React.Component {
       });
   }
 
-  removeMapLayer (layerId) {
+  removeMapLayer(layerId) {
     this.map.removeLayer(this.mapLayers[layerId]);
     delete this.mapLayers[layerId];
   }
 
-  handleTileLoaded () {
+  handleTileLoaded() {
     this.setState({
       loading: false
     });
   }
 
-  handleTileError (layer) {
+  handleTileError(layer) {
     if (this.mapLayers[layer.id]) {
       this.removeMapLayer(layer);
     }
     this.props.onTileError(layer.id);
   }
 
-  render () {
+  render() {
     let loading;
     if (this.state.loading && this.hasActiveLayers) {
       loading = <LoadingSpinner />;
