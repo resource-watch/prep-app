@@ -7,7 +7,8 @@ import {
   MAP_DATASET_ID_SELECTED,
   MAP_DESELECT_DATASET,
   MAP_GEODATA_RECEIVED,
-  MAP_GEOPOSITION_SET
+  MAP_GEOPOSITION_SET,
+  MAP_GEO_DATA_CLOSED
 } from '../constants';
 
 export function updateMapParams(params) {
@@ -88,5 +89,11 @@ export function getGeoDataInfo(datasetId, geo) {
           payload: data
         });
       });
+  };
+}
+
+export function setInteractiveClose() {
+  return {
+    type: MAP_GEO_DATA_CLOSED
   };
 }

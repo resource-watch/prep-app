@@ -3,20 +3,21 @@ import LoadingSpinner from '../Loading/LoadingSpinner';
 import React from 'react';
 import Tooltip from '../Tooltip/Tooltip';
 
+const tooltipBase = {
+  hidden: true,
+  position: {
+    top: 0,
+    left: 0
+  },
+  width: 'auto'
+};
 
 class ExploreMap extends React.Component {
   constructor() {
     super();
     this.state = {
       loading: false,
-      tooltip: {
-        hidden: true,
-        position: {
-          top: 0,
-          left: 0
-        },
-        width: 'auto'
-      }
+      tooltip: tooltipBase
     };
   }
 
@@ -96,6 +97,9 @@ class ExploreMap extends React.Component {
     this.map.on('click', (e) => {
       this.handleMapClick(e);
     });
+    this.map.on('blur', () => {
+      this.clearTooltip();
+    });
   }
 
   getMapParams() {
@@ -113,19 +117,15 @@ class ExploreMap extends React.Component {
     this.props.setMapParams(this.getMapParams());
   }
 
+  clearTooltip() {
+    this.setState({ tooltip: tooltipBase });
+    this.props.setInteractiveClose();
+  }
+
   handleMapClick(e) {
     const { datasetId } = this.props.interactionData;
-    this.setState({
-        tooltip: {
-          text: '',
-          hidden: true,
-          position: {
-            top: 0,
-            left: 0
-          },
-          width: 'auto'
-        }
-      });
+
+    this.clearTooltip();
     
     if (datasetId) {
       const TOLENRANCE = 2;
