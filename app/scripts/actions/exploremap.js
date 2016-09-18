@@ -5,6 +5,7 @@ import {
   MAP_LAYERS_ORDER_CHANGED,
   MAP_LAYER_OPACITY_CHANGED,
   MAP_DATASET_ID_SELECTED,
+  MAP_DESELECT_DATASET,
   MAP_GEODATA_RECEIVED,
   MAP_GEOPOSITION_SET
 } from '../constants';
@@ -48,6 +49,12 @@ export function setDatasetSelected(datasetId) {
   return {
     type: MAP_DATASET_ID_SELECTED,
     payload: datasetId
+  };
+}
+
+export function deselectDataset() {
+  return {
+    type: MAP_DESELECT_DATASET
   };
 }
 

@@ -1,6 +1,7 @@
 import {
   MAP_DATA_CHANGED,
   MAP_DATASET_ID_SELECTED,
+  MAP_DESELECT_DATASET,
   MAP_GEOPOSITION_SET,
   MAP_GEODATA_RECEIVED,
   MAP_GEO_DATA_CLOSED
@@ -34,6 +35,11 @@ export default function (state = initialState, action) {
     case MAP_DATASET_ID_SELECTED: {
       const interactionData = Object.assign({}, state.interactionData, {});
       interactionData.datasetId = action.payload;
+      return Object.assign({}, state, { interactionData });
+    }
+    case MAP_DESELECT_DATASET: {
+      const interactionData = Object.assign({}, state.interactionData, {});
+      interactionData.datasetId = null;
       return Object.assign({}, state, { interactionData });
     }
     case MAP_GEOPOSITION_SET: {

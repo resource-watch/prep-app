@@ -115,8 +115,20 @@ class ExploreMap extends React.Component {
 
   handleMapClick(e) {
     const { datasetId } = this.props.interactionData;
+    this.setState({
+        tooltip: {
+          text: '',
+          hidden: true,
+          position: {
+            top: 0,
+            left: 0
+          },
+          width: 'auto'
+        }
+      });
+    
     if (datasetId) {
-      const TOLENRANCE = 1;
+      const TOLENRANCE = 2;
       const pointX = e.layerPoint.x;
       const pointY = e.layerPoint.y;
       const geo = [];
@@ -135,17 +147,6 @@ class ExploreMap extends React.Component {
         coordinates: [geo]
       };
 
-      this.setState({
-        tooltip: {
-          text: '',
-          hidden: true,
-          position: {
-            top: 0,
-            left: 0
-          },
-          width: 'auto'
-        }
-      });
       this.props.setInteractionData(datasetId, geoJSON, { x: pointX, y: pointY });
     }
   }

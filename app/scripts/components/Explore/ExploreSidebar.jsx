@@ -52,6 +52,12 @@ class DataMap extends React.Component {
     this.props.setTooltip({ hidden: true });
   }
 
+  switchChange(dataset) {
+    dataset.id === this.props.selectedDatasetId &&
+      this.props.deselectDataset();
+    this.props.switchChange(dataset);
+  }
+
   getContent() {
     if (!this.props.listReceived) {
       return <LoadingSpinner />;
@@ -85,7 +91,7 @@ class DataMap extends React.Component {
       if (dataset.layers && dataset.layers.length) {
         layerIcon = (
           <Switch
-            onChange={() => this.props.switchChange(dataset)}
+            onChange={() => this.switchChange(dataset)}
             checked={dataset.active || false}
           />
         );
