@@ -165,7 +165,6 @@ class ExploreMap extends React.Component {
 
       this.props.setInteractionData(datasetId, geoJSON);
       this.props.setInteractionPosition({ x: pointX, y: pointY });
-      this.props.setInteractionVisibility(true);
     }
   }
 

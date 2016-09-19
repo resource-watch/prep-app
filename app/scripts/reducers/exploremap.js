@@ -55,6 +55,7 @@ export default function (state = initialState, action) {
     case MAP_GEODATA_RECEIVED: {
       const interactionData = Object.assign({}, state.interactionData, {});
       interactionData.info = action.payload;
+      interactionData.open = true;
       return Object.assign({}, state, { interactionData });
     }
     default:
