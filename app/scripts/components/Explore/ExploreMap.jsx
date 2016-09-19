@@ -94,10 +94,11 @@ class ExploreMap extends React.Component {
     });
     this.map.on('dragend', () => {
       this.setMapParams();
-      this.handleMapDragEnd();
+      this.updateTooltipPosition();
     });
     this.map.on('zoomend', () => {
       this.setMapParams();
+      this.updateTooltipPosition();
     });
     this.map.on('click', (e) => {
       this.handleMapClick(e);
@@ -127,7 +128,7 @@ class ExploreMap extends React.Component {
     this.props.setInteractiveClose();
   }
 
-  handleMapDragEnd() {
+  updateTooltipPosition() {
     if (this.latLngClicked) {
       this.setInteractionData(this.map.latLngToContainerPoint(this.latLngClicked));
     }
