@@ -19,6 +19,7 @@ class ExploreMap extends React.Component {
       loading: false,
       tooltip: tooltipBase
     };
+    this.latLngClicked = null;
   }
 
   componentDidMount() {
@@ -42,12 +43,12 @@ class ExploreMap extends React.Component {
   }
 
   setTooltipText(data) {
-    let text = [];
+    const text = [];
     if (data) {
       const avoidedKeys = ['the_geom', 'the_geom_webmercator', 'cartodb_id'];
       const item = data.attributes ? data.attributes : data;
 
-      Object.keys(item).map((key, i) => {
+      Object.keys(item).forEach((key, i) => {
         avoidedKeys.indexOf(key) === -1 &&
           text.push(
             <tr key={i}>
@@ -84,12 +85,16 @@ class ExploreMap extends React.Component {
       width: 'auto'
     };
 
-    this.setState({tooltip});
+    this.setState({ tooltip });
   }
 
   setMapListeners() {
+    this.map.on('dragstart', () => {
+      this.clearTooltip();
+    });
     this.map.on('dragend', () => {
       this.setMapParams();
+      this.handleMapDragEnd();
     });
     this.map.on('zoomend', () => {
       this.setMapParams();
@@ -122,15 +127,24 @@ class ExploreMap extends React.Component {
     this.props.setInteractiveClose();
   }
 
-  handleMapClick(e) {
-    const { datasetId } = this.props.interactionData;
+  handleMapDragEnd() {
+    if (this.latLngClicked) {
+      this.setInteractionData(this.map.latLngToContainerPoint(this.latLngClicked));
+    }
+  }
 
+  handleMapClick(e) {
+    this.latLngClicked = e.latlng;
     this.clearTooltip();
-    
+    this.setInteractionData(e.containerPoint);
+  }
+
+  setInteractionData(position) {
+    const { datasetId } = this.props.interactionData;
     if (datasetId) {
       const TOLENRANCE = 2;
-      const pointX = e.layerPoint.x;
-      const pointY = e.layerPoint.y;
+      const pointX = position.x;
+      const pointY = position.y;
       const geo = [];
       let latLngPoint = this.map.layerPointToLatLng(L.point(pointX - TOLENRANCE, pointY + TOLENRANCE));
       geo.push([latLngPoint.lng, latLngPoint.lat]);
