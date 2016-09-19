@@ -4,7 +4,7 @@ import {
   MAP_DESELECT_DATASET,
   MAP_GEOPOSITION_SET,
   MAP_GEODATA_RECEIVED,
-  MAP_GEO_DATA_CLOSED
+  MAP_INTERACTION_VISIBILITY_SET
 } from '../constants';
 
 const initialState = {
@@ -47,15 +47,15 @@ export default function (state = initialState, action) {
       interactionData.position = action.payload;
       return Object.assign({}, state, { interactionData });
     }
+    case MAP_INTERACTION_VISIBILITY_SET: {
+      const interactionData = Object.assign({}, state.interactionData, {});
+      interactionData.open = action.payload;
+      return Object.assign({}, state, { interactionData });
+    }
     case MAP_GEODATA_RECEIVED: {
       const interactionData = Object.assign({}, state.interactionData, {});
       interactionData.open = true;
       interactionData.info = action.payload;
-      return Object.assign({}, state, { interactionData });
-    }
-    case MAP_GEO_DATA_CLOSED: {
-      const interactionData = Object.assign({}, state.interactionData, {});
-      interactionData.open = false;
       return Object.assign({}, state, { interactionData });
     }
     default:

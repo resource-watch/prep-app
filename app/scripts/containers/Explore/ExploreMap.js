@@ -1,7 +1,13 @@
 import { connect } from 'react-redux';
 import ExploreMap from '../../components/Explore/ExploreMap';
 
-import { updateMapParams, setSwitchStatus, getGeoDataInfo, setInteractionPosition, setInteractiveClose } from '../../actions/exploremap';
+import {
+  updateMapParams,
+  setSwitchStatus,
+  getGeoDataInfo,
+  setInteractionPosition,
+  setInteractionVisibility
+} from '../../actions/exploremap';
 import { updateURL } from '../../actions/links';
 
 const mapStateToProps = (state) => ({
@@ -20,11 +26,15 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(updateMapParams(params));
     dispatch(updateURL());
   },
-  setInteractionData: (datasetId, geo, position) => {
-    dispatch(setInteractionPosition(position))
-    dispatch(getGeoDataInfo(datasetId, geo))
+  setInteractionData: (datasetId, geo) => {
+    dispatch(getGeoDataInfo(datasetId, geo));
   },
-  setInteractiveClose: () => {dispatch(setInteractiveClose())}
+  setInteractionPosition: (position) => {
+    dispatch(setInteractionPosition(position));
+  },
+  setInteractionVisibility: (visible) => {
+    dispatch(setInteractionVisibility(visible));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExploreMap);

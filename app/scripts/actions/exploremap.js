@@ -8,7 +8,7 @@ import {
   MAP_DESELECT_DATASET,
   MAP_GEODATA_RECEIVED,
   MAP_GEOPOSITION_SET,
-  MAP_GEO_DATA_CLOSED
+  MAP_INTERACTION_VISIBILITY_SET
 } from '../constants';
 
 export function updateMapParams(params) {
@@ -66,6 +66,13 @@ export function setInteractionPosition(position) {
   };
 }
 
+export function setInteractionVisibility(visible) {
+  return {
+    type: MAP_INTERACTION_VISIBILITY_SET,
+    payload: visible
+  };
+}
+
 export function getGeoDataInfo(datasetId, geo) {
   return (dispatch, state) => {
     const datasetsList = state().datasets.list;
@@ -89,11 +96,5 @@ export function getGeoDataInfo(datasetId, geo) {
           payload: data
         });
       });
-  };
-}
-
-export function setInteractiveClose() {
-  return {
-    type: MAP_GEO_DATA_CLOSED
   };
 }

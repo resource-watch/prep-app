@@ -125,12 +125,13 @@ class ExploreMap extends React.Component {
 
   clearTooltip() {
     this.setState({ tooltip: tooltipBase });
-    this.props.setInteractiveClose();
+    this.props.setInteractionVisibility(false);
   }
 
   updateTooltipPosition() {
     if (this.latLngClicked) {
-      this.setInteractionData(this.map.latLngToContainerPoint(this.latLngClicked));
+      this.props.setInteractionPosition(this.map.latLngToContainerPoint(this.latLngClicked));
+      this.props.setInteractionVisibility(true);
     }
   }
 
@@ -162,7 +163,8 @@ class ExploreMap extends React.Component {
         coordinates: [geo]
       };
 
-      this.props.setInteractionData(datasetId, geoJSON, { x: pointX, y: pointY });
+      this.props.setInteractionData(datasetId, geoJSON);
+      this.props.setInteractionPosition({ x: pointX, y: pointY });
     }
   }
 
