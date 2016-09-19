@@ -7,7 +7,7 @@
   background-color: $dark-slate-blue-2;
   color: $white;
   text-align: center;
-  padding: $small-margin;
+  padding: $small-margin/2 $small-margin;
   z-index: 1;
   // TODO: exploreSidebar
   transform: translate(-50%, calc(-100% - 15px));
@@ -15,20 +15,20 @@
   & > .-tooltip-text {
     overflow-y: auto;
     max-height: 120px;
+    color: $white;
 
     h3 {
+      color: $white;
       margin-top: 0;
     }
 
-    & * { color: $white; }
-
-    & .table-data {
+    .table-data {
       text-align: left;
 
-      & th {
-        text-transform: capitalize;
+      th {
+        text-transform: uppercase;
         padding-right: 10px;
-        font-size: $normal-font-size
+        font-size: $small-font-size;
       }
     }
   }

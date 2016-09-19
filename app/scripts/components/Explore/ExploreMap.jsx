@@ -64,12 +64,12 @@ class ExploreMap extends React.Component {
   tooltipText(text, data) {
     return (
       <div>
-        <h3>Dataset info:</h3>
+        <h3>Dataset info</h3>
         {data ?
           <table className="table-data">
             <tbody>{text}</tbody>
           </table> :
-          <p>- No data available.</p>}
+          <p>No data available.</p>}
       </div>);
   }
 
@@ -90,7 +90,12 @@ class ExploreMap extends React.Component {
 
   setMapListeners() {
     this.map.on('dragstart', () => {
-      this.clearTooltip();
+      if (!this.state.tooltip.hidden) {
+        this.clearTooltip();
+        this.dragging = true;
+      } else {
+        this.dragging = false;
+      }
     });
     this.map.on('dragend', () => {
       this.setMapParams();
@@ -129,9 +134,9 @@ class ExploreMap extends React.Component {
   }
 
   updateTooltipPosition() {
-    if (!this.state.tooltip.hidden && this.latLngClicked) {
+    if (this.latLngClicked) {
       this.props.setInteractionPosition(this.map.latLngToContainerPoint(this.latLngClicked));
-      this.props.setInteractionVisibility(true);
+      if (this.dragging) this.props.setInteractionVisibility(true);
     }
   }
 

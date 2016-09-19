@@ -115,7 +115,7 @@ const SortableItem = SortableElement(({layer, index, onInfoClick, toggleLayerOpa
             onClick={() => onInfoClick(layer.attributes['dataset-id'])}
           > i </span>
           <span
-            className={`icon -select ${selectedDatasetId === layer.attributes['dataset-id'] ? '-selected' : ''}`}
+            className={`icon -select ${selectedDatasetId === layer.attributes['dataset-id'] ? '' : '-selected'}`}
             onClick={() => setDatasetSelected(layer.attributes['dataset-id'])}
           >
             <svg width="11" height="10" viewBox="-256.4 411.4 15 15"><path d="M-242 412.1h-13.8c-.4 0-.6.2-.6.6v9.4c0 .4.2.6.6.6h4.1l2.3 2.9c.1.1.3.2.5.2s.4-.1.5-.2l2.3-2.9h4.1c.4 0 .6-.2.6-.6v-9.4c0-.4-.2-.6-.6-.6z"/></svg>
