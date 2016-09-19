@@ -21,27 +21,21 @@ class FAQ extends React.Component {
           <p>Climate resilience is the ability of an ecosystem or human community to survive
             disruption and to anticipate, adapt, and flourish in the face of a changing climate.
           </p>
-          <p>Read more about how individuals, communities, and businesses can build resilience on
-            the <a href="https://toolkit.climate.gov/" target="_blank">U.S. Climate Resilience
-              Toolkit</a>.
-          </p>
 
           <h3>Where do I go if I have general questions about climate change?</h3>
-          <p>A quick primer on climate change is available from the <a
-            href="http://www.globalchange.gov/climate-change" target="_blank">U.S. Global Change
-            Research Council</a>. You may find more general information about the impacts of climate
+          <p>You may find general information about the impacts of climate
             change around the world at the <a
               href="http://www.ipcc.ch/organization/organization.shtml" target="_blank">Intergovernmental
               Panel on Climate Change (IPCC)</a> and in the United States in the <a
               href="http://nca2014.globalchange.gov/" target="_blank">U.S. National Climate
-              Assessment</a>.
+              Assessment</a>. For additional information please visit the <Link to="/resources">Resources</Link> page.
           </p>
 
           <h3>Where can I learn more about the Climate Data Initiative?</h3>
           <p>The <a href="http://climate.data.gov">Climate Data Initiative (CDI)</a> is a broad
             effort to leverage the U.S. Federal Government's extensive, freely-available
             climate-relevant data resources to stimulate innovation and private-sector
-            entrepreneurship in support of climate-change preparedness. The CDI builds on two
+            entrepreneurship in support of climate change preparedness. The CDI builds on two
             commitments: (1) to strengthen America’s resilience to climate change, and (2) to make
             government-held data more accessible to the public. Read the White House <a
               href="https://www.whitehouse.gov/the-press-office/2014/03/19/fact-sheet-president-s-climate-data-initiative-empowering-america-s-comm">fact
@@ -55,12 +49,6 @@ class FAQ extends React.Component {
             climate conditions over time rather than forecast the climate the way a weather forecast
             makes predictions. Understanding the range of possible futures is essential to building
             climate resilience.
-          </p>
-          <p>You can find additional information about climate projections on <a
-            href="https://www.climate.gov/maps-data/primer/predicting-climate" target="_blank">Climate.gov</a> and in the <a
-              href="http://nca2014.globalchange.gov/report/appendices/climate-science-supplement#statement-38714"
-              target="_blank">U.S. National Climate Assessment</a>. You can also find a list of
-            climate resilience tools and services on the <Link to="/resources">Resources</Link> page.
           </p>
 
           <h3>How can I get involved?</h3>

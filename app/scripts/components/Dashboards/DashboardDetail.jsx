@@ -88,8 +88,6 @@ class DashboardDetail extends React.Component {
           currentSection="dashboards"
         >
           <p dangerouslySetInnerHTML={{ __html:this.props.data.content }}></p>
-          <p>This is an initial list of insights, data and tools that are important for our work.
-          </p>
         </SectionIntro>
 
         <NavTab

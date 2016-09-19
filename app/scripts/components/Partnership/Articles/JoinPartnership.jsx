@@ -6,7 +6,6 @@ class JoinPartnership extends React.Component {
   render() {
     return (
       <div>
-        <a name="join"></a>
         <h2>Join the PREP partnership</h2>
         <p>To become a partner, prepare a short letter of intent expressing your entity’s interest in PREP, your intended workgroup, and how you meet the partner criteria. Partner criteria are:</p>
         <ul>

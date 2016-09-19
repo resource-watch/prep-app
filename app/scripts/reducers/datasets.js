@@ -115,6 +115,7 @@ export default function (state = initialState, action) {
       for (let i = 0, length = filteredList.length; i < length; i++) {
         if (filteredList[i].id === action.payload) {
           filteredList[i].active = !filteredList[i].active;
+          filteredList[i].opacity = 1;
           if (filteredList[i].active) {
             filteredList[i].index = state.filteredList.filter(layer => layer.active).length;
           }

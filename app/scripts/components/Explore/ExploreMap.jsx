@@ -199,7 +199,7 @@ class ExploreMap extends React.Component {
     if (datasets.length) {
       datasets.forEach((dataset) => {
         if (dataset.layers.length) {
-          this.updateMapLayer(dataset, layers);
+          this.updateMapLayer(dataset, layers, datasets.length);
         }
       });
     }
@@ -214,7 +214,8 @@ class ExploreMap extends React.Component {
   }
 
   hasChangedOpacity(dataset) {
-    return dataset && dataset.opacity !== this.mapLayers[dataset.layers[0].layer_id].opacity || false;
+    let hasChanged = (dataset && dataset.opacity !== this.mapLayers[dataset.layers[0].layer_id].options.opacity) || false;
+    return hasChanged;
   }
 
   isLayerReady(dataset, layers) {
@@ -225,17 +226,19 @@ class ExploreMap extends React.Component {
     return false;
   }
 
-  updateMapLayer(dataset, layers) {
+
+  updateMapLayer(dataset, layers, datasetsLength) {
     const layerId = dataset.layers[0].layer_id;
     if (dataset.active) {
       if (this.isLayerReady(dataset, layers)) {
         if (!this.wasAlreadyAdded(dataset)) {
           this.hasActiveLayers = true;
           const layer = layers[layerId];
-          this.addMapLayer(dataset, layer);
+          this.addMapLayer(dataset, layer, datasetsLength);
+
         } else if (this.wasAlreadyAdded(dataset)) {
           if (this.hasChangedOrder(dataset)) {
-            this.changeLayerOrder(dataset);
+            this.changeLayerOrder(dataset, datasetsLength);
           }
           if (this.hasChangedOpacity(dataset)) {
             this.changeLayerOpacity(dataset);
@@ -247,25 +250,32 @@ class ExploreMap extends React.Component {
     }
   }
 
-  changeLayerOrder(dataset) {
+
+  changeLayerOrder(dataset, datasetsLength) {
     const layer = this.mapLayers[dataset.layers[0].layer_id];
-    if (dataset.index !== undefined && layer && typeof layer.setZIndex === 'function') {
-      layer.index = dataset.index;
-      layer.setZIndex(dataset.index);
+    if (dataset.index !== undefined && layer) {
+      if (typeof layer.setZIndex === 'function') {
+        layer.index = dataset.index;
+        layer.setZIndex(datasetsLength - dataset.index);
+      } else {
+        const layerId = dataset.layers[0].layer_id;
+        const layersElements = this.map.getPane('tilePane').children;
+        for (let i = 0; i < layersElements.length; i++) {
+          if (layersElements[i].id === layerId) {
+            layersElements[i].style.zIndex = datasetsLength - dataset.index;
+          }
+        }
+
+      }
     }
   }
 
   changeLayerOpacity(dataset) {
     const layer = this.mapLayers[dataset.layers[0].layer_id];
-    if (dataset.opacity !== undefined && layer && typeof layer.setOpacity === 'function') {
-      setTimeout(() => {
-        layer.setOpacity(dataset.opacity);
-      }, 100);
-      layer.opacity = dataset.opacity;
-    }
+    layer.setOpacity(dataset.opacity);
   }
 
-  addMapLayer(dataset, layer) {
+  addMapLayer(dataset, layer, datasetsLength) {
     if (!this.state.loading) {
       this.setState({
         loading: true
@@ -273,13 +283,13 @@ class ExploreMap extends React.Component {
     }
     switch (layer.attributes.provider) {
       case 'leaflet':
-        this.addLeafletLayer(dataset, layer);
+        this.addLeafletLayer(dataset, layer, datasetsLength);
         break;
       case 'arcgis':
-        this.addEsriLayer(dataset, layer);
+        this.addEsriLayer(dataset, layer, datasetsLength);
         break;
       case 'cartodb':
-        this.addCartoLayer(dataset, layer);
+        this.addCartoLayer(dataset, layer, datasetsLength);
         break;
       default:
         break;
@@ -291,7 +301,8 @@ class ExploreMap extends React.Component {
    * @param {Object} dataset
    * @param {Object} layerSpec
    */
-  addLeafletLayer(dataset, layerSpec) {
+
+  addLeafletLayer(dataset, layerSpec, datasetsLength) {
     const layerData = layerSpec.attributes['layer-config'];
 
     let layer;
@@ -302,6 +313,7 @@ class ExploreMap extends React.Component {
     // TODO: improve this
     if (layerData.body.crs && L.CRS[layerData.body.crs]) {
       layerData.body.crs = L.CRS[layerData.body.crs.replace(':', '')];
+      layerData.body.pane = 'tilePane';
     }
 
     switch (layerData.type) {
@@ -320,11 +332,11 @@ class ExploreMap extends React.Component {
 
     if (layer) {
       const eventName = (layerData.type === 'wms' ||
-        layerData.type === 'tileLayer') ? 'tileload' : 'load';
+      layerData.type === 'tileLayer') ? 'tileload' : 'load';
       layer.on(eventName, () => {
         this.handleTileLoaded(layer);
       });
-      layer.addTo(this.map);
+      layer.addTo(this.map).setZIndex(datasetsLength - dataset.index);
       this.mapLayers[layerData.id] = layer;
     }
   }
@@ -334,7 +346,8 @@ class ExploreMap extends React.Component {
    * @param {Object} dataset
    * @param {Object} layerSpec
    */
-  addEsriLayer(dataset, layerSpec) {
+
+  addEsriLayer(dataset, layerSpec, datasetsLength) {
     const layer = layerSpec.attributes['layer-config'];
     layer.id = layerSpec.id;
 
@@ -346,6 +359,7 @@ class ExploreMap extends React.Component {
 
     if (L.esri[layer.type]) {
       const layerConfig = JSON.parse(bodyStringified);
+      layerConfig.pane = 'tilePane';
       if (layerConfig.style &&
         layerConfig.style.indexOf('function') >= 0) {
         layerConfig.style = eval(`(${layerConfig.style})`);
@@ -353,6 +367,9 @@ class ExploreMap extends React.Component {
       const newLayer = L.esri[layer.type](layerConfig);
       newLayer.on('load', () => {
         this.handleTileLoaded(layer);
+        const layerElement = this.map.getPane('tilePane').lastChild;
+        layerElement.style.zIndex = datasetsLength - dataset.index;
+        layerElement.id = layer.id;
       });
       newLayer.addTo(this.map);
       this.mapLayers[layer.id] = newLayer;
@@ -366,7 +383,8 @@ class ExploreMap extends React.Component {
    * @param {Object} dataset
    * @param {Object} layerSpec
    */
-  addCartoLayer(dataset, layerSpec) {
+
+  addCartoLayer(dataset, layerSpec, datasetsLength) {
     const layer = layerSpec.attributes['layer-config'];
     layer.id = layerSpec.id;
 
@@ -389,21 +407,20 @@ class ExploreMap extends React.Component {
     // add to the load layers lists before the fetch
     // to avoid multiples loads while the layer is loading
     this.mapLayers[layer.id] = true;
-
     fetch(request)
       .then(res => {
-        if (res.ok) {
-          return res.json();
+        if (!res.ok) {
+          const error = new Error(res.statusText);
+          error.response = res;
+          throw error;
         }
-        const error = new Error(res.statusText);
-        error.response = res;
-        throw error;
+        return res.json();
       })
       .then((data) => {
         // we can switch off the layer while it is loading
         if (dataset.active) {
           const tileUrl = `https://${layer.account}.cartodb.com/api/v1/map/${data.layergroupid}/{z}/{x}/{y}.png`;
-          this.mapLayers[layer.id] = L.tileLayer(tileUrl).addTo(this.map).setZIndex(dataset.index);
+          this.mapLayers[layer.id] = L.tileLayer(tileUrl).addTo(this.map).setZIndex(datasetsLength - dataset.index);
           this.mapLayers[layer.id].on('load', () => {
             this.handleTileLoaded(layer);
           });
@@ -463,20 +480,20 @@ ExploreMap.contextTypes = {
 
 ExploreMap.propTypes = {
   /**
-  * Define the datasets data of the map
-  */
+   * Define the datasets data of the map
+   */
   data: React.PropTypes.array.isRequired,
   /**
-  * Define the layers data of the map
-  */
+   * Define the layers data of the map
+   */
   layers: React.PropTypes.object,
   /**
-  * Define the mapa data config
-  */
+   * Define the mapa data config
+   */
   map: React.PropTypes.object.isRequired,
   /**
-  * Define the function to update the map params
-  */
+   * Define the function to update the map params
+   */
   setMapParams: React.PropTypes.func.isRequired,
   /**
   * Define the function to handle a tile load error

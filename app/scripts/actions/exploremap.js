@@ -11,6 +11,8 @@ import {
   MAP_INTERACTION_VISIBILITY_SET
 } from '../constants';
 
+import { updateURL } from './links';
+
 export function updateMapParams(params) {
   return {
     type: MAP_DATA_CHANGED,
@@ -33,9 +35,12 @@ export function setSwitchStatus(id, status) {
 }
 
 export function setLayersOrder(layers) {
-  return {
-    type: MAP_LAYERS_ORDER_CHANGED,
-    payload: layers
+  return dispatch => {
+    dispatch({
+      type: MAP_LAYERS_ORDER_CHANGED,
+      payload: layers
+    });
+    dispatch(updateURL());
   };
 }
 
