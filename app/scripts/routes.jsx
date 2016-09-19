@@ -8,6 +8,7 @@ import Home from './components/Home';
 import Partnership from './components/Partnership';
 import EngagementWorkgroup from './components/Partnership/EngagementWorkgroup';
 import DataAccessibility from './components/Partnership/DataAccessibility';
+import PlatformWorkgroup from './components/Partnership/PlatformWorkgroup';
 import Explore from './containers/Explore';
 import DatasetDetail from './containers/Dataset';
 import FAQ from './components/FAQ';
@@ -104,7 +105,7 @@ function Routes(props) {
             <IndexRoute component={Partnership} />
             <Route path={'engagement'} component={EngagementWorkgroup} />
             <Route path={'data'} component={DataAccessibility} />
-            <Route path={'platforms'} component={DataAccessibility} />
+            <Route path={'platforms'} component={PlatformWorkgroup} />
           </Route>
           <Route path={'faqs'} component={FAQ} />
           <Route path={'dashboards'} component={Dashboards} />
