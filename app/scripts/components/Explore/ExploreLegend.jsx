@@ -115,8 +115,10 @@ const SortableItem = SortableElement(({layer, index, onInfoClick, toggleLayerOpa
           > i </span>
           <span
             className={`icon -select ${selectedDatasetId === layer.attributes['dataset-id'] ? '-selected' : ''}`}
-            onClick={(e) => setDatasetSelected(e, layer.attributes['dataset-id'])}
-          > s </span>
+            onClick={() => setDatasetSelected(layer.attributes['dataset-id'])}
+          >
+            <svg width="11" height="10" viewBox="-256.4 411.4 15 15"><path d="M-242 412.1h-13.8c-.4 0-.6.2-.6.6v9.4c0 .4.2.6.6.6h4.1l2.3 2.9c.1.1.3.2.5.2s.4-.1.5-.2l2.3-2.9h4.1c.4 0 .6-.2.6-.6v-9.4c0-.4-.2-.6-.6-.6z"/></svg>
+          </span>
         </div>
       </div>
       {getLegend(layer)}
@@ -143,12 +145,13 @@ class DataMapLegend extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      legendOpen: true
+      legendOpen: true,
+      selectedDatasetId: null
     };
   }
 
   componentWillReceiveProps(newProps) {
-    this.setState({selectedDatasetId: newProps.selectedDatasetId});
+    this.setState({ selectedDatasetId: newProps.selectedDatasetId });
   }
 
   onSortEnd({ oldIndex, newIndex }) {
@@ -162,10 +165,12 @@ class DataMapLegend extends React.Component {
     });
   }
 
-  handleSelectedDataset(e, datasetId) {
-    if (e.target.classList.contains('-selected')) {
+  handleSelectedDataset(datasetId) {
+    if (this.state.selectedDatasetId) {
+      this.setState({ selectedDatasetId: null });
       this.props.deselectDataset();
     } else {
+      this.setState({ selectedDatasetId: datasetId });
       this.props.setDatasetSelected(datasetId);
     }
   }
@@ -186,7 +191,7 @@ class DataMapLegend extends React.Component {
         useDragHandle
         items={this.props.data}
         onInfoClick={this.props.onInfoClick}
-        setDatasetSelected={(e, datasetId) => this.handleSelectedDataset(e, datasetId)}
+        setDatasetSelected={(datasetId) => this.handleSelectedDataset(datasetId)}
         selectedDatasetId={this.state.selectedDatasetId}
         toggleLayerOpacity={this.props.toggleLayerOpacity}
         onSortEnd={(oldI, newI) => this.onSortEnd(oldI, newI)}

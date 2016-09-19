@@ -3,7 +3,12 @@ import ExploreMapLegend from '../../components/Explore/ExploreLegend';
 
 import { setModalMetadata } from '../../actions/modal';
 import { getDatasetById } from '../../actions/datasets';
-import { setLayersOrder, toggleLayerOpacity, setDatasetSelected, deselectDataset } from '../../actions/exploremap';
+import {
+  setLayersOrder,
+  toggleLayerOpacity,
+  setDatasetSelected,
+  deselectDataset
+} from '../../actions/exploremap';
 import { updateURL } from '../../actions/links';
 
 function isLayerReady(dataset, layers) {
