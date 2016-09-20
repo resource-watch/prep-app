@@ -59,6 +59,9 @@ class InsightsDetail extends React.Component {
         case 16:
           content = <EthiopiaInsight />;
           break;
+        case 2:
+          content = <IFrame src={iframeUrl} />;
+          break;
         default:
           break;
       }
