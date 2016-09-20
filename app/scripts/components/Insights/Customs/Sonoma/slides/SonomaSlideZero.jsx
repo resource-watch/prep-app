@@ -8,7 +8,7 @@ class SonomaSlideZero extends React.Component {
       <section data-background={background} className="sonoma-slide">
         <div className="container content-section -center">
           <div className="row">
-            <div className="col-md-12 wrapper">
+            <div className="columns medium-12 wrapper">
               <h2 className="banner">
                 How is sonoma county’s climate changing
               </h2>

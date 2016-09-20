@@ -8,7 +8,7 @@ class SonomaSlideOne extends React.Component {
         <section className="sonoma-slide">
           <div className="container content-section">
             <div className="row">
-              <div className="col-md-6 wrapper">
+              <div className="columns medium-6 wrapper">
                 <header className="header">
                   <h2 className="title">Projected Overall increased weather variability</h2>
                 </header>
@@ -24,7 +24,7 @@ class SonomaSlideOne extends React.Component {
                   important
                 </p>
               </div>
-              <div className="col-md-6 wrapper">
+              <div className="columns medium-6 wrapper">
                 <div className="chart-card">
                   <h2>Projected annual precipitations between 2010 and 2099</h2>
                   <div className="info-button">i</div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Reveal from 'reveal.js';
-import ShareModal from '../../../Modal/ShareModal';
+import ShareModal from './../Modal/ShareModal';
 
 
 class RevealPresentation extends React.Component {
