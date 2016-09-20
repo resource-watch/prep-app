@@ -27,7 +27,6 @@ export function getDatasetLayer(dataset) {
           type: DATASET_LAYER_RECEIVED,
           payload: data
         });
-        dispatch(updateURL());
       });
     /**
      *  Error is always thrown, because the dataset load is async and the instruction
@@ -77,7 +76,7 @@ export function getDatasets(defaultActiveLayers) {
       .then(data => {
         const datasets = data || [];
         if (datasets.length) {
-          for (let i = datasets.length - 1; i > 0; i--) {
+          for (let i = datasets.length - 1; i >= 0; i--) {
             if (defaultActiveLayers) {
               const index = defaultActiveLayers.indexOf(datasets[i].id);
               if (index > -1) {
