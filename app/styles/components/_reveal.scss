@@ -95,7 +95,7 @@ $navigation-btn-color: #000;
     .menu-icon{
       position: absolute;
       left: 10px;
-      top: 0;
+      top: $small-margin / 6;
       > span {
         position: relative;
         display: block;
@@ -125,8 +125,14 @@ $navigation-btn-color: #000;
       top: 50%;
       transform: translate(0, -50%);
       display: block;
-      &.-left  {  left: 1rem; }
-      &.-right { right: 1rem; }
+      &.-left  {
+        left: 40%;
+        top: $small-margin * 3;
+      }
+      &.-right {
+        right: 40%;
+        top: $small-margin * 3;
+      }
     }
 
     &.-vertical {
@@ -146,15 +152,14 @@ $navigation-btn-color: #000;
       > a {
         position: relative;
         display: inline-block;
-        width: 40px;
-        height: 40px;
-        line-height: 40px;
-        border-radius: 50%;
-        border: 1px solid $navigation-btn-bg-border;
-        background-color: $navigation-btn-bg-disable;
         cursor: default;
+        color: $fourth-color;
+        font-size: $small-font-size;
+        font-family: $base-font-family;
+        font-weight: bold;
+        text-decoration: none;
 
-        &:before{
+       /*  &:before{
           content: "";
           width: 100%;
           height: 100%;
@@ -163,7 +168,7 @@ $navigation-btn-color: #000;
           left:0;
           opacity:0.15;
           background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iOSIgdmlld0JveD0iMCAwIDEwIDkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHRpdGxlPkNvbWJpbmVkIFNoYXBlPC90aXRsZT48cGF0aCBkPSJNNCA1LjEyMVYwaDJ2NS4wMmwyLjQ4NS0yLjQ4NEw5LjkgMy45NSA1LjY1NyA4LjE5MiA0Ljk1IDguOSAwIDMuOTVsMS40MTQtMS40MTNMNCA1LjEyeiIgZmlsbD0iIzFBM0U2MiIgZmlsbC1ydWxlPSJldmVub2RkIi8+PC9zdmc+') no-repeat center center;
-        }
+        } */
 
         /* Instead of having separated icons, we rotate the button */
         &.navigate-up:before { transform: rotate(180deg); }
@@ -174,7 +179,6 @@ $navigation-btn-color: #000;
 
         &.enabled {
           cursor: pointer;
-          background-color: $navigation-btn-bg;
           &:before{
             opacity:1;
           }
@@ -194,7 +198,7 @@ $navigation-btn-color: #000;
 
   .slide-number {
     position: absolute;
-    bottom: $small-margin / 2;
+    bottom: 0;
     left: 5rem;
     right: auto;
     width: auto;

@@ -1,18 +1,39 @@
 import React from 'react';
 import Reveal from 'reveal.js';
+import ShareModal from '../../../Modal/ShareModal';
+
 
 class RevealPresentation extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalShare: false,
+      shareUrl: '',
+      shareTitle: '',
+      widgetSlug: ''
+    };
+    this.setShareModal = this.setShareModal.bind(this);
+  }
 
   componentDidMount() {
     // Add event listeners
     this.initializeReveal();
   }
+
   componentWillUnmount() {
     // Remove event listeners
   }
-  goToSlide(indexh, indexv) {
-    Reveal.slide(indexh, indexv);
+
+  setShareModal(url, section, widgetSlug) {
+    this.setState({
+      modalShare: true,
+      shareUrl: url,
+      shareTitle: `Share this ${section}`,
+      widgetSlug
+    });
   }
+
   initializeReveal() {
     Reveal.initialize({
       controls: false,
@@ -38,6 +59,9 @@ class RevealPresentation extends React.Component {
     // Reveal.addEventListener('ready', (event) => this.updateSlidesInfo(event).bind(this));
     // Reveal.addEventListener('slidechanged', (event) => this.updateSlidesInfo(event).bind(this));
   }
+  goToSlide(indexh, indexv) {
+    Reveal.slide(indexh, indexv);
+  }
 
   render() {
     return (<div className="reveal">
@@ -45,14 +69,12 @@ class RevealPresentation extends React.Component {
 
       <div className="reveal-controls -horizontal -left">
         <div className="navigate-container">
-          <a href="#" className="navigate-left">
-          </a>
+          <a href="#" className="navigate-left"> Prev Chapter </a>
         </div>
       </div>
       <div className="reveal-controls -horizontal -right">
         <div className="navigate-container">
-          <a href="#" className="navigate-right">
-          </a>
+          <a href="#" className="navigate-right"> Next Chapter </a>
         </div>
       </div>
       <div className="reveal-controls -vertical">
@@ -76,9 +98,16 @@ class RevealPresentation extends React.Component {
         </div>
         <div className="toolbar">
           <a href="#" className="download">Download</a>
-          <a href="#" className="share coming-soon">Share</a>
+          <a style={{ cursor: 'pointer' }} className="share coming-soon" onClick={() => this.setShareModal('http://climateserv.nsstc.nasa.gov', 'map')}>Share</a>
         </div>
       </div>
+      <ShareModal
+        title={this.state.shareTitle}
+        url={this.state.shareUrl}
+        opened={this.state.modalShare}
+        close={() => this.setState({ modalShare: false })}
+        widgetSlug={this.state.widgetSlug}
+      />
     </div>);
   }
 }
