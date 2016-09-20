@@ -18,4 +18,5 @@ class SonomaInsight extends React.Component {
   }
 }
 
+
 export default SonomaInsight;

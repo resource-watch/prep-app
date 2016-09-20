@@ -1,0 +1,288 @@
+$slider-title-color: #fff;
+$slider-title-bg: #1A3E62;
+$slider-title-size: 30px;
+
+$slider-highlight-color: #ffc94e;
+
+.sonoma-slide {
+  .wrapper > .content {
+    max-width: 430px;
+    margin-bottom: 20px;
+  }
+
+  /* Needed in order to have Vega render the charts */
+  .chart {
+    height: 360px;
+  }
+  .map-card{
+    height: 460px;
+  }
+  /* The yellow card with the chart inside */
+  .chart-card {
+    position: relative;
+    box-shadow: none;
+    background-color: $slider-highlight-color;
+    border: 0;
+    padding: 25px;
+    &:hover { box-shadow: none; }
+
+    > h2 {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 22px;
+      color: #263e57;
+      margin-top: 0;
+      margin-bottom: 25px;
+    }
+
+    > .info-button {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      width: 22px;
+      height: 22px;
+      border: 2px solid rgba(0, 0, 0, .1);
+      border-radius: 100%;
+      line-height: 20px;
+      text-align: center;
+      color: #263e57;
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    &.-light {
+      background-color: #fff;
+      border: 2px solid #eeeeee;
+    }
+  }
+
+  .overlapping-cards {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    position: relative;
+    left: 10px;
+
+    > .card {
+      width: calc(50% + 10px);
+      padding: 30px 50px 30px 40px;
+      font-size: 17px;
+      line-height: 28px;
+      box-shadow: 0 7px 15px 0 rgba(0, 0, 0, .15);
+      min-height: 400px;
+
+      &:first-of-type {
+        background-color: #25b5cd;
+        color: #fff;
+
+        > h1 {
+          font-family: "PT Serif", serif;
+          font-size: 30px;
+          letter-spacing: -.4px;
+          font-weight: 700;
+          margin-bottom: 20px;
+        }
+
+        > ul {
+          margin: 0;
+          list-style: none;
+
+          > li {
+            position: relative;
+
+            &:before {
+              content: '';
+              display: block;
+              position: relative;
+              top: 16px;
+              left: -20px;
+              width: 7px;
+              height: 7px;
+              background-color: rgba(#263e57, .3);
+            }
+          }
+        }
+        &.-sm {
+          min-height: auto;
+        }
+      }
+
+      &:last-of-type {
+        position: relative;
+        top: 50px;
+        left: -20px;
+
+        &.slide-1-3 {
+          // background: url('../../images/insights/sonoma/slide-1-3@2x.png') no-repeat center center;
+          background-size: cover;
+        }
+
+        &.slide-2-2 {
+          // background: url('../../images/insights/sonoma/slide-2-2@2x.png') no-repeat center center;
+          background-size: cover;
+        }
+
+        &.slide-3-2 {
+          padding: 30px 40px 30px 40px;
+          background-color: #25b5cd;
+          color: #fff;
+          min-height: auto;
+        }
+
+        &.slide-4-3 {
+          // background: url('../../images/insights/sonoma/slide-4-3@2x.png') no-repeat center center;
+          background-size: cover;
+        }
+
+        &.slide-5-2 {
+          // background: url('../../images/insights/sonoma/slide-5-2@2x.png') no-repeat center center;
+          background-size: cover;
+        }
+
+        &.slide-6-2 {
+          // background: url('../../images/insights/sonoma/slide-6-2@2x.png') no-repeat center center;
+          background-size: cover;
+        }
+      }
+    }
+  }
+
+  .float-title {
+    display: inline-block;
+    padding: 1rem 2rem;
+
+    color: $slider-title-color;
+    font-family: "PT Serif", serif;
+    font-weight: 700;
+    font-size: $slider-title-size;
+
+    background-color: $slider-title-bg;
+    box-shadow: 0 7px 15px 0 rgba(0, 0, 0, 0.15);
+
+    > .info-button {
+      display: inline-block;
+      margin-left: 10px;
+      width: 22px;
+      height: 22px;
+      border: 2px solid rgba(#eee, .1);
+      border-radius: 100%;
+      line-height: 20px;
+      text-align: center;
+      color: #fff;
+      font-family: Georgia, serif;
+      font-size: 15px;
+      font-style: italic;
+      font-weight: 700;
+      vertical-align: middle;
+      cursor: pointer;
+    }
+  }
+
+  .img-title{
+    position: relative;
+    display: inline-block;
+    margin: 2.5rem auto;
+    &:after{
+      content: "";
+      display: block;
+      position: absolute;
+      left: 12%;
+      bottom: -2rem;
+      width: 76%;
+      height: 3px;
+      background-color: $slider-highlight-color;
+    }
+  }
+  .banner {
+    font-family: PTSerif-Bold;
+    font-size: 62px;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    color: #ffffff;
+    max-width: 860px;
+    margin: 2.5rem auto;
+  }
+
+  .author {
+    font-size: 15px;
+    line-height: 1.3;
+    color: #ffffff;
+    margin: 2.5rem auto;
+    font-weight: 700;
+
+    .highlight{
+      display: block;
+      margin-top: 3px;
+      font-size: 12px;
+      font-weight: 400;
+      color: $slider-highlight-color;
+    }
+  }
+}
+
+.sonoma-tooltip {
+  padding: 8px 35px;
+  background: #ffde90;
+  border-radius: 100px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: .3px;
+  color:#263e57;
+  text-transform: uppercase;
+  max-width: none !important;
+
+  &.tooltip-target-attached-left:after  { right: 2px; }
+  &.tooltip-target-attached-right:after { left:  2px; }
+}
+
+.modal-header-wrapper{
+  display: flex;
+  align-items: center;
+  margin-bottom: 42px;
+  .wrapper > .header > .title {
+    margin-bottom: 0;
+  }
+}
+.resources {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  >.resource {
+    padding: 12px 0 14px;
+    >.title{
+      margin: 0;
+      font-family: "Open Sans", sans-serif;
+      font-size: 16px;
+      line-height: 1.1;
+      letter-spacing: 0.3px;
+      color: #294554;
+    }
+    >.links{
+      margin-top: 5px;
+      > a{
+        color: rgba(#263e57,0.5);
+        height: 20px;
+        padding-left: 6px;
+        padding-right: 6px;
+        font-family: "Open Sans", sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 20px;
+        letter-spacing: 0.7px;
+        border-right: 1px solid;
+        text-decoration: none;
+        &:first-child{
+          padding-left: 0;
+        }
+        &:last-child{
+          border-right: none;
+        }
+      }
+    }
+  }
+}

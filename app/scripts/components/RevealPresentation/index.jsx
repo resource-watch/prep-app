@@ -3,7 +3,6 @@ import Reveal from 'reveal.js';
 
 class RevealPresentation extends React.Component {
 
-
   componentDidMount() {
     // Add event listeners
     this.initializeReveal();
@@ -94,16 +93,7 @@ RevealPresentation.propTypes = {
    * Define the content of the reveal presentation
    * Required
    */
-  slideTitles: React.PropTypes.array,
-  /**
-   * Define the default next slide title
-   * Required
-   */
-  nextSlideTitle: React.PropTypes.string,
-  /**
-   * Define the current slide
-   */
-  currentSlide: React.PropTypes.object
+  slideTitles: React.PropTypes.array
 };
 
 export default RevealPresentation;
