@@ -9,6 +9,11 @@ $shadow-size: 150px;
   min-height: 30vh;
   z-index: 1;
 
+  &.-h100 {
+    padding: 0;
+    height: 100vh;
+  }
+
   .c-modal & {
     padding: 0;
     min-height: auto;

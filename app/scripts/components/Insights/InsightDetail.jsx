@@ -123,9 +123,11 @@ class InsightsDetail extends React.Component {
 
     let content;
     if (this.props.data.template_type === 2) {
-      content = contentComponent;
+      content = (<div className="l-main -h100">
+        {contentComponent}
+      </div>);
     } else {
-      content = (<div>
+      content = (<div className="l-main">
         <SectionIntro
           data={this.props.data}
           insightSlug={this.props.insightSlug}
@@ -139,11 +141,7 @@ class InsightsDetail extends React.Component {
       </div>);
     }
 
-    return (
-      <div>
-        {content}
-      </div>
-    );
+    return content;
   }
 
   render() {
@@ -155,38 +153,37 @@ class InsightsDetail extends React.Component {
 
         {header}
 
-        <div className="l-main">
+        {content}
 
-          {content}
-
-        </div>
-
-        <footer className="l-footer">
-          <div className="l-footer-top -inverse">
-            <div className="row">
-              <div className="column small-12">
-                <PartnersSlider />
+        {this.props.data && this.props.data.template_type === 2
+          ? null
+          : <footer className="l-footer">
+            <div className="l-footer-top -inverse">
+              <div className="row">
+                <div className="column small-12">
+                  <PartnersSlider />
+                </div>
               </div>
             </div>
-          </div>
-          <div className="l-footer-sep">
-            <div className="row">
-              <div className="column small-12">
-                <div className="footer-sep-item"></div>
+            <div className="l-footer-sep">
+              <div className="row">
+                <div className="column small-12">
+                  <div className="footer-sep-item"></div>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="l-footer-down">
-            <div className="row">
-              <div className="column small-6 align-middle">
-                <SocialNav />
-              </div>
-              <div className="column small-6 align-middle">
-                <SecondaryNav />
+            <div className="l-footer-down">
+              <div className="row">
+                <div className="column small-6 align-middle">
+                  <SocialNav />
+                </div>
+                <div className="column small-6 align-middle">
+                  <SecondaryNav />
+                </div>
               </div>
             </div>
-          </div>
-        </footer>
+          </footer>
+        }
       </div>
     );
   }
