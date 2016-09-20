@@ -43,6 +43,59 @@ class InsightsDetail extends React.Component {
     return currentData;
   }
 
+  getHeader() {
+    if (!this.props.data) {
+      return null;
+    }
+
+    if (this.props.data && this.props.data.template_type === 2) {
+      return (<header className="l-header -float">
+        <div className="l-header-nav">
+          <div className="row align-middle">
+            <div className="column small-10 medium-4">
+              <Link to={'/'} className="logo">
+                <img src={logoImage} alt="Partnership for Resilience and Preparedness" />
+              </Link>
+            </div>
+            <div className="column small-2 medium-8">
+              <MainNav />
+            </div>
+          </div>
+        </div>
+      </header>);
+    }
+
+    const currentData = this.getCurrentData();
+    const title = this.props.data ? this.props.data.title : currentData.title;
+    const imageUrl = !this.props.data || this.props.data.image.indexOf('missing.png') >= 0 ?
+      null : `${config.apiUrl}${this.props.data.image}`;
+
+    document.title = title;
+    return (<header className="l-header">
+      <div className={`l-header-nav ${currentData.name === 'home' ? '-no-bg' : ''}`}>
+        <div className="row align-middle">
+          <div className="column small-10 medium-4">
+            <Link to={'/'} className="logo">
+              <img src={logoImage} alt="Partnership for Resilience and Preparedness" />
+            </Link>
+          </div>
+          <div className="column small-2 medium-8">
+            <MainNav />
+          </div>
+        </div>
+      </div>
+      <div className="l-header-banner">
+        <Breadcrumbs pathname={this.props.location.pathname} />
+        <Banner
+          imageUrl={imageUrl}
+          size={currentData.bannerSize}
+        >
+          <h1>{title}</h1>
+        </Banner>
+      </div>
+    </header>);
+  }
+
   getContent() {
     if (!this.props.data) {
       return <LoadingSpinner />;
@@ -52,24 +105,27 @@ class InsightsDetail extends React.Component {
       ? `/proxy?url=${contentUrl}`
       : contentUrl;
 
-    let content;
+    let contentComponent;
     if (this.props.data.template_type === 0) {
-      content = <IFrame src={iframeUrl} />;
+      contentComponent = <IFrame src={iframeUrl} />;
     } else {
       switch (this.props.data.id) {
         case 16:
-          content = <EthiopiaInsight />;
+          contentComponent = <EthiopiaInsight />;
           break;
         case 2:
-          content = <SonomaInsight />;
+          contentComponent = <SonomaInsight />;
           break;
         default:
           break;
       }
     }
 
-    return (
-      <div>
+    let content;
+    if (this.props.data.template_type === 2) {
+      content = contentComponent;
+    } else {
+      content = (<div>
         <SectionIntro
           data={this.props.data}
           insightSlug={this.props.insightSlug}
@@ -79,46 +135,25 @@ class InsightsDetail extends React.Component {
           <p> {this.props.data.summary} </p>
         </SectionIntro>
 
+        {contentComponent}
+      </div>);
+    }
+
+    return (
+      <div>
         {content}
       </div>
     );
   }
 
   render() {
-    const currentData = this.getCurrentData();
-    const title = this.props.data ? this.props.data.title : currentData.title;
-    const imageUrl = !this.props.data || this.props.data.image.indexOf('missing.png') >= 0 ?
-      null : `${config.apiUrl}${this.props.data.image}`;
-
-    document.title = title;
-
+    let header = this.getHeader();
     let content = this.getContent();
 
     return (
       <div className="-theme-3">
-        <header className="l-header">
-          <div className={`l-header-nav ${currentData.name === 'home' ? '-no-bg' : ''}`}>
-            <div className="row align-middle">
-              <div className="column small-10 medium-4">
-                <Link to={'/'} className="logo">
-                  <img src={logoImage} alt="Partnership for Resilience and Preparedness" />
-                </Link>
-              </div>
-              <div className="column small-2 medium-8">
-                <MainNav />
-              </div>
-            </div>
-          </div>
-          <div className="l-header-banner">
-            <Breadcrumbs pathname={this.props.location.pathname} />
-            <Banner
-              imageUrl={imageUrl}
-              size={currentData.bannerSize}
-            >
-              <h1>{title}</h1>
-            </Banner>
-          </div>
-        </header>
+
+        {header}
 
         <div className="l-main">
 
