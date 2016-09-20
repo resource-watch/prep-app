@@ -39,19 +39,7 @@ class SonomaSlideOne extends React.Component {
             <h1 className="float-title">Temperatures increasing throughout the Year <span
               className="info-button">i</span></h1>
           </div>
-          <div id="map1-3" className="map -big slide-map-1-3"></div>
-          <div className="map-legend">
-            <div className="range years">
-              <span className="-selected">1951-1980</span>
-              <span>1981-2010</span>
-              <span>2011-2039</span>
-              <span>2040-2069</span>
-              <span>2070-2099</span>
-            </div>
-            <div id="timelineSlider1-3" className="slide"></div>
-            <span className="title">Explanation</span>
-            <span className="legend"> Areas showing where the 30-yr average maximum monthly
-            temperature exceeds average maximum temperature between 1981 to 2010 (>72.2 °F) </span>
+          <div id="map1-3" className="map -big slide-map-1-3">
           </div>
         </section>
         <section className="sonoma-slide">

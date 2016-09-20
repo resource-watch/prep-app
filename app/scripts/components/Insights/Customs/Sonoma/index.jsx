@@ -3,6 +3,12 @@ import RevealPresentation from './../../../RevealPresentation';
 import SonomaSlideZero from './slides/SonomaSlideZero';
 import SonomaSlideOne from './slides/SonomaSlideOne';
 import SonomaSlideTwo from './slides/SonomaSlideTwo';
+import SonomaSlideThree from './slides/SonomaSlideThree';
+import SonomaSlideFour from './slides/SonomaSlideFour';
+import SonomaSlideFive from './slides/SonomaSlideFive';
+import SonomaSlideSix from './slides/SonomaSlideSix';
+import SonomaSlideSeven from './slides/SonomaSlideSeven';
+
 
 class SonomaInsight extends React.Component {
 
@@ -13,6 +19,11 @@ class SonomaInsight extends React.Component {
           <SonomaSlideZero />
           <SonomaSlideOne />
           <SonomaSlideTwo />
+          <SonomaSlideThree />
+          <SonomaSlideFour />
+          <SonomaSlideFive />
+          <SonomaSlideSix />
+          <SonomaSlideSeven />
         </div>
       </RevealPresentation>
     );

@@ -1,19 +1,12 @@
 import React from 'react';
 import Reveal from 'reveal.js';
-import ShareModal from './../Modal/ShareModal';
-
 
 class RevealPresentation extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      modalShare: false,
-      shareUrl: '',
-      shareTitle: '',
-      widgetSlug: ''
     };
-    this.setShareModal = this.setShareModal.bind(this);
   }
 
   componentDidMount() {
@@ -23,15 +16,6 @@ class RevealPresentation extends React.Component {
 
   componentWillUnmount() {
     // Remove event listeners
-  }
-
-  setShareModal(url, section, widgetSlug) {
-    this.setState({
-      modalShare: true,
-      shareUrl: url,
-      shareTitle: `Share this ${section}`,
-      widgetSlug
-    });
   }
 
   initializeReveal() {
@@ -101,13 +85,6 @@ class RevealPresentation extends React.Component {
           <a style={{ cursor: 'pointer' }} className="share coming-soon" onClick={() => this.setShareModal('http://climateserv.nsstc.nasa.gov', 'map')}>Share</a>
         </div>
       </div>
-      <ShareModal
-        title={this.state.shareTitle}
-        url={this.state.shareUrl}
-        opened={this.state.modalShare}
-        close={() => this.setState({ modalShare: false })}
-        widgetSlug={this.state.widgetSlug}
-      />
     </div>);
   }
 }
