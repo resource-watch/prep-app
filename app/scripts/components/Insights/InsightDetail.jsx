@@ -15,6 +15,7 @@ import IFrame from '../IFrame';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
 import EthiopiaInsight from './Customs/Ethiopia';
+import SonomaInsight from './Customs/Sonoma';
 
 class InsightsDetail extends React.Component {
 
@@ -58,6 +59,9 @@ class InsightsDetail extends React.Component {
       switch (this.props.data.id) {
         case 16:
           content = <EthiopiaInsight />;
+          break;
+        case 2:
+          content = <SonomaInsight />;
           break;
         default:
           break;
