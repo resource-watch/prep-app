@@ -3,7 +3,12 @@ import ExploreMapLegend from '../../components/Explore/ExploreLegend';
 
 import { setModalMetadata } from '../../actions/modal';
 import { getDatasetById } from '../../actions/datasets';
-import { setLayersOrder, toggleLayerOpacity } from '../../actions/exploremap';
+import {
+  setLayersOrder,
+  toggleLayerOpacity,
+  setDatasetSelected,
+  deselectDataset
+} from '../../actions/exploremap';
 import { updateURL } from '../../actions/links';
 
 function isLayerReady(dataset, layers) {
@@ -41,7 +46,8 @@ function getActiveLayers(datasets, layers) {
 }
 
 const mapStateToProps = (state) => ({
-  data: getActiveLayers(state.datasets.filteredList, state.datasets.layers)
+  data: getActiveLayers(state.datasets.filteredList, state.datasets.layers),
+  selectedDatasetId: state.exploremap.interactionData.datasetId
 });
 const mapDispatchToProps = (dispatch) => ({
   onInfoClick: (datasetId) => {
@@ -52,9 +58,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(setLayersOrder(layers));
     dispatch(updateURL());
   },
-  toggleLayerOpacity: (layerId) => {
-    dispatch(toggleLayerOpacity(layerId));
-  }
+  toggleLayerOpacity: (layerId) => dispatch(toggleLayerOpacity(layerId)),
+  setDatasetSelected: (datasetId) => dispatch(setDatasetSelected(datasetId)),
+  deselectDataset: () => dispatch(deselectDataset())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExploreMapLegend);

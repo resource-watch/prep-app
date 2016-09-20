@@ -24,6 +24,7 @@
     "no-console": ["error", {
       "allow": ["warn", "error", "info"]
     }],
-    "comma-dangle": ["error", "never"]
+    "comma-dangle": ["error", "never"],
+    "max-len": 0
   }
 }

@@ -19,7 +19,7 @@ class DataMap extends React.Component {
   componentDidMount() {
     this.props.setTooltip({
       text: 'Climate Data Initiative dataset',
-      width: '120'
+      width: '135'
     });
   }
 
@@ -50,6 +50,12 @@ class DataMap extends React.Component {
 
   onTagLeave() {
     this.props.setTooltip({ hidden: true });
+  }
+
+  switchChange(dataset) {
+    dataset.id === this.props.selectedDatasetId &&
+      this.props.deselectDataset();
+    this.props.switchChange(dataset);
   }
 
   getContent() {
@@ -85,7 +91,7 @@ class DataMap extends React.Component {
       if (dataset.layers && dataset.layers.length) {
         layerIcon = (
           <Switch
-            onChange={() => this.props.switchChange(dataset)}
+            onChange={() => this.switchChange(dataset)}
             checked={dataset.active || false}
           />
         );
@@ -170,6 +176,7 @@ class DataMap extends React.Component {
           hidden={this.props.tooltip.hidden}
           position={this.props.tooltip.position}
           width={this.props.tooltip.width}
+          padding='15px'
         />
         <div className="row content">
           <FilterTabs />

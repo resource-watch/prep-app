@@ -90,12 +90,12 @@ function getLegend(layer) {
 
 const DragHandle = SortableHandle(() => <span className="handler"><svg width="6" height="18" viewBox="0 0 6 18"><title>Drag and drop</title><path d="M1 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-4 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-8a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fillRule="evenodd"/></svg></span>);
 
-const SortableItem = SortableElement(({layer, index, onInfoClick, toggleLayerOpacity}) => {
+const SortableItem = SortableElement(({layer, index, onInfoClick, toggleLayerOpacity, setDatasetSelected, selectedDatasetId}) => {
   return (
     <div className="legend-layer" key={`map-layer-${index}`}>
       <div className="row">
         <DragHandle />
-        <div className="column small-10">
+        <div className="column small-9">
           <span className="title">{layer.title}
             <span className="-units">
               {layer.attributes['legend-config'].unit &&
@@ -103,7 +103,7 @@ const SortableItem = SortableElement(({layer, index, onInfoClick, toggleLayerOpa
             </span>
           </span>
         </div>
-        <div className="column small-2 layer-actions">
+        <div className="column small-3 layer-actions">
           <span
             className={`icon ${layer.opacity === 0 ? '-hide' : ''}`}
             onClick={() => toggleLayerOpacity(layer.attributes['dataset-id'])}
@@ -114,6 +114,12 @@ const SortableItem = SortableElement(({layer, index, onInfoClick, toggleLayerOpa
             className="icon -info"
             onClick={() => onInfoClick(layer.attributes['dataset-id'])}
           > i </span>
+          <span
+            className={`icon -select ${selectedDatasetId === layer.attributes['dataset-id'] ? '' : '-selected'}`}
+            onClick={() => setDatasetSelected(layer.attributes['dataset-id'])}
+          >
+            <svg width="11" height="10" viewBox="-256.4 411.4 15 15"><path d="M-242 412.1h-13.8c-.4 0-.6.2-.6.6v9.4c0 .4.2.6.6.6h4.1l2.3 2.9c.1.1.3.2.5.2s.4-.1.5-.2l2.3-2.9h4.1c.4 0 .6-.2.6-.6v-9.4c0-.4-.2-.6-.6-.6z"/></svg>
+          </span>
         </div>
       </div>
       {getLegend(layer)}
@@ -121,11 +127,16 @@ const SortableItem = SortableElement(({layer, index, onInfoClick, toggleLayerOpa
   );
 });
 
-const SortableList = SortableContainer(({items, onInfoClick, toggleLayerOpacity}) => {
+const SortableList = SortableContainer(({items, onInfoClick, toggleLayerOpacity, setDatasetSelected, selectedDatasetId}) => {
   return (
     <div className="content">
       {items.map((layer, index) =>
-        <SortableItem key={`item-${index}`} index={index} layer={layer} onInfoClick={onInfoClick} toggleLayerOpacity={toggleLayerOpacity} />
+        <SortableItem
+          key={`item-${index}`} index={index}
+          layer={layer} setDatasetSelected={setDatasetSelected}
+          onInfoClick={onInfoClick} toggleLayerOpacity={toggleLayerOpacity}
+          selectedDatasetId={selectedDatasetId}
+        />
       )}
     </div>
   );
@@ -135,8 +146,13 @@ class DataMapLegend extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      legendOpen: true
+      legendOpen: true,
+      selectedDatasetId: null
     };
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({ selectedDatasetId: newProps.selectedDatasetId });
   }
 
   onSortEnd({ oldIndex, newIndex }) {
@@ -148,6 +164,16 @@ class DataMapLegend extends React.Component {
     this.setState({
       legendOpen: !this.state.legendOpen
     });
+  }
+
+  handleSelectedDataset(datasetId) {
+    if (this.state.selectedDatasetId) {
+      this.setState({ selectedDatasetId: null });
+      this.props.deselectDataset();
+    } else {
+      this.setState({ selectedDatasetId: datasetId });
+      this.props.setDatasetSelected(datasetId);
+    }
   }
 
   render() {
@@ -166,6 +192,8 @@ class DataMapLegend extends React.Component {
         useDragHandle
         items={this.props.data}
         onInfoClick={this.props.onInfoClick}
+        setDatasetSelected={(datasetId) => this.handleSelectedDataset(datasetId)}
+        selectedDatasetId={this.state.selectedDatasetId}
         toggleLayerOpacity={this.props.toggleLayerOpacity}
         onSortEnd={(oldI, newI) => this.onSortEnd(oldI, newI)}
       />);
@@ -208,7 +236,11 @@ DataMapLegend.propTypes = {
   /**
   * Define the function to the update the layers index
   */
-  setLayersOrder: React.PropTypes.func.isRequired
+  setLayersOrder: React.PropTypes.func.isRequired,
+  /**
+  * Define the function to set the dataset to analyze the geom
+  */
+  setDatasetSelected: React.PropTypes.func.isRequired
 };
 
 export default DataMapLegend;

@@ -191,6 +191,9 @@
         font-family: $header-font-family;
         text-transform: none;
       }
+      &.-selected {
+        opacity: .3;
+      }
       &:hover {
         background-color: $inverse-font-color;
         border-color: $inverse-font-color;
