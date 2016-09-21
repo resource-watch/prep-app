@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 function ContentCard(props) {
   const classNames = ['c-content-card'];
   if (props.inner) classNames.push('-inner');
+  if (props.floatAttribution) classNames.push('-float-attribution');
   if (props.noBorder) classNames.push('-no-border');
   if (props.noMargin) classNames.push('-no-margin');
   if (props.autoHeight) classNames.push('-auto-height');
@@ -108,6 +109,10 @@ ContentCard.propTypes = {
    * Define it the card has no padding
    */
   inner: React.PropTypes.bool,
+  /**
+   * Define it the attribution is outside the card
+   */
+  floatAttribution: React.PropTypes.bool,
   /**
    * Define tooltip content data
    */

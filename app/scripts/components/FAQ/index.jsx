@@ -32,14 +32,13 @@ class FAQ extends React.Component {
           </p>
 
           <h3>Where can I learn more about the Climate Data Initiative?</h3>
-          <p>The <a href="http://climate.data.gov">Climate Data Initiative (CDI)</a> is a broad
+          <p>The <a href="http://climate.data.gov" target="_blank">Climate Data Initiative (CDI)</a> is a broad
             effort to leverage the U.S. Federal Government's extensive, freely-available
             climate-relevant data resources to stimulate innovation and private-sector
             entrepreneurship in support of climate change preparedness. The CDI builds on two
             commitments: (1) to strengthen America’s resilience to climate change, and (2) to make
-            government-held data more accessible to the public. Read the White House <a
-              href="https://www.whitehouse.gov/the-press-office/2014/03/19/fact-sheet-president-s-climate-data-initiative-empowering-america-s-comm">fact
-              sheet</a>.
+            government-held data more accessible to the public. Read the White House <a href="https://www.whitehouse.gov/the-press-office/2014/03/19/fact-sheet-president-s-climate-data-initiative-empowering-america-s-comm" target="_blank">
+            factsheet </a>.
           </p>
 
           <h3>How do I deal with uncertainty in planning for the future?</h3>
