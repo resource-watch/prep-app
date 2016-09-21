@@ -9,7 +9,7 @@
     "bg": "home",
     "widgets": [
       { "slug":"projected-changes-in-streamflow-rain-dominant", "category":"water"},
-      { "slug":"number-of-3-day-flow-events-in-the-russian-river-watershed", "category":"water"},
+      { "slug":"historical-and-projected-annual-changes-in-summer-air-temperature-c", "category":"water"},
       { "slug":"precipitation-change", "category":"forest"}
     ]
   },
