@@ -14,8 +14,14 @@ class SonomaInsight extends React.Component {
 
   render() {
     let slideTitles = [
-      ['Start'],
-      ['Projected Overall increased weather variability', 'Temperatures increasing throughout the Year', 'Investments to prepare the Sonoma County Region'],
+      [
+        'Projected Overall increased weather variability',
+        'What is Special about Sonoma County?',
+        'How the Region is Preparing for Climate Change',
+        'Sonoma County’s Regional Climate Protection Authority (RCPA) Fosters Collaboration',
+        'Sonoma County Water Agency:  Mitigation Leader',
+        'A Vibrant Collective of NGOs Catalyzes Community Action'
+      ],
       ['Overall temperatures projected to rise in both summer and winter seasons', 'What does this mean for you?'],
       ['Increase in warmer winter nights projected', 'Night temperature changes consequences'],
       ['Summertime heat waves', 'Heat stress effects'],

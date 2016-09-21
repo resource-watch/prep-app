@@ -19,34 +19,52 @@ $shadow-size: 150px;
     min-height: auto;
   }
 
-  ul > li {
-    position: relative;
-    list-style: none;
+  ul {
+    > li {
+      position: relative;
+      list-style: none;
 
-    > span {
-      &:first-of-type {
-        font-weight: 700;
+      > span {
+        &:first-of-type {
+          font-weight: 700;
+        }
+      }
+
+      &:before {
+        display: block;
+        position: absolute;
+        content: "";
+        width: rem(7);
+        height: rem(7);
+        top: 0.57rem;
+        left: -1.5rem;
+        font-size: rem(14);
+
+        background-color: $secondary-color;
+
+        .-theme-2 & {
+          background-color: $thirth-color;
+        }
+
+        .-theme-3 & {
+          background-color: $fourth-color;
+        }
+
+      }
+
+      > a {
+        color: $header-font-color;
       }
     }
+    &.-no-bullet {
+      > li {
+        &:before {
+          content: none;
+        }
 
-    &:before {
-      display: block;
-      position: absolute;
-      content: "";
-      width: rem(7);
-      height: rem(7);
-      top: 0.57rem;
-      left: -1.5rem;
-      font-size: rem(14);
-
-      background-color: $secondary-color;
-
-      .-theme-2 & {
-        background-color: $thirth-color;
-      }
-
-      .-theme-3 & {
-        background-color: $fourth-color;
+        > a {
+          font-weight: 400;
+        }
       }
     }
   }

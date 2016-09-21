@@ -49,22 +49,7 @@ class InsightsDetail extends React.Component {
     }
 
     if (this.props.data && this.props.data.template_type === 2) {
-      return (
-        <header className="l-header -float">
-          <div className="l-header-nav">
-            <div className="row align-middle">
-              <div className="column small-10 medium-4">
-                <Link to={'/'} className="logo">
-                  <img src={logoImage} alt="Partnership for Resilience and Preparedness" />
-                </Link>
-              </div>
-              <div className="column small-2 medium-8">
-                <MainNav />
-              </div>
-            </div>
-          </div>
-        </header>
-      );
+      return null;
     }
 
     const currentData = this.getCurrentData();
