@@ -22,6 +22,7 @@ import Resources from './components/Resources';
 import Contact from './components/Contact';
 import Embed from './containers/Embed';
 import Root from './components/Root';
+import SonomaInsight from './components/Insights/Customs/Sonoma';
 
 function shouldUpdateScroll(prevRouterProps, { location }) {
   /**
@@ -121,6 +122,7 @@ function Routes(props) {
         <Route path="insight/:slug" component={InsightsDetail} />
         <Route path="dataset/:slug" component={DatasetDetail} />
         <Route path="embed/:slug" component={Embed} />
+        <Route path={'sonomaTest'} component={SonomaInsight} />
       </Route>
     </Router>
   );
