@@ -1,4 +1,3 @@
-/* eslint indent:0, key-spacing:0, quote-props:0, quotes:0, object-curly-spacing:0, comma-spacing:0 */
 import React from 'react';
 import WidgetChart from '../../../../../containers/Chart/WidgetChart';
 
@@ -18,8 +17,8 @@ function SonomaSlide1() {
             </div>
             <div className="column medium-6">
               <div className="chart-card -bg-grey -column">
-                <WidgetChart small slug="historical-and-projected-annual-changes-in-summer-air-temperature-c" />
                 <WidgetChart small slug="precipitation-change-sonoma" />
+                <WidgetChart small slug="historical-and-projected-annual-changes-in-summer-air-temperature-c" />
               </div>
             </div>
           </div>
@@ -30,8 +29,8 @@ function SonomaSlide1() {
           <div className="row align-middle">
             <div className="column medium-6">
               <div className="chart-card -bg-grey -column">
-                <WidgetChart small slug="historical-and-projected-annual-changes-in-summer-air-temperature-c" />
                 <WidgetChart small slug="precipitation-change-sonoma" />
+                <WidgetChart small slug="historical-and-projected-annual-changes-in-summer-air-temperature-c" />
               </div>
             </div>
             <div className="column medium-6">
