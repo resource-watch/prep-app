@@ -16,7 +16,7 @@ function SonomaSlide1() {
               </p>
             </div>
             <div className="column medium-6">
-              <div className="chart-card -bg-grey -column">
+              <div className="chart-card -column">
                 <WidgetChart small slug="precipitation-change-sonoma" />
                 <WidgetChart small slug="historical-and-projected-annual-changes-in-summer-air-temperature-c" />
               </div>
@@ -28,7 +28,7 @@ function SonomaSlide1() {
         <div className="container content-section">
           <div className="row align-middle">
             <div className="column medium-6">
-              <div className="chart-card -bg-grey -column">
+              <div className="chart-card -column">
                 <WidgetChart small slug="precipitation-change-sonoma" />
                 <WidgetChart small slug="historical-and-projected-annual-changes-in-summer-air-temperature-c" />
               </div>

@@ -30,7 +30,7 @@ function SonomaSlide2() {
       <div className="container content-section">
         <div className="row align-middle">
           <div className="column medium-6">
-            <div className="chart-card -bg-grey">
+            <div className="chart-card">
               <WidgetChart slug="precipitation-change-sonoma" />
             </div>
           </div>

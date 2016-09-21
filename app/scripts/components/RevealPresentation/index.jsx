@@ -52,7 +52,7 @@ class RevealPresentation extends React.Component {
     //    "c":  flattened slide number
     //  "c/t":  flattened slide number / total slides
     Reveal.slide(0, 0);
-    Reveal.configure({ slideNumber: 'c/t' });
+    Reveal.configure({ slideNumber: 'h.v' });
     // Reveal.addEventListener('ready', (event) => this.updateSlidesInfo(event).bind(this));
     // Reveal.addEventListener('slidechanged', (event) => this.updateSlidesInfo(event).bind(this));
   }
@@ -65,21 +65,6 @@ class RevealPresentation extends React.Component {
   render() {
     return (
       <div style={{ height: '100%' }}>
-        <header className="l-header -float">
-          <div className="l-header-nav -dark">
-            <div className="row align-middle">
-              <div className="column small-10 medium-4">
-                <Link to={'/'} className="logo">
-                  <img src={logoImage} alt="Partnership for Resilience and Preparedness" />
-                </Link>
-              </div>
-              <div className="column small-2 medium-8">
-                <MainNav />
-              </div>
-            </div>
-          </div>
-        </header>
-
         <div className="reveal">
           {this.props.children}
 
@@ -113,8 +98,6 @@ class RevealPresentation extends React.Component {
               <a id="sliderTitles">{this.props.slideTitles[this.getCurrentSlideIndex().indexh][this.getCurrentSlideIndex().indexv] || 'Start'}</a>
             </div>
             <div className="toolbar">
-              <a className="download">Download</a>
-              <a className="share coming-soon">Share</a>
             </div>
           </div>
         </div>

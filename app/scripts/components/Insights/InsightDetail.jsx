@@ -49,7 +49,21 @@ class InsightsDetail extends React.Component {
     }
 
     if (this.props.data && this.props.data.template_type === 2) {
-      return null;
+      return (
+        <header className="l-header -float">
+          <div className="l-header-nav -dark">
+            <div className="row align-middle">
+              <div className="column small-10 medium-4">
+                <Link to={'/'} className="logo">
+                  <img src={logoImage} alt="Partnership for Resilience and Preparedness" />
+                </Link>
+              </div>
+              <div className="column small-2 medium-8">
+                <MainNav />
+              </div>
+            </div>
+          </div>
+        </header>);
     }
 
     const currentData = this.getCurrentData();
@@ -110,7 +124,7 @@ class InsightsDetail extends React.Component {
 
     let content;
     if (this.props.data.template_type === 2) {
-      content = (<div className="l-main -h100">
+      content = (<div className="l-main -template-2">
         {contentComponent}
       </div>);
     } else {

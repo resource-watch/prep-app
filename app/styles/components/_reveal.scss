@@ -23,14 +23,9 @@ $navigation-btn-color: #000;
   height: 100%;
 
   > .slides {
-    height: 100% !important;
-    width: 100% !important;
-    left: 0 !important;
-    right: 0 !important;
     top: 0 !important;
     bottom: 0 !important;
     right: 0 !important;
-    zoom: 1 !important;
     transform: translate(0, 0) scale(1) !important;
     section {
       top: 0 !important;
@@ -41,9 +36,7 @@ $navigation-btn-color: #000;
       padding-bottom: 40px !important;
       padding-top: 96px !important;
       align-items: center;
-      &.-no-center {
-        align-items: flex-start !important;
-      }
+
     }
   }
 
