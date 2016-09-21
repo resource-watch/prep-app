@@ -46,6 +46,7 @@
     "html-webpack-plugin": "^2.21.0",
     "image-webpack-loader": "^2.0.0",
     "json-loader": "^0.5.4",
+    "moment": "^2.15.1",
     "morgan": "^1.7.0",
     "node-sass": "^3.8.0",
     "pretty-error": "^2.0.0",

@@ -34,7 +34,7 @@ class Root extends React.Component {
             opened={this.state.modalWelcomeOpen}
             close={() => {
               this.setState({ modalWelcomeOpen: false });
-              localStorage.setItem('modalWelcomeOpened', JSON.stringify(true));
+              sessionStorage.setItem('modalWelcomeOpened', JSON.stringify(true));
             }
             }
             hideCloseButton
