@@ -48,7 +48,7 @@ class InsightsDetail extends React.Component {
       return null;
     }
 
-    if (this.props.data && this.props.data.template_type === 2) {
+    if (this.props.data && this.props.data.id === 2) {
       return (
         <header className="l-header -float">
           <div className="l-header-nav -dark">
@@ -115,7 +115,7 @@ class InsightsDetail extends React.Component {
           contentComponent = <EthiopiaInsight />;
           break;
         case 2:
-          contentComponent = <SonomaInsight />;
+          contentComponent = <IFrame src={iframeUrl} />;
           break;
         default:
           break;

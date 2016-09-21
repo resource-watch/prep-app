@@ -12,7 +12,11 @@ $shadow-size: 150px;
   &.-template-2 {
     padding: 0;
     height: 100vh;
-    z-index: 2;
+    padding-top: 96px;
+
+    .c-iframe {
+      height: 100vh!important;
+    }
 
     ul {
       > li {
