@@ -1,74 +1,56 @@
+/* eslint indent:0, key-spacing:0, quote-props:0, quotes:0, object-curly-spacing:0, comma-spacing:0 */
 import React from 'react';
+import VegaChart from '../../../../Chart/VegaChart';
 
-class SonomaSlide1 extends React.Component {
+function SonomaSlide1() {
+  const widgetConfig = {"axes":[{"name":"lbl","type":"x","scale":"x","format":"%Y","values":[-1577923200000,-946771200000,-315619200000,315532800000,946684800000,1577836800000,2208988800000,2840140800000,3471292800000],"formatType":"utc","properties":{"axis":{"stroke":{"value":"#3B4F63"},"opacity":{"value":0.5},"strokeWidth":{"value":0}},"ticks":{"strokeWidth":{"value":0}},"labels":{"dy":{"value":5},"fill":{"value":"#3B4F63"},"font":{"value":"\"Montserrat\", sans-serif"},"opacity":{"value":0.5},"fontSize":{"value":10},"fontWeight":{"value":300}}}},{"grid":true,"type":"y","layer":"back","scale":"y","ticks":7,"format":"f","properties":{"axis":{"stroke":{"value":"#333"},"strokeWidth":{"value":0}},"grid":{"stroke":{"value":"#000"},"strokeWidth":{"value":1},"strokeOpacity":{"value":0.1}},"ticks":{"stroke":{"value":"steelblue"}},"labels":{"fill":{"value":"#3B4F63"},"opacity":{"value":0.5},"fontSize":{"value":10},"fontWeight":{"value":300}},"majorTicks":{"strokeWidth":{"value":0}}}}],"data":[{"url":"http://api.resourcewatch.org/query/c9a1753c-9bc5-4024-b4bd-dff9ec9044c1?sql=select x,  y  from precip_in_per_year order by x asc","name":"line","format":{"type":"json","parse":{"x":"date"},"property":"data"}},{"name":"axis","values":[{"x":"Year","y":"Precipitation in inches"}]},{"name":"tooltip","source":"line","transform":[{"test":"datum.x == utc(currentYear, 0, 1)","type":"filter"},{"expr":"datum.x > utc(2040, 0, 1) ? tooltip.xRight : tooltip.xLeft","type":"formula","field":"xTooltip"},{"expr":"tooltip.xLeft","type":"formula","field":"xData"}]}],"marks":[{"from":{"data":"area"},"type":"area","properties":{"enter":{"x":{"field":"x","scale":"x"},"y":{"field":"y","scale":"y"},"y2":{"scale":"y","value":"0"},"fill":{"value":"#000"},"opacity":{"value":0.07}}}},{"from":{"data":"line"},"type":"line","properties":{"enter":{"x":{"field":"x","scale":"x"},"y":{"field":"y","scale":"y"},"stroke":{"value":"#ddd000"},"strokeWidth":{"value":3}}}},{"from":{"data":"axis"},"type":"text","properties":{"enter":{"x":0,"y":0,"dx":{"value":-30},"dy":{"value":0},"fill":{"value":"#3B4F63"},"font":{"value":"\"Montserrat\", sans-serif"},"text":{"template":"{{datum.y | upper}}"},"align":{"value":"left"},"opacity":{"value":0.5},"fontSize":{"value":10},"fontWeight":{"value":700}}}},{"type":"rule","properties":{"enter":{"x":{"value":0},"y":{"scale":"y","value":56.4},"x2":{"field":{"group":"width"}},"stroke":{"value":"#263e57"},"strokeWidth":{"value":1.5}}}},{"type":"rule","properties":{"enter":{"x":{"value":0},"y":{"scale":"y","value":27.1},"x2":{"field":{"group":"width"}},"stroke":{"value":"#3B4F63"},"opacity":{"value":0.5},"strokeWidth":{"value":1.5}}}},{"from":{"data":"tooltip"},"type":"group","marks":[{"type":"text","properties":{"update":{"x":{"value":10},"y":{"value":17},"fill":{"value":"#3B4F63"},"font":{"value":"\"Montserrat\", sans-serif"},"text":{"template":"{{currentYear}}"},"opacity":{"value":0.8},"fontSize":{"value":11},"fontWeight":{"value":"bold"}}}},{"type":"text","properties":{"update":{"x":{"value":11},"y":{"value":35},"fill":{"value":"#3B4F63"},"font":{"value":"\"Montserrat\", sans-serif"},"text":{"template":"{{parent.y|number:'.2f'}} in"},"opacity":{"value":0.8},"fontSize":{"value":11}}}}],"properties":{"update":{"x":{"field":"xTooltip","scale":"x"},"y":{"field":"y","scale":"y","offset":-55},"fill":{"value":"#fff"},"width":{"value":150},"height":{"value":45},"fillOpacity":{"value":0.85}}}},{"from":{"data":"tooltip"},"size":4,"type":"symbol","properties":{"update":{"x":{"field":"xData","scale":"x"},"y":{"field":"y","scale":"y"},"fill":{"value":"#fff"},"font":{"value":"\"Montserrat\", sans-serif"},"stroke":{"value":"#ffc94e"},"fontSize":{"value":12},"strokeWidth":{"value":2}}}},{"type":"rect","properties":{"enter":{"x":{"value":-15},"y":{"mult":1,"field":{"group":"height"},"offset":45},"y2":{"mult":1,"field":{"group":"height"},"offset":48},"fill":{"value":"#3B4F63"},"width":{"value":9},"opacity":{"value":0.5}}}},{"type":"text","properties":{"enter":{"x":{"value":0},"y":{"mult":1,"field":{"group":"height"}},"dx":{"value":0},"dy":{"value":50},"fill":{"value":"#3b4f63"},"font":{"value":"\"Montserrat\", sans-serif"},"text":{"value":"10TH PERCENTILE (27.1 IN/YR)"},"align":{"value":"left"},"opacity":{"value":0.7},"fontSize":{"value":10},"fontWeight":{"value":700}}}},{"type":"rect","properties":{"enter":{"x":{"mult":0.5,"field":{"group":"width"},"offset":-25},"y":{"mult":1,"field":{"group":"height"},"offset":45},"y2":{"mult":1,"field":{"group":"height"},"offset":48},"fill":{"value":"#263e57"},"width":{"value":9}}}},{"type":"text","properties":{"enter":{"x":{"mult":0.5,"field":{"group":"width"}},"y":{"mult":1,"field":{"group":"height"}},"dx":{"value":-9},"dy":{"value":50},"fill":{"value":"#3b4f63"},"font":{"value":"\"Montserrat\", sans-serif"},"text":{"value":"90TH PERCENTILE (56.4 IN/YR)"},"align":{"value":"left"},"opacity":{"value":0.7},"fontSize":{"value":10},"fontWeight":{"value":700}}}}],"scales":[{"name":"x","type":"time","range":"width","domain":{"data":"line","field":"x"}},{"name":"y","nice":true,"type":"linear","range":"height","domain":{"data":"line","field":"y"}}],"padding":{"top":25,"left":40,"right":20,"bottom":70},"signals":[{"init":"0","name":"currentYear","streams":[{"expr":"utcyear(iscale('x', eventX()))","type":"mousemove"}]},{"init":{"x":0,"y":0},"name":"tooltip","streams":[{"expr":"{xLeft: +iscale('x', eventX()), xRight: +iscale('x', eventX() - 150)}","type":"mousemove"}]}]};
+  const widgetConfig2 = {"axes":[{"type":"x","scale":"x","ticks":5,"title":"Years","values":[1920,1940,1960,1980,2000,2020,2040,2060,2080,2099],"properties":{"axis":{"stroke":{"value":"#E6E6E6"},"opacity":{"value":1},"strokeWidth":{"value":1.5}},"ticks":{"stroke":{"value":"#9BA2AA"}},"title":{"fill":{"value":"#9BA2AA"},"font":{"value":"\"Montserrat\", sans-serif"},"fontSize":{"value":12}},"labels":{"fill":{"value":"#9BA2AA"},"font":{"value":"\"Montserrat\", sans-serif"},"align":{"value":"center"},"baseline":{"value":"top"},"fontSize":{"value":10}}}},{"grid":false,"type":"y","scale":"y","ticks":10,"title":"Summer maximum air temperature, degrees Fº","properties":{"axis":{"stroke":{"value":"#E6E6E6"},"opacity":{"value":1},"strokeWidth":{"value":1.5}},"ticks":{"stroke":{"value":"#9BA2AA"}},"title":{"x":{"value":100},"y":{"value":-20},"fill":{"value":"#9BA2AA"},"font":{"value":"\"Montserrat\", sans-serif"},"angle":90,"fontSize":{"value":12}},"labels":{"fill":{"value":"#9BA2AA"},"font":{"value":"\"Montserrat\", sans-serif"},"align":{"value":"right"},"baseline":{"value":"middle"},"fontSize":{"value":10}}},"titleOffset":15}],"data":[{"url":"http://api.resourcewatch.org/query/3feaf26c-42c8-43ce-b1b5-07a02a773c36?sql=select * from index_3feaf26c42c843ceb1b507a02a773c36 order by date asc","name":"data_brut","format":{"type":"json","property":"data"}},{"name":"data","source":"data_brut","transform":[{"expr":"datum.date < 2010 ? ((datum.HST*1.8)+32) : 0","type":"formula","field":"HST"},{"expr":"datum.date < 2010 ? 0 : ((datum.min*1.8)+32)","type":"formula","field":"min"},{"expr":"datum.date < 2010 ? 0 : ((datum.max*1.8)+32)","type":"formula","field":"max"},{"expr":"datum.date < 2010 ? 0 : ((datum.CCSM4_rcp85*1.8)+32)","type":"formula","field":"CCSM4_rcp85"},{"expr":"datum.date < 2010 ? 0 : ((datum.CNRM_rcp85*1.8)+32)","type":"formula","field":"CNRM_rcp85"},{"expr":"datum.date < 2010 ? 0 : ((datum.GFDL_A2*1.8)+32)","type":"formula","field":"GFDL_A2"},{"expr":"datum.date < 2010 ? 0 : ((datum.GFDL_B1*1.8)+32)","type":"formula","field":"GFDL_B1"},{"expr":"datum.date < 2010 ? 0 : ((datum.MIROC_rcp85*1.8)+32)","type":"formula","field":"MIROC_rcp85"},{"expr":"datum.date < 2010 ? 0 : ((datum.PCM_A2*1.8)+32)","type":"formula","field":"PCM_A2"}]},{"name":"hist","source":"data","transform":[{"test":"datum.date < 2010","type":"filter"}]},{"name":"modeled","source":"data","transform":[{"test":"datum.date > 2009","type":"filter"}]},{"name":"legend","values":[{"cat":"Historic"},{"cat":"CCSM4"},{"cat":"Models amplitude"}]},{"name":"tooltip","source":"data","transform":[{"test":"datum.date == indexDate.date","type":"filter"},{"expr":"datum.date > 2060 ? indexDate.xRight : indexDate.xLeft","type":"formula","field":"xTooltip"},{"expr":"datum.date < 2010 ? datum.HST : datum.CCSM4_rcp85","type":"formula","field":"value"},{"expr":"indexDate.xLeft","type":"formula","field":"xData"},{"by":"date","type":"sort"}]}],"marks":[{"name":"datalines-hist","type":"group","marks":[{"from":{"data":"hist"},"type":"line","properties":{"enter":{"x":{"field":"date","scale":"x"},"y":{"field":"HST","scale":"y"},"height":{"scale":"y"},"stroke":{"value":"#efa600"},"strokeWidth":{"value":1.5},"strokeOpacity":{"value":1}}}}]},{"name":"datalines-modeled","type":"group","marks":[{"from":{"data":"modeled"},"type":"area","properties":{"enter":{"x":{"field":"date","scale":"x"},"y":{"field":"min","scale":"y"},"y2":{"field":"max","scale":"y"},"fill":{"value":"#1a6d9e"},"fillOpacity":{"value":0.2},"interpolate":{"value":"linear"}}}},{"from":{"data":"modeled"},"type":"line","properties":{"enter":{"x":{"field":"date","scale":"x"},"y":{"field":"CCSM4_rcp85","scale":"y"},"height":{"scale":"y"},"stroke":{"value":"#1a6d9e"},"strokeWidth":{"value":1.5},"strokeOpacity":{"value":1}}}}]},{"name":"90 perc","type":"rule","properties":{"enter":{"x":{"value":0},"y":{"scale":"y","value":88.43},"x2":{"field":{"group":"width"}},"stroke":{"value":"#263e57"},"strokeWidth":{"value":1.5},"strokeOpacity":{"value":0.05}}}},{"name":"10 perc","type":"rule","properties":{"enter":{"x":{"value":0},"y":{"scale":"y","value":84.74},"x2":{"field":{"group":"width"}},"stroke":{"value":"#263e57"},"strokeWidth":{"value":1.5},"strokeOpacity":{"value":0.05}}}},{"from":{"data":"tooltip"},"name":"tooltip","type":"group","marks":[{"type":"text","properties":{"update":{"x":{"value":10},"y":{"value":17},"fill":{"value":"#3B4F63"},"font":{"value":"\"Montserrat\", sans-serif"},"text":{"template":"{{indexDate.xLeft}}"},"opacity":{"value":0.8},"fontSize":{"value":11},"fontWeight":{"value":"bold"}}}},{"name":"mean","type":"text","properties":{"update":{"x":{"value":11},"y":{"value":35},"fill":{"value":"#3B4F63"},"font":{"value":"\"Montserrat\", sans-serif"},"text":{"template":"{{parent.value|number:'.2f'}} ºF"},"opacity":{"value":0.8},"fontSize":{"value":11}}}}],"properties":{"update":{"x":{"field":"xTooltip","scale":"x","offset":0},"y":{"scale":"y","offset":-10,"signal":"indexDate.yval"},"fill":{"value":"#fff"},"width":{"value":130},"height":{"value":55},"fillOpacity":{"value":0.85}}}},{"ease":"in-out","from":{"data":"tooltip"},"size":4,"type":"rule","properties":{"update":{"x":{"field":"date","scale":"x"},"y":{"value":0},"y2":{"field":{"group":"height"}},"stroke":{"value":"#000000"},"opacity":{"value":0.2},"strokeWidth":{"value":2}}}},{"ease":"in-out","from":{"data":"tooltip"},"size":4,"type":"symbol","properties":{"update":{"x":{"field":"date","scale":"x"},"y":{"field":"value","scale":"y"},"fill":{"value":"#c15467"},"size":{"value":20}}}}],"width":600,"height":400,"scales":[{"name":"x","type":"ordinal","range":"width","domain":{"fields":[{"data":"data","field":"date"}]},"domainMax":2100,"domainMin":1920},{"name":"y","type":"linear","zero":false,"range":"height","domain":{"fields":[{"data":"data","field":"max"}]},"domainMax":100,"domainMin":80},{"name":"color","type":"ordinal","zero":false,"range":["#efa600","#1a6d9e","#D2E2EC"],"domain":{"sort":false,"fields":[{"data":"legend","field":"cat"}]},"points":true}],"legends":[{"fill":"color","offset":50,"properties":{"title":{"dx":{"value":0},"dy":{"value":-2},"fontSize":{"value":12}},"labels":{"fill":{"value":"#9BA2AA"},"text":{"template":"{{datum.data}}"},"fontSize":{"value":10}},"legend":{"x":{"mult":0.05,"field":{"group":"width"},"offset":0},"y":{"mult":0.05,"field":{"group":"height"},"offset":-10}},"symbols":{"size":{"value":30},"shape":{"value":"square"},"strokeOpacity":{"value":0}}}}],"padding":{"top":30,"left":35,"right":5,"bottom":40},"signals":[{"init":{"xval":0,"yval":0},"name":"indexDate","streams":[{"expr":"{xLeft: +iscale('x', eventX()), xRight: +iscale('x', eventX()), date: +iscale('x', eventX()), yval: iscale('y', eventY())}","type":"mousemove"}]}]};
 
-  render() {
-    return (
-      <section>
-        <section className="sonoma-slide">
-          <div className="container content-section">
-            <div className="row">
-              <div className="columns medium-6 wrapper">
-                <header className="header">
-                  <h2 className="title">Projected Overall increased weather variability</h2>
-                </header>
-                <p className="content">
-                  Unprecedented warm conditions are projected to occur in both summer and winter
-                  seasons. Both extreme wet years and extreme dry years are likely to occur.
-                  Overall,
-                  despite all this variability, the North Bay region is becoming more arid due to
-                  rising temperatures.
-                </p>
-                <p className="content">
-                  Preparing for the impacts of this increased weather variability is critically
-                  important
-                </p>
-              </div>
-              <div className="columns medium-6 wrapper">
-                <div className="chart-card">
-                  <h2>Projected annual precipitations between 2010 and 2099</h2>
-                  <div className="info-button">i</div>
-                  <div className="chart" id="chart1-1"></div>
-                </div>
+  return (
+    <section>
+      <section className="sonoma-slide" data-title="Our Climate is getting Warmer and More Variable">
+        <div className="container content-section">
+          <div className="row align-middle">
+            <div className="column medium-6">
+              <header className="header">
+                <h2 className="title">Our Climate is getting Warmer and More Variable</h2>
+              </header>
+              <p className="content">
+                Chart: Yearly rain and yearly summer air temperature for Sonoma County, showing actual data before 2010 and projected data from multiple models after 2010. The model closest to the mid-range of all the models, used throughout this dashboard, is highlighted in black. Dotted lines show 10th and 90th percentiles.
+              </p>
+            </div>
+            <div className="column medium-6">
+              <div className="chart-card -bg-grey -column">
+                <VegaChart small data={widgetConfig} />
+                <VegaChart small data={widgetConfig2} />
               </div>
             </div>
           </div>
-        </section>
-        <section className="sonoma-slide slide-map-1-3 -no-center">
-          <div className="container">
-            <h1 className="float-title">Temperatures increasing throughout the Year <span
-              className="info-button">i</span></h1>
-          </div>
-          <div id="map1-3" className="map -big slide-map-1-3">
-          </div>
-        </section>
-        <section className="sonoma-slide">
-          <div className="container content-section">
-            <div className="row">
-              <div className="overlapping-cards">
-                <div className="card">
-                  <p>Increase weather variability requires more planning and investments to prepare
-                    the Sonoma County Region to be resilient in the face of this climate change in
-                    areas such as:
-                  </p>
-                  <ul>
-                    <li>Infrastructure improvements (buildings, roads, energy grids)</li>
-                    <li>Agriculture</li>
-                    <li>Water Management</li>
-                    <li>Health Services</li>
-                    <li>Fire Management</li>
-                  </ul>
-                </div>
-                <div className="card slide-1-3"></div>
+        </div>
+      </section>
+      <section className="sonoma-slide" data-title="Our Climate is getting Warmer and More Variable">
+        <div className="container content-section">
+          <div className="row align-middle">
+            <div className="column medium-6">
+              <div className="chart-card -bg-grey -column">
+                <VegaChart small data={widgetConfig} />
+                <VegaChart small data={widgetConfig2} />
               </div>
             </div>
+            <div className="column medium-6">
+              <header className="header">
+                <h2 className="title">Our Climate is getting Warmer and More Variable</h2>
+              </header>
+              <p className="content">Scientists can estimate the range of future climate change outcomes using computer models.</p>
+              <p className="content">18 future projections were evaluated and all suggest that Sonoma County climate is getting warmer and more variable.</p>
+              <p className="content">This dashboard presents results from just one climate-hydrology projection for illustration.</p>
+              <p className="content">Chart: Yearly rain and yearly summer air temperature for Sonoma County, showing actual data before 2010 and projected data from multiple models after 2010. The model closest to the mid-range of all the models, used throughout this dashboard, is highlighted in black. Dotted lines show 10th and 90th percentiles.</p>
+            </div>
           </div>
-        </section>
-        </section>
+        </div>
+      </section>
+    </section>
+  );
+}
 
-
-        );
-        }
-        }
-
-        export default SonomaSlide1;
+export default SonomaSlide1;
