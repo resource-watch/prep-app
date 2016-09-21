@@ -53,11 +53,27 @@ class InsightsDetail extends React.Component {
 
     let content;
     if (this.props.data.template_type === 0) {
-      content = <IFrame src={iframeUrl} />;
+      if (this.props.data.embeddable) {
+        content = <IFrame src={iframeUrl} />;
+      } else {
+        content = (<div className="row">
+          <div className="column small-12">
+            <div className="c-insight-link">
+              <img alt="" src={config.apiUrl + this.props.data.image} />
+              <a className="c-button -border" href={this.props.data.content_url} target="_blank">
+                See insight
+              </a>
+            </div>
+          </div>
+        </div>);
+      }
     } else {
       switch (this.props.data.id) {
         case 16:
           content = <EthiopiaInsight />;
+          break;
+        case 2:
+          content = <IFrame src={iframeUrl} />;
           break;
         default:
           break;
