@@ -106,6 +106,8 @@ class DashboardDetail extends React.Component {
     const currentData = this.getCurrentData();
     const content = this.getContent();
     const title = this.props.data ? this.props.data.title : currentData.title;
+    const imageUrl = !this.props.data || this.props.data.image.indexOf('missing.png') >= 0 ?
+      null : `${config.apiUrl}${this.props.data.image}`;
 
     document.title = title;
 
@@ -128,6 +130,7 @@ class DashboardDetail extends React.Component {
             <Breadcrumbs pathname={this.props.location.pathname}/>
             <Banner
               bg={currentData.bannerBg}
+              imageUrl={imageUrl}
               size={currentData.bannerSize}
             >
               <h1>{title}</h1>
