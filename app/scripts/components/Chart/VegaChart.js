@@ -69,7 +69,7 @@ class VegaChart extends React.Component {
 
   render() {
     return (
-      <div ref="chartContainer" className={`c-vega-chart} ${this.props.small ? '-small' : ''}`}>
+      <div ref="chartContainer" className={`c-vega-chart ${this.props.small ? '-small' : ''}`}>
         <div ref="vegaChart" className="chart"></div>
       </div>
     );

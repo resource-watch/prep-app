@@ -19,7 +19,7 @@ class Root extends React.Component {
 
   setModalWelcome() {
     if (this.props.location.pathname.indexOf('embed') === -1) {
-      // this.setState({ modalWelcomeOpen: true });
+      this.setState({ modalWelcomeOpen: true });
     }
   }
 
