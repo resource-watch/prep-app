@@ -1,6 +1,6 @@
 import React from 'react';
 
-class SonomaSlideOne extends React.Component {
+class SonomaSlide2 extends React.Component {
 
   render() {
     return (<section>
@@ -47,5 +47,5 @@ class SonomaSlideOne extends React.Component {
   }
 }
 
-export default SonomaSlideOne;
+export default SonomaSlide2;
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-class SonomaSlideOne extends React.Component {
+class SonomaSlide1 extends React.Component {
 
   render() {
     return (
@@ -71,4 +71,4 @@ class SonomaSlideOne extends React.Component {
         }
         }
 
-        export default SonomaSlideOne;
+        export default SonomaSlide1;

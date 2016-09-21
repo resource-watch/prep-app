@@ -1,7 +1,7 @@
 import React from 'react';
 import background from './../../../../../../images/insights/sonoma/dashboard-sonoma-header.png';
 
-class SonomaSlideZero extends React.Component {
+class SonomaSlide0 extends React.Component {
 
   render() {
     return (
@@ -20,7 +20,7 @@ class SonomaSlideZero extends React.Component {
   }
 }
 
-export default SonomaSlideZero;
+export default SonomaSlide0;
 
 
 

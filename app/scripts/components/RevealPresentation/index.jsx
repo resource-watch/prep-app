@@ -1,11 +1,13 @@
 import React from 'react';
 import Reveal from 'reveal.js';
+import Modal from '../Modal/Modal';
 
 class RevealPresentation extends React.Component {
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
+      modalTable: false
     };
   }
 
@@ -16,6 +18,13 @@ class RevealPresentation extends React.Component {
 
   componentWillUnmount() {
     // Remove event listeners
+  }
+
+  getCurrentSlideIndex() {
+    const index = Reveal.getIndices(Reveal.getCurrentSlide());
+    index.h = index.h ? index.h : 0;
+    index.v = index.v ? index.v : 0;
+    return { indexh: index.h, indexv: index.v };
   }
 
   initializeReveal() {
@@ -39,16 +48,18 @@ class RevealPresentation extends React.Component {
     //    "c":  flattened slide number
     //  "c/t":  flattened slide number / total slides
     Reveal.slide(0, 0);
-    Reveal.configure({ slideNumber: 'c/t' });
+    Reveal.configure({ slideNumber: 'h.v' });
     // Reveal.addEventListener('ready', (event) => this.updateSlidesInfo(event).bind(this));
     // Reveal.addEventListener('slidechanged', (event) => this.updateSlidesInfo(event).bind(this));
   }
+
   goToSlide(indexh, indexv) {
     Reveal.slide(indexh, indexv);
   }
 
   render() {
-    return (<div className="reveal">
+    return (
+      <div className="reveal">
       {this.props.children}
 
       <div className="reveal-controls -horizontal -left">
@@ -73,18 +84,27 @@ class RevealPresentation extends React.Component {
       </div>
       <div className="reveal-actions">
         <div className="index">
-          <div className="menu-icon">
+          <div className="menu-icon" onClick={() => this.setState({ modalTable: true })}>
             <span></span>
             <span></span>
             <span></span>
           </div>
-          <a id="sliderTitles" href="#">Start</a>
+          <a id="sliderTitles" href="#">{this.props.slideTitles[this.getCurrentSlideIndex().indexh][this.getCurrentSlideIndex().indexv] || 'Start'}</a>
         </div>
         <div className="toolbar">
           <a href="#" className="download">Download</a>
-          <a style={{ cursor: 'pointer' }} className="share coming-soon" onClick={() => this.setShareModal('http://climateserv.nsstc.nasa.gov', 'map')}>Share</a>
+          <a href="#" className="share coming-soon">Share</a>
         </div>
       </div>
+      {this.state.modalTable &&
+        <Modal
+          opened={this.state.modalTable}
+          close={() => this.setState({ modalTable: false })}
+        >
+          <h2>Table of contents</h2>
+
+        </Modal>
+      }
     </div>);
   }
 }
