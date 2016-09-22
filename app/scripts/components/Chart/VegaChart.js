@@ -30,10 +30,13 @@ class VegaChart extends React.Component {
       dataObj = JSON.parse(data);
     }
 
-    const widthSpace = dataObj.padding ?
-      dataObj.padding.left + dataObj.padding.right : 50;
-    const heightSpace = dataObj.padding ?
-    dataObj.padding.top + dataObj.padding.bottom : 50;
+    let widthSpace = 50;
+    let heightSpace = 50;
+
+    if (dataObj.padding) {
+      widthSpace = (dataObj.padding.left || 20) + (dataObj.padding.right || 20);
+      heightSpace = (dataObj.padding.top || 25) + (dataObj.padding.bottom || 25);
+    }
 
     dataObj.width = this.width - widthSpace;
     dataObj.height = this.height - heightSpace;
