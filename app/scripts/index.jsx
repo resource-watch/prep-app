@@ -9,7 +9,6 @@ import * as reducers from './reducers';
 import Routes from './routes';
 
 import '../styles/lib/custom-foundation.css';
-import '../styles/lib/reveal.scss';
 import '../styles/index.scss';
 
 /**

@@ -15,7 +15,6 @@ import IFrame from '../IFrame';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
 import EthiopiaInsight from './Customs/Ethiopia';
-import SonomaInsight from './Customs/Sonoma';
 
 class InsightsDetail extends React.Component {
 
