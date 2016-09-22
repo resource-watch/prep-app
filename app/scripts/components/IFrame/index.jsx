@@ -2,12 +2,12 @@ import React from 'react';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
 class IFrame extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.allowGoInside = true;
     this.state = {
       loaded: false,
-      height: 400
+      height: props.height || 400
     };
   }
 
@@ -21,11 +21,14 @@ class IFrame extends React.Component {
   }
 
   onLoad() {
-    let height = this.props.src.indexOf('maps.arcgis.com') ? 650 : 400;
-    if (this.allowGoInside) {
-      height = this.refs.iframe.contentDocument.body.scrollHeight;
+    if (!this.props.height) {
+      let height = this.props.src.indexOf('maps.arcgis.com') ? 650 : 400;
+      if (this.allowGoInside) {
+        height = this.refs.iframe.contentDocument.body.scrollHeight;
+      }
+      this.setState({ loaded: true, height });
     }
-    this.setState({ loaded: true, height });
+    this.setState({ loaded: true });
   }
 
   render() {

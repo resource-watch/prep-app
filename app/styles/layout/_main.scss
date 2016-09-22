@@ -15,7 +15,7 @@ $shadow-size: 150px;
     padding-top: 96px;
 
     .c-iframe {
-      height: 100vh!important;
+      min-height: 100vh;
     }
 
     ul {

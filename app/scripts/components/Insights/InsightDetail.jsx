@@ -108,7 +108,7 @@ class InsightsDetail extends React.Component {
     let contentComponent;
     if (this.props.data.template_type === 0) {
       if (this.props.data.embeddable) {
-        contentComponent = <IFrame src={iframeUrl} />;
+        contentComponent = <IFrame src={iframeUrl} height={900} />;
       } else {
         contentComponent = (<div className="row">
           <div className="column small-12">
