@@ -4,7 +4,7 @@ import Slider from '../../lib/react-slick/react-slick';
 const settings = {
   dots: false,
   arrows: false,
-  autoplay: false,
+  autoplay: true,
   autoplaySpeed: 5000,
   infinite: true,
   speed: 500,
