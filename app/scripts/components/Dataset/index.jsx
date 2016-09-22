@@ -19,7 +19,7 @@ import LoadingSpinner from '../Loading/LoadingSpinner';
 class DatasetDetail extends React.Component {
 
   componentWillMount() {
-    if (!this.props.data) {
+    if (!this.props.data || !this.props.widgets.length) {
       this.props.getDatasetData(this.props.datasetSlug);
     }
   }
