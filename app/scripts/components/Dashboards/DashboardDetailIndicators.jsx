@@ -35,7 +35,7 @@ class DashboardDetailIndicators extends React.Component {
             : indicator.widget_config;
           if (widgetConfig.type === 'map') {
             content.push(
-              <div className="column large-12" key={`indicator-${index}`} style={{ display: 'flex' }}>
+              <div className="column small-12" key={`indicator-${index}`} style={{ display: 'flex' }}>
                 <MapCard
                   data={indicator}
                   layerId={widgetConfig.layerId}
@@ -47,7 +47,7 @@ class DashboardDetailIndicators extends React.Component {
             );
           } else if (widgetConfig.type === 'embed') {
             content.push(
-              <div className="column large-12" key={`indicator-${index}`} style={{ display: 'flex' }}>
+              <div className="column small-12" key={`indicator-${index}`} style={{ display: 'flex' }}>
                 <EmbedCard
                   autoHeight
                   data={indicator}
