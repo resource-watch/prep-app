@@ -4,11 +4,12 @@ import Slider from '../../lib/react-slick/react-slick';
 const settings = {
   dots: false,
   arrows: false,
-  autoplay: true,
-  autoplaySpeed: 3000,
+  autoplay: false,
+  autoplaySpeed: 5000,
   infinite: true,
   speed: 500,
-  slidesToShow: 5
+  slidesToShow: 5,
+  swipe: false
 };
 
 class PartnersSlider extends Component {
@@ -21,7 +22,7 @@ class PartnersSlider extends Component {
   render() {
     const partners = this.props.data.map(d => (
       <div key={`partner-slider-${d.id}`}>
-        <a href={d.url} rel="noreferrer" target="_blank" className="logo">
+        <a href={d.url} target="_blank" className="logo">
           <img
             src={config.apiUrl + d.images.white_logo}
             alt={d.name}
