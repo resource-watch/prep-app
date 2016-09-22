@@ -12,7 +12,7 @@ export function getTwitterFeed() {
         if (!data.error) {
           dispatch({
             type: TWITTER_FEED_LIST_RECEIVED,
-            payload: { data }
+            payload: { data: data.statuses }
           });
         }
       })
