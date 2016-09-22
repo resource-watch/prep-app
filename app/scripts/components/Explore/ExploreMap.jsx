@@ -101,8 +101,13 @@ class ExploreMap extends React.Component {
       this.setMapParams();
       this.updateTooltipPosition();
     });
+    this.map.on('zoomstart', () => {
+      this.zooming = true;
+    });
     this.map.on('zoomend', () => {
       this.setMapParams();
+      this.updateTooltipPosition();
+      this.zooming = false;
     });
     this.map.on('click', (e) => {
       this.handleMapClick(e);
@@ -135,7 +140,7 @@ class ExploreMap extends React.Component {
   updateTooltipPosition() {
     if (this.latLngClicked) {
       this.props.setInteractionPosition(this.map.latLngToContainerPoint(this.latLngClicked));
-      if (this.dragging) this.props.setInteractionVisibility(true);
+      if (this.dragging || this.zooming) this.props.setInteractionVisibility(true);
     }
   }
 
