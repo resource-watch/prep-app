@@ -24,7 +24,7 @@ const webpackConfig = {
       template: 'app/index.html',
       inject: 'body',
       filename: 'index.html',
-      googleAnalytics: process.env.NODE_ENV === 'production' ? 
+      googleAnalytics: process.env.NODE_ENV === 'production' ?
         JSON.stringify(process.env.GOOGLE_ANALYTICS) : 'UA-XXXXXXXX-YY'
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
