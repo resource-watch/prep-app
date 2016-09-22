@@ -12,7 +12,7 @@
   // TODO: exploreSidebar
   transform: translate(-50%, calc(-100% - 15px));
 
-  & > .-tooltip-text {
+  > .tooltip-text {
     overflow-y: auto;
     max-height: 120px;
     color: $white;
@@ -50,6 +50,46 @@
 
   &.-hidden {
     display: none;
+  }
+
+  &.-scroll {
+    padding: 0;
+    padding-bottom: .5rem;
+    min-width: 260px;
+    > .tooltip-text {
+      max-height: none;
+      overflow-y: visible;
+      position: relative;
+      .header {
+        margin-top: 1rem;
+        margin-bottom: .5rem;
+        max-height: 28px;
+        > h3 { margin: 0;}
+      }
+      .content {
+        height: 110px;
+        padding: .5rem $small-margin;
+        padding-left: 1rem;
+        overflow-y: auto;
+        background-color: $navy;
+
+        &:before {
+          @include arrow(7px, 2px, 45deg);
+          position: absolute;
+          top: 50px;
+          right: 1rem;
+          left: auto;
+        }
+        &:after {
+          @include arrow(7px, 2px, 225deg);
+          position: absolute;
+          bottom: 10px;
+          right: 1rem;
+          left: auto;
+          top: auto;
+        }
+      }
+    }
   }
 
 }

@@ -64,12 +64,16 @@ class ExploreMap extends React.Component {
   tooltipText(text, data) {
     return (
       <div>
-        <h3>Dataset info</h3>
-        {data ?
+        <div className="header">
+          <h3>Dataset info</h3>
+        </div>
+        {data
+        ? <div className="content">
           <table className="table-data">
             <tbody>{text}</tbody>
-          </table> :
-          <p>No data available.</p>}
+          </table>
+        </div>
+        : <p>No data available.</p>}
       </div>);
   }
 
@@ -472,6 +476,7 @@ class ExploreMap extends React.Component {
       <div className="map" ref="map"></div>
       {loading}
       <Tooltip
+        scroll
         ref="tagTooltip"
         text={this.state.tooltip.text}
         hidden={this.state.tooltip.hidden}
