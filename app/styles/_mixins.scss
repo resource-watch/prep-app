@@ -83,3 +83,17 @@ $hamburguer-transition: 0.3s;
     }
   }
 }
+
+@mixin arrow($width, $border-width, $deg) {
+  display: block;
+  content: "";
+  top: 50%;
+  left: 50%;
+  width: $width;
+  height: $width;
+  // you need specify border-color
+  border-top: $border-width solid;
+  border-left: $border-width solid;
+  transform: translate(-50%, -50%) rotate($deg);
+  pointer-events: none;
+}

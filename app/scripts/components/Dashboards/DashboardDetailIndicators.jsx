@@ -40,6 +40,8 @@ class DashboardDetailIndicators extends React.Component {
                   data={indicator}
                   layerId={widgetConfig.layerId}
                   setShareModal={this.setShareModal}
+                  dashboardSlug={this.props.dashboardSlug}
+                  link={`/dataset/${indicator.dataset}`}
                 />
               </div>
             );
@@ -51,6 +53,8 @@ class DashboardDetailIndicators extends React.Component {
                   data={indicator}
                   url={widgetConfig.url}
                   setShareModal={this.setShareModal}
+                  dashboardSlug={this.props.dashboardSlug}
+                  link={`/dataset/${indicator.dataset}`}
                 />
               </div>
             );

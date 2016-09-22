@@ -19,6 +19,8 @@ class MapCard extends React.Component {
         inner
         floatAttribution
         header={header}
+        link={this.props.link}
+        dashboardSlug={this.props.dashboardSlug}
         attribution={this.props.data.attribution}
         noBorder={this.props.noBorder}
         share={typeof this.props.setShareModal === 'function'}
@@ -46,6 +48,10 @@ MapCard.propTypes = {
    * Define layer id to add in map
    */
   layerId: React.PropTypes.string.isRequired,
+  /**
+   * Define it the card has link
+   */
+  link: React.PropTypes.string,
   /**
    * Set share modal state
    */

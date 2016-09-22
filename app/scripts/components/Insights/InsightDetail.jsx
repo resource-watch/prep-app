@@ -129,9 +129,6 @@ class InsightsDetail extends React.Component {
         case 2:
           contentComponent = <IFrame src={iframeUrl} />;
           break;
-        case 2:
-          content = <IFrame src={iframeUrl} />;
-          break;
         default:
           break;
       }

@@ -16,8 +16,8 @@ class Tooltip extends React.Component {
     const border = this.props.width !== 'auto' ? this.props.width * 0.1 : 10;
 
     return (
-      <div className={`c-tooltip ${visibility}`} style={styles}>
-        <div className="-tooltip-text">
+      <div className={`c-tooltip ${visibility} ${this.props.scroll ? '-scroll' : ''}`} style={styles}>
+        <div className="tooltip-text">
           {this.props.text}
         </div>
       </div>
@@ -42,7 +42,11 @@ Tooltip.propTypes = {
   /**
    * Define the width of the tooltip
    */
-  width: React.PropTypes.string
+  width: React.PropTypes.string,
+  /**
+   * Define if want scroll in the tooltip
+   */
+  scroll: React.PropTypes.bool
 };
 
 export default Tooltip;
