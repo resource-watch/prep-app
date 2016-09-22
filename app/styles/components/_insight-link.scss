@@ -1,0 +1,11 @@
+.c-insight-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  > .c-button {
+    position: absolute;
+    text-decoration: none;
+    color: $button-font-color-inverse;
+  }
+}

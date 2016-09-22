@@ -69,7 +69,7 @@ class VegaChart extends React.Component {
 
   render() {
     return (
-      <div ref="chartContainer" className="c-vega-chart">
+      <div ref="chartContainer" className={`c-vega-chart ${this.props.small ? '-small' : ''}`}>
         <div ref="vegaChart" className="chart"></div>
       </div>
     );
@@ -80,7 +80,11 @@ VegaChart.propTypes = {
   /**
    * Define the chart data
    */
-  data: React.PropTypes.any.isRequired
+  data: React.PropTypes.any.isRequired,
+  /**
+   * Remove the min-height in component
+   */
+  small: React.PropTypes.bool
 };
 
 export default VegaChart;

@@ -17,6 +17,7 @@ class EmbedCard extends React.Component {
     return (
       <ContentCard
         inner
+        floatAttribution
         header={header}
         autoHeight={this.props.autoHeight}
         attribution={this.props.data.attribution}

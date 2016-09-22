@@ -103,7 +103,6 @@ class ExploreMap extends React.Component {
     });
     this.map.on('zoomend', () => {
       this.setMapParams();
-      this.updateTooltipPosition();
     });
     this.map.on('click', (e) => {
       this.handleMapClick(e);

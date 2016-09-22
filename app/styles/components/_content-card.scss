@@ -18,8 +18,22 @@ $content-header-height: 80px;
 
   &.-inner {
     padding: 0;
+    border: none;
     > .header {
-      padding: $small-margin $small-margin 0
+      padding: $small-margin $small-margin 0;
+      border: solid 2px $border-color;
+    }
+    > .content {
+      border: solid 2px $border-color;
+      border-top: 0;
+    }
+  }
+
+  &.-float-attribution {
+    margin-bottom: $large-margin;
+    > .attribution {
+      position: absolute;
+      margin-top: $small-margin;
     }
   }
 
@@ -52,8 +66,13 @@ $content-header-height: 80px;
   &.-bg {
     border: none;
     background-color: $secondary-color;
-    > .header .legend {
-      color: $inverse-font-color;
+    > .header {
+      .legend {
+        color: $inverse-font-color;
+      }
+      .card-options .icon path {
+        fill: $button-font-color;
+      }
     }
   }
 

@@ -42,61 +42,15 @@ class InsightsDetail extends React.Component {
     return currentData;
   }
 
-  getContent() {
+  getHeader() {
     if (!this.props.data) {
-      return <LoadingSpinner />;
-    }
-    const contentUrl = this.props.data.content_url;
-    let iframeUrl = contentUrl.indexOf('github.io') > -1
-      ? `/proxy?url=${contentUrl}`
-      : contentUrl;
-
-    let content;
-    if (this.props.data.template_type === 0) {
-      content = <IFrame src={iframeUrl} />;
-    } else {
-      switch (this.props.data.id) {
-        case 16:
-          content = <EthiopiaInsight />;
-          break;
-        case 2:
-          content = <IFrame src={iframeUrl} />;
-          break;
-        default:
-          break;
-      }
+      return null;
     }
 
-    return (
-      <div>
-        <SectionIntro
-          data={this.props.data}
-          insightSlug={this.props.insightSlug}
-          insightUrl={this.props.data.content_url}
-          currentSection={'insights'}
-        >
-          <p> {this.props.data.summary} </p>
-        </SectionIntro>
-
-        {content}
-      </div>
-    );
-  }
-
-  render() {
-    const currentData = this.getCurrentData();
-    const title = this.props.data ? this.props.data.title : currentData.title;
-    const imageUrl = !this.props.data || this.props.data.image.indexOf('missing.png') >= 0 ?
-      null : `${config.apiUrl}${this.props.data.image}`;
-
-    document.title = title;
-
-    let content = this.getContent();
-
-    return (
-      <div className="-theme-3">
-        <header className="l-header">
-          <div className={`l-header-nav ${currentData.name === 'home' ? '-no-bg' : ''}`}>
+    if (this.props.data && this.props.data.id === 2) {
+      return (
+        <header className="l-header -float">
+          <div className="l-header-nav -dark">
             <div className="row align-middle">
               <div className="column small-10 medium-4">
                 <Link to={'/'} className="logo">
@@ -108,49 +62,144 @@ class InsightsDetail extends React.Component {
               </div>
             </div>
           </div>
-          <div className="l-header-banner">
-            <Breadcrumbs pathname={this.props.location.pathname} />
-            <Banner
-              imageUrl={imageUrl}
-              size={currentData.bannerSize}
-            >
-              <h1>{title}</h1>
-            </Banner>
+        </header>);
+    }
+
+    const currentData = this.getCurrentData();
+    const title = this.props.data ? this.props.data.title : currentData.title;
+    const imageUrl = !this.props.data || this.props.data.image.indexOf('missing.png') >= 0 ?
+      null : `${config.apiUrl}${this.props.data.image}`;
+
+    document.title = title;
+    return (<header className="l-header">
+      <div className={`l-header-nav ${currentData.name === 'home' ? '-no-bg' : ''}`}>
+        <div className="row align-middle">
+          <div className="column small-10 medium-4">
+            <Link to={'/'} className="logo">
+              <img src={logoImage} alt="Partnership for Resilience and Preparedness" />
+            </Link>
           </div>
-        </header>
-
-        <div className="l-main">
-
-          {content}
-
+          <div className="column small-2 medium-8">
+            <MainNav />
+          </div>
         </div>
+      </div>
+      <div className="l-header-banner">
+        <Breadcrumbs pathname={this.props.location.pathname} />
+        <Banner
+          imageUrl={imageUrl}
+          size={currentData.bannerSize}
+        >
+          <h1>{title}</h1>
+        </Banner>
+      </div>
+    </header>);
+  }
 
-        <footer className="l-footer">
-          <div className="l-footer-top -inverse">
-            <div className="row">
-              <div className="column small-12">
-                <PartnersSlider />
-              </div>
+  getContent() {
+    if (!this.props.data) {
+      return <LoadingSpinner />;
+    }
+    const contentUrl = this.props.data.content_url;
+    let iframeUrl = contentUrl.indexOf('github.io') > -1
+      ? `/proxy?url=${contentUrl}`
+      : contentUrl;
+
+    let contentComponent;
+    if (this.props.data.template_type === 0) {
+      if (this.props.data.embeddable) {
+        contentComponent = <IFrame src={iframeUrl} />;
+      } else {
+        contentComponent = (<div className="row">
+          <div className="column small-12">
+            <div className="c-insight-link">
+              <img alt="" src={config.apiUrl + this.props.data.image} />
+              <a className="c-button -border" href={this.props.data.content_url} target="_blank">
+                See insight
+              </a>
             </div>
           </div>
-          <div className="l-footer-sep">
-            <div className="row">
-              <div className="column small-12">
-                <div className="footer-sep-item"></div>
+        </div>);
+      }
+    } else {
+      switch (this.props.data.id) {
+        case 16:
+          contentComponent = <EthiopiaInsight />;
+          break;
+        case 2:
+          contentComponent = <IFrame src={iframeUrl} />;
+          break;
+        case 2:
+          content = <IFrame src={iframeUrl} />;
+          break;
+        default:
+          break;
+      }
+    }
+
+    let content;
+    if (this.props.data.template_type === 2) {
+      content = (<div className="l-main -template-2">
+        {contentComponent}
+      </div>);
+    } else {
+      content = (<div className="l-main">
+        <SectionIntro
+          data={this.props.data}
+          insightSlug={this.props.insightSlug}
+          insightUrl={this.props.data.content_url}
+          currentSection={'insights'}
+        >
+          <p> {this.props.data.summary} </p>
+        </SectionIntro>
+
+        {contentComponent}
+      </div>);
+    }
+
+    return content;
+  }
+
+  render() {
+    let header = this.getHeader();
+    let content = this.getContent();
+
+    return (
+      <div className="-theme-3">
+
+        {header}
+
+        {content}
+
+        {this.props.data && this.props.data.template_type === 2
+          ? null
+          : <footer className="l-footer">
+            <div className="l-footer-top -inverse">
+              <div className="row">
+                <div className="column small-12">
+                  <PartnersSlider />
+                </div>
               </div>
             </div>
-          </div>
-          <div className="l-footer-down">
-            <div className="row">
-              <div className="column small-6 align-middle">
-                <SocialNav />
-              </div>
-              <div className="column small-6 align-middle">
-                <SecondaryNav />
+            <div className="l-footer-sep">
+              <div className="row">
+                <div className="column small-12">
+                  <div className="footer-sep-item"></div>
+                </div>
               </div>
             </div>
-          </div>
-        </footer>
+            <div className="l-footer-down">
+              <div className="row">
+                <div className="column small-6 align-middle">
+                  <SocialNav />
+                </div>
+                <div className="column small-6 align-middle">
+                  <SecondaryNav />
+                </div>
+              </div>
+            </div>
+          </footer>
+        }
       </div>
     );
   }

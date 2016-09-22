@@ -17,6 +17,7 @@ class MapCard extends React.Component {
     return (
       <ContentCard
         inner
+        floatAttribution
         header={header}
         attribution={this.props.data.attribution}
         noBorder={this.props.noBorder}

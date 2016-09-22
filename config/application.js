@@ -53,8 +53,9 @@ const twitterClient = new Twitter({
 });
 
 app.get('/api/twitter', (req, res) => {
-  const urlPath = 'statuses/user_timeline';
-  const params = { screen_name: process.env.TWITTER_USER, count: 10 };
+  const urlPath = 'search/tweets';
+  // const params = { screen_name: process.env.TWITTER_USER, count: 10 };
+  const params = { q: 'list:worldresources/prep4climate #prep4climate', count: 10 };
   twitterClient.get(urlPath, params, (err, timeline) => {
     if (err) {
       res.json({ error: err });

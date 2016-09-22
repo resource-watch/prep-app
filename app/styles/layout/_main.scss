@@ -9,39 +9,72 @@ $shadow-size: 150px;
   min-height: 30vh;
   z-index: 1;
 
+  &.-template-2 {
+    padding: 0;
+    height: 100vh;
+    padding-top: 96px;
+
+    .c-iframe {
+      height: 100vh!important;
+    }
+
+    ul {
+      > li {
+
+      &.-no-bullet {
+        > li {
+          &:before {
+            content: none;
+          }
+
+          > a {
+            font-weight: 400;
+          }
+        }
+      }
+    }
+      > a {
+        color: $header-font-color;
+      }
+  }
+  }
+
   .c-modal & {
     padding: 0;
     min-height: auto;
   }
 
-  ul > li {
-    position: relative;
-    list-style: none;
+  ul {
+    > li {
+      position: relative;
+      list-style: none;
 
-    > span {
-      &:first-of-type {
-        font-weight: 700;
-      }
-    }
-
-    &:before {
-      display: block;
-      position: absolute;
-      content: "";
-      width: rem(7);
-      height: rem(7);
-      top: 0.57rem;
-      left: -1.5rem;
-      font-size: rem(14);
-
-      background-color: $secondary-color;
-
-      .-theme-2 & {
-        background-color: $thirth-color;
+      > span {
+        &:first-of-type {
+          font-weight: 700;
+        }
       }
 
-      .-theme-3 & {
-        background-color: $fourth-color;
+      &:before {
+        display: block;
+        position: absolute;
+        content: "";
+        width: rem(7);
+        height: rem(7);
+        top: 0.57rem;
+        left: -1.5rem;
+        font-size: rem(14);
+
+        background-color: $secondary-color;
+
+        .-theme-2 & {
+          background-color: $thirth-color;
+        }
+
+        .-theme-3 & {
+          background-color: $fourth-color;
+        }
+
       }
     }
   }
