@@ -42,8 +42,10 @@ function getDownloadUrl(data) {
 }
 
 function MetadataInfo(props) {
-  const metadataInfo = props.data.metadata[0].info;
+  const metadataInfo = props.data.metadata && props.data.metadata[0].info;
   const downloadUrl = getDownloadUrl(props.data);
+
+  if (!metadataInfo) return null;
 
   const title = metadataInfo.attributes.message
     ? <li>

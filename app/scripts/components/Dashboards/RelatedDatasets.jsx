@@ -5,7 +5,7 @@ class RelatedDatasets extends React.Component {
 
   componentWillMount() {
     for (let i = 0, slugsLength = this.props.slugs.length; i < slugsLength; i++) {
-      if (this.props.slugs[i]) this.props.getDatasetById(this.props.slugs[i]);
+      if (this.props.slugs[i]) this.props.getDatasetById(this.props.slugs[i], ['metadata']);
     }
   }
 
