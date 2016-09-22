@@ -1,5 +1,12 @@
 $header-bg-color: $dark-slate-blue-2;
 
+.l-header.-float {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
 .l-header-nav {
   position: relative;
   background-color: rgba($navy, .45);

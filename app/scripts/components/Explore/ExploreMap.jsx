@@ -64,12 +64,16 @@ class ExploreMap extends React.Component {
   tooltipText(text, data) {
     return (
       <div>
-        <h3>Dataset info</h3>
-        {data ?
+        <div className="header">
+          <h3>Dataset info</h3>
+        </div>
+        {data
+        ? <div className="content">
           <table className="table-data">
             <tbody>{text}</tbody>
-          </table> :
-          <p>No data available.</p>}
+          </table>
+        </div>
+        : <p>No data available.</p>}
       </div>);
   }
 
@@ -101,8 +105,13 @@ class ExploreMap extends React.Component {
       this.setMapParams();
       this.updateTooltipPosition();
     });
+    this.map.on('zoomstart', () => {
+      this.zooming = true;
+    });
     this.map.on('zoomend', () => {
       this.setMapParams();
+      this.updateTooltipPosition();
+      this.zooming = false;
     });
     this.map.on('click', (e) => {
       this.handleMapClick(e);
@@ -135,7 +144,7 @@ class ExploreMap extends React.Component {
   updateTooltipPosition() {
     if (this.latLngClicked) {
       this.props.setInteractionPosition(this.map.latLngToContainerPoint(this.latLngClicked));
-      if (this.dragging) this.props.setInteractionVisibility(true);
+      if (this.dragging || this.zooming) this.props.setInteractionVisibility(true);
     }
   }
 
@@ -467,6 +476,7 @@ class ExploreMap extends React.Component {
       <div className="map" ref="map"></div>
       {loading}
       <Tooltip
+        scroll
         ref="tagTooltip"
         text={this.state.tooltip.text}
         hidden={this.state.tooltip.hidden}

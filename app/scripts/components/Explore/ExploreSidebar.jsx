@@ -28,24 +28,32 @@ class DataMap extends React.Component {
     const tag = e.target;
     const tooltip = ReactDOM.findDOMNode(this.refs.tagTooltip);
     const tooltipParent = tooltip.parentNode;
-    const tooltipText = tooltip.firstChild;
+    // const tooltipText = tooltip.firstChild;
+
     // Get elements' position
     const tParentBounds = tooltipParent.getBoundingClientRect();
     const tagBounds = tag.getBoundingClientRect();
+
     // Get elements' height and width
     const tagWidth = tag.offsetWidth;
-    const tagHeight = tag.offsetHeight;
-    const tooltipTextWidth = tooltipText.offsetWidth;
-    const tooltipTextHeight = tooltipText.offsetHeight;
+    // const tagHeight = tag.offsetHeight;
+    // const tooltipTextWidth = tooltipText.offsetWidth;
+    // const tooltipTextHeight = tooltipText.offsetHeight;
+
     // Update the state of the tooltip
     this.props.setTooltip(
       {
         hidden: false,
+        // position: {
+        //   top: (tagBounds.top - (tParentBounds.top + (tagHeight + tooltipTextHeight))),
+        //   left: (tagBounds.left - (tooltipTextWidth / 2) + (tagWidth / 2))
+        // },
         position: {
-          top: (tagBounds.top - (tParentBounds.top + (tagHeight + tooltipTextHeight))),
-          left: (tagBounds.left - (tooltipTextWidth / 2) + (tagWidth / 2))
+          top: tagBounds.top - tParentBounds.top,
+          left: tagBounds.left + (tagWidth / 2)
         }
-      });
+      }
+    );
   }
 
   onTagLeave() {
