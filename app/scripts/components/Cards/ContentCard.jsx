@@ -26,6 +26,17 @@ function ContentCard(props) {
     subtitle = <span className="legend">{props.header.subtitle}</span>;
   }
 
+  let downloadUrl;
+  if (props.downloadUrl) {
+    if (props.downloadUrl.indexOf(config.apiUrlRW) > -1) {
+      downloadUrl = props.downloadUrl.replace('query', 'download');
+    } else if (props.downloadUrl.indexOf('query') > -1 || props.downloadUrl.indexOf('download') > -1) {
+      downloadUrl = `${config.apiUrlRW}/${props.downloadUrl.replace('query', 'download')}`;
+    } else {
+      downloadUrl = props.downloadUrl;
+    }
+  }
+
   return (
     <div className={classNames.join(' ')}>
       <div className="header">
@@ -41,7 +52,7 @@ function ContentCard(props) {
         </div>
         <div className="card-options">
           {props.downloadUrl &&
-          <a href={`${config.apiUrlRW}/${props.downloadUrl}`} target="_blank"
+          <a href={downloadUrl} target="_blank"
              className="c-button -action -icon">
             <svg className="icon" width="10" height="12" viewBox="0 0 10 12"><title>Download</title>
               <g fill="none" fillRule="evenodd">

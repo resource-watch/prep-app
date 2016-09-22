@@ -11,8 +11,8 @@ class Root extends React.Component {
   }
 
   componentDidMount() {
-    if (sessionStorage.getItem('modalWelcomeOpened') === false ||
-      sessionStorage.getItem('modalWelcomeOpened') === null) {
+    if (localStorage.getItem('modalWelcomeOpened') === false ||
+      localStorage.getItem('modalWelcomeOpened') === null) {
       this.setModalWelcome();
     }
   }
@@ -34,7 +34,7 @@ class Root extends React.Component {
             opened={this.state.modalWelcomeOpen}
             close={() => {
               this.setState({ modalWelcomeOpen: false });
-              sessionStorage.setItem('modalWelcomeOpened', JSON.stringify(true));
+              localStorage.setItem('modalWelcomeOpened', JSON.stringify(true));
             }
             }
             hideCloseButton

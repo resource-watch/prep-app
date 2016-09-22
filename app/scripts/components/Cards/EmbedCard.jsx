@@ -13,6 +13,7 @@ class EmbedCard extends React.Component {
       title: this.props.data.title,
       subtitle: this.props.data.subtitle
     };
+    const downloadUrl = this.props.data.data_url || false;
 
     return (
       <ContentCard
@@ -20,6 +21,7 @@ class EmbedCard extends React.Component {
         floatAttribution
         header={header}
         link={this.props.link}
+        downloadUrl={downloadUrl}
         dashboardSlug={this.props.dashboardSlug}
         autoHeight={this.props.autoHeight}
         attribution={this.props.data.attribution}

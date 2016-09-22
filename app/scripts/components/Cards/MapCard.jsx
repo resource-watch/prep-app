@@ -13,6 +13,7 @@ class MapCard extends React.Component {
       title: this.props.data.title,
       subtitle: this.props.data.subtitle
     };
+    const downloadUrl = this.props.data.data_url || false;
 
     return (
       <ContentCard
@@ -21,6 +22,7 @@ class MapCard extends React.Component {
         header={header}
         link={this.props.link}
         dashboardSlug={this.props.dashboardSlug}
+        downloadUrl={downloadUrl}
         attribution={this.props.data.attribution}
         noBorder={this.props.noBorder}
         share={typeof this.props.setShareModal === 'function'}
