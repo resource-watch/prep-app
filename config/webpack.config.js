@@ -25,7 +25,7 @@ const webpackConfig = {
       inject: 'body',
       filename: 'index.html',
       googleAnalytics: process.env.NODE_ENV === 'production' ?
-        JSON.stringify(process.env.GOOGLE_ANALYTICS) : 'UA-XXXXXXXX-YY'
+        process.env.GOOGLE_ANALYTICS : 'UA-XXXXXXXX-YY'
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
