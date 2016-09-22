@@ -19,6 +19,8 @@ class EmbedCard extends React.Component {
         inner
         floatAttribution
         header={header}
+        link={this.props.link}
+        dashboardSlug={this.props.dashboardSlug}
         autoHeight={this.props.autoHeight}
         attribution={this.props.data.attribution}
         noBorder={this.props.noBorder}
@@ -47,6 +49,10 @@ EmbedCard.propTypes = {
    * Define url to embed
    */
   url: React.PropTypes.string.isRequired,
+  /**
+   * Define it the card has link
+   */
+  link: React.PropTypes.string,
   /**
    * Set share modal state
    */
