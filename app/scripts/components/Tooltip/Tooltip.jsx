@@ -3,7 +3,7 @@ import React from 'react';
 class Tooltip extends React.Component {
 
   render() {
-    const visibility = this.props.hidden ? '' : '-visible';
+    const visibility = this.props.hidden ? '-hidden' : '-visible';
     let styles = {
       top: this.props.position.top,
       left: this.props.position.left,
