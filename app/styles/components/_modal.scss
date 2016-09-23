@@ -16,11 +16,33 @@
     padding: 1.25rem 4rem;
   }
 
+  .close-button {
+    position: absolute;
+    bottom: 94%;
+    left: 85%;
+    width: 21px;
+    height: 21px;
+    cursor: pointer;
+    fill: $base-bg-color;
+    transition: fill .3s;
+    &:hover {
+      fill: $secondary-color;
+      .-theme-2 & {
+        fill: $thirth-color;
+      }
+      .-theme-3 & {
+        fill: $fourth-color;
+      }
+    }
+  }
+
   > .c-modal {
     position: relative;
     background-color:$base-bg-color;
     width: 80%;
     max-width: rem($max-width);
+    overflow-y: overlay;
+    margin-top: $small-margin;
 
     @media #{$mq-medium} {
       min-width: rem(370);
@@ -74,6 +96,11 @@
       .openEmbed {
         margin-top: rem(35);
       }
+
+      & + .close-button {
+        bottom: 86%;
+        left: 72%;
+      }
     }
 
     &.presentation {
@@ -118,27 +145,7 @@
         }
       }
     }
-
-    > .close-button {
-      position: absolute;
-      top: -20px;
-      right: 0px;
-      width: 16px;
-      height: 16px;
-      cursor: pointer;
-      fill: $base-bg-color;
-      transition: fill .3s;
-      &:hover {
-        fill: $secondary-color;
-        .-theme-2 & {
-          fill: $thirth-color;
-        }
-        .-theme-3 & {
-          fill: $fourth-color;
-        }
-      }
-    }
-  }
+}
 }
 
 /* React animations for when the modal will appear */
