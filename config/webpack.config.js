@@ -10,6 +10,7 @@ const rootPath = process.cwd();
 const webpackConfig = {
 
   entry: [
+    'babel-polyfill',
     path.join(rootPath, 'app/scripts/index.jsx')
   ],
 
