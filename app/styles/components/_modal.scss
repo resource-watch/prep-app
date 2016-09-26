@@ -12,19 +12,33 @@
   justify-content: center;
   padding: 1rem;
 
+
   @media #{$mq-medium} {
     padding: 1.25rem 4rem;
   }
 
-  .close-button {
+  .wrapper {
     position: absolute;
-    bottom: 94%;
-    left: 85%;
+    width: 85%;
+    height: 99%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    pointer-events: none;
+  }
+
+  .close-button {
+    position: relative;
+    bottom: 98%;
+    left: 39%;
     width: 21px;
     height: 21px;
     cursor: pointer;
     fill: $base-bg-color;
     transition: fill .3s;
+    pointer-events: auto;
     &:hover {
       fill: $secondary-color;
       .-theme-2 & {
@@ -36,16 +50,16 @@
     }
   }
 
-  > .c-modal {
-    position: relative;
-    background-color:$base-bg-color;
-    width: 80%;
-    max-width: rem($max-width);
-    overflow-y: overlay;
-    margin-top: $small-margin;
-
+   .c-modal {
+      position: relative;
+      background-color:$base-bg-color;
+      width: 80%;
+      max-width: rem($max-width);
+      overflow-y: overlay;
+      margin-top: $small-margin;
+      pointer-events: auto;
     @media #{$mq-medium} {
-      min-width: rem(370);
+      // min-width: rem(370);
     }
 
     .m-content {
@@ -79,11 +93,10 @@
     }
 
     &.share {
-      width: auto;
-      min-width: auto;
+      width: 40%;
 
       @media #{$mq-medium} {
-        width: rem(620);
+        // width: rem(620);
         & .m-content {
           padding: $medium-margin $large-margin;
         }
@@ -98,8 +111,9 @@
       }
 
       & + .close-button {
-        bottom: 86%;
-        left: 72%;
+        bottom: 0;
+        top: -60%;
+        left: 23%;
       }
     }
 

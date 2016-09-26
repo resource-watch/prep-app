@@ -34,6 +34,7 @@ class Modal extends React.Component {
     if (this.props.opened) {
       modal = (
         <div className="overlay" onClick={(e) => this.onClickOverlay(e)}>
+          <div className="wrapper">
           <div className={`c-modal ${className}`}>
             {this.props.navbar && this.props.navbar()}
             <div className="m-content">
@@ -52,6 +53,7 @@ class Modal extends React.Component {
               d="M11.872.559L7.347 5.084 2.788.525.525 2.788l4.56 4.559-4.526 4.525 2.196 2.197L7.28 9.543l4.56 4.559 2.262-2.263L9.543 7.28l4.526-4.525z"/>
           </svg>
           }
+          </div>
         </div>
       );
     }
