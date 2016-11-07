@@ -81,6 +81,7 @@ export function getDatasets(defaultActiveLayers) {
       })
       .then(data => {
         deserializer.deserialize(data, (err, datasetData) => {
+          if (err) throw new Error('Error deserializing json api');
           const datasets = datasetData || [];
           if (datasets.length) {
             for (let i = datasets.length - 1; i >= 0; i--) {
@@ -136,6 +137,7 @@ export function getDatasetById(datasetId, includesData) {
       })
       .then(data => {
         deserializer.deserialize(data, (err, datasetData) => {
+          if (err) throw new Error('Error deserializing json api');
           if (datasetData) {
             dispatch({
               type: DATASET_DETAIL_RECEIVED,
