@@ -85,7 +85,7 @@ class DataMap extends React.Component {
       let partner = '';
 
       if (dataset.metadata && dataset.metadata.length) {
-        const metadata = dataset.metadata[0].info.attributes;
+        const metadata = dataset.metadata[0].attributes.info.attributes;
         if (metadata) {
           if (metadata.subtitle) {
             subtitle = metadata.subtitle;

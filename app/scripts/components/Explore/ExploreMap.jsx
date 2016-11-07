@@ -210,7 +210,7 @@ class ExploreMap extends React.Component {
     this.hasActiveLayers = false;
     if (datasets.length) {
       datasets.forEach((dataset) => {
-        if (dataset.layers.length) {
+        if (dataset.layers && dataset.layers.length) {
           this.updateMapLayer(dataset, layers, datasets.length);
         }
       });

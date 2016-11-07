@@ -5,24 +5,24 @@ function getDownloadUrl(data) {
   let url = null;
   let metadataUrl = null;
   if (data.metadata && data.metadata.length &&
-      data.metadata[0].info.attributes.dataDownload) {
-    metadataUrl = data.metadata[0].info.attributes.dataDownload;
+      data.metadata[0].attributes.info.attributes.dataDownload) {
+    metadataUrl = data.metadata[0].attributes.info.attributes.dataDownload;
   }
   switch(data.provider) {
     case 'wms':
       url = null;
       break;
     case 'cartodb':
-      if (data.connector_url.indexOf('tables') === -1) {
-        const uri = new URI(data.connector_url);
+      if (data.connectorUrl.indexOf('tables') === -1) {
+        const uri = new URI(data.connectorUrl);
         uri.search({ format: 'csv' });
         url = uri.toString();
       } else {
-        url = data.connector_url;
+        url = data.connectorUrl;
       }
       break;
     case 'featureservice':
-      const uri = new URI(data.connector_url);
+      const uri = new URI(data.connectorUrl);
       uri.segment('query');
       uri.search({
         where: '1=1',
@@ -36,13 +36,13 @@ function getDownloadUrl(data) {
       url = uri.toString();
       break;
     default:
-      url = metadataUrl || data.connector_url;
+      url = metadataUrl || data.connectorUrl;
   }
   return url;
 }
 
 function MetadataInfo(props) {
-  const metadataInfo = props.data.metadata && props.data.metadata[0].info;
+  const metadataInfo = props.data.metadata && props.data.metadata[0].attributes.info;
   const downloadUrl = getDownloadUrl(props.data);
 
   if (!metadataInfo) return null;

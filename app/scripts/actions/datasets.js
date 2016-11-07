@@ -12,6 +12,9 @@ import {
 } from '../constants';
 
 import { updateURL } from './links';
+import * as JsonApi from 'jsonapi-serializer';
+
+const deserializer = new JsonApi.Deserializer({ keyForAttribute: 'camelCase' });
 
 export function getDatasetLayer(dataset) {
   return dispatch => {
@@ -62,43 +65,48 @@ export function getActiveDatasetLayers(datasets) {
 export function setDatasetsTagFilter(filter, tag) {
   return {
     type: DATASET_SET_FILTER,
-    payload: { filter, tag }
+    payload: {
+      filter,
+      tag
+    }
   };
 }
 
 export function getDatasets(defaultActiveLayers) {
   return dispatch => {
-    fetch(`${config.apiUrlRW}/datasets?app=prep&includes=metadata`)
+    fetch(`${config.apiUrlRW}/dataset?app=prep&includes=metadata`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
       })
       .then(data => {
-        const datasets = data || [];
-        if (datasets.length) {
-          for (let i = datasets.length - 1; i >= 0; i--) {
-            if (defaultActiveLayers) {
-              const index = defaultActiveLayers.indexOf(datasets[i].id);
-              if (index > -1) {
-                datasets[i].active = true;
-                datasets[i].index = index + 1;
-                datasets[i].opacity = 1;
+        deserializer.deserialize(data, (err, datasetData) => {
+          const datasets = datasetData || [];
+          if (datasets.length) {
+            for (let i = datasets.length - 1; i >= 0; i--) {
+              if (defaultActiveLayers) {
+                const index = defaultActiveLayers.indexOf(datasets[i].id);
+                if (index > -1) {
+                  datasets[i].active = true;
+                  datasets[i].index = index + 1;
+                  datasets[i].opacity = 1;
+                }
               }
             }
           }
-        }
-        dispatch({
-          type: DATASET_LIST_RECEIVED,
-          payload: {
-            data: datasets
-          }
+          dispatch({
+            type: DATASET_LIST_RECEIVED,
+            payload: {
+              data: datasets
+            }
+          });
+          dispatch(getActiveDatasetLayers(datasets));
+          dispatch({
+            type: DATASET_SET_FILTER,
+            payload: {}
+          });
+          dispatch(updateURL());
         });
-        dispatch(getActiveDatasetLayers(datasets));
-        dispatch({
-          type: DATASET_SET_FILTER,
-          payload: {}
-        });
-        dispatch(updateURL());
       })
       .catch((err) => {
         dispatch({
@@ -121,18 +129,22 @@ export function getDatasetById(datasetId, includesData) {
     '';
 
   return dispatch => {
-    fetch(`${config.apiUrlRW}/datasets/${datasetId}?app=prep${includeQuery}`)
+    fetch(`${config.apiUrlRW}/dataset/${datasetId}?app=prep${includeQuery}`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
       })
       .then(data => {
-        if (data) {
-          dispatch({
-            type: DATASET_DETAIL_RECEIVED,
-            payload: { data }
-          });
-        }
+        deserializer.deserialize(data, (err, datasetData) => {
+          if (datasetData) {
+            dispatch({
+              type: DATASET_DETAIL_RECEIVED,
+              payload: {
+                data: datasetData
+              }
+            });
+          }
+        });
       })
       .catch((err) => {
         dispatch({
@@ -161,7 +173,9 @@ export function getDatasetDefaultWidget(datasetId) {
               .then(widget => {
                 dispatch({
                   type: DATASET_WIDGET_RECEIVED,
-                  payload: { data: widget.data }
+                  payload: {
+                    data: widget.data
+                  }
                 });
               });
           }
