@@ -12,9 +12,9 @@ import {
 } from '../constants';
 
 import { updateURL } from './links';
-import * as JsonApi from 'jsonapi-serializer';
+import { Deserializer } from 'jsonapi-serializer';
 
-const deserializer = new JsonApi.Deserializer({ keyForAttribute: 'camelCase' });
+const deserializer = new Deserializer({ keyForAttribute: 'camelCase' });
 
 export function getDatasetLayer(dataset) {
   return dispatch => {
