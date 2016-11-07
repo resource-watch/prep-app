@@ -71,7 +71,7 @@ class Explore extends React.Component {
 
     if (datasetData) {
       if (datasetData.metadata && datasetData.metadata.length) {
-        const metadataInfo = datasetData.metadata[0].info;
+        const metadataInfo = datasetData.metadata[0].attributes.info;
 
         return (
           <div className="content">
