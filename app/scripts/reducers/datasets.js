@@ -50,7 +50,7 @@ export default function (state = initialState, action) {
     }
     case DATASET_LAYER_RECEIVED: {
       const layers = Object.assign({}, state.layers, {});
-      layers[action.payload.data.id] = action.payload.data;
+      layers[action.payload.id] = action.payload;
       return Object.assign({}, state, { layers });
     }
     case DATASET_METADATA_RECEIVED: {
@@ -136,7 +136,7 @@ export default function (state = initialState, action) {
     }
     case MAP_LAYERS_ORDER_CHANGED: {
       const datasets = state.filteredList.slice(0);
-      const idsOrdered = action.payload.map((item) => item.attributes['dataset-id']);
+      const idsOrdered = action.payload.map((item) => item.dataset);
 
       for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
         const index = idsOrdered.indexOf(datasets[i].id);

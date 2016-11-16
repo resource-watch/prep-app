@@ -12,8 +12,8 @@ import {
 import { updateURL } from '../../actions/links';
 
 function isLayerReady(dataset, layers) {
-  if (dataset.layers && dataset.layers.length) {
-    const layerId = dataset.layers[0].layer_id;
+  if (dataset.layer && dataset.layer.length) {
+    const layerId = dataset.layer[0].attributes.id;
     if (layers && layers[layerId]) {
       return true;
     }
@@ -34,7 +34,7 @@ function getActiveLayers(datasets, layers) {
   const activeLayers = [];
   datasets.forEach((dataset) => {
     if (dataset.active && isLayerReady(dataset, layers)) {
-      const layer = layers[dataset.layers[0].layer_id];
+      const layer = layers[dataset.layer[0].attributes.id];
       layer.title = dataset.name;
       layer.index = dataset.index;
       layer.opacity = dataset.opacity;

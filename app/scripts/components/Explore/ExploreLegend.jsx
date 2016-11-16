@@ -5,7 +5,7 @@ import { SortableContainer, SortableElement, SortableHandle, arrayMove } from 'r
 function getLinesLegend(layer) {
   return (<div className="legend -line">
     <div className="row">
-      {layer.attributes['legend-config'].items.map((item, index) => (
+      {layer.legendConfig.items.map((item, index) => (
         <div className="column small-6" key={index}>
           <div className="item">
             <span className="color" style={{ backgroundColor: item.color }}></span>
@@ -20,7 +20,7 @@ function getLinesLegend(layer) {
 function getBasicLegend(layer) {
   return (<div className="legend -basic">
     <div className="row">
-      {layer.attributes['legend-config'].items.map((item, index) => (
+      {layer.legendConfig.items.map((item, index) => (
         <div className="column small-6" key={index}>
           <div className="item">
             {item.icon
@@ -37,7 +37,7 @@ function getBasicLegend(layer) {
 function getGradientLegend(layer) {
   const colors = [];
   const values = [];
-  layer.attributes['legend-config'].items.forEach((item, index) => {
+  layer.legendConfig.items.forEach((item, index) => {
     colors.push(item.color);
     values.push(<span key={index}>{item.value}</span>);
   });
@@ -58,7 +58,7 @@ function getGradientLegend(layer) {
 
 function getCloroplethLegend(layer) {
   const columns = [];
-  layer.attributes['legend-config'].items.forEach((item, index) => {
+  layer.legendConfig.items.forEach((item, index) => {
     columns.push(
       <div className="column" key={index}>
         <span className="-color" style={{ backgroundColor: item.color }}></span>
@@ -74,7 +74,7 @@ function getCloroplethLegend(layer) {
 }
 
 function getLegend(layer) {
-  switch (layer.attributes['legend-config'].type) {
+  switch (layer.legendConfig.type) {
     case 'lines':
       return getLinesLegend(layer);
     case 'basic':
@@ -98,8 +98,8 @@ const SortableItem = SortableElement(({layer, index, onInfoClick, toggleLayerOpa
         <div className="column small-9">
           <span className="title">{layer.title}
             <span className="-units">
-              {layer.attributes['legend-config'].unit &&
-              ` (${layer.attributes['legend-config'].unit})`}
+              {layer.legendConfig.unit &&
+              ` (${layer.legendConfig.unit})`}
             </span>
           </span>
         </div>
@@ -107,19 +107,19 @@ const SortableItem = SortableElement(({layer, index, onInfoClick, toggleLayerOpa
           <span
             title="Visibility"
             className={`icon ${layer.opacity === 0 ? '-hide' : ''}`}
-            onClick={() => toggleLayerOpacity(layer.attributes['dataset-id'])}
+            onClick={() => toggleLayerOpacity(layer.dataset)}
           >
             <svg width="13" height="9" viewBox="0 0 13 9"><title>icon-eye</title><path d="M4.933 4.5c0 .855.698 1.545 1.567 1.545s1.567-.69 1.567-1.545S7.369 2.955 6.5 2.955s-1.567.69-1.567 1.545zM13 4.5C11.755 2.265 9.312 0 6.5 0 3.695 0 1.245 2.265 0 4.5 1.245 6.735 3.695 9 6.5 9c2.812 0 5.255-2.265 6.5-4.5zm-9.415 0c0-1.582 1.307-2.865 2.915-2.865S9.415 2.918 9.415 4.5c0 1.582-1.307 2.865-2.915 2.865S3.585 6.082 3.585 4.5z" fillRule="evenodd"/></svg>
           </span>
           <span
             title="Information"
             className="icon -info"
-            onClick={() => onInfoClick(layer.attributes['dataset-id'])}
+            onClick={() => onInfoClick(layer.dataset)}
           > i </span>
           <span
             title="Interactivity"
-            className={`icon -select ${selectedDatasetId === layer.attributes['dataset-id'] ? '' : '-selected'}`}
-            onClick={() => setDatasetSelected(layer.attributes['dataset-id'])}
+            className={`icon -select ${selectedDatasetId === layer.dataset ? '' : '-selected'}`}
+            onClick={() => setDatasetSelected(layer.dataset)}
           >
             <svg width="11" height="10" viewBox="-256.4 411.4 15 15"><path d="M-242 412.1h-13.8c-.4 0-.6.2-.6.6v9.4c0 .4.2.6.6.6h4.1l2.3 2.9c.1.1.3.2.5.2s.4-.1.5-.2l2.3-2.9h4.1c.4 0 .6-.2.6-.6v-9.4c0-.4-.2-.6-.6-.6z"/></svg>
           </span>

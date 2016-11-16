@@ -16,9 +16,18 @@ import { Deserializer } from 'jsonapi-serializer';
 
 const deserializer = new Deserializer({ keyForAttribute: 'camelCase' });
 
+export function setDatasetActive(dataset) {
+  return dispatch => {
+    dispatch({
+      type: DATASET_LAYER_RECEIVED,
+      payload: dataset.layer[0].attributes
+    });
+  };
+}
+
 export function getDatasetLayer(dataset) {
   return dispatch => {
-    fetch(`${config.apiUrlRW}/layers/${dataset.layers[0].layer_id}`)
+    fetch(`${config.apiUrlRW}/layer/${dataset.layer[0].attributes.id}`)
       .then(response => {
         if (!response.ok) {
           throw new Error(response.statusText);
@@ -74,7 +83,7 @@ export function setDatasetsTagFilter(filter, tag) {
 
 export function getDatasets(defaultActiveLayers) {
   return dispatch => {
-    fetch(`${config.apiUrlRW}/dataset?app=prep&includes=metadata`)
+    fetch(`${config.apiUrlRW}/dataset?app=prep&includes=metadata,layer`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);

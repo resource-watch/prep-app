@@ -96,7 +96,7 @@ class DataMap extends React.Component {
         }
       }
 
-      if (dataset.layers && dataset.layers.length) {
+      if (dataset.layer && dataset.layer.length) {
         layerIcon = (
           <Switch
             onChange={() => this.switchChange(dataset)}
