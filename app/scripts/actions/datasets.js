@@ -35,9 +35,11 @@ export function getDatasetLayer(dataset) {
         return response.json();
       })
       .then(data => {
-        dispatch({
-          type: DATASET_LAYER_RECEIVED,
-          payload: data
+        deserializer.deserialize(data, (error, layerData) => {
+          dispatch({
+            type: DATASET_LAYER_RECEIVED,
+            payload: layerData
+          });
         });
       });
     /**
