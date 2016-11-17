@@ -1,8 +1,7 @@
 import 'whatwg-fetch';
 import {
   LAYER_DATA_RECEIVED,
-  LAYER_DATA_ERROR,
-  DATASET_LAYER_RECEIVED
+  LAYER_DATA_ERROR
 } from '../constants';
 
 import { updateURL } from './links';

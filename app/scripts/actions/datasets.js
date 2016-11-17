@@ -63,11 +63,21 @@ export function getDatasetLayer(dataset) {
   };
 }
 
+// export function getActiveDatasetLayers(datasets) {
+//   return dispatch => {
+//     for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
+//       if (datasets[i].active) {
+//         dispatch(getDatasetLayer(datasets[i]));
+//       }
+//     }
+//   };
+// }
+
 export function getActiveDatasetLayers(datasets) {
   return dispatch => {
     for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
       if (datasets[i].active) {
-        dispatch(getDatasetLayer(datasets[i]));
+        dispatch(setDatasetActive(datasets[i]));
       }
     }
   };
