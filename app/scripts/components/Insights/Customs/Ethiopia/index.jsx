@@ -9,11 +9,11 @@ import ShareModal from '../../../Modal/ShareModal';
 import ethiopia01 from '../../../../../images/insights/ethiopia/Insight_Ethiopia01.png';
 import ethiopiaMap from '../../../../../images/insights/ethiopia/Insight_Ethiopia02.png';
 
-import seasonal from 'json!./jsons/seasonal.json';
-import tigray from 'json!./jsons/tigray.json';
-import chirps from 'json!./jsons/chirps.json';
-import somaliSeasonal from 'json!./jsons/somali-seasonal.json';
-import tigraySeasonal from 'json!./jsons/tigray-seasonal.json';
+import seasonal from './jsons/seasonal.json';
+import tigray from './jsons/tigray.json';
+import chirps from './jsons/chirps.json';
+import somaliSeasonal from './jsons/somali-seasonal.json';
+import tigraySeasonal from './jsons/tigray-seasonal.json';
 
 const tigrayMap = "https://prep.carto.com/u/prep-admin/viz/c7fc6dc6-4b08-4d23-ac0b-ff07144ad89a/embed_map";
 const somaliaMap = "https://prep.carto.com/u/prep-admin/viz/5824b7fa-705a-11e6-bb05-0e3ebc282e83/embed_map";
