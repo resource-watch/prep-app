@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../Button/Button';
 
-import filtersConfig from 'json!../../../scripts/filters.json';
+import filtersConfig from '../../../scripts/filters.json';
 
 class FilterTabs extends React.Component {
   constructor() {

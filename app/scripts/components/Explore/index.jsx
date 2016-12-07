@@ -14,7 +14,7 @@ import Modal from '../Modal/Modal';
 import Button from '../Button/Button';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
-import metadata from 'json!../../metadata.json';
+import metadata from '../../metadata.json';
 import logoImage from '../../../images/prep-logo.png';
 
 import Form from '../Form';
