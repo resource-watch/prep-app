@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import RelatedDatasets from '../../components/Dashboards/RelatedDatasets';
 
-import { getDatasetById, getDatasetMetadata } from '../../actions/datasets';
+import { getDatasetById } from '../../actions/datasets';
 
 const mapStateToProps = (state) => ({
   data: state.datasets.details,
