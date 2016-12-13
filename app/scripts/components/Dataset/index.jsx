@@ -56,6 +56,8 @@ class DatasetDetail extends React.Component {
         }
       };
 
+    console.log(this.props)
+
     const widgetComponents = [];
     const { widgets } = this.props;
     if (widgets && widgets.length) {

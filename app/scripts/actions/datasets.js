@@ -180,7 +180,7 @@ export function getDatasetById(datasetId, includesData) {
 
 export function getDatasetDefaultWidget(datasetId) {
   return dispatch => {
-    fetch(`${config.apiUrlRW}/widgets?app=prep&default=true&dataset=${datasetId}`)
+    fetch(`${config.apiUrlRW}/widget?app=prep&default=true&dataset=${datasetId}`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
@@ -188,7 +188,7 @@ export function getDatasetDefaultWidget(datasetId) {
       .then(data => {
         if (data.data.length) {
           for (let i = 0, wLength = data.data.length; i < wLength; i++) {
-            fetch(`${config.apiUrlRW}/widgets/${data.data[i].id}`)
+            fetch(`${config.apiUrlRW}/widget/${data.data[i].id}`)
               .then(response => {
                 if (response.ok) return response.json();
                 throw new Error(response.statusText);
