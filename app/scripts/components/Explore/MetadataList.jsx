@@ -47,16 +47,16 @@ function MetadataInfo(props) {
 
   if (!metadataInfo) return null;
 
-  const title = metadataInfo.attributes.message
+  const title = metadataInfo.message
     ? <li>
       <span>Info: </span>
-      <span>{metadataInfo.attributes.message}</span>
+      <span>{metadataInfo.message}</span>
     </li>
     : <li>
       <span>Description: </span>
       <span>{props.short
-        ? metadataInfo.attributes['short-description']
-        : metadataInfo.attributes.description}
+        ? metadataInfo['short-description']
+        : metadataInfo.description}
       </span>
     </li>;
   return (
@@ -64,24 +64,24 @@ function MetadataInfo(props) {
 
       {title}
 
-      {metadataInfo.attributes.organization &&
+      {metadataInfo.organization &&
         <li>
           <span>Organization: </span>
-          <span>{metadataInfo.attributes.organization}</span>
+          <span>{metadataInfo.organization}</span>
         </li>
       }
-      {metadataInfo.attributes.license &&
+      {metadataInfo.license &&
         <li>
           <span>License: </span>
-          <span>{metadataInfo.attributes.license}</span>
+          <span>{metadataInfo.license}</span>
         </li>
       }
-      {metadataInfo.attributes.source &&
+      {metadataInfo.source &&
         <li>
           <span>Access: </span>
           <span>
-            <a href={metadataInfo.attributes.source} target="_blank">
-              {metadataInfo.attributes.source}
+            <a href={metadataInfo.source} target="_blank">
+              {metadataInfo.source}
             </a>
           </span>
         </li>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import metadata from 'json!../../../metadata.json';
+import metadata from '../../../metadata.json';
 
 import ChartCard from '../../Cards/ChartCard';
 

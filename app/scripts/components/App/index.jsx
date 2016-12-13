@@ -9,7 +9,7 @@ import Banner from '../../components/Banner';
 import SummaryCards from '../../components/SummaryCards';
 import ContactForm from '../../components/ContactForm';
 
-import metadata from 'json!../../metadata.json';
+import metadata from '../../metadata.json';
 import logoImage from '../../../images/prep-logo.png';
 
 const theme = {

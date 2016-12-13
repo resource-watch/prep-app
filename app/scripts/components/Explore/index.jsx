@@ -14,7 +14,7 @@ import Modal from '../Modal/Modal';
 import Button from '../Button/Button';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
-import metadata from 'json!../../metadata.json';
+import metadata from '../../metadata.json';
 import logoImage from '../../../images/prep-logo.png';
 
 import Form from '../Form';
@@ -77,10 +77,10 @@ class Explore extends React.Component {
           <div className="content">
           <h3>
           <Link to={`/dataset/${this.props.metadataModal.datasetId}`}>
-          {metadataInfo.attributes.title}
+          {metadataInfo.title}
           </Link>
           </h3>
-          <h4> {metadataInfo.attributes.subtitle} </h4>
+          <h4> {metadataInfo.subtitle} </h4>
           <MetadataList short download data={datasetData} />
           </div>
         );

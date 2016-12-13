@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import URI from 'urijs';
 
-import metadata from 'json!../../metadata.json';
+import metadata from '../../metadata.json';
 import PartnersSlider from '../../containers/PartnersSlider';
 import SecondaryNav from '../../components/Navigation/SecondaryNav';
 import SocialNav from '../../components/Navigation/SocialNav';
