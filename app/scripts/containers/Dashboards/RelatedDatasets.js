@@ -11,7 +11,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getDatasetById: (id, includes) => {
     dispatch(getDatasetById(id, includes));
-    dispatch(getDatasetMetadata(id));
+    // dispatch(getDatasetMetadata(id));
   }
 });
 

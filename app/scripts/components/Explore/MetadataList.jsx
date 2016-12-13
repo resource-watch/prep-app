@@ -5,8 +5,8 @@ function getDownloadUrl(data) {
   let url = null;
   let metadataUrl = null;
   if (data.metadata && data.metadata.length &&
-      data.metadata[0].attributes.info.attributes.dataDownload) {
-    metadataUrl = data.metadata[0].attributes.info.attributes.dataDownload;
+      data.metadata[0].attributes.info.dataDownload) {
+    metadataUrl = data.metadata[0].attributes.info.dataDownload;
   }
   switch(data.provider) {
     case 'wms':

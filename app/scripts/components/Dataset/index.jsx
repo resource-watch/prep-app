@@ -47,7 +47,7 @@ class DatasetDetail extends React.Component {
     }
 
     const data = this.props.data.metadata && this.props.data.metadata.length > 0
-      ? this.props.data.metadata[0].attributes.info.attributes
+      ? this.props.data.metadata[0].attributes.info
       : {
         id: this.props.data.id,
         attributes: {
@@ -98,8 +98,8 @@ class DatasetDetail extends React.Component {
     let url = null;
     let metadataUrl = null;
     if (data.metadata && data.metadata.length &&
-        data.metadata[0].attributes.info.attributes.dataDownload) {
-      metadataUrl = data.metadata[0].attributes.info.attributes.dataDownload;
+        data.metadata[0].attributes.info.dataDownload) {
+      metadataUrl = data.metadata[0].attributes.info.dataDownload;
     }
     switch(data.provider) {
       case 'wms':
