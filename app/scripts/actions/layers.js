@@ -8,7 +8,7 @@ import { updateURL } from './links';
 
 export function getLayerById(layerId) {
   return dispatch => {
-    fetch(`${config.apiUrlRW}/layers/${layerId}`)
+    fetch(`${config.apiUrlRW}/layer/${layerId}`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);

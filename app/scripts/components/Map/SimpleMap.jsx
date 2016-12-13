@@ -51,8 +51,8 @@ class SimpleMap extends React.Component {
   }
 
   updateMapPosition(layer) {
-    const center = layer.attributes['layer-config'].center;
-    const zoom = layer.attributes['layer-config'].zoom;
+    const center = layer.layerConfig.center;
+    const zoom = layer.layerConfig.zoom;
     if (center && center.lat && center.lng && zoom) {
       this.map.setView(new L.LatLng(center.lat, center.lng), zoom);
     }
@@ -65,7 +65,7 @@ class SimpleMap extends React.Component {
       });
     }
 
-    switch (layer.attributes.provider) {
+    switch (layer.provider) {
       case 'leaflet':
         this.addLeafletLayer(layer);
         break;
@@ -85,7 +85,7 @@ class SimpleMap extends React.Component {
    * @param {Object} layerSpec
    */
   addLeafletLayer(layerSpec) {
-    const layerData = layerSpec.attributes['layer-config'];
+    const layerData = layerSpec.attributes.layerConfig;
 
     let layer;
 
@@ -127,7 +127,7 @@ class SimpleMap extends React.Component {
    * @param {Object} layerSpec
    */
   addEsriLayer(layerSpec) {
-    const layer = layerSpec.attributes['layer-config'];
+    const layer = layerSpec.attributes.layerConfig;
     layer.id = layerSpec.id;
 
     // Transforming layer
@@ -158,7 +158,7 @@ class SimpleMap extends React.Component {
    * @param {Object} layerSpec
    */
   addCartoLayer(layerSpec) {
-    const layer = layerSpec.attributes['layer-config'];
+    const layer = layerSpec.attributes.layerConfig;
     layer.id = layerSpec.id;
 
     // Transforming layerSpec

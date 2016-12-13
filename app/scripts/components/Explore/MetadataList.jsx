@@ -5,24 +5,24 @@ function getDownloadUrl(data) {
   let url = null;
   let metadataUrl = null;
   if (data.metadata && data.metadata.length &&
-      data.metadata[0].info.attributes.dataDownload) {
-    metadataUrl = data.metadata[0].info.attributes.dataDownload;
+      data.metadata[0].attributes.info.dataDownload) {
+    metadataUrl = data.metadata[0].attributes.info.dataDownload;
   }
   switch(data.provider) {
     case 'wms':
       url = null;
       break;
     case 'cartodb':
-      if (data.connector_url.indexOf('tables') === -1) {
-        const uri = new URI(data.connector_url);
+      if (data.connectorUrl.indexOf('tables') === -1) {
+        const uri = new URI(data.connectorUrl);
         uri.search({ format: 'csv' });
         url = uri.toString();
       } else {
-        url = data.connector_url;
+        url = data.connectorUrl;
       }
       break;
     case 'featureservice':
-      const uri = new URI(data.connector_url);
+      const uri = new URI(data.connectorUrl);
       uri.segment('query');
       uri.search({
         where: '1=1',
@@ -36,27 +36,27 @@ function getDownloadUrl(data) {
       url = uri.toString();
       break;
     default:
-      url = metadataUrl || data.connector_url;
+      url = metadataUrl || data.connectorUrl;
   }
   return url;
 }
 
 function MetadataInfo(props) {
-  const metadataInfo = props.data.metadata && props.data.metadata[0].info;
+  const metadataInfo = props.data.metadata && props.data.metadata[0].attributes.info;
   const downloadUrl = getDownloadUrl(props.data);
 
   if (!metadataInfo) return null;
 
-  const title = metadataInfo.attributes.message
+  const title = metadataInfo.message
     ? <li>
       <span>Info: </span>
-      <span>{metadataInfo.attributes.message}</span>
+      <span>{metadataInfo.message}</span>
     </li>
     : <li>
       <span>Description: </span>
       <span>{props.short
-        ? metadataInfo.attributes['short-description']
-        : metadataInfo.attributes.description}
+        ? metadataInfo['short-description']
+        : metadataInfo.description}
       </span>
     </li>;
   return (
@@ -64,24 +64,24 @@ function MetadataInfo(props) {
 
       {title}
 
-      {metadataInfo.attributes.organization &&
+      {metadataInfo.organization &&
         <li>
           <span>Organization: </span>
-          <span>{metadataInfo.attributes.organization}</span>
+          <span>{metadataInfo.organization}</span>
         </li>
       }
-      {metadataInfo.attributes.license &&
+      {metadataInfo.license &&
         <li>
           <span>License: </span>
-          <span>{metadataInfo.attributes.license}</span>
+          <span>{metadataInfo.license}</span>
         </li>
       }
-      {metadataInfo.attributes.source &&
+      {metadataInfo.source &&
         <li>
           <span>Access: </span>
           <span>
-            <a href={metadataInfo.attributes.source} target="_blank">
-              {metadataInfo.attributes.source}
+            <a href={metadataInfo.source} target="_blank">
+              {metadataInfo.source}
             </a>
           </span>
         </li>

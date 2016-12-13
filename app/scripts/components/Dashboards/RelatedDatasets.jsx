@@ -13,7 +13,8 @@ class RelatedDatasets extends React.Component {
   render() {
     if (!this.props.slugs.length) return null;
 
-    const { data, metadata } = this.props;
+    const { data } = this.props;
+
     return (
       <div className="l-related-datasets">
         <div className="row">
@@ -23,9 +24,9 @@ class RelatedDatasets extends React.Component {
         </div>
         <div className="row">
           {this.props.slugs.map((item, index) => {
-            if (data[item] && metadata[item]) {
+            if (data[item] && data[item].metadata.length) {
               const datasetData = data[item];
-              const datasetMetadata = metadata[item].attributes.info.attributes;
+              const datasetMetadata = datasetData.metadata[0].attributes.info;
               return (
                 <div
                   className="columns small-12 medium-4 align-stretch"

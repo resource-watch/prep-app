@@ -84,7 +84,7 @@ export function getGeoDataInfo(datasetId, geo) {
     let datasetTableName;
     for (let i = 0, dLength = datasetsList.length; i < dLength; i++) {
       if (datasetId === datasetsList[i].id) {
-        datasetTableName = datasetsList[i].table_name;
+        datasetTableName = datasetsList[i].tableName;
         break;
       }
     }

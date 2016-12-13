@@ -47,7 +47,7 @@ class DatasetDetail extends React.Component {
     }
 
     const data = this.props.data.metadata && this.props.data.metadata.length > 0
-      ? this.props.data.metadata[0].info
+      ? this.props.data.metadata[0].attributes.info
       : {
         id: this.props.data.id,
         attributes: {
@@ -55,6 +55,8 @@ class DatasetDetail extends React.Component {
           message: 'Content cooming soon'
         }
       };
+
+    console.log(this.props)
 
     const widgetComponents = [];
     const { widgets } = this.props;
@@ -98,24 +100,24 @@ class DatasetDetail extends React.Component {
     let url = null;
     let metadataUrl = null;
     if (data.metadata && data.metadata.length &&
-        data.metadata[0].info.attributes.dataDownload) {
-      metadataUrl = data.metadata[0].info.attributes.dataDownload;
+        data.metadata[0].attributes.info.dataDownload) {
+      metadataUrl = data.metadata[0].attributes.info.dataDownload;
     }
     switch(data.provider) {
       case 'wms':
         url = null;
         break;
       case 'cartodb':
-        if (data.connector_url.indexOf('tables') === -1) {
-          const uri = new URI(data.connector_url);
+        if (data.connectorUrl.indexOf('tables') === -1) {
+          const uri = new URI(data.connectorUrl);
           uri.search({ format: 'csv' });
           url = uri.toString();
         } else {
-          url = data.connector_url;
+          url = data.connectorUrl;
         }
         break;
       case 'featureservice':
-        const uri = new URI(data.connector_url);
+        const uri = new URI(data.connectorUrl);
         uri.segment('query');
         uri.search({
           where: '1=1',
@@ -129,7 +131,7 @@ class DatasetDetail extends React.Component {
         url = uri.toString();
         break;
       default:
-        url =  metadataUrl || data.connector_url;
+        url =  metadataUrl || data.connectorUrl;
     }
     return url;
   }

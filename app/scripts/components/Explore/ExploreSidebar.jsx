@@ -85,7 +85,7 @@ class DataMap extends React.Component {
       let partner = '';
 
       if (dataset.metadata && dataset.metadata.length) {
-        const metadata = dataset.metadata[0].info.attributes;
+        const metadata = dataset.metadata[0].attributes.info;
         if (metadata) {
           if (metadata.subtitle) {
             subtitle = metadata.subtitle;
@@ -96,7 +96,7 @@ class DataMap extends React.Component {
         }
       }
 
-      if (dataset.layers && dataset.layers.length) {
+      if (dataset.layer && dataset.layer.length) {
         layerIcon = (
           <Switch
             onChange={() => this.switchChange(dataset)}
