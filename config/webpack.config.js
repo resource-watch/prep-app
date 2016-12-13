@@ -72,13 +72,14 @@ const webpackConfig = {
 if (process.env.NODE_ENV === 'production') {
   // Loaders
   webpackConfig.module.loaders.push({
+    test: /\.css$/,
+    loader: ExtractTextPlugin.extract(['css'])
+  });
+  webpackConfig.module.loaders.push({
     test: /\.scss$/,
     loader: ExtractTextPlugin.extract(['css', 'sass', 'postcss'])
   });
-  webpackConfig.module.loaders.push({
-    test: /\.css$/,
-    loader: ExtractTextPlugin.extract(['css', 'postcss'])
-  });
+
   webpackConfig.module.loaders.push({
     test: /\.(jpe?g|png|gif|svg)$/i,
     loaders: [

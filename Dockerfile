@@ -1,4 +1,4 @@
-FROM node:6.3.1
+FROM node:7.2.1
 MAINTAINER David Inga <david.inga@vizzuality.com>
 
 ENV NAME prep-app
