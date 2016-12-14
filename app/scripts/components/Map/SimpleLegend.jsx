@@ -11,7 +11,7 @@ class DataMapLegend extends React.Component {
   getLinesLegend(layer) {
     return (<div className="legend -line">
       <div className="row">
-        {layer.legendConfig.items.map((item, index) => (
+        {layer.attributes.legendConfig.items.map((item, index) => (
           <div className="column small-6" key={index}>
             <div className="item">
               <span className="color" style={{ backgroundColor: item.color }}></span>
@@ -26,7 +26,7 @@ class DataMapLegend extends React.Component {
   getBasicLegend(layer) {
     return (<div className="legend -basic">
       <div className="row">
-        {layer.legendConfig.items.map((item, index) => (
+        {layer.attributes.legendConfig.items.map((item, index) => (
           <div className="column small-6" key={index}>
             <div className="item">
               {item.icon
@@ -44,7 +44,7 @@ class DataMapLegend extends React.Component {
   getGradientLegend(layer) {
     const colors = [];
     const values = [];
-    layer.legendConfig.items.forEach((item, index) => {
+    layer.attributes.legendConfig.items.forEach((item, index) => {
       colors.push(item.color);
       values.push(<span key={index}>{item.value}</span>);
     });
@@ -66,7 +66,7 @@ class DataMapLegend extends React.Component {
 
   getCloroplethLegend(layer) {
     const columns = [];
-    layer.legendConfig.items.forEach((item, index) => {
+    layer.attributes.legendConfig.items.forEach((item, index) => {
       columns.push(
         <div className="column" key={index}>
           <span className="-color" style={{ backgroundColor: item.color }}></span>
@@ -82,7 +82,7 @@ class DataMapLegend extends React.Component {
   }
 
   getLegend(layer) {
-    switch (layer.legendConfig.type) {
+    switch (layer.attributes.legendConfig.type) {
       case 'lines':
         return this.getLinesLegend(layer);
       case 'basic':

@@ -51,8 +51,8 @@ class SimpleMap extends React.Component {
   }
 
   updateMapPosition(layer) {
-    const center = layer.layerConfig.center;
-    const zoom = layer.layerConfig.zoom;
+    const center = layer.attributes.layerConfig.center;
+    const zoom = layer.attributes.layerConfig.zoom;
     if (center && center.lat && center.lng && zoom) {
       this.map.setView(new L.LatLng(center.lat, center.lng), zoom);
     }
@@ -65,15 +65,15 @@ class SimpleMap extends React.Component {
       });
     }
 
-    switch (layer.provider) {
+    switch (layer.attributes.provider) {
       case 'leaflet':
-        this.addLeafletLayer(layer);
+        this.addLeafletLayer(layer.attributes);
         break;
       case 'arcgis':
-        this.addEsriLayer(layer);
+        this.addEsriLayer(layer.attributes);
         break;
       case 'cartodb':
-        this.addCartoLayer(layer);
+        this.addCartoLayer(layer.attributes);
         break;
       default:
         break;
@@ -96,7 +96,6 @@ class SimpleMap extends React.Component {
     if (layerData.body.crs && L.CRS[layerData.body.crs]) {
       layerData.body.crs = L.CRS[layerData.body.crs.replace(':', '')];
     }
-
     switch (layerData.type) {
       case 'wms':
         layer = new L.tileLayer.wms(layerData.url, layerData.body);
@@ -127,7 +126,7 @@ class SimpleMap extends React.Component {
    * @param {Object} layerSpec
    */
   addEsriLayer(layerSpec) {
-    const layer = layerSpec.attributes.layerConfig;
+    const layer = layerSpec.layerConfig;
     layer.id = layerSpec.id;
 
     // Transforming layer
