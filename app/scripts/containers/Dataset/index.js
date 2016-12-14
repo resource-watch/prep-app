@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import DatasetDetailPage from '../../components/Dataset';
 
-import { getDatasetDefaultWidget, getDatasetById } from '../../actions/datasets';
+import { getDatasetById } from '../../actions/datasets';
 
 const mapStateToProps = (state, { params, route }) => ({
   currentPage: route.path,
@@ -12,8 +12,7 @@ const mapStateToProps = (state, { params, route }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getDatasetData: (slug) => {
-    dispatch(getDatasetById(slug, ['metadata']));
-    dispatch(getDatasetDefaultWidget(slug));
+    dispatch(getDatasetById(slug, ['metadata', 'widget']));
   }
 });
 

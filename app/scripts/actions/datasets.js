@@ -166,6 +166,14 @@ export function getDatasetById(datasetId, includesData) {
                 data: datasetData
               }
             });
+            if (datasetData.widget.length) {
+              dispatch({
+                type: DATASET_WIDGET_RECEIVED,
+                payload: {
+                  data: datasetData.widget[0]
+                }
+              });
+            }
           }
         });
       })
