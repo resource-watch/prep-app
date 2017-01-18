@@ -65,6 +65,9 @@ export default class PartnerDetail extends React.Component {
   }
   render() {
     const partner = this.props.partners.length ? this.props.partners.find(item => item.id === +this.props.params.id) : null;
+    if (partner) {
+      document.title = `Partners - ${partner.name}`;
+    }
     return (
       <div>
         {this.getHeader()}
