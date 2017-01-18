@@ -1,4 +1,6 @@
-import { PARTNERS_LIST_RECEIVED } from '../constants';
+import {
+  PARTNERS_LIST_RECEIVED
+} from '../constants';
 
 const initialState = {
   list: []

@@ -1,7 +1,7 @@
 import React from 'react';
 import Article from '../Content/Article';
 import Thumbnail from '../Thumbnails/Thumbnail';
-
+import { Link } from 'react-router';
 
 function Partners(props) {
   return (
@@ -18,8 +18,10 @@ function Partners(props) {
                     alt={partner.name}
                     border={'neutral'}
                   />
-                  <h3>{partner.name}</h3>
-                 </div>
+                  <h3 className="partner-name">{partner.name}</h3>
+                  <p className="partner-desc">{partner.description}</p>
+                  <Link to={`/partners/${partner.id}`} className="partner-link">Read more</Link>
+                </div>
               </div>
             );
           })}
@@ -36,12 +38,14 @@ function Partners(props) {
             <div className="c-article-module">
               <Thumbnail
                 url={'http://www.globalchange.gov/'}
-                src={config.apiUrl + '/system/partners/logos/000/000/013/medium/logo-globalchange-small.png?1473415466'}
+                src={`${config.apiUrl}/system/partners/logos/000/000/013/medium/logo-globalchange-small.png?1473415466`}
                 alt={'U.S. Global Change Research Program (USGCRP)'}
                 border={'neutral'}
               />
-              <h3>U.S. Global Change Research Program (USGCRP)</h3>
-             </div>
+              <h3 className="parter-name">U.S. Global Change Research Program (USGCRP)</h3>
+              <p className="partner-desc">Lorem ispum.</p>
+              <Link to={'/partners/???'} className="partner-link">Read more</Link>
+            </div>
           </div>
         </div>
       </Article>
