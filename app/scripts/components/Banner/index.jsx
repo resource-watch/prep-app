@@ -7,6 +7,7 @@ import dashboardBg from '../../../images/bg/bg-dashboard.png';
 import insightsBg from '../../../images/bg/bg-insights.jpg';
 import partnershipEngagementBg from '../../../images/bg/bg-partnership-engagement.jpg';
 import partnershipPlatformsBg from '../../../images/bg/bg-partnership-platforms.jpg';
+import partnerDetailBg from '../../../images/bg/bg-partner-detail.png';
 import contactBg from '../../../images/bg/bg-contact.jpg';
 import resourcesBg from '../../../images/bg/bg-resources.jpg';
 import createBg from '../../../images/bg/bg-create.jpg';
@@ -29,7 +30,8 @@ const bg = {
   resources: resourcesBg,
   create: createBg,
   partners: partnersBg,
-  faq: faqBg
+  faq: faqBg,
+  partnerDetail: partnerDetailBg
 };
 
 class Banner extends React.Component {
