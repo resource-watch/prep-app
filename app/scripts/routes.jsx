@@ -22,6 +22,7 @@ import Resources from './components/Resources';
 import Contact from './components/Contact';
 import Embed from './containers/Embed';
 import Root from './components/Root';
+import PartnerDetail from './containers/PartnerDetail';
 
 function shouldUpdateScroll(prevRouterProps, { location }) {
   /**
@@ -116,6 +117,7 @@ function Routes(props) {
           <Route path={'contact'} component={Contact} />
         </Route>
 
+        <Route path="partners/:id" component={PartnerDetail} />
         <Route path="explore(/:lat)(/:lng)(/:zoom)" component={Explore} />
         <Route path="dashboard/:slug(/:tab)" component={DashboardsDetail} />
         <Route path="insight/:slug" component={InsightsDetail} />

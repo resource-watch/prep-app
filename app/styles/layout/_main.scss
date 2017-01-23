@@ -9,6 +9,10 @@ $shadow-size: 150px;
   min-height: 30vh;
   z-index: 1;
 
+  &.-collapsed {
+    padding-bottom: 0;
+  }
+
   &.-template-2 {
     padding: 0;
     height: 100vh;
