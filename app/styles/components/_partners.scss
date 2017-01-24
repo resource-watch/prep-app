@@ -8,3 +8,14 @@
   margin: 0 auto;
   top: 227px;
 }
+.partner-links {
+  display: flex;
+  justify-content: space-between;
+
+  svg {
+    display: inline-block;
+    vertical-align: middle;
+    fill: $yellow-orange;
+    margin-right: 7px;
+  }
+}

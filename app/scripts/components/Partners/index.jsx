@@ -13,7 +13,6 @@ function Partners(props) {
               <div className="columns small-12 medium-4" key={i}>
                 <div className="c-article-module">
                   <Thumbnail
-                    url={partner.url}
                     src={config.apiUrl + partner.images.thumbnail}
                     alt={partner.name}
                     border={'neutral'}
