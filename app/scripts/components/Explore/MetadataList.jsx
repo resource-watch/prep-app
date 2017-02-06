@@ -9,9 +9,6 @@ function getDownloadUrl(data) {
     metadataUrl = data.metadata[0].attributes.info.dataDownload;
   }
   switch(data.provider) {
-    case 'wms':
-      url = null;
-      break;
     case 'cartodb':
       if (data.connectorUrl.indexOf('tables') === -1) {
         const uri = new URI(data.connectorUrl);
