@@ -21,20 +21,6 @@ function getDownloadUrl(data) {
         url = data.connectorUrl;
       }
       break;
-    case 'featureservice':
-      const uri = new URI(data.connectorUrl);
-      uri.segment('query');
-      uri.search({
-        where: '1=1',
-        returnGeometry: 'true',
-        returnDistinctValues: 'false',
-        returnIdsOnly: 'false',
-        returnCountOnly: 'false',
-        outFields: '*',
-        f: 'json'
-      });
-      url = uri.toString();
-      break;
     default:
       url = metadataUrl || data.connectorUrl;
   }
