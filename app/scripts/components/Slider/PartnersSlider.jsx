@@ -16,11 +16,11 @@ class PartnersSlider extends Component {
 
   componentDidMount() {
     if (!this.props.data.length) {
-      this.props.getFeaturedPartners();
+      this.props.getPartners();
     }
   }
   render() {
-    const partners = this.props.data.map(d => (
+    const partners = this.props.featured.map(d => (
       <div key={`partner-slider-${d.id}`}>
         <a href={d.url} target="_blank" className="logo">
           <img
@@ -53,7 +53,7 @@ PartnersSlider.propTypes = {
   // Define the partners list
   data: React.PropTypes.array,
   // Define the function to get the partners list
-  getFeaturedPartners: React.PropTypes.func.isRequired
+  getPartners: React.PropTypes.func.isRequired
 };
 
 export default PartnersSlider;

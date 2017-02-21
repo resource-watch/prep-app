@@ -1,14 +1,15 @@
 import { connect } from 'react-redux';
-import { getPartners, getFeaturedPartners } from '../../actions/partners';
+import { getPartners } from '../../actions/partners';
 import Partners from '../../components/Partners';
 
 const mapStateToProps = (state) => ({
-  data: state.partners.list
+  data: state.partners.list,
+  partners: state.partners.list.filter((d) => d.partner_type === 'partner'),
+  foundingPartners: state.partners.list.filter((d) => d.partner_type === 'founding partner')
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getPartners: () => dispatch(getPartners()),
-  getFeaturedPartners: () => dispatch(getFeaturedPartners())
+  getPartners: () => dispatch(getPartners())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Partners);
