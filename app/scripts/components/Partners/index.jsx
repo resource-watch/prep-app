@@ -9,7 +9,7 @@ function Partners(props) {
 
       <Article grid="small-12">
         <div className="row align-center">
-          <div className="column small-12"><h2>Founding parterns</h2></div>
+          <div className="column small-12"><h2>Founding partners</h2></div>
         </div>
         <div className="row align-stretch">
           {props.foundingPartners.map((partner, i) => {
@@ -33,7 +33,7 @@ function Partners(props) {
 
       <Article grid="small-12">
         <div className="row">
-          <div className="column small-12"><h2>Parterns</h2></div>
+          <div className="column small-12"><h2>Partners</h2></div>
         </div>
         <div className="row align-stretch">
           {props.partners.map((partner, i) => {
