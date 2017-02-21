@@ -98,6 +98,8 @@ export default class PartnerDetail extends React.Component {
                   </Link>
                 </div>
                 <p>{partner ? partner.description : ''}</p>
+                {partner && partner.content ? <h3>Commitment</h3> : ''}
+                <p>{partner ? partner.content : ''}</p>
               </div>
             </div>
           </article>
