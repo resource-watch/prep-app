@@ -14,7 +14,7 @@ import {
 import { updateURL } from './links';
 import { Deserializer } from 'jsonapi-serializer';
 
-const deserializer = new Deserializer({ keyForAttribute: 'camelCase' });
+const deserializer = new Deserializer({ keyForAttribute: 'underscore_case' });
 
 export function setDatasetActive(dataset) {
   return dispatch => {

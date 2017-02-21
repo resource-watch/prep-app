@@ -5,7 +5,7 @@ import { SortableContainer, SortableElement, SortableHandle, arrayMove } from 'r
 function getLinesLegend(layer) {
   return (<div className="legend -line">
     <div className="row">
-      {layer.legendConfig.items.map((item, index) => (
+      {layer.legend_config.items.map((item, index) => (
         <div className="column small-6" key={index}>
           <div className="item">
             <span className="color" style={{ backgroundColor: item.color }}></span>
@@ -20,7 +20,7 @@ function getLinesLegend(layer) {
 function getBasicLegend(layer) {
   return (<div className="legend -basic">
     <div className="row">
-      {layer.legendConfig.items.map((item, index) => (
+      {layer.legend_config.items.map((item, index) => (
         <div className="column small-6" key={index}>
           <div className="item">
             {item.icon
@@ -37,7 +37,7 @@ function getBasicLegend(layer) {
 function getGradientLegend(layer) {
   const colors = [];
   const values = [];
-  layer.legendConfig.items.forEach((item, index) => {
+  layer.legend_config.items.forEach((item, index) => {
     colors.push(item.color);
     values.push(<span key={index}>{item.value}</span>);
   });
@@ -58,7 +58,7 @@ function getGradientLegend(layer) {
 
 function getCloroplethLegend(layer) {
   const columns = [];
-  layer.legendConfig.items.forEach((item, index) => {
+  layer.legend_config.items.forEach((item, index) => {
     columns.push(
       <div className="column" key={index}>
         <span className="-color" style={{ backgroundColor: item.color }}></span>
@@ -74,7 +74,7 @@ function getCloroplethLegend(layer) {
 }
 
 function getLegend(layer) {
-  switch (layer.legendConfig.type) {
+  switch (layer.legend_config.type) {
     case 'lines':
       return getLinesLegend(layer);
     case 'basic':
@@ -98,8 +98,8 @@ const SortableItem = SortableElement(({layer, index, onInfoClick, toggleLayerOpa
         <div className="column small-9">
           <span className="title">{layer.title}
             <span className="-units">
-              {layer.legendConfig.unit &&
-              ` (${layer.legendConfig.unit})`}
+              {layer.legend_config.unit &&
+              ` (${layer.legend_config.unit})`}
             </span>
           </span>
         </div>
