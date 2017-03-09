@@ -25,7 +25,7 @@ function auth(username, password) {
 }
 
 module.exports = (app) => {
-  app.use(auth(process.env.USERNAME, process.env.PASSWORD));
+  // app.use(auth(process.env.USERNAME, process.env.PASSWORD));
   app.use(favicon(`${process.cwd()}/public/favicon.ico`));
   app.use(express.static(path.join(process.cwd(), 'dist')));
   app.get('*', (req, res) => {
