@@ -61,10 +61,10 @@ function Create() {
 
             <div className="column align-middle small-12 medium-6">
               <h3>Create Personalized Dashboards</h3>
-              <p>Collect data, tools and insights relevant to you and your community in one place.
+              <p>Collect data, tools, and insights relevant to you and your community in one place.
                 Create and share your own online dashboard containing data, information, tools,
-                interactive stories and other dynamic resources specific to your own geographic or
-                topical area of interest. Look at what data, tools, and insights others are using
+                 interactive stories, and other dynamic resources specific to your own geographic
+                  or topical area of interest. Look at what data, tools, and insights others are using
                 and add them to your dashboard. Get updates when datasets are added.
               </p>
               <Link to="/dashboards"> See dashboards </Link>
