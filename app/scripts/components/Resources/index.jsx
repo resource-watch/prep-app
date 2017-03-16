@@ -278,9 +278,9 @@ function Resources() {
               />
               <h3>World Bank Climate Knowledge Portal</h3>
               <p>
-                The Climate Change Knowledge Portal (CCKP) Beta is a central hub of information, data and reports about
+                The Climate Change Knowledge Portal (CCKP) Beta is a central hub of information, data, and reports about
                 climate change around the world. In the CCKP you can query, map, compare, chart and summarize key
-                climate
+                climate,
                 and climate-related information.
               </p>
               <a href={'HTTP://SDWEBX.WORLDBANK.ORG/CLIMATEPORTAL/?PAGE=CLIMATE_DATA'} target="_blank">HTTP://SDWEBX.WORLDBANK.ORG/CLIMATEPORTAL/?PAGE=CLIMATE_DATA</a>
