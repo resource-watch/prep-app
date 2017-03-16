@@ -238,7 +238,7 @@ function Resources() {
               <h3>IRI/LDEO Climate Data Library</h3>
               <p>
                 The IRI Data Library is an online data repository and analysis tool that allows a user to view, analyze,
-                and download hundreds of terabytes of climate-related data through a standard web browser
+                and download hundreds of terabytes of climate-related data through a standard web browser.
               </p>
               <a href={'http://iridl.ldeo.columbia.edu'} target="_blank">http://iridl.ldeo.columbia.edu</a>
             </div>
