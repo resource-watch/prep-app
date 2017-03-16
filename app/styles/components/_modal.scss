@@ -21,6 +21,7 @@
     background-color:$base-bg-color;
     width: 80%;
     max-width: rem($max-width);
+    max-height: calc(100vh * 0.9);
 
     @media #{$mq-medium} {
       min-width: rem(370);
@@ -28,6 +29,8 @@
 
     .m-content {
       padding: $medium-margin;
+      height: 90vh;
+      overflow: auto;
     }
 
     > .c-nav-tab {
