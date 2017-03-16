@@ -198,7 +198,7 @@ function Resources() {
               <h3>Copernicus – Climate Service</h3>
               <p>
                 Copernicus consists of a complex set of systems which collect data from multiple sources: earth
-                observation satellites and in situ sensors such as ground stations, airborne and sea-borne sensors. It
+                observation satellites and in situ sensors, such as ground stations, airborne and sea-borne sensors. It
                 processes these data and provides users with reliable and up-to-date information through a set of
                 services
                 related to environmental and security issues.
