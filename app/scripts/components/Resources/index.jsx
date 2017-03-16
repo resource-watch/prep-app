@@ -151,7 +151,7 @@ function Resources() {
 
               <h3>Adaptation Learning Mechanism</h3>
               <p>
-                The ALM represents a collaborative, global learning process, with leadership, facilitation and strong
+                The Adaptation Learning Mechanism (ALM) represents a collaborative, global learning process with leadership, facilitation, and strong
                 participation by Southern institutions. Seeking to provide stakeholders with a common platform for
                 sharing
                 and learning, the ALM bridges knowledge gaps by bringing relevant knowledge and stakeholders together to
