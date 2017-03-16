@@ -173,7 +173,7 @@ function Resources() {
               <h3>weADAPT</h3>
               <p>
                 weADAPT is a collaborative platform on climate adaptation issues. It allows practitioners, researchers
-                and policy-makers to access credible, high-quality information and connect with one another.
+                and policy-makers to access credible, high-quality information, and connect with one another.
               </p>
               <a href={'https://www.weadapt.org/'} target="_blank">HTTPS://WWW.WEADAPT.ORG/</a>
             </div>
