@@ -299,7 +299,7 @@ function Resources() {
               <p>
                 The CCAFS-Climate data portal provides global and regional future high-resolution climate datasets that
                 serve as a basis for assessing the climate change impacts and adaptation in a variety of fields
-                including biodiversity, agricultural and livestock production, and ecosystem services and hydrology.
+                including biodiversity, agricultural and livestock production, ecosystem services, and hydrology.
               </p>
               <a href="http://ccafs-climate.org" target="_blank">HTTP://CCAFS-CLIMATE.ORG</a>
             </div>
