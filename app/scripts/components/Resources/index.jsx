@@ -45,10 +45,10 @@ function Resources() {
               <p>
                 The Intergovernmental Panel on Climate Change (IPCC) is the international
                 body for assessing the science related to climate change. The IPCC’s periodic
-                assessments of the causes, impacts and possible response strategies to climate
+                assessments of the causes, impacts, and possible response strategies to climate
                 change are the most comprehensive and up-to-date reports available on the subject,
                 and form the standard reference for all concerned with climate change in academia,
-                government and industry worldwide.
+                government, and industry worldwide.
               </p>
               <a href={'http://www.ipcc.ch/report/ar5/'} target="_blank">HTTP://WWW.IPCC.CH/REPORT/AR5/</a>
             </div>
