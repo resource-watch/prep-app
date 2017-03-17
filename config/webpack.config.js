@@ -101,7 +101,7 @@ if (process.env.NODE_ENV === 'production') {
   webpackConfig.plugins.push(new ExtractTextPlugin('styles-[hash].css'));
 } else {
   // Activating source map
-  webpackConfig.devtool = 'source-map';
+  webpackConfig.devtool = 'dev-source-map';
   // Loaders
   webpackConfig.module.loaders.push({
     test: /\.css$/,

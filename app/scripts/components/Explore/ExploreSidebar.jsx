@@ -115,8 +115,8 @@ class DataMap extends React.Component {
       }
 
       let cdiTag = false;
-      for (let i = 0; i < dataset.tags.length; i++) {
-        if (dataset.tags[i] === 'cdi') {
+      for (let i = 0; i < dataset.vocabulary[0].attributes.tags.length; i++) {
+        if (dataset.vocabulary[0].attributes.tags[i] === 'cdi') {
           cdiTag = true;
         }
       }
