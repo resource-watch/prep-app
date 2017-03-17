@@ -45,10 +45,10 @@ function Resources() {
               <p>
                 The Intergovernmental Panel on Climate Change (IPCC) is the international
                 body for assessing the science related to climate change. The IPCC’s periodic
-                assessments of the causes, impacts and possible response strategies to climate
+                assessments of the causes, impacts, and possible response strategies to climate
                 change are the most comprehensive and up-to-date reports available on the subject,
                 and form the standard reference for all concerned with climate change in academia,
-                government and industry worldwide.
+                government, and industry worldwide.
               </p>
               <a href={'http://www.ipcc.ch/report/ar5/'} target="_blank">HTTP://WWW.IPCC.CH/REPORT/AR5/</a>
             </div>
@@ -151,7 +151,7 @@ function Resources() {
 
               <h3>Adaptation Learning Mechanism</h3>
               <p>
-                The ALM represents a collaborative, global learning process, with leadership, facilitation and strong
+                The Adaptation Learning Mechanism (ALM) represents a collaborative, global learning process with leadership, facilitation, and strong
                 participation by Southern institutions. Seeking to provide stakeholders with a common platform for
                 sharing
                 and learning, the ALM bridges knowledge gaps by bringing relevant knowledge and stakeholders together to
@@ -173,7 +173,7 @@ function Resources() {
               <h3>weADAPT</h3>
               <p>
                 weADAPT is a collaborative platform on climate adaptation issues. It allows practitioners, researchers
-                and policy-makers to access credible, high-quality information and connect with one another.
+                and policy-makers to access credible, high-quality information, and connect with one another.
               </p>
               <a href={'https://www.weadapt.org/'} target="_blank">HTTPS://WWW.WEADAPT.ORG/</a>
             </div>
@@ -198,7 +198,7 @@ function Resources() {
               <h3>Copernicus – Climate Service</h3>
               <p>
                 Copernicus consists of a complex set of systems which collect data from multiple sources: earth
-                observation satellites and in situ sensors such as ground stations, airborne and sea-borne sensors. It
+                observation satellites and in situ sensors, such as ground stations, airborne and sea-borne sensors. It
                 processes these data and provides users with reliable and up-to-date information through a set of
                 services
                 related to environmental and security issues.
@@ -238,7 +238,7 @@ function Resources() {
               <h3>IRI/LDEO Climate Data Library</h3>
               <p>
                 The IRI Data Library is an online data repository and analysis tool that allows a user to view, analyze,
-                and download hundreds of terabytes of climate-related data through a standard web browser
+                and download hundreds of terabytes of climate-related data through a standard web browser.
               </p>
               <a href={'http://iridl.ldeo.columbia.edu'} target="_blank">http://iridl.ldeo.columbia.edu</a>
             </div>
@@ -278,9 +278,9 @@ function Resources() {
               />
               <h3>World Bank Climate Knowledge Portal</h3>
               <p>
-                The Climate Change Knowledge Portal (CCKP) Beta is a central hub of information, data and reports about
+                The Climate Change Knowledge Portal (CCKP) Beta is a central hub of information, data, and reports about
                 climate change around the world. In the CCKP you can query, map, compare, chart and summarize key
-                climate
+                climate,
                 and climate-related information.
               </p>
               <a href={'HTTP://SDWEBX.WORLDBANK.ORG/CLIMATEPORTAL/?PAGE=CLIMATE_DATA'} target="_blank">HTTP://SDWEBX.WORLDBANK.ORG/CLIMATEPORTAL/?PAGE=CLIMATE_DATA</a>
@@ -299,7 +299,7 @@ function Resources() {
               <p>
                 The CCAFS-Climate data portal provides global and regional future high-resolution climate datasets that
                 serve as a basis for assessing the climate change impacts and adaptation in a variety of fields
-                including biodiversity, agricultural and livestock production, and ecosystem services and hydrology.
+                including biodiversity, agricultural and livestock production, ecosystem services, and hydrology.
               </p>
               <a href="http://ccafs-climate.org" target="_blank">HTTP://CCAFS-CLIMATE.ORG</a>
             </div>

@@ -93,9 +93,7 @@ class Partnership extends React.Component {
               </p>
             </li>
             <li>
-              <h4>Even when data and information exist, they are difficult to find, access, and
-                use
-              </h4>
+              <h4>Even existing data are difficult to find, access and use</h4>
               <p>Much of the climate-relevant data are difficult to access and use because they sit
                 in incompatible formats in silos of a multitude of government, university, and other
                 data servers.
