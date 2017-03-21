@@ -7,7 +7,7 @@ import {
 
 export function getWidgetBySlug(slug) {
   return dispatch => {
-    fetch(`${config.apiUrl}/api/widgets/${slug}`)
+    fetch(`${config.apiUrl}/api/widgets/${slug}?cache=false`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
