@@ -27,6 +27,12 @@
       min-width: rem(370);
     }
 
+    &.metadata-modal {
+      .m-content {
+        height: 420px;
+      }
+    }
+
     .m-content {
       padding: $medium-margin;
       height: 90vh;
