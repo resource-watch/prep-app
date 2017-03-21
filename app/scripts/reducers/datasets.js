@@ -91,9 +91,13 @@ export default function (state = initialState, action) {
         filteredList = list.filter((item) => {
           for (let i = andFilters.length - 1; i >= 0; i--) {
             const tags = filtersChoosen[andFilters[i]];
+            let itemTags = [];
+            if (item.vocabulary[0]) {
+              itemTags = item.vocabulary[0].attributes.tags || [];
+            }
             let j = tags.length - 1;
             for (j; j >= 0; j--) {
-              if (item.tags.indexOf(tags[j]) > -1) {
+              if (itemTags.indexOf(tags[j]) > -1) {
                 break;
               }
             }

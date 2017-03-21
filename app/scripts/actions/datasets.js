@@ -95,7 +95,7 @@ export function setDatasetsTagFilter(filter, tag) {
 
 export function getDatasets(defaultActiveLayers) {
   return dispatch => {
-    fetch(`${config.apiUrlRW}/dataset?app=prep&includes=metadata,layer&page[size]=999`)
+    fetch(`${config.apiUrlRW}/dataset?application=prep&includes=metadata,layer,vocabulary&page[size]=999&status=saved`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
@@ -151,7 +151,7 @@ export function getDatasetById(datasetId, includesData) {
     '';
 
   return dispatch => {
-    fetch(`${config.apiUrlRW}/dataset/${datasetId}?app=prep${includeQuery}`)
+    fetch(`${config.apiUrlRW}/dataset/${datasetId}?application=prep${includeQuery}&status=saved`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
@@ -188,7 +188,7 @@ export function getDatasetById(datasetId, includesData) {
 
 export function getDatasetDefaultWidget(datasetId) {
   return dispatch => {
-    fetch(`${config.apiUrlRW}/widget?app=prep&default=true&dataset=${datasetId}`)
+    fetch(`${config.apiUrlRW}/widget?application=prep&default=true&dataset=${datasetId}`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
