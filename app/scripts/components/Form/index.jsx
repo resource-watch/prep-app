@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import React from 'react';
 
 class Form extends React.Component {
@@ -9,9 +10,14 @@ class Form extends React.Component {
     };
   }
 
-  handleSubmit() {
+  handleSubmit(ev) {
     this.checkFormFill().length === 0 &&
     this.setState({ success: true });
+    if (ev) {
+      ev.preventDefault();
+      const data = new FormData(ev.currentTarget);
+      fetch('/contact', { method: 'POST', body: data });
+    }
   }
 
   checkFormFill() {
@@ -28,12 +34,12 @@ class Form extends React.Component {
     return (
       <div id="mc_embed_signup" className="c-form-container">
         <form
-          action="//resourcewatch.us12.list-manage.com/subscribe/post?u=c99e39850f4acfe33f49fea68&id=ccad0f31c4"
+          action="/contact"
           method="post"
           id="mc-embedded-subscribe-form"
           name="mc-embedded-subscribe-form"
           className="validate"
-          target="_blank"
+          onSubmit={(ev)=>this.handleSubmit(ev)}
         >
           <div id="mc_embed_signup_scroll">
             <div className="mc-field-group -hidden">
@@ -82,7 +88,6 @@ class Form extends React.Component {
                 name="subscribe"
                 id="mc-embedded-subscribe"
                 className="c-button -filled -secondary-color button"
-                onClick={()=>this.handleSubmit()}
               />
             </div>
           </div>
