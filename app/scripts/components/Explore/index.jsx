@@ -152,6 +152,7 @@ class Explore extends React.Component {
 
         {this.props.metadataModal &&
           <Modal
+            className="metadata-modal"
             opened={this.props.metadataModal.open}
             close={() => this.props.setModalMetadata(false)}
           >

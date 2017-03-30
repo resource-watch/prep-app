@@ -97,9 +97,10 @@ class DatasetDetail extends React.Component {
   getDownloadUrl(data) {
     let url = null;
     let metadataUrl = null;
+    console.log(data)
     if (data.metadata && data.metadata.length &&
-        data.metadata[0].attributes.info.dataDownload) {
-      metadataUrl = data.metadata[0].attributes.info.dataDownload;
+        data.metadata[0].attributes.info.data_download) {
+      metadataUrl = data.metadata[0].attributes.info.data_download;
     }
     switch(data.provider) {
       case 'cartodb':
