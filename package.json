@@ -75,7 +75,7 @@
     "serve-favicon": "^2.3.0",
     "sparkpost": "^2.1.2",
     "style-loader": "^0.13.1",
-    "twitter": "^1.4.0",
+    "twitter": "^1.7.0",
     "urijs": "^1.18.1",
     "vega": "2.5.2",
     "webpack": "^1.13.0",
