@@ -13,7 +13,7 @@ import { updateURL } from '../../actions/links';
 
 function isLayerReady(dataset, layers) {
   if (dataset.layer && dataset.layer.length) {
-    const layerId = dataset.layer[0].attributes.id;
+    const layerId = dataset.layer[0].id;
     if (layers && layers[layerId]) {
       return true;
     }
@@ -34,14 +34,14 @@ function getActiveLayers(datasets, layers) {
   const activeLayers = [];
   datasets.forEach((dataset) => {
     if (dataset.active && isLayerReady(dataset, layers)) {
-      const layer = layers[dataset.layer[0].attributes.id];
+      const layer = layers[dataset.layer[0].id];
       layer.title = dataset.name;
       layer.index = dataset.index;
       layer.opacity = dataset.opacity;
       activeLayers.push(layer);
     }
   });
-  activeLayers.sort(sortByIndex);
+  // activeLayers.sort(sortByIndex);
   return activeLayers;
 }
 
