@@ -1,8 +1,8 @@
 const SparkPost = require('sparkpost');
+
 const mailClient = new SparkPost(process.env.SPARKPOST_API_KEY);
 
-module.exports = function(mailSettings) {
-
+module.exports = (mailSettings) => {
   mailClient.transmissions.send({
     content: {
       from: process.env.MAIL_FROM,
@@ -13,12 +13,11 @@ module.exports = function(mailSettings) {
       { address: process.env.MAIL_RECIPIENTS }
     ]
   })
-    .then(data => {
-      console.log('Woohoo! You just sent your first mailing!');
+    .then(() => {
+      console.info('Woohoo! You just sent your first mailing!');
     })
-    .catch(err => {
-      console.log('Whoops! Something went wrong');
-      console.log(err);
+    .catch((err) => {
+      console.error('Whoops! Something went wrong');
+      console.error(err);
     });
-
 };

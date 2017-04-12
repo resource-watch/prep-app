@@ -18,16 +18,17 @@ const deserializer = new Deserializer({ keyForAttribute: 'underscore_case' });
 
 export function setDatasetActive(dataset) {
   return dispatch => {
+    const layerData = Object.assign({}, dataset.layer[0].attributes, {id: dataset.layer[0].id});
     dispatch({
       type: DATASET_LAYER_RECEIVED,
-      payload: dataset.layer[0].attributes
+      payload: layerData
     });
   };
 }
 
 export function getDatasetLayer(dataset) {
   return dispatch => {
-    fetch(`${config.apiUrlRW}/layer/${dataset.layer[0].attributes.id}`)
+    fetch(`${config.apiUrlRW}/layer/${dataset.layer[0].id}`)
       .then(response => {
         if (!response.ok) {
           throw new Error(response.statusText);
@@ -151,7 +152,7 @@ export function getDatasetById(datasetId, includesData) {
     '';
 
   return dispatch => {
-    fetch(`${config.apiUrlRW}/dataset/${datasetId}?application=prep${includeQuery}&status=saved`)
+    fetch(`${config.apiUrlRW}/dataset/${datasetId}?application=prep${includeQuery}&status=saved&page[size]=999`)
       .then(response => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);

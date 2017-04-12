@@ -10,21 +10,21 @@
     "config": true
   },
   "parserOptions": {
-    "ecmaVersion": 7,
+    "ecmaVersion": 2017,
     "ecmaFeatures": {
-      "jsx": true
+      "jsx": true,
+      "experimentalObjectRestSpread": true
     },
     "sourceType": "module"
   },
-  "plugins": [
-    "react"
+  "extends": [
+    "vizzuality"
   ],
-  "extends": "airbnb",
-  "rules": {
-    "no-console": ["error", {
-      "allow": ["warn", "error", "info"]
-    }],
-    "comma-dangle": ["error", "never"],
-    "max-len": 0
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "config/webpack/development.js"
+      }
+    }
   }
 }

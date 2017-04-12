@@ -1,8 +1,7 @@
-import initOpbeat from 'opbeat-react'
-import 'opbeat-react/router'
-import { createOpbeatMiddleware } from 'opbeat-react/redux'
 import React from 'react';
 import { render } from 'react-dom';
+import initOpbeat from 'opbeat-react';
+import { createOpbeatMiddleware } from 'opbeat-react/redux';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
@@ -17,10 +16,12 @@ import '../styles/index.scss';
 /**
  * Monitoring with Opbeat
  */
-initOpbeat({
-  orgId: '17ab8eb501d2418a81f3167c10407e90',
-  appId: 'd4c49f7f9d',
-});
+if (process.env.NODE_ENV === 'production') {
+  initOpbeat({
+    orgId: process.env.OPBEAT_ORG_ID,
+    appId: process.env.OPBEAT_APP_ID,
+  });
+}
 
 /**
  * Reducers

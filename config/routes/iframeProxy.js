@@ -1,7 +1,6 @@
 const request = require('request');
 
-module.exports = function(app) {
-
+module.exports = (app) => {
   app.get('/proxy', (req, res) => {
     const url = req.query.url;
     if (url) {
@@ -16,5 +15,4 @@ module.exports = function(app) {
       res.sendStatus(400);
     }
   });
-
 };
