@@ -226,13 +226,13 @@ class ExploreMap extends React.Component {
   }
 
   hasChangedOpacity(dataset) {
-    let hasChanged = (dataset && dataset.opacity !== this.mapLayers[dataset.layer[0].attributes.id].options.opacity) || false;
+    let hasChanged = (dataset && dataset.opacity !== this.mapLayers[dataset.layer[0].id].options.opacity) || false;
     return hasChanged;
   }
 
   isLayerReady(dataset, layers) {
     if (dataset.layer && dataset.layer.length) {
-      const layerId = dataset.layer[0].attributes.id;
+      const layerId = dataset.layer[0].id;
       return layers && layers[layerId] || false;
     }
     return false;
@@ -240,7 +240,7 @@ class ExploreMap extends React.Component {
 
 
   updateMapLayer(dataset, layers, datasetsLength) {
-    const layerId = dataset.layer[0].attributes.id;
+    const layerId = dataset.layer[0].id;
     if (dataset.active) {
       if (this.isLayerReady(dataset, layers)) {
         if (!this.wasAlreadyAdded(dataset)) {
@@ -264,13 +264,13 @@ class ExploreMap extends React.Component {
 
 
   changeLayerOrder(dataset, datasetsLength) {
-    const layer = this.mapLayers[dataset.layer[0].attributes.id];
+    const layer = this.mapLayers[dataset.layer[0].id];
     if (dataset.index !== undefined && layer) {
       if (typeof layer.setZIndex === 'function') {
         layer.index = dataset.index;
         layer.setZIndex(datasetsLength - dataset.index);
       } else {
-        const layerId = dataset.layer[0].attributes.id;
+        const layerId = dataset.layer[0].id;
         const layersElements = this.map.getPane('tilePane').children;
         for (let i = 0; i < layersElements.length; i++) {
           if (layersElements[i].id === layerId) {
