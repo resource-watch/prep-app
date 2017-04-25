@@ -139,10 +139,16 @@ const SortableItem = SortableElement(({layer, index, onInfoClick, toggleLayerOpa
   );
 });
 
+const sortByIndex = items => (
+  items.sort((a, b) => a.index - b.index)
+);
+
 const SortableList = SortableContainer(({items, onInfoClick, toggleLayerOpacity, setDatasetSelected, selectedDatasetId, switchChange }) => {
+  const sortedItems = sortByIndex(items);
+
   return (
     <div className="content">
-      {items.map((layer, index) =>
+      {sortedItems.map((layer, index) =>
         <SortableItem
           key={`item-${index}`}
           index={index}
