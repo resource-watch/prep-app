@@ -2,12 +2,13 @@ import { connect } from 'react-redux';
 import ExploreMapLegend from '../../components/Explore/ExploreLegend';
 
 import { setModalMetadata } from '../../actions/modal';
-import { getDatasetById } from '../../actions/datasets';
+import { getDatasetById, setDatasetActive } from '../../actions/datasets';
 import {
   setLayersOrder,
   toggleLayerOpacity,
   setDatasetSelected,
-  deselectDataset
+  deselectDataset,
+  switchChange
 } from '../../actions/exploremap';
 import { updateURL } from '../../actions/links';
 
@@ -45,11 +46,16 @@ function getActiveLayers(datasets, layers) {
   return activeLayers;
 }
 
-const mapStateToProps = (state) => ({
+function getActiveDatasets(datasets, layers) {
+  return datasets.filter(dataset => dataset.active && isLayerReady(dataset, layers));
+}
+
+const mapStateToProps = state => ({
   data: getActiveLayers(state.datasets.filteredList, state.datasets.layers),
+  activeDatasets: getActiveDatasets(state.datasets.filteredList, state.datasets.layers),
   selectedDatasetId: state.exploremap.interactionData.datasetId
 });
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   onInfoClick: (datasetId) => {
     dispatch(getDatasetById(datasetId, ['metadata']));
     dispatch(setModalMetadata(true, datasetId));
@@ -58,8 +64,13 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(setLayersOrder(layers));
     dispatch(updateURL());
   },
-  toggleLayerOpacity: (layerId) => dispatch(toggleLayerOpacity(layerId)),
-  setDatasetSelected: (datasetId) => dispatch(setDatasetSelected(datasetId)),
+  switchChange: (dataset) => {
+    dispatch(switchChange(dataset.id));
+    if (dataset.active) dispatch(setDatasetActive(dataset));
+    dispatch(updateURL());
+  },
+  toggleLayerOpacity: layerId => dispatch(toggleLayerOpacity(layerId)),
+  setDatasetSelected: datasetId => dispatch(setDatasetSelected(datasetId)),
   deselectDataset: () => dispatch(deselectDataset())
 });
 

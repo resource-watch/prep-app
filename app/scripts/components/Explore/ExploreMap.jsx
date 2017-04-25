@@ -280,6 +280,7 @@ class ExploreMap extends React.Component {
       } else {
         const layerId = dataset.layer[0].id;
         const layersElements = this.map.getPane('tilePane').children;
+
         for (let i = 0; i < layersElements.length; i++) {
           if (layersElements[i].id === layerId) {
             layersElements[i].style.zIndex = datasetsLength - dataset.index;
