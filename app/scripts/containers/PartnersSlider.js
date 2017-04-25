@@ -2,12 +2,12 @@ import { connect } from 'react-redux';
 import { getPartners } from '../actions/partners';
 import PartnersSlider from '../components/Slider/PartnersSlider';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   data: state.partners.list,
-  featured: state.partners.list.filter((d) => d.featured)
+  featured: state.partners.list.filter(d => d.featured)
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   getPartners: () => dispatch(getPartners())
 });
 

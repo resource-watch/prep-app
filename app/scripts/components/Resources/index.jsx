@@ -14,12 +14,12 @@ import iriLogo from '../../../images/resources/iri_logo.png';
 import servirLogo from '../../../images/resources/servilglobal_logo.png';
 import worldBankLogo from '../../../images/resources/WorldBankGorup_logo.png';
 import weAdaptLogo from '../../../images/resources/logo-weAdapt-resource.png';
-import ccafsLogo from '../../../images/resources/logo-CCAFS-resource.png'
+import ccafsLogo from '../../../images/resources/logo-CCAFS-resource.png';
 
 function Resources() {
   return (
     <div className="c-partners">
-      <div className="sliced"></div>
+      <div className="sliced" />
 
       <Article no-border>
         <p>Find selected resources for understanding the impacts of climate change,
@@ -264,7 +264,8 @@ function Resources() {
               </p>
               <a
                 href={'HTTP://WWW.SERVIRGLOBAL.NET/'}
-                target="_blank">HTTP://WWW.SERVIRGLOBAL.NET/</a>
+                target="_blank"
+              >HTTP://WWW.SERVIRGLOBAL.NET/</a>
             </div>
           </div>
 

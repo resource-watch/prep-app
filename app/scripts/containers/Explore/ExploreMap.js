@@ -10,14 +10,14 @@ import {
 } from '../../actions/exploremap';
 import { updateURL } from '../../actions/links';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   data: state.datasets.filteredList,
   interactionData: state.exploremap.interactionData,
   layers: state.datasets.layers,
   map: state.exploremap
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   onTileError: (id) => {
     dispatch(setSwitchStatus(id, false));
     dispatch(updateURL());

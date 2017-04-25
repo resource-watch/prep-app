@@ -4,8 +4,7 @@ function Switch(props) {
   const classNames = ['c-switch'];
   if (props.checked) classNames.push('-checked');
   return (
-    <span className={classNames.join(' ')} onClick={() => props.onChange()} >
-    </span>
+    <span className={classNames.join(' ')} onClick={() => props.onChange()} />
   );
 }
 

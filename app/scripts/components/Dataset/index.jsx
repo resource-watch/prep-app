@@ -83,11 +83,11 @@ class DatasetDetail extends React.Component {
 
         {
           (widgetComponents && widgetComponents.length) ?
-          <div className="row">
-            <div className="columns small-12">
-              {widgetComponents}
+            <div className="row">
+              <div className="columns small-12">
+                {widgetComponents}
+              </div>
             </div>
-          </div>
           : null
         }
       </div>
@@ -101,7 +101,7 @@ class DatasetDetail extends React.Component {
         data.metadata[0].attributes.info.data_download) {
       metadataUrl = data.metadata[0].attributes.info.data_download;
     }
-    switch(data.provider) {
+    switch (data.provider) {
       case 'cartodb':
         if (data.connectorUrl.indexOf('tables') === -1) {
           const uri = new URI(data.connectorUrl);
@@ -112,7 +112,7 @@ class DatasetDetail extends React.Component {
         }
         break;
       default:
-        url =  metadataUrl;
+        url = metadataUrl;
     }
     return url;
   }
@@ -170,7 +170,7 @@ class DatasetDetail extends React.Component {
           <div className="l-footer-sep">
             <div className="row">
               <div className="column small-12">
-                <div className="footer-sep-item"></div>
+                <div className="footer-sep-item" />
               </div>
             </div>
           </div>

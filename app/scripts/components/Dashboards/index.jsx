@@ -27,23 +27,22 @@ class DashboardsPage extends React.Component {
       );
     }
 
-    const items = this.props.data.map((item, index) => {
-      return (
-        <div
-          className={`columns small-10 medium-5 align-stretch ${index % 2 === 0 ? 'small-offset-1' : ''}`}
-          key={`dashboard-item-${index}`}
-          style={{ display: 'flex' }}
-        >
-          <Card border="neutral">
-            <h3>
-              <Link to={`/dashboard/${item.slug}/data`}>
-                {item.title}
-              </Link>
-            </h3>
-            <p>
-              {item.summary}
-            </p>
-            {item.partner &&
+    const items = this.props.data.map((item, index) => (
+      <div
+        className={`columns small-10 medium-5 align-stretch ${index % 2 === 0 ? 'small-offset-1' : ''}`}
+        key={`dashboard-item-${index}`}
+        style={{ display: 'flex' }}
+      >
+        <Card border="neutral">
+          <h3>
+            <Link to={`/dashboard/${item.slug}/data`}>
+              {item.title}
+            </Link>
+          </h3>
+          <p>
+            {item.summary}
+          </p>
+          {item.partner &&
             <a href={item.partner.url} target="_blank">
               <img
                 src={config.apiUrl + item.partner.images.logo}
@@ -52,13 +51,12 @@ class DashboardsPage extends React.Component {
               />
             </a>
             }
-            {item.attribution &&
+          {item.attribution &&
             <span className="attribution">{item.attribution}</span>
             }
-          </Card>
-        </div>
-      );
-    });
+        </Card>
+      </div>
+      ));
 
     return (
       <div className="row align-stretch">
@@ -68,11 +66,11 @@ class DashboardsPage extends React.Component {
   }
 
   render() {
-    let content = this.getContent();
+    const content = this.getContent();
 
     return (
       <div className="l-dashboards">
-        <div className="sliced"></div>
+        <div className="sliced" />
         <article className="c-article -no-border">
           <div className="row align-center">
             <div className="column small-12 medium-8">

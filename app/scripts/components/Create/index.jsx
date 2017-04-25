@@ -10,7 +10,7 @@ import dashboards from '../../../images/create/dashboards.png';
 function Create() {
   return (
     <div className="c-partnership">
-      <div className="sliced"></div>
+      <div className="sliced" />
 
       <article className="c-article">
         <div className="row align-center">
@@ -48,7 +48,7 @@ function Create() {
             </div>
 
             <div className="column align-middle small-12 medium-6">
-              <img src={shareData} alt="Share Data"/>
+              <img src={shareData} alt="Share Data" />
             </div>
           </div>
         </div>
@@ -56,7 +56,7 @@ function Create() {
         <div className="c-article-module">
           <div className="row">
             <div className="column align-middle small-12 medium-6">
-              <img src={dashboards} alt="Create Personalized Dashboards"/>
+              <img src={dashboards} alt="Create Personalized Dashboards" />
             </div>
 
             <div className="column align-middle small-12 medium-6">
@@ -84,7 +84,7 @@ function Create() {
             </div>
 
             <div className="column align-middle small-12 medium-6">
-              <img src={communicate} alt="See insights"/>
+              <img src={communicate} alt="See insights" />
             </div>
           </div>
         </div>
@@ -99,7 +99,7 @@ function Create() {
               develop their own dashboards.</p>
             <p>We can only work with a few groups at this time. Let us know why you think you would
               be an ideal group to pilot the PREP Platform.</p>
-            <Form type="Request access"/>
+            <Form type="Request access" />
           </div>
         </div>
       </article>

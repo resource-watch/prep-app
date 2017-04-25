@@ -15,20 +15,22 @@ const cards = {
   insights: (
     <div
       className="simple-card -inverse"
-      style={{ backgroundImage: `url(${bg.insights})` }}>
+      style={{ backgroundImage: `url(${bg.insights})` }}
+    >
       <h3>Insights</h3>
       <p>Find data-driven stories and tools that spotlight specific climate-related risks and solutions</p>
       <Link to="/insights">EXPLORE THE INSIGHTS</Link>
     </div>),
   dashboards: (
-     <div
+    <div
       className="simple-card -inverse"
-      style={{ backgroundImage: `url(${bg.dashboards})` }}>
+      style={{ backgroundImage: `url(${bg.dashboards})` }}
+    >
       <h3>Dashboards</h3>
       <p>Find collections of climate risk data, insights, and tools contributed by partner communities</p>
       <Link to="/dashboards">EXPLORE THE DASHBOARDS</Link>
     </div>)
-}
+};
 
 
 class SummaryCards extends React.Component {
@@ -42,7 +44,7 @@ class SummaryCards extends React.Component {
           <Link to="/explore">EXPLORE THE MAP</Link>
         </div>
 
-       {cards[this.props.extraCard]}
+        {cards[this.props.extraCard]}
       </div>
     );
   }

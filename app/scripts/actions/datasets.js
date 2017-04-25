@@ -17,8 +17,8 @@ import { Deserializer } from 'jsonapi-serializer';
 const deserializer = new Deserializer({ keyForAttribute: 'underscore_case' });
 
 export function setDatasetActive(dataset) {
-  return dispatch => {
-    const layerData = Object.assign({}, dataset.layer[0].attributes, {id: dataset.layer[0].id});
+  return (dispatch) => {
+    const layerData = Object.assign({}, dataset.layer[0].attributes, { id: dataset.layer[0].id });
     dispatch({
       type: DATASET_LAYER_RECEIVED,
       payload: layerData
@@ -27,15 +27,15 @@ export function setDatasetActive(dataset) {
 }
 
 export function getDatasetLayer(dataset) {
-  return dispatch => {
+  return (dispatch) => {
     fetch(`${config.apiUrlRW}/layer/${dataset.layer[0].id}`)
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
           throw new Error(response.statusText);
         }
         return response.json();
       })
-      .then(data => {
+      .then((data) => {
         deserializer.deserialize(data, (error, layerData) => {
           dispatch({
             type: DATASET_LAYER_RECEIVED,
@@ -75,7 +75,7 @@ export function getDatasetLayer(dataset) {
 // }
 
 export function getActiveDatasetLayers(datasets) {
-  return dispatch => {
+  return (dispatch) => {
     for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
       if (datasets[i].active) {
         dispatch(setDatasetActive(datasets[i]));
@@ -95,13 +95,13 @@ export function setDatasetsTagFilter(filter, tag) {
 }
 
 export function getDatasets(defaultActiveLayers) {
-  return dispatch => {
+  return (dispatch) => {
     fetch(`${config.apiUrlRW}/dataset?application=prep&includes=metadata,layer,vocabulary&page[size]=999&status=saved`)
-      .then(response => {
+      .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
       })
-      .then(data => {
+      .then((data) => {
         deserializer.deserialize(data, (err, datasetData) => {
           if (err) throw new Error('Error deserializing json api');
           const datasets = datasetData || [];
@@ -151,13 +151,13 @@ export function getDatasetById(datasetId, includesData) {
     `&includes=${includes.join(',')}` :
     '';
 
-  return dispatch => {
+  return (dispatch) => {
     fetch(`${config.apiUrlRW}/dataset/${datasetId}?application=prep${includeQuery}&status=saved&page[size]=999`)
-      .then(response => {
+      .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
       })
-      .then(data => {
+      .then((data) => {
         deserializer.deserialize(data, (err, datasetData) => {
           if (err) throw new Error('Error deserializing json api');
           if (datasetData) {
@@ -188,21 +188,21 @@ export function getDatasetById(datasetId, includesData) {
 }
 
 export function getDatasetDefaultWidget(datasetId) {
-  return dispatch => {
+  return (dispatch) => {
     fetch(`${config.apiUrlRW}/widget?application=prep&default=true&dataset=${datasetId}`)
-      .then(response => {
+      .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
       })
-      .then(data => {
+      .then((data) => {
         if (data.data.length) {
           for (let i = 0, wLength = data.data.length; i < wLength; i++) {
             fetch(`${config.apiUrlRW}/widget/${data.data[i].id}`)
-              .then(response => {
+              .then((response) => {
                 if (response.ok) return response.json();
                 throw new Error(response.statusText);
               })
-              .then(widget => {
+              .then((widget) => {
                 dispatch({
                   type: DATASET_WIDGET_RECEIVED,
                   payload: {
@@ -223,13 +223,13 @@ export function getDatasetDefaultWidget(datasetId) {
 }
 
 export function getDatasetMetadata(datasetId) {
-  return dispatch => {
+  return (dispatch) => {
     fetch(`${config.apiUrlRW}/metadata/${datasetId}`)
-      .then(response => {
+      .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
       })
-      .then(data => {
+      .then((data) => {
         if (data.data[0]) {
           dispatch({
             type: DATASET_METADATA_RECEIVED,

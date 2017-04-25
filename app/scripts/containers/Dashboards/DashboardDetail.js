@@ -11,9 +11,9 @@ const mapStateToProps = (state, { params }) => ({
   modalOpen: state.modal.underDevelop
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  getDashboardBySlug: (slug) => dispatch(getDashboardBySlug(slug)),
-  setModalUnderDevelop: (status) =>
+const mapDispatchToProps = dispatch => ({
+  getDashboardBySlug: slug => dispatch(getDashboardBySlug(slug)),
+  setModalUnderDevelop: status =>
     dispatch(setModalUnderDevelop(status))
 });
 

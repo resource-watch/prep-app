@@ -61,7 +61,7 @@ class App extends React.Component {
             <div className="row align-middle">
               <div className="column small-10 medium-4">
                 <Link to={'/'} className="logo">
-                  <img src={logoImage} alt="Partnership for Resilience and Preparedness"/>
+                  <img src={logoImage} alt="Partnership for Resilience and Preparedness" />
                 </Link>
               </div>
               <div className="column small-2 medium-8">
@@ -70,7 +70,7 @@ class App extends React.Component {
             </div>
           </div>
           <div className="l-header-banner">
-            <Breadcrumbs pathname={this.props.location.pathname}/>
+            <Breadcrumbs pathname={this.props.location.pathname} />
             <Banner
               bg={currentData.bannerBg}
               size={currentData.bannerSize}
@@ -86,9 +86,11 @@ class App extends React.Component {
         </div>
 
         {summaryCardsPages.indexOf(pathname) !== -1 &&
-        <SummaryCards extraCard={pathname === '/insights' ?
+        <SummaryCards
+          extraCard={pathname === '/insights' ?
           'dashboards' :
-          'insights'}/>
+          'insights'}
+        />
         }
 
         {pathname === '/' &&
@@ -99,14 +101,14 @@ class App extends React.Component {
           <div className="l-footer-top -inverse">
             <div className="row">
               <div className="column small-12">
-                <PartnersSlider route={pathname}/>
+                <PartnersSlider route={pathname} />
               </div>
             </div>
           </div>
           <div className="l-footer-sep">
             <div className="row">
               <div className="column small-12">
-                <div className="footer-sep-item"></div>
+                <div className="footer-sep-item" />
               </div>
             </div>
           </div>

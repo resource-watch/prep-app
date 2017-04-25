@@ -8,7 +8,7 @@ function getDownloadUrl(data) {
       data.metadata[0].attributes.info.dataDownload) {
     metadataUrl = data.metadata[0].attributes.info.dataDownload;
   }
-  switch(data.provider) {
+  switch (data.provider) {
     case 'cartodb':
       if (data.connectorUrl.indexOf('tables') === -1) {
         const uri = new URI(data.connectorUrl);
@@ -31,17 +31,17 @@ function MetadataInfo(props) {
   if (!metadataInfo) return null;
 
   const title = metadataInfo.message
-    ? <li>
+    ? (<li>
       <span>Info: </span>
       <span>{metadataInfo.message}</span>
-    </li>
-    : <li>
+    </li>)
+    : (<li>
       <span>Description: </span>
       <span>{props.short
         ? metadataInfo['short-description']
         : metadataInfo.description}
       </span>
-    </li>;
+    </li>);
   return (
     <ul>
 

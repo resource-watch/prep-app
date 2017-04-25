@@ -226,7 +226,7 @@ class ExploreMap extends React.Component {
   }
 
   hasChangedOpacity(dataset) {
-    let hasChanged = (dataset && dataset.opacity !== this.mapLayers[dataset.layer[0].id].options.opacity) || false;
+    const hasChanged = (dataset && dataset.opacity !== this.mapLayers[dataset.layer[0].id].options.opacity) || false;
     return hasChanged;
   }
 
@@ -247,7 +247,6 @@ class ExploreMap extends React.Component {
           this.hasActiveLayers = true;
           const layer = layers[layerId];
           this.addMapLayer(dataset, layer, datasetsLength);
-
         } else if (this.wasAlreadyAdded(dataset)) {
           if (this.hasChangedOrder(dataset)) {
             this.changeLayerOrder(dataset, datasetsLength);
@@ -277,7 +276,6 @@ class ExploreMap extends React.Component {
             layersElements[i].style.zIndex = datasetsLength - dataset.index;
           }
         }
-
       }
     }
   }
@@ -422,7 +420,7 @@ class ExploreMap extends React.Component {
     // to avoid multiples loads while the layer is loading
     this.mapLayers[layer.id] = true;
     fetch(request)
-      .then(res => {
+      .then((res) => {
         if (!res.ok) {
           const error = new Error(res.statusText);
           error.response = res;
@@ -475,7 +473,7 @@ class ExploreMap extends React.Component {
       loading = <LoadingSpinner />;
     }
     return (<div className="c-explore-map">
-      <div className="map" ref="map"></div>
+      <div className="map" ref="map" />
       {loading}
       <Tooltip
         scroll

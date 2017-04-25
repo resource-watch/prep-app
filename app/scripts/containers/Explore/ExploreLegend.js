@@ -21,11 +21,11 @@ function isLayerReady(dataset, layers) {
   return false;
 }
 
-function sortByIndex(a, b) {
-  if (a.index < b.index) return -1;
-  if (a.index > b.index) return 1;
-  return 0;
-}
+// function sortByIndex(a, b) {
+//   if (a.index < b.index) return -1;
+//   if (a.index > b.index) return 1;
+//   return 0;
+// }
 
 function getActiveLayers(datasets, layers) {
   if (!datasets.length) {
@@ -45,11 +45,11 @@ function getActiveLayers(datasets, layers) {
   return activeLayers;
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   data: getActiveLayers(state.datasets.filteredList, state.datasets.layers),
   selectedDatasetId: state.exploremap.interactionData.datasetId
 });
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   onInfoClick: (datasetId) => {
     dispatch(getDatasetById(datasetId, ['metadata']));
     dispatch(setModalMetadata(true, datasetId));
@@ -58,8 +58,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(setLayersOrder(layers));
     dispatch(updateURL());
   },
-  toggleLayerOpacity: (layerId) => dispatch(toggleLayerOpacity(layerId)),
-  setDatasetSelected: (datasetId) => dispatch(setDatasetSelected(datasetId)),
+  toggleLayerOpacity: layerId => dispatch(toggleLayerOpacity(layerId)),
+  setDatasetSelected: datasetId => dispatch(setDatasetSelected(datasetId)),
   deselectDataset: () => dispatch(deselectDataset())
 });
 

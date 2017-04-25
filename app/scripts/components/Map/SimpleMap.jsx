@@ -181,7 +181,7 @@ class SimpleMap extends React.Component {
     this.mapLayers[layer.id] = true;
 
     fetch(request)
-      .then(res => {
+      .then((res) => {
         if (res.ok) {
           return res.json();
         }
@@ -218,13 +218,13 @@ class SimpleMap extends React.Component {
     let loading;
     const layer = this.props.data[this.props.layerId] || false;
     if (this.state.loading) {
-      loading = <LoadingSpinner inner/>;
+      loading = <LoadingSpinner inner />;
     }
 
     return (<div className="c-simple-map">
-      <div className="map" ref="map"></div>
+      <div className="map" ref="map" />
       {layer &&
-      <SimpleLegend layer={layer}/>
+      <SimpleLegend layer={layer} />
       }
       {loading}
     </div>);

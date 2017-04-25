@@ -52,7 +52,7 @@ class VegaChart extends React.Component {
   parseVega() {
     const dataObj = this.getData();
 
-    vega.parse.spec(dataObj, chart => {
+    vega.parse.spec(dataObj, (chart) => {
       const chartVis = chart({
         el: this.refs.vegaChart
       });
@@ -73,7 +73,7 @@ class VegaChart extends React.Component {
   render() {
     return (
       <div ref="chartContainer" className={`c-vega-chart ${this.props.small ? '-small' : ''}`}>
-        <div ref="vegaChart" className="chart"></div>
+        <div ref="vegaChart" className="chart" />
       </div>
     );
   }

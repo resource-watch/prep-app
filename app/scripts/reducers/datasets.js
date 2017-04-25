@@ -93,7 +93,7 @@ export default function (state = initialState, action) {
             const tags = filtersChoosen[andFilters[i]];
             let itemTags = [];
             if (item.vocabulary[0]) {
-              itemTags = item.vocabulary[0].attributes.tags || [];
+              itemTags = item.vocabulary[0].attributes.tags || [];
             }
             let j = tags.length - 1;
             for (j; j >= 0; j--) {
@@ -140,7 +140,7 @@ export default function (state = initialState, action) {
     }
     case MAP_LAYERS_ORDER_CHANGED: {
       const datasets = state.filteredList.slice(0);
-      const idsOrdered = action.payload.map((item) => item.dataset);
+      const idsOrdered = action.payload.map(item => item.dataset);
 
       for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
         const index = idsOrdered.indexOf(datasets[i].id);

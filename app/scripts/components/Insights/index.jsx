@@ -27,7 +27,7 @@ class InsightsPage extends React.Component {
       );
     }
 
-    let items = [];
+    const items = [];
     this.props.data.forEach((item, index) => {
       items.push(
         <div
@@ -69,11 +69,11 @@ class InsightsPage extends React.Component {
   }
 
   render() {
-    let content = this.getContent();
+    const content = this.getContent();
 
     return (
       <div className="">
-        <div className="sliced"></div>
+        <div className="sliced" />
         <article className="c-article -no-border">
           <div className="row align-center">
             <div className="column small-12 medium-8">

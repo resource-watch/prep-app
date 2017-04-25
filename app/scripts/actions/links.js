@@ -47,14 +47,14 @@ export function updateURL() {
 }
 
 export function getShortLink(longUrl) {
-  return dispatch => {
+  return (dispatch) => {
     const url = encodeURIComponent(longUrl);
     fetch(`/short?url=${url}`)
-      .then(response => {
+      .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
       })
-      .then(data => {
+      .then((data) => {
         if (data.data.url) {
           dispatch({
             type: LINK_SHORTEN_RECEIVE,
