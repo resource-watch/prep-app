@@ -75,20 +75,19 @@ class Explore extends React.Component {
 
         return (
           <div className="content">
-          <h3>
-          <Link to={`/dataset/${this.props.metadataModal.datasetId}`}>
-          {metadataInfo.title}
-          </Link>
-          </h3>
-          <h4> {metadataInfo.subtitle} </h4>
-          <MetadataList short download data={datasetData} />
+            <h3>
+              <Link to={`/dataset/${this.props.metadataModal.datasetId}`}>
+                {metadataInfo.title}
+              </Link>
+            </h3>
+            <h4> {metadataInfo.subtitle} </h4>
+            <MetadataList short download data={datasetData} />
           </div>
         );
-      } else {
-        return (
-          <p>Metadata details cooming soon</p>
-        )
       }
+      return (
+        <p>Metadata details cooming soon</p>
+      );
     }
     return <LoadingSpinner inner />;
   }
@@ -130,7 +129,7 @@ class Explore extends React.Component {
 
         {this.state.modalShareOpen &&
           <ShareModal
-            title={"Share this page"}
+            title={'Share this page'}
             url={window.location.href}
             opened={this.state.modalShareOpen}
             close={() => this.setState({ modalShareOpen: false })}

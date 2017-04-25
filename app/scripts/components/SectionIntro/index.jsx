@@ -3,7 +3,7 @@ import ToolbarActions from '../ToolbarActions';
 
 function SectionIntro(props) {
   return (
-    <div className={"c-section-intro"}>
+    <div className={'c-section-intro'}>
       <div className="top-bar">
         {props.data.partner &&
           <div className="row">
@@ -24,7 +24,7 @@ function SectionIntro(props) {
           </div>
         }
       </div>
-      <div className="sliced"></div>
+      <div className="sliced" />
       <article className="c-article">
         <div className="row align-center">
           <div className="columns small-12 medium-8">

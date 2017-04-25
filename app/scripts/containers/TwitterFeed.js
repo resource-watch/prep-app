@@ -2,11 +2,11 @@ import { connect } from 'react-redux';
 import { getTwitterFeed } from '../actions/twitter';
 import TwitterFeed from '../components/TwitterFeed';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   data: state.twitterFeed.list
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   getTwitterFeed: () => dispatch(getTwitterFeed())
 });
 

@@ -32,7 +32,7 @@ class ExploreHome extends React.Component {
             <p>Interact with national, regional, and local data on this web map. Filter by topic, projection models, and area of impact to create a custom map in seconds. When you’re ready, share your findings to raise awareness in your community.</p>
           </div>
           <div className="column small-12 medium-4">
-            <button className="c-button -border" onClick={()=>this.handleClick()}>Request data</button>
+            <button className="c-button -border" onClick={() => this.handleClick()}>Request data</button>
           </div>
         </div>
         <p><img src={temperaturesLayer} /></p>

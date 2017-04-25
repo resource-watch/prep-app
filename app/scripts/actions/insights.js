@@ -6,13 +6,13 @@ import {
 } from '../constants';
 
 export function getInsightsList() {
-  return dispatch => {
+  return (dispatch) => {
     fetch(`${config.apiUrl}/api/insights`)
-      .then(response => {
+      .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
       })
-      .then(data => {
+      .then((data) => {
         dispatch({
           type: INSIGHTS_LIST_RECEIVED,
           payload: { data }
@@ -28,13 +28,13 @@ export function getInsightsList() {
 }
 
 export function getInsightBySlug(slug) {
-  return dispatch => {
+  return (dispatch) => {
     fetch(`${config.apiUrl}/api/insights/${slug}`)
-      .then(response => {
+      .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
       })
-      .then(data => {
+      .then((data) => {
         dispatch({
           type: INSIGHTS_DETAIL_RECEIVED,
           payload: { data }

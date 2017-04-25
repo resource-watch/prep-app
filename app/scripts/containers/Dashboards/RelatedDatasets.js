@@ -3,12 +3,12 @@ import RelatedDatasets from '../../components/Dashboards/RelatedDatasets';
 
 import { getDatasetById } from '../../actions/datasets';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   data: state.datasets.details,
   metadata: state.datasets.metadatas
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   getDatasetById: (id, includes) => {
     dispatch(getDatasetById(id, includes));
     // dispatch(getDatasetMetadata(id));

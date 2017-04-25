@@ -2,13 +2,13 @@ import 'whatwg-fetch';
 import { TWITTER_FEED_LIST_RECEIVED, TWITTER_FEED_FETCH_ERROR } from '../constants';
 
 export function getTwitterFeed() {
-  return dispatch => {
+  return (dispatch) => {
     fetch('/api/twitter')
-      .then(response => {
+      .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
       })
-      .then(data => {
+      .then((data) => {
         if (!data.error) {
           dispatch({
             type: TWITTER_FEED_LIST_RECEIVED,

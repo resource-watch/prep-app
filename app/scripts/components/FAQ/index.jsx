@@ -25,9 +25,11 @@ class FAQ extends React.Component {
           <h3>Where do I go if I have general questions about climate change?</h3>
           <p>You may find general information about the impacts of climate
             change around the world at the <a
-              href="http://www.ipcc.ch/organization/organization.shtml" target="_blank">Intergovernmental
+              href="http://www.ipcc.ch/organization/organization.shtml" target="_blank"
+            >Intergovernmental
               Panel on Climate Change (IPCC)</a> and in the United States in the <a
-              href="http://nca2014.globalchange.gov/" target="_blank">U.S. National Climate
+                href="http://nca2014.globalchange.gov/" target="_blank"
+              >U.S. National Climate
               Assessment</a>. For additional information please visit the <Link to="/resources">Resources</Link> page.
           </p>
 
@@ -52,8 +54,10 @@ class FAQ extends React.Component {
 
           <h3>How can I get involved?</h3>
           <p>We appreciate any feedback and suggestions. Please contact us at <a
-            href="mailto:info@prepdata.org">info@prepdata.org</a> or fill out this <Link
-            to='/contact'>form</Link>.
+            href="mailto:info@prepdata.org"
+          >info@prepdata.org</a> or fill out this <Link
+            to="/contact"
+          >form</Link>.
           </p>
           <p>If you would like to <Link to="/about">join</Link> PREP, prepare a short letter of intent expressing your
             entity’s interest in PREP, your intended workgroup, and how you meet the partner
@@ -66,14 +70,15 @@ class FAQ extends React.Component {
           </p>
 
           <h3>What is coming next for PREP?</h3>
-          <p>The next phase of the PREP platform will enable users to create personalized dashboards of climate risks that combine top-down data with local information. To learn more about this feature or to apply to be a pilot user, see the <Link to='/create'>Create</Link> page.
+          <p>The next phase of the PREP platform will enable users to create personalized dashboards of climate risks that combine top-down data with local information. To learn more about this feature or to apply to be a pilot user, see the <Link to="/create">Create</Link> page.
           </p>
         </Article>
         <Article>
           <h2>The PREP Platfrom</h2>
           <h3>How do I find data in PREP?</h3>
           <p>All data on the PREP platform can be found in the <Link to="/explore">Explore</Link> section. You can also find a list of climate-related data portals or the <Link
-              to="/resources">Resources</Link> page.
+            to="/resources"
+          >Resources</Link> page.
           </p>
 
           <h3>What if I have difficulty downloading data?</h3>
@@ -97,15 +102,18 @@ class FAQ extends React.Component {
 
           <h3>How do I create a dashboard or insight in PREP?</h3>
           <p>The ability to create and customize dashboards and insights is currently under
-            development. To learn more about this feature or to apply to be a pilot user, see the <Link to='/create'>Create</Link> page.
+            development. To learn more about this feature or to apply to be a pilot user, see the <Link to="/create">Create</Link> page.
           </p>
           <p>If you are interested in data storytelling, you may wish to try Esri <a
-            href="https://storymaps.arcgis.com/en/" target="_blank">Story Maps</a>.</p>
+            href="https://storymaps.arcgis.com/en/" target="_blank"
+          >Story Maps</a>.</p>
 
           <h3>Which web browser should I use to explore this site?</h3>
           <p>For the best experience, we recommend using a modern web browser such as <a
-            href="https://www.google.com/chrome/">Chrome</a> or <a
-            href="https://www.mozilla.org/en-US/firefox/new/" target="_blank">Firefox</a>.</p>
+            href="https://www.google.com/chrome/"
+          >Chrome</a> or <a
+            href="https://www.mozilla.org/en-US/firefox/new/" target="_blank"
+          >Firefox</a>.</p>
 
           <h3>May I have permission to use the content in your site?</h3>
           <p>Most of the datasets on the PREP Platform carry their own licenses, which you can find

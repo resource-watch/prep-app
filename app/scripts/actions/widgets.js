@@ -6,13 +6,13 @@ import {
 
 
 export function getWidgetBySlug(slug) {
-  return dispatch => {
+  return (dispatch) => {
     fetch(`${config.apiUrl}/api/widgets/${slug}?cache=false`)
-      .then(response => {
+      .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
       })
-      .then(data => {
+      .then((data) => {
         dispatch({
           type: WIDGET_DETAIL_RECEIVED,
           payload: { data }

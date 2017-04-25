@@ -35,7 +35,7 @@ export function setSwitchStatus(id, status) {
 }
 
 export function setLayersOrder(layers) {
-  return dispatch => {
+  return (dispatch) => {
     dispatch({
       type: MAP_LAYERS_ORDER_CHANGED,
       payload: layers
@@ -91,11 +91,11 @@ export function getGeoDataInfo(datasetId, geo) {
     const geoString = JSON.stringify(geo);
 
     fetch(`${config.apiUrlRW}/query/${datasetId}?sql=SELECT * FROM ${datasetTableName} WHERE ST_INTERSECTS(ST_SetSRID(ST_GeomFromGeoJSON('${geoString}'), 4326), the_geom)`)
-      .then(response => {
+      .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
       })
-      .then(data => {
+      .then((data) => {
         dispatch({
           type: MAP_GEODATA_RECEIVED,
           payload: data

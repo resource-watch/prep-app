@@ -93,7 +93,7 @@ export default function (state = initialState, action) {
             const tags = filtersChoosen[andFilters[i]];
             let itemTags = [];
             if (item.vocabulary[0]) {
-              itemTags = item.vocabulary[0].attributes.tags || [];
+              itemTags = item.vocabulary[0].attributes.tags || [];
             }
             let j = tags.length - 1;
             for (j; j >= 0; j--) {
@@ -116,14 +116,13 @@ export default function (state = initialState, action) {
     }
     case TOGGLE_LAYER_STATUS: {
       const filteredList = state.filteredList.slice(0);
-      for (let i = 0, length = filteredList.length; i < length; i++) {
-        if (filteredList[i].id === action.payload) {
-          filteredList[i].active = !filteredList[i].active;
-          filteredList[i].opacity = 1;
-          if (filteredList[i].active) {
-            filteredList[i].index = state.filteredList.filter(layer => layer.active).length;
-          }
-          break;
+      const index = state.filteredList.map(d => d.id).indexOf(action.payload);
+
+      if (index !== -1) {
+        filteredList[index].active = !filteredList[index].active;
+        filteredList[index].opacity = 1;
+        if (filteredList[index].active) {
+          filteredList[index].index = state.filteredList.filter(layer => layer.active).length;
         }
       }
       return Object.assign({}, state, { filteredList });
@@ -140,7 +139,7 @@ export default function (state = initialState, action) {
     }
     case MAP_LAYERS_ORDER_CHANGED: {
       const datasets = state.filteredList.slice(0);
-      const idsOrdered = action.payload.map((item) => item.dataset);
+      const idsOrdered = action.payload.map(item => item.dataset);
 
       for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
         const index = idsOrdered.indexOf(datasets[i].id);

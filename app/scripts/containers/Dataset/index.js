@@ -10,7 +10,7 @@ const mapStateToProps = (state, { params, route }) => ({
   widgets: state.datasets.widgets[params.slug] || []
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   getDatasetData: (slug) => {
     dispatch(getDatasetById(slug, ['metadata', 'widget']));
   }

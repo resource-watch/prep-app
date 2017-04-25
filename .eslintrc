@@ -20,6 +20,11 @@
   "extends": [
     "vizzuality"
   ],
+  "rules": {
+    "no-plusplus": ["error", {
+      "allowForLoopAfterthoughts": true
+    }]
+  },
   "settings": {
     "import/resolver": {
       "webpack": {

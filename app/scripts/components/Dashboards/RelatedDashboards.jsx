@@ -13,35 +13,33 @@ function RelatedDasboards(props) {
         </div>
       </div>
       <div className="row">
-        {props.data.map((item, index) => {
-          return (
-            <div
-              className="columns small-12 medium-6 align-stretch"
-              key={`dashboard-item-${index}`}
-              style={{ display: 'flex' }}
-            >
-              <Card border>
-                <h3>
-                  <Link to={`/dashboard/${item.slug}/data`}>
-                   {item.title}
-                  </Link>
-                </h3>
-                <p>
-                  {item.summary}
-                </p>
-                {item.partner &&
-                  <a href={item.partner.url} target="_blank">
-                    <img
-                      src={config.apiUrl + item.partner.images.logo}
-                      className="logo"
-                      alt={item.partner.name}
-                    />
-                  </a>
+        {props.data.map((item, index) => (
+          <div
+            className="columns small-12 medium-6 align-stretch"
+            key={`dashboard-item-${index}`}
+            style={{ display: 'flex' }}
+          >
+            <Card border>
+              <h3>
+                <Link to={`/dashboard/${item.slug}/data`}>
+                  {item.title}
+                </Link>
+              </h3>
+              <p>
+                {item.summary}
+              </p>
+              {item.partner &&
+              <a href={item.partner.url} target="_blank">
+                <img
+                  src={config.apiUrl + item.partner.images.logo}
+                  className="logo"
+                  alt={item.partner.name}
+                />
+              </a>
                 }
-              </Card>
-            </div>
-          );
-        })}
+            </Card>
+          </div>
+          ))}
       </div>
     </div>
   );

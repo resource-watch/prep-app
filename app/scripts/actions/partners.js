@@ -2,13 +2,13 @@ import 'whatwg-fetch';
 import { PARTNERS_LIST_RECEIVED, PARTNERS_FETCH_ERROR } from '../constants';
 
 export function getPartners() {
-  return dispatch => {
+  return (dispatch) => {
     fetch(`${config.apiUrl}/api/partners`)
-      .then(response => {
+      .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
       })
-      .then(data => {
+      .then((data) => {
         dispatch({
           type: PARTNERS_LIST_RECEIVED,
           payload: { data }

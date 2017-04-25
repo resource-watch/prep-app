@@ -6,13 +6,13 @@ import {
 } from '../constants';
 
 export function getDashboardList() {
-  return dispatch => {
+  return (dispatch) => {
     fetch(`${config.apiUrl}/api/dashboards`)
-      .then(response => {
+      .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
       })
-      .then(data => {
+      .then((data) => {
         dispatch({
           type: DASHBOARD_LIST_RECEIVED,
           payload: { data }
@@ -28,13 +28,13 @@ export function getDashboardList() {
 }
 
 export function getDashboardBySlug(slug) {
-  return dispatch => {
+  return (dispatch) => {
     fetch(`${config.apiUrl}/api/dashboards/${slug}`)
-      .then(response => {
+      .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
       })
-      .then(data => {
+      .then((data) => {
         dispatch({
           type: DASHBOARD_DETAIL_RECEIVED,
           payload: { data }

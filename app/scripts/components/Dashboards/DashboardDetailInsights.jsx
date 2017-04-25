@@ -7,7 +7,7 @@ function DashboardDetailInsights(props) {
     props.data.length
     ? <div className="row align-stretch">
       {props.data.map((card, index) => (
-        <div className="columns small-12 medium-6" key={`insight-card-${index}`} style={{display: 'flex'}} >
+        <div className="columns small-12 medium-6" key={`insight-card-${index}`} style={{ display: 'flex' }} >
           <Card border="neutral">
             <h3>
               <Link to={`/insight/${card.slug}`}>
