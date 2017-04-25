@@ -364,14 +364,16 @@ class ExploreMap extends React.Component {
     layer.id = layerSpec.id;
 
     // Transforming layer
-    // TODO: change this please @ra
     const bodyStringified = JSON.stringify(layer.body || {})
       .replace(/"mosaic-rule":/g, '"mosaicRule":')
-      .replace(/"use-cors"/g, '"useCors"');
+      .replace(/"mosaic_rule":/g, '"mosaicRule":')
+      .replace(/"use-cors":/g, '"useCors":')
+      .replace(/"use_cors":/g, '"useCors":');
 
     if (L.esri[layer.type]) {
       const layerConfig = JSON.parse(bodyStringified);
       layerConfig.pane = 'tilePane';
+      layerConfig.useCors = true; // forcing cors
       if (layerConfig.style &&
         layerConfig.style.indexOf('function') >= 0) {
         layerConfig.style = eval(`(${layerConfig.style})`);

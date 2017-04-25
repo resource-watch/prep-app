@@ -12,7 +12,6 @@ module.exports = (app) => {
     const urlPath = 'search/tweets';
     const params = { q: 'list:worldresources/prep4climate', count: 10 };
     twitterClient.get(urlPath, params, (err, timeline) => {
-      console.log(timeline)
       if (err) {
         res.json({ error: err });
       } else {
