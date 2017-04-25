@@ -271,31 +271,6 @@ class ExploreMap extends React.Component {
     this.removeMapLayer(layerId);
   }
 
-
-  // updateMapLayer(dataset, layers, datasetsLength) {
-  //   const layerId = dataset.layer[0].id;
-  //   if (dataset.active) {
-  //     if (this.isLayerReady(dataset, layers)) {
-  //       if (!this.wasAlreadyAdded(dataset)) {
-  //         this.hasActiveLayers = true;
-  //         const layer = layers[layerId];
-  //         this.addMapLayer(dataset, layer, datasetsLength);
-  //
-  //       } else if (this.wasAlreadyAdded(dataset)) {
-  //         if (this.hasChangedOrder(dataset)) {
-  //           this.changeLayerOrder(dataset, datasetsLength);
-  //         }
-  //         if (this.hasChangedOpacity(dataset)) {
-  //           this.changeLayerOpacity(dataset);
-  //         }
-  //       }
-  //     }
-  //   } else if (this.mapLayers[layerId]) {
-  //     this.removeMapLayer(layerId);
-  //   }
-  // }
-
-
   changeLayerOrder(dataset, datasetsLength) {
     const layer = this.mapLayers[dataset.layer[0].id];
     if (dataset.index !== undefined && layer) {
