@@ -209,24 +209,31 @@ class ExploreMap extends React.Component {
     const layers = newLayers || this.props.layers;
     this.hasActiveLayers = false;
     if (datasets.length) {
-      datasets.forEach((dataset) => {
-        if (dataset.layer && dataset.layer.length) {
-          this.updateMapLayer(dataset, layers, datasets.length);
+      const mapLayers = this.mapLayers;
+
+      datasets.forEach((d) => {
+        if (d.active && d.layer && d.layer.length) {
+          this.updateActiveLayer(d, layers, datasets.length);
+        } else if (!d.active && d.layer
+          && d.layer.length && mapLayers[d.layer[0].id]) {
+          this.updateRemovedLayer(d);
         }
       });
     }
   }
 
   wasAlreadyAdded(dataset) {
-    return this.mapLayers[dataset.layer[0].attributes.id] || false;
+    return this.mapLayers[dataset.layer[0].id] || false;
   }
 
   hasChangedOrder(dataset) {
-    return dataset.index !== undefined && dataset.index !== this.mapLayers[dataset.layer[0].attributes.id].index || false;
+    return dataset.index !== undefined &&
+      dataset.index !== this.mapLayers[dataset.layer[0].id].index || false;
   }
 
   hasChangedOpacity(dataset) {
-    let hasChanged = (dataset && dataset.opacity !== this.mapLayers[dataset.layer[0].id].options.opacity) || false;
+    const hasChanged = (dataset &&
+      dataset.opacity !== this.mapLayers[dataset.layer[0].id].options.opacity) || false;
     return hasChanged;
   }
 
@@ -238,29 +245,55 @@ class ExploreMap extends React.Component {
     return false;
   }
 
-
-  updateMapLayer(dataset, layers, datasetsLength) {
+  updateActiveLayer(dataset, layers, datasetsLength) {
     const layerId = dataset.layer[0].id;
-    if (dataset.active) {
-      if (this.isLayerReady(dataset, layers)) {
-        if (!this.wasAlreadyAdded(dataset)) {
-          this.hasActiveLayers = true;
-          const layer = layers[layerId];
-          this.addMapLayer(dataset, layer, datasetsLength);
 
-        } else if (this.wasAlreadyAdded(dataset)) {
-          if (this.hasChangedOrder(dataset)) {
-            this.changeLayerOrder(dataset, datasetsLength);
-          }
-          if (this.hasChangedOpacity(dataset)) {
-            this.changeLayerOpacity(dataset);
-          }
+    if (this.isLayerReady(dataset, layers)) {
+      const wasAlreadyAdded = this.wasAlreadyAdded(dataset);
+
+      if (!wasAlreadyAdded) {
+        this.hasActiveLayers = true;
+        const layer = layers[layerId];
+        this.addMapLayer(dataset, layer, datasetsLength);
+      } else {
+        if (this.hasChangedOrder(dataset)) {
+          this.changeLayerOrder(dataset, datasetsLength);
+        }
+        if (this.hasChangedOpacity(dataset)) {
+          this.changeLayerOpacity(dataset);
         }
       }
-    } else if (this.mapLayers[layerId]) {
-      this.removeMapLayer(layerId);
     }
   }
+
+  updateRemovedLayer(dataset) {
+    const layerId = dataset.layer[0].id;
+    this.removeMapLayer(layerId);
+  }
+
+
+  // updateMapLayer(dataset, layers, datasetsLength) {
+  //   const layerId = dataset.layer[0].id;
+  //   if (dataset.active) {
+  //     if (this.isLayerReady(dataset, layers)) {
+  //       if (!this.wasAlreadyAdded(dataset)) {
+  //         this.hasActiveLayers = true;
+  //         const layer = layers[layerId];
+  //         this.addMapLayer(dataset, layer, datasetsLength);
+  //
+  //       } else if (this.wasAlreadyAdded(dataset)) {
+  //         if (this.hasChangedOrder(dataset)) {
+  //           this.changeLayerOrder(dataset, datasetsLength);
+  //         }
+  //         if (this.hasChangedOpacity(dataset)) {
+  //           this.changeLayerOpacity(dataset);
+  //         }
+  //       }
+  //     }
+  //   } else if (this.mapLayers[layerId]) {
+  //     this.removeMapLayer(layerId);
+  //   }
+  // }
 
 
   changeLayerOrder(dataset, datasetsLength) {
@@ -277,13 +310,12 @@ class ExploreMap extends React.Component {
             layersElements[i].style.zIndex = datasetsLength - dataset.index;
           }
         }
-
       }
     }
   }
 
   changeLayerOpacity(dataset) {
-    const layer = this.mapLayers[dataset.layer[0].attributes.id];
+    const layer = this.mapLayers[dataset.layer[0].id];
     layer.setOpacity(dataset.opacity);
   }
 
