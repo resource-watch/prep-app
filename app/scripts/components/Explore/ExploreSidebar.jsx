@@ -76,7 +76,7 @@ class DataMap extends React.Component {
 
     const layers = this.props.data.map((dataset, index) => {
       let layerIcon = (
-        <div className="detail-space"></div>
+        <div className="detail-space" />
       );
 
       let datasetIcon = null;
@@ -132,7 +132,7 @@ class DataMap extends React.Component {
               >
                 {dataset.name}
                 <div
-                  onMouseEnter={(e) => this.onTagHover(e)}
+                  onMouseEnter={e => this.onTagHover(e)}
                   onMouseLeave={() => this.onTagLeave()}
                   className="-highlighted-tag"
                 >
@@ -174,7 +174,7 @@ class DataMap extends React.Component {
               className={['toggle-status', this.state.sidebarOpen ? '-open' : ''].join(' ')}
               onClick={() => this.toggleToolbarStatus()}
             >
-              <span></span>
+              <span />
             </button>
           </div>
         </div>
@@ -184,7 +184,7 @@ class DataMap extends React.Component {
           hidden={this.props.tooltip.hidden}
           position={this.props.tooltip.position}
           width={this.props.tooltip.width}
-          padding='15px'
+          padding="15px"
         />
         <div className="row content">
           <FilterTabs />

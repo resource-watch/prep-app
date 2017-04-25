@@ -7,13 +7,13 @@ import {
 import { updateURL } from './links';
 
 export function getLayerById(layerId) {
-  return dispatch => {
+  return (dispatch) => {
     fetch(`${config.apiUrlRW}/layer/${layerId}`)
-      .then(response => {
+      .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
       })
-      .then(data => {
+      .then((data) => {
         dispatch({
           type: LAYER_DATA_RECEIVED,
           payload: data

@@ -19,7 +19,7 @@ import '../styles/index.scss';
 if (process.env.NODE_ENV === 'production') {
   initOpbeat({
     orgId: process.env.OPBEAT_ORG_ID,
-    appId: process.env.OPBEAT_APP_ID,
+    appId: process.env.OPBEAT_APP_ID
   });
 }
 
@@ -61,7 +61,7 @@ const history = syncHistoryWithStore(browserHistory, store);
 
 render(
   <Provider store={store}>
-    <Routes history={history}/>
+    <Routes history={history} />
   </Provider>,
   document.getElementById('app')
 );

@@ -3,11 +3,11 @@ import SimpleMap from '../../components/Map/SimpleMap';
 
 import { getLayerById } from '../../actions/layers';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   data: state.layers
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   getLayerData: (layerId) => { dispatch(getLayerById(layerId)); }
 });
 

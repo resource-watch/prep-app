@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 function Breadcrumbs(props) {
-  const patnames = props.pathname.split('/').filter((item) => item !== '');
+  const patnames = props.pathname.split('/').filter(item => item !== '');
   let route = '/';
   return (
     patnames.length
@@ -24,7 +24,7 @@ function Breadcrumbs(props) {
                   routeTemp = `/${itemName}`;
                 }
                 route += `${item}/`;
-                return <li key={index}> <Link to={routeTemp ? routeTemp : route}>{itemName.replace(/-/g, ' ')}</Link> </li>;
+                return <li key={index}> <Link to={routeTemp || route}>{itemName.replace(/-/g, ' ')}</Link> </li>;
               })}
             </ul>
           </nav>

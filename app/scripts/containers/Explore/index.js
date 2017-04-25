@@ -10,9 +10,9 @@ const mapStateToProps = (state, { location, params }) => ({
   metadataModal: state.modal.metadata
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  getDatasets: (defaultActiveLayers) => dispatch(getDatasets(defaultActiveLayers)),
-  setModalMetadata: (status) => dispatch(setModalMetadata(status)),
+const mapDispatchToProps = dispatch => ({
+  getDatasets: defaultActiveLayers => dispatch(getDatasets(defaultActiveLayers)),
+  setModalMetadata: status => dispatch(setModalMetadata(status)),
   resetExplore: () => {
     dispatch(resetDatasetList());
     dispatch(setModalMetadata(false));

@@ -8,7 +8,7 @@ const mapStateToProps = (state, { params }) => ({
   data: state.widgets[params.slug]
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   getWidgetBySlug: (slug) => { dispatch(getWidgetBySlug(slug)); }
 });
 

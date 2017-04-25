@@ -46,7 +46,7 @@ export default class PartnerDetail extends React.Component {
         <div className="l-footer-sep">
           <div className="row">
             <div className="column small-12">
-              <div className="footer-sep-item"></div>
+              <div className="footer-sep-item" />
             </div>
           </div>
         </div>
@@ -77,7 +77,7 @@ export default class PartnerDetail extends React.Component {
           <Banner size="small" bg="partnerDetail" />
         </div>
         <div className="l-main -collapsed">
-          <div className="sliced"></div>
+          <div className="sliced" />
           <article className="c-article">
             <div className="row align-center">
               <div className="column small-12 medium-8">
@@ -85,16 +85,22 @@ export default class PartnerDetail extends React.Component {
                   <Link to="/partners">{'<  partners'}</Link>
                   <Link to={partner ? partner.url : ''} target="_blank" >
                     <svg x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16"><g>
-                    <path d="M11,0C9.7,0,8.4,0.5,7.5,1.5L6.3,2.6C5.9,3,5.9,3.6,6.3,4s1,0.4,1.4,0l1.2-1.2c1.1-1.1,3.1-1.1,4.2,0
+                      <path
+                        d="M11,0C9.7,0,8.4,0.5,7.5,1.5L6.3,2.6C5.9,3,5.9,3.6,6.3,4s1,0.4,1.4,0l1.2-1.2c1.1-1.1,3.1-1.1,4.2,0
                     	C13.7,3.4,14,4.2,14,5s-0.3,1.6-0.9,2.1L12,8.3c-0.4,0.4-0.4,1,0,1.4c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3l1.2-1.2
-                    	C15.5,7.6,16,6.3,16,5s-0.5-2.6-1.5-3.5C13.6,0.5,12.3,0,11,0z"></path>
-                    <path d="M8.3,12l-1.2,1.2c-1.1,1.1-3.1,1.1-4.2,0C2.3,12.6,2,11.8,2,11s0.3-1.6,0.9-2.1L4,7.7c0.4-0.4,0.4-1,0-1.4
+                    	C15.5,7.6,16,6.3,16,5s-0.5-2.6-1.5-3.5C13.6,0.5,12.3,0,11,0z"
+                      />
+                      <path
+                        d="M8.3,12l-1.2,1.2c-1.1,1.1-3.1,1.1-4.2,0C2.3,12.6,2,11.8,2,11s0.3-1.6,0.9-2.1L4,7.7c0.4-0.4,0.4-1,0-1.4
                     	s-1-0.4-1.4,0L1.5,7.5C0.5,8.4,0,9.7,0,11s0.5,2.6,1.5,3.5C2.4,15.5,3.7,16,5,16s2.6-0.5,3.5-1.5l1.2-1.2c0.4-0.4,0.4-1,0-1.4
-                    	S8.7,11.6,8.3,12z"></path>
-                    <path d="M9.4,5.2L5.2,9.4c-0.4,0.4-0.4,1,0,1.4c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3l4.2-4.2
-                    	c0.4-0.4,0.4-1,0-1.4C10.4,4.8,9.8,4.8,9.4,5.2z"></path>
+                    	S8.7,11.6,8.3,12z"
+                      />
+                      <path
+                        d="M9.4,5.2L5.2,9.4c-0.4,0.4-0.4,1,0,1.4c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3l4.2-4.2
+                    	c0.4-0.4,0.4-1,0-1.4C10.4,4.8,9.8,4.8,9.4,5.2z"
+                      />
                     </g></svg>
-                  <span>go to partner website</span>
+                    <span>go to partner website</span>
                   </Link>
                 </div>
                 <p>{partner ? partner.description : ''}</p>

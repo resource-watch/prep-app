@@ -15,9 +15,9 @@ import chirps from './jsons/chirps.json';
 import somaliSeasonal from './jsons/somali-seasonal.json';
 import tigraySeasonal from './jsons/tigray-seasonal.json';
 
-const tigrayMap = "https://prep.carto.com/u/prep-admin/viz/c7fc6dc6-4b08-4d23-ac0b-ff07144ad89a/embed_map";
-const somaliaMap = "https://prep.carto.com/u/prep-admin/viz/5824b7fa-705a-11e6-bb05-0e3ebc282e83/embed_map";
-const forecastMap = "https://prep.carto.com/u/prep-admin/viz/8e9860a4-7058-11e6-aa42-0e233c30368f/embed_map";
+const tigrayMap = 'https://prep.carto.com/u/prep-admin/viz/c7fc6dc6-4b08-4d23-ac0b-ff07144ad89a/embed_map';
+const somaliaMap = 'https://prep.carto.com/u/prep-admin/viz/5824b7fa-705a-11e6-bb05-0e3ebc282e83/embed_map';
+const forecastMap = 'https://prep.carto.com/u/prep-admin/viz/8e9860a4-7058-11e6-aa42-0e233c30368f/embed_map';
 
 
 class EthiopiaInsight extends React.Component {
@@ -56,7 +56,7 @@ class EthiopiaInsight extends React.Component {
                   link=""
                   title="Ethiopia crop calendar"
                   subtitle=""
-                  data={{widget_config: seasonal, slug: 'ethiopia-crop-calendar', data_url: ''}}
+                  data={{ widget_config: seasonal, slug: 'ethiopia-crop-calendar', data_url: '' }}
                   setShareModal={this.setShareModal}
                   noMargin
                 />
@@ -79,15 +79,15 @@ class EthiopiaInsight extends React.Component {
           <div className="c-article-module -no-top">
             <div className="row">
               <div className="column small-12 medium-12 flex align-right align-middle">
-                <button className="c-button -action highlighted -theme-3" onClick={()=>this.setShareModal('http://climateserv.nsstc.nasa.gov', 'map')}>
+                <button className="c-button -action highlighted -theme-3" onClick={() => this.setShareModal('http://climateserv.nsstc.nasa.gov', 'map')}>
                   <span>Share</span>
                 </button>
-                <div className="c-button -icon flex" onClick={()=>this.setShareModal('http://climateserv.nsstc.nasa.gov', 'map')}>
+                <div className="c-button -icon flex" onClick={() => this.setShareModal('http://climateserv.nsstc.nasa.gov', 'map')}>
                   <svg className="-icon" width="10" height="12" viewBox="0 0 10 12">
                     <title>icon-share</title>
                     <g fill="#25b5cd">
-                      <path d="M6.45 1l1.414 1.414-4.95 4.95L1.5 5.95zM0 10h10v2H0z"></path>
-                      <path d="M9 1V0H2v2h5v5h2V1z"></path>
+                      <path d="M6.45 1l1.414 1.414-4.95 4.95L1.5 5.95zM0 10h10v2H0z" />
+                      <path d="M9 1V0H2v2h5v5h2V1z" />
                     </g>
                   </svg>
                 </div>
@@ -104,7 +104,7 @@ class EthiopiaInsight extends React.Component {
           </div>
           <div className="c-article-module">
             <div className="row align-center">
-             <div className="column small-12 medium-8">
+              <div className="column small-12 medium-8">
                 <p>This study includes three case studies, which focus on Tigray, Somali, and Gambela, Ethiopia’s agriculture-based regional states that are particularly vulnerable to climate change.</p>
                 <ul>
                   <li>The first case study highlights the overall drought issue in the Tigray region.</li>
@@ -129,7 +129,7 @@ class EthiopiaInsight extends React.Component {
               <div className="c-article-module -large-margin -no-top">
                 <p>The first region of focus is Tigray in northern Ethiopia, where about 80% of the population are farmers residing in rural areas with high poverty and food scarcity (FAO). Farming systems in this area consist mainly of mixed farming of teff, wheat, and barley crops and livestock.</p>
               </div>
-              <EmbedMap title="Tigray, Ethiopia" legend="SOURCE: WIKIPEDIA" url={tigrayMap}/>
+              <EmbedMap title="Tigray, Ethiopia" legend="SOURCE: WIKIPEDIA" url={tigrayMap} />
             </div>
           </div>
 
@@ -160,7 +160,7 @@ class EthiopiaInsight extends React.Component {
                   link=""
                   title="East Africa eMODIS NDVI"
                   subtitle="NDVI FOR TIGRAY REGION IN ETHIOPIA"
-                  data={{widget_config: tigray, slug: 'east-africa-emodis-ndvi', data_url: ''}}
+                  data={{ widget_config: tigray, slug: 'east-africa-emodis-ndvi', data_url: '' }}
                   setShareModal={this.setShareModal}
                 />
               </div>
@@ -170,7 +170,7 @@ class EthiopiaInsight extends React.Component {
                   link=""
                   title="CHIRPS Rainfall"
                   subtitle="RAINFALL FOR TIGRAY REGION IN ETHIOPIA"
-                  data={{widget_config: chirps, slug: 'chirps-rainfall', data_url: ''}}
+                  data={{ widget_config: chirps, slug: 'chirps-rainfall', data_url: '' }}
                   setShareModal={this.setShareModal}
                 />
               </div>
@@ -185,7 +185,7 @@ class EthiopiaInsight extends React.Component {
               <div className="c-article-module -large-margin -no-top">
                 <p>The second region of focus is Somali in eastern Ethiopia, where four major river basins contribute to the region’s irrigable land potential, and droughts contribute to the region’s poverty. Pastoralism is the most common type of livelihood in the lowland areas of Somali, followed by mixed farming of livestock and maize and sorghum crops.</p>
               </div>
-              <EmbedMap title="Somali, Ethiopia" legend="SOURCE: WIKIPEDIA" url={somaliaMap}/>
+              <EmbedMap title="Somali, Ethiopia" legend="SOURCE: WIKIPEDIA" url={somaliaMap} />
             </div>
           </div>
 
@@ -205,7 +205,7 @@ class EthiopiaInsight extends React.Component {
                   link=""
                   title="Somali seasonal forecast"
                   subtitle="NORTH AMERICAN MULTIMODEL ENSEMBLE (N MME)"
-                  data={{widget_config: somaliSeasonal, slug: 'somali-seasonal-forecast', data_url: ''}}
+                  data={{ widget_config: somaliSeasonal, slug: 'somali-seasonal-forecast', data_url: '' }}
                   setShareModal={this.setShareModal}
                 />
               </div>
@@ -215,7 +215,7 @@ class EthiopiaInsight extends React.Component {
                   link=""
                   title="Tigray seasonal forecast"
                   subtitle="NORTH AMERICAN MULTIMODEL ENSEMBLE (N MME)"
-                  data={{widget_config: tigraySeasonal, slug: 'tigray-seasonal-forecast', data_url: ''}}
+                  data={{ widget_config: tigraySeasonal, slug: 'tigray-seasonal-forecast', data_url: '' }}
                   setShareModal={this.setShareModal}
                 />
               </div>
@@ -230,7 +230,7 @@ class EthiopiaInsight extends React.Component {
               <div className="c-article-module -large-margin -no-top">
                 <p>This case study focuses on Gambela in western Ethiopia and compares forecasted rainfall to historical rainfall on a regional basis. By comparing the forecasted belg grain-setting season rainfall with average historical rainfall during the same monthly period, it is possible to identify regions that are at risk of rainfall deficits and possible agricultural stress  (picture bellow)</p>
               </div>
-              <EmbedMap title="High, Medium and Low terciles for forecasted 2016 grainsetting seasonal precipitation compared to 17-year historical data" legend="SOURCE: UAH, ESRI" url={forecastMap}/>
+              <EmbedMap title="High, Medium and Low terciles for forecasted 2016 grainsetting seasonal precipitation compared to 17-year historical data" legend="SOURCE: UAH, ESRI" url={forecastMap} />
             </div>
           </div>
           <div className="c-article-module -large-margin -no-bottom">

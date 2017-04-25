@@ -27,7 +27,7 @@ class ContactForm extends React.Component {
               <p>PREP aims to enhance access and use of data and information to help communities build climate resilience. We can only do this with input from users like you.</p>
             </div>
             <div className="column small-12 medium-6">
-              <Form type="Contact" simple={true} />
+              <Form type="Contact" simple />
             </div>
           </div>
         </article>

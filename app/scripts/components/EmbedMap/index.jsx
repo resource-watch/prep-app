@@ -3,7 +3,6 @@ import IFrame from '../IFrame';
 
 
 function EmbedMap(props) {
-
   return (
     <div className="c-embed-map">
       {props.title && <h3>{props.title}</h3>}

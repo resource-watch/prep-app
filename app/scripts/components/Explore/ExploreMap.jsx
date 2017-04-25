@@ -430,7 +430,7 @@ class ExploreMap extends React.Component {
     // to avoid multiples loads while the layer is loading
     this.mapLayers[layer.id] = true;
     fetch(request)
-      .then(res => {
+      .then((res) => {
         if (!res.ok) {
           const error = new Error(res.statusText);
           error.response = res;
@@ -483,7 +483,7 @@ class ExploreMap extends React.Component {
       loading = <LoadingSpinner />;
     }
     return (<div className="c-explore-map">
-      <div className="map" ref="map"></div>
+      <div className="map" ref="map" />
       {loading}
       <Tooltip
         scroll

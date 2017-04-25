@@ -3,11 +3,11 @@ import DashboardsHome from '../../components/Home/Articles/DashboardsHome';
 
 import { getWidgetBySlug } from '../../actions/widgets';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   widgets: state.widgets
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   getWidgetBySlug: (slug) => {
     dispatch(getWidgetBySlug(slug));
   }

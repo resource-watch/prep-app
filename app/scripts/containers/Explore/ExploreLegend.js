@@ -22,10 +22,8 @@ function isLayerReady(dataset, layers) {
   return false;
 }
 
-function sortByIndex(a, b) {
-  if (a.index < b.index) return -1;
-  if (a.index > b.index) return 1;
-  return 0;
+function sortByIndex(items) {
+  return items.sort((a, b) => a.index - b.index);
 }
 
 function getActiveLayers(datasets, layers) {
@@ -43,7 +41,7 @@ function getActiveLayers(datasets, layers) {
     }
   });
   // activeLayers.sort(sortByIndex);
-  return activeLayers;
+  return sortByIndex(activeLayers);
 }
 
 function getActiveDatasets(datasets, layers) {

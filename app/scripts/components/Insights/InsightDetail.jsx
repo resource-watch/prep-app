@@ -101,7 +101,7 @@ class InsightsDetail extends React.Component {
       return <LoadingSpinner />;
     }
     const contentUrl = this.props.data.content_url;
-    let iframeUrl = contentUrl.indexOf('github.io') > -1
+    const iframeUrl = contentUrl.indexOf('github.io') > -1
       ? `/proxy?url=${contentUrl}`
       : contentUrl;
 
@@ -158,8 +158,8 @@ class InsightsDetail extends React.Component {
   }
 
   render() {
-    let header = this.getHeader();
-    let content = this.getContent();
+    const header = this.getHeader();
+    const content = this.getContent();
 
     return (
       <div className="-theme-3">
@@ -181,7 +181,7 @@ class InsightsDetail extends React.Component {
             <div className="l-footer-sep">
               <div className="row">
                 <div className="column small-12">
-                  <div className="footer-sep-item"></div>
+                  <div className="footer-sep-item" />
                 </div>
               </div>
             </div>

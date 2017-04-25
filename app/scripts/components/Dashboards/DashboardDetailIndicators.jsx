@@ -26,7 +26,7 @@ class DashboardDetailIndicators extends React.Component {
   }
 
   render() {
-    let content = [];
+    const content = [];
     if (this.props.data && this.props.data.widgets.length) {
       this.props.data.widgets.forEach((indicator, index) => {
         if (indicator.widget_config) {

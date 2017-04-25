@@ -15,7 +15,7 @@ class Partnership extends React.Component {
   render() {
     return (
       <div className="c-partnership">
-        <div className="sliced"></div>
+        <div className="sliced" />
 
         <article className="c-article">
           <div className="row align-center">
@@ -110,7 +110,7 @@ class Partnership extends React.Component {
         <article className="c-article" ref="role">
           <div className="row align-center">
             <div className="column small-12 medium-8">
-              <a name="role"> </a>
+              <a name="role" />
               <h2>The role of PREP partners</h2>
               <p>PREP is built on a global network of collaborators from the public sector, private
                 sector and civil society. Each partner participates in at least one PREP

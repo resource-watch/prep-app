@@ -33,6 +33,7 @@ function getBasicLegend(layer) {
     </div>
   </div>);
 }
+
 function getGradientLegend(layer) {
   const colors = [];
   const values = [];
@@ -89,7 +90,8 @@ function getLegend(layer) {
 
 const DragHandle = SortableHandle(() => <span className="handler"><svg width="6" height="18" viewBox="0 0 6 18"><title>Drag and drop</title><path d="M1 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-4 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-8a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fillRule="evenodd"/></svg></span>);
 
-const SortableItem = SortableElement(({layer, index, onInfoClick, toggleLayerOpacity, setDatasetSelected, selectedDatasetId, switchChange }) => {
+const SortableItem = SortableElement(({ layer, index, onInfoClick, toggleLayerOpacity,
+  setDatasetSelected, selectedDatasetId, switchChange }) => {
   return (
     <div className="legend-layer" key={`map-layer-${index}`}>
       <div className="row">
@@ -139,16 +141,10 @@ const SortableItem = SortableElement(({layer, index, onInfoClick, toggleLayerOpa
   );
 });
 
-const sortByIndex = items => (
-  items.sort((a, b) => a.index - b.index)
-);
-
 const SortableList = SortableContainer(({items, onInfoClick, toggleLayerOpacity, setDatasetSelected, selectedDatasetId, switchChange }) => {
-  const sortedItems = sortByIndex(items);
-
   return (
     <div className="content">
-      {sortedItems.map((layer, index) =>
+      {items.map((layer, index) =>
         <SortableItem
           key={`item-${index}`}
           index={index}
