@@ -228,6 +228,10 @@ DataMap.propTypes = {
    */
   onInfoClick: React.PropTypes.func.isRequired,
   /**
+   * Define function to unselect dataset
+   */
+  deselectDataset: React.PropTypes.func,
+  /**
    * Define the tooltip properties.
    */
   tooltip: React.PropTypes.object
