@@ -7,7 +7,7 @@ function getLinesLegend(layer) {
       {layer.legend_config.items.map((item, index) => (
         <div className="column small-6" key={index}>
           <div className="item">
-            <span className="color" style={{ backgroundColor: item.color }}></span>
+            <span className="color" style={{ backgroundColor: item.color }} />
             <span className="value"> {item.name} </span>
           </div>
         </div>
@@ -23,8 +23,8 @@ function getBasicLegend(layer) {
         <div className="column small-6" key={index}>
           <div className="item">
             {item.icon
-              ? <span className="icon" style={{ backgroundImage: `url(${item.icon})` }}></span>
-              : <span className="color" style={{ backgroundColor: item.color }}></span>
+              ? <span className="icon" style={{ backgroundImage: `url(${item.icon})` }} />
+              : <span className="color" style={{ backgroundColor: item.color }} />
             }
             <span className="value"> {item.name ? item.name : item.value} </span>
           </div>
@@ -45,11 +45,11 @@ function getGradientLegend(layer) {
   return (<div className="row">
     <div className="legend -gradient column small-12 ">
       {colors.length &&
-        <div className="colors" style={{backgroundImage: `linear-gradient(to right, ${colors.join(',')})`}}></div>
+        <div className="colors" style={{ backgroundImage: `linear-gradient(to right, ${colors.join(',')})` }} />
       }
       {values.length &&
         <div className="values">
-        {values}
+          {values}
         </div>
       }
     </div>
@@ -61,7 +61,7 @@ function getCloroplethLegend(layer) {
   layer.legend_config.items.forEach((item, index) => {
     columns.push(
       <div className="column" key={index}>
-        <span className="-color" style={{ backgroundColor: item.color }}></span>
+        <span className="-color" style={{ backgroundColor: item.color }} />
         <span>{item.value}</span>
       </div>);
   });
@@ -88,11 +88,16 @@ function getLegend(layer) {
   }
 }
 
-const DragHandle = SortableHandle(() => <span className="handler"><svg width="6" height="18" viewBox="0 0 6 18"><title>Drag and drop</title><path d="M1 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-4 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-8a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fillRule="evenodd"/></svg></span>);
+const DragHandle = SortableHandle(() => <span className="handler">
+  <svg width="6" height="18" viewBox="0 0 6 18">
+    <title>Drag and drop</title>
+    <path
+      d="M1 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-4 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-8a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fillRule="evenodd" />
+  </svg>
+</span>);
 
 const SortableItem = SortableElement(({ layer, index, onInfoClick, toggleLayerOpacity,
-  setDatasetSelected, selectedDatasetId, switchChange }) => {
-  return (
+  setDatasetSelected, selectedDatasetId, switchChange }) => (
     <div className="legend-layer" key={`map-layer-${index}`}>
       <div className="row">
         <DragHandle />
@@ -123,7 +128,9 @@ const SortableItem = SortableElement(({ layer, index, onInfoClick, toggleLayerOp
               className={`icon -select ${selectedDatasetId === layer.dataset ? '' : '-selected'}`}
               onClick={() => setDatasetSelected(layer.dataset)}
             >
-              <svg width="11" height="10" viewBox="-256.4 411.4 15 15"><path d="M-242 412.1h-13.8c-.4 0-.6.2-.6.6v9.4c0 .4.2.6.6.6h4.1l2.3 2.9c.1.1.3.2.5.2s.4-.1.5-.2l2.3-2.9h4.1c.4 0 .6-.2.6-.6v-9.4c0-.4-.2-.6-.6-.6z"/></svg>
+              <svg width="11" height="10" viewBox="-256.4 411.4 15 15">
+                <path d="M-242 412.1h-13.8c-.4 0-.6.2-.6.6v9.4c0 .4.2.6.6.6h4.1l2.3 2.9c.1.1.3.2.5.2s.4-.1.5-.2l2.3-2.9h4.1c.4 0 .6-.2.6-.6v-9.4c0-.4-.2-.6-.6-.6z" />
+              </svg>
             </span>
 
             <span
@@ -131,18 +138,21 @@ const SortableItem = SortableElement(({ layer, index, onInfoClick, toggleLayerOp
               className="icon -select remove"
               onClick={() => switchChange(layer)}
             >
-              <svg width="9" height="9" viewBox="0 0 9 9"><title>Close</title><path d="M4.5 3l-3-3L0 1.5l3 3-3 3L1.5 9l3-3 3 3L9 7.5l-3-3 3-3L7.5 0l-3 3z" fillRule="evenodd"/></svg>
+              <svg width="9" height="9" viewBox="0 0 9 9">
+                <title>Close</title>
+                <path d="M4.5 3l-3-3L0 1.5l3 3-3 3L1.5 9l3-3 3 3L9 7.5l-3-3 3-3L7.5 0l-3 3z" fillRule="evenodd" />
+              </svg>
             </span>
           </div>
         </div>
       </div>
       {getLegend(layer)}
     </div>
-  );
-});
+  )
+);
 
-const SortableList = SortableContainer(({items, onInfoClick, toggleLayerOpacity, setDatasetSelected, selectedDatasetId, switchChange }) => {
-  return (
+const SortableList = SortableContainer(({ items, onInfoClick, toggleLayerOpacity,
+  setDatasetSelected, selectedDatasetId, switchChange }) => (
     <div className="content">
       {items.map((layer, index) =>
         <SortableItem
@@ -157,8 +167,8 @@ const SortableList = SortableContainer(({items, onInfoClick, toggleLayerOpacity,
         />
       )}
     </div>
-  );
-});
+  )
+);
 
 class DataMapLegend extends React.Component {
   constructor(props) {
@@ -219,14 +229,14 @@ class DataMapLegend extends React.Component {
         useDragHandle
         items={this.props.data}
         onInfoClick={this.props.onInfoClick}
-        setDatasetSelected={(datasetId) => this.handleSelectedDataset(datasetId)}
+        setDatasetSelected={datasetId => this.handleSelectedDataset(datasetId)}
         selectedDatasetId={this.state.selectedDatasetId}
-        switchChange={(dataset) => this.switchChange(dataset)}
+        switchChange={dataset => this.switchChange(dataset)}
         toggleLayerOpacity={this.props.toggleLayerOpacity}
         onSortEnd={(oldI, newI) => this.onSortEnd(oldI, newI)}
       />);
     } else {
-      content = <div className="content"></div>;
+      content = <div className="content" />;
     }
 
     return (
@@ -234,10 +244,16 @@ class DataMapLegend extends React.Component {
         <div className="action-container">
           <span className="help">View legend</span>
           <span className="action open" onClick={() => this.toggleToolbarStatus()}>
-            <svg width="10" height="7" viewBox="0 0 10 7"><title>Open</title><path d="M5.657.707L4.95 0 0 4.95l1.414 1.414L4.95 2.828l3.535 3.536L9.9 4.95 5.657.707z" fillRule="evenodd"/></svg>
+            <svg width="10" height="7" viewBox="0 0 10 7">
+              <title>Open</title>
+              <path d="M5.657.707L4.95 0 0 4.95l1.414 1.414L4.95 2.828l3.535 3.536L9.9 4.95 5.657.707z" fillRule="evenodd" />
+            </svg>
           </span>
           <span className="action close" onClick={() => this.toggleToolbarStatus()}>
-            <svg width="9" height="9" viewBox="0 0 9 9"><title>Close</title><path d="M4.5 3l-3-3L0 1.5l3 3-3 3L1.5 9l3-3 3 3L9 7.5l-3-3 3-3L7.5 0l-3 3z" fillRule="evenodd"/></svg>
+            <svg width="9" height="9" viewBox="0 0 9 9">
+              <title>Close</title>
+              <path d="M4.5 3l-3-3L0 1.5l3 3-3 3L1.5 9l3-3 3 3L9 7.5l-3-3 3-3L7.5 0l-3 3z" fillRule="evenodd" />
+            </svg>
           </span>
         </div>
 
