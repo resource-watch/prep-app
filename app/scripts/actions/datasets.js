@@ -1,4 +1,5 @@
 import 'whatwg-fetch';
+import { Deserializer } from 'jsonapi-serializer';
 import {
   DATASET_LIST_RECEIVED,
   DATASET_LIST_RESET,
@@ -10,11 +11,11 @@ import {
   DATASET_LAYER_RECEIVED,
   DATASET_SET_FILTER
 } from '../constants';
-
 import { updateURL } from './links';
-import { Deserializer } from 'jsonapi-serializer';
 
 const deserializer = new Deserializer({ keyForAttribute: 'underscore_case' });
+
+export default function () {}
 
 export function setDatasetActive(dataset) {
   return (dispatch) => {

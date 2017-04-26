@@ -3,8 +3,9 @@ import {
   LAYER_DATA_RECEIVED,
   LAYER_DATA_ERROR
 } from '../constants';
-
 import { updateURL } from './links';
+
+export default function () {}
 
 export function getLayerById(layerId) {
   return (dispatch) => {

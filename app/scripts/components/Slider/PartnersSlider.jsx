@@ -55,7 +55,7 @@ PartnersSlider.propTypes = {
   // Define the function to get the partners list
   getPartners: React.PropTypes.func.isRequired,
   route: React.PropTypes.string,
-  featured: React.PropTypes.object
+  featured: React.PropTypes.any
 };
 
 export default PartnersSlider;

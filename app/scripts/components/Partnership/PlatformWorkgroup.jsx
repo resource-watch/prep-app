@@ -5,7 +5,6 @@ import JoinPartnership from './Articles/JoinPartnership';
 function PlatformWorkgroup() {
   return (
     <div className="c-partnership">
-
       <Article>
         <p>The Platform Workgroup collaborates on building platforms to enhance access and usability of data.</p>
         <p>The PREP platform, currently in beta, is designed to help users access climate relevant data,
@@ -16,7 +15,6 @@ function PlatformWorkgroup() {
       <Article>
         <JoinPartnership />
       </Article>
-
     </div>
   );
 }

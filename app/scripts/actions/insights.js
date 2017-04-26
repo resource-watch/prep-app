@@ -5,6 +5,8 @@ import {
   INSIGHTS_DETAIL_RECEIVED
 } from '../constants';
 
+export default function () {}
+
 export function getInsightsList() {
   return (dispatch) => {
     fetch(`${config.apiUrl}/api/insights`)

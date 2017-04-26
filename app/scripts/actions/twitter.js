@@ -1,6 +1,8 @@
 import 'whatwg-fetch';
 import { TWITTER_FEED_LIST_RECEIVED, TWITTER_FEED_FETCH_ERROR } from '../constants';
 
+export default function () {}
+
 export function getTwitterFeed() {
   return (dispatch) => {
     fetch('/api/twitter')

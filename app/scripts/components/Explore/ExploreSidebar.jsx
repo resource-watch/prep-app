@@ -26,7 +26,7 @@ class DataMap extends React.Component {
   onTagHover(e) {
     // Get elements
     const tag = e.target;
-    const tooltip = ReactDOM.findDOMNode(this.refs.tagTooltip);
+    const tooltip = ReactDOM.findDOMNode(this.tagTooltip);
     const tooltipParent = tooltip.parentNode;
     // const tooltipText = tooltip.firstChild;
 
@@ -179,7 +179,7 @@ class DataMap extends React.Component {
           </div>
         </div>
         <Tooltip
-          ref="tagTooltip"
+          ref={(tagTooltip) => {this.tagTooltip = tagTooltip}}
           text={this.props.tooltip.text}
           hidden={this.props.tooltip.hidden}
           position={this.props.tooltip.position}

@@ -1,13 +1,14 @@
 import 'whatwg-fetch';
-import { LINK_SHORTEN_RECEIVE, LINK_SHORTEN_ERROR } from '../constants';
-
 import { push } from 'react-router-redux';
+import { LINK_SHORTEN_RECEIVE, LINK_SHORTEN_ERROR } from '../constants';
 
 function sortArrayByIndex(a, b) {
   if (a.index < b.index) return -1;
   if (a.index > b.index) return 1;
   return 0;
 }
+
+export default function () {}
 
 export function updateURL() {
   return (dispatch, state) => {
