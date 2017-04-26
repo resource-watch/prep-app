@@ -8,7 +8,7 @@ function Thumbnail(props) {
   return (
     <div className={classes.join(' ')}>
       {props.url &&
-        <a href={props.url} target="_blank">
+        <a href={props.url} target="_blank" rel="noopener noreferrer">
           <img
             src={props.src}
             alt={props.alt}
