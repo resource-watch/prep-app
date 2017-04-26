@@ -103,6 +103,15 @@
     }
   }
 
+  .layer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 30px);
+    padding-left: 15px;
+
+  }
+
   .legend {
     display: block;
     margin-top: .5rem;
@@ -181,6 +190,11 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
+
+      &:last-child { margin-right: 0; }
+
+      &.remove { margin-left: 8px; }
+
       > svg {
         fill: $inverse-font-color;
       }
