@@ -13,6 +13,8 @@ import {
 
 import { updateURL } from './links';
 
+export default function () {}
+
 export function updateMapParams(params) {
   return {
     type: MAP_DATA_CHANGED,

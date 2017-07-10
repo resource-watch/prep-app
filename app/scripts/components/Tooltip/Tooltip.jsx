@@ -1,7 +1,6 @@
 import React from 'react';
 
 class Tooltip extends React.Component {
-
   render() {
     const visibility = this.props.hidden ? '-hidden' : '-visible';
     const styles = {
@@ -13,7 +12,7 @@ class Tooltip extends React.Component {
     if (this.props.padding) styles.padding = this.props.padding;
 
     // pointer's border must be 10% of the tooltiptext's width. Defaults to 10px
-    const border = this.props.width !== 'auto' ? this.props.width * 0.1 : 10;
+    // const border = this.props.width !== 'auto' ? this.props.width * 0.1 : 10;
 
     return (
       <div className={`c-tooltip ${visibility} ${this.props.scroll ? '-scroll' : ''}`} style={styles}>
@@ -24,7 +23,6 @@ class Tooltip extends React.Component {
     );
   }
 }
-
 
 Tooltip.propTypes = {
   /**
@@ -46,7 +44,11 @@ Tooltip.propTypes = {
   /**
    * Define if want scroll in the tooltip
    */
-  scroll: React.PropTypes.bool
+  scroll: React.PropTypes.bool,
+  /**
+   * Define padding
+   */
+  padding: React.PropTypes.any
 };
 
 export default Tooltip;

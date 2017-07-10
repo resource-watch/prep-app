@@ -32,13 +32,24 @@ class ToolbarActions extends React.Component {
       <div className="c-toolbar-actions">
         <div className="left">
           <Link to={`/${this.props.currentSection}`} className="action -alternative" >
-            <svg className="icon" width="7" height="10" viewBox="0 0 7 10"><title>icon-back</title><path d="M.707 4.243L0 4.95 4.95 9.9l1.414-1.415L2.828 4.95l3.536-3.536L4.95 0 .707 4.243z" fillRule="evenodd" /></svg>
+            <svg className="icon" width="7" height="10" viewBox="0 0 7 10">
+              <title>icon-back</title>
+              <path
+                d="M.707 4.243L0 4.95 4.95 9.9l1.414-1.415L2.828 4.95l3.536-3.536L4.95 0 .707 4.243z"
+                fillRule="evenodd"
+              />
+            </svg>
             {currentSectionTitle}
           </Link>
         </div>
         <div className="right">
           {this.props.currentSection === 'explore' && this.props.downloadUrl &&
-            <a href={this.props.downloadUrl} target="_blank" className="c-button -action -alternative" >
+            <a
+              href={this.props.downloadUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="c-button -action -alternative"
+            >
               <svg className="icon" width="10" height="12" viewBox="0 0 10 12" ><title>
                 Download</title>
                 <g fill="none" fillRule="evenodd" >
@@ -50,8 +61,19 @@ class ToolbarActions extends React.Component {
             </a>
           }
 
-          <Button click={() => this.setShareModal(window.location.href, 'page')} alternative border="alternative" action >
-            <svg className="icon" width="10" height="12" viewBox="0 0 10 12"><title>icon-share</title><g fill="none" fillRule="evenodd"><path d="M6.45 1l1.414 1.414-4.95 4.95L1.5 5.95zM0 10h10v2H0z" /><path d="M9 1V0H2v2h5v5h2V1z" /></g></svg>
+          <Button
+            click={() => this.setShareModal(window.location.href, 'page')}
+            alternative
+            border="alternative"
+            action
+          >
+            <svg className="icon" width="10" height="12" viewBox="0 0 10 12">
+              <title>icon-share</title>
+              <g fill="none" fillRule="evenodd">
+                <path d="M6.45 1l1.414 1.414-4.95 4.95L1.5 5.95zM0 10h10v2H0z" />
+                <path d="M9 1V0H2v2h5v5h2V1z" />
+              </g>
+            </svg>
             Share
           </Button>
 
@@ -76,7 +98,8 @@ ToolbarActions.propTypes = {
   /**
    * Url to embed the insight
    */
-  insightUrl: React.PropTypes.string
+  // insightUrl: React.PropTypes.string,
+  downloadUrl: React.PropTypes.string
 };
 
 export default ToolbarActions;

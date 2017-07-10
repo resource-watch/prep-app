@@ -4,6 +4,7 @@ import {
   WIDGET_DETAIL_RECEIVED
 } from '../constants';
 
+export default function () {}
 
 export function getWidgetBySlug(slug) {
   return (dispatch) => {

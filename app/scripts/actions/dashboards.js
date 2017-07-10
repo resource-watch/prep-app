@@ -5,6 +5,8 @@ import {
   DASHBOARD_DETAIL_RECEIVED
 } from '../constants';
 
+export default function () {}
+
 export function getDashboardList() {
   return (dispatch) => {
     fetch(`${config.apiUrl}/api/dashboards`)

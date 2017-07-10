@@ -6,7 +6,7 @@ import ncaLogo from '../../../images/resources/nationalClimateAsset_logo.png';
 import usToolkitLogo from '../../../images/resources/ustoolkit_logo.png';
 import ukcipLogo from '../../../images/resources/ukcip_logo.png';
 import calAdaptLogo from '../../../images/resources/caladapt_logo.png';
-import c40Logo from '../../../images/resources/c40cities_logo.png';
+// import c40Logo from '../../../images/resources/c40cities_logo.png';
 import almLogo from '../../../images/resources/alm_logo.png';
 import copernicusLogo from '../../../images/resources/copernicus_logo.png';
 import climateDataGovLogo from '../../../images/resources/datagovclimate_logo.png';
@@ -50,7 +50,7 @@ function Resources() {
                 and form the standard reference for all concerned with climate change in academia,
                 government, and industry worldwide.
               </p>
-              <a href={'http://www.ipcc.ch/report/ar5/'} target="_blank">HTTP://WWW.IPCC.CH/REPORT/AR5/</a>
+              <a href={'http://www.ipcc.ch/report/ar5/'} target="_blank" rel="noopener noreferrer">HTTP://WWW.IPCC.CH/REPORT/AR5/</a>
             </div>
           </div>
 
@@ -71,7 +71,13 @@ function Resources() {
                 reviewed by the public and experts, including federal agencies and a panel of the
                 National Academy of Sciences.
               </p>
-              <a href={'http://nca2014.globalchange.gov/'} target="_blank">HTTP://NCA2014.GLOBALCHANGE.GOV/</a>
+              <a
+                href={'http://nca2014.globalchange.gov/'}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                HTTP://NCA2014.GLOBALCHANGE.GOV/
+              </a>
             </div>
           </div>
         </div>
@@ -96,7 +102,7 @@ function Resources() {
                 and manage their climate-related risks and opportunities, and to help them make their communities and
                 businesses more resilient to extreme events.
               </p>
-              <a href={'HTTPS://TOOLKIT.CLIMATE.GOV/'} target="_blank">HTTPS://TOOLKIT.CLIMATE.GOV/</a>
+              <a href={'HTTPS://TOOLKIT.CLIMATE.GOV/'} target="_blank" rel="noopener noreferrer">HTTPS://TOOLKIT.CLIMATE.GOV/</a>
             </div>
           </div>
 
@@ -114,7 +120,7 @@ function Resources() {
                 current climate and future climate change, identify options to address your organisation’s key climate
                 risks, and help you develop and implement a climate change adaptation strategy.
               </p>
-              <a href={'HTTP://WWW.UKCIP.ORG.UK/WIZARD/'} target="_blank">HTTP://WWW.UKCIP.ORG.UK/WIZARD/</a>
+              <a href={'HTTP://WWW.UKCIP.ORG.UK/WIZARD/'} target="_blank" rel="noopener noreferrer">HTTP://WWW.UKCIP.ORG.UK/WIZARD/</a>
             </div>
           </div>
 
@@ -130,11 +136,11 @@ function Resources() {
               <h3>Cal-Adapt</h3>
               <p>
                 Cal-Adapt is a web-based climate adaptation planning tool designed to provide access to up-to-date
-                information and data produced by the State of California's scientific and research community. The
+                information and data produced by the State of California´s cientific and research community. The
                 website provides interactive visualization tools, access to data, a community forum, local climate
                 stories, climate education, and links to additional climate resources.
               </p>
-              <a href={'HTTP://CAL-ADAPT.ORG/'} target="_blank">HTTP://CAL-ADAPT.ORG/</a>
+              <a href={'HTTP://CAL-ADAPT.ORG/'} target="_blank" rel="noopener noreferrer">HTTP://CAL-ADAPT.ORG/</a>
             </div>
           </div>
         </div>
@@ -157,7 +163,7 @@ function Resources() {
                 and learning, the ALM bridges knowledge gaps by bringing relevant knowledge and stakeholders together to
                 exchange information, experiences, and expertise.
               </p>
-              <a href={'HTTP://WWW.ADAPTATIONLEARNING.NET/'} target="_blank">HTTP://WWW.ADAPTATIONLEARNING.NET/</a>
+              <a href={'HTTP://WWW.ADAPTATIONLEARNING.NET/'} target="_blank" rel="noopener noreferrer">HTTP://WWW.ADAPTATIONLEARNING.NET/</a>
             </div>
           </div>
 
@@ -175,7 +181,7 @@ function Resources() {
                 weADAPT is a collaborative platform on climate adaptation issues. It allows practitioners, researchers
                 and policy-makers to access credible, high-quality information, and connect with one another.
               </p>
-              <a href={'https://www.weadapt.org/'} target="_blank">HTTPS://WWW.WEADAPT.ORG/</a>
+              <a href={'https://www.weadapt.org/'} target="_blank" rel="noopener noreferrer">HTTPS://WWW.WEADAPT.ORG/</a>
             </div>
           </div>
         </div>
@@ -203,7 +209,7 @@ function Resources() {
                 services
                 related to environmental and security issues.
               </p>
-              <a href={'HTTPS://CLIMATE.COPERNICUS.EU/'} target="_blank">HTTPS://CLIMATE.COPERNICUS.EU/</a>
+              <a href={'HTTPS://CLIMATE.COPERNICUS.EU/'} target="_blank" rel="noopener noreferrer">HTTPS://CLIMATE.COPERNICUS.EU/</a>
             </div>
           </div>
 
@@ -223,7 +229,7 @@ function Resources() {
                 data and resources related to coastal flooding, food resilience, water, ecosystem vulnerability, human
                 health, energy infrastructure, transportation and the Arctic region.
               </p>
-              <a href={'HTTP://CLIMATE.DATA.GOV'} target="_blank">CLIMATE.DATA.GOV</a>
+              <a href={'HTTP://CLIMATE.DATA.GOV'} target="_blank" rel="noopener noreferrer">CLIMATE.DATA.GOV</a>
             </div>
           </div>
 
@@ -240,7 +246,7 @@ function Resources() {
                 The IRI Data Library is an online data repository and analysis tool that allows a user to view, analyze,
                 and download hundreds of terabytes of climate-related data through a standard web browser.
               </p>
-              <a href={'http://iridl.ldeo.columbia.edu'} target="_blank">http://iridl.ldeo.columbia.edu</a>
+              <a href={'http://iridl.ldeo.columbia.edu'} target="_blank" rel="noopener noreferrer">http://iridl.ldeo.columbia.edu</a>
             </div>
           </div>
         </div>
@@ -264,7 +270,7 @@ function Resources() {
               </p>
               <a
                 href={'HTTP://WWW.SERVIRGLOBAL.NET/'}
-                target="_blank"
+                target="_blank" rel="noopener noreferrer"
               >HTTP://WWW.SERVIRGLOBAL.NET/</a>
             </div>
           </div>
@@ -284,7 +290,7 @@ function Resources() {
                 climate,
                 and climate-related information.
               </p>
-              <a href={'HTTP://SDWEBX.WORLDBANK.ORG/CLIMATEPORTAL/?PAGE=CLIMATE_DATA'} target="_blank">HTTP://SDWEBX.WORLDBANK.ORG/CLIMATEPORTAL/?PAGE=CLIMATE_DATA</a>
+              <a href={'HTTP://SDWEBX.WORLDBANK.ORG/CLIMATEPORTAL/?PAGE=CLIMATE_DATA'} target="_blank" rel="noopener noreferrer">HTTP://SDWEBX.WORLDBANK.ORG/CLIMATEPORTAL/?PAGE=CLIMATE_DATA</a>
             </div>
           </div>
 
@@ -302,7 +308,7 @@ function Resources() {
                 serve as a basis for assessing the climate change impacts and adaptation in a variety of fields
                 including biodiversity, agricultural and livestock production, ecosystem services, and hydrology.
               </p>
-              <a href="http://ccafs-climate.org" target="_blank">HTTP://CCAFS-CLIMATE.ORG</a>
+              <a href="http://ccafs-climate.org" target="_blank" rel="noopener noreferrer">HTTP://CCAFS-CLIMATE.ORG</a>
             </div>
           </div>
         </div>

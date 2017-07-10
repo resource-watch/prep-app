@@ -1,27 +1,24 @@
-FROM node:6.6.0
+FROM node:8.1.2
 MAINTAINER David Inga <david.inga@vizzuality.com>
 
-ENV NAME prep-app
-ENV NODE_ENV production
-
-# Install dependencies
 RUN apt-get update && \
-    apt-get install -y bash git python build-essential
-
-RUN npm install --silent -g pm2
+    apt-get install -y bash git build-essential \
+    automake autoconf make g++ libtool libcairo2-dev
+RUN npm install -g node-gyp --loglevel warn
 
 # Create app directory
-RUN mkdir -p /usr/src/$NAME
-WORKDIR /usr/src/$NAME
-
-COPY . /usr/src/$NAME
+RUN mkdir -p /usr/src/app && mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
 # Install app dependencies
-COPY package.json /usr/src/$NAME/
-RUN npm install --silent --dev
+COPY package.json /usr/src/app/
+COPY yarn.lock /usr/src/app/
+RUN yarn install
 
-# Generate statics files
-RUN npm run build
+# Bundle app source
+COPY . /usr/src/app
+RUN yarn run build
 
 EXPOSE 3000
-CMD pm2 start --no-daemon processes.json
+
+CMD ["yarn", "start"]

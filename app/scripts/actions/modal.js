@@ -4,6 +4,8 @@ import {
   SET_MODAL_METADATA
 } from '../constants';
 
+export default function () {}
+
 export function setModalUnderDevelop(status) {
   return {
     type: SET_MODAL_UNDER_DEVELOP,

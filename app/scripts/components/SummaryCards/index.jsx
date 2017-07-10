@@ -33,21 +33,18 @@ const cards = {
 };
 
 
-class SummaryCards extends React.Component {
-
-  render() {
-    return (
-      <div className="c-summary-cards">
-        <div className="simple-card -inverse" style={{ backgroundImage: `url(${bg.explore})` }}>
-          <h3>Data on the map</h3>
-          <p>Find datasets from local, national and other sources</p>
-          <Link to="/explore">EXPLORE THE MAP</Link>
-        </div>
-
-        {cards[this.props.extraCard]}
+function SummaryCards(props) {
+  return (
+    <div className="c-summary-cards">
+      <div className="simple-card -inverse" style={{ backgroundImage: `url(${bg.explore})` }}>
+        <h3>Data on the map</h3>
+        <p>Find datasets from local, national and other sources</p>
+        <Link to="/explore">EXPLORE THE MAP</Link>
       </div>
-    );
-  }
+
+      {cards[props.extraCard]}
+    </div>
+  );
 }
 
 SummaryCards.propTypes = {

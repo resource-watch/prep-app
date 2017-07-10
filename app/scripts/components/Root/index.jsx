@@ -45,4 +45,9 @@ class Root extends React.Component {
   }
 }
 
+Root.propTypes = {
+  location: React.PropTypes.object,
+  children: React.PropTypes.any
+};
+
 export default Root;
