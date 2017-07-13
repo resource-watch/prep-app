@@ -441,7 +441,8 @@ class ExploreMap extends React.Component {
       .then((data) => {
         // we can switch off the layer while it is loading
         if (dataset.active) {
-          const tileUrl = `https://${layer.account}.cartodb.com/api/v1/map/${data.layergroupid}/{z}/{x}/{y}.png`;
+          const tileUrl = `${data.cdn_url.templates.https.url}/${layer.account}/api/v1/map/${data.layergroupid}/{z}/{x}/{y}.png`
+          // const tileUrl = `https://${layer.account}.cartodb.com/api/v1/map/${data.layergroupid}/{z}/{x}/{y}.png`;
           this.mapLayers[layer.id] = L.tileLayer(tileUrl).addTo(this.map).setZIndex(datasetsLength - dataset.index);
           this.mapLayers[layer.id].on('load', () => {
             this.handleTileLoaded(layer);
