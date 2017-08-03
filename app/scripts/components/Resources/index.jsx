@@ -6,6 +6,7 @@ import ncaLogo from '../../../images/resources/nationalClimateAsset_logo.png';
 import usToolkitLogo from '../../../images/resources/ustoolkit_logo.png';
 import ukcipLogo from '../../../images/resources/ukcip_logo.png';
 import calAdaptLogo from '../../../images/resources/caladapt_logo.png';
+import cakeLogo from '../../../images/resources/cake_logo.png';
 // import c40Logo from '../../../images/resources/c40cities_logo.png';
 import almLogo from '../../../images/resources/alm_logo.png';
 import copernicusLogo from '../../../images/resources/copernicus_logo.png';
@@ -184,8 +185,25 @@ function Resources() {
               <a href={'https://www.weadapt.org/'} target="_blank" rel="noopener noreferrer">HTTPS://WWW.WEADAPT.ORG/</a>
             </div>
           </div>
-        </div>
 
+
+          <div className="columns small-12 medium-4">
+            <div className="c-article-module">
+              <Thumbnail
+                url={'http://cakex.org'}
+                src={cakeLogo}
+                alt={'CAKE'}
+                border={'neutral'}
+              />
+
+              <h3>CAKE</h3>
+              <p>
+                  The Climate Adaptation Knowledge Exchange (CAKE) is a cutting-edge, climate adaptation-focused knowledge sharing platform and community of practice for those working to manage natural and built environments and human communities in a changing climate. The CAKE platform includes case studies on the-ground adaptation efforts, a library of adaptation resources and tools, a directory of adaptation experts, and a community section featuring events and opportunities from around the field.
+              </p>
+              <a href={'HTTP://CAKEX.ORG/'} target="_blank" rel="noopener noreferrer">HTTP://CAKEX.ORG/</a>
+            </div>
+          </div>
+        </div>
       </Article>
 
       <Article grid="small-12">
