@@ -34,6 +34,7 @@
     "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
+    "base64-js": "^1.2.1",
     "basic-auth": "^1.0.4",
     "bitly": "^4.1.1",
     "body-parser": "^1.15.1",
