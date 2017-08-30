@@ -4,10 +4,10 @@ MAINTAINER David Inga <david.inga@vizzuality.com>
 ARG datasetEnv production
 ARG facebookUser worldresources
 ARG twitterUser worldresources
-ARG apiUrl http://prep-manager.vizzuality.com
-ARG assetsUrl http://prep-manager.vizzuality.com
-ARG rwApiUrl http://api.resourcewatch.org/v1
-ARG basemapUrl http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png
+ARG apiUrl https://prep-manager.vizzuality.com
+ARG assetsUrl https://prep-manager.vizzuality.com
+ARG rwApiUrl https://api.resourcewatch.org/v1
+ARG basemapUrl https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png
 ARG nodeEnv production
 
 ENV DATASET_ENV $datasetEnv
