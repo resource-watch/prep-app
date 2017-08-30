@@ -1,0 +1,37 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    name: {name}
+  name: {name}
+spec:
+  revisionHistoryLimit: 0
+  template:
+    metadata:
+      annotations:
+        chaos.alpha.kubernetes.io/enabled: "true"
+      labels:
+        name: {name}
+    spec:
+      containers:
+      - name: {name}
+        image: vizzuality/{name}
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "0Mi"
+            cpu: "0m"
+        env:
+          - name: PORT
+            value: "3000"
+          - name: NODE_ENV
+            value: production
+          - name: SHORT_URL_API_TOKEN
+            valueFrom:
+                secretKeyRef:
+                  name: appsecrets
+                  key: PREP_SHORT_URL_API_TOKEN
+        ports:
+          - containerPort: 3000
+
+      restartPolicy: Always

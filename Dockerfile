@@ -2,7 +2,22 @@ FROM node:8.1.2
 MAINTAINER David Inga <david.inga@vizzuality.com>
 
 ARG datasetEnv production
+ARG facebookUser worldresources
+ARG twitterUser worldresources
+ARG apiUrl http://prep-manager.vizzuality.com
+ARG assetsUrl http://prep-manager.vizzuality.com
+ARG rwApiUrl http://api.resourcewatch.org/v1
+ARG basemapUrl http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png
+ARG nodeEnv production
+
 ENV DATASET_ENV $datasetEnv
+ENV FACEBOOK_USER $facebookUser
+ENV TWITTER_USER $twitterUser
+ENV API_URL $apiUrl
+ENV ASSETS_URL $assetsUrl
+ENV RW_API_URL $rwApiUrl
+ENV BASEMAP_TILE_URL $basemapUrl
+ENV NODE_ENV $nodeEnv
 
 WORKDIR /usr/src/app
 
