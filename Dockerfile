@@ -1,6 +1,9 @@
 FROM node:8.1.2
 MAINTAINER David Inga <david.inga@vizzuality.com>
 
+ARG datasetEnv production
+ENV DATASET_ENV $datasetEnv
+
 WORKDIR /usr/src/app
 
 RUN apt-get update && \
