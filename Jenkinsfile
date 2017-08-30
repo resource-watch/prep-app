@@ -39,6 +39,7 @@ node {
         default:
           sh("docker -H :2375 build -t ${imageTag} .")
           sh("docker -H :2375 build -t ${dockerUsername}/${appName}:latest .")
+      }
     }
 
     stage ('Run Tests') {
