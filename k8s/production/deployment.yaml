@@ -32,6 +32,21 @@ spec:
                 secretKeyRef:
                   name: appsecrets
                   key: PREP_SHORT_URL_API_TOKEN
+          - name: SPARKPOST_API_KEY
+            valueFrom:
+                secretKeyRef:
+                  name: appsecrets
+                  key: PREP_SPARKPOST_API_KEY
+          - name: MAIL_RECIPIENTS
+            valueFrom:
+                secretKeyRef:
+                  name: appsecrets
+                  key: PREP_MAIL_RECIPIENTS
+          - name: MAIL_FROM
+            valueFrom:
+                secretKeyRef:
+                  name: appsecrets
+                  key: PREP_MAIL_FROM
         ports:
           - containerPort: 3000
 
