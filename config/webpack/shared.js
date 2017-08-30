@@ -70,7 +70,6 @@ const config = {
         twitterUser: JSON.stringify(process.env.TWITTER_USER),
         apiUrl: JSON.stringify(process.env.API_URL),
         apiUrlRW: JSON.stringify(process.env.RW_API_URL),
-        tokenUrlShorter: JSON.stringify(process.env.SHORT_URL_API_TOKEN),
         basemapTileUrl: JSON.stringify(process.env.BASEMAP_TILE_URL),
         datasetEnv: JSON.stringify(process.env.DATASET_ENV)
       }
