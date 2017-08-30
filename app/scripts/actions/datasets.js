@@ -15,7 +15,7 @@ import { updateURL } from './links';
 
 const deserializer = new Deserializer({ keyForAttribute: 'underscore_case' });
 
-export default function () {}
+export default function () { }
 
 export function setDatasetActive(dataset) {
   return (dispatch) => {
@@ -96,8 +96,9 @@ export function setDatasetsTagFilter(filter, tag) {
 }
 
 export function getDatasets(defaultActiveLayers) {
-  return (dispatch) => {
-    fetch(`${config.apiUrlRW}/dataset?application=prep&includes=metadata,layer,vocabulary&page[size]=999&status=saved`)
+  return (dispatch, getState) => {
+    const env = config.datasetEnv || 'production';
+    fetch(`${config.apiUrlRW}/dataset?application=prep&includes=metadata,layer,vocabulary&page[size]=999&status=saved&env=${env}`)
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);

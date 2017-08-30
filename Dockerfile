@@ -1,14 +1,15 @@
 FROM node:8.1.2
 MAINTAINER David Inga <david.inga@vizzuality.com>
 
+WORKDIR /usr/src/app
+
 RUN apt-get update && \
     apt-get install -y bash git build-essential \
-    automake autoconf make g++ libtool libcairo2-dev
-RUN npm install -g node-gyp --loglevel warn
-
-# Create app directory
-RUN mkdir -p /usr/src/app && mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+    automake autoconf make g++ libtool \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+    && npm install -g node-gyp --loglevel warn \
+    && mkdir -p /usr/src/app && mkdir -p /usr/src/app
 
 # Install app dependencies
 COPY package.json /usr/src/app/
