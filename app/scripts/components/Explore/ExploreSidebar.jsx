@@ -147,6 +147,7 @@ class DataMap extends React.Component {
               </strong>
             }
             <span className="subtitle">{subtitle}</span>
+            { dataset.env === 'preproduction' ? <span style={{ color: 'red', fontSize: '11px' }}>Preproduction</span> : null }
             <span className="subtitle">Source: <strong>{partner}</strong></span>
           </span>
           {datasetIcon}
