@@ -14,9 +14,9 @@ class ExploreHome extends React.Component {
     };
   }
 
-  handleClick() {
-    this.setState({ modal: true });
-  }
+  // handleClick() {
+  //   this.setState({ modal: true });
+  // }
 
   render() {
     return (
@@ -32,7 +32,7 @@ class ExploreHome extends React.Component {
             <p>Interact with national, regional, and local data on this web map. Filter by topic, projection models, and area of impact to create a custom map in seconds. When you’re ready, share your findings to raise awareness in your community.</p>
           </div>
           <div className="column small-12 medium-4">
-            <button className="c-button -border" onClick={() => this.handleClick()}>Request data</button>
+            <a className="c-button -border" href="https://docs.google.com/forms/d/1wZzQno3De7Ul6vlOkkdHhWK_9csErSrOlo6pOAZHIds/edit">Request data</a>
           </div>
         </div>
         <p><img src={temperaturesLayer} /></p>
