@@ -168,7 +168,7 @@ class SimpleMap extends React.Component {
       .replace(/"geom-type"/g, '"geom_type"')
       .replace(/"raster-band"/g, '"raster_band"');
 
-    const request = new Request(`https://${layer.account}.cartodb.com/api/v1/map`, {
+    const request = new Request(`https://${layer.account}.carto.com/api/v1/map`, {
       method: 'POST',
       headers: new Headers({
         'Content-Type': 'application/json'
@@ -190,7 +190,7 @@ class SimpleMap extends React.Component {
         throw error;
       })
       .then((data) => {
-        const tileUrl = `https://${layer.account}.cartodb.com/api/v1/map/${data.layergroupid}/{z}/{x}/{y}.png`;
+        const tileUrl = `https://${layer.account}.carto.com/api/v1/map/${data.layergroupid}/{z}/{x}/{y}.png`;
         this.mapLayers[layer.id] = L.tileLayer(tileUrl).addTo(this.map);
         this.mapLayers[layer.id].on('load', () => {
           this.handleTileLoaded(layer);
