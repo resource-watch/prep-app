@@ -33,7 +33,7 @@ node {
       switch ("${env.BRANCH_NAME}") {
         // Roll out to staging
         case "develop":
-          sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production,preproduction apiUrl=https://staging.prepdata.org/api assetsUrl=https://staging.prepdata.org .")
+          sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production,preproduction --build-arg apiUrl=https://staging.prepdata.org/api --build-arg assetsUrl=https://staging.prepdata.org .")
           sh("docker -H :2375 build -t ${dockerUsername}/${appName}:latest --build-arg datasetEnv=production,preproduction .")
           break
         default:
