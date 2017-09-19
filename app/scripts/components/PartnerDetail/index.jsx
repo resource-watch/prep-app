@@ -71,7 +71,7 @@ export default function PartnerDetail() {
       {getHeader()}
       <div className="l-header-banner">
         <Breadcrumbs pathname={`/partners/${partner ? partner.name : ''}`} />
-        <img className="partner-logo" alt={partner ? partner.name : ''} src={partner ? `${config.apiUrl}${partner.images.white_logo}` : ''} />
+        <img className="partner-logo" alt={partner ? partner.name : ''} src={partner ? `${config.assetsUrl}${partner.images.white_logo}` : ''} />
         <Banner size="small" bg="partnerDetail" />
       </div>
       <div className="l-main -collapsed">

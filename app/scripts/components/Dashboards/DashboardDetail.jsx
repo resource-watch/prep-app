@@ -107,7 +107,7 @@ class DashboardDetail extends React.Component {
     const content = this.getContent();
     const title = this.props.data ? this.props.data.title : currentData.title;
     const imageUrl = !this.props.data || this.props.data.image.indexOf('missing.png') >= 0 ?
-      null : `${config.apiUrl}${this.props.data.image}`;
+      null : `${config.assetsUrl}${this.props.data.image}`;
 
     document.title = title;
 

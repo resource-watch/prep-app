@@ -71,7 +71,8 @@ const config = {
         apiUrl: JSON.stringify(process.env.API_URL),
         apiUrlRW: JSON.stringify(process.env.RW_API_URL),
         basemapTileUrl: JSON.stringify(process.env.BASEMAP_TILE_URL),
-        datasetEnv: JSON.stringify(process.env.DATASET_ENV)
+        datasetEnv: JSON.stringify(process.env.DATASET_ENV),
+        assetsUrl: JSON.stringify(process.env.ASSETS_URL)
       }
     })
   ]

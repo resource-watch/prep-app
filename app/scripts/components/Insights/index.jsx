@@ -47,7 +47,7 @@ class InsightsPage extends React.Component {
             {item.partner &&
             <a href={item.partner.url} target="_blank">
               <img
-                src={config.apiUrl + item.partner.images.logo}
+                src={config.assetsUrl + item.partner.images.logo}
                 className="logo"
                 alt={item.partner.name}
               />
