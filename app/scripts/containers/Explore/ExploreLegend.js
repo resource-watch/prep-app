@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import ExploreMapLegend from '../../components/Explore/ExploreLegend';
 
 import { setModalMetadata } from '../../actions/modal';
+import { toggleTooltip } from '../../actions/tooltip';
 import { getDatasetById, setDatasetActive } from '../../actions/datasets';
 import {
   setLayersOrder,
@@ -54,6 +55,7 @@ const mapStateToProps = state => ({
   selectedDatasetId: state.exploremap.interactionData.datasetId
 });
 const mapDispatchToProps = dispatch => ({
+  toggleTooltip: (open, options) => dispatch(toggleTooltip(open, options)),
   onInfoClick: (datasetId) => {
     dispatch(getDatasetById(datasetId, ['metadata']));
     dispatch(setModalMetadata(true, datasetId));
@@ -67,7 +69,7 @@ const mapDispatchToProps = dispatch => ({
     if (dataset.active) dispatch(setDatasetActive(dataset));
     dispatch(updateURL());
   },
-  toggleLayerOpacity: layerId => dispatch(toggleLayerOpacity(layerId)),
+  toggleLayerOpacity: (layerId, opacity) => dispatch(toggleLayerOpacity(layerId, opacity)),
   setDatasetSelected: datasetId => dispatch(setDatasetSelected(datasetId)),
   deselectDataset: () => dispatch(deselectDataset())
 });

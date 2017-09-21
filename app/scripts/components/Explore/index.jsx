@@ -11,6 +11,8 @@ import MetadataList from './MetadataList';
 import ShareModal from '../Modal/ShareModal';
 import Modal from '../Modal/Modal';
 
+import TooltipTether from '../Tooltip/TooltipTether';
+
 import Button from '../Button/Button';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
@@ -159,6 +161,7 @@ class Explore extends React.Component {
           </Modal>
         }
 
+        <TooltipTether />
       </div>
     );
   }
