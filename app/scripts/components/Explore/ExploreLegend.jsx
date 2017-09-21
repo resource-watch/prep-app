@@ -115,10 +115,10 @@ const SortableItem = SortableElement(({ layer, index, onInfoClick, toggleLayerOp
           <div className="layer-actions">
             <span
               title="Opacity"
-              className="icon"
+              className="icon -opacity"
               onClick={e => onClickOpacity(e, layer)}
             >
-              <svg width="13" height="9" viewBox="0 0 13 9"><title>icon-eye</title><path d="M4.933 4.5c0 .855.698 1.545 1.567 1.545s1.567-.69 1.567-1.545S7.369 2.955 6.5 2.955s-1.567.69-1.567 1.545zM13 4.5C11.755 2.265 9.312 0 6.5 0 3.695 0 1.245 2.265 0 4.5 1.245 6.735 3.695 9 6.5 9c2.812 0 5.255-2.265 6.5-4.5zm-9.415 0c0-1.582 1.307-2.865 2.915-2.865S9.415 2.918 9.415 4.5c0 1.582-1.307 2.865-2.915 2.865S3.585 6.082 3.585 4.5z" fillRule="evenodd" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="29" height="32" viewBox="0 0 29 32"><title>opacity</title><path d="M29.333 7.92a16.293 16.293 0 0 0-2.667-3.526v23.211a16.106 16.106 0 0 0 2.667-3.525V7.92zm-8-7.04a14.384 14.384 0 0 0-2.569-.762l-.098-.016v31.797c.92-.179 1.813-.443 2.667-.779V.88zm-8 31.12C5.786 30.819 0 24.107 0 16S5.787 1.181 13.333 0v32z"/></svg>
             </span>
             <span
               title="Visibility"
@@ -141,7 +141,6 @@ const SortableItem = SortableElement(({ layer, index, onInfoClick, toggleLayerOp
                 <path d="M-242 412.1h-13.8c-.4 0-.6.2-.6.6v9.4c0 .4.2.6.6.6h4.1l2.3 2.9c.1.1.3.2.5.2s.4-.1.5-.2l2.3-2.9h4.1c.4 0 .6-.2.6-.6v-9.4c0-.4-.2-.6-.6-.6z" />
               </svg>
             </span>
-
             <span
               title="Remove"
               className="icon -select remove"
@@ -191,7 +190,7 @@ class DataMapLegend extends React.Component {
     const clientRect = node.getBoundingClientRect();
     return {
       x: window.scrollX + clientRect.left + (clientRect.width / 2),
-      y: window.scrollY + clientRect.top + (clientRect.height / 2)
+      y: window.scrollY + clientRect.bottom + (clientRect.height * 2) + 8
     };
   }
 
@@ -234,23 +233,20 @@ class DataMapLegend extends React.Component {
 
     this.setState({ opacityTooltipOpen: true, layersTooltipOpen: false });
 
-    // If the user is opening the tooltip to select a layer
-    // then the tour doesn't make any sense anymore
-    // this.closeLayersTourTooltip();
-
     // We save the button that was used to open the tooltip
     // so we can compute its position later
     this.opacityButton = e.target;
 
     this.props.toggleTooltip(true, {
       follow: false,
+      direction: 'top',
       position: DataMapLegend.getElementPosition(this.opacityButton),
       children: SliderTooltip,
       childrenProps: {
         className: '',
         title: 'Opacity',
         options: {
-          min: 0, max: 1, step: 0.1, defaultValue: opacity
+          min: 0, max: 1, step: 0.01, defaultValue: opacity
         },
         onChange: value => this.onChangeOpacity(value, layerGroup),
         onClose: () => {

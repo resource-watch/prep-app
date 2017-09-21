@@ -35,6 +35,7 @@ class SliderTooltip extends React.Component {
 
   onChange(value) {
     this.setState({ value });
+    this.props.onChange(value);
   }
 
   onReset(value) {
@@ -56,11 +57,10 @@ class SliderTooltip extends React.Component {
           value={this.state.value !== null ? this.state.value : options.defaultValue}
           defaultValue={this.state.value !== null ? this.state.value : options.defaultValue}
           onChange={this.onChange}
-          onAfterChange={this.props.onChange}
         />
         <div className="actions-container">
           <button className="c-button -primary" onClick={this.props.onClose}>Done</button>
-          <button className="c-button" onClick={() => this.onReset(options.max)}>Reset</button>
+          <button className="c-button" onClick={() => this.onChange(options.max)}>Reset</button>
         </div>
       </div>
     );

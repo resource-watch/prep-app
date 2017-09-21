@@ -22,7 +22,7 @@ const initialState = {
   children: null,
   loading: false,
   follow: false,
-  direction: 'bottom',
+  direction: 'top',
   childrenProps: {},
   pos: {
     x: 0,

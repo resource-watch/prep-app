@@ -70,8 +70,8 @@ class Tooltip extends React.Component {
     return (
       <TetherComponent
         ref={(node) => { this.tether = node; }}
-        attachment="bottom center"
-        targetAttachment="top center"
+        attachment={`${this.props.tooltip.direction === 'bottom' ? 'bottom' : 'top'} center`}
+        targetAttachment={`${this.props.tooltip.direction === 'bottom' ? 'top' : 'bottom'} center`}
         constraints={[{
           // Don't use the "together attachement" without making sure
           // the tooltip doesn't disappear in an embedded widget when
