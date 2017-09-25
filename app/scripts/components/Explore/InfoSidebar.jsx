@@ -100,32 +100,36 @@ class InfoSidebar extends React.Component {
 
     return (
       <div className={['c-info-sidebar', metadata.open ? '-open' : ''].join(' ')}>
-        <div className="actions">
-          <div>
-            {/* <button
-              className={['toggle-status', this.state.sidebarOpen ? '-open' : ''].join(' ')}
-              onClick={() => this.toggleToolbarStatus()}
-            >
-              <span />
-            </button> */}
+        {metadata.open &&
+          <div className="actions">
+            <div>
+              <button
+                className="toggle-status"
+                onClick={() => this.props.onClose()}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="32" viewBox="0 0 20 32"><title>arrow-left</title><path d="M20.364 5.071L16 0 0 16l16 16 4.364-5.071L8.221 16z"/></svg>
+                </button>
+            </div>
           </div>
-        </div>
-        <div className="row content collapse">
-          <div className="columns small-12 dataset-items">
-            {this.getHeader()}
-            {this.getActionsBar()}
-            {this.getContent()}
+        }
+        <div className="info-container">
+          <div className="row content collapse">
+            <div className="columns small-12 dataset-items">
+              {this.getHeader()}
+              {this.getActionsBar()}
+              {this.getContent()}
+            </div>
           </div>
-        </div>
-        {/* <div className="actions-mobile">
-          <Button
-            border
-            click={() => this.toggleToolbarStatus()}
-          >
-            Apply
-          </Button>
+          {/* <div className="actions-mobile">
+              <Button
+              border
+              click={() => this.toggleToolbarStatus()}
+              >
+              Apply
+            </Button>
 
-        </div> */}
+          </div> */}
+        </div>
       </div>
     );
   }

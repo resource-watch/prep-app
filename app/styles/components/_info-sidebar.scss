@@ -9,14 +9,19 @@
   transform: translateX(-$sidebar-width);
   transition: transform 0.3s ease-out;
   box-shadow: 0 20px 30px 0 rgba(0,0,0,0.1);
-  overflow-y: auto;
 
   @media #{$mq-medium} {
     width: $sidebar-width;
     background-color: $base-bg-color;
   }
 
-  > .actions {
+  .info-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  .actions {
     position: absolute;
     top: 0;
     right: -30px;
@@ -25,7 +30,7 @@
       width: 30px;
       height: 39px;
       padding: 0;
-      background-color: rgba($base-bg-color, 0.9);
+      background-color: $base-bg-color;
       border: none;
       outline: none;
       cursor: pointer;
@@ -34,12 +39,19 @@
       justify-content: center;
 
       > .toggle-status {
-        @include hamburger-icon(10px, 2px, 2px, 1px, $thirth-color, $thirth-color);
+        height: 100%;
+        width: 100%;
+
+        svg {
+          width: 10px;
+          height: 10px;
+          fill: $dark-blue;
+        }
       }
     }
   }
 
-  > .content {
+  .content {
     position: relative;
 
     @media #{$mq-medium} {
@@ -127,7 +139,7 @@
     }
   }
 
-  > .actions-mobile {
+  .actions-mobile {
     display: flex;
     align-items: center;
     justify-content: center;

@@ -4,14 +4,13 @@ import ExploreSidebar from '../../components/Explore/ExploreSidebar';
 import { switchChange, deselectDataset } from '../../actions/exploremap';
 import { updateURL } from '../../actions/links';
 import { setTooltip } from '../../actions/tooltip';
-import { setModalMetadata } from '../../actions/modal';
 import { setInfoSidebarMetadata } from '../../actions/info-sidebar';
 import { setDatasetActive, getDatasetById } from '../../actions/datasets';
 
 const mapStateToProps = state => ({
   listReceived: state.datasets.list.length > 0,
   data: state.datasets.filteredList,
-  infoSidebarOpen: state.infoSidebar.metadata.open,
+  infoSidebarMetadata: state.infoSidebar.metadata,
   filters: state.datasets.filters,
   tooltip: state.tooltip,
   selectedDatasetId: state.exploremap.interactionData.datasetId
@@ -34,8 +33,10 @@ const mapDispatchToProps = dispatch => ({
   },
   onInfoClick: (datasetId) => {
     dispatch(getDatasetById(datasetId, ['metadata, vocabulary']));
-    // dispatch(setModalMetadata(true, datasetId));
     dispatch(setInfoSidebarMetadata(true, datasetId));
+  },
+  onCloseInfo: () => {
+    dispatch(setInfoSidebarMetadata(false));
   },
   deselectDataset: () => dispatch(deselectDataset())
 });
