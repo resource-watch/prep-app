@@ -38,11 +38,6 @@ class SliderTooltip extends React.Component {
     this.props.onChange(value);
   }
 
-  onReset(value) {
-    this.onChange(value);
-    this.props.onChange(value);
-  }
-
   render() {
     const { className, options, title } = this.props;
 

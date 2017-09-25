@@ -3,7 +3,7 @@ import ExploreMapLegend from '../../components/Explore/ExploreLegend';
 
 import { setModalMetadata } from '../../actions/modal';
 import { toggleTooltip } from '../../actions/tooltip';
-import { getDatasetById, setDatasetActive } from '../../actions/datasets';
+import { getDatasetById, setDatasetActive, setLayerGroupActiveLayer } from '../../actions/datasets';
 import {
   setLayersOrder,
   toggleLayerOpacity,
@@ -13,14 +13,8 @@ import {
 } from '../../actions/exploremap';
 import { updateURL } from '../../actions/links';
 
-function isLayerReady(dataset, layers) {
-  if (dataset.layer && dataset.layer.length) {
-    const layerId = dataset.layer[0].id;
-    if (layers && layers[layerId]) {
-      return true;
-    }
-  }
-  return false;
+function isLayerReady(layer, layers) {
+  return layers && !!layers[layer.id];
 }
 
 function sortByIndex(items) {
@@ -32,13 +26,18 @@ function getActiveLayers(datasets, layers) {
     return [];
   }
   const activeLayers = [];
+
   datasets.forEach((dataset) => {
-    if (dataset.active && isLayerReady(dataset, layers)) {
-      const layer = layers[dataset.layer[0].id];
-      layer.title = dataset.name;
-      layer.index = dataset.index;
-      layer.opacity = dataset.opacity;
-      activeLayers.push(layer);
+    if (dataset.active && dataset.layer && dataset.layer.length) {
+      dataset.layer.forEach((l) => {
+        if (isLayerReady(l, layers)) {
+          const layer = layers[l.id];
+          layer.title = dataset.name;
+          layer.index = dataset.index;
+          layer.opacity = dataset.opacity;
+          activeLayers.push(layer);
+        }
+      });
     }
   });
   // activeLayers.sort(sortByIndex);
@@ -46,7 +45,13 @@ function getActiveLayers(datasets, layers) {
 }
 
 function getActiveDatasets(datasets, layers) {
-  return datasets.filter(dataset => dataset.active && isLayerReady(dataset, layers));
+  return datasets.filter((dataset) => {
+    let active = false;
+    dataset.layer.forEach((l) => {
+      if (isLayerReady(l, layers)) active = true;
+    });
+    return dataset.active && active;
+  });
 }
 
 const mapStateToProps = state => ({
@@ -62,6 +67,10 @@ const mapDispatchToProps = dispatch => ({
   },
   setLayersOrder: (layers) => {
     dispatch(setLayersOrder(layers));
+    dispatch(updateURL());
+  },
+  setLayerGroupActiveLayer: (layer) => {
+    dispatch(setLayerGroupActiveLayer(layer));
     dispatch(updateURL());
   },
   switchChange: (dataset) => {

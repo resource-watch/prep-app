@@ -1,6 +1,6 @@
+import React from 'react';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
-import React from 'react';
 import Tooltip from '../Tooltip/Tooltip';
 
 const tooltipBase = {
@@ -208,6 +208,7 @@ class ExploreMap extends React.Component {
     const datasets = newData || this.props.data;
     const layers = newLayers || this.props.layers;
     this.hasActiveLayers = false;
+
     if (datasets.length) {
       const mapLayers = this.mapLayers;
 
@@ -223,24 +224,29 @@ class ExploreMap extends React.Component {
   }
 
   wasAlreadyAdded(dataset) {
-    return this.mapLayers[dataset.layer[0].id] || false;
+    const layer = dataset.layer.find(l => l.active) || dataset.layer.find(l => l.active);
+    return layer && this.mapLayers[layer.id] || false;
   }
 
   hasChangedOrder(dataset) {
-    return dataset.index !== undefined &&
-      dataset.index !== this.mapLayers[dataset.layer[0].id].index || false;
+    const layer = dataset.layer.find(l => l.active) || dataset.layer.find(l => l.active);
+
+    return dataset.index !== undefined && layer &&
+      dataset.index !== this.mapLayers[layer.id].index || false;
   }
 
   hasChangedOpacity(dataset) {
-    const hasChanged = (dataset &&
-      dataset.opacity !== this.mapLayers[dataset.layer[0].id].options.opacity) || false;
+    const layer = dataset.layer.find(l => l.active) || dataset.layer.find(l => l.active);
+
+    const hasChanged = (dataset && layer &&
+      dataset.opacity !== this.mapLayers[layer.id].options.opacity) || false;
     return hasChanged;
   }
 
   isLayerReady(dataset, layers) {
     if (dataset.layer && dataset.layer.length) {
-      const layerId = dataset.layer[0].id;
-      return layers && layers[layerId] || false;
+      const layer = dataset.layer.find(l => l.active) || dataset.layer.find(l => l.active);
+      return layers && layer && layers[layer.id] || false;
     }
     return false;
   }
@@ -483,6 +489,7 @@ class ExploreMap extends React.Component {
     if (this.state.loading && this.hasActiveLayers) {
       loading = <LoadingSpinner />;
     }
+
     return (<div className="c-explore-map">
       <div className="map" ref="map" />
       {loading}

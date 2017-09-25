@@ -9,7 +9,8 @@ import {
   DATASET_DETAIL_RECEIVED,
   DATASET_METADATA_RECEIVED,
   DATASET_LAYER_RECEIVED,
-  DATASET_SET_FILTER
+  DATASET_SET_FILTER,
+  SET_LAYERGROUP_ACTIVE_LAYER
 } from '../constants';
 import { updateURL } from './links';
 
@@ -19,10 +20,12 @@ export default function () { }
 
 export function setDatasetActive(dataset) {
   return (dispatch) => {
-    const layerData = Object.assign({}, dataset.layer[0].attributes, { id: dataset.layer[0].id });
-    dispatch({
-      type: DATASET_LAYER_RECEIVED,
-      payload: layerData
+    dataset.layer.forEach((l) => {
+      const layerData = Object.assign({}, l.attributes, { id: l.id });
+      dispatch({
+        type: DATASET_LAYER_RECEIVED,
+        payload: layerData
+      });
     });
   };
 }
@@ -261,5 +264,18 @@ export function getDatasetMetadata(datasetId) {
           payload: err.message
         });
       });
+  };
+}
+
+
+export function setLayerGroupActiveLayer(dataset, layer) {
+  return (dispatch) => {
+    dispatch({
+      type: SET_LAYERGROUP_ACTIVE_LAYER,
+      payload: { dataset, layer }
+    });
+
+    // We also update the URL
+    // if (typeof window !== 'undefined') dispatch(setUrlParams());
   };
 }
