@@ -11,6 +11,7 @@ import { setDatasetActive, getDatasetById } from '../../actions/datasets';
 const mapStateToProps = state => ({
   listReceived: state.datasets.list.length > 0,
   data: state.datasets.filteredList,
+  infoSidebarOpen: state.infoSidebar.metadata.open,
   filters: state.datasets.filters,
   tooltip: state.tooltip,
   selectedDatasetId: state.exploremap.interactionData.datasetId

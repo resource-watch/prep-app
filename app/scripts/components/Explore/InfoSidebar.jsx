@@ -13,152 +13,6 @@ class InfoSidebar extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   this.props.setTooltip({
-  //     text: 'Climate Data Initiative dataset',
-  //     width: '135'
-  //   });
-  // }
-  //
-  // onTagHover(e) {
-  //   // Get elements
-  //   const tag = e.target;
-  //   const tooltip = ReactDOM.findDOMNode(this.tagTooltip);
-  //   const tooltipParent = tooltip.parentNode;
-  //   // const tooltipText = tooltip.firstChild;
-  //
-  //   // Get elements' position
-  //   const tParentBounds = tooltipParent.getBoundingClientRect();
-  //   const tagBounds = tag.getBoundingClientRect();
-  //
-  //   // Get elements' height and width
-  //   const tagWidth = tag.offsetWidth;
-  //   // const tagHeight = tag.offsetHeight;
-  //   // const tooltipTextWidth = tooltipText.offsetWidth;
-  //   // const tooltipTextHeight = tooltipText.offsetHeight;
-  //
-  //   // Update the state of the tooltip
-  //   this.props.setTooltip(
-  //     {
-  //       hidden: false,
-  //       // position: {
-  //       //   top: (tagBounds.top - (tParentBounds.top + (tagHeight + tooltipTextHeight))),
-  //       //   left: (tagBounds.left - (tooltipTextWidth / 2) + (tagWidth / 2))
-  //       // },
-  //       position: {
-  //         top: tagBounds.top - tParentBounds.top,
-  //         left: tagBounds.left + (tagWidth / 2)
-  //       }
-  //     }
-  //   );
-  // }
-  //
-  // onTagLeave() {
-  //   this.props.setTooltip({ hidden: true });
-  // }
-  //
-  // switchChange(dataset) {
-  //   dataset.id === this.props.selectedDatasetId &&
-  //     this.props.deselectDataset();
-  //   this.props.switchChange(dataset);
-  // }
-  //
-  // getContent() {
-  //   if (!this.props.listReceived) {
-  //     return <LoadingSpinner />;
-  //   }
-  //   if (!this.props.data.length) {
-  //     return <p>No datasets with these filters selected</p>;
-  //   }
-  //
-  //   const layers = this.props.data.map((dataset, index) => {
-  //     let layerIcon = (
-  //       <div className="detail-space" />
-  //     );
-  //
-  //     let datasetIcon = null;
-  //
-  //     let subtitle = '';
-  //     let partner = '';
-  //
-  //     if (dataset.metadata && dataset.metadata.length) {
-  //       const metadata = dataset.metadata[0].attributes.info;
-  //       if (metadata) {
-  //         if (metadata.subtitle) {
-  //           subtitle = metadata.subtitle;
-  //         }
-  //         if (metadata.organization) {
-  //           partner = metadata.organization;
-  //         }
-  //       }
-  //     }
-  //
-  //     if (dataset.layer && dataset.layer.length) {
-  //       layerIcon = (
-  //         <Switch
-  //           onChange={() => this.switchChange(dataset)}
-  //           checked={dataset.active || false}
-  //         />
-  //       );
-  //     }
-  //     if (dataset.id) {
-  //       datasetIcon = (
-  //         <Link className="detail-link" to={`/dataset/${dataset.id}`}>
-  //           <svg width="16" height="16" viewBox="0 0 16 16"><title>View page</title>
-  //             <path d="M0 0v16h14v-2H2V2h12V0H0zm12 4l4 4-4 4V4zM6 7h6v2H6V7z" fillRule="evenodd" />
-  //           </svg>
-  //         </Link>
-  //       );
-  //     }
-  //
-  //     let cdiTag = false;
-  //     for (let i = 0; i < dataset.vocabulary[0].attributes.tags.length; i++) {
-  //       if (dataset.vocabulary[0].attributes.tags[i] === 'cdi') {
-  //         cdiTag = true;
-  //       }
-  //     }
-  //
-  //     return (
-  //       <div className="layer" key={`map-layer-${index}`}>
-  //         {layerIcon}
-  //         <span className="layerItem">
-  //           {cdiTag
-  //             ? <strong
-  //               className="title"
-  //               onClick={() => this.props.onInfoClick(dataset.id)}
-  //             >
-  //               {dataset.name}
-  //               <div
-  //                 onMouseEnter={e => this.onTagHover(e)}
-  //                 onMouseLeave={() => this.onTagLeave()}
-  //                 className="-highlighted-tag"
-  //               >
-  //                 CDI
-  //               </div>
-  //             </strong>
-  //             : <strong
-  //               className="title"
-  //               onClick={() => this.props.onInfoClick(dataset.id)}
-  //             >
-  //               {dataset.name}
-  //             </strong>
-  //           }
-  //           <span className="subtitle">{subtitle}</span>
-  //           { dataset.env === 'preproduction' ? <span style={{ color: 'red', fontSize: '11px' }}>Preproduction</span> : null }
-  //           <span className="subtitle">Source: <strong>{partner}</strong></span>
-  //         </span>
-  //         {datasetIcon}
-  //       </div>
-  //     );
-  //   });
-  //
-  //   return layers;
-  // }
-  //
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps.dataset.active);
-  }
-
   toggleToolbarStatus() {
     this.setState({
       sidebarOpen: !this.state.sidebarOpen
@@ -203,7 +57,7 @@ class InfoSidebar extends React.Component {
 
     if (dataset && dataset.layer && dataset.layer.length) {
       layerIcon = (
-        <button onClick={() => this.switchChange(dataset)}>
+        <button onClick={() => this.switchChange(dataset)} className="layer">
           <span
             title="Visibility"
             className={`icon ${dataset.id !== selectedDatasetId ? '-hide' : ''}`}
@@ -217,15 +71,8 @@ class InfoSidebar extends React.Component {
 
     if (dataset && dataset.metadata && dataset.metadata.length && dataset.metadata[0].attributes.info.data_download) {
       downloadIcon = (
-        <a download href={dataset.metadata[0].attributes.info.data_download}>
-          <svg className="icon" width="10" height="12" viewBox="0 0 10 12"><title>Download</title>
-            <g fill="none" fillRule="evenodd">
-              <path d="M4 0h2v7H4zM0 10h10v2H0z" />
-              <path
-                d="M4.243 8.192l.707.707L9.9 3.95 8.484 2.537 4.95 6.07 1.414 2.536 0 3.95l4.243 4.242z"
-              />
-            </g>
-          </svg>
+        <a download href={dataset.metadata[0].attributes.info.data_download} className="download">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="32" viewBox="0 0 26 32"><title>download</title><path d="M1.12 28.32h24v2.56h-24v-2.56zM11.531 0v18.255l-6.204-6.264-2.095 2.13L13.017 24l9.785-9.879-2.095-2.115-6.204 6.249V0z"/></svg>
           Download
         </a>
       );
@@ -234,7 +81,10 @@ class InfoSidebar extends React.Component {
     return (
       <nav className="info-actions">
         {downloadIcon}
-        <Link to={`/dataset/${dataset.id}`}>Learn more</Link>
+        <Link to={`/dataset/${dataset.id}`} className="more">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><title>arrow-up-right2</title><path d="M7.414 27.414L24 10.828V18a2 2 0 1 0 4 0V6a2 2 0 0 0-2-1.999V4H14a2 2 0 1 0 0 4h7.172L4.586 24.586C4.195 24.976 4 25.488 4 26s.195 1.024.586 1.414a2 2 0 0 0 2.828 0z"/></svg>
+          Learn more
+        </Link>
         {layerIcon}
       </nav>
     );

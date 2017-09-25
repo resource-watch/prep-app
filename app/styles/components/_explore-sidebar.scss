@@ -255,6 +255,17 @@
           fill: rgba($main-color, 0.3);
         }
       }
+
+      .cancel,
+      .info {
+        margin-top: 3px;
+
+        svg {
+          width: 14px;
+          height: 14px;
+          fill: $dark-blue;
+        }
+      }
     }
   }
 

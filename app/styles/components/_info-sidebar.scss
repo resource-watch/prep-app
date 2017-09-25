@@ -67,6 +67,14 @@
       padding: 10px 30px;
       padding-top: 0;
 
+      .layer svg,
+      .download svg,
+      .more svg {
+        width: 12px;
+        height: 12px;
+        fill: $light-gold;
+      }
+
       a,
       button {
         display: flex;
