@@ -5,6 +5,7 @@ import { switchChange, deselectDataset } from '../../actions/exploremap';
 import { updateURL } from '../../actions/links';
 import { setTooltip } from '../../actions/tooltip';
 import { setModalMetadata } from '../../actions/modal';
+import { setInfoSidebarMetadata } from '../../actions/info-sidebar';
 import { setDatasetActive, getDatasetById } from '../../actions/datasets';
 
 const mapStateToProps = state => ({
@@ -31,8 +32,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setTooltip(tooltip));
   },
   onInfoClick: (datasetId) => {
-    dispatch(getDatasetById(datasetId, ['metadata']));
-    dispatch(setModalMetadata(true, datasetId));
+    dispatch(getDatasetById(datasetId, ['metadata, vocabulary']));
+    // dispatch(setModalMetadata(true, datasetId));
+    dispatch(setInfoSidebarMetadata(true, datasetId));
   },
   deselectDataset: () => dispatch(deselectDataset())
 });

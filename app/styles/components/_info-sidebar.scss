@@ -1,0 +1,134 @@
+.c-info-sidebar {
+  position: absolute;
+  top: $header-height-short + $header-height-tools;
+  left: $sidebar-width;
+  height: calc(100% - #{$header-height-short} - #{$header-height-tools});
+  width: 100%;
+  background-color: $base-bg-color;
+  z-index: 2;
+  transform: translateX(-$sidebar-width);
+  transition: transform 0.3s ease-out;
+  box-shadow: 0 20px 30px 0 rgba(0,0,0,0.1);
+  overflow-y: auto;
+
+  @media #{$mq-medium} {
+    width: $sidebar-width;
+    background-color: $base-bg-color;
+  }
+
+  > .actions {
+    position: absolute;
+    top: 0;
+    right: -30px;
+    > div {
+      display: block;
+      width: 30px;
+      height: 39px;
+      padding: 0;
+      background-color: rgba($base-bg-color, 0.9);
+      border: none;
+      outline: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      > .toggle-status {
+        @include hamburger-icon(10px, 2px, 2px, 1px, $thirth-color, $thirth-color);
+      }
+    }
+  }
+
+  > .content {
+    position: relative;
+
+    @media #{$mq-medium} {
+      height: 100%;
+    }
+
+    .item-prop {
+      word-break: break-word;
+
+      .prop-label {
+        font-weight: bold;
+        color: $dark-blue;
+      }
+
+      &.topics,
+      &.areas {
+        color: $light-gold;
+        font-weight: bold;
+      }
+    }
+
+    .info-actions {
+      display: flex;
+      align-items: center;
+      padding: 10px 30px;
+      padding-top: 0;
+
+      a,
+      button {
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+        text-transform: uppercase;
+        color: $dark-blue;
+        font-weight: bold;
+        font-size: 13px;
+        line-height: 13px;
+
+        svg {
+          margin-right: 5px;
+        }
+      }
+    }
+
+    .header-container {
+      padding: 20px 30px;
+
+      .item-title {
+        margin: 0;
+        padding: 0;
+        font-size: 37px;
+        line-height: 45px;
+        text-align: left;
+        word-break: break-word;
+
+        &:after { display: none; }
+      }
+
+      .item-subtitle {
+        margin: 0;
+        margin-top: 3px;
+        padding: 0;
+        font-size: 11px;
+        line-height: 15px;
+        text-transform: uppercase;
+        text-align: left;
+        color: rgba($dark-blue, .5);
+        word-break: break-word;
+
+        &:after { display: none; }
+      }
+    }
+
+    .content-container {
+      padding: 20px 30px;
+      border-top: 1px solid $border-color;
+    }
+  }
+
+  > .actions-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @media #{$mq-medium} {
+      display: none;
+    }
+  }
+
+  &.-open {
+    transform: translateX(0);
+  }
+}

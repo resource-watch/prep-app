@@ -5,13 +5,15 @@
   height: calc(100% - #{$header-height-short} - #{$header-height-tools});
   width: 100%;
   background-color: $base-bg-color;
-  z-index: 2;
+  z-index: 3;
   transform: translateX(-$sidebar-width);
   transition: transform 0.3s ease-out;
+  border: 1px solid rgba(26,28,34,0.1);
+  box-shadow: 0 20px 30px 0 rgba(0,0,0,0.1);
 
   @media #{$mq-medium} {
     width: $sidebar-width;
-    background-color: rgba($base-bg-color, 0.9);
+    background-color: $base-bg-color;
   }
 
   > .actions {

@@ -363,42 +363,40 @@ class DataMapLegend extends React.Component {
     if (this.props.data && this.props.data.length && this.state.legendOpen) {
       legendClassNames.push('-open');
       content = (
-        <SortableList
-          axis="y"
-          lockAxis="y"
-          lockToContainerEdges
-          lockOffset="50%"
-          useDragHandle
-          items={this.getItems()}
-          onSortEnd={(oldI, newI) => this.onSortEnd(oldI, newI)}
-        />
+        <div className={legendClassNames.join(' ')}>
+          <div className="action-container">
+            <span className="help">View legend</span>
+            <span className="action open" onClick={() => this.toggleToolbarStatus()}>
+              <svg width="10" height="7" viewBox="0 0 10 7">
+                <title>Open</title>
+                <path d="M5.657.707L4.95 0 0 4.95l1.414 1.414L4.95 2.828l3.535 3.536L9.9 4.95 5.657.707z" fillRule="evenodd" />
+              </svg>
+            </span>
+            <span className="action close" onClick={() => this.toggleToolbarStatus()}>
+              <svg width="9" height="9" viewBox="0 0 9 9">
+                <title>Close</title>
+                <path d="M4.5 3l-3-3L0 1.5l3 3-3 3L1.5 9l3-3 3 3L9 7.5l-3-3 3-3L7.5 0l-3 3z" fillRule="evenodd" />
+              </svg>
+            </span>
+          </div>
+
+          <SortableList
+            axis="y"
+            lockAxis="y"
+            lockToContainerEdges
+            lockOffset="50%"
+            useDragHandle
+            items={this.getItems()}
+            onSortEnd={(oldI, newI) => this.onSortEnd(oldI, newI)}
+          />
+        </div>
       );
     } else {
-      content = <div className="content" />;
+      // content = <div className="content" />;
+      content = <div className={legendClassNames.join(' ')} />;
     }
 
-    return (
-      <div className={legendClassNames.join(' ')}>
-        <div className="action-container">
-          <span className="help">View legend</span>
-          <span className="action open" onClick={() => this.toggleToolbarStatus()}>
-            <svg width="10" height="7" viewBox="0 0 10 7">
-              <title>Open</title>
-              <path d="M5.657.707L4.95 0 0 4.95l1.414 1.414L4.95 2.828l3.535 3.536L9.9 4.95 5.657.707z" fillRule="evenodd" />
-            </svg>
-          </span>
-          <span className="action close" onClick={() => this.toggleToolbarStatus()}>
-            <svg width="9" height="9" viewBox="0 0 9 9">
-              <title>Close</title>
-              <path d="M4.5 3l-3-3L0 1.5l3 3-3 3L1.5 9l3-3 3 3L9 7.5l-3-3 3-3L7.5 0l-3 3z" fillRule="evenodd" />
-            </svg>
-          </span>
-        </div>
-
-        {content}
-
-      </div>
-    );
+    return content;
   }
 }
 

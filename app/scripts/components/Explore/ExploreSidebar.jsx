@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Link } from 'react-router';
 
 import FilterTabs from '../../containers/Explore/FilterTabs';
 import Switch from '../Button/Switch';
@@ -79,7 +78,7 @@ class DataMap extends React.Component {
         <div className="detail-space" />
       );
 
-      let datasetIcon = null;
+      let datasetInfo = null;
 
       let subtitle = '';
       let partner = '';
@@ -105,14 +104,15 @@ class DataMap extends React.Component {
         );
       }
       if (dataset.id) {
-        datasetIcon = (
-          <Link className="detail-link" to={`/dataset/${dataset.id}`}>
-            <svg width="16" height="16" viewBox="0 0 16 16"><title>View page</title>
+        datasetInfo = (
+          <button onClick={() => this.props.onInfoClick(dataset.id)}>
+            <svg width="16" height="16" viewBox="0 0 16 16"><title>View info</title>
               <path d="M0 0v16h14v-2H2V2h12V0H0zm12 4l4 4-4 4V4zM6 7h6v2H6V7z" fillRule="evenodd" />
             </svg>
-          </Link>
+          </button>
         );
       }
+
 
       let cdiTag = false;
       for (let i = 0; i < dataset.vocabulary[0].attributes.tags.length; i++) {
@@ -150,7 +150,7 @@ class DataMap extends React.Component {
             { dataset.env === 'preproduction' ? <span style={{ color: 'red', fontSize: '11px' }}>Preproduction</span> : null }
             <span className="subtitle">Source: <strong>{partner}</strong></span>
           </span>
-          {datasetIcon}
+          {datasetInfo}
         </div>
       );
     });
@@ -169,7 +169,7 @@ class DataMap extends React.Component {
     return (
 
       <div className={['c-explore-sidebar', this.state.sidebarOpen ? '-open' : ''].join(' ')}>
-        <div className="actions">
+        {/* <div className="actions">
           <div>
             <button
               className={['toggle-status', this.state.sidebarOpen ? '-open' : ''].join(' ')}
@@ -178,7 +178,7 @@ class DataMap extends React.Component {
               <span />
             </button>
           </div>
-        </div>
+        </div> */}
         <Tooltip
           ref={(tagTooltip) => {this.tagTooltip = tagTooltip}}
           text={this.props.tooltip.text}
