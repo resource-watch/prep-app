@@ -9,7 +9,7 @@ export default function () {}
 
 export function getInsightsList() {
   return (dispatch) => {
-    fetch(`${config.apiUrl}/api/insights`)
+    fetch(`${config.apiUrl}/insights`)
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);

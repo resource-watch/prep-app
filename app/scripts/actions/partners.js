@@ -5,7 +5,7 @@ export default function () {}
 
 export function getPartners() {
   return (dispatch) => {
-    fetch(`${config.apiUrl}/api/partners`)
+    fetch(`${config.apiUrl}/partners`)
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);

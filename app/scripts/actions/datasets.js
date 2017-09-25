@@ -157,7 +157,8 @@ export function getDatasetById(datasetId, includesData) {
     '';
 
   return (dispatch) => {
-    fetch(`${config.apiUrlRW}/dataset/${datasetId}?application=prep${includeQuery}&status=saved&page[size]=999`)
+    const env = config.datasetEnv || 'production';
+    fetch(`${config.apiUrlRW}/dataset/${datasetId}?application=prep${includeQuery}&status=saved&page[size]=999&env=${env}`)
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);

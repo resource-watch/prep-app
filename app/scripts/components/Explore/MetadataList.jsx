@@ -25,6 +25,8 @@ function getDownloadUrl(data) {
 }
 
 function MetadataInfo(props) {
+  if (!props.data.metadata || props.data.metadata.length === 0) return null;
+
   const metadataInfo = props.data.metadata && props.data.metadata[0].attributes.info;
   const downloadUrl = getDownloadUrl(props.data);
 

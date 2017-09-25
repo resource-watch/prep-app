@@ -230,7 +230,7 @@ DataMap.propTypes = {
   /**
    * Define if got the dataset list
    */
-  infoSidebarMetadata: React.PropTypes.bool,
+  infoSidebarMetadata: React.PropTypes.any,
   /**
    * Define the tooltip text and position
    */

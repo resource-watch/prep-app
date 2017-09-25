@@ -57,17 +57,18 @@ class DatasetDetail extends React.Component {
       };
 
     const widgetComponents = [];
-    const { widgets } = this.props;
+    const widgets = this.props.data.widget;
     if (widgets && widgets.length) {
       for (let i = 0, wLength = widgets.length; i < wLength; i++) {
         const widget = widgets[i].attributes;
-        if (widget.widgetConfig) {
-          switch (widget.widgetConfig.type) {
+        if (widget.widget_config) {
+          switch (widget.widget_config.type) {
             case 'map':
-              widgetComponents.push(<div className="c-article" key={i} ><SimpleMap layerId={widget.widgetConfig.layerId} /></div>);
+              console.log(widget)
+              widgetComponents.push(<div className="c-article" key={i} ><SimpleMap layerId={widget.widget_config.layer_id} /></div>);
               break;
             default:
-              widgetComponents.push(<div className="c-article" key={i} ><VegaChart data={widget.widgetConfig} /></div>);
+              widgetComponents.push(<div className="c-article" key={i} ><VegaChart data={widget.widget_config} /></div>);
               break;
           }
         }

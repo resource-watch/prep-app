@@ -1,5 +1,6 @@
 import React from 'react';
 import vega from 'vega';
+import theme from './theme';
 
 class VegaChart extends React.Component {
 
@@ -52,7 +53,9 @@ class VegaChart extends React.Component {
   parseVega() {
     const dataObj = this.getData();
 
-    vega.parse.spec(dataObj, (chart) => {
+    vega.parse.spec(dataObj, theme(), (err, chart) => {
+      if (err) throw err;
+
       const chartVis = chart({
         el: this.refs.vegaChart
       });

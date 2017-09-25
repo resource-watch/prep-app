@@ -9,7 +9,7 @@ export default function () {}
 
 export function getDashboardList() {
   return (dispatch) => {
-    fetch(`${config.apiUrl}/api/dashboards`)
+    fetch(`${config.apiUrl}/dashboards`)
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);

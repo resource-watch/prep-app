@@ -5,7 +5,7 @@ export default function () {}
 
 export function getTwitterFeed() {
   return (dispatch) => {
-    fetch('/api/twitter')
+    fetch('/api-twitter')
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
