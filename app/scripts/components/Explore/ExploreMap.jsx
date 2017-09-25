@@ -229,13 +229,13 @@ class ExploreMap extends React.Component {
 
   wasAlreadyAdded(dataset, layers) {
     const layer = Object.values(layers).find(l => dataset.id === l.dataset && l.active) ||
-      Object.values(layers).find(l => l.default);
+      Object.values(layers).find(l => dataset.id === l.dataset && l.default);
     return layer && this.mapLayers[layer.id] || false;
   }
 
   hasChangedOrder(dataset, layers) {
     const layer = Object.values(layers).find(l => dataset.id === l.dataset && l.active) ||
-      Object.values(layers).find(l => l.default);
+      Object.values(layers).find(l => dataset.id === l.dataset && l.default);
 
     return dataset.index !== undefined && layer &&
       dataset.index !== this.mapLayers[layer.id].index || false;
@@ -243,7 +243,7 @@ class ExploreMap extends React.Component {
 
   hasChangedOpacity(dataset, layers) {
     const layer = Object.values(layers).find(l => dataset.id === l.dataset && l.active) ||
-      Object.values(layers).find(l => l.default);
+      Object.values(layers).find(l => dataset.id === l.dataset && l.default) || {};
     const hasChanged = (dataset && layer &&
       dataset.opacity !== this.mapLayers[layer.id].options.opacity) || false;
 
@@ -266,7 +266,8 @@ class ExploreMap extends React.Component {
       const wasAlreadyAdded = this.wasAlreadyAdded(dataset, layers);
 
       if (!wasAlreadyAdded) {
-        const inactiveLayers = Object.values(layers).filter(l => dataset.id === l.dataset && (l.active === false || (l.active === undefined && !l.default)));
+        const inactiveLayers = Object.values(layers).filter(l => dataset.id === l.dataset && (l.active === false ||
+            (l.active === undefined && !l.default)));
         const layer = layers[activeLayer.id];
         this.hasActiveLayers = true;
 
@@ -292,17 +293,20 @@ class ExploreMap extends React.Component {
 
   // TODO change multilayer
   changeLayerOrder(dataset, datasetsLength) {
-    const layer = this.mapLayers[dataset.layer[0].id];
+    const { layers } = this.props;
+    const activeLayer = Object.values(layers).find(l => dataset.id === l.dataset && l.active) ||
+      Object.values(layers).find(l => dataset.id === l.dataset && l.default);
+    const layer = this.mapLayers[activeLayer.id];
+
     if (dataset.index !== undefined && layer) {
       if (typeof layer.setZIndex === 'function') {
         layer.index = dataset.index;
         layer.setZIndex(datasetsLength - dataset.index);
       } else {
-        const layerId = dataset.layer[0].id;
         const layersElements = this.map.getPane('tilePane').children;
 
         for (let i = 0; i < layersElements.length; i++) {
-          if (layersElements[i].id === layerId) {
+          if (layersElements[i].id === activeLayer.id) {
             layersElements[i].style.zIndex = datasetsLength - dataset.index;
           }
         }
@@ -310,10 +314,12 @@ class ExploreMap extends React.Component {
     }
   }
 
-
-  // TODO change multilayer
   changeLayerOpacity(dataset) {
-    const layer = this.mapLayers[dataset.layer[0].id];
+    const { layers } = this.props;
+    const activeLayer = Object.values(layers).find(l => dataset.id === l.dataset && l.active) ||
+      Object.values(layers).find(l => dataset.id === l.dataset && l.default) || {};
+    const layer = this.mapLayers[activeLayer.id];
+
     layer.setOpacity(dataset.opacity);
   }
 
@@ -379,8 +385,8 @@ class ExploreMap extends React.Component {
         this.handleTileLoaded(layer);
       });
       layer.addTo(this.map).setZIndex(datasetsLength - dataset.index);
-      console.log(layer);
       this.mapLayers[layerData.id] = layer;
+      this.changeLayerOpacity(dataset);
     }
   }
 
@@ -418,6 +424,7 @@ class ExploreMap extends React.Component {
       });
       newLayer.addTo(this.map);
       this.mapLayers[layer.id] = newLayer;
+      this.changeLayerOpacity(dataset);
     } else {
       throw new Error('"type" specified in layer spec doesn`t exist');
     }
@@ -464,10 +471,12 @@ class ExploreMap extends React.Component {
       .then((data) => {
         // we can switch off the layer while it is loading
         if (dataset.active) {
-          const tileUrl = `${data.cdn_url.templates.https.url}/${layer.account}/api/v1/map/${data.layergroupid}/{z}/{x}/{y}.png`
+          const tileUrl = `${data.cdn_url.templates.https.url}/${layer.account}/api/v1/map/${data.layergroupid}/{z}/{x}/{y}.png`;
           // const tileUrl = `https://${layer.account}.carto.com/api/v1/map/${data.layergroupid}/{z}/{x}/{y}.png`;
           this.mapLayers[layer.id] = L.tileLayer(tileUrl).addTo(this.map).setZIndex(datasetsLength - dataset.index);
+          this.mapLayers[layer.id].index = dataset.index;
           this.mapLayers[layer.id].on('load', () => {
+            this.changeLayerOpacity(dataset);
             this.handleTileLoaded(layer);
           });
           this.mapLayers[layer.id].on('tileerror', () => {
