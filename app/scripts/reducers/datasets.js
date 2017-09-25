@@ -10,7 +10,8 @@ import {
   DATASET_LAYER_FETCH_ERROR,
   DATASET_SET_FILTER,
   MAP_LAYERS_ORDER_CHANGED,
-  MAP_LAYER_OPACITY_CHANGED
+  MAP_LAYER_OPACITY_CHANGED,
+  SET_LAYERGROUP_ACTIVE_LAYER
 } from '../constants';
 
 const initialState = {
@@ -162,6 +163,18 @@ export default function (state = initialState, action) {
         }
       }
       return Object.assign({}, state, { filteredList: datasets });
+    }
+    case SET_LAYERGROUP_ACTIVE_LAYER: {
+      const newLayers = {};
+      Object.keys(state.layers).forEach((key) => {
+        const l = state.layers[key];
+
+        if (l.dataset !== action.payload.dataset) newLayers[key] = l;
+        else if (l.dataset === action.payload.dataset && key === action.payload.layer) {
+          newLayers[key] = Object.assign({}, l, { active: true });
+        } else newLayers[key] = Object.assign({}, l, { active: false });
+      });
+      return Object.assign({}, state, { layers: newLayers });
     }
     default:
       return state;
