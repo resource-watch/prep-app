@@ -172,7 +172,7 @@ export function getDatasetById(datasetId, includesData) {
                 data: datasetData
               }
             });
-            if (datasetData.widget.length) {
+            if (datasetData.widget && datasetData.widget.length) {
               dispatch({
                 type: DATASET_WIDGET_RECEIVED,
                 payload: {

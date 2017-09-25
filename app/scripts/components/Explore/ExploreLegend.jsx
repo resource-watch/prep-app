@@ -302,7 +302,9 @@ class DataMapLegend extends React.Component {
           title="Information"
           className="icon -info"
           onClick={() => this.props.onInfoClick(layer.dataset)}
-        > i </span>
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><title>info</title><path d="M18.107 14.899v-1.101h-6.603v2.201h2.201v6.603h-2.201v2.201h8.804v-2.201h-2.201v-7.703zm-2.201 16.508C7.397 31.407.499 24.509.499 16S7.397.593 15.906.593 31.313 7.491 31.313 16s-6.898 15.407-15.407 15.407zM13.705 7.196v4.402h4.402V7.196h-4.402z"/></svg>
+        </span>
         <span
           title="Interactivity"
           className={`icon -select ${this.state.selectedDatasetId === layer.dataset ? '' : '-selected'}`}
@@ -363,42 +365,40 @@ class DataMapLegend extends React.Component {
     if (this.props.data && this.props.data.length && this.state.legendOpen) {
       legendClassNames.push('-open');
       content = (
-        <SortableList
-          axis="y"
-          lockAxis="y"
-          lockToContainerEdges
-          lockOffset="50%"
-          useDragHandle
-          items={this.getItems()}
-          onSortEnd={(oldI, newI) => this.onSortEnd(oldI, newI)}
-        />
+        <div className={legendClassNames.join(' ')}>
+          <div className="action-container">
+            <span className="help">View legend</span>
+            <span className="action open" onClick={() => this.toggleToolbarStatus()}>
+              <svg width="10" height="7" viewBox="0 0 10 7">
+                <title>Open</title>
+                <path d="M5.657.707L4.95 0 0 4.95l1.414 1.414L4.95 2.828l3.535 3.536L9.9 4.95 5.657.707z" fillRule="evenodd" />
+              </svg>
+            </span>
+            <span className="action close" onClick={() => this.toggleToolbarStatus()}>
+              <svg width="9" height="9" viewBox="0 0 9 9">
+                <title>Close</title>
+                <path d="M4.5 3l-3-3L0 1.5l3 3-3 3L1.5 9l3-3 3 3L9 7.5l-3-3 3-3L7.5 0l-3 3z" fillRule="evenodd" />
+              </svg>
+            </span>
+          </div>
+
+          <SortableList
+            axis="y"
+            lockAxis="y"
+            lockToContainerEdges
+            lockOffset="50%"
+            useDragHandle
+            items={this.getItems()}
+            onSortEnd={(oldI, newI) => this.onSortEnd(oldI, newI)}
+          />
+        </div>
       );
     } else {
-      content = <div className="content" />;
+      // content = <div className="content" />;
+      content = <div className={legendClassNames.join(' ')} />;
     }
 
-    return (
-      <div className={legendClassNames.join(' ')}>
-        <div className="action-container">
-          <span className="help">View legend</span>
-          <span className="action open" onClick={() => this.toggleToolbarStatus()}>
-            <svg width="10" height="7" viewBox="0 0 10 7">
-              <title>Open</title>
-              <path d="M5.657.707L4.95 0 0 4.95l1.414 1.414L4.95 2.828l3.535 3.536L9.9 4.95 5.657.707z" fillRule="evenodd" />
-            </svg>
-          </span>
-          <span className="action close" onClick={() => this.toggleToolbarStatus()}>
-            <svg width="9" height="9" viewBox="0 0 9 9">
-              <title>Close</title>
-              <path d="M4.5 3l-3-3L0 1.5l3 3-3 3L1.5 9l3-3 3 3L9 7.5l-3-3 3-3L7.5 0l-3 3z" fillRule="evenodd" />
-            </svg>
-          </span>
-        </div>
-
-        {content}
-
-      </div>
-    );
+    return content;
   }
 }
 

@@ -4,6 +4,7 @@ import MainNav from '../../components/Navigation/MainNav';
 
 import ExploreMap from '../../containers/Explore/ExploreMap';
 import ExploreMapSidebar from '../../containers/Explore/ExploreSidebar';
+import InfoSidebar from '../../containers/Explore/InfoSidebar';
 import ExploreMapLegend from '../../containers/Explore/ExploreLegend';
 
 import MetadataList from './MetadataList';
@@ -124,6 +125,7 @@ class Explore extends React.Component {
         </header>
 
         <ExploreMapSidebar />
+        <InfoSidebar />
         <ExploreMap />
         <ExploreMapLegend />
 
@@ -155,9 +157,7 @@ class Explore extends React.Component {
             opened={this.props.metadataModal.open}
             close={() => this.props.setModalMetadata(false)}
           >
-
             {modalContent}
-
           </Modal>
         }
 

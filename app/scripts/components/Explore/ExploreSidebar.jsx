@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Link } from 'react-router';
 
 import FilterTabs from '../../containers/Explore/FilterTabs';
 import Switch from '../Button/Switch';
@@ -14,6 +13,10 @@ class DataMap extends React.Component {
     this.state = {
       sidebarOpen: true
     };
+  }
+
+  componentWillMount() {
+    this.props.onCloseInfo();
   }
 
   componentDidMount() {
@@ -79,7 +82,7 @@ class DataMap extends React.Component {
         <div className="detail-space" />
       );
 
-      let datasetIcon = null;
+      let datasetInfo = null;
 
       let subtitle = '';
       let partner = '';
@@ -105,14 +108,15 @@ class DataMap extends React.Component {
         );
       }
       if (dataset.id) {
-        datasetIcon = (
-          <Link className="detail-link" to={`/dataset/${dataset.id}`}>
-            <svg width="16" height="16" viewBox="0 0 16 16"><title>View page</title>
-              <path d="M0 0v16h14v-2H2V2h12V0H0zm12 4l4 4-4 4V4zM6 7h6v2H6V7z" fillRule="evenodd" />
-            </svg>
-          </Link>
-        );
+        datasetInfo = this.props.infoSidebarMetadata.open && this.props.infoSidebarMetadata.datasetId === dataset.id ?
+          (<button onClick={() => this.props.onCloseInfo()} className="cancel">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>cancel</title><path d="M17.016 15.609L13.407 12l3.609-3.609-1.406-1.406-3.609 3.609-3.609-3.609-1.406 1.406L10.595 12l-3.609 3.609 1.406 1.406 3.609-3.609 3.609 3.609zM12 2.016c5.531 0 9.984 4.453 9.984 9.984S17.531 21.984 12 21.984 2.016 17.531 2.016 12 6.469 2.016 12 2.016z"/></svg>
+          </button>) :
+          (<button onClick={() => this.props.onInfoClick(dataset.id)} className="info">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><title>info</title><path d="M18.107 14.899v-1.101h-6.603v2.201h2.201v6.603h-2.201v2.201h8.804v-2.201h-2.201v-7.703zm-2.201 16.508C7.397 31.407.499 24.509.499 16S7.397.593 15.906.593 31.313 7.491 31.313 16s-6.898 15.407-15.407 15.407zM13.705 7.196v4.402h4.402V7.196h-4.402z"/></svg>
+          </button>);
       }
+
 
       let cdiTag = false;
       for (let i = 0; i < dataset.vocabulary[0].attributes.tags.length; i++) {
@@ -150,7 +154,7 @@ class DataMap extends React.Component {
             { dataset.env === 'preproduction' ? <span style={{ color: 'red', fontSize: '11px' }}>Preproduction</span> : null }
             <span className="subtitle">Source: <strong>{partner}</strong></span>
           </span>
-          {datasetIcon}
+          {datasetInfo}
         </div>
       );
     });
@@ -165,20 +169,23 @@ class DataMap extends React.Component {
   }
 
   render() {
+    const { infoSidebarMetadata } = this.props;
     const content = this.getContent();
     return (
 
       <div className={['c-explore-sidebar', this.state.sidebarOpen ? '-open' : ''].join(' ')}>
-        <div className="actions">
-          <div>
-            <button
-              className={['toggle-status', this.state.sidebarOpen ? '-open' : ''].join(' ')}
-              onClick={() => this.toggleToolbarStatus()}
-            >
-              <span />
-            </button>
+        {!infoSidebarMetadata.open &&
+          <div className="actions">
+            <div>
+              <button
+                className={['toggle-status', this.state.sidebarOpen ? '-open' : ''].join(' ')}
+                onClick={() => this.toggleToolbarStatus()}
+              >
+                <span />
+              </button>
+            </div>
           </div>
-        </div>
+        }
         <Tooltip
           ref={(tagTooltip) => {this.tagTooltip = tagTooltip}}
           text={this.props.tooltip.text}
@@ -221,6 +228,10 @@ DataMap.propTypes = {
    */
   listReceived: React.PropTypes.bool,
   /**
+   * Define if got the dataset list
+   */
+  infoSidebarMetadata: React.PropTypes.bool,
+  /**
    * Define the tooltip text and position
    */
   setTooltip: React.PropTypes.func.isRequired,
@@ -228,6 +239,10 @@ DataMap.propTypes = {
    * Define function to show the dataset metadata
    */
   onInfoClick: React.PropTypes.func.isRequired,
+  /**
+   * Define function to show the dataset metadata
+   */
+  onCloseInfo: React.PropTypes.func.isRequired,
   /**
    * Define function to unselect dataset
    */
