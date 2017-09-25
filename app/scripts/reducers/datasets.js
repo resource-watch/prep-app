@@ -155,8 +155,9 @@ export default function (state = initialState, action) {
       const datasets = state.filteredList.slice(0);
 
       for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
-        if (datasets[i].id === action.payload) {
-          datasets[i].opacity = datasets[i].opacity ? 0 : 1;
+        if (datasets[i].id === action.payload.id) {
+          // datasets[i].opacity = datasets[i].opacity ? 0 : 1;
+          datasets[i].opacity = action.payload.opacity !== undefined ? action.payload.opacity : 1;
           break;
         }
       }

@@ -1,18 +1,18 @@
 .c-explore-legend {
   position: absolute;
   left: auto;
-  background-color: rgba($navy, 0.8);
+  background-color: $white;
   z-index: 1;
   width: 100%;
   right: 0;
-  bottom: 0;
+  top: 100px;
   transform: translateY(0);
 
   @media #{$mq-large} {
     width: 500px;
     right: 10px;
-    bottom: 10px;
-    transform: translateY(calc(100% - 40px));
+    top: 100px;
+    transform: translateY(0);
   }
 
   > .action-container {
@@ -21,7 +21,7 @@
     justify-content: flex-end;
     > .help {
       margin-right: 1rem;
-      color: $inverse-font-color;
+      color: $base-font-color;
       font-size: $small-font-size;
       font-weight: 700;
       text-transform: uppercase;
@@ -33,18 +33,18 @@
       width: 30px;
       height: 30px;
       cursor: pointer;
-      color: $inverse-font-color;
+      color: $base-font-color;
       > svg {
-        fill: $inverse-font-color;
+        fill: $base-font-color;
       }
     }
     > .close {
       display: none;
       position: absolute;
-      top: -30px;
+      bottom: -30px;
       right: 0;
       padding: 0;
-      background-color: rgba($navy, 0.8);
+      background-color: $white;
     }
   }
 
@@ -57,7 +57,7 @@
     transform: translateY(0);
     transition: transform 0.3s ease-out;
     @media #{$mq-large} {
-      transform: translateY(-10px);
+      // transform: translateY(10px);
     }
 
     > .action-container  {
@@ -71,7 +71,7 @@
   }
 
   &.-empty {
-    transform: translateY(calc(100% + 40px));
+    transform: translateY(0);
   }
 }
 
@@ -81,7 +81,7 @@
   padding: .5rem 0 .5rem .5rem;
   border-bottom: 1px solid $main-color;
 
-  color: $inverse-font-color;
+  color: $base-font-color;
   font-size: $small-font-size;
   font-weight: 700;
   text-transform: uppercase;
@@ -99,7 +99,7 @@
     left: .5rem;
     top: 10px;
     > svg {
-      fill: rgba($inverse-font-color, .4)
+      fill: rgba($base-font-color, .4)
     }
   }
 
@@ -107,7 +107,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: calc(100% - 30px);
+    width: calc(100% - 18px);
     padding-left: 15px;
 
   }
@@ -180,11 +180,9 @@
     display: flex;
     align-items: center;
     >.icon {
-      width: 21px;
-      height: 21px;
+      width: 14px;
+      height: 14px;
       margin-right: .5rem;
-      border: 1px solid rgba($inverse-font-color, 0.2);
-      border-radius: 50%;
       display: flex;
       flex-shrink: 0;
       align-items: center;
@@ -193,27 +191,38 @@
 
       &:last-child { margin-right: 0; }
 
-      &.remove { margin-left: 8px; }
+      &.remove {
+        margin-left: 8px;
+        width: 10px;
+        height: 10px;
+      }
 
       > svg {
-        fill: $inverse-font-color;
+        fill: $base-font-color;
+        width: 100%;
+        height: 100%;
+      }
+      &.-opacity {
+        svg {
+          width: 12px;
+          height: 12px;
+        }
       }
       &.-hide {
         opacity: .5;
       }
       &.-info {
         font-family: $header-font-family;
+        font-size: 14px;
         text-transform: none;
       }
       &.-selected {
         opacity: .3;
       }
       &:hover {
-        background-color: $inverse-font-color;
-        border-color: $inverse-font-color;
-        color: $base-font-color;
+        color: rgba($light-blue, .5);
         > svg {
-          fill: $base-font-color;
+          fill: rgba($light-blue, .5);
         }
       }
     }

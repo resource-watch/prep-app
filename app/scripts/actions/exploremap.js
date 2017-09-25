@@ -46,10 +46,10 @@ export function setLayersOrder(layers) {
   };
 }
 
-export function toggleLayerOpacity(layerId) {
+export function toggleLayerOpacity(layerId, opacity) {
   return {
     type: MAP_LAYER_OPACITY_CHANGED,
-    payload: layerId
+    payload: { id: layerId, opacity }
   };
 }
 
