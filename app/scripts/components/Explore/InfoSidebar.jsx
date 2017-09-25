@@ -217,15 +217,8 @@ class InfoSidebar extends React.Component {
 
     if (dataset && dataset.metadata && dataset.metadata.length && dataset.metadata[0].attributes.info.data_download) {
       downloadIcon = (
-        <a download href={dataset.metadata[0].attributes.info.data_download}>
-          <svg className="icon" width="10" height="12" viewBox="0 0 10 12"><title>Download</title>
-            <g fill="none" fillRule="evenodd">
-              <path d="M4 0h2v7H4zM0 10h10v2H0z" />
-              <path
-                d="M4.243 8.192l.707.707L9.9 3.95 8.484 2.537 4.95 6.07 1.414 2.536 0 3.95l4.243 4.242z"
-              />
-            </g>
-          </svg>
+        <a download href={dataset.metadata[0].attributes.info.data_download} className="download">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="32" viewBox="0 0 26 32"><title>download</title><path d="M1.12 28.32h24v2.56h-24v-2.56zM11.531 0v18.255l-6.204-6.264-2.095 2.13L13.017 24l9.785-9.879-2.095-2.115-6.204 6.249V0z"/></svg>
           Download
         </a>
       );
@@ -234,7 +227,10 @@ class InfoSidebar extends React.Component {
     return (
       <nav className="info-actions">
         {downloadIcon}
-        <Link to={`/dataset/${dataset.id}`}>Learn more</Link>
+        <Link to={`/dataset/${dataset.id}`} className="more">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><title>arrow-up-right2</title><path d="M7.414 27.414L24 10.828V18a2 2 0 1 0 4 0V6a2 2 0 0 0-2-1.999V4H14a2 2 0 1 0 0 4h7.172L4.586 24.586C4.195 24.976 4 25.488 4 26s.195 1.024.586 1.414a2 2 0 0 0 2.828 0z"/></svg>
+          Learn more
+        </Link>
         {layerIcon}
       </nav>
     );
