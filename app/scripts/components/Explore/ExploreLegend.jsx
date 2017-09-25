@@ -1,6 +1,7 @@
 import React from 'react';
 import { SortableContainer, SortableElement, SortableHandle, arrayMove } from 'react-sortable-hoc';
 import SliderTooltip from '../Tooltip/SliderTooltip';
+import LayersTooltip from '../Tooltip/LayersTooltip';
 
 function getLinesLegend(layer) {
   return (<div className="legend -line">
@@ -75,7 +76,9 @@ function getCloroplethLegend(layer) {
 }
 
 function getLegend(layer) {
-  switch (layer.legend_config.type) {
+  const type = layer && layer.legend_config && layer.legend_config.type || '';
+
+  switch (type) {
     case 'lines':
       return getLinesLegend(layer);
     case 'basic':
@@ -98,86 +101,16 @@ const DragHandle = SortableHandle(() => <span className="handler">
   </svg>
 </span>);
 
-const SortableItem = SortableElement(({ layer, index, onInfoClick, toggleLayerOpacity,
-  setDatasetSelected, selectedDatasetId, switchChange, onClickOpacity }) => (
-    <div className="legend-layer" key={`map-layer-${index}`}>
-      <div className="row">
-        <DragHandle />
-        <div className="layer-header">
-          <div className="">
-            <span className="title">{layer.title}
-              <span className="-units">
-                {layer.legend_config.unit &&
-                ` (${layer.legend_config.unit})`}
-              </span>
-            </span>
-          </div>
-          <div className="layer-actions">
-            <span
-              title="Opacity"
-              className="icon -opacity"
-              onClick={e => onClickOpacity(e, layer)}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="29" height="32" viewBox="0 0 29 32"><title>opacity</title><path d="M29.333 7.92a16.293 16.293 0 0 0-2.667-3.526v23.211a16.106 16.106 0 0 0 2.667-3.525V7.92zm-8-7.04a14.384 14.384 0 0 0-2.569-.762l-.098-.016v31.797c.92-.179 1.813-.443 2.667-.779V.88zm-8 31.12C5.786 30.819 0 24.107 0 16S5.787 1.181 13.333 0v32z"/></svg>
-            </span>
-            <span
-              title="Visibility"
-              className={`icon ${layer.opacity === 0 ? '-hide' : ''}`}
-              onClick={() => toggleLayerOpacity(layer.dataset, layer.opacity === 0 ? 1 : 0)}
-            >
-              <svg width="13" height="9" viewBox="0 0 13 9"><title>icon-eye</title><path d="M4.933 4.5c0 .855.698 1.545 1.567 1.545s1.567-.69 1.567-1.545S7.369 2.955 6.5 2.955s-1.567.69-1.567 1.545zM13 4.5C11.755 2.265 9.312 0 6.5 0 3.695 0 1.245 2.265 0 4.5 1.245 6.735 3.695 9 6.5 9c2.812 0 5.255-2.265 6.5-4.5zm-9.415 0c0-1.582 1.307-2.865 2.915-2.865S9.415 2.918 9.415 4.5c0 1.582-1.307 2.865-2.915 2.865S3.585 6.082 3.585 4.5z" fillRule="evenodd" /></svg>
-            </span>
-            <span
-              title="Information"
-              className="icon -info"
-              onClick={() => onInfoClick(layer.dataset)}
-            > i </span>
-            <span
-              title="Interactivity"
-              className={`icon -select ${selectedDatasetId === layer.dataset ? '' : '-selected'}`}
-              onClick={() => setDatasetSelected(layer.dataset)}
-            >
-              <svg width="11" height="10" viewBox="-256.4 411.4 15 15">
-                <path d="M-242 412.1h-13.8c-.4 0-.6.2-.6.6v9.4c0 .4.2.6.6.6h4.1l2.3 2.9c.1.1.3.2.5.2s.4-.1.5-.2l2.3-2.9h4.1c.4 0 .6-.2.6-.6v-9.4c0-.4-.2-.6-.6-.6z" />
-              </svg>
-            </span>
-            <span
-              title="Remove"
-              className="icon -select remove"
-              onClick={() => switchChange(layer)}
-            >
-              <svg width="9" height="9" viewBox="0 0 9 9">
-                <title>Close</title>
-                <path d="M4.5 3l-3-3L0 1.5l3 3-3 3L1.5 9l3-3 3 3L9 7.5l-3-3 3-3L7.5 0l-3 3z" fillRule="evenodd" />
-              </svg>
-            </span>
-          </div>
-        </div>
-      </div>
-      {getLegend(layer)}
-    </div>
-  )
-);
+const SortableItem = SortableElement(({ value }) => value);
 
-const SortableList = SortableContainer(({ items, onInfoClick, toggleLayerOpacity,
-  setDatasetSelected, selectedDatasetId, switchChange, onClickOpacity }) => (
-    <div className="content">
-      {items.map((layer, index) =>
-        <SortableItem
-          key={`item-${index}`}
-          index={index}
-          layer={layer}
-          setDatasetSelected={setDatasetSelected}
-          switchChange={switchChange}
-          onInfoClick={onInfoClick}
-          toggleLayerOpacity={toggleLayerOpacity}
-          selectedDatasetId={selectedDatasetId}
-          onClickOpacity={onClickOpacity}
-        />
-      )}
-    </div>
-  )
-);
+const SortableList = SortableContainer(({ items }) => (
+  <div className="content">
+    {items.map((value, index) =>
+      <SortableItem key={value.key} index={index} value={value} />
+    )}
+  </div>
+));
+
 
 class DataMapLegend extends React.Component {
   /**
@@ -257,6 +190,39 @@ class DataMapLegend extends React.Component {
     });
   }
 
+  /**
+   * Event handler executed when the user clicks the button
+   * to switch the layer for another one of the same dataset
+   * @param {MouseEvent} e
+   * @param {LayerGroup} layerGroup
+   */
+  onClickLayers(e, layerGroup) {
+    this.setState({ layersTooltipOpen: true, opacityTooltipOpen: false });
+
+    // If the user is opening the tooltip to select a layer
+    // then the tour doesn't make any sense anymore
+    // this.closeLayersTourTooltip();
+
+    // We save the button that was used to open the tooltip
+    // so we can compute its position later
+    this.activeLayersButton = e.target;
+
+    this.props.toggleTooltip(true, {
+      follow: false,
+      direction: 'top',
+      position: DataMapLegend.getElementPosition(this.activeLayersButton),
+      children: LayersTooltip,
+      childrenProps: {
+        layerGroup,
+        onChangeLayer: this.props.setLayerGroupActiveLayer,
+        onClose: () => {
+          this.setState({ layersTooltipOpen: false });
+          this.props.toggleTooltip(false);
+        }
+      }
+    });
+  }
+
   onSortEnd({ oldIndex, newIndex }) {
     const layers = arrayMove(this.props.data, oldIndex, newIndex);
     this.props.setLayersOrder(layers);
@@ -279,12 +245,113 @@ class DataMapLegend extends React.Component {
   }
 
   switchChange(layer) {
-    const dataset = this.props.activeDatasets.filter(d => d.layer && d.layer.length
-      && d.layer[0].id === layer.id)[0];
+    const dataset = this.props.activeDatasets.find(d => d.layer && d.layer.length
+      && d.layer.find(l => l.id === layer.id));
 
-    dataset.id === this.props.selectedDatasetId &&
+    if (dataset && dataset.id === this.props.selectedDatasetId) {
       this.props.deselectDataset();
+    }
     this.props.switchChange(dataset);
+  }
+
+  groupDatasetLayers(layers) {
+    const groups = {};
+    layers.forEach((l) => {
+      if (l.dataset) {
+        if (groups[l.dataset] && groups[l.dataset].layers) groups[l.dataset].layers.push(l);
+        else {
+          groups[l.dataset] = {
+            dataset: l.dataset,
+            layers: [l]
+          };
+        }
+      }
+    });
+    return Object.values(groups);
+  }
+
+  getItemActions(layersGroup) {
+    const layer = layersGroup.layers.find(l => l.active) || layersGroup.layers.find(l => l.default) || {};
+
+    return (
+      <div className="layer-actions">
+        {layersGroup.layers.length > 1 &&
+          <span
+            title="Layers"
+            className="icon -layers"
+            onClick={e => this.onClickLayers(e, layersGroup)}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="32" viewBox="0 0 34 32"><title>layers</title><path d="M29.995 17.712l4.29 2.859L17.142 32 .006 20.571l4.286-2.857 12.855 8.571 12.85-8.574zm4.286-6.283L17.145 22.858 0 11.429 17.143 0l17.138 11.429z"/></svg>
+          </span>
+        }
+        <span
+          title="Opacity"
+          className="icon -opacity"
+          onClick={e => this.onClickOpacity(e, layer)}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="29" height="32" viewBox="0 0 29 32"><title>opacity</title><path d="M29.333 7.92a16.293 16.293 0 0 0-2.667-3.526v23.211a16.106 16.106 0 0 0 2.667-3.525V7.92zm-8-7.04a14.384 14.384 0 0 0-2.569-.762l-.098-.016v31.797c.92-.179 1.813-.443 2.667-.779V.88zm-8 31.12C5.786 30.819 0 24.107 0 16S5.787 1.181 13.333 0v32z"/></svg>
+        </span>
+        <span
+          title="Visibility"
+          className={`icon ${layer.opacity === 0 ? '-hide' : ''}`}
+          onClick={() => this.props.toggleLayerOpacity(layer.dataset, layer.opacity === 0 ? 1 : 0)}
+        >
+          <svg width="13" height="9" viewBox="0 0 13 9"><title>icon-eye</title><path d="M4.933 4.5c0 .855.698 1.545 1.567 1.545s1.567-.69 1.567-1.545S7.369 2.955 6.5 2.955s-1.567.69-1.567 1.545zM13 4.5C11.755 2.265 9.312 0 6.5 0 3.695 0 1.245 2.265 0 4.5 1.245 6.735 3.695 9 6.5 9c2.812 0 5.255-2.265 6.5-4.5zm-9.415 0c0-1.582 1.307-2.865 2.915-2.865S9.415 2.918 9.415 4.5c0 1.582-1.307 2.865-2.915 2.865S3.585 6.082 3.585 4.5z" fillRule="evenodd" /></svg>
+        </span>
+        <span
+          title="Information"
+          className="icon -info"
+          onClick={() => this.props.onInfoClick(layer.dataset)}
+        > i </span>
+        <span
+          title="Interactivity"
+          className={`icon -select ${this.state.selectedDatasetId === layer.dataset ? '' : '-selected'}`}
+          onClick={() => this.handleSelectedDataset(layer.dataset)}
+        >
+          <svg width="11" height="10" viewBox="-256.4 411.4 15 15">
+            <path d="M-242 412.1h-13.8c-.4 0-.6.2-.6.6v9.4c0 .4.2.6.6.6h4.1l2.3 2.9c.1.1.3.2.5.2s.4-.1.5-.2l2.3-2.9h4.1c.4 0 .6-.2.6-.6v-9.4c0-.4-.2-.6-.6-.6z" />
+          </svg>
+        </span>
+        <span
+          title="Remove"
+          className="icon -select remove"
+          onClick={() => this.switchChange(layer)}
+        >
+          <svg width="9" height="9" viewBox="0 0 9 9">
+            <title>Close</title>
+            <path d="M4.5 3l-3-3L0 1.5l3 3-3 3L1.5 9l3-3 3 3L9 7.5l-3-3 3-3L7.5 0l-3 3z" fillRule="evenodd" />
+          </svg>
+        </span>
+      </div>
+    );
+  }
+
+  getItems() {
+    const layersGroups = this.groupDatasetLayers(this.props.data) || [];
+
+    return layersGroups.map((layersGroup) => {
+      const layer = layersGroup.layers.find(l => l.active) || layersGroup.layers.find(l => l.default) || {};
+
+      return (
+        <div className="legend-layer" key={`map-layer-${layer.id}`}>
+          <div className="row">
+            <DragHandle />
+            <div className="layer-header">
+              <div className="">
+                <span className="title">{layer.title}
+                  <span className="-units">
+                    {layer && layer.legend_config && layer.legend_config.unit &&
+                    ` (${layer.legend_config.unit})`}
+                  </span>
+                </span>
+              </div>
+              {this.getItemActions(layersGroup)}
+            </div>
+          </div>
+          {getLegend(layer)}
+        </div>
+      );
+    });
   }
 
   render() {
@@ -295,21 +362,17 @@ class DataMapLegend extends React.Component {
 
     if (this.props.data && this.props.data.length && this.state.legendOpen) {
       legendClassNames.push('-open');
-      content = (<SortableList
-        axis="y"
-        lockAxis="y"
-        lockToContainerEdges
-        lockOffset="50%"
-        useDragHandle
-        items={this.props.data}
-        onInfoClick={this.props.onInfoClick}
-        setDatasetSelected={datasetId => this.handleSelectedDataset(datasetId)}
-        selectedDatasetId={this.state.selectedDatasetId}
-        switchChange={dataset => this.switchChange(dataset)}
-        toggleLayerOpacity={this.props.toggleLayerOpacity}
-        onSortEnd={(oldI, newI) => this.onSortEnd(oldI, newI)}
-        onClickOpacity={this.onClickOpacity}
-      />);
+      content = (
+        <SortableList
+          axis="y"
+          lockAxis="y"
+          lockToContainerEdges
+          lockOffset="50%"
+          useDragHandle
+          items={this.getItems()}
+          onSortEnd={(oldI, newI) => this.onSortEnd(oldI, newI)}
+        />
+      );
     } else {
       content = <div className="content" />;
     }
@@ -361,7 +424,8 @@ DataMapLegend.propTypes = {
   setDatasetSelected: React.PropTypes.func.isRequired,
   deselectDataset: React.PropTypes.func,
   switchChange: React.PropTypes.func,
-  toggleTooltip: React.PropTypes.func
+  toggleTooltip: React.PropTypes.func,
+  setLayerGroupActiveLayer: React.PropTypes.func
 };
 
 export default DataMapLegend;

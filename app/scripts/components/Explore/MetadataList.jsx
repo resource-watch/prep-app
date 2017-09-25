@@ -10,7 +10,7 @@ function getDownloadUrl(data) {
   }
   switch (data.provider) {
     case 'cartodb':
-      if (data.connectorUrl.indexOf('tables') === -1) {
+      if (data && data.connectorUrl && data.connectorUrl.indexOf('tables') === -1) {
         const uri = new URI(data.connectorUrl);
         uri.search({ format: 'csv' });
         url = uri.toString();
