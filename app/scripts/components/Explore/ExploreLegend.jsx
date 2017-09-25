@@ -281,7 +281,7 @@ class DataMapLegend extends React.Component {
             className="icon -layers"
             onClick={e => this.onClickLayers(e, layersGroup)}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="29" height="32" viewBox="0 0 29 32"><title>layers</title><path d="M29.333 7.92a16.293 16.293 0 0 0-2.667-3.526v23.211a16.106 16.106 0 0 0 2.667-3.525V7.92zm-8-7.04a14.384 14.384 0 0 0-2.569-.762l-.098-.016v31.797c.92-.179 1.813-.443 2.667-.779V.88zm-8 31.12C5.786 30.819 0 24.107 0 16S5.787 1.181 13.333 0v32z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="32" viewBox="0 0 34 32"><title>layers</title><path d="M29.995 17.712l4.29 2.859L17.142 32 .006 20.571l4.286-2.857 12.855 8.571 12.85-8.574zm4.286-6.283L17.145 22.858 0 11.429 17.143 0l17.138 11.429z"/></svg>
           </span>
         }
         <span
