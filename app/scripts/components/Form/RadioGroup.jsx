@@ -46,7 +46,7 @@ class RadioGroup extends FormElement {
               checked={item.value === value}
               onChange={this.triggerChange}
             />
-            <label htmlFor={`radio-${name}-${item.value}`}>
+            <label htmlFor={`radio-${name}-${item.value}`} className={item.value === value ? '-checked' : ''}>
               <span />
               {item.label}
             </label>

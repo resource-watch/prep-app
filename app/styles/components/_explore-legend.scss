@@ -30,8 +30,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 30px;
-      height: 30px;
+      width: 40px;
+      height: 28px;
+      border-radius: 0 0 2px 2px;
       cursor: pointer;
       color: $base-font-color;
       > svg {
@@ -41,16 +42,31 @@
     > .close {
       display: none;
       position: absolute;
-      bottom: -30px;
+      bottom: -28px;
       right: 0;
       padding: 0;
       background-color: $white;
+      box-shadow: 0 7px 15px 0 rgba(0,0,0,0.15);
+
+      svg {
+        width: 12px;
+        height: 12px;
+        transform: rotate(90deg);
+      }
+    }
+
+    > .open {
+
+      svg {
+        transform: rotate(180deg);
+      }
     }
   }
 
   > .content {
     overflow: auto;
     max-height: 50vh;
+    box-shadow: 0 7px 15px 0 rgba(0,0,0,0.15);
   }
 
   &.-open {
@@ -79,7 +95,7 @@
   position: relative;
 
   padding: .5rem 0 .5rem .5rem;
-  border-bottom: 1px solid $main-color;
+  border-bottom: 1px solid $border-color;
 
   color: $base-font-color;
   font-size: $small-font-size;
@@ -208,9 +224,6 @@
           height: 12px;
         }
       }
-      &.-hide {
-        opacity: .5;
-      }
       &.-info {
         font-family: $header-font-family;
         font-size: 14px;
@@ -220,9 +233,9 @@
         opacity: .3;
       }
       &:hover {
-        color: rgba($light-blue, .5);
+        color: $light-gold;
         > svg {
-          fill: rgba($light-blue, .5);
+          fill: $light-gold;
         }
       }
     }
