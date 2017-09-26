@@ -61,9 +61,11 @@ class InfoSidebar extends React.Component {
   }
 
   getActionsBar() {
-    const { dataset, selectedDatasetId } = this.props;
+    const { dataset, selectedDatasetId, metadata, list } = this.props;
     let layerIcon = null;
     let downloadIcon = null;
+    const datasetFiltered = list.find(d => d.id === metadata.datasetId) || {};
+    const active = datasetFiltered && datasetFiltered.active;
 
     if (dataset && dataset.layer && dataset.layer.length) {
       layerIcon = (
@@ -72,7 +74,10 @@ class InfoSidebar extends React.Component {
             title="Visibility"
             className={`icon ${dataset.id !== selectedDatasetId ? '-hide' : ''}`}
           >
-            <svg width="13" height="9" viewBox="0 0 13 9"><title>icon-eye</title><path d="M4.933 4.5c0 .855.698 1.545 1.567 1.545s1.567-.69 1.567-1.545S7.369 2.955 6.5 2.955s-1.567.69-1.567 1.545zM13 4.5C11.755 2.265 9.312 0 6.5 0 3.695 0 1.245 2.265 0 4.5 1.245 6.735 3.695 9 6.5 9c2.812 0 5.255-2.265 6.5-4.5zm-9.415 0c0-1.582 1.307-2.865 2.915-2.865S9.415 2.918 9.415 4.5c0 1.582-1.307 2.865-2.915 2.865S3.585 6.082 3.585 4.5z" fillRule="evenodd" /></svg>
+            {active ?
+              <svg xmlns="http://www.w3.org/2000/svg" width="39" height="32" viewBox="0 0 39 32"><title>show</title><path d="M26.905 4.994L32.03 0l3.481 3.392L6.155 32l-3.481-3.392 4.076-3.973a30.449 30.449 0 0 1-6.672-7.88l-.077-.142C3.775 10.06 11.194 3.419 19.693 3.419c2.523 0 4.948.583 7.212 1.575zM11.168 20.33l3.36-3.274a4.91 4.91 0 0 1-.017-.419v-.026.001c0-2.806 2.306-5.073 5.182-5.073.16 0 .32.007.475.02l3.36-3.274a9.305 9.305 0 0 0-3.812-.803h-.024.001c-5.145 0-9.329 4.086-9.329 9.132 0 1.324.288 2.58.805 3.717zm23.286-10.09a30.506 30.506 0 0 1 4.853 6.233l.077.143C35.61 23.166 28.211 29.81 19.692 29.81a17.105 17.105 0 0 1-4.766-.688l.121.03 3.557-3.466c.357.039.721.062 1.088.062 5.145 0 9.329-4.089 9.329-9.132 0-.345-.02-.689-.059-1.022l5.492-5.354z"/></svg> :
+              <svg xmlns="http://www.w3.org/2000/svg" width="47" height="32" viewBox="0 0 47 32"><title>hide</title><path d="M17.149 16a6.127 6.127 0 1 0 12.248-.009v.01a6.127 6.127 0 1 0-12.248.009V16zm29.396 0C42.085 8.052 33.341 0 23.272 0 13.227 0 4.459 8.052-.001 16c4.46 7.948 13.228 16 23.273 16 10.068 0 18.813-8.052 23.273-16zM23.273 4.922c6.08 0 11.025 4.96 11.025 11.078s-4.945 11.078-11.025 11.078S12.248 22.118 12.248 16c0-6.118 4.945-11.078 11.025-11.078z"/></svg>
+            }
           </span>
           Map
         </button>

@@ -12,6 +12,7 @@ import { setInfoSidebarMetadata } from '../../actions/info-sidebar';
 
 const mapStateToProps = state => ({
   dataset: state.datasets.filteredList.find(d => d.id === state.infoSidebar.metadata.datasetId) || {},
+  list: state.datasets.filteredList,
   details: state.datasets.details,
   metadata: state.infoSidebar.metadata,
   selectedDatasetId: state.exploremap.interactionData.datasetId
