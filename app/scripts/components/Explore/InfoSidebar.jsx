@@ -100,23 +100,22 @@ class InfoSidebar extends React.Component {
     const { metadata, details } = this.props;
     const widgetComponents = [];
     const dataset = details[metadata.datasetId];
-    const widgets = dataset.widget;
+    const widgets = dataset.widget ? dataset.widget.filter(w => w.attributes.default) : [];
 
-    if (widgets && widgets.length) {
-      for (let i = 0, wLength = widgets.length; i < wLength; i++) {
-        const widget = widgets[i].attributes;
-        if (widget.widget_config) {
-          switch (widget.widget_config.type) {
-            case 'map':
-              widgetComponents.push(<div className="widget-container" key={i} ><SimpleMap layerId={widget.widget_config.layer_id} /></div>);
-              break;
-            default:
-              widgetComponents.push(<div className="widget-container" key={i} ><VegaChart data={widget.widget_config} /></div>);
-              break;
-          }
+    widgets.forEach((w) => {
+      const widget = w.attributes;
+
+      if (widget.widget_config) {
+        switch (widget.widget_config.type) {
+          case 'map':
+            widgetComponents.push(<div className="widget-container" key={w.id} ><SimpleMap layerId={widget.widget_config.layer_id} /></div>);
+            break;
+          default:
+            widgetComponents.push(<div className="widget-container" key={w.id} ><VegaChart data={widget.widget_config} /></div>);
+            break;
         }
       }
-    }
+    });
 
     return widgetComponents;
   }
