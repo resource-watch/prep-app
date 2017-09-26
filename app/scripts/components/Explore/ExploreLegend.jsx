@@ -301,13 +301,22 @@ class DataMapLegend extends React.Component {
             <svg xmlns="http://www.w3.org/2000/svg" width="47" height="32" viewBox="0 0 47 32"><title>hide</title><path d="M17.149 16a6.127 6.127 0 1 0 12.248-.009v.01a6.127 6.127 0 1 0-12.248.009V16zm29.396 0C42.085 8.052 33.341 0 23.272 0 13.227 0 4.459 8.052-.001 16c4.46 7.948 13.228 16 23.273 16 10.068 0 18.813-8.052 23.273-16zM23.273 4.922c6.08 0 11.025 4.96 11.025 11.078s-4.945 11.078-11.025 11.078S12.248 22.118 12.248 16c0-6.118 4.945-11.078 11.025-11.078z"/></svg>
           }
         </span>
-        <span
-          title="Information"
-          className="icon -info"
-          onClick={() => this.props.onInfoClick(layer.dataset)}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><title>info</title><path d="M18.107 14.899v-1.101h-6.603v2.201h2.201v6.603h-2.201v2.201h8.804v-2.201h-2.201v-7.703zm-2.201 16.508C7.397 31.407.499 24.509.499 16S7.397.593 15.906.593 31.313 7.491 31.313 16s-6.898 15.407-15.407 15.407zM13.705 7.196v4.402h4.402V7.196h-4.402z"/></svg>
-        </span>
+        {this.props.infoMetadata.open && this.props.infoMetadata.datasetId === layer.dataset ?
+          <span
+            title="Information"
+            className="icon -info"
+            onClick={() => this.props.onCloseInfo()}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>cancel</title><path d="M18.028 16.338L13.69 12l4.338-4.338-1.69-1.69L12 10.31 7.662 5.972l-1.69 1.69L10.31 12l-4.338 4.338 1.69 1.69L12 13.69l4.338 4.338zM12 0c6.648 0 12 5.352 12 12s-5.352 12-12 12S0 18.648 0 12 5.352 0 12 0z"/></svg>
+          </span> :
+          <span
+            title="Information"
+            className="icon -info"
+            onClick={() => this.props.onInfoClick(layer.dataset)}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><title>info</title><path d="M18.107 14.899v-1.101h-6.603v2.201h2.201v6.603h-2.201v2.201h8.804v-2.201h-2.201v-7.703zm-2.201 16.508C7.397 31.407.499 24.509.499 16S7.397.593 15.906.593 31.313 7.491 31.313 16s-6.898 15.407-15.407 15.407zM13.705 7.196v4.402h4.402V7.196h-4.402z"/></svg>
+          </span>
+        }
         <span
           title="Interactivity"
           className={`icon -select ${this.state.selectedDatasetId === layer.dataset ? '' : '-selected'}`}
@@ -394,7 +403,6 @@ class DataMapLegend extends React.Component {
         </div>
       );
     } else {
-      // content = <div className="content" />;
       content = (
         <div className={legendClassNames.join(' ')}>
           {this.props.data && this.props.data.length > 0 &&
@@ -425,9 +433,17 @@ DataMapLegend.propTypes = {
   */
   data: React.PropTypes.array,
   /**
-  * Define the function to the handle the detail info click
+  * Define the layers data of the map
+  */
+  infoMetadata: React.PropTypes.object,
+  /**
+  * Define the function to handle the detail info click
   */
   onInfoClick: React.PropTypes.func.isRequired,
+  /**
+  * Define the function to close info click
+  */
+  onCloseInfo: React.PropTypes.func.isRequired,
   /**
   * Define the function to the toggle the layer opacity
   */

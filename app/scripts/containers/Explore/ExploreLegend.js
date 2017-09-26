@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import ExploreMapLegend from '../../components/Explore/ExploreLegend';
 
-import { setModalMetadata } from '../../actions/modal';
+import { setInfoSidebarMetadata } from '../../actions/info-sidebar';
 import { toggleTooltip } from '../../actions/tooltip';
 import { getDatasetById, setDatasetActive, setLayerGroupActiveLayer } from '../../actions/datasets';
 import {
@@ -57,13 +57,17 @@ function getActiveDatasets(datasets, layers) {
 const mapStateToProps = state => ({
   data: getActiveLayers(state.datasets.filteredList, state.datasets.layers),
   activeDatasets: getActiveDatasets(state.datasets.filteredList, state.datasets.layers),
-  selectedDatasetId: state.exploremap.interactionData.datasetId
+  selectedDatasetId: state.exploremap.interactionData.datasetId,
+  infoMetadata: state.infoSidebar.metadata
 });
 const mapDispatchToProps = dispatch => ({
   toggleTooltip: (open, options) => dispatch(toggleTooltip(open, options)),
   onInfoClick: (datasetId) => {
-    dispatch(getDatasetById(datasetId, ['metadata']));
-    dispatch(setModalMetadata(true, datasetId));
+    dispatch(getDatasetById(datasetId, ['metadata, vocabulary', 'widget']));
+    dispatch(setInfoSidebarMetadata(true, datasetId));
+  },
+  onCloseInfo: () => {
+    dispatch(setInfoSidebarMetadata(false));
   },
   setLayersOrder: (layers) => {
     dispatch(setLayersOrder(layers));
