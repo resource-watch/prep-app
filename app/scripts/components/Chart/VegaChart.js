@@ -53,7 +53,6 @@ class VegaChart extends React.Component {
   parseVega() {
     const dataObj = this.getData();
     const themeObj = theme();
-    console.log(dataObj, themeObj)
     themeObj.width = dataObj.width;
 
     vega.parse.spec(dataObj, themeObj, (err, chart) => {
