@@ -78,6 +78,9 @@ class DataMap extends React.Component {
     }
 
     const layers = this.props.data.map((dataset, index) => {
+      const name = dataset.metadata && dataset.metadata.length ?
+        dataset.metadata[0].attributes.name : dataset.name;
+
       let layerIcon = (
         <div className="detail-space" />
       );
@@ -134,7 +137,7 @@ class DataMap extends React.Component {
                 className="title"
                 onClick={() => this.props.onInfoClick(dataset.id)}
               >
-                {dataset.name}
+                {name}
                 <div
                   onMouseEnter={e => this.onTagHover(e)}
                   onMouseLeave={() => this.onTagLeave()}
