@@ -320,7 +320,7 @@ class ExploreMap extends React.Component {
       Object.values(layers).find(l => dataset.id === l.dataset && l.default) || {};
     const layer = this.mapLayers[activeLayer.id];
 
-    layer.setOpacity(dataset.opacity);
+    if (layer) layer.setOpacity(dataset.opacity);
   }
 
   addMapLayer(dataset, layer, datasetsLength) {
@@ -329,18 +329,32 @@ class ExploreMap extends React.Component {
         loading: true
       });
     }
-    switch (layer.provider) {
-      case 'leaflet':
-        this.addLeafletLayer(dataset, layer, datasetsLength);
-        break;
-      case 'arcgis':
-        this.addEsriLayer(dataset, layer, datasetsLength);
-        break;
-      case 'cartodb':
-        this.addCartoLayer(dataset, layer, datasetsLength);
-        break;
-      default:
-        break;
+
+    const method = {
+      // legacy/deprecated
+      leaflet: this.addLeafletLayer,
+      arcgis: this.addEsriLayer,
+      // carto
+      cartodb: this.addCartoLayer,
+      carto: this.addCartoLayer,
+      // wms
+      wmsservice: this.addLeafletLayer,
+      wms: this.addLeafletLayer,
+      // arcgis
+      featureservice: this.addEsriLayer,
+      mapservice: this.addEsriLayer,
+      tileservice: this.addEsriLayer,
+      esrifeatureservice: this.addEsriLayer,
+      esrimapservice: this.addEsriLayer,
+      esritileservice: this.addEsriLayer,
+      // geojson
+      // geojson: this.addGeoJsonLayer
+    }[layer.provider];
+
+    if (method) {
+      method.call(this, dataset, layer, datasetsLength);
+    } else {
+      throw Error(`${layer.provider} provider is not yet supported.`);
     }
   }
 
