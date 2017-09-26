@@ -1,6 +1,9 @@
 import React from 'react';
 import isEmpty from 'lodash/isEmpty';
+
 import { Link } from 'react-router';
+import VegaChart from '../Chart/VegaChart';
+import SimpleMap from '../../containers/Map/SimpleMap';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
 import filtersConfig from '../../../scripts/filters.json';
@@ -93,6 +96,31 @@ class InfoSidebar extends React.Component {
     );
   }
 
+  getWidget() {
+    const { metadata, details } = this.props;
+    const widgetComponents = [];
+    const dataset = details[metadata.datasetId];
+    const widgets = dataset.widget;
+
+    if (widgets && widgets.length) {
+      for (let i = 0, wLength = widgets.length; i < wLength; i++) {
+        const widget = widgets[i].attributes;
+        if (widget.widget_config) {
+          switch (widget.widget_config.type) {
+            case 'map':
+              widgetComponents.push(<div className="widget-container" key={i} ><SimpleMap layerId={widget.widget_config.layer_id} /></div>);
+              break;
+            default:
+              widgetComponents.push(<div className="widget-container" key={i} ><VegaChart data={widget.widget_config} /></div>);
+              break;
+          }
+        }
+      }
+    }
+
+    return widgetComponents;
+  }
+
   toggleToolbarStatus() {
     this.setState({
       sidebarOpen: !this.state.sidebarOpen
@@ -106,6 +134,7 @@ class InfoSidebar extends React.Component {
 
   render() {
     const { metadata, details } = this.props;
+    const detailDataset = details[metadata.datasetId];
 
     return (
       <div className={['c-info-sidebar', metadata.open ? '-open' : ''].join(' ')}>
@@ -128,6 +157,7 @@ class InfoSidebar extends React.Component {
               {this.getHeader()}
               {this.getActionsBar()}
               {this.getContent()}
+              {detailDataset && detailDataset.widget && this.getWidget()}
             </div>
           </div>
           {/* <div className="actions-mobile">
