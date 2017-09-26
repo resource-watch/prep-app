@@ -8,13 +8,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [1.1.0] - 2017-09-26
 
 ### Fixed
-- Datasets with published false were been showed in explore page
-- Twitter feed was failing with new API structure
-- Widget was not been showed in dataset page
+- Datasets with published false were been showed in explore page.
+- Twitter feed was failing with new API structure.
+- Widget was not been showed in dataset page.
 - Description of datasets was failing in some cases.
 - Published datasets was not working in dataset edition.
 - Widget was broken for Vega charts created by widget editor.
 - Removing `/api` in actions files to solve 404 errors.
+- In admin adding a widget in dataset tab redirects to blank page. Now it redirects to correct page.
 
 ### Added
 - Panel info in explore page with dataset page instead modal window.
