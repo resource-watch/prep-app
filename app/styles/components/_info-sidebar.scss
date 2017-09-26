@@ -151,7 +151,7 @@
       border-top: 1px solid $border-color;
 
       .c-vega-chart {
-        height: 200px;
+        overflow: auto;
         min-height: 200px;
       }
     }

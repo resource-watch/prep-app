@@ -19,7 +19,7 @@ const defaultTheme = {
     ticks: 8,
     tickColor: '#A9ABAD',
     tickLabelColor: '#717171',
-    tickLabelFont: 'Lato',
+    tickLabelFont: 'Open Sans',
     tickLabelFontSize: 13
   },
   axis_y: {
@@ -27,7 +27,7 @@ const defaultTheme = {
     tickSize: 0,
     ticks: 5,
     tickLabelColor: '#717171',
-    tickLabelFont: 'Lato',
+    tickLabelFont: 'Open Sans',
     tickLabelFontSize: 13,
     grid: true,
     gridColor: '#A9ABAD',
