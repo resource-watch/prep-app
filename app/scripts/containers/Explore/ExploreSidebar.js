@@ -32,7 +32,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setTooltip(tooltip));
   },
   onInfoClick: (datasetId) => {
-    dispatch(getDatasetById(datasetId, ['metadata, vocabulary']));
+    dispatch(getDatasetById(datasetId, ['metadata, vocabulary', 'widget']));
     dispatch(setInfoSidebarMetadata(true, datasetId));
   },
   onCloseInfo: () => {

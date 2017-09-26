@@ -266,6 +266,13 @@
           fill: $dark-blue;
         }
       }
+
+      .cancel {
+        svg {
+          width: 16px;
+          height: 16px;
+        }
+      }
     }
   }
 

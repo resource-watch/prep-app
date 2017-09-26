@@ -1,6 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import isEmpty from 'lodash/isEmpty';
+
 import { Link } from 'react-router';
+import VegaChart from '../Chart/VegaChart';
+import SimpleMap from '../../containers/Map/SimpleMap';
+import LoadingSpinner from '../Loading/LoadingSpinner';
 
 import filtersConfig from '../../../scripts/filters.json';
 
@@ -13,19 +17,19 @@ class InfoSidebar extends React.Component {
     };
   }
 
-  toggleToolbarStatus() {
-    this.setState({
-      sidebarOpen: !this.state.sidebarOpen
-    });
-  }
-
   getHeader() {
     const { metadata, details } = this.props;
     const dataset = details[metadata.datasetId];
+    let name = '';
+
+    if (dataset) {
+      name = dataset && dataset.metadata && dataset.metadata.length ?
+        dataset.metadata[0].attributes.name : dataset.name;
+    }
 
     return dataset ?
       <header className="header-container">
-        <h1 className="item-title">{dataset.name}</h1>
+        <h1 className="item-title">{name}</h1>
         {dataset.subtitle && <h2 className="item-subtitle">{dataset.subtitle}</h2>}
       </header> :
       <header className="header-container" />;
@@ -39,10 +43,12 @@ class InfoSidebar extends React.Component {
       dataset.vocabulary[0].attributes.tags.filter(t => allFilters.topics[t]).map(t => allFilters.topics[t]) : [];
     const areasList = dataset && dataset.vocabulary && dataset.vocabulary.length ?
       dataset.vocabulary[0].attributes.tags.filter(t => allFilters.geography[t]).map(t => allFilters.geography[t]) : [];
+    const description = dataset && dataset.metadata && dataset.metadata.length ?
+      dataset.metadata[0].attributes.description : '';
 
     return dataset ?
       <div className="content-container">
-        <p className="item-prop description"><span className="prop-label">Description: </span>{dataset.metadata[0].attributes.description}</p>
+        <p className="item-prop description"><span className="prop-label">Description: </span>{description}</p>
         {/* <p className="item-prop"><span className="prop-label">Data source: </span>{dataset.data_source}</p> */}
         <p className="item-prop topics"><span className="prop-label">Topics: </span>{topicsList.join(', ')}</p>
         <p className="item-prop areas"><span className="prop-label">Area: </span>{areasList.join(', ')}</p>
@@ -90,13 +96,45 @@ class InfoSidebar extends React.Component {
     );
   }
 
+  getWidget() {
+    const { metadata, details } = this.props;
+    const widgetComponents = [];
+    const dataset = details[metadata.datasetId];
+    const widgets = dataset.widget;
+
+    if (widgets && widgets.length) {
+      for (let i = 0, wLength = widgets.length; i < wLength; i++) {
+        const widget = widgets[i].attributes;
+        if (widget.widget_config) {
+          switch (widget.widget_config.type) {
+            case 'map':
+              widgetComponents.push(<div className="widget-container" key={i} ><SimpleMap layerId={widget.widget_config.layer_id} /></div>);
+              break;
+            default:
+              widgetComponents.push(<div className="widget-container" key={i} ><VegaChart data={widget.widget_config} /></div>);
+              break;
+          }
+        }
+      }
+    }
+
+    return widgetComponents;
+  }
+
+  toggleToolbarStatus() {
+    this.setState({
+      sidebarOpen: !this.state.sidebarOpen
+    });
+  }
+
   switchChange(dataset) {
     if (dataset.id === this.props.selectedDatasetId) this.props.deselectDataset();
     this.props.switchChange(dataset);
   }
 
   render() {
-    const { metadata } = this.props;
+    const { metadata, details } = this.props;
+    const detailDataset = details[metadata.datasetId];
 
     return (
       <div className={['c-info-sidebar', metadata.open ? '-open' : ''].join(' ')}>
@@ -106,18 +144,20 @@ class InfoSidebar extends React.Component {
               <button
                 className="toggle-status"
                 onClick={() => this.props.onClose()}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="32" viewBox="0 0 20 32"><title>arrow-left</title><path d="M20.364 5.071L16 0 0 16l16 16 4.364-5.071L8.221 16z"/></svg>
-                </button>
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="32" viewBox="0 0 20 32"><title>arrow-left</title><path d="M20.364 5.071L16 0 0 16l16 16 4.364-5.071L8.221 16z"/></svg>
+              </button>
             </div>
           </div>
         }
         <div className="info-container">
           <div className="row content collapse">
             <div className="columns small-12 dataset-items">
+              {isEmpty(details[metadata.datasetId]) && <LoadingSpinner />}
               {this.getHeader()}
               {this.getActionsBar()}
               {this.getContent()}
+              {detailDataset && detailDataset.widget && this.getWidget()}
             </div>
           </div>
           {/* <div className="actions-mobile">
@@ -149,14 +189,6 @@ InfoSidebar.propTypes = {
    * Define the layers on change switch function
    */
   switchChange: React.PropTypes.func.isRequired,
-  // /**
-  //  * Define if got the dataset list
-  //  */
-  // listReceived: React.PropTypes.bool,
-  // /**
-  //  * Define the tooltip text and position
-  //  */
-  // setTooltip: React.PropTypes.func.isRequired,
   /**
    * Define function to close info sidebar
    */
@@ -166,10 +198,6 @@ InfoSidebar.propTypes = {
    */
   deselectDataset: React.PropTypes.func,
   selectedDatasetId: React.PropTypes.string
-  // /**
-  //  * Define the tooltip properties.
-  //  */
-  // tooltip: React.PropTypes.object
 };
 
 InfoSidebar.defaultProps = {
