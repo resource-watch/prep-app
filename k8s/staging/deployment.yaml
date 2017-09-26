@@ -46,6 +46,26 @@ spec:
                 secretKeyRef:
                   name: appsecrets
                   key: PREP_MAIL_FROM
+          - name: TWITTER_CONSUMER_KEY
+            valueFrom:
+                secretKeyRef:
+                  name: appsecrets
+                  key: PREP_TWITTER_CONSUMER_KEY
+          - name: TWITTER_CONSUMER_SECRET
+            valueFrom:
+                secretKeyRef:
+                  name: appsecrets
+                  key: PREP_TWITTER_CONSUMER_SECRET
+          - name: TWITTER_ACCESS_TOKEN_KEY
+            valueFrom:
+                secretKeyRef:
+                  name: appsecrets
+                  key: PREP_TWITTER_ACCESS_TOKEN_KEY
+          - name: TWITTER_ACCESS_TOKEN_SECRET
+            valueFrom:
+                secretKeyRef:
+                  name: appsecrets
+                  key: PREP_TWITTER_ACCESS_TOKEN_SECRET
         ports:
           - containerPort: 3000
 
