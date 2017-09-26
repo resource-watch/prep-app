@@ -31,7 +31,7 @@ export function getInsightsList() {
 
 export function getInsightBySlug(slug) {
   return (dispatch) => {
-    fetch(`${config.apiUrl}/api/insights/${slug}`)
+    fetch(`${config.apiUrl}/insights/${slug}`)
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);

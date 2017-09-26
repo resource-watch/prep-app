@@ -44,7 +44,7 @@ class InfoSidebar extends React.Component {
     const areasList = dataset && dataset.vocabulary && dataset.vocabulary.length ?
       dataset.vocabulary[0].attributes.tags.filter(t => allFilters.geography[t]).map(t => allFilters.geography[t]) : [];
     const description = dataset && dataset.metadata && dataset.metadata.length ?
-      dataset.metadata[0].attributes.description : '';
+      dataset.metadata[0].attributes.info.description : '';
 
     return dataset ?
       <div className="content-container">
@@ -100,23 +100,22 @@ class InfoSidebar extends React.Component {
     const { metadata, details } = this.props;
     const widgetComponents = [];
     const dataset = details[metadata.datasetId];
-    const widgets = dataset.widget;
+    const widgets = dataset.widget ? dataset.widget.filter(w => w.attributes.default) : [];
 
-    if (widgets && widgets.length) {
-      for (let i = 0, wLength = widgets.length; i < wLength; i++) {
-        const widget = widgets[i].attributes;
-        if (widget.widget_config) {
-          switch (widget.widget_config.type) {
-            case 'map':
-              widgetComponents.push(<div className="widget-container" key={i} ><SimpleMap layerId={widget.widget_config.layer_id} /></div>);
-              break;
-            default:
-              widgetComponents.push(<div className="widget-container" key={i} ><VegaChart data={widget.widget_config} /></div>);
-              break;
-          }
+    widgets.forEach((w) => {
+      const widget = w.attributes;
+
+      if (widget.widget_config) {
+        switch (widget.widget_config.type) {
+          case 'map':
+            widgetComponents.push(<div className="widget-container" key={w.id} ><SimpleMap layerId={widget.widget_config.layer_id} /></div>);
+            break;
+          default:
+            widgetComponents.push(<div className="widget-container" key={w.id} ><VegaChart data={widget.widget_config} /></div>);
+            break;
         }
       }
-    }
+    });
 
     return widgetComponents;
   }
