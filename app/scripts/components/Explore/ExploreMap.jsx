@@ -320,7 +320,7 @@ class ExploreMap extends React.Component {
       Object.values(layers).find(l => dataset.id === l.dataset && l.default) || {};
     const layer = this.mapLayers[activeLayer.id];
 
-    if (layer) layer.setOpacity(dataset.opacity);
+    if (layer && dataset && dataset.opacity) layer.setOpacity(dataset.opacity);
   }
 
   addMapLayer(dataset, layer, datasetsLength) {

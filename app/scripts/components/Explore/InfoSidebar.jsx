@@ -44,7 +44,7 @@ class InfoSidebar extends React.Component {
     const areasList = dataset && dataset.vocabulary && dataset.vocabulary.length ?
       dataset.vocabulary[0].attributes.tags.filter(t => allFilters.geography[t]).map(t => allFilters.geography[t]) : [];
     const description = dataset && dataset.metadata && dataset.metadata.length ?
-      dataset.metadata[0].attributes.description : '';
+      dataset.metadata[0].attributes.info.description : '';
 
     return dataset ?
       <div className="content-container">
