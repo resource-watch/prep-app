@@ -64,7 +64,6 @@ class DatasetDetail extends React.Component {
         if (widget.widget_config) {
           switch (widget.widget_config.type) {
             case 'map':
-              console.log(widget)
               widgetComponents.push(<div className="c-article" key={i} ><SimpleMap layerId={widget.widget_config.layer_id} /></div>);
               break;
             default:

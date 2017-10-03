@@ -127,7 +127,7 @@ class SimpleMap extends React.Component {
    */
   addEsriLayer(layerSpec) {
     const layer = layerSpec.layerConfig;
-    layer.id = layerSpec.id;
+    layer.id = layerSpec.id || this.props.layerId;
 
     // Transforming layer
     // TODO: change this please @ra
@@ -141,6 +141,7 @@ class SimpleMap extends React.Component {
         layerConfig.style.indexOf('function') >= 0) {
         layerConfig.style = eval(`(${layerConfig.style})`);
       }
+
       const newLayer = L.esri[layer.type](layerConfig);
       newLayer.on('load', () => {
         this.handleTileLoaded(layer);
