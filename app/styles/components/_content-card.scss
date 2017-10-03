@@ -96,6 +96,10 @@ $content-header-height: 80px;
 
       .c-button {
         margin-right: rem(8);
+
+        &.-icon {
+          display: flex;
+        }
       }
     }
 
