@@ -51,11 +51,7 @@ class DashboardDetail extends React.Component {
     return currentData;
   }
 
-  getContent() {
-    if (!this.props.data) {
-      return <LoadingSpinner />;
-    }
-
+  getSpecificContent() {
     let content;
 
     switch (this.props.dashboardTab) {
@@ -78,6 +74,15 @@ class DashboardDetail extends React.Component {
         />);
         break;
     }
+    return content;
+  }
+
+  getContent() {
+    if (!this.props.data) {
+      return <LoadingSpinner />;
+    }
+
+    const specificContent = this.getSpecificContent();
 
     return (
       <div>
@@ -96,7 +101,7 @@ class DashboardDetail extends React.Component {
         />
 
         <div className="wrapper tab-container">
-          {content}
+          {specificContent}
         </div>
       </div>
     );

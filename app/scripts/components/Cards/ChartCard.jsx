@@ -15,7 +15,6 @@ class ChartCard extends React.Component {
       legend: this.props.legend
     };
     const downloadUrl = this.props.data.data_url || false;
-    console.log(this.props.data);
 
     return (
       <ContentCard
