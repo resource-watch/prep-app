@@ -6,6 +6,7 @@
   "scripts": {
     "build": "rm -rf dist/ && webpack --config ./config/webpack/production.js --progress --colors -p",
     "lint": "./node_modules/.bin/eslint --ext .js --ext .jsx .",
+    "storybook": "start-storybook -p 9001 -c .storybook",
     "test": "npm run lint && ./node_modules/mocha/bin/mocha --compilers js:babel-core/register --recursive",
     "test:watch": "npm run test -- --watch"
   },
@@ -20,6 +21,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@storybook/react": "^3.2.12",
     "chai": "^3.5.0",
     "eslint": "^3.19.0",
     "eslint-config-vizzuality": "^1.0.3",
