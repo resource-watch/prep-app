@@ -1,4 +1,6 @@
 import React from 'react';
+
+// Components
 import { Link } from 'react-router';
 import PartnersSlider from '../../containers/PartnersSlider';
 import SecondaryNav from '../../components/Navigation/SecondaryNav';
