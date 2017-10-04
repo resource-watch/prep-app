@@ -3,6 +3,27 @@
   padding: 10px;
   border: 2px solid #EEEEEE;
 
+  &.-layer-active { border-color: $light-gold; }
+  &.-info-active {
+    border-color: $light-gold;
+    background-color: $light-gold;
+
+    * {
+      color: $white;
+    }
+
+    .tag {
+      background-color: rgba($white, .1);
+    }
+
+    .c-switch {
+      border-color: $white;
+       &:after {
+         background-color: $white;
+       }
+    }
+  }
+
   h1,
   h2 {
     padding-bottom: 0;
@@ -59,7 +80,7 @@
     }
 
     .cancel {
-      svg { fill: $light-gold; }
+      svg { fill: $white; }
     }
   }
 

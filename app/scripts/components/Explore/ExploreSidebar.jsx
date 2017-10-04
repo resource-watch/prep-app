@@ -80,12 +80,11 @@ class DataMap extends React.Component {
     }
 
     const layers = this.props.data.map((dataset, index) => {
+      const isInfoPanelOpen = dataset.id && this.props.infoSidebarMetadata.open &&
+        this.props.infoSidebarMetadata.datasetId === dataset.id;
       const metadata = { title: '', subtitle: '', description: '', tags: [] };
       metadata.title = dataset.metadata && dataset.metadata.length ?
         dataset.metadata[0].attributes.name : dataset.name;
-      // const tags = [];
-      // let subtitle = '';
-      // let description = '';
 
       let layerIcon = null;
       let datasetInfoElement = null;
@@ -100,10 +99,7 @@ class DataMap extends React.Component {
       }
 
       for (let i = 0; i < dataset.vocabulary[0].attributes.tags.length; i++) {
-        tags.push(dataset.vocabulary[0].attributes.tags[i]);
-        if (dataset.vocabulary[0].attributes.tags[i] === 'cdi') {
-          cdiTag = true;
-        }
+        metadata.tags.push(dataset.vocabulary[0].attributes.tags[i]);
       }
 
       // Set actions
@@ -116,7 +112,7 @@ class DataMap extends React.Component {
         );
       }
       if (dataset.id) {
-        datasetInfoElement = this.props.infoSidebarMetadata.open && this.props.infoSidebarMetadata.datasetId === dataset.id ?
+        datasetInfoElement = isInfoPanelOpen ?
           (<button key={'info-close'} onClick={() => this.props.onCloseInfo()} className="cancel">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>cancel</title><path d="M17.016 15.609L13.407 12l3.609-3.609-1.406-1.406-3.609 3.609-3.609-3.609-1.406 1.406L10.595 12l-3.609 3.609 1.406 1.406 3.609-3.609 3.609 3.609zM12 2.016c5.531 0 9.984 4.453 9.984 9.984S17.531 21.984 12 21.984 2.016 17.531 2.016 12 6.469 2.016 12 2.016z"/></svg>
           </button>) :
@@ -132,6 +128,8 @@ class DataMap extends React.Component {
           leftElement={layerIcon}
           toolsElements={[datasetInfoElement]}
           metadata={metadata}
+          layerActive={dataset.active || false}
+          infoActive={isInfoPanelOpen}
         />
       );
     });
