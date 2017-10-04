@@ -28,6 +28,16 @@ export const MAP_DESELECT_DATASET = 'MAP_DESELECT_DATASET';
 export const MAP_GEODATA_RECEIVED = 'MAP_GEODATA_RECEIVED';
 export const MAP_GEOPOSITION_SET = 'MAP_GEOPOSITION_SET';
 export const MAP_INTERACTION_VISIBILITY_SET = 'MAP_INTERACTION_VISIBILITY_SET';
+export const TABS_OPTIONS = [
+  {
+    label: 'Core datasets',
+    value: 'core_datasets'
+  },
+  {
+    label: 'All datasets',
+    value: 'all_datasets'
+  }
+];
 
 // DATASETS
 export const DATASET_FETCH_ERROR = 'DATASET_FETCH_ERROR';

@@ -4,11 +4,15 @@ import ReactDOM from 'react-dom';
 // Components
 import FilterTabs from '../../containers/Explore/FilterTabs';
 import Icon from '../ui/Icon';
+import Tabs from '../ui/Tabs';
 import Switch from '../Button/Switch';
 import Button from '../Button/Button';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 import Tooltip from '../Tooltip/Tooltip';
 import DatasetItem from './DatasetItem';
+
+// Constants
+import { TABS_OPTIONS } from '../../constants';
 
 
 class DataMap extends React.Component {
@@ -146,10 +150,9 @@ class DataMap extends React.Component {
   }
 
   render() {
-    const { infoSidebarMetadata } = this.props;
+    const { infoSidebarMetadata, selectedTab } = this.props;
     const content = this.getContent();
     return (
-
       <div className={['c-explore-sidebar', this.state.sidebarOpen ? '-open' : ''].join(' ')}>
         {!infoSidebarMetadata.open &&
           <div className="actions">
@@ -173,6 +176,7 @@ class DataMap extends React.Component {
         />
         <div className="row content">
           <FilterTabs />
+          <Tabs options={TABS_OPTIONS} selected={selectedTab || TABS_OPTIONS[0].value} onChange={this.onChange} />
           <div className="columns small-12 dataset-items">
             {content}
           </div>
@@ -196,6 +200,10 @@ DataMap.propTypes = {
    * Define the layers data of the map
    */
   data: React.PropTypes.array,
+  /**
+   * Define the layers data of the map
+   */
+  selectedTab: React.PropTypes.string,
   /**
    * Define the layers on change switch function
    */
