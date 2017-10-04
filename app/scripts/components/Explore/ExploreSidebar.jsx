@@ -8,9 +8,6 @@ import LoadingSpinner from '../Loading/LoadingSpinner';
 import Tooltip from '../Tooltip/Tooltip';
 import DatasetItem from './DatasetItem';
 
-import {
-  DATASET_ITEM_SAMPLE
-} from './samples';
 
 class DataMap extends React.Component {
   constructor() {
@@ -83,12 +80,12 @@ class DataMap extends React.Component {
     }
 
     const layers = this.props.data.map((dataset, index) => {
-      const title = dataset.metadata && dataset.metadata.length ?
+      const metadata = { title: '', subtitle: '', description: '', tags: [] };
+      metadata.title = dataset.metadata && dataset.metadata.length ?
         dataset.metadata[0].attributes.name : dataset.name;
-      let subtitle = '';
-      let description = '';
-      let cdiTag = false;
-      const tags = [];
+      // const tags = [];
+      // let subtitle = '';
+      // let description = '';
 
       let layerIcon = null;
       let datasetInfoElement = null;
@@ -97,8 +94,8 @@ class DataMap extends React.Component {
       if (dataset.metadata && dataset.metadata.length) {
         const info = dataset.metadata[0].attributes.info;
         if (info) {
-          if (info.organization) subtitle = info.organization;
-          if (info.short_description) description = info.short_description;
+          if (info.organization) metadata.subtitle = info.organization;
+          if (info.short_description) metadata.description = info.short_description;
         }
       }
 
@@ -128,7 +125,6 @@ class DataMap extends React.Component {
           </button>);
       }
 
-      const metadata = { title, subtitle, description, tags };
 
       return (
         <DatasetItem
