@@ -176,7 +176,9 @@ class DataMap extends React.Component {
         />
         <div className="row content">
           <FilterTabs />
-          <Tabs options={TABS_OPTIONS} selected={selectedTab || TABS_OPTIONS[0].value} onChange={this.onChange} />
+
+          <Tabs options={TABS_OPTIONS} selected={selectedTab || TABS_OPTIONS[0].value} onChange={this.props.onChangeTab} />
+
           <div className="columns small-12 dataset-items">
             {content}
           </div>
@@ -200,9 +202,6 @@ DataMap.propTypes = {
    * Define the layers data of the map
    */
   data: React.PropTypes.array,
-  /**
-   * Define the layers data of the map
-   */
   selectedTab: React.PropTypes.string,
   /**
    * Define the layers on change switch function
@@ -232,6 +231,7 @@ DataMap.propTypes = {
    * Define function to unselect dataset
    */
   deselectDataset: React.PropTypes.func,
+  onChangeTab: React.PropTypes.func,
   selectedDatasetId: React.PropTypes.string,
   /**
    * Define the tooltip properties.

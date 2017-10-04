@@ -5,13 +5,14 @@ import { switchChange, deselectDataset } from '../../actions/exploremap';
 import { updateURL } from '../../actions/links';
 import { setTooltip } from '../../actions/tooltip';
 import { setInfoSidebarMetadata } from '../../actions/info-sidebar';
-import { setDatasetActive, getDatasetById } from '../../actions/datasets';
+import { setDatasetActive, getDatasetById, changeTab } from '../../actions/datasets';
 
 const mapStateToProps = state => ({
   listReceived: state.datasets.list.length > 0,
   data: state.datasets.filteredList,
   infoSidebarMetadata: state.infoSidebar.metadata,
   filters: state.datasets.filters,
+  selectedTab: state.datasets.tab,
   tooltip: state.tooltip,
   selectedDatasetId: state.exploremap.interactionData.datasetId
 });
@@ -37,6 +38,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onCloseInfo: () => {
     dispatch(setInfoSidebarMetadata(false));
+  },
+  onChangeTab: (tab) => {
+    dispatch(changeTab(tab));
   },
   deselectDataset: () => dispatch(deselectDataset())
 });

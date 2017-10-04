@@ -24,7 +24,7 @@ export default function Tabs({ options, className, selected, onChange }) {
               key={option.value}
               className="column shrink"
             >
-              <button className={`tab ${btnClasses}`} onClick={onChange}>
+              <button className={`tab ${btnClasses}`} onClick={() => onChange(option.value)}>
                 <span className="title">{option.label}</span>
               </button>
             </div>
