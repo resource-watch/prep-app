@@ -2,13 +2,13 @@
   position: relative;
   display: inline-block;
   width: 17px;
-  height: 10px;
+  height: 11px;
   flex-shrink: 0;
   line-height: 1;
   border-radius: 22px;
-  background-color: rgba($inverse-bg-color, 0.3);
-  cursor: pointer;
+  border: 1px solid $dark-blue;
   transition: background-color 0.15s ease-out;
+  cursor: pointer;
 
   &:after {
     content: " ";
@@ -18,17 +18,19 @@
     left: 0;
     top: 2px;
     border-radius: 50%;
-    background-color: $base-bg-color;
+    background-color: $dark-blue;
     cursor: pointer;
     transform: translateX(2px);
     transition: transform 0.15s ease-out;
   }
 
   &.-checked {
-    background-color: $thirth-color;
+    background-color: $light-gold;
+    border-color: $light-gold;
 
     &:after{
       transform: translateX(9px);
+      background-color: $white;
     }
   }
 

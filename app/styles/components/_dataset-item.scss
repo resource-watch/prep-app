@@ -1,0 +1,93 @@
+
+.c-dataset-item {
+  padding: 10px;
+  border: 2px solid #EEEEEE;
+
+  h1,
+  h2 {
+    padding-bottom: 0;
+    margin: 0;
+
+    &:after { display: none; }
+  }
+
+  p { margin: 0; }
+
+  /* Header */
+  .header-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .title-container {
+    display: flex;
+    align-items: flex-start;
+
+    .left-element {
+      display: flex;
+      margin-top: 5px;
+      margin-right: 8px;
+    }
+
+    .item-title {
+      font-size: 16px;
+      line-height: 20px;
+      text-align: left;
+      margin-right: 10px;
+    }
+  }
+
+  .item-tools {
+    display: flex;
+    align-items: center;
+    margin-top: 3px;
+
+    > * {
+      margin-right: 5px;
+
+      &:last-child { margin-right: 0; }
+    }
+
+    .info,
+    .cancel {
+      svg {
+        width: 14px;
+        height: 14px;
+        fill: $dark-blue;
+      }
+    }
+
+    .cancel {
+      svg { fill: $light-gold; }
+    }
+  }
+
+
+  .subtitle {
+    font-size: 11px;
+    line-height: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    opacity: .5;
+    text-align: left;
+  }
+
+  /* Content */
+  .description {
+    font-size: 13px;
+    line-height: 20px;
+    margin-top: 5px;
+  }
+
+  .tags-container {
+    display: flex;
+    flex-flow: row wrap;
+    margin-top: 6px;
+
+    .tag {
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+  }
+}
