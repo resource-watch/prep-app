@@ -137,36 +137,6 @@ class DataMap extends React.Component {
           toolsElements={[datasetInfoElement]}
           metadata={metadata}
         />
-        // <div className="layer" key={`map-layer-${index}`}>
-        //   {layerIcon}
-        //   <span className="layerItem">
-        //     {cdiTag
-        //       ? <strong
-        //         className="title"
-        //         onClick={() => this.props.onInfoClick(dataset.id)}
-        //       >
-        //         {name}
-        //         <div
-        //           onMouseEnter={e => this.onTagHover(e)}
-        //           onMouseLeave={() => this.onTagLeave()}
-        //           className="-highlighted-tag"
-        //         >
-        //           CDI
-        //         </div>
-        //       </strong>
-        //       : <strong
-        //         className="title"
-        //         onClick={() => this.props.onInfoClick(dataset.id)}
-        //       >
-        //         {dataset.name}
-        //       </strong>
-        //     }
-        //     <span className="subtitle">{subtitle}</span>
-        //     { dataset.env === 'preproduction' ? <span style={{ color: 'red', fontSize: '11px' }}>Preproduction</span> : null }
-        //     <span className="subtitle">Source: <strong>{partner}</strong></span>
-        //   </span>
-        //   {datasetInfo}
-        // </div>
       );
     });
 

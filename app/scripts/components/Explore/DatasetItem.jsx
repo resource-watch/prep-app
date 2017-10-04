@@ -6,10 +6,10 @@ import classnames from 'classnames';
 
 class DatasetItem extends React.Component {
   render() {
-    const { metadata, leftElement, toolsElements } = this.props;
+    const { classNames, metadata, leftElement, toolsElements } = this.props;
     const className = classnames(
       'c-dataset-item',
-      {}
+      { [classNames]: !!classNames }
     );
 
     return (
@@ -50,6 +50,7 @@ class DatasetItem extends React.Component {
 }
 
 DatasetItem.propTypes = {
+  classNames: React.PropTypes.string,
   metadata: React.PropTypes.object,
   leftElement: React.PropTypes.any,
   toolsElements: React.PropTypes.any

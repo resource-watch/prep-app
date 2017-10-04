@@ -12,9 +12,6 @@ import {
 
 
 storiesOf('Explore', module)
-  // .add('Thumbnail', () => (
-  //   <VegaChartThumbnail width={300} height={250} spec={chartSpec} />
-  // ))
   .add('Dataset Item', () => (
     <DatasetItem
       {...DATASET_ITEM_SAMPLE}
