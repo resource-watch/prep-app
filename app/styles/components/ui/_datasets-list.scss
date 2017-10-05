@@ -1,0 +1,58 @@
+
+.c-datasets-list {
+  h1,
+  h2 {
+    margin: 0;
+    padding: 0;
+
+    &:after { display: none; }
+  }
+
+  .c-dataset-item {
+    margin-bottom: 10px;
+  }
+
+  .dataset-group {
+    border-bottom: 2px solid #EEEEEE;
+    padding: 24px 0;
+
+    .group-title {
+      font-size: 37px;
+      line-height: 45px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .group-description {
+      font-size: 15px;
+      line-height: 26px;
+      margin-bottom: 10px;
+    }
+
+    .c-collapsible-item {
+      background-color: #F7F7F7;
+      padding: 12px 22px;
+
+      &.-hidden {
+        background-color: transparent;
+
+        .collapsible-title {
+          margin-bottom: 0;
+        }
+      }
+
+      .collapsible-title {
+        margin-bottom: 10px;
+
+        .c-icon {
+          width: 12px;
+          height: 12px;
+        }
+      }
+
+      .collapsible-item-container {
+        padding: 0 18px;
+      }
+    }
+  }
+}

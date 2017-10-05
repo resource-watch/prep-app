@@ -9,8 +9,7 @@ import Switch from '../Button/Switch';
 import Button from '../Button/Button';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 import Tooltip from '../Tooltip/Tooltip';
-import CoreDatasets from '../ui/CoreDatasets';
-import AllDatasets from '../ui/AllDatasets';
+import DatasetsList from '../ui/DatasetsList';
 import DatasetItem from './DatasetItem';
 
 // Constants
@@ -74,13 +73,6 @@ class DataMap extends React.Component {
   }
 
   getContent() {
-    if (!this.props.listReceived) {
-      return <LoadingSpinner />;
-    }
-    if (!this.props.data.length) {
-      return <p>No datasets with these filters selected</p>;
-    }
-
     const layers = this.props.data.map((dataset, index) => {
       const isInfoPanelOpen = dataset.id && this.props.infoSidebarMetadata.open &&
         this.props.infoSidebarMetadata.datasetId === dataset.id;
@@ -156,7 +148,7 @@ class DataMap extends React.Component {
   }
 
   render() {
-    const { infoSidebarMetadata, selectedTab, data } = this.props;
+    const { infoSidebarMetadata, selectedTab } = this.props;
     const content = this.getContent();
 
     return (
@@ -174,25 +166,23 @@ class DataMap extends React.Component {
           </div>
         }
         <Tooltip
-          ref={(tagTooltip) => { this.tagTooltip = tagTooltip }}
+          ref={(tagTooltip) => { this.tagTooltip = tagTooltip; }}
           text={this.props.tooltip.text}
           hidden={this.props.tooltip.hidden}
           position={this.props.tooltip.position}
           width={this.props.tooltip.width}
           padding="15px"
         />
-        <div className="row content">
+        <header className="sidebar-header">
           <FilterTabs />
-
           <Tabs options={TABS_OPTIONS} selected={selectedTab || TABS_OPTIONS[0].value} onChange={this.props.onChangeTab} />
+        </header>
 
-          {selectedTab === 'core_datasets' ?
-            <CoreDatasets data={content} switchChange={this.switchChange} /> :
-            <AllDatasets data={content} switchChange={this.switchChange} />
-          }
-          {/* <div className="columns small-12 dataset-items">
-            {content}
-          </div> */}
+        <div className="content">
+          {!this.props.listReceived && <LoadingSpinner />}
+          {!this.props.data.length && <p>No datasets with these filters selected</p>}
+
+          <DatasetsList data={content} type={selectedTab} />
         </div>
         <div className="actions-mobile">
           <Button

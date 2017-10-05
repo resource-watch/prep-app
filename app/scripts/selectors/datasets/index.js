@@ -9,7 +9,7 @@ const tab = state => state.datasets.tab;
 
 const filterDatasetsByTab = (_list, _tab) => {
   if (_tab === 'core_datasets') {
-    const datasets = flattenDeep(DATASETS_GROUPS.map(t => t.groups.map(g => g.datasets))) || [];
+    const datasets = flattenDeep(DATASETS_GROUPS.map(t => t.subgroups.map(sg => sg.datasets))) || [];
 
     return _list.filter(l => datasets.includes(l.id));
   } return _list;
