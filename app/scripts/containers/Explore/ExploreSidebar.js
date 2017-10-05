@@ -7,9 +7,12 @@ import { setTooltip } from '../../actions/tooltip';
 import { setInfoSidebarMetadata } from '../../actions/info-sidebar';
 import { setDatasetActive, getDatasetById, changeTab } from '../../actions/datasets';
 
+// Selectors
+import filterDatasetsByTab from '../../selectors/datasets';
+
 const mapStateToProps = state => ({
   listReceived: state.datasets.list.length > 0,
-  data: state.datasets.filteredList,
+  data: filterDatasetsByTab(state),
   infoSidebarMetadata: state.infoSidebar.metadata,
   filters: state.datasets.filters,
   selectedTab: state.datasets.tab,

@@ -9,6 +9,8 @@ import Switch from '../Button/Switch';
 import Button from '../Button/Button';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 import Tooltip from '../Tooltip/Tooltip';
+import CoreDatasets from '../ui/CoreDatasets';
+import AllDatasets from '../ui/AllDatasets';
 import DatasetItem from './DatasetItem';
 
 // Constants
@@ -71,12 +73,6 @@ class DataMap extends React.Component {
     this.props.setTooltip({ hidden: true });
   }
 
-  switchChange(dataset) {
-    dataset.id === this.props.selectedDatasetId &&
-      this.props.deselectDataset();
-    this.props.switchChange(dataset);
-  }
-
   getContent() {
     if (!this.props.listReceived) {
       return <LoadingSpinner />;
@@ -128,19 +124,29 @@ class DataMap extends React.Component {
       }
 
 
-      return (
-        <DatasetItem
-          key={`map-layer-${index}`}
-          leftElement={layerIcon}
-          toolsElements={[datasetInfoElement]}
-          metadata={metadata}
-          layerActive={dataset.active || false}
-          infoActive={isInfoPanelOpen}
-        />
-      );
+      return {
+        key: dataset.id,
+        id: dataset.id,
+        item: (
+          <DatasetItem
+            key={`map-layer-${dataset.id}`}
+            leftElement={layerIcon}
+            toolsElements={[datasetInfoElement]}
+            metadata={metadata}
+            layerActive={dataset.active || false}
+            infoActive={isInfoPanelOpen}
+          />
+        )
+      };
     });
 
     return layers;
+  }
+
+  switchChange(dataset) {
+    dataset.id === this.props.selectedDatasetId &&
+      this.props.deselectDataset();
+    this.props.switchChange(dataset);
   }
 
   toggleToolbarStatus() {
@@ -150,8 +156,9 @@ class DataMap extends React.Component {
   }
 
   render() {
-    const { infoSidebarMetadata, selectedTab } = this.props;
+    const { infoSidebarMetadata, selectedTab, data } = this.props;
     const content = this.getContent();
+
     return (
       <div className={['c-explore-sidebar', this.state.sidebarOpen ? '-open' : ''].join(' ')}>
         {!infoSidebarMetadata.open &&
@@ -167,7 +174,7 @@ class DataMap extends React.Component {
           </div>
         }
         <Tooltip
-          ref={(tagTooltip) => {this.tagTooltip = tagTooltip}}
+          ref={(tagTooltip) => { this.tagTooltip = tagTooltip }}
           text={this.props.tooltip.text}
           hidden={this.props.tooltip.hidden}
           position={this.props.tooltip.position}
@@ -179,9 +186,13 @@ class DataMap extends React.Component {
 
           <Tabs options={TABS_OPTIONS} selected={selectedTab || TABS_OPTIONS[0].value} onChange={this.props.onChangeTab} />
 
-          <div className="columns small-12 dataset-items">
+          {selectedTab === 'core_datasets' ?
+            <CoreDatasets data={content} switchChange={this.switchChange} /> :
+            <AllDatasets data={content} switchChange={this.switchChange} />
+          }
+          {/* <div className="columns small-12 dataset-items">
             {content}
-          </div>
+          </div> */}
         </div>
         <div className="actions-mobile">
           <Button
