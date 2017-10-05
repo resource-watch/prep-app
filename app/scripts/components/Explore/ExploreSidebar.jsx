@@ -175,14 +175,16 @@ class DataMap extends React.Component {
         />
         <header className="sidebar-header">
           <FilterTabs />
+          <h1 className="sidebar-title">Explore</h1>
           <Tabs options={TABS_OPTIONS} selected={selectedTab || TABS_OPTIONS[0].value} onChange={this.props.onChangeTab} />
         </header>
 
         <div className="content">
           {!this.props.listReceived && <LoadingSpinner />}
-          {!this.props.data.length && <p>No datasets with these filters selected</p>}
-
-          <DatasetsList data={content} type={selectedTab} />
+          {!this.props.data.length ?
+            <p>No datasets with these filters selected</p> :
+            <DatasetsList data={content} type={selectedTab} />
+          }
         </div>
         <div className="actions-mobile">
           <Button

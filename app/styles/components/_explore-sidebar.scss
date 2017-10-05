@@ -39,8 +39,20 @@
     }
   }
 
-  > .header {
+  > .sidebar-header {
     position: relative;
+    background-color: $light-blue;
+    padding: 0 0 18px;
+
+    .sidebar-title {
+      color: $white;
+      padding: 0;
+      margin: 0;
+      margin-top: 20px;
+      margin-bottom: 20px;
+
+      &:after { display: none; }
+    }
   }
 
   > .content {
