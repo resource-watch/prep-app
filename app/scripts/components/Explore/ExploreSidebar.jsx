@@ -182,7 +182,7 @@ class DataMap extends React.Component {
         <div className="content">
           {!this.props.listReceived && <LoadingSpinner />}
           {!this.props.data.length ?
-            <p>No datasets with these filters selected</p> :
+            <p className="no-data">No datasets with these filters selected</p> :
             <DatasetsList data={content} type={selectedTab} />
           }
         </div>

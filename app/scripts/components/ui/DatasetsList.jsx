@@ -35,7 +35,9 @@ export default class DatasetsList extends React.Component {
       <div className="c-datasets-list">
         {type === 'core_datasets' ?
           content :
-          data.map(d => d.item)
+          <div className="list-container">
+            {data.map(d => d.item)}
+          </div>
         }
       </div>
     );
