@@ -174,7 +174,7 @@ class DataMap extends React.Component {
           padding="15px"
         />
         <header className="sidebar-header">
-          <FilterTabs />
+          {/* <FilterTabs /> */}
           <h1 className="sidebar-title">Explore</h1>
           <Tabs options={TABS_OPTIONS} selected={selectedTab || TABS_OPTIONS[0].value} onChange={this.props.onChangeTab} />
         </header>

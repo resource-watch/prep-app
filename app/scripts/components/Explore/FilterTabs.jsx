@@ -117,7 +117,8 @@ class FilterTabs extends React.Component {
 
         {this.state.filterOpen &&
         <div className="filters-list-container columns small-12">
-          <span style={{ transform: `translateX(${pointerPosition}px)` }} className="pointer" />
+          {/* <span style={{ transform: `translateX(${pointerPosition}px)` }} className="pointer" /> */}
+          <span className="pointer" />
           <h3>Filters by {this.filtersNames[this.state.filterSelected]}</h3>
           <svg className="close-button" title="Close this modal" onClick={() => this.closeFilter()}>
             <path

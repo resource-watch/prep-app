@@ -2,12 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Components
+import FilterTabs from '../../containers/Explore/FilterTabs';
 import CollapsibleItem from './CollapsibleItem';
 
 // Constants
 import { DATASETS_GROUPS } from '../../general-constants/datasets-groups';
 
 export default class DatasetsList extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      filters: false
+    };
+  }
+
   componentWillReceiveProps(nextProps) {
     if (this.props.type !== nextProps.type && this.node) {
       this.node.scrollIntoView();
@@ -34,11 +43,28 @@ export default class DatasetsList extends React.Component {
   }
 
   render() {
+    const { filters } = this.state;
     const { data, type } = this.props;
     const content = this.getContent();
 
     return (
       <div ref={(n) => { this.node = n; }} className="c-datasets-list">
+        {type === 'all_datasets' &&
+          <div className="list-filters">
+            <button onClick={() => this.setState({ filters: !filters })}>
+              <span>Filter results</span>
+            </button>
+
+            <span></span>
+          </div>
+        }
+
+        {type === 'all_datasets' &&
+          <div className={`filters-content`}>
+            {filters && <FilterTabs />}
+          </div>
+        }
+
         {type === 'core_datasets' ?
           content :
           <div className="list-container">
