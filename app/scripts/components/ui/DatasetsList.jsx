@@ -8,6 +8,12 @@ import CollapsibleItem from './CollapsibleItem';
 import { DATASETS_GROUPS } from '../../general-constants/datasets-groups';
 
 export default class DatasetsList extends React.Component {
+  componentWillReceiveProps(nextProps) {
+    if (this.props.type !== nextProps.type && this.node) {
+      this.node.scrollIntoView();
+    }
+  }
+
   getContent() {
     const { data } = this.props;
 
@@ -32,12 +38,24 @@ export default class DatasetsList extends React.Component {
     const content = this.getContent();
 
     return (
-      <div className="c-datasets-list">
+      <div ref={(n) => { this.node = n; }} className="c-datasets-list">
         {type === 'core_datasets' ?
           content :
           <div className="list-container">
             {data.map(d => d.item)}
           </div>
+        }
+
+        {type === 'core_datasets' &&
+          <footer className="sidebar-footer">
+            <p>These datasets are a curated collection. If you don't find what you are interested in, you can explore all the data:</p>
+
+            <div className="footer-actions">
+              <button className="c-button" onClick={() => this.props.onChangeTab('all_datasets')}>
+                Browse all datasets
+              </button>
+            </div>
+          </footer>
         }
       </div>
     );
@@ -47,5 +65,7 @@ export default class DatasetsList extends React.Component {
 DatasetsList.propTypes = {
   className: PropTypes.string,
   data: PropTypes.array,
-  type: PropTypes.string
+  type: PropTypes.string,
+  // Actions
+  onChangeTab: PropTypes.func
 };

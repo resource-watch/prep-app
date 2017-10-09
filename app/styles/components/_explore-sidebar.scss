@@ -58,12 +58,11 @@
   > .content {
     position: relative;
     overflow: auto;
-    padding-bottom: 90px;
+    padding-bottom: 60px;
 
     @media #{$mq-medium} {
-      height: 100%;
+      height: calc(100% - 200px);
       overflow: auto;
-      padding-bottom: 90px;
     }
 
     .no-data {

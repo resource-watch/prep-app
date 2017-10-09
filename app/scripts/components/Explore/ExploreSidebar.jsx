@@ -183,7 +183,7 @@ class DataMap extends React.Component {
           {!this.props.listReceived && <LoadingSpinner />}
           {!this.props.data.length ?
             <p className="no-data">No datasets with these filters selected</p> :
-            <DatasetsList data={content} type={selectedTab} />
+            <DatasetsList data={content} type={selectedTab} onChangeTab={this.props.onChangeTab} />
           }
         </div>
         <div className="actions-mobile">

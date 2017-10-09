@@ -59,4 +59,23 @@
       }
     }
   }
+
+  .sidebar-footer {
+    padding: 12px 22px;
+
+    p { margin: 0; }
+
+    .footer-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .c-button {
+      border: 1px solid $light-gold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 }
