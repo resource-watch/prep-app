@@ -6,7 +6,7 @@
   width: 100%;
   background-color: $base-bg-color;
   z-index: 2;
-  transform: translateX(-$sidebar-width);
+  transform: translateX(-($sidebar-width * 2));
   transition: transform 0.3s ease-out;
   border: 1px solid rgba(26,28,34,0.1);
   box-shadow: 0 20px 30px 0 rgba(0,0,0,0.1);
