@@ -116,12 +116,6 @@ class Explore extends React.Component {
               </div>
             </div>
           </div>
-          <div className="l-header-tools-map">
-            <a className="c-button -theme-color" href="https://docs.google.com/forms/d/1wZzQno3De7Ul6vlOkkdHhWK_9csErSrOlo6pOAZHIds/edit">Request data</a>
-            <Button themeColor click={() => this.setState({ modalShareOpen: true })}>
-              Share
-            </Button>
-          </div>
         </header>
 
         <ExploreMapSidebar />
