@@ -11,7 +11,8 @@ import {
   DATASET_SET_FILTER,
   MAP_LAYERS_ORDER_CHANGED,
   MAP_LAYER_OPACITY_CHANGED,
-  SET_LAYERGROUP_ACTIVE_LAYER
+  SET_LAYERGROUP_ACTIVE_LAYER,
+  CHANGE_TAB
 } from '../constants';
 
 const initialState = {
@@ -23,7 +24,8 @@ const initialState = {
   metadatas: {},
   filters: {
     geography: ['global', 'national']
-  }
+  },
+  tab: 'core_datasets'
 };
 
 export default function (state = initialState, action) {
@@ -175,6 +177,9 @@ export default function (state = initialState, action) {
         } else newLayers[key] = Object.assign({}, l, { active: false });
       });
       return Object.assign({}, state, { layers: newLayers });
+    }
+    case CHANGE_TAB: {
+      return Object.assign({}, state, { tab: action.payload });
     }
     default:
       return state;

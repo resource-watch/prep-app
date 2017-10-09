@@ -4,11 +4,16 @@ import ReactDOM from 'react-dom';
 // Components
 import FilterTabs from '../../containers/Explore/FilterTabs';
 import Icon from '../ui/Icon';
+import Tabs from '../ui/Tabs';
 import Switch from '../Button/Switch';
 import Button from '../Button/Button';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 import Tooltip from '../Tooltip/Tooltip';
+import DatasetsList from '../ui/DatasetsList';
 import DatasetItem from './DatasetItem';
+
+// Constants
+import { TABS_OPTIONS } from '../../constants';
 
 
 class DataMap extends React.Component {
@@ -67,20 +72,7 @@ class DataMap extends React.Component {
     this.props.setTooltip({ hidden: true });
   }
 
-  switchChange(dataset) {
-    dataset.id === this.props.selectedDatasetId &&
-      this.props.deselectDataset();
-    this.props.switchChange(dataset);
-  }
-
   getContent() {
-    if (!this.props.listReceived) {
-      return <LoadingSpinner />;
-    }
-    if (!this.props.data.length) {
-      return <p>No datasets with these filters selected</p>;
-    }
-
     const layers = this.props.data.map((dataset, index) => {
       const isInfoPanelOpen = dataset.id && this.props.infoSidebarMetadata.open &&
         this.props.infoSidebarMetadata.datasetId === dataset.id;
@@ -124,19 +116,29 @@ class DataMap extends React.Component {
       }
 
 
-      return (
-        <DatasetItem
-          key={`map-layer-${index}`}
-          leftElement={layerIcon}
-          toolsElements={[datasetInfoElement]}
-          metadata={metadata}
-          layerActive={dataset.active || false}
-          infoActive={isInfoPanelOpen}
-        />
-      );
+      return {
+        key: dataset.id,
+        id: dataset.id,
+        item: (
+          <DatasetItem
+            key={`map-layer-${dataset.id}`}
+            leftElement={layerIcon}
+            toolsElements={[datasetInfoElement]}
+            metadata={metadata}
+            layerActive={dataset.active || false}
+            infoActive={isInfoPanelOpen}
+          />
+        )
+      };
     });
 
     return layers;
+  }
+
+  switchChange(dataset) {
+    dataset.id === this.props.selectedDatasetId &&
+      this.props.deselectDataset();
+    this.props.switchChange(dataset);
   }
 
   toggleToolbarStatus() {
@@ -146,10 +148,10 @@ class DataMap extends React.Component {
   }
 
   render() {
-    const { infoSidebarMetadata } = this.props;
+    const { infoSidebarMetadata, selectedTab } = this.props;
     const content = this.getContent();
-    return (
 
+    return (
       <div className={['c-explore-sidebar', this.state.sidebarOpen ? '-open' : ''].join(' ')}>
         {!infoSidebarMetadata.open &&
           <div className="actions">
@@ -164,18 +166,25 @@ class DataMap extends React.Component {
           </div>
         }
         <Tooltip
-          ref={(tagTooltip) => {this.tagTooltip = tagTooltip}}
+          ref={(tagTooltip) => { this.tagTooltip = tagTooltip; }}
           text={this.props.tooltip.text}
           hidden={this.props.tooltip.hidden}
           position={this.props.tooltip.position}
           width={this.props.tooltip.width}
           padding="15px"
         />
-        <div className="row content">
+        <header className="sidebar-header">
           <FilterTabs />
-          <div className="columns small-12 dataset-items">
-            {content}
-          </div>
+          <h1 className="sidebar-title">Explore</h1>
+          <Tabs options={TABS_OPTIONS} selected={selectedTab || TABS_OPTIONS[0].value} onChange={this.props.onChangeTab} />
+        </header>
+
+        <div className="content">
+          {!this.props.listReceived && <LoadingSpinner />}
+          {!this.props.data.length ?
+            <p className="no-data">No datasets with these filters selected</p> :
+            <DatasetsList data={content} type={selectedTab} />
+          }
         </div>
         <div className="actions-mobile">
           <Button
@@ -196,6 +205,7 @@ DataMap.propTypes = {
    * Define the layers data of the map
    */
   data: React.PropTypes.array,
+  selectedTab: React.PropTypes.string,
   /**
    * Define the layers on change switch function
    */
@@ -224,6 +234,7 @@ DataMap.propTypes = {
    * Define function to unselect dataset
    */
   deselectDataset: React.PropTypes.func,
+  onChangeTab: React.PropTypes.func,
   selectedDatasetId: React.PropTypes.string,
   /**
    * Define the tooltip properties.

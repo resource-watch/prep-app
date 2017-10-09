@@ -7,6 +7,7 @@ function loadStories() {
 
   // Import components
   require('../app/scripts/components/Explore/explore.story.js');
+  require('../app/scripts/components/ui/ui.story.js');
 }
 
 configure(loadStories, module);

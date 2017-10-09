@@ -10,13 +10,23 @@ import {
   DATASET_METADATA_RECEIVED,
   DATASET_LAYER_RECEIVED,
   DATASET_SET_FILTER,
-  SET_LAYERGROUP_ACTIVE_LAYER
+  SET_LAYERGROUP_ACTIVE_LAYER,
+  CHANGE_TAB
 } from '../constants';
 import { updateURL } from './links';
 
 const deserializer = new Deserializer({ keyForAttribute: 'underscore_case' });
 
 export default function () { }
+
+export function changeTab(tab) {
+  return (dispatch) => {
+    dispatch({
+      type: CHANGE_TAB,
+      payload: tab
+    });
+  };
+}
 
 export function setDatasetActive(dataset) {
   return (dispatch) => {
