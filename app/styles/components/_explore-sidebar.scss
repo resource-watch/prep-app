@@ -1,8 +1,8 @@
 .c-explore-sidebar {
   position: absolute;
-  top: $header-height-short + $header-height-tools;
+  top: $header-height-short;
   left: 0;
-  height: calc(100% - #{$header-height-short} - #{$header-height-tools});
+  height: calc(100% - #{$header-height-short});
   width: 100%;
   background-color: $base-bg-color;
   z-index: 3;

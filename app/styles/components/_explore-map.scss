@@ -19,75 +19,49 @@
     z-index: 1;
   }
   .leaflet-top {
-    top: $header-height-short;
+    bottom: 50px;
+    top: auto;
+    right: 30px;
   }
   .leaflet-control-zoom {
-    box-shadow: none;
+    display: flex;
+    flex-flow: column;
     margin-top: 0;
     margin-right: 0;
     border: 0;
-    a, a:hover {
-      width: 70px;
+    box-shadow: 0 7px 15px 0 rgba(0,0,0,0.15);
+
+    a {
+    }
+
+    .leaflet-control-zoom-in {
+      border-bottom: 1px solid ;
+    }
+
+    a {
+      width: 30px;
       height: 30px;
       margin: 0;
       display: inline-block;
 
       font-size: $normal-font-size;
       -webkit-font-smoothing: subpixel-antialiased;
-      text-indent: -99999px;
+      color: $navy;
 
       border: none;
       border-radius: 0;
       border-left: 1px solid rgba($base-bg-color, 0.1);
-      background-color: rgba($navy, .9);
+      background-color: $white;
+
+      &:hover { opacity: .6; }
     }
     .leaflet-control-zoom-in {
       position: relative;
       border-radius: 0;
-
-      &:before,
-      &:after {
-        content: "";
-        position: absolute;
-        background-color: $base-bg-color;
-        transition: background-color 0.1s ease-in;
-      }
-
-      &:before {
-        top: 10px;
-        left: 34px;
-        width: 2px;
-        height: 10px;
-
-      }
-      &:after {
-        top: 14px;
-        left: 30px;
-        width: 10px;
-        height: 2px;
-      }
-      &:hover:before, &:hover:after {
-        background-color: $thirth-color;
-      }
     }
     .leaflet-control-zoom-out {
       position: relative;
       border-radius: 0;
-
-      &:after {
-        content: "";
-        position: absolute;
-        top: 14px;
-        left: 30px;
-        width: 10px;
-        height: 2px;
-
-        background-color: $base-bg-color;
-        transition: background-color 0.1s ease-in;
-      }
-      &:hover:after {
-        background-color: $thirth-color;
-      }
     }
   }
 }
