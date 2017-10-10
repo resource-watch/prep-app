@@ -66,7 +66,7 @@ export default class DatasetsList extends React.Component {
         </div>
 
         {data.length > 0 ?
-          <div className="list-container">
+          <div className="list-container -padding">
             {data.map(d => d.item)}
           </div> :
           <p className="no-data">No datasets with these filters selected</p>

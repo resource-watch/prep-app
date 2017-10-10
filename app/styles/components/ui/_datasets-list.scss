@@ -39,7 +39,10 @@
 
   .list-container {
     overflow: auto;
-    padding: 12px 22px;
+
+    &.-padding {
+      padding: 12px 22px;
+    }
   }
 
   .c-dataset-item {
