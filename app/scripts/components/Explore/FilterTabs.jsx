@@ -1,5 +1,8 @@
 import React from 'react';
+
+// Components
 import Button from '../Button/Button';
+import Icon from '../ui/Icon';
 
 import filtersConfig from '../../../scripts/filters.json';
 
@@ -52,12 +55,9 @@ class FilterTabs extends React.Component {
       layers.push((
         <li key={`filter-tag-${index}`} onClick={() => this.onClickTag(key)}>
           <span className={filterChoosen && filterChoosen.indexOf(key) > -1 ? 'checkbox -selected' : 'checkbox'}>
-            <svg width="13" height="9" viewBox="0 0 13 9"><title>Selected</title><path
-              d="M5.744 6.997l6.514-5.465L10.972 0 4.46 5.464 1.176 3.078 0 4.696l4.854 3.527.89-1.226z" fill="#FFF"
-              fillRule="evenodd"
-            /></svg>
+            <Icon name="icon-check" />
           </span>
-          <span>{filters[key]}</span>
+          <span className="filter-label">{filters[key]}</span>
         </li>
       ));
     });
@@ -77,21 +77,9 @@ class FilterTabs extends React.Component {
   }
 
   render() {
+    const { filterSelected } = this.state;
     const filters = this.getFilters();
     const filterChoosen = this.props.filtersChoosen;
-
-    let pointerPosition = 30;
-    switch (this.state.filterSelected) {
-      case 'geography':
-        pointerPosition = 160;
-        break;
-      case 'dataType':
-        pointerPosition = 290;
-        break;
-      default:
-
-    }
-
     const filtersCount = {
       topics: filterChoosen.topics && filterChoosen.topics.length ? filterChoosen.topics.length : 0,
       geography: filterChoosen.geography && filterChoosen.geography.length ? filterChoosen.geography.length : 0,
@@ -101,30 +89,28 @@ class FilterTabs extends React.Component {
     return (
       <div className="filters-tab">
         <ul className="filters-toolbar  columns small-12">
-          <li>
-            <Button themeColor click={() => this.openFilter('topics')}> {this.filtersNames.topics} </Button>
+          <li className={`filter-type ${filterSelected === 'topics' ? '-selected' : ''}`}>
+            <Button click={() => this.openFilter('topics')}> {this.filtersNames.topics} </Button>
             <span className={filtersCount.topics === 0 ? '-hide' : ''}>{filtersCount.topics}</span>
           </li>
-          <li>
-            <Button themeColor click={() => this.openFilter('geography')}> {this.filtersNames.geography} </Button>
+          <li className={`filter-type ${filterSelected === 'geography' ? '-selected' : ''}`}>
+            <Button click={() => this.openFilter('geography')}> {this.filtersNames.geography} </Button>
             <span className={filtersCount.geography === 0 ? '-hide' : ''}>{filtersCount.geography}</span>
           </li>
-          <li>
-            <Button themeColor click={() => this.openFilter('dataType')}> {this.filtersNames.dataType} </Button>
+          <li className={`filter-type ${filterSelected === 'dataType' ? '-selected' : ''}`}>
+            <Button click={() => this.openFilter('dataType')}> {this.filtersNames.dataType} </Button>
             <span className={filtersCount.dataType === 0 ? '-hide' : ''}>{filtersCount.dataType}</span>
           </li>
         </ul>
 
         {this.state.filterOpen &&
         <div className="filters-list-container columns small-12">
-          <span style={{ transform: `translateX(${pointerPosition}px)` }} className="pointer" />
-          <h3>Filters by {this.filtersNames[this.state.filterSelected]}</h3>
-          <svg className="close-button" title="Close this modal" onClick={() => this.closeFilter()}>
-            <path
-              d="M8.047.548l-3 3L2.025.524l-1.5 1.5 3.023 3.022-3 3 1.455 1.456 3-3 3.023 3.022 1.5-1.5-3.023-3.022 3-3"
-              fillRule="evenodd"
-            />
-          </svg>
+          <header className="filter-type-header">
+            <h3>Filters by {this.filtersNames[this.state.filterSelected]}</h3>
+            <button className="close-button" title="Close this modal" onClick={() => this.closeFilter()}>
+              <Icon name="icon-cross" />
+            </button>
+          </header>
           <ul className="filters-list">
             {filters}
           </ul>

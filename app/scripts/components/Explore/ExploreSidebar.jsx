@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // Components
-import FilterTabs from '../../containers/Explore/FilterTabs';
 import Icon from '../ui/Icon';
 import Tabs from '../ui/Tabs';
 import Switch from '../Button/Switch';
@@ -174,16 +173,18 @@ class DataMap extends React.Component {
           padding="15px"
         />
         <header className="sidebar-header">
-          <FilterTabs />
+          {/* <FilterTabs /> */}
           <h1 className="sidebar-title">Explore</h1>
           <Tabs options={TABS_OPTIONS} selected={selectedTab || TABS_OPTIONS[0].value} onChange={this.props.onChangeTab} />
         </header>
 
         <div className="content">
           {!this.props.listReceived && <LoadingSpinner />}
-          {!this.props.data.length ?
-            <p className="no-data">No datasets with these filters selected</p> :
-            <DatasetsList data={content} type={selectedTab} onChangeTab={this.props.onChangeTab} />
+
+          <DatasetsList data={content} type={selectedTab} onChangeTab={this.props.onChangeTab} />
+
+          {!this.props.data.length &&
+            <p className="no-data">No datasets with these filters selected</p>
           }
         </div>
         <div className="actions-mobile">
