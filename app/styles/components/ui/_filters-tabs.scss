@@ -1,16 +1,17 @@
 .filters-tab {
   position: relative;
   width: 100%;
-  background-color: $white;
+  background-color: #F7F7F7;
+  box-shadow: 0 20px 30px 0 rgba(0,0,0,0.1);
 
   @media #{$mq-medium} {
-    height: 39px;
+    height: 41px;
   }
 
   > .filters-toolbar {
     position: relative;
     margin: 0;
-    padding: 0;
+    padding: 0 22px;
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -27,12 +28,20 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      flex: 1;
       margin: 0;
       list-style: none;
 
+      &.filter-type {
+        border-bottom: 3px solid transparent;
+
+        &.-selected {
+          border-bottom-color: $light-gold;
+        }
+      }
+
       > button {
         padding: 0;
+        padding-bottom: 2px;
         line-height: 19px;
       }
       > span {
@@ -42,7 +51,7 @@
         width: rem(13);
         height: rem(13);
         margin-left: rem(5);
-
+        margin-bottom: 6px;
         color: $inverse-font-color;
         font-weight: bold;
         font-size: 9px;
@@ -52,26 +61,22 @@
         background-color: $dark-blue;
 
         &.-hide {
-          opacity: 0;
+          display: none;
         }
       }
     }
   }
 
   > .filters-list-container {
-    width: 350px;
-    position: absolute;
-    flex-direction: column;
+    position: relative;
     margin: 0;
-    padding: $small-margin;
-    top: 100%;
-    left: 50%;
-    margin-left: -175px;
-
-    color: $inverse-font-color;
-    background-color: $dark-slate-blue-2;
-
+    padding: 12px 22px;
+    color: $base-font-color;
+    background-color: #F7F7F7;
+    overflow: auto;
+    max-height: 235px;
     z-index: 3;
+    box-shadow: 0 20px 30px 0 rgba(0,0,0,0.1);
 
     > .pointer {
       position: absolute;
@@ -86,22 +91,26 @@
       transition: transform 0.15s ease-out;
     }
 
-    > h3 {
-      margin: 0;
-      color: $inverse-font-color;
-    }
+    .filter-type-header {
+      > h3 {
+        margin: 0;
+        color: $base-font-color;
+      }
 
-    > .close-button {
-      width: 9px;
-      height: 9px;
-      padding: 5px;
-      position: absolute;
-      right: 11px;
-      top: 11px;
+      > .close-button {
+        box-sizing: content-box;
+        position: absolute;
+        right: 22px;
+        top: 15px;
+        padding: 5px;
+        cursor: pointer;
 
-      box-sizing: content-box;
-      fill: $inverse-font-color;
-      cursor: pointer;
+        svg {
+          width: 9px;
+          height: 9px;
+          fill: $base-font-color;
+        }
+      }
     }
 
     > .filters-list {
@@ -118,8 +127,8 @@
         list-style: none;
 
         > .checkbox {
-          width: 20px;
-          height: 20px;
+          width: 15px;
+          height: 15px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -128,6 +137,9 @@
           margin-right: rem(9);
 
           > svg {
+            width: 12px;
+            height: 12px;
+            fill: $base-font-color;
             opacity: 0;
           }
 

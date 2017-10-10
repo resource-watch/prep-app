@@ -11,7 +11,24 @@
   }
 
   .list-filters {
-    padding: 22px;
+    padding: 22px 22px 15px;
+
+    &.-open {
+      background-color: #F7F7F7;
+    }
+
+    .btn-filters {
+      display: flex;
+      align-items: center;
+    }
+
+    .c-icon {
+      width: 12px;
+      height: 12px;
+      fill: $light-gold;
+      margin-left: 5px;
+      margin-top: 1px;
+    }
   }
 
   .datasets-list-content {

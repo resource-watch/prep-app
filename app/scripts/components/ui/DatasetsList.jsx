@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 // Components
 import FilterTabs from '../../containers/Explore/FilterTabs';
 import CollapsibleItem from './CollapsibleItem';
+import Icon from '../ui/Icon';
 
 // Constants
 import { DATASETS_GROUPS } from '../../general-constants/datasets-groups';
@@ -48,21 +49,28 @@ export default class DatasetsList extends React.Component {
 
     return (
       <div className="datasets-list-content">
-        <div className="list-filters">
-          <button onClick={() => this.setState({ filters: !filters })}>
+        <div className={`list-filters ${filters ? '-open' : ''}`}>
+          <button className="btn-filters" onClick={() => this.setState({ filters: !filters })}>
             <span>Filter results</span>
+            {filters ?
+              <Icon name="icon-arrow-up" /> :
+              <Icon name="icon-arrow-down" />
+            }
           </button>
 
           <span></span>
         </div>
 
-        <div className={`filters-content`}>
+        <div className={`filters-content ${filters ? '-open' : ''}`}>
           {filters && <FilterTabs />}
         </div>
 
-        <div className="list-container">
-          {data.map(d => d.item)}
-        </div>
+        {data.length > 0 ?
+          <div className="list-container">
+            {data.map(d => d.item)}
+          </div> :
+          <p className="no-data">No datasets with these filters selected</p>
+        }
       </div>
     );
   }
