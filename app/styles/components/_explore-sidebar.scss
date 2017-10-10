@@ -8,7 +8,6 @@
   z-index: 3;
   transform: translateX(-$sidebar-width);
   transition: transform 0.3s ease-out;
-  border: 1px solid rgba(26,28,34,0.1);
   box-shadow: 0 20px 30px 0 rgba(0,0,0,0.1);
 
   @media #{$mq-medium} {
@@ -41,7 +40,7 @@
 
   > .sidebar-header {
     position: relative;
-    background-color: $navy;
+    background-color: $dark-slate-blue;
     padding: 35px 0 18px;
 
     .sidebar-title {
