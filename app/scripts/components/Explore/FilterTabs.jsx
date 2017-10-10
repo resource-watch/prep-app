@@ -102,15 +102,15 @@ class FilterTabs extends React.Component {
       <div className="filters-tab">
         <ul className="filters-toolbar  columns small-12">
           <li>
-            <Button themeColor click={() => this.openFilter('topics')}> {this.filtersNames.topics} </Button>
+            <Button click={() => this.openFilter('topics')}> {this.filtersNames.topics} </Button>
             <span className={filtersCount.topics === 0 ? '-hide' : ''}>{filtersCount.topics}</span>
           </li>
           <li>
-            <Button themeColor click={() => this.openFilter('geography')}> {this.filtersNames.geography} </Button>
+            <Button click={() => this.openFilter('geography')}> {this.filtersNames.geography} </Button>
             <span className={filtersCount.geography === 0 ? '-hide' : ''}>{filtersCount.geography}</span>
           </li>
           <li>
-            <Button themeColor click={() => this.openFilter('dataType')}> {this.filtersNames.dataType} </Button>
+            <Button click={() => this.openFilter('dataType')}> {this.filtersNames.dataType} </Button>
             <span className={filtersCount.dataType === 0 ? '-hide' : ''}>{filtersCount.dataType}</span>
           </li>
         </ul>

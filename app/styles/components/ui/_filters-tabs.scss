@@ -1,7 +1,7 @@
 .filters-tab {
   position: relative;
   width: 100%;
-  background-color: $alternative-bg-color;
+  background-color: $white;
 
   @media #{$mq-medium} {
     height: 39px;
@@ -44,11 +44,12 @@
         margin-left: rem(5);
 
         color: $inverse-font-color;
+        font-weight: bold;
         font-size: 9px;
         line-height: 1;
 
         border-radius: 50%;
-        background-color: $thirth-color;
+        background-color: $dark-blue;
 
         &.-hide {
           opacity: 0;
