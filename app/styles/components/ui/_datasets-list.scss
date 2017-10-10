@@ -1,5 +1,7 @@
 
 .c-datasets-list {
+  height: 100%;
+
   h1,
   h2 {
     margin: 0;
@@ -8,7 +10,14 @@
     &:after { display: none; }
   }
 
+  .datasets-list-content {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+  }
+
   .list-container {
+    overflow: auto;
     padding: 12px 22px;
   }
 

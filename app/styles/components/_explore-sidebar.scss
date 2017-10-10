@@ -41,14 +41,13 @@
 
   > .sidebar-header {
     position: relative;
-    background-color: $light-blue;
-    padding: 0 0 18px;
+    background-color: $navy;
+    padding: 35px 0 18px;
 
     .sidebar-title {
       color: $white;
       padding: 0;
       margin: 0;
-      margin-top: 20px;
       margin-bottom: 20px;
 
       &:after { display: none; }
@@ -57,12 +56,12 @@
 
   > .content {
     position: relative;
-    overflow: auto;
-    padding-bottom: 60px;
+    // overflow: auto;
+    // padding-bottom: 60px;
 
     @media #{$mq-medium} {
-      height: calc(100% - 200px);
-      overflow: auto;
+      height: calc(100% - 193px);
+      // overflow: auto;
     }
 
     .no-data {

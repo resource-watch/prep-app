@@ -23,7 +23,7 @@ export default class DatasetsList extends React.Component {
     }
   }
 
-  getContent() {
+  getCoreContent() {
     const { data } = this.props;
 
     return DATASETS_GROUPS.map((g, j) => (
@@ -42,37 +42,39 @@ export default class DatasetsList extends React.Component {
     ));
   }
 
-  render() {
+  getAllDatasetsContent() {
     const { filters } = this.state;
-    const { data, type } = this.props;
-    const content = this.getContent();
+    const { data } = this.props;
 
     return (
-      <div ref={(n) => { this.node = n; }} className="c-datasets-list">
-        {type === 'all_datasets' &&
-          <div className="list-filters">
-            <button onClick={() => this.setState({ filters: !filters })}>
-              <span>Filter results</span>
-            </button>
+      <div className="datasets-list-content">
+        <div className="list-filters">
+          <button onClick={() => this.setState({ filters: !filters })}>
+            <span>Filter results</span>
+          </button>
 
-            <span></span>
-          </div>
-        }
+          <span></span>
+        </div>
 
-        {type === 'all_datasets' &&
-          <div className={`filters-content`}>
-            {filters && <FilterTabs />}
-          </div>
-        }
+        <div className={`filters-content`}>
+          {filters && <FilterTabs />}
+        </div>
 
-        {type === 'core_datasets' ?
-          content :
-          <div className="list-container">
-            {data.map(d => d.item)}
-          </div>
-        }
+        <div className="list-container">
+          {data.map(d => d.item)}
+        </div>
+      </div>
+    );
+  }
 
-        {type === 'core_datasets' &&
+  getCoreDatasetsContent() {
+    const content = this.getCoreContent();
+
+    return (
+      <div className="datasets-list-content">
+        <div className="list-container">
+          {content}
+
           <footer className="sidebar-footer">
             <p>These datasets are a curated collection. If you don't find what you are interested in, you can explore all the data:</p>
 
@@ -82,6 +84,19 @@ export default class DatasetsList extends React.Component {
               </button>
             </div>
           </footer>
+        </div>
+      </div>
+    );
+  }
+
+  render() {
+    const { type } = this.props;
+
+    return (
+      <div ref={(n) => { this.node = n; }} className="c-datasets-list">
+        {type === 'core_datasets' ?
+          this.getCoreDatasetsContent() :
+          this.getAllDatasetsContent()
         }
       </div>
     );
