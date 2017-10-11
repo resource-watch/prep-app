@@ -71,69 +71,6 @@ class DataMap extends React.Component {
     this.props.setTooltip({ hidden: true });
   }
 
-  // getContent() {
-  //   const layers = this.props.data.map((dataset, index) => {
-  //     const isInfoPanelOpen = dataset.id && this.props.infoSidebarMetadata.open &&
-  //       this.props.infoSidebarMetadata.datasetId === dataset.id;
-  //     const metadata = { title: '', subtitle: '', description: '', tags: [] };
-  //     metadata.title = dataset.metadata && dataset.metadata.length ?
-  //       dataset.metadata[0].attributes.name : dataset.name;
-  //
-  //     let layerIcon = null;
-  //     let datasetInfoElement = null;
-  //
-  //     // Set metadata
-  //     if (dataset.metadata && dataset.metadata.length) {
-  //       const info = dataset.metadata[0].attributes.info;
-  //       if (info) {
-  //         if (info.organization) metadata.subtitle = info.organization;
-  //         if (info.short_description) metadata.description = info.short_description;
-  //       }
-  //     }
-  //
-  //     for (let i = 0; i < dataset.vocabulary[0].attributes.tags.length; i++) {
-  //       metadata.tags.push(dataset.vocabulary[0].attributes.tags[i]);
-  //     }
-  //
-  //     // Set actions
-  //     if (dataset.layer && dataset.layer.length) {
-  //       layerIcon = (
-  //         <Switch
-  //           onChange={() => this.switchChange(dataset)}
-  //           checked={dataset.active || false}
-  //         />
-  //       );
-  //     }
-  //     if (dataset.id) {
-  //       datasetInfoElement = isInfoPanelOpen ?
-  //         (<button key={'info-close'} onClick={() => this.props.onCloseInfo()} className="cancel">
-  //           <Icon name="icon-cancel" />
-  //         </button>) :
-  //         (<button key={'info-open'} onClick={() => this.props.onInfoClick(dataset.id)} className="info">
-  //           <Icon name="icon-info" />
-  //         </button>);
-  //     }
-  //
-  //
-  //     return {
-  //       key: dataset.id,
-  //       id: dataset.id,
-  //       item: (
-  //         <DatasetItem
-  //           key={`map-layer-${dataset.id}`}
-  //           leftElement={layerIcon}
-  //           toolsElements={[datasetInfoElement]}
-  //           metadata={metadata}
-  //           layerActive={dataset.active || false}
-  //           infoActive={isInfoPanelOpen}
-  //         />
-  //       )
-  //     };
-  //   });
-  //
-  //   return layers;
-  // }
-
   switchChange(dataset) {
     dataset.id === this.props.selectedDatasetId &&
       this.props.deselectDataset();
@@ -148,7 +85,6 @@ class DataMap extends React.Component {
 
   render() {
     const { infoSidebarMetadata, selectedTab } = this.props;
-    // const content = this.getContent();
 
     return (
       <div className={['c-explore-sidebar', this.state.sidebarOpen ? '-open' : ''].join(' ')}>
@@ -186,7 +122,7 @@ class DataMap extends React.Component {
             type={selectedTab}
             infoSidebarMetadata={this.props.infoSidebarMetadata}
             onChangeTab={this.props.onChangeTab}
-            switchChange={this.switchChange}
+            onSwitchChange={this.switchChange}
             onCloseInfo={this.props.onCloseInfo}
             onInfoClick={this.props.onInfoClick}
           />

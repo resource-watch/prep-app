@@ -24,6 +24,12 @@ export default class Search extends React.Component {
     this.onSearch = this.onSearch.bind(this);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.open && !prevState.open) {
+      this.input.focus();
+    }
+  }
+
   onToggle() {
     this.setState({ open: !this.state.open });
   }
@@ -48,11 +54,18 @@ export default class Search extends React.Component {
     return (
       <div className={classNames}>
         {!open ?
-          <button onClick={this.onToggle}>
+          <button className="label-container" onClick={this.onToggle}>
             <span>{label}</span>
+            <Icon name="icon-search" />
           </button> :
           <div>
-            <input className="search-box" type="text" onKeyUp={this.onSearch} placeholder={placeholder} />
+            <input
+              ref={(n) => { this.input = n; }}
+              className="search-box"
+              type="text"
+              onKeyUp={this.onSearch}
+              placeholder={placeholder}
+            />
 
             <button onClick={this.onToggle}>
               <Icon name="icon-search" />
