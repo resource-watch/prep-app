@@ -275,23 +275,23 @@ class DataMapLegend extends React.Component {
       <div className="layer-actions">
         {layersGroup.layers.length > 1 &&
           <span
-            title="Layers"
-            className="icon -layers"
+            className="icon -layers -tooltip"
+            data-title="Layers"
             onClick={e => this.onClickLayers(e, layersGroup)}
           >
             <Icon name="icon-layers" className="-normal" />
           </span>
         }
         <span
-          title="Opacity"
-          className="icon -opacity"
+          data-title="Opacity"
+          className="icon -opacity -tooltip"
           onClick={e => this.onClickOpacity(e, layer)}
         >
           <Icon name="icon-opacity" className="-normal" />
         </span>
         <span
-          title="Visibility"
-          className={`icon ${layer.opacity === 0 ? '-hide' : ''}`}
+          data-title="Visibility"
+          className={`icon ${layer.opacity === 0 ? '-hide' : ''} -tooltip`}
           onClick={() => this.props.toggleLayerOpacity(layer.dataset, layer.opacity === 0 ? 1 : 0)}
         >
           {layer.opacity === 0 ?
@@ -301,15 +301,15 @@ class DataMapLegend extends React.Component {
         </span>
         {this.props.infoMetadata.open && this.props.infoMetadata.datasetId === layer.dataset ?
           <span
-            title="Information"
-            className="icon -info"
+            data-title="Info"
+            className="icon -info -tooltip"
             onClick={() => this.props.onCloseInfo()}
           >
             <Icon name="icon-cancel" className="-normal" />
           </span> :
           <span
-            title="Information"
-            className="icon -info"
+            data-title="Info"
+            className="icon -info -tooltip"
             onClick={() => this.props.onInfoClick(layer.dataset)}
           >
             <Icon name="icon-info" className="-normal" />

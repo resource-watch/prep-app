@@ -63,7 +63,8 @@
   }
 
   > .content {
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     max-height: 50vh;
     box-shadow: 0 7px 15px 0 rgba(0,0,0,0.15);
   }
@@ -210,6 +211,41 @@
       cursor: pointer;
 
       &:last-child { margin-right: 0; }
+
+      &.-tooltip {
+        position: relative;
+
+        &:hover {
+          &:before { display: inherit; }
+          &:after { display: inherit; }
+        }
+
+        &:before {
+          display: none;
+          content: '';
+          position: absolute;
+          top: calc(100% + 4px);
+          width: 10px;
+          height: 10px;
+          transform: rotate(45deg);
+          background-color: $dark-blue;
+        }
+
+        &:after {
+          display: none;
+          content: attr(data-title);
+          position: absolute;
+          top: calc(100% + 9px);
+          left: 50%;
+          background-color: $dark-blue;
+          padding: 6px 12px;
+          border-radius: 4px;
+          color: $white;
+          text-transform: initial;
+          transform: translateX(-50%);
+          font-family: $header-font-family;
+        }
+      }
 
       &.remove {
         margin-left: 8px;
