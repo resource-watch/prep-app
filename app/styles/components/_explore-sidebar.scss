@@ -17,8 +17,9 @@
 
   > .actions {
     position: absolute;
-    top: 0;
+    top: 15px;
     right: -30px;
+
     > div {
       display: block;
       width: 30px;
@@ -33,7 +34,9 @@
       justify-content: center;
 
       > .toggle-status {
-        @include hamburger-icon(10px, 2px, 2px, 1px, $thirth-color, $thirth-color);
+        width: 100%;
+        height: 100%;
+        background-color: $white;
       }
     }
   }
