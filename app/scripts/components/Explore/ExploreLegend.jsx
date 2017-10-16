@@ -301,14 +301,14 @@ class DataMapLegend extends React.Component {
         </span>
         {this.props.infoMetadata.open && this.props.infoMetadata.datasetId === layer.dataset ?
           <span
-            data-title="Information"
+            data-title="Info"
             className="icon -info -tooltip"
             onClick={() => this.props.onCloseInfo()}
           >
             <Icon name="icon-cancel" className="-normal" />
           </span> :
           <span
-            data-title="Information"
+            data-title="Info"
             className="icon -info -tooltip"
             onClick={() => this.props.onInfoClick(layer.dataset)}
           >

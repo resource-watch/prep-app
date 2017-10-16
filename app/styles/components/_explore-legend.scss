@@ -63,7 +63,8 @@
   }
 
   > .content {
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     max-height: 50vh;
     box-shadow: 0 7px 15px 0 rgba(0,0,0,0.15);
   }
