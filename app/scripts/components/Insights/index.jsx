@@ -81,7 +81,7 @@ class InsightsPage extends React.Component {
                 and solutions
               </h2>
               <p>In PREP’s next phase, any user will be able to <Link to="create">create</Link> and
-                share their own dashboards and insights.</p>
+                share their own dashboards and stories.</p>
             </div>
           </div>
         </article>

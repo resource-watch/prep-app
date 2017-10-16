@@ -100,8 +100,8 @@ class FAQ extends React.Component {
             currently available, and why you think it would be valuable to share.
           </p>
 
-          <h3>How do I create a dashboard or insight in PREP?</h3>
-          <p>The ability to create and customize dashboards and insights is currently under
+          <h3>How do I create a dashboard or story in PREP?</h3>
+          <p>The ability to create and customize dashboards and stories is currently under
             development. To learn more about this feature or to apply to be a pilot user, see the <Link to="/create">Create</Link> page.
           </p>
           <p>If you are interested in data storytelling, you may wish to try Esri <a
@@ -117,8 +117,8 @@ class FAQ extends React.Component {
 
           <h3>May I have permission to use the content in your site?</h3>
           <p>Most of the datasets on the PREP Platform carry their own licenses, which you can find
-            by going to the dataset description page. For permission to reproduce insights, please
-            contact the author of the insight.
+            by going to the dataset description page. For permission to reproduce stories, please
+            contact the author of the story.
           </p>
 
           <h3>I see an error or have a suggestion for the site. Where do I report it?</h3>

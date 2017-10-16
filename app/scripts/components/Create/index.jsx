@@ -61,10 +61,10 @@ function Create() {
 
             <div className="column align-middle small-12 medium-6">
               <h3>Create Personalized Dashboards</h3>
-              <p>Collect data, tools, and insights relevant to you and your community in one place.
+              <p>Collect data, tools, and stories relevant to you and your community in one place.
                 Create and share your own online dashboard containing data, information, tools,
                  interactive stories, and other dynamic resources specific to your own geographic
-                  or topical area of interest. Look at what data, tools, and insights others are using
+                  or topical area of interest. Look at what data, tools, and stories others are using
                 and add them to your dashboard. Get updates when datasets are added.
               </p>
               <Link to="/dashboards"> See dashboards </Link>
@@ -75,16 +75,16 @@ function Create() {
         <div className="c-article-module">
           <div className="row">
             <div className="column align-middle small-12 medium-6">
-              <h3>Share Insights</h3>
-              <p>Choose from a range of open source tools to share an insight about your data and
+              <h3>Share Stories</h3>
+              <p>Choose from a range of open source tools to share a story about your data and
                 how it can or is being used to inform and manage climate risk. Embed your dashboard
-                or insights on your own website and share them with your community.
+                or stories on your own website and share them with your community.
               </p>
-              <Link to="/insights"> See insights </Link>
+              <Link to="/insights"> See stories </Link>
             </div>
 
             <div className="column align-middle small-12 medium-6">
-              <img src={communicate} alt="See insights" />
+              <img src={communicate} alt="See stories" />
             </div>
           </div>
         </div>
@@ -94,7 +94,7 @@ function Create() {
         <div className="row align-center">
           <div className="column small-12 medium-8">
             <h2>Become a pilot user</h2>
-            <p>Would you like to develop a dashboard? Or share insights from your community? Over
+            <p>Would you like to develop a dashboard? Or share stories from your community? Over
               the coming months we plan to work with communities around the globe to help them
               develop their own dashboards.</p>
             <p>We can only work with a few groups at this time. Let us know why you think you would

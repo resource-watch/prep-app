@@ -37,7 +37,7 @@ function DashboardDetailInsights(props) {
     : <div className="c-article">
       <div className="row align-center">
         <div className="column small-12 medium-8">
-          <p>There are no insights associated with this dashboard yet.</p>
+          <p>There are no stories associated with this dashboard yet.</p>
         </div>
       </div>
     </div>

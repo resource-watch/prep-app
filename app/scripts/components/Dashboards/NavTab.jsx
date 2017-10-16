@@ -10,7 +10,7 @@ function NavBar(props) {
             <Link className="link" to={`${props.baseUrl}/data`}>Data</Link>
           </li>
           <li className={props.activeTab === 'insights' ? '-active' : ''}>
-            <Link className="link" to={`${props.baseUrl}/insights`}>Insights</Link>
+            <Link className="link" to={`${props.baseUrl}/insights`}>Stories</Link>
           </li>
           <li className={props.activeTab === 'tools' ? '-active' : ''}>
             <Link className="link" to={`${props.baseUrl}/tools`}>Tools</Link>

@@ -24,7 +24,7 @@ class Partnership extends React.Component {
                 collaboration to empower a data-driven approach to building climate resilience. PREP
                 aims to help planners, investors, and resource managers more easily incorporate
                 climate risks into their decisions by enhancing access to relevant data and
-                facilitating collective learning through insights on climate change. PREP does this
+                facilitating collective learning through stories on climate change. PREP does this
                 through:
               </p>
 

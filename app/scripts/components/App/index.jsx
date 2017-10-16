@@ -91,7 +91,7 @@ class App extends React.Component {
         <SummaryCards
           extraCard={pathname === '/insights' ?
           'dashboards' :
-          'insights'}
+          'stories'}
         />
         }
 

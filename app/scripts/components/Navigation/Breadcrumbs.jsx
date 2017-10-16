@@ -19,8 +19,8 @@ function Breadcrumbs(props) {
                   itemName = 'dashboards';
                   routeTemp = `/${itemName}`;
                 }
-                if (item === 'insight') {
-                  itemName = 'insights';
+                if (item === 'insight' || item === 'insights') {
+                  itemName = 'stories';
                   routeTemp = `/${itemName}`;
                 }
                 route += `${item}/`;

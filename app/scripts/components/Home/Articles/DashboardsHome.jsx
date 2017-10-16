@@ -25,7 +25,7 @@ class DashboardsHome extends React.Component {
           <div className="column small-12 medium-8">
             <h2 className="-left">Assembling the information</h2>
             <Link to="/dashboards">Go to dashboards</Link>
-            <p>Dashboards are a collection of data, insights, and tools that users compile to
+            <p>Dashboards are a collection of data, stories, and tools that users compile to
               support their climate resilience and preparedness planning. View dashboards that
               others have created, or create your own to track key issues in your area.</p>
           </div>

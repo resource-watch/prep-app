@@ -106,18 +106,18 @@
   {
     "name": "insights",
     "pathname": "/insights",
-    "metaTitle": "Insights",
+    "metaTitle": "Stories",
     "metaDescription": "",
-    "title": "Insights",
+    "title": "Stories",
     "bannerSize": "medium",
     "bannerBg": "insights"
   },
   {
     "name": "insight",
     "pathname": "insight",
-    "metaTitle": "Insights",
+    "metaTitle": "Stories",
     "metaDescription": "",
-    "title": "Insights",
+    "title": "Stories",
     "bannerSize": "medium",
     "bannerBg": "insight"
   },

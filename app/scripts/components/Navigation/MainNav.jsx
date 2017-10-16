@@ -15,7 +15,7 @@ function MainNav() {
           <Link activeClassName="-current" to="/dashboards">Dashboards</Link>
         </li>
         <li>
-          <Link activeClassName="-current" to="/insights">Insights</Link>
+          <Link activeClassName="-current" to="/insights">Stories</Link>
         </li>
         <li>
           <Link activeClassName="-current" to="/create">Create</Link>
