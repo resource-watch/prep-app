@@ -95,7 +95,10 @@ class DataMap extends React.Component {
                 className={['toggle-status', this.state.sidebarOpen ? '-open' : ''].join(' ')}
                 onClick={() => this.toggleToolbarStatus()}
               >
-                <span />
+                {this.state.sidebarOpen ?
+                  <Icon name="icon-arrow-left" className="-normal" /> :
+                  <Icon name="icon-arrow-right" className="-normal" />
+                }
               </button>
             </div>
           </div>
