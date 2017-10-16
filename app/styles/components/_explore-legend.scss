@@ -56,7 +56,6 @@
     }
 
     > .open {
-
       svg {
         transform: rotate(180deg);
       }
@@ -93,8 +92,7 @@
 
 .legend-layer{
   position: relative;
-
-  padding: .5rem 0 .5rem .5rem;
+  padding: .5rem;
   border-bottom: 1px solid $border-color;
 
   color: $base-font-color;
@@ -108,12 +106,15 @@
     border-bottom: none;
   }
 
+  .layer-header-container {
+    align-items: flex-start;
+  }
+
   .handler {
     display: flex;
     cursor: row-resize;
-    position: absolute;
-    left: .5rem;
-    top: 10px;
+    margin-top: 6px;
+
     > svg {
       fill: rgba($base-font-color, .4)
     }
@@ -121,7 +122,7 @@
 
   .layer-header {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     width: calc(100% - 18px);
     padding-left: 15px;
@@ -195,6 +196,9 @@
   .layer-actions {
     display: flex;
     align-items: center;
+    margin-top: 4px;
+    margin-left: 5px;
+
     >.icon {
       width: 14px;
       height: 14px;

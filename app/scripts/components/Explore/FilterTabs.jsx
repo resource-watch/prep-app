@@ -89,13 +89,13 @@ class FilterTabs extends React.Component {
     return (
       <div className="filters-tab">
         <ul className="filters-toolbar  columns small-12">
-          <li className={`filter-type ${filterSelected === 'topics' ? '-selected' : ''}`}>
-            <Button click={() => this.openFilter('topics')}> {this.filtersNames.topics} </Button>
-            <span className={filtersCount.topics === 0 ? '-hide' : ''}>{filtersCount.topics}</span>
-          </li>
           <li className={`filter-type ${filterSelected === 'geography' ? '-selected' : ''}`}>
             <Button click={() => this.openFilter('geography')}> {this.filtersNames.geography} </Button>
             <span className={filtersCount.geography === 0 ? '-hide' : ''}>{filtersCount.geography}</span>
+          </li>
+          <li className={`filter-type ${filterSelected === 'topics' ? '-selected' : ''}`}>
+            <Button click={() => this.openFilter('topics')}> {this.filtersNames.topics} </Button>
+            <span className={filtersCount.topics === 0 ? '-hide' : ''}>{filtersCount.topics}</span>
           </li>
           <li className={`filter-type ${filterSelected === 'dataType' ? '-selected' : ''}`}>
             <Button click={() => this.openFilter('dataType')}> {this.filtersNames.dataType} </Button>

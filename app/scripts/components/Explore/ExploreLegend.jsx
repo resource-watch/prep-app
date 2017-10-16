@@ -1,7 +1,10 @@
 import React from 'react';
+
+// Components
 import { SortableContainer, SortableElement, SortableHandle, arrayMove } from 'react-sortable-hoc';
 import SliderTooltip from '../Tooltip/SliderTooltip';
 import LayersTooltip from '../Tooltip/LayersTooltip';
+import Icon from '../ui/Icon';
 
 function getLinesLegend(layer) {
   return (<div className="legend -line">
@@ -93,12 +96,7 @@ function getLegend(layer) {
 }
 
 const DragHandle = SortableHandle(() => <span className="handler">
-  <svg width="6" height="18" viewBox="0 0 6 18">
-    <title>Drag and drop</title>
-    <path
-      d="M1 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-4 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm4 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-8a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fillRule="evenodd"
-    />
-  </svg>
+  <Icon name="icon-drag-dots" className="-medium" />
 </span>);
 
 const SortableItem = SortableElement(({ value }) => value);
@@ -281,7 +279,7 @@ class DataMapLegend extends React.Component {
             className="icon -layers"
             onClick={e => this.onClickLayers(e, layersGroup)}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="32" viewBox="0 0 34 32"><title>layers</title><path d="M29.995 17.712l4.29 2.859L17.142 32 .006 20.571l4.286-2.857 12.855 8.571 12.85-8.574zm4.286-6.283L17.145 22.858 0 11.429 17.143 0l17.138 11.429z"/></svg>
+            <Icon name="icon-layers" className="-normal" />
           </span>
         }
         <span
@@ -289,7 +287,7 @@ class DataMapLegend extends React.Component {
           className="icon -opacity"
           onClick={e => this.onClickOpacity(e, layer)}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="29" height="32" viewBox="0 0 29 32"><title>opacity</title><path d="M29.333 7.92a16.293 16.293 0 0 0-2.667-3.526v23.211a16.106 16.106 0 0 0 2.667-3.525V7.92zm-8-7.04a14.384 14.384 0 0 0-2.569-.762l-.098-.016v31.797c.92-.179 1.813-.443 2.667-.779V.88zm-8 31.12C5.786 30.819 0 24.107 0 16S5.787 1.181 13.333 0v32z"/></svg>
+          <Icon name="icon-opacity" className="-normal" />
         </span>
         <span
           title="Visibility"
@@ -297,8 +295,8 @@ class DataMapLegend extends React.Component {
           onClick={() => this.props.toggleLayerOpacity(layer.dataset, layer.opacity === 0 ? 1 : 0)}
         >
           {layer.opacity === 0 ?
-            <svg xmlns="http://www.w3.org/2000/svg" width="39" height="32" viewBox="0 0 39 32"><title>show</title><path d="M26.905 4.994L32.03 0l3.481 3.392L6.155 32l-3.481-3.392 4.076-3.973a30.449 30.449 0 0 1-6.672-7.88l-.077-.142C3.775 10.06 11.194 3.419 19.693 3.419c2.523 0 4.948.583 7.212 1.575zM11.168 20.33l3.36-3.274a4.91 4.91 0 0 1-.017-.419v-.026.001c0-2.806 2.306-5.073 5.182-5.073.16 0 .32.007.475.02l3.36-3.274a9.305 9.305 0 0 0-3.812-.803h-.024.001c-5.145 0-9.329 4.086-9.329 9.132 0 1.324.288 2.58.805 3.717zm23.286-10.09a30.506 30.506 0 0 1 4.853 6.233l.077.143C35.61 23.166 28.211 29.81 19.692 29.81a17.105 17.105 0 0 1-4.766-.688l.121.03 3.557-3.466c.357.039.721.062 1.088.062 5.145 0 9.329-4.089 9.329-9.132 0-.345-.02-.689-.059-1.022l5.492-5.354z"/></svg> :
-            <svg xmlns="http://www.w3.org/2000/svg" width="47" height="32" viewBox="0 0 47 32"><title>hide</title><path d="M17.149 16a6.127 6.127 0 1 0 12.248-.009v.01a6.127 6.127 0 1 0-12.248.009V16zm29.396 0C42.085 8.052 33.341 0 23.272 0 13.227 0 4.459 8.052-.001 16c4.46 7.948 13.228 16 23.273 16 10.068 0 18.813-8.052 23.273-16zM23.273 4.922c6.08 0 11.025 4.96 11.025 11.078s-4.945 11.078-11.025 11.078S12.248 22.118 12.248 16c0-6.118 4.945-11.078 11.025-11.078z"/></svg>
+            <Icon name="icon-hide" className="-normal" /> :
+            <Icon name="icon-show" className="-normal" />
           }
         </span>
         {this.props.infoMetadata.open && this.props.infoMetadata.datasetId === layer.dataset ?
@@ -307,17 +305,17 @@ class DataMapLegend extends React.Component {
             className="icon -info"
             onClick={() => this.props.onCloseInfo()}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>cancel</title><path d="M18.028 16.338L13.69 12l4.338-4.338-1.69-1.69L12 10.31 7.662 5.972l-1.69 1.69L10.31 12l-4.338 4.338 1.69 1.69L12 13.69l4.338 4.338zM12 0c6.648 0 12 5.352 12 12s-5.352 12-12 12S0 18.648 0 12 5.352 0 12 0z"/></svg>
+            <Icon name="icon-cancel" className="-normal" />
           </span> :
           <span
             title="Information"
             className="icon -info"
             onClick={() => this.props.onInfoClick(layer.dataset)}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><title>info</title><path d="M18.107 14.899v-1.101h-6.603v2.201h2.201v6.603h-2.201v2.201h8.804v-2.201h-2.201v-7.703zm-2.201 16.508C7.397 31.407.499 24.509.499 16S7.397.593 15.906.593 31.313 7.491 31.313 16s-6.898 15.407-15.407 15.407zM13.705 7.196v4.402h4.402V7.196h-4.402z"/></svg>
+            <Icon name="icon-info" className="-normal" />
           </span>
         }
-        <span
+        {/* <span
           title="Interactivity"
           className={`icon -select ${this.state.selectedDatasetId === layer.dataset ? '' : '-selected'}`}
           onClick={() => this.handleSelectedDataset(layer.dataset)}
@@ -325,16 +323,13 @@ class DataMapLegend extends React.Component {
           <svg width="11" height="10" viewBox="-256.4 411.4 15 15">
             <path d="M-242 412.1h-13.8c-.4 0-.6.2-.6.6v9.4c0 .4.2.6.6.6h4.1l2.3 2.9c.1.1.3.2.5.2s.4-.1.5-.2l2.3-2.9h4.1c.4 0 .6-.2.6-.6v-9.4c0-.4-.2-.6-.6-.6z" />
           </svg>
-        </span>
+        </span> */}
         <span
           title="Remove"
           className="icon -select remove"
           onClick={() => this.switchChange(layer)}
         >
-          <svg width="9" height="9" viewBox="0 0 9 9">
-            <title>Close</title>
-            <path d="M4.5 3l-3-3L0 1.5l3 3-3 3L1.5 9l3-3 3 3L9 7.5l-3-3 3-3L7.5 0l-3 3z" fillRule="evenodd" />
-          </svg>
+          <Icon name="icon-cross" className="-normal" />
         </span>
       </div>
     );
@@ -348,7 +343,7 @@ class DataMapLegend extends React.Component {
 
       return (
         <div className="legend-layer" key={`map-layer-${layer.id}`}>
-          <div className="row">
+          <div className="row layer-header-container">
             <DragHandle />
             <div className="layer-header">
               <div className="">
