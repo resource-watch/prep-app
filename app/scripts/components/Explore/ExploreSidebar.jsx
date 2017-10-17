@@ -21,6 +21,8 @@ class DataMap extends React.Component {
     this.state = {
       sidebarOpen: true
     };
+
+    this.switchChange = this.switchChange.bind(this);
   }
 
   componentWillMount() {

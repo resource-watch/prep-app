@@ -302,10 +302,10 @@ class DataMapLegend extends React.Component {
         {this.props.infoMetadata.open && this.props.infoMetadata.datasetId === layer.dataset ?
           <span
             data-title="Info"
-            className="icon -info -tooltip"
+            className="icon -info -tooltip -active"
             onClick={() => this.props.onCloseInfo()}
           >
-            <Icon name="icon-cancel" className="-normal" />
+            <Icon name="icon-info" className="-normal" />
           </span> :
           <span
             data-title="Info"

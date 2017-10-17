@@ -268,7 +268,12 @@
         font-family: $header-font-family;
         font-size: 14px;
         text-transform: none;
+
+        &.-active svg {
+          fill: $light-gold;
+        }
       }
+
       &.-selected {
         opacity: .3;
       }
