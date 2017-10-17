@@ -23,7 +23,7 @@ export default class DatasetsList extends React.Component {
     this.state = {
       filters: false,
       search: {
-        list: props.data,
+        list: props.data || [],
         value: ''
       }
     };
@@ -37,7 +37,7 @@ export default class DatasetsList extends React.Component {
     }
 
     if (!isEqual(this.props.data, nextProps.data)) {
-      this.setState({ search: { list: nextProps.data, value: '' } });
+      this.setState({ search: { list: nextProps.data || [], value: '' } });
     }
   }
 
@@ -51,7 +51,7 @@ export default class DatasetsList extends React.Component {
     return (
       <div className="datasets-list-content">
         <div className={`list-filters ${filters ? '-open' : ''}`}>
-          <button className="btn-filters" onClick={() => this.setState({ filters: !filters, search: false })}>
+          <button className="btn-filters" onClick={() => this.setState({ filters: !filters })}>
             <span>Filter results</span>
             {filters ?
               <Icon name="icon-arrow-up" /> :
