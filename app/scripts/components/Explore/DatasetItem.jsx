@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Libraries
 import classnames from 'classnames';
@@ -54,12 +55,12 @@ class DatasetItem extends React.Component {
 }
 
 DatasetItem.propTypes = {
-  classNames: React.PropTypes.string,
-  metadata: React.PropTypes.object,
-  leftElement: React.PropTypes.any,
-  toolsElements: React.PropTypes.any,
-  layerActive: React.PropTypes.bool,
-  infoActive: React.PropTypes.bool
+  classNames: PropTypes.string,
+  metadata: PropTypes.object,
+  leftElement: PropTypes.any,
+  toolsElements: PropTypes.any,
+  layerActive: PropTypes.bool,
+  infoActive: PropTypes.bool
 };
 
 DatasetItem.defaultProps = {
