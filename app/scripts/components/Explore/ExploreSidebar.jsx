@@ -111,37 +111,39 @@ class DataMap extends React.Component {
           width={this.props.tooltip.width}
           padding="15px"
         />
-        <header className="sidebar-header">
-          {/* <FilterTabs /> */}
-          <h1 className="sidebar-title">Explore</h1>
-          <Tabs options={TABS_OPTIONS} selected={selectedTab || TABS_OPTIONS[0].value} onChange={this.props.onChangeTab} />
-        </header>
+        <div className="sidebar-container">
+          <header className="sidebar-header">
+            {/* <FilterTabs /> */}
+            <h1 className="sidebar-title">Explore</h1>
+            <Tabs options={TABS_OPTIONS} selected={selectedTab || TABS_OPTIONS[0].value} onChange={this.props.onChangeTab} />
+          </header>
 
-        <div className="content">
-          {!this.props.listReceived && <LoadingSpinner />}
+          <div className="content">
+            {!this.props.listReceived && <LoadingSpinner />}
 
-          <DatasetsList
-            data={this.props.data}
-            type={selectedTab}
-            infoSidebarMetadata={this.props.infoSidebarMetadata}
-            onChangeTab={this.props.onChangeTab}
-            onSwitchChange={this.switchChange}
-            onCloseInfo={this.props.onCloseInfo}
-            onInfoClick={this.props.onInfoClick}
-          />
+            <DatasetsList
+              data={this.props.data}
+              type={selectedTab}
+              infoSidebarMetadata={this.props.infoSidebarMetadata}
+              onChangeTab={this.props.onChangeTab}
+              onSwitchChange={this.switchChange}
+              onCloseInfo={this.props.onCloseInfo}
+              onInfoClick={this.props.onInfoClick}
+            />
 
-          {!this.props.data.length &&
-            <p className="no-data">No datasets with these filters selected</p>
-          }
-        </div>
-        <div className="actions-mobile">
-          <Button
-            border
-            click={() => this.toggleToolbarStatus()}
-          >
-            Apply
-          </Button>
+            {!this.props.data.length &&
+              <p className="no-data">No datasets with these filters selected</p>
+            }
+          </div>
+          <div className="actions-mobile">
+            <Button
+              border
+              click={() => this.toggleToolbarStatus()}
+            >
+              Apply
+            </Button>
 
+          </div>
         </div>
       </div>
     );

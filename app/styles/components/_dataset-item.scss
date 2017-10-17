@@ -90,6 +90,7 @@
     font-size: 11px;
     line-height: 15px;
     font-weight: bold;
+    font-family: $base-font-family;
     text-transform: uppercase;
     opacity: .5;
     text-align: left;
@@ -100,6 +101,7 @@
     font-size: 13px;
     line-height: 20px;
     margin-top: 5px;
+    font-family: $base-font-family;
   }
 
   .tags-container {
