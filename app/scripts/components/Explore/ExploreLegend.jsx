@@ -339,7 +339,9 @@ class DataMapLegend extends React.Component {
     const layersGroups = this.groupDatasetLayers(this.props.data) || [];
 
     return layersGroups.map((layersGroup) => {
-      const layer = layersGroup.layers.find(l => l.active) || layersGroup.layers.find(l => l.default) || {};
+      const layer = layersGroup.layers.find(l => l.active) ||
+        layersGroup.layers.find(l => l.default) ||
+        layersGroup.layers[0];
 
       return (
         <div className="legend-layer" key={`map-layer-${layer.id}`}>

@@ -227,23 +227,27 @@ class ExploreMap extends React.Component {
     }
   }
 
+  getActiveLayer(dataset, layers) {
+    const activeLayer = Object.values(layers).find(l => dataset.id === l.dataset && l.active) ||
+      Object.values(layers).find(l => dataset.id === l.dataset && l.default) ||
+      Object.values(layers)[0] || {};
+    return activeLayer;
+  }
+
   wasAlreadyAdded(dataset, layers) {
-    const layer = Object.values(layers).find(l => dataset.id === l.dataset && l.active) ||
-      Object.values(layers).find(l => dataset.id === l.dataset && l.default);
+    const layer = this.getActiveLayer(dataset, layers);
     return layer && this.mapLayers[layer.id] || false;
   }
 
   hasChangedOrder(dataset, layers) {
-    const layer = Object.values(layers).find(l => dataset.id === l.dataset && l.active) ||
-      Object.values(layers).find(l => dataset.id === l.dataset && l.default);
+    const layer = this.getActiveLayer(dataset, layers);
 
     return dataset.index !== undefined && layer &&
       dataset.index !== this.mapLayers[layer.id].index || false;
   }
 
   hasChangedOpacity(dataset, layers) {
-    const layer = Object.values(layers).find(l => dataset.id === l.dataset && l.active) ||
-      Object.values(layers).find(l => dataset.id === l.dataset && l.default) || {};
+    const layer = this.getActiveLayer(dataset, layers);
     const hasChanged = (dataset && layer &&
       dataset.opacity !== this.mapLayers[layer.id].options.opacity) || false;
 
@@ -252,15 +256,14 @@ class ExploreMap extends React.Component {
 
   isLayerReady(dataset, layers) {
     if (dataset.layer && dataset.layer.length) {
-      const layer = dataset.layer.find(l => l.attributes.active) || dataset.layer.find(l => l.attributes.default);
+      const layer = dataset.layer.find(l => l.attributes.active) || dataset.layer.find(l => l.attributes.default) || dataset.layer[0];
       return layers && layer && layers[layer.id] || false;
     }
     return false;
   }
 
   updateActiveLayer(dataset, layers, datasetsLength) {
-    const activeLayer = Object.values(layers).find(l => dataset.id === l.dataset && l.active) ||
-      Object.values(layers).find(l => dataset.id === l.dataset && l.default);
+    const activeLayer = this.getActiveLayer(dataset, layers);
 
     if (!!this.isLayerReady(dataset, layers)) {
       const wasAlreadyAdded = this.wasAlreadyAdded(dataset, layers);
@@ -294,8 +297,7 @@ class ExploreMap extends React.Component {
   // TODO change multilayer
   changeLayerOrder(dataset, datasetsLength) {
     const { layers } = this.props;
-    const activeLayer = Object.values(layers).find(l => dataset.id === l.dataset && l.active) ||
-      Object.values(layers).find(l => dataset.id === l.dataset && l.default);
+    const activeLayer =this.getActiveLayer(dataset, layers);
     const layer = this.mapLayers[activeLayer.id];
 
     if (dataset.index !== undefined && layer) {
@@ -316,8 +318,7 @@ class ExploreMap extends React.Component {
 
   changeLayerOpacity(dataset) {
     const { layers } = this.props;
-    const activeLayer = Object.values(layers).find(l => dataset.id === l.dataset && l.active) ||
-      Object.values(layers).find(l => dataset.id === l.dataset && l.default) || {};
+    const activeLayer = this.getActiveLayer(dataset, layers);
     const layer = this.mapLayers[activeLayer.id];
 
     if (layer) layer.setOpacity(dataset.opacity);
@@ -423,7 +424,7 @@ class ExploreMap extends React.Component {
 
     if (L.esri[layer.type]) {
       const layerConfig = JSON.parse(bodyStringified);
-      layerConfig.pane = 'tilePane';
+      // layerConfig.pane = 'tilePane';
       layerConfig.useCors = true; // forcing cors
       if (layerConfig.style &&
         layerConfig.style.indexOf('function') >= 0) {
@@ -435,6 +436,9 @@ class ExploreMap extends React.Component {
         const layerElement = this.map.getPane('tilePane').lastChild;
         layerElement.style.zIndex = datasetsLength - dataset.index;
         layerElement.id = layer.id;
+      });
+      newLayer.on('requesterror', (e) => {
+        console.error(e.message);
       });
       newLayer.addTo(this.map);
       this.mapLayers[layer.id] = newLayer;
