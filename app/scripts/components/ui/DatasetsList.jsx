@@ -59,7 +59,7 @@ export default class DatasetsList extends React.Component {
             }
           </button>
 
-          <Search list={this.props.data} onChange={this.onSearch} label="Search dataset" />
+          <Search open={filters ? false : undefined} list={this.props.data} onChange={this.onSearch} label="Search dataset" />
         </div>
 
         <div className={`filters-content ${filters ? '-open' : ''}`}>

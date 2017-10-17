@@ -24,6 +24,12 @@ export default class Search extends React.Component {
     this.onSearch = this.onSearch.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.open !== nextProps.open && nextProps.open !== undefined) {
+      this.setState({ open: nextProps.open });
+    }
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (this.state.open && !prevState.open) {
       this.input.focus();
@@ -48,7 +54,9 @@ export default class Search extends React.Component {
     const { className, label, placeholder } = this.props;
     const classNames = classnames(
       'c-search',
-      { [className]: !className }
+      {
+        [className]: !className
+      }
     );
 
     return (
@@ -78,11 +86,12 @@ export default class Search extends React.Component {
 }
 
 Search.propTypes = {
+  className: PropTypes.string,
   list: PropTypes.array.isRequired,
   label: PropTypes.string,
   placeholder: PropTypes.string,
   options: PropTypes.object,
-  className: PropTypes.string,
+  open: PropTypes.bool,
   // Actions
   onChange: PropTypes.func
 };
