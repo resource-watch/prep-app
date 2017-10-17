@@ -295,17 +295,17 @@ class DataMapLegend extends React.Component {
           onClick={() => this.props.toggleLayerOpacity(layer.dataset, layer.opacity === 0 ? 1 : 0)}
         >
           {layer.opacity === 0 ?
-            <Icon name="icon-hide" className="-normal" /> :
-            <Icon name="icon-show" className="-normal" />
+            <Icon name="icon-show" className="-normal" /> :
+            <Icon name="icon-hide" className="-normal" />
           }
         </span>
         {this.props.infoMetadata.open && this.props.infoMetadata.datasetId === layer.dataset ?
           <span
             data-title="Info"
-            className="icon -info -tooltip"
+            className="icon -info -tooltip -active"
             onClick={() => this.props.onCloseInfo()}
           >
-            <Icon name="icon-cancel" className="-normal" />
+            <Icon name="icon-info" className="-normal" />
           </span> :
           <span
             data-title="Info"

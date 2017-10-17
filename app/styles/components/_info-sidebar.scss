@@ -28,9 +28,9 @@
 
   .actions {
     position: absolute;
-    top: -1px;
+    top: 15px;
     right: -30px;
-    box-shadow: 0 7px 15px 0 rgba(0,0,0,0.15);
+    box-shadow: 4px 7px 15px 0 rgba(0,0,0,0.15);
 
     > div {
       display: block;
@@ -86,6 +86,21 @@
       padding: 10px 30px;
       padding-top: 0;
 
+      .layer {
+        .c-switch {
+          margin-top: 0;
+          border-color: $light-gold;
+
+          &:after {
+            background-color: $light-gold;
+          }
+
+          &.-checked:after {
+            background-color: $white;
+          }
+        }
+      }
+
       .layer svg,
       .download svg,
       .more svg {
@@ -94,8 +109,7 @@
         fill: $light-gold;
       }
 
-      a,
-      button {
+      .info-tool {
         display: flex;
         align-items: center;
         margin-right: 20px;
@@ -105,7 +119,8 @@
         font-size: 13px;
         line-height: 13px;
 
-        svg {
+        svg,
+        .c-switch {
           margin-right: 5px;
         }
       }

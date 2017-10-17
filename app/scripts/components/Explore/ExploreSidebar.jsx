@@ -4,12 +4,10 @@ import ReactDOM from 'react-dom';
 // Components
 import Icon from '../ui/Icon';
 import Tabs from '../ui/Tabs';
-import Switch from '../Button/Switch';
 import Button from '../Button/Button';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 import Tooltip from '../Tooltip/Tooltip';
 import DatasetsList from '../ui/DatasetsList';
-import DatasetItem from './DatasetItem';
 
 // Constants
 import { TABS_OPTIONS } from '../../constants';
@@ -21,6 +19,8 @@ class DataMap extends React.Component {
     this.state = {
       sidebarOpen: true
     };
+
+    this.switchChange = this.switchChange.bind(this);
   }
 
   componentWillMount() {
