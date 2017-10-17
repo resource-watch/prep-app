@@ -25,10 +25,20 @@ export default class DatasetsList extends React.Component {
       search: {
         list: props.data || [],
         value: ''
-      }
+      },
+      sticky: false
     };
 
     this.onSearch = this.onSearch.bind(this);
+    this.onAddListener = this.onAddListener.bind(this);
+  }
+
+  componentDidMount() {
+    const sidebar = document.getElementsByClassName('sidebar-container');
+
+    if (sidebar && sidebar.length) {
+      sidebar[0].addEventListener('scroll', this.onAddListener);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -41,16 +51,27 @@ export default class DatasetsList extends React.Component {
     }
   }
 
+  onAddListener(e) {
+    const header = document.getElementsByClassName('sidebar-header')[0];
+
+    if (this.tools && !this.state.sticky && e.target.scrollTop > header.offsetHeight) {
+      this.setState({ sticky: true });
+    } else if (this.tools && this.state.sticky && e.target.scrollTop <= header.offsetHeight) {
+      this.setState({ sticky: false });
+    }
+  }
+
   onSearch(list, value) {
     this.setState({ search: { list, value } });
   }
 
+  /* All datasets content */
   getAllDatasetsContent() {
-    const { filters, search } = this.state;
+    const { filters, search, sticky } = this.state;
 
     return (
       <div className="datasets-list-content">
-        <div className={`list-filters ${filters ? '-open' : ''}`}>
+        <div ref={n => this.tools = n} className={`list-filters ${filters ? '-open' : ''} ${sticky ? '-fixed' : ''}`}>
           <button className="btn-filters" onClick={() => this.setState({ filters: !filters })}>
             <span>Filter results</span>
             {filters ?
@@ -62,7 +83,7 @@ export default class DatasetsList extends React.Component {
           <Search open={filters ? false : undefined} list={this.props.data} onChange={this.onSearch} label="Search dataset" />
         </div>
 
-        <div className={`filters-content ${filters ? '-open' : ''}`}>
+        <div className={`filters-content ${filters ? '-open' : ''} ${sticky ? '-fixed' : ''}`}>
           {filters && <FilterTabs />}
         </div>
 
@@ -76,6 +97,8 @@ export default class DatasetsList extends React.Component {
     );
   }
 
+
+  /* Core datasets */
   getCoreContent() {
     const { data } = this.props;
 
@@ -117,6 +140,7 @@ export default class DatasetsList extends React.Component {
     );
   }
 
+  /* Datasets item content */
   getDatasetItems(list) {
     return list.map((dataset) => {
       const isInfoPanelOpen = dataset.id && this.props.infoSidebarMetadata.open &&

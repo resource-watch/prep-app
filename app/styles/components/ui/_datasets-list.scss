@@ -14,15 +14,28 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 22px 22px 15px;
+    padding: 22px;
+
+    &.-fixed {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: $white;
+      z-index: 1;
+      box-shadow: 0 20px 30px 0 rgba(0,0,0,0.1);
+    }
 
     &.-open {
       background-color: #F7F7F7;
+      box-shadow: 0;
     }
 
     .btn-filters {
       display: flex;
       align-items: center;
+
+      font-size: 15px;
+      line-height: 26px;
     }
 
     .c-icon {
@@ -34,17 +47,23 @@
     }
   }
 
+  .filters-content {
+    &.-fixed {
+      position: fixed;
+      top: 58px;
+      width: 100%;
+      z-index: 1;
+    }
+  }
+
   .datasets-list-content {
     display: flex;
     flex-flow: column;
-    height: 100%;
   }
 
   .list-container {
-    overflow: auto;
-
     &.-padding {
-      padding: 12px 22px;
+      padding: 3px 22px 12px;
     }
   }
 

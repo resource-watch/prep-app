@@ -41,7 +41,13 @@
     }
   }
 
-  > .sidebar-header {
+  .sidebar-container {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    height: 100%;
+  }
+
+  .sidebar-header {
     position: relative;
     background-color: $dark-slate-blue;
     padding: 35px 0 18px;
@@ -56,14 +62,11 @@
     }
   }
 
-  > .content {
+  .content {
     position: relative;
-    // overflow: auto;
-    // padding-bottom: 60px;
 
     @media #{$mq-medium} {
       height: calc(100% - 193px);
-      // overflow: auto;
     }
 
     .no-data {
@@ -72,8 +75,6 @@
 
     .dataset-items {
       height: calc(100% - 40px);
-      overflow: auto;
-      -webkit-overflow-scrolling: touch;
     }
 
     .layer {
@@ -153,7 +154,7 @@
     }
   }
 
-  > .actions-mobile {
+  .actions-mobile {
     display: flex;
     align-items: center;
     justify-content: center;
