@@ -16,6 +16,9 @@ export default class BasemapControl extends React.Component {
     };
 
     this.toggleDropdown = this.toggleDropdown.bind(this);
+    this.onScreenClick = this.onScreenClick.bind(this);
+    this.onBasemapChange = this.onBasemapChange.bind(this);
+    this.onLabelChange = this.onLabelChange.bind(this);
   }
 
   componentWillUnmount() {
