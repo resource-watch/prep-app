@@ -62,50 +62,52 @@ export default class BasemapControl extends React.Component {
     const { active } = this.state;
 
     return (
-      <TetherComponent
-        attachment="top right"
-        constraints={[{
-          to: 'window'
-        }]}
-        targetOffset="8px 100%"
-        classes={{
-          element: 'c-tooltip'
-        }}
-      >
-        {/* First child: This is what the item will be tethered to */}
-        <button type="button" className="c-basemap-control" onClick={() => this.toggleDropdown(true)}>
-          <Icon name="icon-layers" className="-small" />
-        </button>
+      <div className="c-basemap-control">
+        <TetherComponent
+          attachment="bottom right"
+          constraints={[{
+            to: 'window'
+          }]}
+          targetOffset="-2px 100%"
+          classes={{
+            element: 'c-tooltip -arrow-bottom-right'
+          }}
+        >
+          {/* First child: This is what the item will be tethered to */}
+          <button type="button" className="btn-basemaps" onClick={() => this.toggleDropdown(true)}>
+            <Icon name="icon-layers" className="-small" />
+          </button>
 
-        {/* Second child: If present, this item will be tethered to the the first child */}
-        {active &&
-          <div>
-            <RadioGroup
-              options={Object.keys(basemapControl.basemaps).map((k) => {
-                const bs = basemapControl.basemaps[k];
-                return {
-                  label: bs.label,
-                  value: bs.id
-                };
-              })}
-              name="basemap"
-              properties={{
-                default: basemap.id
-              }}
-              onChange={this.onBasemapChange}
-            />
-            <div className="divisor" />
-            <Checkbox
-              properties={{
-                name: 'label',
-                title: 'Label',
-                value: 'label'
-              }}
-              onChange={this.onLabelChange}
-            />
-          </div>
-        }
-      </TetherComponent>
+          {/* Second child: If present, this item will be tethered to the the first child */}
+          {active &&
+            <div className="basemap-options">
+              <RadioGroup
+                options={Object.keys(basemapControl.basemaps).map((k) => {
+                  const bs = basemapControl.basemaps[k];
+                  return {
+                    label: bs.label,
+                    value: bs.id
+                  };
+                })}
+                name="basemap"
+                properties={{
+                  default: basemap.id
+                }}
+                onChange={this.onBasemapChange}
+              />
+              <div className="divisor" />
+              <Checkbox
+                properties={{
+                  name: 'label',
+                  title: 'Label',
+                  value: 'label'
+                }}
+                onChange={this.onLabelChange}
+              />
+            </div>
+          }
+        </TetherComponent>
+      </div>
     );
   }
 }

@@ -1,10 +1,17 @@
 
 .c-basemap-control {
-  position: absolute;
-  bottom: 20px;
-  right: 30px;
-  width: 30px;
-  height: 30px;
-  background-color: $white;
-  border-radius: 2px;
+
+  .btn-basemaps {
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    width: 30px;
+    height: 30px;
+    background-color: $white;
+    border-radius: 2px;
+  }
+
+  .basemap-options {
+    padding: 10px;
+  }
 }

@@ -44,6 +44,12 @@
     border-top: 10px solid $dark-slate-blue-2;
   }
 
+  &.-arrow-bottom-right:after {
+    left: auto;
+    right: 5px;
+    transform: translateX(0);
+  }
+
   &.-visible {
     display: inherit;
   }
