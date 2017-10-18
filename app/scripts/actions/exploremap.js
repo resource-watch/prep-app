@@ -8,7 +8,9 @@ import {
   MAP_DESELECT_DATASET,
   MAP_GEODATA_RECEIVED,
   MAP_GEOPOSITION_SET,
-  MAP_INTERACTION_VISIBILITY_SET
+  MAP_INTERACTION_VISIBILITY_SET,
+  SET_BASEMAP,
+  SET_LABELS
 } from '../constants';
 
 import { updateURL } from './links';
@@ -103,5 +105,20 @@ export function getGeoDataInfo(datasetId, geo) {
           payload: data
         });
       });
+  };
+}
+
+export function setBasemap(basemap) {
+  return {
+    type: SET_BASEMAP,
+    payload: basemap
+  };
+}
+
+
+export function setLabels(labelEnabled) {
+  return {
+    type: SET_LABELS,
+    payload: labelEnabled
   };
 }

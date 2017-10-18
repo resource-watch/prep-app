@@ -4,8 +4,13 @@ import {
   MAP_DESELECT_DATASET,
   MAP_GEOPOSITION_SET,
   MAP_GEODATA_RECEIVED,
-  MAP_INTERACTION_VISIBILITY_SET
+  MAP_INTERACTION_VISIBILITY_SET,
+  SET_BASEMAP,
+  SET_LABELS
 } from '../constants';
+
+import { BASEMAPS } from '../general-constants/basemaps';
+
 
 const initialState = {
   zoom: null,
@@ -14,7 +19,12 @@ const initialState = {
     lng: null
   },
   zoomPosition: 'topright',
-  basemap: config.basemapTileUrl || 'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
+  // basemap: config.basemapTileUrl || 'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
+  basemap: BASEMAPS.dark,
+  basemapControl: {
+    basemaps: BASEMAPS
+  },
+  labels: false,
   basemapOptions: { maxZoom: 18 },
   interactionData: {
     info: null,
@@ -57,6 +67,16 @@ export default function (state = initialState, action) {
       interactionData.info = action.payload;
       interactionData.open = true;
       return Object.assign({}, state, { interactionData });
+    }
+    case SET_BASEMAP: {
+      return Object.assign({}, state, {
+        basemap: action.payload
+      });
+    }
+    case SET_LABELS: {
+      return Object.assign({}, state, {
+        labels: action.payload
+      });
     }
     default:
       return state;

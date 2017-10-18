@@ -1,8 +1,11 @@
 import React from 'react';
-import LoadingSpinner from '../Loading/LoadingSpinner';
+import PropTypes from 'prop-types';
 
+// Components
+import LoadingSpinner from '../Loading/LoadingSpinner';
 import Tooltip from '../Tooltip/Tooltip';
 
+// Constants
 const tooltipBase = {
   hidden: true,
   position: {
@@ -11,6 +14,7 @@ const tooltipBase = {
   },
   width: 'auto'
 };
+
 
 class ExploreMap extends React.Component {
   constructor() {
@@ -199,7 +203,7 @@ class ExploreMap extends React.Component {
     L.control.zoom({ position: this.props.map.zoomPosition }).addTo(this.map);
 
     L.tileLayer(
-      this.props.map.basemap,
+      this.props.map.basemap.value,
       this.props.map.basemapOptions
     ).addTo(this.map, 1);
   }
@@ -550,46 +554,46 @@ class ExploreMap extends React.Component {
 }
 
 ExploreMap.contextTypes = {
-  location: React.PropTypes.object
+  location: PropTypes.object
 };
 
 ExploreMap.propTypes = {
   /**
    * Define the datasets data of the map
    */
-  data: React.PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
   /**
    * Define the layers data of the map
    */
-  layers: React.PropTypes.object,
+  layers: PropTypes.object,
   /**
    * Define the mapa data config
    */
-  map: React.PropTypes.object.isRequired,
+  map: PropTypes.object.isRequired,
   /**
    * Define the function to update the map params
    */
-  setMapParams: React.PropTypes.func.isRequired,
+  setMapParams: PropTypes.func.isRequired,
   /**
   * Define the function to handle a tile load error
   */
-  onTileError: React.PropTypes.func.isRequired,
+  onTileError: PropTypes.func.isRequired,
   /**
   * Define the function to get the geo data
   */
-  setInteractionData: React.PropTypes.func.isRequired,
+  setInteractionData: PropTypes.func.isRequired,
   /**
   * Define the interaction data: position, visibility and datasetId
   */
-  interactionData: React.PropTypes.object,
+  interactionData: PropTypes.object,
   /**
   * Define the function to set visibility
   */
-  setInteractionVisibility: React.PropTypes.func,
+  setInteractionVisibility: PropTypes.func,
   /**
   * Define the function to set position
   */
-  setInteractionPosition: React.PropTypes.func
+  setInteractionPosition: PropTypes.func
 };
 
 export default ExploreMap;

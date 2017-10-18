@@ -39,6 +39,8 @@ export const TABS_OPTIONS = [
     value: 'all_datasets'
   }
 ];
+export const SET_BASEMAP = 'explore/SET_BASEMAP';
+export const SET_LABELS = 'explore/SET_LABELS';
 
 // DATASETS
 export const DATASET_FETCH_ERROR = 'DATASET_FETCH_ERROR';
