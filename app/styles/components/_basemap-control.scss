@@ -1,17 +1,58 @@
 
 .c-basemap-control {
-
   .btn-basemaps {
     position: absolute;
-    bottom: 20px;
+    bottom: 28px;
     right: 30px;
     width: 30px;
     height: 30px;
     background-color: $white;
     border-radius: 2px;
   }
+}
+
+/* Tooltip */
+.c-tooltip.basemap-tooltip {
+  padding: 0;
 
   .basemap-options {
-    padding: 10px;
+    padding: 15px 20px;
+
+    .c-radio-box {
+      text-align: left;
+    }
+
+    .c-radio {
+      input { display: none; }
+
+      label {
+        font-size: 15px;
+        line-height: 26px;
+        cursor: pointer;
+
+        &.-checked {
+          color: $light-gold;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .c-checkbox {
+      text-align: left;
+      cursor: pointer;
+
+      input {
+        cursor: pointer;
+      }
+
+      label {
+        margin-left: 5px;
+        font-size: 15px;
+        line-height: 26px;
+        cursor: pointer;
+
+        .checkbox-icon { display: none; }
+      }
+    }
   }
 }
