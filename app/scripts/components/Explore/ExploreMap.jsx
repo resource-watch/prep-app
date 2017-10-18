@@ -9,6 +9,8 @@ import LoadingSpinner from '../Loading/LoadingSpinner';
 import Tooltip from '../Tooltip/Tooltip';
 
 // Constants
+import { LABELS } from '../../general-constants/basemaps';
+
 const tooltipBase = {
   hidden: true,
   position: {
@@ -44,8 +46,12 @@ class ExploreMap extends React.Component {
   componentWillReceiveProps(props) {
     this.updateDatasets(props.data, props.layers);
 
-    if (!isEqual(this.props.map.basema, props.map.basemap)) {
+    if (!isEqual(this.props.map.basemap, props.map.basemap)) {
       this.addBasemap(props.map.basemap);
+    }
+
+    if (!isEqual(this.props.map.labels, props.map.labels)) {
+      this.handleLabels(props.map.labels);
     }
 
     if (props.interactionData.open && props.interactionData.info) {
@@ -209,6 +215,20 @@ class ExploreMap extends React.Component {
       basemap.value,
       basemap.options
     ).addTo(this.map, 1);
+  }
+
+  handleLabels(labels) {
+    if (this.labels) this.map.removeLayer(this.labels);
+
+    if (labels) {
+      this.labels = L.tileLayer(
+        LABELS.value,
+        LABELS.options
+      ).addTo(this.map)
+      .setZIndex(100000000000000000);
+    } else {
+      this.labels = null;
+    }
   }
 
   initMap() {

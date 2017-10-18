@@ -19,8 +19,7 @@ const initialState = {
     lng: null
   },
   zoomPosition: 'topright',
-  // basemap: config.basemapTileUrl || 'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
-  basemap: BASEMAPS.dark,
+  basemap: BASEMAPS.default,
   basemapControl: {
     basemaps: BASEMAPS
   },

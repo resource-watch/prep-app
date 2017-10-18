@@ -26,8 +26,8 @@ export default class BasemapControl extends React.Component {
   }
 
   onScreenClick(e) {
-    const el = document.querySelector('.c-tooltip');
-    const clickOutside = el && el.contains && !el.contains(e.target);
+    const el = document.querySelector('.c-tooltip.basemap-tooltip');
+    const clickOutside = el && el.contains && (!el.contains(e.target));
 
     if (clickOutside) {
       this.toggleDropdown(false);
@@ -73,7 +73,7 @@ export default class BasemapControl extends React.Component {
           }]}
           targetOffset="-2px 100%"
           classes={{
-            element: 'c-tooltip -arrow-bottom-right'
+            element: 'c-tooltip -arrow-bottom-right basemap-tooltip'
           }}
         >
           {/* First child: This is what the item will be tethered to */}
