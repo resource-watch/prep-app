@@ -1,4 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+
+// Components
 import { Link } from 'react-router';
 import MainNav from '../../components/Navigation/MainNav';
 
@@ -6,21 +10,21 @@ import ExploreMap from '../../containers/Explore/ExploreMap';
 import ExploreMapSidebar from '../../containers/Explore/ExploreSidebar';
 import InfoSidebar from '../../containers/Explore/InfoSidebar';
 import ExploreMapLegend from '../../containers/Explore/ExploreLegend';
+import BasemapControl from '../../containers/Explore/BasemapControl';
 
 import MetadataList from './MetadataList';
+import Form from '../Form';
 
 import ShareModal from '../Modal/ShareModal';
 import Modal from '../Modal/Modal';
 
 import TooltipTether from '../Tooltip/TooltipTether';
-
-import Button from '../Button/Button';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
+// Constants
 import metadata from '../../metadata.json';
 import logoImage from '../../../images/prep-logo.png';
 
-import Form from '../Form';
 
 class Explore extends React.Component {
 
@@ -122,6 +126,7 @@ class Explore extends React.Component {
         <InfoSidebar />
         <ExploreMap />
         <ExploreMapLegend />
+        <BasemapControl />
 
         {this.state.modalShareOpen &&
           <ShareModal
@@ -162,17 +167,17 @@ class Explore extends React.Component {
 }
 
 Explore.childContextTypes = {
-  location: React.PropTypes.object
+  location: PropTypes.object
 };
 
 Explore.propTypes = {
-  getDatasets: React.PropTypes.func.isRequired,
-  data: React.PropTypes.any.isRequired,
-  location: React.PropTypes.object.isRequired,
-  params: React.PropTypes.object.isRequired,
-  metadataModal: React.PropTypes.object,
-  setModalMetadata: React.PropTypes.func.isRequired,
-  resetExplore: React.PropTypes.func.isRequired
+  getDatasets: PropTypes.func.isRequired,
+  data: PropTypes.any.isRequired,
+  location: PropTypes.object.isRequired,
+  params: PropTypes.object.isRequired,
+  metadataModal: PropTypes.object,
+  setModalMetadata: PropTypes.func.isRequired,
+  resetExplore: PropTypes.func.isRequired
 };
 
 export default Explore;

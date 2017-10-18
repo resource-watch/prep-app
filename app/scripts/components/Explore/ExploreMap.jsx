@@ -1,7 +1,15 @@
 import React from 'react';
-import LoadingSpinner from '../Loading/LoadingSpinner';
+import PropTypes from 'prop-types';
 
+// Libraries
+import isEqual from 'lodash/isEqual';
+
+// Components
+import LoadingSpinner from '../Loading/LoadingSpinner';
 import Tooltip from '../Tooltip/Tooltip';
+
+// Constants
+import { LABELS } from '../../general-constants/basemaps';
 
 const tooltipBase = {
   hidden: true,
@@ -11,6 +19,7 @@ const tooltipBase = {
   },
   width: 'auto'
 };
+
 
 class ExploreMap extends React.Component {
   constructor() {
@@ -37,6 +46,14 @@ class ExploreMap extends React.Component {
   componentWillReceiveProps(props) {
     this.updateDatasets(props.data, props.layers);
 
+    if (!isEqual(this.props.map.basemap, props.map.basemap)) {
+      this.addBasemap(props.map.basemap);
+    }
+
+    if (!isEqual(this.props.map.labels, props.map.labels)) {
+      this.handleLabels(props.map.labels);
+    }
+
     if (props.interactionData.open && props.interactionData.info) {
       this.handleInteractivityTooltip(props.interactionData);
     }
@@ -59,6 +76,84 @@ class ExploreMap extends React.Component {
     }
 
     return this.tooltipText(text, data);
+  }
+
+  getActiveLayer(dataset, layers) {
+    const activeLayer = Object.values(layers).find(l => dataset.id === l.dataset && l.active) ||
+      Object.values(layers).find(l => dataset.id === l.dataset && l.default) ||
+      Object.values(layers)[0] || {};
+    return activeLayer;
+  }
+
+  setInteractionData(position) {
+    const { datasetId } = this.props.interactionData;
+    if (datasetId) {
+      const TOLENRANCE = 2;
+      const pointX = position.x;
+      const pointY = position.y;
+      const geo = [];
+      let latLngPoint = this.map.layerPointToLatLng(L.point(pointX - TOLENRANCE, pointY + TOLENRANCE));
+      geo.push([latLngPoint.lng, latLngPoint.lat]);
+      latLngPoint = this.map.layerPointToLatLng(L.point(pointX + TOLENRANCE, pointY + TOLENRANCE));
+      geo.push([latLngPoint.lng, latLngPoint.lat]);
+      latLngPoint = this.map.layerPointToLatLng(L.point(pointX + TOLENRANCE, pointY - TOLENRANCE));
+      geo.push([latLngPoint.lng, latLngPoint.lat]);
+      latLngPoint = this.map.layerPointToLatLng(L.point(pointX - TOLENRANCE, pointY - TOLENRANCE));
+      geo.push([latLngPoint.lng, latLngPoint.lat]);
+      latLngPoint = this.map.layerPointToLatLng(L.point(pointX - TOLENRANCE, pointY + TOLENRANCE));
+      geo.push([latLngPoint.lng, latLngPoint.lat]);
+      const geoJSON = {
+        type: 'Polygon',
+        coordinates: [geo]
+      };
+
+      this.props.setInteractionData(datasetId, geoJSON);
+      this.props.setInteractionPosition({ x: pointX, y: pointY });
+    }
+  }
+
+  setMapParams() {
+    this.props.setMapParams(this.getMapParams());
+  }
+
+  getMapParams() {
+    const latLng = this.map.getCenter();
+    return {
+      zoom: this.map.getZoom(),
+      latLng: {
+        lat: latLng.lat,
+        lng: latLng.lng
+      }
+    };
+  }
+
+  setMapListeners() {
+    this.map.on('dragstart', () => {
+      if (!this.state.tooltip.hidden) {
+        this.clearTooltip();
+        this.dragging = true;
+      } else {
+        this.dragging = false;
+      }
+    });
+    this.map.on('dragend', () => {
+      this.setMapParams();
+      this.updateTooltipPosition();
+    });
+    this.map.on('zoomstart', () => {
+      this.zooming = true;
+    });
+    this.map.on('zoomend', () => {
+      this.setMapParams();
+      this.updateTooltipPosition();
+      this.zooming = false;
+    });
+    this.map.on('click', (e) => {
+      this.handleMapClick(e);
+    });
+    this.map.on('blur', () => {
+      this.clearTooltip();
+    });
   }
 
   tooltipText(text, data) {
@@ -92,50 +187,6 @@ class ExploreMap extends React.Component {
     this.setState({ tooltip });
   }
 
-  setMapListeners() {
-    this.map.on('dragstart', () => {
-      if (!this.state.tooltip.hidden) {
-        this.clearTooltip();
-        this.dragging = true;
-      } else {
-        this.dragging = false;
-      }
-    });
-    this.map.on('dragend', () => {
-      this.setMapParams();
-      this.updateTooltipPosition();
-    });
-    this.map.on('zoomstart', () => {
-      this.zooming = true;
-    });
-    this.map.on('zoomend', () => {
-      this.setMapParams();
-      this.updateTooltipPosition();
-      this.zooming = false;
-    });
-    this.map.on('click', (e) => {
-      this.handleMapClick(e);
-    });
-    this.map.on('blur', () => {
-      this.clearTooltip();
-    });
-  }
-
-  getMapParams() {
-    const latLng = this.map.getCenter();
-    return {
-      zoom: this.map.getZoom(),
-      latLng: {
-        lat: latLng.lat,
-        lng: latLng.lng
-      }
-    };
-  }
-
-  setMapParams() {
-    this.props.setMapParams(this.getMapParams());
-  }
-
   clearTooltip() {
     this.setState({ tooltip: tooltipBase });
     this.props.setInteractionVisibility(false);
@@ -154,34 +205,34 @@ class ExploreMap extends React.Component {
     this.setInteractionData(e.containerPoint);
   }
 
-  setInteractionData(position) {
-    const { datasetId } = this.props.interactionData;
-    if (datasetId) {
-      const TOLENRANCE = 2;
-      const pointX = position.x;
-      const pointY = position.y;
-      const geo = [];
-      let latLngPoint = this.map.layerPointToLatLng(L.point(pointX - TOLENRANCE, pointY + TOLENRANCE));
-      geo.push([latLngPoint.lng, latLngPoint.lat]);
-      latLngPoint = this.map.layerPointToLatLng(L.point(pointX + TOLENRANCE, pointY + TOLENRANCE));
-      geo.push([latLngPoint.lng, latLngPoint.lat]);
-      latLngPoint = this.map.layerPointToLatLng(L.point(pointX + TOLENRANCE, pointY - TOLENRANCE));
-      geo.push([latLngPoint.lng, latLngPoint.lat]);
-      latLngPoint = this.map.layerPointToLatLng(L.point(pointX - TOLENRANCE, pointY - TOLENRANCE));
-      geo.push([latLngPoint.lng, latLngPoint.lat]);
-      latLngPoint = this.map.layerPointToLatLng(L.point(pointX - TOLENRANCE, pointY + TOLENRANCE));
-      geo.push([latLngPoint.lng, latLngPoint.lat]);
-      const geoJSON = {
-        type: 'Polygon',
-        coordinates: [geo]
-      };
+  addBasemap(basemap) {
+    // Remove old basemap
+    if (this.basemap) {
+      this.map.removeLayer(this.basemap);
+    }
 
-      this.props.setInteractionData(datasetId, geoJSON);
-      this.props.setInteractionPosition({ x: pointX, y: pointY });
+    this.basemap = L.tileLayer(
+      basemap.value,
+      basemap.options
+    ).addTo(this.map, 1);
+  }
+
+  handleLabels(labels) {
+    if (this.labels) this.map.removeLayer(this.labels);
+
+    if (labels) {
+      this.labels = L.tileLayer(
+        LABELS.value,
+        LABELS.options
+      ).addTo(this.map)
+      .setZIndex(100000000000000000);
+    } else {
+      this.labels = null;
     }
   }
 
   initMap() {
+    const { map } = this.props;
     const { params } = this.context.location;
 
     if (!params.zoom) params.zoom = 3;
@@ -196,12 +247,10 @@ class ExploreMap extends React.Component {
       minZoom: 2
     });
 
-    L.control.zoom({ position: this.props.map.zoomPosition }).addTo(this.map);
+    L.control.zoom({ position: map.zoomPosition }).addTo(this.map);
 
-    L.tileLayer(
-      this.props.map.basemap,
-      this.props.map.basemapOptions
-    ).addTo(this.map, 1);
+    /* Ad basemap */
+    this.addBasemap(map.basemap);
   }
 
   updateDatasets(newData, newLayers) {
@@ -225,13 +274,6 @@ class ExploreMap extends React.Component {
         }
       });
     }
-  }
-
-  getActiveLayer(dataset, layers) {
-    const activeLayer = Object.values(layers).find(l => dataset.id === l.dataset && l.active) ||
-      Object.values(layers).find(l => dataset.id === l.dataset && l.default) ||
-      Object.values(layers)[0] || {};
-    return activeLayer;
   }
 
   wasAlreadyAdded(dataset, layers) {
@@ -550,46 +592,46 @@ class ExploreMap extends React.Component {
 }
 
 ExploreMap.contextTypes = {
-  location: React.PropTypes.object
+  location: PropTypes.object
 };
 
 ExploreMap.propTypes = {
   /**
    * Define the datasets data of the map
    */
-  data: React.PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
   /**
    * Define the layers data of the map
    */
-  layers: React.PropTypes.object,
+  layers: PropTypes.object,
   /**
    * Define the mapa data config
    */
-  map: React.PropTypes.object.isRequired,
+  map: PropTypes.object.isRequired,
   /**
    * Define the function to update the map params
    */
-  setMapParams: React.PropTypes.func.isRequired,
+  setMapParams: PropTypes.func.isRequired,
   /**
   * Define the function to handle a tile load error
   */
-  onTileError: React.PropTypes.func.isRequired,
+  onTileError: PropTypes.func.isRequired,
   /**
   * Define the function to get the geo data
   */
-  setInteractionData: React.PropTypes.func.isRequired,
+  setInteractionData: PropTypes.func.isRequired,
   /**
   * Define the interaction data: position, visibility and datasetId
   */
-  interactionData: React.PropTypes.object,
+  interactionData: PropTypes.object,
   /**
   * Define the function to set visibility
   */
-  setInteractionVisibility: React.PropTypes.func,
+  setInteractionVisibility: PropTypes.func,
   /**
   * Define the function to set position
   */
-  setInteractionPosition: React.PropTypes.func
+  setInteractionPosition: PropTypes.func
 };
 
 export default ExploreMap;
