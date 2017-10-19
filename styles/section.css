@@ -5,6 +5,7 @@
   background-repeat: no-repeat;
 }
 
+
 /* Intro */
 .c-section.intro {
   display: flex;
@@ -13,6 +14,10 @@
   padding: 160px 100px 210px;
   background-color: #0A2C50;
   background-image: url('../images/intro.jpg');
+}
+
+.c-section.intro .logo {
+  margin-bottom: 45px;
 }
 
 .intro-title {
@@ -54,9 +59,14 @@
 .c-section.footer {
   display: flex;
   flex-flow: column;
+  align-items: center;
   padding: 250px 100px 170px;
   background-color: #0A2C50;
   background-image: url('../images/intro.jpg');
+}
+
+.c-section.footer .logo {
+  margin-bottom: 65px;
 }
 
 .c-section .actions {
