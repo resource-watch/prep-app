@@ -54,6 +54,32 @@
   padding: 0 68px;
 }
 
+/* Partners */
+.c-section.partners .partners-title {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.c-section.partners .partners-title {
+  position: relative;
+  font-size: 37px;
+  line-height: 45px;
+  color: #263E57;
+  padding: 25px 0;
+}
+
+.c-section.partners .partners-title:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 67px;
+  height: 3px;
+  background-color: #FFC94E;
+}
+
 
 /* Footer */
 .c-section.footer {
