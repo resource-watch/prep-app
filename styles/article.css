@@ -4,6 +4,8 @@
 
 /* Overlapped */
 .c-article.-overlapped {
+  box-sizing: border-box;
+  width: 83.33%;
   padding: 65px 100px;
   background-color: #fff;
   margin-top: -75px;
@@ -23,6 +25,7 @@
 .c-article.-card .article-title {
   font-size: 55px;
   line-height: 61px;
+  font-family: "PT Serif", Georgia, serif;
   margin: 0;
   margin-bottom: 50px;
 }

@@ -1,8 +1,13 @@
 
-.c-text {
+.c-text {
   margin: 0;
   margin-bottom: 30px;
   font-size: 19px;
   line-height: 30px;
-  color: #263E57;
+  font-size: 15px;
+  line-height: 30px;
+}
+
+.c-text.-principal {
+  font-size: 19px;
 }

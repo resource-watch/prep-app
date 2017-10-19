@@ -25,6 +25,7 @@
   font-size: 62px;
   line-height: 69px;
   font-weight: bold;
+  font-family: "PT Serif", Georgia, serif;
   color: #fff;
   padding: 37px 0;
   text-align: center;
@@ -45,7 +46,9 @@
 
 /* Description */
 .c-section.description {
-  padding: 0 170px;
+  display: flex;
+  justify-content: center;
+  padding: 0 68px;
 }
 
 
@@ -70,6 +73,7 @@
   position: relative;
   font-size: 37px;
   line-height: 45px;
+  font-family: "PT Serif", Georgia, serif;
   text-align: center;
   color: #263E57;
   padding: 25px 0;

@@ -1,4 +1,6 @@
 
+@import "./base.css";
+
 @import "./section.css";
 @import "./article.css";
 @import "./text.css";
