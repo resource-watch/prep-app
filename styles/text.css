@@ -1,0 +1,12 @@
+
+.c-text {
+  margin: 0;
+  margin-bottom: 30px;
+  font-size: 19px;
+  line-height: 30px;
+  color: #263E57;
+}
+
+.c-text:last-child {
+  margin-bottom: 0;
+}

@@ -6,9 +6,9 @@
   display: flex;
   flex-flow: column;
   align-items: center;
-  padding: 160px 100px 160px;
+  padding: 160px 100px 210px;
   background-color: #0A2C50;
-  background-image: url('./images/intro.jpg');
+  background-image: url('../images/intro.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -34,4 +34,8 @@
   width: 190px;
   height: 3px;
   background-color: #FFC94E;
+}
+
+.c-section.description {
+  padding: 0 170px;
 }

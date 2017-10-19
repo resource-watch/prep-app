@@ -1,0 +1,9 @@
+
+.c-article {
+  padding: 65px 100px;
+  background-color: #fff;
+}
+
+.c-article.-overlapped {
+  margin-top: -75px;
+}
