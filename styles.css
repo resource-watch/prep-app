@@ -1,0 +1,37 @@
+
+.c-section {
+}
+
+.c-section.intro {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding: 160px 100px 160px;
+  background-color: #0A2C50;
+  background-image: url('./images/intro.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.intro-title {
+  position: relative;
+  font-size: 62px;
+  line-height: 69px;
+  font-weight: bold;
+  color: #fff;
+  padding: 37px 0;
+  text-align: center;
+  margin: 0;
+}
+
+.intro-title:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 190px;
+  height: 3px;
+  background-color: #FFC94E;
+}
