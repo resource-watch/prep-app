@@ -1,5 +1,8 @@
 
 .c-section {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 /* Intro */
@@ -10,9 +13,6 @@
   padding: 160px 100px 210px;
   background-color: #0A2C50;
   background-image: url('../images/intro.jpg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
 .intro-title {
@@ -37,12 +37,30 @@
   background-color: #FFC94E;
 }
 
+
 /* Description */
 .c-section.description {
   padding: 0 170px;
 }
 
+
 /* Contact */
 .c-section.contact {
   padding: 0 68px;
+}
+
+
+/* Footer */
+.c-section.footer {
+  display: flex;
+  flex-flow: column;
+  padding: 250px 100px 170px;
+  background-color: #0A2C50;
+  background-image: url('../images/intro.jpg');
+}
+
+.c-section .actions {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
