@@ -1,0 +1,14 @@
+
+.c-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 18px;
+  color: #fff;
+  border: 2px solid #FFC94E;
+}

@@ -2,6 +2,7 @@
 .c-section {
 }
 
+/* Intro */
 .c-section.intro {
   display: flex;
   flex-flow: column;
@@ -36,6 +37,12 @@
   background-color: #FFC94E;
 }
 
+/* Description */
 .c-section.description {
   padding: 0 170px;
+}
+
+/* Contact */
+.c-section.contact {
+  padding: 0 68px;
 }

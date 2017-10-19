@@ -1,4 +1,6 @@
 
-@import "./text.css";
 @import "./section.css";
 @import "./article.css";
+@import "./text.css";
+@import "./link.css";
+@import "./button.css";

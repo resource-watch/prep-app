@@ -1,9 +1,35 @@
 
 .c-article {
-  padding: 65px 100px;
-  background-color: #fff;
 }
 
+/* Overlapped */
 .c-article.-overlapped {
+  padding: 65px 100px;
+  background-color: #fff;
   margin-top: -75px;
+}
+
+/* card */
+.c-article.-card {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding: 100px;
+  background-color: #263E57;
+  background-image: url('../images/intro.jpg');
+  color: #fff;
+}
+
+.c-article.-card .article-title {
+  font-size: 55px;
+  line-height: 61px;
+  margin: 0;
+  margin-bottom: 50px;
+}
+
+.c-article.-card .article-description {
+  font-size: 17px;
+  line-height: 28px;
+  margin: 0;
+  margin-bottom: 50px;
 }
