@@ -55,18 +55,26 @@
 }
 
 /* Partners */
-.c-section.partners .partners-title {
+.c-section.partners {
+  padding: 100px 68px;
+}
+
+.c-section.partners {
   display: flex;
   flex-flow: column;
   align-items: center;
+
 }
 
 .c-section.partners .partners-title {
   position: relative;
   font-size: 37px;
   line-height: 45px;
+  text-align: center;
   color: #263E57;
   padding: 25px 0;
+  margin: 0;
+  margin-bottom: 50px;
 }
 
 .c-section.partners .partners-title:after {

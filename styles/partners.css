@@ -1,0 +1,11 @@
+
+.c-partners {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.c-partners .logo-container {
+  text-align: center;
+  width: 33.33%;
+  margin-bottom: 70px;
+}

@@ -14,7 +14,7 @@
   display: flex;
   flex-flow: column;
   align-items: center;
-  padding: 100px;
+  padding: 100px 50px;
   background-color: #263E57;
   background-image: url('../images/intro.jpg');
   color: #fff;
