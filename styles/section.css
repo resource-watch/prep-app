@@ -134,7 +134,7 @@
   align-items: center;
   padding: 250px 100px 170px;
   background-color: #0A2C50;
-  background-image: url('../images/intro.jpg');
+  background-image: url('../images/bg-dashboards.jpg');
 }
 
 @media screen and (min-width: 319px) and (max-width: 650px) {

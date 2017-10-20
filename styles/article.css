@@ -44,8 +44,10 @@
   align-items: center;
   padding: 100px 50px;
   background-color: #263E57;
-  background-image: url('../images/intro.jpg');
+  background-image: url('../images/bg-create.jpg');
   color: #fff;
+  background-size: cover;
+  box-shadow: 0 15px 20px 0 rgba(0,0,0,0.15);
 }
 
 @media screen and (min-width: 319px) and (max-width: 650px) {

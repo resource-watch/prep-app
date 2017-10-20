@@ -15,5 +15,5 @@
 }
 
 .c-button:hover {
-  opacity: .7;
+  background-color: rgba(255,201,78,0.1);
 }
