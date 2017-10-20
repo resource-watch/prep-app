@@ -13,3 +13,7 @@
   border: 2px solid #FFC94E;
   letter-spacing: 1px;
 }
+
+.c-button:hover {
+  opacity: .7;
+}

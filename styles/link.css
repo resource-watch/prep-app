@@ -4,3 +4,7 @@
   font-weight: bold;
   text-decoration: none;
 }
+
+.c-link:hover {
+  opacity: .7;
+}
