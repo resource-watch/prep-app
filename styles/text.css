@@ -2,7 +2,6 @@
 .c-text {
   margin: 0;
   margin-bottom: 30px;
-  font-size: 19px;
   line-height: 30px;
   font-size: 15px;
   line-height: 30px;
@@ -10,4 +9,15 @@
 
 .c-text.-principal {
   font-size: 19px;
+}
+
+@media screen and (min-width: 319px) and (max-width: 650px) {
+  .c-text {
+    font-size: 13px;
+    line-height: 22px;
+  }
+
+  .c-text.-principal {
+    font-size: 15px;
+  }
 }

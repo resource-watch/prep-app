@@ -9,3 +9,10 @@
   width: 33.33%;
   margin-bottom: 70px;
 }
+
+@media screen and (min-width: 319px) and (max-width: 650px) {
+  .c-partners .logo-container {
+    width: 50%;
+    margin-bottom: 30px;
+  }
+}
