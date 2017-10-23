@@ -12,12 +12,11 @@ function getPartners() {
     }
 
     partners.forEach(function(p) {
-      el.innerHTML += '<div class="logo-container"><a href="' + p.url + '" target="_blank" rel="noreferrer noopener"><img src="' + p.images.logo + '" alt="' + p.name + '" /></a></div>';
+      el.innerHTML += '<div class="logo-container"><a href="' + p.url + '" target="_blank" rel="noreferrer noopener"><img src="' + p.images.thumbnail + '" alt="' + p.name + '" /></a></div>';
     }.bind(this));
   };
   xhttp.open("GET", url, true);
   xhttp.send();
 }
 
-
-getPartners();
+document.addEventListener('DOMContentLoaded', getPartners);

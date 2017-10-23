@@ -10,6 +10,20 @@
   margin-bottom: 70px;
 }
 
+.c-partners .logo-container a {
+  display: inline-block;
+  overflow: hidden;
+  box-shadow: inset 0px 0px 0 2px white;
+  max-width: 200px;
+}
+
+.c-partners .logo-container img {
+  display: block;
+  position: relative;
+  max-width: 100%;
+  z-index: -1;
+}
+
 @media screen and (min-width: 319px) and (max-width: 650px) {
   .c-partners .logo-container {
     width: 50%;
