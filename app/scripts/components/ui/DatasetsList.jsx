@@ -145,54 +145,16 @@ export default class DatasetsList extends React.Component {
     return list.map((dataset) => {
       const isInfoPanelOpen = dataset.id && this.props.infoSidebarMetadata.open &&
         this.props.infoSidebarMetadata.datasetId === dataset.id;
-      const metadata = { title: '', subtitle: '', description: '', tags: [] };
-      metadata.title = dataset.metadata && dataset.metadata.length ?
-        dataset.metadata[0].attributes.name : dataset.name;
-
-      let layerIcon = null;
-      let datasetInfoElement = null;
-
-      // Set metadata
-      if (dataset.metadata && dataset.metadata.length) {
-        const info = dataset.metadata[0].attributes.info;
-        if (info) {
-          if (info.organization) metadata.subtitle = info.organization;
-          if (info.short_description) metadata.description = info.short_description;
-        }
-      }
-
-      for (let i = 0; i < dataset.vocabulary[0].attributes.tags.length; i++) {
-        metadata.tags.push(dataset.vocabulary[0].attributes.tags[i]);
-      }
-
-      // Set actions
-      if (dataset.layer && dataset.layer.length) {
-        layerIcon = (
-          <Switch
-            onChange={() => this.props.onSwitchChange(dataset)}
-            checked={dataset.active || false}
-          />
-        );
-      }
-      if (dataset.id) {
-        datasetInfoElement = isInfoPanelOpen ?
-          (<button key={'info-close'} onClick={() => this.props.onCloseInfo()} className="cancel">
-            <Icon name="icon-cancel" />
-          </button>) :
-          (<button key={'info-open'} onClick={() => this.props.onInfoClick(dataset.id)} className="info">
-            <Icon name="icon-info" />
-          </button>);
-      }
-
 
       return (
         <DatasetItem
           key={`map-layer-${dataset.id}`}
-          leftElement={layerIcon}
-          toolsElements={[datasetInfoElement]}
-          metadata={metadata}
+          dataset={dataset || {}}
           layerActive={dataset.active || false}
           infoActive={isInfoPanelOpen}
+          onCloseInfo={this.props.onCloseInfo}
+          onInfoClick={this.props.onInfoClick}
+          onSwitchChange={this.props.onSwitchChange}
         />
       );
     });
