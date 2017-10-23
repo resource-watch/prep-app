@@ -54,12 +54,14 @@
   padding: 37px 0;
   text-align: center;
   margin: 0;
+  max-width: 60%;
 }
 
 @media screen and (min-width: 319px) and (max-width: 650px) {
   .intro-title {
     font-size: 43px;
     line-height: 55px;
+    max-width: 90%;
   }
 }
 
