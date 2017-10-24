@@ -11,10 +11,10 @@ import CollapsibleItem from './CollapsibleItem';
 import Icon from '../ui/Icon';
 import Search from '../ui/Search';
 import DatasetItem from '../Explore/DatasetItem';
-import Switch from '../Button/Switch';
 
 // Constants
 import { DATASETS_GROUPS } from '../../general-constants/datasets-groups';
+
 
 export default class DatasetsList extends React.Component {
   constructor(props) {
@@ -96,7 +96,6 @@ export default class DatasetsList extends React.Component {
       </div>
     );
   }
-
 
   /* Core datasets */
   getCoreContent() {
