@@ -4,10 +4,83 @@ import PropTypes from 'prop-types';
 // Libraries
 import classnames from 'classnames';
 
+// Components
+import Icon from 'components/ui/Icon';
+import Switch from '../Button/Switch';
+
 
 class DatasetItem extends React.Component {
+  constructor() {
+    super();
+
+    this.onInfoClick = this.onInfoClick.bind(this);
+    this.onCloseInfo = this.onCloseInfo.bind(this);
+    this.onSwitchChange = this.onSwitchChange.bind(this);
+  }
+
+  onSwitchChange() {
+    const { dataset } = this.props;
+    this.props.onSwitchChange(dataset);
+  }
+
+  onCloseInfo() {
+    this.props.onCloseInfo();
+  }
+
+  onInfoClick() {
+    const { dataset } = this.props;
+    this.props.onInfoClick(dataset.id);
+  }
+
+  getInfoButton() {
+    const { infoActive } = this.props;
+
+    return infoActive ?
+      (<button key={'info-close'} onClick={this.onCloseInfo} className="cancel">
+        <Icon name="icon-cancel" />
+      </button>) :
+      (<button key={'info-open'} onClick={this.onInfoClick} className="info">
+        <Icon name="icon-info" />
+      </button>);
+  }
+
+  getDatasetSwitch() {
+    const { dataset } = this.props;
+    if (dataset.layer && dataset.layer.length) {
+      return (
+        <Switch
+          onChange={this.onSwitchChange}
+          checked={dataset.active || false}
+        />
+      );
+    }
+
+    return null;
+  }
+
+  getMetadata() {
+    const { dataset } = this.props;
+    const metadata = { title: '', subtitle: '', description: '', tags: [] };
+    metadata.title = dataset.metadata && dataset.metadata.length ?
+      dataset.metadata[0].attributes.name : dataset.name;
+
+    // Set metadata
+    if (dataset.metadata && dataset.metadata.length) {
+      const info = dataset.metadata[0].attributes.info;
+
+      if (info && info.organization) metadata.subtitle = info.organization;
+      if (info && info.short_description) metadata.description = info.short_description;
+    }
+
+    if (dataset.vocabulary && dataset.vocabulary.length && dataset.vocabulary[0].attributes.tags) {
+      metadata.tags = dataset.vocabulary[0].attributes.tags;
+    }
+
+    return metadata;
+  }
+
   render() {
-    const { classNames, metadata, leftElement, toolsElements, layerActive, infoActive } = this.props;
+    const { classNames, layerActive, infoActive } = this.props;
     const className = classnames(
       'c-dataset-item',
       {
@@ -17,23 +90,23 @@ class DatasetItem extends React.Component {
       }
     );
 
+    const infoButton = this.getInfoButton();
+    const datasetSwitch = this.getDatasetSwitch();
+    const metadata = this.getMetadata();
+
     return (
       <div className={className}>
         <header className="item-header">
           <div className="header-container">
             <div className="title-container">
-              {leftElement &&
-                <div className="left-element">
-                  {leftElement}
-                </div>
-              }
+              <div className="left-element">
+                {datasetSwitch}
+              </div>
               <h1 className="item-title">{metadata.title}</h1>
             </div>
-            {toolsElements && toolsElements.length > 0 &&
-              <div className="item-tools">
-                {toolsElements}
-              </div>
-            }
+            <div className="item-tools">
+              {infoButton}
+            </div>
           </div>
           <h2 className="subtitle">{metadata.subtitle}</h2>
         </header>
@@ -56,11 +129,13 @@ class DatasetItem extends React.Component {
 
 DatasetItem.propTypes = {
   classNames: PropTypes.string,
-  metadata: PropTypes.object,
-  leftElement: PropTypes.any,
-  toolsElements: PropTypes.any,
+  dataset: PropTypes.object,
   layerActive: PropTypes.bool,
-  infoActive: PropTypes.bool
+  infoActive: PropTypes.bool,
+  // Actions
+  onInfoClick: PropTypes.func,
+  onCloseInfo: PropTypes.func,
+  onSwitchChange: PropTypes.func
 };
 
 DatasetItem.defaultProps = {
