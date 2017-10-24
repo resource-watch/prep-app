@@ -5,6 +5,9 @@
 }
 
 .c-partners .logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   width: 33.33%;
   margin-bottom: 70px;
