@@ -1,24 +1,46 @@
 import React from 'react';
+
+// Libraries
+import Scroll from 'react-scroll';
+
+// Components
 import { Link } from 'react-router';
 
-function NavBar(props) {
-  return (
-    <div className="row c-nav-tab">
-      <div className="columns small-8 small-offset-2">
-        <ul>
-          <li className={props.activeTab === 'data' ? '-active' : ''}>
-            <Link className="link" to={`${props.baseUrl}/data`}>Data</Link>
-          </li>
-          <li className={props.activeTab === 'insights' ? '-active' : ''}>
-            <Link className="link" to={`${props.baseUrl}/insights`}>Stories</Link>
-          </li>
-          <li className={props.activeTab === 'tools' ? '-active' : ''}>
-            <Link className="link" to={`${props.baseUrl}/tools`}>Tools</Link>
-          </li>
-        </ul>
+// Constants
+import { DASHBOARD_NAV } from '../../general-constants/dashboard';
+
+const scroll = Scroll.animateScroll;
+
+export default class NavBar extends React.Component {
+  onScroll(id) {
+    const targetHeight = document.getElementById(id).getBoundingClientRect();
+    const bodyRect = document.body.getBoundingClientRect();
+    // Get element top position
+    const offset = targetHeight.top - bodyRect.top;
+
+    scroll.scrollTo(offset);
+  }
+
+  render() {
+    const { list, anchor, baseUrl, activeTab } = this.props;
+
+    return (
+      <div className="row c-nav-tab">
+        <div className="columns small-8 small-offset-2">
+          <ul>
+            {list.map(l => (
+              <li id={`tg-${l.value}`} key={l.value} className={activeTab === l.value ? '-active' : ''}>
+                {anchor ?
+                  <button className="link" onClick={() => this.onScroll(l.value)}>{l.label}</button> :
+                  <Link className="link" to={`${baseUrl}/${l.value}`}>{l.label}</Link>
+                }
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 NavBar.propTypes = {
@@ -30,7 +52,12 @@ NavBar.propTypes = {
   /**
    * Define the base URL to which the tab's name will be added to
    */
-  baseUrl: React.PropTypes.string.isRequired
+  baseUrl: React.PropTypes.string.isRequired,
+  list: React.PropTypes.array,
+  anchor: React.PropTypes.bool
 };
 
-export default NavBar;
+NavBar.defaultProps = {
+  list: DASHBOARD_NAV,
+  anchor: false
+};

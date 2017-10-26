@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import metadata from '../../metadata.json';
+
+// Components
 import PartnersSlider from '../../containers/PartnersSlider';
 import SecondaryNav from '../../components/Navigation/SecondaryNav';
 import SocialNav from '../../components/Navigation/SocialNav';
@@ -18,6 +19,10 @@ import RelatedDatasets from '../../containers/Dashboards/RelatedDatasets';
 import RelatedDashboards from './RelatedDashboards';
 import NavTab from './NavTab';
 import LoadingSpinner from '../Loading/LoadingSpinner';
+
+// Constants
+import metadata from '../../metadata.json';
+import { DASHBOARD_NAV } from '../../general-constants/dashboard';
 
 class DashboardDetail extends React.Component {
 
@@ -98,10 +103,32 @@ class DashboardDetail extends React.Component {
         <NavTab
           activeTab={this.props.dashboardTab}
           baseUrl={`/dashboard/${this.props.dashboardSlug}`}
+          anchor
         />
 
         <div className="wrapper tab-container">
-          {specificContent}
+          {/* {specificContent} */}
+          <article id="data">
+            <h2>Data</h2>
+            <DashboardDetailInsights
+              data={this.props.data.insights}
+            />
+          </article>
+
+          <article id="stories">
+            <h2>Stories</h2>
+            <DashboardDetailTools
+              data={this.props.data.tools}
+            />
+          </article>
+
+          <article id="tools">
+            <h2>Tools</h2>
+            <DashboardDetailIndicators
+              dashboardSlug={this.props.dashboardSlug}
+              data={this.props.data.indicator}
+            />
+          </article>
         </div>
       </div>
     );
