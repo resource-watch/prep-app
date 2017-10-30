@@ -35,7 +35,7 @@
 
     .m-content {
       padding: $medium-margin;
-      height: 90vh;
+      max-height: 90vh;
       overflow: auto;
     }
 
