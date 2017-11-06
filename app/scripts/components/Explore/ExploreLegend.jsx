@@ -13,7 +13,7 @@ function getLinesLegend(layer) {
         <div className="column small-6" key={index}>
           <div className="item">
             <span className="color" style={{ backgroundColor: item.color }} />
-            <span className="value"> {item.name} </span>
+            <span className="value"> {item.name || item.value} </span>
           </div>
         </div>
       ))}
@@ -44,7 +44,7 @@ function getGradientLegend(layer) {
   const values = [];
   layer.legend_config.items.forEach((item, index) => {
     colors.push(item.color);
-    values.push(<span key={index}>{item.value}</span>);
+    values.push(<span key={index}>{item.value || item.name}</span>);
   });
 
   return (<div className="row">
@@ -67,7 +67,7 @@ function getCloroplethLegend(layer) {
     columns.push(
       <div className="column" key={index}>
         <span className="-color" style={{ backgroundColor: item.color }} />
-        <span>{item.value}</span>
+        <span>{item.value || item.name}</span>
       </div>);
   });
 
