@@ -42,6 +42,7 @@ function MetadataInfo(props) {
         : metadata.description}
       </span>
     </li>);
+  const createdAt = new Date(metadata.created_at);
 
   return (
     <ul>
@@ -121,6 +122,19 @@ function MetadataInfo(props) {
           </span>
         </li>
       }
+
+      {/* Contact */}
+      <li><span>Contact: </span>
+        <span>
+          <a href="mailto:info@prepdata.org">info@prepdata.org</a>
+        </span>
+      </li>
+
+      {/* /Metadata date creation */}
+      <li>
+        <span>Date of creation: </span>
+        <span>{`${createdAt.getFullYear()}/${createdAt.getMonth() + 1}/${createdAt.getDate()}`}</span>
+      </li>
     </ul>
   );
 }
