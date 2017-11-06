@@ -22,7 +22,7 @@ import LoadingSpinner from '../Loading/LoadingSpinner';
 
 // Constants
 import metadata from '../../metadata.json';
-import { DASHBOARD_NAV } from '../../general-constants/dashboard';
+
 
 class DashboardDetail extends React.Component {
 
@@ -214,6 +214,7 @@ class DashboardDetail extends React.Component {
 }
 
 DashboardDetail.propTypes = {
+  location: React.PropTypes.object,
   /**
    * Define the route path (from the router)
    */

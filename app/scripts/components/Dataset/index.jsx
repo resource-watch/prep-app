@@ -118,11 +118,12 @@ class DatasetDetail extends React.Component {
   }
 
   render() {
+    const data = this.props.data ? this.props.data : {};
     const currentData = this.getCurrentData();
-
-    const data = this.props.data && this.props.data || null;
-
-    const title = data ? data.name : currentData.title;
+    const dataMetadata = data.metadata && data.metadata.length ? data.metadata : null;
+    const title = dataMetadata && dataMetadata[0].attributes.info && dataMetadata[0].attributes.info.technical_title ?
+      dataMetadata[0].attributes.info.technical_title :
+      data.name;
 
     document.title = title;
 
@@ -211,6 +212,10 @@ DatasetDetail.propTypes = {
    * Define the dataset widget
    */
   widgets: React.PropTypes.array
+};
+
+DatasetDetail.defaultProps = {
+  data: {}
 };
 
 export default DatasetDetail;

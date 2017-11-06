@@ -25,57 +25,94 @@ function getDownloadUrl(data) {
 }
 
 function MetadataInfo(props) {
-  if (!props.data.metadata || props.data.metadata.length === 0) return null;
+  if (!props.data.metadata || props.data.metadata.length === 0) return null;
 
-  const metadataInfo = props.data.metadata && props.data.metadata[0].attributes.info;
+  const metadata = props.data.metadata && props.data.metadata[0].attributes;
+  const metadataInfo = metadata && metadata.info;
   const downloadUrl = getDownloadUrl(props.data);
 
-  if (!metadataInfo) return null;
+  if (!metadata || !metadataInfo) return null;
 
-  const title = metadataInfo.message
-    ? (<li>
-      <span>Info: </span>
-      <span>{metadataInfo.message}</span>
-    </li>)
+  const description = metadataInfo.message
+    ? (<li><span>Info: </span><span>{metadataInfo.message}</span></li>)
     : (<li>
       <span>Description: </span>
-      <span>{props.short
+      <span>{props.short && metadataInfo['short-description']
         ? metadataInfo['short-description']
-        : metadataInfo.description}
+        : metadata.description}
       </span>
     </li>);
+
   return (
     <ul>
-
-      {title}
-
-      {metadataInfo.organization &&
-        <li>
-          <span>Organization: </span>
-          <span>{metadataInfo.organization}</span>
-        </li>
+      {/* Published date */}
+      {metadataInfo.pusblished_date &&
+        <li><span>Published date: </span><span>{metadataInfo.pusblished_date}</span></li>
       }
+
+      {/* Description */}
+      {description}
+
+      {/* Dataset language */}
+      <li><span>Dataset Language: </span><span>{metadata.language}</span></li>
+
+      {/* Geographic Location */}
+      {metadataInfo.geographic_coverage &&
+        <li><span>Geographic location: </span><span>{metadataInfo.geographic_coverage}</span></li>
+      }
+
+      {/* Date of content */}
+      {metadataInfo.date_of_content &&
+        <li><span>Date of content: </span><span>{metadataInfo.date_of_content}</span></li>
+      }
+
+      {/* Data type */}
+      {metadataInfo.data_type &&
+        <li><span>Data type: </span><span>{metadataInfo.data_type}</span></li>
+      }
+
+      {/* Spatial resolution */}
+      {metadataInfo.spatial_resolution &&
+        <li><span>Spatial resolution: </span><span>{metadataInfo.spatial_resolution}</span></li>
+      }
+
+      {/* Metadata language */}
+      <li><span>Metadata Language: </span><span>{metadata.language}</span></li>
+
+      {/* License */}
       {metadataInfo.license &&
+        <li><span>License: </span><span>{metadataInfo.license}</span></li>
+      }
+
+      {/* License link */}
+      {metadataInfo.license_link &&
+        <li><span>Link to license: </span><span>{metadataInfo.license_link}</span></li>
+      }
+
+      {/* Source organizations */}
+      {metadata.source ?
+        <li><span>Source organizations: </span><span>{metadataInfo.sources ? metadataInfo.sources['sources-name'] : ''}({metadata.source})</span></li> :
         <li>
-          <span>License: </span>
-          <span>{metadataInfo.license}</span>
+          <span>Source organizations: </span>
+          <span>{metadataInfo['organization-long']} ({metadataInfo.organization})</span>
         </li>
       }
-      {metadataInfo.source &&
-        <li>
-          <span>Access: </span>
+
+      {/* Learn more link */}
+      {metadataInfo.learn_more_link &&
+        <li><span>Download from Original Source Link: </span>
           <span>
-            <a href={metadataInfo.source} target="_blank">
-              {metadataInfo.source}
-            </a>
+            <a href={metadataInfo.learn_more_link} target="_blank" rel="noopener noreferrer">{metadataInfo.learn_more_link}</a>
           </span>
         </li>
       }
+
+      {/* Download url */}
       {props.download && downloadUrl &&
         <li>
           <span>Download: </span>
           <span>
-            <a href={downloadUrl} target="_blank">
+            <a href={downloadUrl} target="_blank" rel="noopener noreferrer">
               {downloadUrl.length > 120
                 ? `${downloadUrl.substring(0, 120)}...`
                 : downloadUrl
@@ -101,6 +138,10 @@ MetadataInfo.propTypes = {
    * Define the metadata info
    */
   data: React.PropTypes.object.isRequired
+};
+
+MetadataInfo.deafultProps = {
+  data: {}
 };
 
 export default MetadataInfo;
