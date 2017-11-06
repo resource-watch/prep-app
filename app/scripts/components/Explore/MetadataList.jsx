@@ -91,8 +91,11 @@ function MetadataInfo(props) {
       }
 
       {/* Source organizations */}
-      {metadata.source ?
-        <li><span>Source organizations: </span><span>{metadataInfo.sources ? metadataInfo.sources['sources-name'] : ''}({metadata.source})</span></li> :
+      {metadataInfo.sources && metadataInfo.sources.length ?
+        <li>
+          <span>Source organizations: </span>
+          <span>{metadataInfo.sources.map(s => s['sources-name']).join(', ')}</span>
+        </li> :
         <li>
           <span>Source organizations: </span>
           <span>{metadataInfo['organization-long']} ({metadataInfo.organization})</span>

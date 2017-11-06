@@ -30,7 +30,7 @@ class InfoSidebar extends React.Component {
     let name = '';
 
     if (dataset) {
-      name = dataset && dataset.metadata && dataset.metadata.length ?
+      name = dataset && dataset.metadata && dataset.metadata.length && dataset.metadata[0].attributes.technical_title ?
         dataset.metadata[0].attributes.name : dataset.name;
     }
 
@@ -50,9 +50,10 @@ class InfoSidebar extends React.Component {
       dataset.vocabulary[0].attributes.tags.filter(t => allFilters.topics[t]).map(t => allFilters.topics[t]) : [];
     const areasList = dataset && dataset.vocabulary && dataset.vocabulary.length ?
       dataset.vocabulary[0].attributes.tags.filter(t => allFilters.geography[t]).map(t => allFilters.geography[t]) : [];
-    const infoDescription = dataset && dataset.metadata && dataset.metadata.length && dataset.metadata[0].attributes.info.description &&
-      dataset.metadata[0].attributes.info.description !== '' ?
-      dataset.metadata[0].attributes.info.description : null;
+
+    const infoDescription = dataset && dataset.metadata && dataset.metadata.length && dataset.metadata[0].attributes.info.short_description &&
+      dataset.metadata[0].attributes.info.short_description !== '' ?
+      dataset.metadata[0].attributes.info.short_description : null;
     const metaDescription = dataset && dataset.metadata && dataset.metadata.length ?
       dataset.metadata[0].attributes.description : '';
     const description = infoDescription || metaDescription;

@@ -66,10 +66,17 @@ class DatasetItem extends React.Component {
 
     // Set metadata
     if (dataset.metadata && dataset.metadata.length) {
+      const MAX_LENGTH = 150;
       const info = dataset.metadata[0].attributes.info;
 
       if (info && info.organization) metadata.subtitle = info.organization;
-      if (info && info.short_description) metadata.description = info.short_description;
+      if (info && info.short_description) {
+        if (info.short_description.length > MAX_LENGTH) {
+          metadata.description = `${info.short_description.slice(0, MAX_LENGTH)}...`;
+        } else {
+          metadata.description = info.short_description;
+        }
+      }
     }
 
     if (dataset.vocabulary && dataset.vocabulary.length && dataset.vocabulary[0].attributes.tags) {
