@@ -2,25 +2,26 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    name: {name}-staging
-  name: {name}-staging
+    name: {name}
+  name: {name}
 spec:
-  revisionHistoryLimit: 0
+  revisionHistoryLimit: 2
   template:
     metadata:
       annotations:
         chaos.alpha.kubernetes.io/enabled: "true"
       labels:
-        name: {name}-staging
+        name: {name}
     spec:
       containers:
-      - name: {name}-staging
+      - name: {name}
         image: vizzuality/{name}
         imagePullPolicy: Always
         resources:
           requests:
-            memory: "0Mi"
-            cpu: "0m"
+            memory: "128Mi"
+          limits:
+            memory: "512Mi"
         env:
           - name: PORT
             value: "3000"
@@ -46,26 +47,6 @@ spec:
                 secretKeyRef:
                   name: appsecrets
                   key: PREP_MAIL_FROM
-          - name: TWITTER_CONSUMER_KEY
-            valueFrom:
-                secretKeyRef:
-                  name: appsecrets
-                  key: PREP_TWITTER_CONSUMER_KEY
-          - name: TWITTER_CONSUMER_SECRET
-            valueFrom:
-                secretKeyRef:
-                  name: appsecrets
-                  key: PREP_TWITTER_CONSUMER_SECRET
-          - name: TWITTER_ACCESS_TOKEN_KEY
-            valueFrom:
-                secretKeyRef:
-                  name: appsecrets
-                  key: PREP_TWITTER_ACCESS_TOKEN_KEY
-          - name: TWITTER_ACCESS_TOKEN_SECRET
-            valueFrom:
-                secretKeyRef:
-                  name: appsecrets
-                  key: PREP_TWITTER_ACCESS_TOKEN_SECRET
         ports:
           - containerPort: 3000
 
