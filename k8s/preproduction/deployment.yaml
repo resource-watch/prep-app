@@ -2,8 +2,8 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    name: {name}
-  name: {name}
+    name: {name}-preproduction
+  name: {name}-preproduction
 spec:
   revisionHistoryLimit: 2
   template:
@@ -11,10 +11,10 @@ spec:
       annotations:
         chaos.alpha.kubernetes.io/enabled: "true"
       labels:
-        name: {name}
+        name: {name}-preproduction
     spec:
       containers:
-      - name: {name}
+      - name: {name}-preproduction
         image: vizzuality/{name}
         imagePullPolicy: Always
         resources:
