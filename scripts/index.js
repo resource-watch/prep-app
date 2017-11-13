@@ -1,6 +1,6 @@
 
 function getPartners() {
-  var url = 'https://staging.prepdata.org/api/partners?featured=true';
+  var url = 'https://beta.prepdata.org/api/partners?featured=true';
   var xhttp = new XMLHttpRequest();
 
   xhttp.onreadystatechange = function() {
