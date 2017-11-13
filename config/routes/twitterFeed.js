@@ -8,7 +8,7 @@ const twitterClient = new Twitter({
 });
 
 module.exports = (app) => {
-  app.get('/api/twitter', (req, res) => {
+  app.get('/twitter-api', (req, res) => {
     const urlPath = 'search/tweets';
     const params = { q: 'list:worldresources/prep4climate', count: 10 };
     twitterClient.get(urlPath, params, (err, timeline) => {
