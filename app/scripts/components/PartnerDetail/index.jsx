@@ -61,8 +61,8 @@ function getFooter() {
   );
 }
 
-export default function PartnerDetail() {
-  const partner = this.props.partners.length ? this.props.partners.find(item => item.id === +this.props.params.id) : null;
+export default function PartnerDetail(props) {
+  const partner = props.partners.length ? props.partners.find(item => item.id === +props.params.id) : null;
   if (partner) {
     document.title = `Partners - ${partner.name}`;
   }
