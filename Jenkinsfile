@@ -37,11 +37,11 @@ node {
           sh("docker -H :2375 build -t ${dockerUsername}/${appName}:latest --build-arg datasetEnv=production,preproduction .")
           break
         case "preproduction":
-          sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production,preproduction --build-arg apiUrl=https://staging.prepdata.org/api .")
+          sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production,preproduction --build-arg apiUrl=https://preproduction.prepdata.org/api .")
           sh("docker -H :2375 build -t ${dockerUsername}/${appName}:latest --build-arg datasetEnv=production,preproduction .")
           break
         case "master":
-          sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production --build-arg apiUrl=https://staging.prepdata.org .")
+          sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production --build-arg apiUrl=https://beta.prepdata.org .")
           sh("docker -H :2375 build -t ${dockerUsername}/${appName}:latest --build-arg datasetEnv=production .")
           break
         default:
