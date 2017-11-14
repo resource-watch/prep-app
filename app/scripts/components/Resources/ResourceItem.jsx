@@ -1,3 +1,5 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import Thumbnail from '../Thumbnails/Thumbnail';
 
 export default function ResourceItem(props) {
@@ -8,7 +10,7 @@ export default function ResourceItem(props) {
       <div className="c-article-module">
         <Thumbnail
           url={data.url}
-          src={data.image}
+          src={data.photo.original}
           alt={data.title}
           border={'neutral'}
         />
@@ -22,3 +24,7 @@ export default function ResourceItem(props) {
     </div>
   );
 }
+
+ResourceItem.propTypes = {
+  data: PropTypes.object
+};

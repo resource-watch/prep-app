@@ -5,7 +5,7 @@ export default function () {}
 
 export function getResources() {
   return (dispatch) => {
-    fetch(`${config.apiUrl}/resources`)
+    fetch(`${config.apiUrl}/resources?published=true`)
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);

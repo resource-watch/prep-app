@@ -1,5 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Article from '../Content/Article';
+import ResourceItem from './ResourceItem';
+
 import Thumbnail from '../Thumbnails/Thumbnail';
 
 import ipccLogo from '../../../images/resources/ipcc_logo.png';
@@ -18,14 +21,13 @@ import worldBankLogo from '../../../images/resources/WorldBankGorup_logo.png';
 import weAdaptLogo from '../../../images/resources/logo-weAdapt-resource.png';
 import ccafsLogo from '../../../images/resources/logo-CCAFS-resource.png';
 
-class Resources extends React.Component {
-
+class Resources extends React.PureComponent {
   componentDidMount() {
     this.props.getResources();
   }
 
   render() {
-    console.log(this.props.list);
+    const resources = this.props.list;
 
     return (
       <div className="c-partners">
@@ -42,6 +44,8 @@ class Resources extends React.Component {
           <h2>Understanding impacts of climate change</h2>
 
           <div className="row align-stretch">
+            { resources.map(resource => <ResourceItem key={`resource-${resource.id}`} data={resource} />) }
+
             <div className="columns small-12 medium-4">
               <div className="c-article-module">
                 <Thumbnail
@@ -206,9 +210,11 @@ class Resources extends React.Component {
                 />
 
                 <h3>CAKE</h3>
-                <p>
-                    The Climate Adaptation Knowledge Exchange (CAKE) is a cutting-edge, climate adaptation-focused knowledge sharing platform and community of practice for those working to manage natural and built environments and human communities in a changing climate. The CAKE platform includes case studies on the-ground adaptation efforts, a library of adaptation resources and tools, a directory of adaptation experts, and a community section featuring events and opportunities from around the field.
-                </p>
+                <p>The Climate Adaptation Knowledge Exchange (CAKE) is a cutting-edge, climate adaptation-focused
+                  knowledge sharing platform and community of practice for those working to manage natural and built
+                  environments and human communities in a changing climate. The CAKE platform includes case studies
+                  on the-ground adaptation efforts, a library of adaptation resources and tools, a directory of adaptation experts,
+                  and a community section featuring events and opportunities from around the field.</p>
                 <a href={'HTTP://CAKEX.ORG/'} target="_blank" rel="noopener noreferrer">HTTP://CAKEX.ORG/</a>
               </div>
             </div>
@@ -297,7 +303,8 @@ class Resources extends React.Component {
                 </p>
                 <a
                   href={'HTTP://WWW.SERVIRGLOBAL.NET/'}
-                  target="_blank" rel="noopener noreferrer"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >HTTP://WWW.SERVIRGLOBAL.NET/</a>
               </div>
             </div>
@@ -344,7 +351,11 @@ class Resources extends React.Component {
       </div>
     );
   }
-
 }
+
+Resources.propTypes = {
+  list: PropTypes.array,
+  getResources: PropTypes.func
+};
 
 export default Resources;
