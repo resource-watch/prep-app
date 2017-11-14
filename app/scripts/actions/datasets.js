@@ -98,7 +98,7 @@ export function setDatasetsTagFilter(filter, tag) {
 export function getDatasets(defaultActiveLayers) {
   return (dispatch, getState) => {
     const env = config.datasetEnv || 'production';
-    fetch(`${config.apiUrlRW}/dataset?application=prep&includes=metadata,layer,vocabulary&page[size]=999&status=saved&env=${env}`)
+    fetch(`${config.apiUrlRW}/dataset?application=prep&includes=metadata,layer,vocabulary&page[size]=999&status=saved&env=${env}&published=true`)
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
