@@ -18,7 +18,7 @@ import Insights from './containers/Insights';
 import InsightsDetail from './containers/Insights/InsightDetail';
 import Create from './components/Create';
 import Partners from './containers/Partners';
-import Resources from './components/Resources';
+import Resources from './containers/Resources';
 import Contact from './components/Contact';
 import Embed from './containers/Embed';
 import Root from './components/Root';

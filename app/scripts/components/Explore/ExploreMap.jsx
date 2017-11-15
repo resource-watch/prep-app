@@ -391,7 +391,9 @@ class ExploreMap extends React.Component {
       esrimapservice: this.addEsriLayer,
       esritileservice: this.addEsriLayer,
       // geojson
-      // geojson: this.addGeoJsonLayer
+      // geojson: this.addGeoJsonLayer,
+      gee: this.addGeeLayer,
+      nexgddp: this.addNexGDDPLayer
     }[layer.provider];
 
     if (method) {
@@ -550,6 +552,38 @@ class ExploreMap extends React.Component {
         console.error('Request failed', err);
         this.props.onTileError(layer.id);
       });
+  }
+
+  addNexGDDPLayer(dataset, layerSpec, datasetsLength) {
+    const layerData = Object.assign({}, layerSpec);
+    const tileUrl = `${config.apiUrlRW}/layer/${layerData.id}/tile/nexgddp/{z}/{x}/{y}`;
+    const tileLayer = L.tileLayer(tileUrl);
+
+    const eventName = (layerData.type === 'wms' ||
+    layerData.type === 'tileLayer') ? 'tileload' : 'load';
+    tileLayer.on(eventName, () => {
+      this.handleTileLoaded(tileLayer);
+    });
+    tileLayer.addTo(this.map).setZIndex(datasetsLength - dataset.index);
+
+    this.mapLayers[layerData.id] = tileLayer;
+    this.changeLayerOpacity(dataset);
+  }
+
+  addGeeLayer(dataset, layerSpec, datasetsLength) {
+    const layerData = Object.assign({}, layerSpec);
+    const tileUrl = `${config.apiUrlRW}/layer/${layerData.id}/tile/gee/{z}/{x}/{y}`;
+    const tileLayer = L.tileLayer(tileUrl);
+
+    const eventName = (layerData.type === 'wms' ||
+    layerData.type === 'tileLayer') ? 'tileload' : 'load';
+    tileLayer.on(eventName, () => {
+      this.handleTileLoaded(tileLayer);
+    });
+    tileLayer.addTo(this.map).setZIndex(datasetsLength - dataset.index);
+
+    this.mapLayers[layerData.id] = tileLayer;
+    this.changeLayerOpacity(dataset);
   }
 
   removeMapLayer(layerId) {

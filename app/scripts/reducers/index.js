@@ -10,3 +10,4 @@ export { default as twitterFeed } from './twitter';
 export { default as tooltip } from './tooltip';
 export { default as widgets } from './widgets';
 export { default as layers } from './layers';
+export { default as resources } from './resources';
