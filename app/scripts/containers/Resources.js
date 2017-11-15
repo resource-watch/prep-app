@@ -1,14 +1,16 @@
 import { connect } from 'react-redux';
 import { getResources } from '../actions/resources';
 import Resources from '../components/Resources';
+import { firstTypeSelector, secondTypeSelector, thirdTypeSelector } from '../selectors/resources.selector';
 
 const mapStateToProps = state => ({
-  list: state.resources.list,
-  // featured: state.resources.list.filter(d => d.featured)
+  list: firstTypeSelector(state),
+  secondList: secondTypeSelector(state),
+  thirdList: thirdTypeSelector(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-  getResources: () => dispatch(getResources())
+  getResources: params => dispatch(getResources(params))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Resources);

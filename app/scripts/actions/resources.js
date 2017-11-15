@@ -1,11 +1,12 @@
-import 'whatwg-fetch';
+import queryString from 'query-string';
 import { RESOURCES_LIST_RECEIVED, RESOURCES_FETCH_ERROR } from '../constants';
 
 export default function () {}
 
-export function getResources() {
+export function getResources(params) {
+  const queryParams = Object.assign({ published: true }, queryString.stringify(params || {}));
   return (dispatch) => {
-    fetch(`${config.apiUrl}/resources?published=true`)
+    fetch(`${config.apiUrl}/resources?${queryParams}`)
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);

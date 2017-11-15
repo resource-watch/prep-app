@@ -10,7 +10,7 @@ export default function ResourceItem(props) {
       <div className="c-article-module">
         <Thumbnail
           url={data.url}
-          src={data.photo.original}
+          src={data.photo.medium}
           alt={data.title}
           border={'neutral'}
         />
