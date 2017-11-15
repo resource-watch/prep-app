@@ -1,0 +1,173 @@
+/* Colors [Deprecated] */
+$color-primary: #c32d7b;
+$color-secondary: #3bb2d0;
+$color-tertiary: #f4f5f6;
+$color-white: #fff;
+$color-black: #000;
+$color-pale-grey: #f4f5f6;
+$battleship-grey: #6c7379;
+$color-dark-grey: #9aa2a9;
+$color-grey: #e3e4e6;
+$color-charcoal-grey: #393f44;
+$color-silver: #b9bfc4;
+$color-mid-grey: #b9bfc4;
+$color-red: #e23035;
+$color-green: #65b60d;
+$color-mango: #fab72e;
+$color-dark-pink: #c32d7b;
+$color-text-headers: $color-charcoal-grey;
+$color-blue-turquoise: #00B4D3;
+$color-off-white: #f9f9f9;
+
+$color-error: $color-red;
+
+$color-text-1: #393f44;
+$color-text-2: #999ba1;
+$color-text-3: #717171;
+
+// Fonts [Deprecated]
+$font-size-extra-small:   10px;
+$font-size-small:         12px;
+$font-size-small-medium:  13px;
+$font-size-default:       14px;
+$font-size-big:           16px;
+$font-size-extra-big:     18px;
+$font-size-huge:          22px;
+$font-size-huger:         26px;
+$font-size-header-normal: 38px;
+$font-size-header-big:    48px;
+$font-size-header-huge:   64px;
+
+// Weights [Deprecated]
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-bold: 700;
+
+// Layout [Deprecated]
+$fullscreen-margin: 24px;
+$space-1: 8px;
+
+$max-width-modal: 880px;
+$max-width-modal-medium: 900px;
+
+// Theme [Deprecated]
+$bg-color-1: $color-white;
+$bg-color-2: $color-pale-grey;
+
+// Times [Deprecated]
+$animation-time: .16s;
+$animation-time-2: .24s;
+$animation-time-3: .5s;
+$animation-time-4: .75s;
+
+// Eases
+$ease-in-cubic: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+$ease-out-cubic: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+$ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1.000);
+
+$ease-in-sine: cubic-bezier(0.470, 0.000, 0.745, 0.715);
+$ease-out-sine: cubic-bezier(0.390, 0.575, 0.565, 1.000);
+$ease-in-out-sine: cubic-bezier(0.445, 0.050, 0.550, 0.950);
+
+
+
+
+
+// General settings
+$base-font-family: "Open Sans", Helvetica, Arial, sans-serif;
+$base-font-size: rem(15);
+$base-line-height: 1.7;
+
+
+
+
+// Colors
+$dark-pink: #c32d7b;
+$yellow: #FAB72E;
+$blue-turquoise: #3bb2d0;
+$charcoal-grey: #393f44;
+$dove-grey: #717171;
+$light-grey: #CACCD0;
+$porcelain: #F4F6F7;
+$white: #ffffff;
+$black: #000;
+$sea-blue: #2C75B0;
+
+// Theme
+$base-font-color: $charcoal-grey;
+$header-font-color: $color-primary;
+$link-font-color: $sea-blue;
+$active-font-color: $yellow;
+$ui-font-color: $dove-grey;
+$alt-font-color: $white;
+$ui-bg-color: $porcelain;
+$base-bg-color: $white;
+
+$border-color-1: rgba(26, 28, 34, 0.1);
+$border-color-2: rgba(202, 204,208, 0.85);; // For inputs
+$alt-border-color: $white;
+
+$color-primary: $dark-pink;
+$color-secondary: $blue-turquoise;
+$primary-color: $color-primary;
+$secondary-color: $color-secondary;
+
+// Typography
+$font-size-extra-small: 12px;
+$font-size-small: 13px;
+$font-size-normal: 14px;
+$font-size-medium: 16px;
+$font-size-big: 21px;
+
+$font-size-h1: 64px;
+$font-size-h2: 42px;
+$font-size-h3: 26px;
+$font-size-h4: 16px;
+
+$body-font-color: $base-font-color;
+$body-font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans;
+$global-weight-normal: normal;
+$global-lineheight: 1.625;
+$global-font-size: $font-size-medium;
+
+// Layout
+$margin-size-extra-small: 15px;
+$margin-size-small: 30px;
+$margin-size: 50px;
+$margin-size-big: 100px;
+
+@import
+  "add_widget_to_collection_tooltip",
+  "aggregate_function_tooltip",
+  "chart_editor",
+  "chart_tooltip",
+  "column_container",
+  "column_details",
+  "columnbox",
+  "container",
+  "custom_select",
+  "dimensions_container",
+  "field",
+  "fields_container",
+  "filter_container",
+  "filter_tooltip",
+  "how_to_widget_editor_modal",
+  "icon",
+  "limit_container",
+  "map_editor",
+  "modal",
+  "order_by_tooltip",
+  "raster_chart_editor",
+  "select",
+  "sort_container",
+  "spinner",
+  "table_view",
+  "text_chart",
+  "tooltip",
+  "vega_chart_legend",
+  "widget-tooltip-list",
+  "widget_actions_tooltip",
+  "widget_card",
+  "widget_dock",
+  "widget_editor",
+  "widget_list";

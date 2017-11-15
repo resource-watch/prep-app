@@ -1,0 +1,216 @@
+.c-custom-select {
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  border: 1px solid $border-color-2;
+  border-radius: 4px;
+  height: 45px;
+
+  &.-fixed {
+    max-width: 200px;
+  }
+
+  &.-disabled {
+    pointer-events: none;
+    opacity: .4;
+  }
+
+  &:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid $color-primary;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 15px;
+    margin: auto;
+    pointer-events: none;
+  }
+
+  &.-closed {
+    .custom-select-search {
+      // Don't use display: none here
+      // For accessibility reasons (focus) the input
+      // can't be hidden
+      opacity: 0;
+      visibility: none;
+      cursor: pointer;
+    }
+
+    &:after {
+      transform: rotate(180deg);
+    }
+  }
+
+  &.-search:not(.-closed) {
+    .custom-select-text > div {
+      display: none;
+    }
+  }
+
+  .icon-btn {
+    display: flex; // Vertically align the icon
+    border: 0;
+    background: none;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .clear-button {
+    margin-right: 15px;
+    // Without this property, the user will be unable to click on the
+    // clear button (the click gets caught by the input)
+    z-index: 1;
+
+    .c-icon {
+      fill: rgba($dove-grey, .5);
+    }
+  }
+
+  .no-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 8px 12px;
+    line-height: 1.1;
+    font-style: italic;
+    color: palette(blue);
+    background-color: $color-white;
+    font-size: $font-size-normal;
+    box-shadow: 0 -2px 4px 0 rgba(33, 62, 118, 0.09), 0 2px 4px 0 rgba(33, 62, 118, 0.09);
+  }
+
+  .custom-select-text {
+    font-size: $font-size-normal;
+    font-weight: normal;
+    line-height: 2;
+    display: block;
+    width: 100%;
+    position: relative;
+    min-height: 33px;
+    height: 100%;
+
+    > div {
+      user-select: none;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px $margin-size-extra-small;
+      overflow: hidden;
+      height: 100%;
+      white-space: nowrap;
+      line-height: 17px;
+      align-items: center;
+      // Don't capitalise the text here because the case of the
+      // content of the input won't match the case of the text
+      // when the focus is somewhere else
+
+      > span {
+        .c-spinner {
+          vertical-align: middle;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
+  .custom-select-options {
+    list-style-type: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 100%;
+    background-color: $color-white;
+    z-index: 999;
+    box-shadow: 0 -2px 3px 0 rgba(33, 62, 118, 0.09), 0 2px 3px 0 rgba(33, 62, 118, 0.09);
+    max-height: 400px;
+    margin: 0;
+    padding: 0 0;
+    overflow-y: auto;
+
+    li {
+      display: flex;
+      margin: 0;
+      justify-content: space-between;
+      color: $color-text-headers;
+      font-size: $font-size-normal;
+      font-weight: normal;
+      line-height: 2;
+      cursor: pointer;
+      line-height: 1.1;
+      align-items: center;
+
+      .c-icon {
+        fill: $color-primary;
+        width: 11px;
+        height: 11px;
+      }
+
+      &.title {
+        color: $color-primary;
+        justify-content: flex-start;
+        border-bottom: 1px solid $border-color-1;
+        padding: 10px $margin-size-extra-small;
+
+        &:hover {
+          background-color: $color-white;
+          color: $color-primary;
+        }
+      }
+
+      &:hover {
+        background-color: rgba($color-charcoal-grey, .05);
+        color: $color-secondary;
+      }
+
+      &.-selected {
+        background-color: rgba($color-charcoal-grey, .05);
+      }
+
+      &[aria-selected="true"] {
+        color: $color-primary;
+      }
+
+      & .label {
+        flex-grow: 1;
+        display: inline-block;
+        padding: 10px $margin-size-extra-small;
+        text-transform: capitalize;
+      }
+
+      .next {
+        padding: 17px;
+        height: 100%;
+        cursor: pointer;
+
+        &:hover {
+          background-color: rgba(#4a81b9, .05);
+        }
+      }
+    }
+  }
+
+  .custom-select-search {
+    background-color: transparent;
+    color: $base-font-color;
+    outline: none;
+    border: none;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    padding: 10px $margin-size-extra-small;
+    font-family: $base-font-family;
+    // Make sure that if you have a z-index here, you don't
+    // cause issues with dropdowns being the one below another
+    // (unable to select an option of the first dropdown because
+    // the one below gets focused when you click)
+  }
+}

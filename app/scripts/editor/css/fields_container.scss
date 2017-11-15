@@ -1,0 +1,16 @@
+.c-fields-container {
+  max-width: 147px;
+  max-height: 270px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: $space-1;
+  border: 1px solid $border-color-1;
+
+  float: left;
+  clear: right;
+
+  .c-columnbox {
+    margin-bottom: $space-1;
+    &:last-child { margin-bottom: 0; }
+  }
+}

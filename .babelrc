@@ -1,4 +1,4 @@
 {
   "presets": ["env", "react", "latest", "stage-3"],
-  "plugins": ["add-react-displayname"]
+  "plugins": ["add-react-displayname", "babel-plugin-transform-decorators-legacy"]
 }

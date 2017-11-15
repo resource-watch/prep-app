@@ -1,0 +1,22 @@
+.c-limit-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 8px;
+
+  font-size: $font-size-small-medium;
+  font-weight: $font-weight-bold;
+
+  .text {
+    margin-right: 8px;
+  }
+
+  input {
+    height: 30px;
+    width: 150px;
+    text-align: right;
+
+    border: 1px solid $border-color-2;
+    border-radius: 4px;
+  }
+}

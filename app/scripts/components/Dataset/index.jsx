@@ -16,11 +16,29 @@ import VegaChart from '../Chart/VegaChart';
 import SimpleMap from '../../containers/Map/SimpleMap';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
+import WidgetEditor from '../../editor/WidgetEditor';
+import Icons from '../../editor/ui/Icons';
+import Tooltip from '../../editor/ui/Tooltip';
+import Modal from '../../editor/ui/Modal';
+
 class DatasetDetail extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalOpen: false
+    };
+  }
 
   componentWillMount() {
     if (!this.props.data || !this.props.widgets.length) {
       this.props.getDatasetData(this.props.datasetSlug);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.state.modalOpen !== nextProps.modal.open) {
+      this.setState({ modalOpen: nextProps.modal.open });
     }
   }
 
@@ -74,12 +92,23 @@ class DatasetDetail extends React.Component {
       }
     }
 
-    const currentSection = this.props.location.state && this.props.location.state.prevPath || 'explore';
+    const currentSection = (this.props.location.state && this.props.location.state.prevPath) || 'explore';
     return (
       <div>
         <SectionIntro data={data} downloadUrl={this.getDownloadUrl(this.props.data)} currentSection={currentSection} >
           <MetadataList data={this.props.data} />
         </SectionIntro>
+
+        <div className="row">
+          <div className="columns small-12">
+            <WidgetEditor
+              dataset={this.props.data.id}
+              mode="dataset"
+              showSaveButton={false}
+              showNotLoggedInText
+            />
+          </div>
+        </div>
 
         {
           (widgetComponents && widgetComponents.length) ?
@@ -120,7 +149,7 @@ class DatasetDetail extends React.Component {
   render() {
     const currentData = this.getCurrentData();
 
-    const data = this.props.data && this.props.data || null;
+    const data = this.props.data || null;
 
     const title = data ? data.name : currentData.title;
 
@@ -130,6 +159,16 @@ class DatasetDetail extends React.Component {
 
     return (
       <div className="-theme-2">
+        <Icons />
+        <Tooltip />
+        <Modal
+          open={this.state.modalOpen}
+          options={this.props.modal.options}
+          loading={this.props.modal.loading}
+          toggleModal={this.props.toggleModal}
+          setModalOptions={this.props.setModalOptions}
+        />
+
         <header className="l-header">
           <div className={`l-header-nav ${currentData.name === 'home' ? '-no-bg' : ''}`}>
             <div className="row align-middle">
@@ -210,7 +249,13 @@ DatasetDetail.propTypes = {
   /**
    * Define the dataset widget
    */
-  widgets: React.PropTypes.array
+  widgets: React.PropTypes.array,
+  /**
+   * Editor's modal
+   */
+  modal: React.PropTypes.object,
+  toggleModal: React.PropTypes.func,
+  setModalOptions: React.PropTypes.func
 };
 
 export default DatasetDetail;

@@ -1,0 +1,84 @@
+.c-raster-chart-editor {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  height: 360px; // Kinda ugly, used to have the buttons at the bottom
+  margin-top: 20px;
+
+  .content {
+    flex-grow: 1;
+
+    .selectors-container {
+      display: flex;
+      justify-content: space-between;
+
+      > div {
+        flex-basis: calc(50% - 10px);
+        flex-grow: 0;
+        flex-shrink: 0;
+      }
+    }
+
+    h5 {
+      margin: 0 0 5px;
+    }
+
+    .Select {
+      max-width: none;
+    }
+
+    .description {
+      font-size: $font-size-normal;
+
+      button {
+        color: $color-primary;
+        cursor: pointer;
+      }
+    }
+
+    .stats {
+      position: relative;
+      min-height: 100px;
+      margin-top: 20px;
+
+      // If we don't set a low z-index, the
+      // selector above will open below the
+      // overlay
+      .c-spinner {
+        z-index: 0;
+      }
+
+      table {
+        display: block;
+        width: 100%;
+        font-size: $font-size-normal;
+
+        thead, tbody, tr {
+          display: block;
+          width: 100%;
+        }
+
+        th, td {
+          display: inline-block;
+          width: calc(100% / 6);
+        }
+      }
+    }
+  }
+
+  .error {
+    span {
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  .buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+
+    .not-logged-in-text {
+      font-style: italic;
+    }
+  }
+}

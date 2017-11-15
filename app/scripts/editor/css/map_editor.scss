@@ -1,0 +1,34 @@
+.c-map-editor {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 370px;
+  margin-top: 20px;
+
+  .selector-container {
+    h5 {
+      margin: 0 0 5px;
+    }
+
+    .Select {
+      max-width: none;
+    }
+  }
+
+  .actions-container {
+    color: $primary-color;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: 10px;
+
+    a {
+      cursor: pointer;
+    }
+
+    .not-logged-in-text {
+      font-style: italic;
+      color: $dark-pink;
+    }
+  }
+}

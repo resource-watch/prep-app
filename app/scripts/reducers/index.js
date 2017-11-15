@@ -10,3 +10,8 @@ export { default as tooltip } from './tooltip';
 export { default as widgets } from './widgets';
 export { default as layers } from './layers';
 
+export { default as widgetEditor } from '../editor/redux/widgetEditor';
+export { default as tooltipEditor } from '../editor/redactions/tooltip';
+export { default as modalEditor } from '../editor/redactions/modal';
+export const user = () => ({});
+

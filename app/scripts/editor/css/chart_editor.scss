@@ -1,0 +1,86 @@
+.c-chart-editor {
+
+  $margin-between-fields: 20px;
+
+  .selectors-container {
+    display: flex;
+    justify-content: space-between;
+
+    // h5 {
+    //   font-size: $font-size-small-medium;
+    //   line-height: 23px; // Height needed for the spinner
+    //   margin-bottom: 2px;
+
+    //   .c-spinner {
+    //     margin-left: 5px;
+    //     vertical-align: middle;
+    //   }
+    // }
+
+    .chart-type {
+      width: 100%;
+
+      .Select {
+        max-width: none;
+      }
+    }
+
+    .area-intersection {
+      width: 100%;
+
+      &:not(:only-child) {
+        margin-left: $margin-between-fields;
+      }
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      .area-intersection-selector {
+        max-width: none;
+      }
+    }
+  }
+
+  .text-container {
+    margin-top: $margin-between-fields;
+  }
+
+  .arrow-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: $margin-size-extra-small;
+    margin-right: $margin-size-extra-small;
+  }
+
+  .actions-div {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: $margin-between-fields;
+    margin-bottom: $margin-between-fields;
+
+    .customization-container {
+      flex-grow: 1;
+      border: 1px solid $border-color-1;
+      padding: $margin-size-extra-small;
+    }
+  }
+
+  .save-widget-container {
+    color: $color-dark-pink;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: $margin-between-fields;
+
+    a {
+      cursor: pointer;
+    }
+
+    .not-logged-in-text {
+      font-style: italic;
+    }
+  }
+
+}

@@ -1,0 +1,95 @@
+.c-spinner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 998;
+  background: rgba($color-black, 0.5);
+  visibility: hidden;
+  opacity: 0;
+
+  // Spinner
+  .spinner-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+
+    .icon {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      margin: 0 auto;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: $color-primary;
+      animation: rotateEditor $animation-time-4 infinite $ease-in-out-sine;
+    }
+
+    button {
+      margin: 10px 0 0;
+    }
+  }
+
+  // State
+  &.-loading {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  // Colors
+  &.-light { background: rgba($color-white, 0.5); }
+  &.-transparent { background: rgba($color-white, 0); }
+
+  // Icon colors
+  &.-white-icon {
+    .spinner-box {
+      .icon {
+        border-top-color: $color-white;
+      }
+    }
+  }
+
+  // Position
+  &.-fixed { position: fixed;}
+  &.-relative { position: relative;}
+  &.-inline {
+    position: static;
+    display: inline-block;
+    background: none;
+
+    .spinner-box {
+      position: static;
+      transform: none;
+    }
+  }
+
+  // Sizes
+  &.-small {
+    .spinner-box {
+      .icon {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+ // ROTATE
+ @-webkit-keyframes rotateEditor {
+   from { transform: rotate(0deg);}
+   to { transform: rotate(360deg);}
+ }
+ @-moz-keyframes rotateEditor {
+   from { transform: rotate(0deg);}
+   to { transform: rotate(360deg);}
+ }
+ @-ms-keyframes rotateEditor {
+   from { transform: rotate(0deg);}
+   to { transform: rotate(360deg);}
+ }
+ @keyframes rotateEditor {
+   from { transform: rotate(0deg);}
+   to { transform: rotate(360deg);}
+ }

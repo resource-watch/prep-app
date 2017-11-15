@@ -1,0 +1,50 @@
+.c-columnbox {
+  display: flex;
+  float: left;
+  clear: left;
+  align-items: center;
+  min-height: 22px;
+  background-color: $color-blue-turquoise;
+  font-size: $font-size-small-medium;
+  font-weight: $font-weight-bold;
+  color: $color-white;
+  border-radius: 15px;
+  padding: 3px 15px 4px 10px;
+  cursor: grab;
+
+  &.-dimmed {
+    opacity: 0.5;
+  }
+
+  button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+  }
+
+  .aggregate-function {
+    margin-left: 6px;
+    color: $color-grey;
+  }
+
+  .order-by {
+    margin-left: 10px;
+    color: $color-grey;
+  }
+
+  .c-icon {
+    margin-right: 5px;
+    fill: $color-white;
+
+    &.close-button {
+      cursor: pointer;
+      margin-left: 5px;
+    }
+
+    &.configure-button {
+      cursor: pointer;
+    }
+  }
+
+}

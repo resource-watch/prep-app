@@ -1,0 +1,104 @@
+.c-widget-card {
+  position: relative;
+  width: 100%;
+  background: $color-tertiary;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  cursor: pointer;
+
+  border: 1px solid rgba(26,28,34,0.1);
+  border-radius: 4px;
+
+  > a {
+    // This rule prevent the textual widget to get
+    // an underlined when hovered in My RW > Widgets
+    // (you can try starring a widget)
+    &:hover { text-decoration: none; }
+  }
+
+  .widget-collections {
+    display: flex;
+    justify-content: flex-start;
+    padding: 6px 15px;
+
+    button {
+      cursor: pointer;
+      margin: 0;
+      padding: 0;
+      font-size: $font-size-small;
+      color: $color-dark-grey;
+    }
+  }
+
+  .c-widget-chart {
+    .c-chart {
+      .chart {
+        display: flex;
+
+        canvas {
+          // NOTE:
+          // Both the width and the height can't be defined because
+          // the "self-sizing" charts will be distorted (in My RW >
+          // My widgets)
+          // Also, if the width is defined, the same charts will be
+          // distorted, so the only attribute that can be defined
+          // here is height
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  .info {
+    background: $color-white;
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 16px;
+
+    .detail {
+      margin-bottom: 20px;
+
+      a {
+        text-decoration: none;
+        color: $color-text-1;
+      }
+
+      p {
+        margin: 10px 0 0;
+        word-break: break-word;
+        font-size: $font-size-normal;
+        color: $ui-font-color;
+      }
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      height: 30px;
+
+      .c-button {
+        height: 30px;
+        padding: 0 10px;
+      }
+    }
+  }
+
+  .star-icon {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    cursor: pointer;
+
+    svg {
+      fill: #FAB72E;
+    }
+  }
+
+  &.-selected {
+    border-color: $color-primary;
+  }
+
+}
