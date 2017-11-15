@@ -4,9 +4,9 @@ import { RESOURCES_LIST_RECEIVED, RESOURCES_FETCH_ERROR } from '../constants';
 export default function () {}
 
 export function getResources(params) {
-  const queryParams = Object.assign({ published: true }, queryString.stringify(params || {}));
+  const queryParams = Object.assign({ published: true }, params || {});
   return (dispatch) => {
-    fetch(`${config.apiUrl}/resources?${queryParams}`)
+    fetch(`${config.apiUrl}/resources?${queryString.stringify(queryParams)}`)
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
