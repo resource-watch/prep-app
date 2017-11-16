@@ -40,12 +40,16 @@ const config = {
   },
 
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.scss'],
     modules: [
       path.join(rootPath, 'app'),
       path.resolve('app/scripts'),
+      path.resolve('app/styles'),
       path.join(rootPath, 'node_modules')
-    ]
+    ],
+    alias: {
+      styles: path.resolve('app/styles')
+    }
   },
 
   resolveLoader: {

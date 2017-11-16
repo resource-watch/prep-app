@@ -1,3 +1,5 @@
+// TODO: remove this component
+
 import React from 'react';
 
 // Components

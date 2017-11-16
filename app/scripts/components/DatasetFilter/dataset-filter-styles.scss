@@ -1,14 +1,12 @@
-// TODO: to remove
+@import '~styles/_settings.scss';
+@import '~styles/_layouts.scss';
+
 
 .filters-tab {
   position: relative;
   width: 100%;
   background-color: #F7F7F7;
   box-shadow: 0 20px 30px 0 rgba(0,0,0,0.1);
-
-  @media #{$mq-medium} {
-    height: 41px;
-  }
 
   > .filters-toolbar {
     position: relative;
@@ -19,11 +17,6 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-
-    @media #{$mq-medium} {
-      height: rem(39);
-      flex-direction: row;
-    }
 
     > li {
       position: relative;
