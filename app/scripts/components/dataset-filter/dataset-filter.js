@@ -2,11 +2,11 @@ import { Component, createElement } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import * as actions from 'components/DatasetFilter/dataset-filter-actions';
-import reducers, { initialState } from 'components/DatasetFilter/dataset-filter-reducer';
-import DatasetFilterComponent from 'components/DatasetFilter/dataset-filter-component';
+import * as actions from './dataset-filter-actions';
+import reducers, { initialState } from './dataset-filter-reducer';
+import DatasetFilterComponent from './dataset-filter-component';
 
-import filtersConfig from 'components/DatasetFilter/dataset-filter-data.json';
+import filtersConfig from './dataset-filter-data.json';
 
 const mapStateToProps = state => ({
   visibility: state.datasetFilter.visibility,

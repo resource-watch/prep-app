@@ -14,7 +14,7 @@ import * as reducers from './reducers';
 import Routes from './routes';
 
 // Modules
-import * as DatasetFilterModule from 'pages/explore/dataset-filter/dataset-filter';
+import * as DatasetFilterModule from 'components/dataset-filter/dataset-filter';
 
 // utils
 import { handleActions } from 'utils/redux';

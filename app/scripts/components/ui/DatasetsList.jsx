@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import isEqual from 'lodash/isEqual';
 
 // Components
-import DatasetFilterContainer from 'pages/explore/dataset-filter';
+import DatasetFilterContainer from 'components/dataset-filter/dataset-filter';
 import CollapsibleItem from './CollapsibleItem';
 import Icon from '../ui/Icon';
 import Search from '../ui/Search';
