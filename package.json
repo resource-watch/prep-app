@@ -79,7 +79,7 @@
     "react-sortable-hoc": "0.0.7",
     "react-tether": "^0.5.7",
     "redux": "^3.5.2",
-    "redux-actions": "^2.2.1",
+    "redux-actions": "vectorsize/redux-actions",
     "redux-thunk": "^2.1.0",
     "request": "^2.73.0",
     "reselect": "3.0.1",

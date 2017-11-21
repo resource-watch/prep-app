@@ -17,7 +17,7 @@ import Routes from './routes';
 import * as DatasetFilterModule from 'components/dataset-filter/dataset-filter';
 
 // utils
-import { handleActions } from 'utils/redux';
+import { handleModule } from 'redux-actions';
 
 import '../styles/lib/custom-foundation.css';
 import '../styles/index.scss';
@@ -39,7 +39,7 @@ if (process.env.NODE_ENV === 'production') {
  */
 
 const componentReducers = {
-  datasetFilter: handleActions(DatasetFilterModule)
+  datasetFilter: handleModule(DatasetFilterModule)
 };
 
 const reducer = combineReducers({
