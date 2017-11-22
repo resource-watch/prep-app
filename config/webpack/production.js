@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-
+const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const sharedConfig = require('./shared.js');
 
 module.exports = merge(sharedConfig, {
@@ -31,6 +32,37 @@ module.exports = merge(sharedConfig, {
           }
         }
       ]
+    }, {
+      test: /\.css$/,
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: 'css-loader'
+      })
+    }, {
+      test: /\.(scss|sass)$/,
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: [{
+          loader: 'css-loader',
+          options: {
+            importLoaders: 1
+          }
+        }, {
+          loader: 'postcss-loader',
+          options: {
+            config: {
+              path: path.resolve(__dirname, '../../postcss.config.js')
+            }
+          }
+        }, {
+          loader: 'sass-loader',
+          options: {
+            includePaths: [
+              path.resolve(__dirname, '../../app/styles')
+            ]
+          }
+        }]
+      })
     }]
   },
 
@@ -38,7 +70,8 @@ module.exports = merge(sharedConfig, {
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false
-    })
+    }),
+    new ExtractTextPlugin('styles.css')
   ]
 
 });

@@ -5,8 +5,7 @@ import Button from 'components/Button/Button';
 import Icon from 'components/ui/Icon';
 
 // styles
-// TODO: make styles import work
-import styles from './dataset-filter-styles.scss';
+import './dataset-filter-styles.scss';
 
 class DatasetFilter extends PureComponent {
   constructor(props) {
