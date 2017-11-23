@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import isEqual from 'lodash/isEqual';
 
 // Components
-import FilterTabs from '../../containers/Explore/FilterTabs';
+import DatasetFilterContainer from 'components/dataset-filter/dataset-filter';
 import CollapsibleItem from './CollapsibleItem';
 import Icon from '../ui/Icon';
 import Search from '../ui/Search';
@@ -84,7 +84,7 @@ export default class DatasetsList extends React.Component {
         </div>
 
         <div className={`filters-content ${filters ? '-open' : ''} ${sticky ? '-fixed' : ''}`}>
-          {filters && <FilterTabs />}
+          {filters && <DatasetFilterContainer />}
         </div>
 
         {search.list.length > 0 ?

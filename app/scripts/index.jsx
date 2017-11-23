@@ -1,3 +1,6 @@
+/* eslint-disable import/first */
+
+
 import React from 'react';
 import { render } from 'react-dom';
 import initOpbeat from 'opbeat-react';
@@ -9,6 +12,12 @@ import { browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux';
 import * as reducers from './reducers';
 import Routes from './routes';
+
+// Modules
+import * as DatasetFilterModule from 'components/dataset-filter/dataset-filter';
+
+// utils
+import { handleModule } from 'redux-actions';
 
 import '../styles/lib/custom-foundation.css';
 import '../styles/index.scss';
@@ -28,8 +37,14 @@ if (process.env.NODE_ENV === 'production') {
  * @info(http://redux.js.org/docs/basics/Reducers.html)
  * @type {Object}
  */
+
+const componentReducers = {
+  datasetFilter: handleModule(DatasetFilterModule)
+};
+
 const reducer = combineReducers({
   ...reducers,
+  ...componentReducers,
   routing: routerReducer
 });
 
