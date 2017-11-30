@@ -23,6 +23,7 @@ import Contact from './components/Contact';
 import Embed from './containers/Embed';
 import Root from './components/Root';
 import PartnerDetail from './containers/PartnerDetail';
+import Auth from './components/auth/auth';
 
 function shouldUpdateScroll(prevRouterProps, { location }) {
   /**
@@ -92,6 +93,15 @@ function shouldUpdateScroll(prevRouterProps, { location }) {
   return true;
 }
 
+const requireAuth = (nextState, replace) => {
+  if (!sessionStorage.token) {
+    replace({
+      pathname: '/',
+      state: { nextPathname: nextState.location.pathname }
+    });
+  }
+};
+
 function Routes(props) {
   return (
     <Router
@@ -115,6 +125,8 @@ function Routes(props) {
           <Route path={'partners'} component={Partners} />
           <Route path={'resources'} component={Resources} />
           <Route path={'contact'} component={Contact} />
+          <Route path={'auth'} component={Auth} />
+          <Route path={'myprep'} onEnter={requireAuth} component={Home} />
         </Route>
 
         <Route path="partners/:id" component={PartnerDetail} />

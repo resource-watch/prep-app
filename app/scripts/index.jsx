@@ -15,6 +15,8 @@ import Routes from './routes';
 
 // Modules
 import * as DatasetFilterModule from 'components/dataset-filter/dataset-filter';
+import * as AuthModule from 'components/auth/auth';
+import * as UserModule from 'components/user/user';
 
 // utils
 import { handleModule } from 'redux-actions';
@@ -39,7 +41,9 @@ if (process.env.NODE_ENV === 'production') {
  */
 
 const componentReducers = {
-  datasetFilter: handleModule(DatasetFilterModule)
+  datasetFilter: handleModule(DatasetFilterModule),
+  auth: handleModule(AuthModule),
+  user: handleModule(UserModule)
 };
 
 const reducer = combineReducers({
