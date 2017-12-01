@@ -349,7 +349,7 @@ class DataMapLegend extends React.Component {
             <DragHandle />
             <div className="layer-header">
               <div className="">
-                <span className="title">{layer.title}
+                <span className="title">{layer.name}
                   <span className="-units">
                     {layer && layer.legend_config && layer.legend_config.unit &&
                     ` (${layer.legend_config.unit})`}
