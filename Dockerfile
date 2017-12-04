@@ -7,7 +7,7 @@ ARG twitterUser=worldresources
 ARG apiUrl=https://staging.prepdata.org/api
 ARG assetsUrl=
 ARG rwApiUrl=https://api.resourcewatch.org/v1
-ARG basemapUrl=https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png
+ARG basemapUrl=https://api.mapbox.com/styles/v1/wri/cism5nsz4007t2wnrp5xslf7s/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoid3JpIiwiYSI6Ik9TY2w5RTQifQ.0HV7dQTjK40mk7GpNNA64g
 ARG nodeEnv=production
 
 ENV APPLICATIONS prep
