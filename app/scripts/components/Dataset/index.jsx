@@ -16,6 +16,8 @@ import VegaChart from '../Chart/VegaChart';
 import SimpleMap from '../../containers/Map/SimpleMap';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
+import NexGDDPTool from '../nexgddp-tool/NexGDDPTool';
+
 class DatasetDetail extends React.Component {
 
   componentWillMount() {
@@ -81,7 +83,7 @@ class DatasetDetail extends React.Component {
           <MetadataList data={this.props.data} />
         </SectionIntro>
 
-        {
+        {/*
           (widgetComponents && widgetComponents.length) ?
             <div className="row">
               <div className="columns small-12">
@@ -89,7 +91,13 @@ class DatasetDetail extends React.Component {
               </div>
             </div>
           : null
-        }
+        */}
+
+        <div className="row">
+          <div className="columns small-12">
+            <NexGDDPTool />
+          </div>
+        </div>
       </div>
     );
   }

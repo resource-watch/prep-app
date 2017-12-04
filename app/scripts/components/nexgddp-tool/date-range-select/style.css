@@ -1,0 +1,8 @@
+.c-date-range-select {
+  display: flex;
+}
+
+.c-date-range-select > .Select {
+  width: 50%;
+  flex: 1;
+}
