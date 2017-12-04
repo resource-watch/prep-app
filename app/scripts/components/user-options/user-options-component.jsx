@@ -6,17 +6,17 @@ import isEmpty from 'lodash/isEmpty';
 import './user-options-style.scss';
 
 function UserOptions(props) {
+  const token = sessionStorage.getItem('token');
+
   return (
-    <div
-      className="c-user-options"
-    >
+    <div className="c-user-options">
       { props.session && !isEmpty(props.data) ?
         <ul className="user-options-list">
           <li>
-            <Link to={'/myprep'} >Profile</Link>
+            <a href={`/myprep/auth?token=${token}`} target="_blank" rel="noreferrer noopener" >Profile</a>
           </li>
           <li>
-            <a href="/" onClick={props.handleLogOut}>Logout</a>
+            <Link to="/" onClick={props.handleLogOut}>Logout</Link>
           </li>
         </ul>
         :
