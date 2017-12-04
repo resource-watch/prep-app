@@ -4,12 +4,13 @@ MAINTAINER David Inga <david.inga@vizzuality.com>
 ARG datasetEnv=production
 ARG facebookUser=worldresources
 ARG twitterUser=worldresources
-ARG apiUrl=https://staging.predata.org/api
+ARG apiUrl=https://staging.prepdata.org/api
 ARG assetsUrl=
 ARG rwApiUrl=https://api.resourcewatch.org/v1
 ARG basemapUrl=https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png
 ARG nodeEnv=production
 
+ENV APPLICATIONS prep
 ENV DATASET_ENV $datasetEnv
 ENV FACEBOOK_USER $facebookUser
 ENV TWITTER_USER $twitterUser

@@ -3,14 +3,14 @@ require('dotenv').config({ silent: true });
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const rootPath = process.cwd();
 
 const config = {
 
   entry: {
-    app: path.join(rootPath, 'app/scripts/index.jsx')
+    app: ['babel-polyfill', path.join(rootPath, 'app/scripts/index.jsx')]
   },
 
   output: {
@@ -24,28 +24,20 @@ const config = {
       test: /\.jsx?$/,
       exclude: /(node_modules|lib)/,
       use: ['babel-loader']
-    }, {
-      test: /\.css$/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: 'css-loader'
-      })
-    }, {
-      test: /\.(scss|sass)$/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: ['css-loader', 'sass-loader', 'postcss-loader']
-      })
     }]
   },
 
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.scss'],
     modules: [
       path.join(rootPath, 'app'),
       path.resolve('app/scripts'),
+      path.resolve('app/styles'),
       path.join(rootPath, 'node_modules')
-    ]
+    ],
+    alias: {
+      styles: path.resolve('app/styles')
+    }
   },
 
   resolveLoader: {
@@ -62,7 +54,6 @@ const config = {
       googleAnalytics: process.env.NODE_ENV === 'production' ?
         process.env.GOOGLE_ANALYTICS : 'UA-XXXXXXXX-YY'
     }),
-    new ExtractTextPlugin('styles.css'),
     new webpack.EnvironmentPlugin(Object.keys(process.env)),
     new webpack.DefinePlugin({
       config: {
@@ -74,7 +65,13 @@ const config = {
         datasetEnv: JSON.stringify(process.env.DATASET_ENV),
         assetsUrl: JSON.stringify(process.env.ASSETS_URL)
       }
-    })
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: 'node_modules/widget-editor/dist/images',
+        to: 'images/'
+      }
+    ])
   ]
 
 };

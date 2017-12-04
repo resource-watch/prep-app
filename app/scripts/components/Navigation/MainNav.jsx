@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+// components
+import User from '../user/user';
+
 function MainNav() {
   return (
     <nav className="c-nav -main">
@@ -22,6 +25,9 @@ function MainNav() {
         </li>
         <li>
           <Link activeClassName="-current" to="/resources">Resources</Link>
+        </li>
+        <li className="avatar-container">
+          <User />
         </li>
       </ul>
     </nav>
