@@ -21,7 +21,7 @@ class DatasetDetail extends React.Component {
 
   componentWillMount() {
     if (!this.props.data || !this.props.widgets.length) {
-      this.props.getDatasetData(this.props.datasetSlug);
+      this.props.getDatasetData(this.props.datasetId);
     }
   }
 
@@ -209,7 +209,7 @@ DatasetDetail.propTypes = {
   /**
    * Define the slug of the dataset
    */
-  datasetSlug: React.PropTypes.string.isRequired,
+  datasetId: React.PropTypes.string.isRequired,
   /**
    * Define the function to get the datataset detail data
    */
