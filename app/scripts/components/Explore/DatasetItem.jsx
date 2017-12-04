@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router';
 
 // Libraries
 import classnames from 'classnames';
@@ -109,7 +110,9 @@ class DatasetItem extends React.Component {
               <div className="left-element">
                 {datasetSwitch}
               </div>
-              <h1 className="item-title">{metadata.title}</h1>
+              <Link className="item-title-link" to={`/dataset/${this.props.dataset.id}`} >
+                <h1 className="item-title">{metadata.title}</h1>
+              </Link>
             </div>
             <div className="item-tools">
               {infoButton}
