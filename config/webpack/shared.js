@@ -3,13 +3,14 @@ require('dotenv').config({ silent: true });
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const rootPath = process.cwd();
 
 const config = {
 
   entry: {
-    app: path.join(rootPath, 'app/scripts/index.jsx')
+    app: ['babel-polyfill', path.join(rootPath, 'app/scripts/index.jsx')]
   },
 
   output: {
@@ -64,7 +65,13 @@ const config = {
         datasetEnv: JSON.stringify(process.env.DATASET_ENV),
         assetsUrl: JSON.stringify(process.env.ASSETS_URL)
       }
-    })
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: 'node_modules/widget-editor/dist/images',
+        to: 'images/'
+      }
+    ])
   ]
 
 };

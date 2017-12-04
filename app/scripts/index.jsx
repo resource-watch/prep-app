@@ -12,6 +12,9 @@ import { browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux';
 import * as reducers from './reducers';
 import Routes from './routes';
+import { reducers as widgetEditorReducers, setConfig } from 'widget-editor';
+import 'widget-editor/dist/styles.css';
+
 
 // Modules
 import * as DatasetFilterModule from 'components/dataset-filter/dataset-filter';
@@ -21,6 +24,13 @@ import { handleModule } from 'redux-actions';
 
 import '../styles/lib/custom-foundation.css';
 import '../styles/index.scss';
+
+setConfig({
+  url: process.env.RW_API_URL,
+  env: process.env.DATASET_ENV,
+  applications: process.env.APPLICATIONS,
+  authUrl: 'https://api.resourcewatch.org/auth'
+});
 
 /**
  * Monitoring with Opbeat
@@ -44,6 +54,7 @@ const componentReducers = {
 
 const reducer = combineReducers({
   ...reducers,
+  ...widgetEditorReducers,
   ...componentReducers,
   routing: routerReducer
 });
