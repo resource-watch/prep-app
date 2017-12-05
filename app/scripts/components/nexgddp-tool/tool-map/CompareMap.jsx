@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import L from 'leaflet';
 import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
-import 'leaflet-side-by-side';
+import 'lib/leaflet-side-by-side';
 
 const mapDefaultOptions = {
   center: [20, -30],
