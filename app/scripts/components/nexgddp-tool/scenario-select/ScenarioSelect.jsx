@@ -1,41 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import './style.css';
 
+// Redux
+import actions from '../nexgddptool-actions';
+
 class ScenarioSelect extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedOption: ''
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(selectedOption) {
-    this.setState({ selectedOption });
-  }
-
   render() {
-    const { scenarios } = this.props;
-    const { selectedOption } = this.state;
+    const { scenario, setScenarioSelection } = this.props;
 
     return (
       <div className="c-scenario-select">
         <Select
           name="scenario"
-          value={selectedOption ? selectedOption.value : ''}
-          onChange={this.handleChange}
-          options={scenarios}
+          value={scenario.selection}
+          onChange={setScenarioSelection}
+          options={scenario.options}
         />
       </div>
     );
   }
 }
 
+const option = PropTypes.shape({
+  label: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired
+});
+
 ScenarioSelect.propTypes = {
-  scenarios: PropTypes.array
+  scenario: PropTypes.shape({
+    options: PropTypes.arrayOf(option),
+    selection: option
+  }),
+  setScenarioSelection: PropTypes.func
 };
 
-export default ScenarioSelect;
+const mapStateToProps = state => ({
+  scenario: state.nexgddptool.scenario
+});
+
+export default connect(mapStateToProps, actions)(ScenarioSelect);

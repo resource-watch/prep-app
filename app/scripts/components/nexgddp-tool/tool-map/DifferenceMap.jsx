@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 
 const mapDefaultOptions = {
@@ -12,11 +13,11 @@ const mapDefaultOptions = {
 
 class DifferenceMap extends React.PureComponent {
   render() {
-    const { markerLocation } = this.props;
+    const { marker } = this.props;
 
     // It will change center of map on marker location
     const mapOptions = Object.assign({}, mapDefaultOptions, {
-      center: markerLocation || mapDefaultOptions.center
+      center: marker || mapDefaultOptions.center
     });
 
     return (
@@ -29,7 +30,7 @@ class DifferenceMap extends React.PureComponent {
             url={config.basemapTileUrl}
           />
           <ZoomControl position="bottomright" />
-          { markerLocation && <Marker position={markerLocation} /> }
+          { marker && <Marker position={marker} /> }
         </Map>
       </div>
     );
@@ -37,7 +38,11 @@ class DifferenceMap extends React.PureComponent {
 }
 
 DifferenceMap.propTypes = {
-  markerLocation: PropTypes.object
+  marker: PropTypes.array
 };
 
-export default DifferenceMap;
+const mapStateToProps = state => ({
+  marker: state.nexgddptool.marker
+});
+
+export default connect(mapStateToProps)(DifferenceMap);

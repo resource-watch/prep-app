@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import L from 'leaflet';
 import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 import 'lib/leaflet-side-by-side';
@@ -37,11 +38,11 @@ class CompareMap extends React.PureComponent {
   }
 
   render() {
-    const { markerLocation } = this.props;
+    const { marker } = this.props;
 
     // It will change center of map on marker location
     const mapOptions = Object.assign({}, mapDefaultOptions, {
-      center: markerLocation || mapDefaultOptions.center
+      center: marker || mapDefaultOptions.center
     });
 
     return (
@@ -55,7 +56,7 @@ class CompareMap extends React.PureComponent {
             url={config.basemapTileUrl}
           />
           <ZoomControl position="bottomright" />
-          { markerLocation && <Marker position={markerLocation} /> }
+          { marker && <Marker position={marker} /> }
         </Map>
       </div>
     );
@@ -63,7 +64,11 @@ class CompareMap extends React.PureComponent {
 }
 
 CompareMap.propTypes = {
-  markerLocation: PropTypes.object
+  marker: PropTypes.array
 };
 
-export default CompareMap;
+const mapStateToProps = state => ({
+  marker: state.nexgddptool.marker
+});
+
+export default connect(mapStateToProps)(CompareMap);
