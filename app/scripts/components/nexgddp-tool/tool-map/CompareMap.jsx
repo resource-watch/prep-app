@@ -8,6 +8,8 @@ import 'lib/leaflet-side-by-side';
 const mapDefaultOptions = {
   center: [20, -30],
   zoom: 3,
+  minZoom: 3,
+  maxZoom: 10,
   scrollWheelZoom: false,
   attributionControl: false,
   zoomControl: false

@@ -6,6 +6,8 @@ import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 const mapDefaultOptions = {
   center: [20, -30],
   zoom: 3,
+  minZoom: 3,
+  maxZoom: 10,
   scrollWheelZoom: false,
   attributionControl: false,
   zoomControl: false
@@ -27,8 +29,7 @@ class ToggleMap extends React.PureComponent {
           {...mapOptions}
         >
           <TileLayer
-            url="//stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.png"
-            attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+            url={config.basemapTileUrl}
           />
           <ZoomControl position="bottomright" />
           { marker && <Marker position={marker} /> }
