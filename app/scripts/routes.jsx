@@ -133,7 +133,7 @@ function Routes(props) {
         <Route path="explore(/:lat)(/:lng)(/:zoom)" component={Explore} />
         <Route path="dashboard/:slug(/:tab)" component={DashboardsDetail} />
         <Route path="insight/:slug" component={InsightsDetail} />
-        <Route path="dataset/:slug" component={DatasetDetail} />
+        <Route path="dataset/:id" component={DatasetDetail} />
         <Route path="embed/:slug" component={Embed} />
       </Route>
     </Router>

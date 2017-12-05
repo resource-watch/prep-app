@@ -1,14 +1,14 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
 
-import Icon from 'components/ui/Icon';
-import UserOptions from 'components/user-options/user-options-component';
+import Icon from '../ui/Icon';
+import UserOptions from '../user-options/user-options-component';
 
 // styles
 import './user-style.scss';
 
-class User extends PureComponent {
+class User extends React.PureComponent {
   render() {
     const {
       handleHover,
