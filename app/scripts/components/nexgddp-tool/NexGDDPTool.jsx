@@ -6,6 +6,31 @@ import { CompareMap, ToggleMap, DifferenceMap } from './tool-map';
 import LocationSearch from './location-search/LocationSearch'
 import './style.scss';
 
+const dateRanges = [{
+  label: '1950 - 1960',
+  value: '1950'
+}, {
+  label: '1960 - 1970',
+  value: '1960'
+}, {
+  label: '1970 - 1980',
+  value: '1970'
+}, {
+  label: '1980 - 1990',
+  value: '1980'
+}, {
+  label: '1990 - 2000',
+  value: '1990'
+}];
+
+const scenarios = [{
+  label: 'RCP45',
+  value: 'nex_tasavg_decadal_rcp45'
+}, {
+  label: 'RCP85',
+  value: 'nex_tasavg_decadal_rcp85'
+}];
+
 class NexGDDPTool extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -26,14 +51,13 @@ class NexGDDPTool extends React.PureComponent {
   }
 
   render() {
-    const scenarios = [{ label: 'High emission', value: 'high-emission' }];
     const { mapView, location } = this.state;
 
     return (
       <div className="c-nextgddp-tool">
         <div className="row">
           <div className="columns small-12 medium-4">
-            <DateRangeSelect />
+            <DateRangeSelect dateRanges={dateRanges} />
           </div>
           <div className="columns small-12 medium-4">
             <ScenarioSelect scenarios={scenarios} />

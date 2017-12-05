@@ -25,7 +25,7 @@ class ScenarioSelect extends React.PureComponent {
       <div className="c-scenario-select">
         <Select
           name="scenario"
-          value={selectedOption.value}
+          value={selectedOption ? selectedOption.value : ''}
           onChange={this.handleChange}
           options={scenarios}
         />

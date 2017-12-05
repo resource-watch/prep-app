@@ -11,11 +11,16 @@ class DateRangeSelect extends React.PureComponent {
       firstRangeSelected: '',
       secondRangeSelected: ''
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.firstHandleChange = this.firstHandleChange.bind(this);
+    this.secondHandleChange = this.secondHandleChange.bind(this);
   }
 
-  handleChange(selectedOption) {
-    this.setState({ selectedOption });
+  firstHandleChange(firstRangeSelected) {
+    this.setState({ firstRangeSelected });
+  }
+
+  secondHandleChange(secondRangeSelected) {
+    this.setState({ secondRangeSelected });
   }
 
   render() {
@@ -26,14 +31,14 @@ class DateRangeSelect extends React.PureComponent {
       <div className="c-date-range-select">
         <Select
           name="startdate"
-          value={firstRangeSelected.value}
-          onChange={this.handleChange}
+          value={firstRangeSelected ? firstRangeSelected.value : ''}
+          onChange={this.firstHandleChange}
           options={dateRanges}
         />
         <Select
           name="enddate"
-          value={secondRangeSelected.value}
-          onChange={this.handleChange}
+          value={secondRangeSelected ? secondRangeSelected.value : ''}
+          onChange={this.secondHandleChange}
           options={dateRanges}
         />
       </div>
