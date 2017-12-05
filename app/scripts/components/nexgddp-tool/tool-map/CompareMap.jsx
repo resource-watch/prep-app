@@ -18,23 +18,20 @@ const mapDefaultOptions = {
 class CompareMap extends React.PureComponent {
   componentDidMount() {
     const map = this.mapElement.leafletElement;
-    const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    const leftLayer = L.tileLayer(`${config.apiUrlRW}/layer/dd272bc7-a5e7-41e2-8ca5-6e3353603fd0/tile/rasdaman/{z}/{x}/{y}?ansi="1960-01-01T00:00:00"`, {
+      maxZoom: 10,
+      minZoom: 3
     });
 
-    const stamenLayer = L.tileLayer('//stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.png', {
-      attribution:
-        'Map tiles by <a href="http://stamen.com">Stamen Design</a>, ' +
-        '<a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; ' +
-        'Map data {attribution.OpenStreetMap}',
-      minZoom: 1,
-      maxZoom: 16
+    const rightLayer = L.tileLayer(`${config.apiUrlRW}/layer/dd272bc7-a5e7-41e2-8ca5-6e3353603fd0/tile/rasdaman/{z}/{x}/{y}?ansi="2050-01-01T00:00:00"`, {
+      minZoom: 3,
+      maxZoom: 10
     });
 
     window.requestAnimationFrame(() => {
-      osmLayer.addTo(map);
-      stamenLayer.addTo(map);
-      L.control.sideBySide(stamenLayer, osmLayer).addTo(map);
+      leftLayer.addTo(map);
+      rightLayer.addTo(map);
+      L.control.sideBySide(leftLayer, rightLayer).addTo(map);
       map.invalidateSize();
     });
   }

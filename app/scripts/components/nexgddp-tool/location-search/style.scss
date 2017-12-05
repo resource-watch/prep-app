@@ -2,6 +2,7 @@
 
 .c-location-search {
   width: auto;
+  margin-top: 5px;
 }
 
 /**
@@ -9,20 +10,18 @@
  * NOTE: duplicated font-sizes' are for browsers which don't support rem (only IE 8)
  */
  .geosuggest {
-  font-size: 18px;
-  font-size: 1rem;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: bold;
   position: relative;
   width: 100%;
-  margin: 1em auto;
+  margin: 0 auto;
   text-align: left;
 }
 .geosuggest__input {
   width: 100%;
-  border: 1px solid transparent;
-  box-shadow: 0 0 1px #3d464d;
-  padding: .5em 1em;
-  -webkit-transition: border 0.2s, box-shadow 0.2s;
-          transition: border 0.2s, box-shadow 0.2s;
+  border: 2px solid transparent;
+  padding: 5px;
 }
 .geosuggest__input:focus {
   border-color: $border-color-blue;
@@ -37,7 +36,7 @@
   padding: 0;
   margin-top: -1px;
   background: $base-bg-color;
-  border: 1px solid $border-color;
+  border: 2px solid $border-color;
   border-top-width: 0;
   overflow-x: hidden;
   overflow-y: auto;

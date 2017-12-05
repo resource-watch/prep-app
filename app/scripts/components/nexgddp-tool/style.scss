@@ -1,5 +1,19 @@
 @import 'settings';
 
-.c-nextgddp-tool {
+.c-nexgddp-tool {
   margin: $small-margin 0 $large-margin 0;
+
+  > .filters {
+    margin-bottom: $small-margin;
+  }
+
+  > .toolbar {
+    border: 2px solid $border-color;
+    padding: 5px 15px;
+  }
+
+  > .map {
+    border: 2px solid $border-color;
+    border-top: 0;
+  }
 }

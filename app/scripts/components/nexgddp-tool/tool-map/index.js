@@ -1,4 +1,4 @@
-import './style.css';
+import './style.scss';
 
 export { default as CompareMap } from './CompareMap';
 export { default as DifferenceMap } from './DifferenceMap';
