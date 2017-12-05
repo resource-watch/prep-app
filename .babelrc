@@ -1,4 +1,4 @@
 {
-  "presets": ["env", "react", "latest", "stage-3"],
+  "presets": ["env", "react", "stage-3"],
   "plugins": ["add-react-displayname"]
 }
