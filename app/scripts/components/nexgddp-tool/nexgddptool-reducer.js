@@ -62,8 +62,28 @@ export const initialState = {
   },
   // Comparison range for the visualization
   range2: {
-    /** @type {{ label: string, value: string }[]} options */
-    options: [],
+    options: [
+      {
+        label: '1950 - 1960',
+        value: '1950'
+      },
+      {
+        label: '1960 - 1970',
+        value: '1960'
+      },
+      {
+        label: '1970 - 1980',
+        value: '1970'
+      },
+      {
+        label: '1980 - 1990',
+        value: '1980'
+      },
+      {
+        label: '1990 - 2000',
+        value: '1990'
+      }
+    ],
     /** @type {{ label: string, value: string }} selection */
     selection: undefined
   }
