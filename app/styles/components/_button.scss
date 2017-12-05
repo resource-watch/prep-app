@@ -9,6 +9,18 @@
   cursor: pointer;
   background-color: transparent;
 
+  &.-inline {
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  &.-active {
+    color: $link-font-color;
+    border-bottom: 3px solid $link-font-color;
+    padding-bottom: rem(12);
+  }
+
   &.-theme-color {
     color: $secondary-color;
     .-theme-2 & { color: $thirth-color; }
@@ -112,4 +124,8 @@
       height: ($small-margin / 2) + $small-margin;
     }
   }
+}
+
+.c-button + .c-button {
+  margin-left: 15px;
 }

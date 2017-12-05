@@ -10,7 +10,7 @@
     height: 100%;
   }
   .c-loading-spinner {
-    top: $header-height-short + $header-height-tools;
+    top: $header-height-short;
     left: $sidebar-width;
     width: calc(100% - 380px);
   }

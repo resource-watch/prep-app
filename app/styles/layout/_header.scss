@@ -74,8 +74,30 @@ $header-bg-color: $dark-slate-blue-2;
   background-color: $header-bg-color;
 }
 
-.l-header.-expanded .l-header-nav .row {
-  max-width: none;
+.l-header.-expanded {
+  position: relative;
+  z-index: 1000;
+
+  .l-header-nav .row {
+    max-width: none;
+  }
+
+  .c-user {
+    min-width: 100%;
+    text-align: center;
+  }
+
+  .c-user-options {
+    right: 0;
+    left: auto;
+    transform: none;
+
+    &:before {
+      transform: translate(-33px, -100%);
+      right: auto;
+      left: 100%;
+    }
+  }
 }
 
 .l-breadcrumbs {
