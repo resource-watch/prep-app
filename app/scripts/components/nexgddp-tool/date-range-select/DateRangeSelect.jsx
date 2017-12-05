@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
-import './style.css';
+import './style.scss';
 
 // Redux
 import { setRange1Selection, setRange2Selection } from 'actions/nexgddptool';
