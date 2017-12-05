@@ -125,6 +125,7 @@ export function getSelectorsInfo() {
       }));
 
       dispatch(setScenarioOptions(scenarioOptions));
+      dispatch(setScenarioSelection(scenarioOptions[0]));
     });
   };
 }
