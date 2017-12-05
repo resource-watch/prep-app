@@ -6,10 +6,11 @@ import 'react-select/dist/react-select.css';
 import './style.css';
 
 // Redux
-import actions from '../nexgddptool-actions';
+import { setScenarioSelection } from 'actions/nexgddptool';
 
 class ScenarioSelect extends React.PureComponent {
   render() {
+    // eslint-disable-next-line no-shadow
     const { scenario, setScenarioSelection } = this.props;
 
     return (
@@ -42,4 +43,8 @@ const mapStateToProps = state => ({
   scenario: state.nexgddptool.scenario
 });
 
-export default connect(mapStateToProps, actions)(ScenarioSelect);
+const mapDispatchToProps = dispatch => ({
+  setScenarioSelection: (...params) => dispatch(setScenarioSelection(...params))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScenarioSelect);

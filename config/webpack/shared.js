@@ -38,7 +38,8 @@ const config = {
     alias: {
       styles: path.resolve('app/styles'),
       components: path.resolve('app/scripts/components'),
-      lib: path.resolve('app/scripts/lib')
+      lib: path.resolve('app/scripts/lib'),
+      actions: path.resolve('app/scripts/actions')
     }
   },
 

@@ -12,3 +12,4 @@ export { default as widgets } from './widgets';
 export { default as layers } from './layers';
 export { default as resources } from './resources';
 export { default as auth } from '../components/auth/auth-reducer';
+export { default as nexgddptool } from './nexgddptool';

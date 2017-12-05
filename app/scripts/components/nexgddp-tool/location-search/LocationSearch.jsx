@@ -5,7 +5,7 @@ import Geosuggest from 'react-geosuggest';
 import './style.scss';
 
 // Redux
-import actions from '../nexgddptool-actions';
+import { setMarkerPosition } from 'actions/nexgddptool';
 
 class LocationSearch extends React.Component {
   constructor(props) {
@@ -55,4 +55,8 @@ const mapStateToProps = state => ({
   marker: state.nexgddptool.marker
 });
 
-export default connect(mapStateToProps, actions)(LocationSearch);
+const mapDispatchToProps = dispatch => ({
+  setMarkerPosition: (...params) => dispatch(setMarkerPosition(...params))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LocationSearch);

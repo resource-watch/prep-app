@@ -6,10 +6,11 @@ import 'react-select/dist/react-select.css';
 import './style.css';
 
 // Redux
-import actions from '../nexgddptool-actions';
+import { setRange1Selection, setRange2Selection } from 'actions/nexgddptool';
 
 class DateRangeSelect extends React.PureComponent {
   render() {
+    // eslint-disable-next-line no-shadow
     const { range1, range2, setRange1Selection, setRange2Selection } = this.props;
 
     return (
@@ -54,4 +55,9 @@ const mapStateToProps = state => ({
   range2: state.nexgddptool.range2
 });
 
-export default connect(mapStateToProps, actions)(DateRangeSelect);
+const mapDispatchToProps = dispatch => ({
+  setRange1Selection: (...params) => dispatch(setRange1Selection(...params)),
+  setRange2Selection: (...params) => dispatch(setRange2Selection(...params))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(DateRangeSelect);
