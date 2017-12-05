@@ -77,7 +77,7 @@ class NexGDDPTool extends React.PureComponent {
           <div className="row">
             <div className="columns small-12">
               {mapView === 'difference' && <DifferenceMap />}
-              {mapView === 'side-by-side' && <CompareMap />}
+              {mapView === 'side-by-side' && <CompareMap layers={layers} />}
               {mapView === 'toggle' && <ToggleMap layers={layers} />}
             </div>
           </div>

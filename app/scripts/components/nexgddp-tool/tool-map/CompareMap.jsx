@@ -17,13 +17,14 @@ const mapDefaultOptions = {
 
 class CompareMap extends React.PureComponent {
   componentDidMount() {
+    const { layers } = this.props;
     const map = this.mapElement.leafletElement;
-    const leftLayer = L.tileLayer(`${config.apiUrlRW}/layer/dd272bc7-a5e7-41e2-8ca5-6e3353603fd0/tile/rasdaman/{z}/{x}/{y}?ansi="1960-01-01T00:00:00"`, {
+    const leftLayer = L.tileLayer(layers[0].url, {
       maxZoom: 10,
       minZoom: 3
     });
 
-    const rightLayer = L.tileLayer(`${config.apiUrlRW}/layer/dd272bc7-a5e7-41e2-8ca5-6e3353603fd0/tile/rasdaman/{z}/{x}/{y}?ansi="2050-01-01T00:00:00"`, {
+    const rightLayer = L.tileLayer(layers[1].url, {
       minZoom: 3,
       maxZoom: 10
     });
@@ -37,7 +38,7 @@ class CompareMap extends React.PureComponent {
   }
 
   render() {
-    const { marker } = this.props;
+    const { marker, layers } = this.props;
 
     // It will change center of map on marker location
     const mapOptions = Object.assign({}, mapDefaultOptions, {
@@ -46,6 +47,12 @@ class CompareMap extends React.PureComponent {
 
     return (
       <div className="c-tool-map">
+        <div
+          className="current-layer-label"
+        >{new Date(layers[0].date).getFullYear()}</div>
+        <div
+          className="current-layer-label -right"
+        >{new Date(layers[1].date).getFullYear()}</div>
         <Map
           ref={el => (this.mapElement = el)}
           style={{ height: 440 }}
