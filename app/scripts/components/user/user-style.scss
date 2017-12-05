@@ -4,6 +4,7 @@
 .c-user {
     position: relative;
     align-self: center;
+    padding: 15px 0;
 
     .icon-nav-user {
         width: 50px;
@@ -11,10 +12,11 @@
     }
 
     .user-empty {
-        padding: 15px;
+        padding: 0 15px;
     }
 
     .user-avatar {
+        display: inline-block;
         background-color: $white;
         background-position: center;
         background-repeat: no-repeat;
