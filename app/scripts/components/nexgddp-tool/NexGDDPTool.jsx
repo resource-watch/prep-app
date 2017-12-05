@@ -37,6 +37,7 @@ class NexGDDPTool extends React.PureComponent {
 
   render() {
     const { mapView } = this.state;
+    const { isComparing } = this.props;
 
     return (
       <div className="c-nexgddp-tool">
@@ -54,18 +55,22 @@ class NexGDDPTool extends React.PureComponent {
         <div className="toolbar">
           <div className="row">
             <div className="columns small-12 medium-8">
-              <button
-                className={`c-button -inline ${mapView === 'difference' ? '-active' : ''}`}
-                onClick={this.switchMapView('difference')}
-              >Difference</button>
-              <button
-                className={`c-button -inline ${mapView === 'side-by-side' ? '-active' : ''}`}
-                onClick={this.switchMapView('side-by-side')}
-              >Side by side</button>
-              <button
-                className={`c-button -inline ${mapView === 'toggle' ? '-active' : ''}`}
-                onClick={this.switchMapView('toggle')}
-              >Toggle</button>
+              { isComparing && (
+                <div>
+                  <button
+                    className={`c-button -inline ${mapView === 'difference' ? '-active' : ''}`}
+                    onClick={this.switchMapView('difference')}
+                  >Difference</button>
+                  <button
+                    className={`c-button -inline ${mapView === 'side-by-side' ? '-active' : ''}`}
+                    onClick={this.switchMapView('side-by-side')}
+                  >Side by side</button>
+                  <button
+                    className={`c-button -inline ${mapView === 'toggle' ? '-active' : ''}`}
+                    onClick={this.switchMapView('toggle')}
+                  >Toggle</button>
+                </div>
+              )}
             </div>
             <div className="columns small-12 medium-4">
               <LocationSearch />
@@ -77,8 +82,8 @@ class NexGDDPTool extends React.PureComponent {
           <div className="row">
             <div className="columns small-12">
               {mapView === 'difference' && <DifferenceMap />}
-              {mapView === 'side-by-side' && <CompareMap layers={layers} />}
-              {mapView === 'toggle' && <ToggleMap layers={layers} />}
+              {mapView === 'side-by-side' && <CompareMap />}
+              {mapView === 'toggle' && <ToggleMap />}
             </div>
           </div>
         </div>
@@ -89,6 +94,7 @@ class NexGDDPTool extends React.PureComponent {
 
 NexGDDPTool.propTypes = {
   getSelectorsInfo: PropTypes.func,
+  isComparing: PropTypes.bool,
   mapView: PropTypes.oneOf(['difference', 'side-by-side', 'toggle'])
 };
 
@@ -96,8 +102,12 @@ NexGDDPTool.defaultProps = {
   mapView: 'difference'
 };
 
+const mapStateToProps = state => ({
+  isComparing: !!state.nexgddptool.range2.selection
+});
+
 const mapDispatchToProps = dispatch => ({
   getSelectorsInfo: () => dispatch(getSelectorsInfo())
 });
 
-export default connect(null, mapDispatchToProps)(NexGDDPTool);
+export default connect(mapStateToProps, mapDispatchToProps)(NexGDDPTool);

@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 
+// Redux
+import { getLayers } from 'selectors/nexgddptool';
+
 const mapDefaultOptions = {
   center: [20, -30],
   zoom: 3,
@@ -68,7 +71,8 @@ ToggleMap.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  marker: state.nexgddptool.marker
+  marker: state.nexgddptool.marker,
+  layers: getLayers(state)
 });
 
 export default connect(mapStateToProps)(ToggleMap);

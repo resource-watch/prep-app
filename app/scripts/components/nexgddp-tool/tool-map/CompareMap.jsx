@@ -5,6 +5,9 @@ import L from 'leaflet';
 import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 import 'lib/leaflet-side-by-side';
 
+// Redux
+import { getLayers } from 'selectors/nexgddptool';
+
 const mapDefaultOptions = {
   center: [20, -30],
   zoom: 3,
@@ -70,11 +73,13 @@ class CompareMap extends React.PureComponent {
 }
 
 CompareMap.propTypes = {
+  layers: PropTypes.array,
   marker: PropTypes.array
 };
 
 const mapStateToProps = state => ({
-  marker: state.nexgddptool.marker
+  marker: state.nexgddptool.marker,
+  layers: getLayers(state)
 });
 
 export default connect(mapStateToProps)(CompareMap);
