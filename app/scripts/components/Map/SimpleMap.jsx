@@ -1,8 +1,11 @@
 import React from 'react';
+import L from 'leaflet';
+import { default as esri } from 'esri-leaflet';
 
 import LoadingSpinner from '../Loading/LoadingSpinner';
 import SimpleLegend from './SimpleLegend';
 
+if (L) L.esri = esri;
 
 class SimpleMap extends React.Component {
   constructor() {

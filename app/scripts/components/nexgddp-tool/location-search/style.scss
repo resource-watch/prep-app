@@ -1,0 +1,77 @@
+@import 'settings';
+
+.c-location-search {
+  width: auto;
+  margin-top: 5px;
+}
+
+/**
+ * The geosuggest module
+ * NOTE: duplicated font-sizes' are for browsers which don't support rem (only IE 8)
+ */
+ .geosuggest {
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: bold;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  text-align: left;
+}
+.geosuggest__input {
+  width: 100%;
+  border: 2px solid transparent;
+  padding: 5px;
+}
+.geosuggest__input:focus {
+  border-color: $border-color-blue;
+  box-shadow: 0 0 0 transparent;
+}
+.geosuggest__suggests {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 25em;
+  padding: 0;
+  margin-top: -1px;
+  background: $base-bg-color;
+  border: 2px solid $border-color;
+  border-top-width: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  list-style: none;
+  z-index: 5;
+  -webkit-transition: max-height 0.2s, border 0.2s;
+          transition: max-height 0.2s, border 0.2s;
+}
+.geosuggest__suggests--hidden {
+  max-height: 0;
+  overflow: hidden;
+  border-width: 0;
+}
+
+/**
+ * A geosuggest item
+ */
+.geosuggest__item {
+  font-size: $normal-font-size;
+  padding: .5em .65em;
+  margin: 0;
+  cursor: pointer;
+}
+.geosuggest__item:hover,
+.geosuggest__item:focus {
+  background: $border-color;
+}
+.geosuggest__item--active {
+  background: $button-bg-color;
+  color: $button-font-color;
+}
+.geosuggest__item--active:hover,
+.geosuggest__item--active:focus {
+  background: $button-bg-color;
+}
+.geosuggest__item__matched-text {
+  font-weight: bold;
+}

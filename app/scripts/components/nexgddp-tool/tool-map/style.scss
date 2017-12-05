@@ -1,0 +1,49 @@
+@import 'settings';
+
+.c-tool-map {
+  position: relative;
+
+  .leaflet-container {
+    z-index: 0;
+    position: relative;
+  }
+
+  .leaflet-touch .leaflet-control-layers,
+  .leaflet-touch .leaflet-bar {
+    border: 0;
+  }
+
+  .leaflet-control-zoom {
+    border: 0;
+  }
+
+  .leaflet-control-zoom-in,
+  .leaflet-control-zoom-out {
+    margin: 0;
+  }
+
+  > .switch-button,
+  > .switch-button.-filled {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: $button-font-color;
+    z-index: 10;
+  }
+
+  > .current-layer-label {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 2;
+    color: $button-font-color;
+    font-weight: bold;
+    font-size: 22px;
+    font-family: "PT Serif", serif;
+
+    &.-right {
+      left: auto;
+      right: 15px;
+    }
+  }
+}
