@@ -82,15 +82,20 @@ $header-bg-color: $dark-slate-blue-2;
     max-width: none;
   }
 
+  .c-user {
+    min-width: 100%;
+    text-align: center;
+  }
+
   .c-user-options {
     right: 0;
     left: auto;
     transform: none;
 
-    &:after {
-      right: 0;
-      left: auto;
-      transform: translate(-100%, -100%);
+    &:before {
+      transform: translate(-33px, -100%);
+      right: auto;
+      left: 100%;
     }
   }
 }
