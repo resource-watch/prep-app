@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import L from 'leaflet';
+import { default as esri } from 'esri-leaflet';
 
 // Libraries
 import isEqual from 'lodash/isEqual';
@@ -11,6 +13,8 @@ import Tooltip from '../Tooltip/Tooltip';
 // Constants
 import { LABELS } from '../../general-constants/basemaps';
 
+if (L) L.esri = esri;
+
 const tooltipBase = {
   hidden: true,
   position: {
@@ -19,7 +23,6 @@ const tooltipBase = {
   },
   width: 'auto'
 };
-
 
 class ExploreMap extends React.Component {
   constructor() {
