@@ -5,6 +5,11 @@
 
   > .filters {
     margin-bottom: $small-margin;
+    
+    label {
+      font-size: 13px;
+      font-weight: bold;
+    }
   }
 
   > .toolbar {
