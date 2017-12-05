@@ -23,39 +23,47 @@ class NexGDDPTool extends React.PureComponent {
     const { mapView } = this.state;
 
     return (
-      <div className="c-nextgddp-tool">
-        <div className="row">
-          <div className="columns small-12 medium-4">
-            <DateRangeSelect />
-          </div>
-          <div className="columns small-12 medium-4">
-            <ScenarioSelect />
-          </div>
-        </div>
-        <div className="row">
-          <div className="columns small-12 medium-8">
-            <button
-              className={`c-button -inline ${mapView === 'difference' ? '-active' : ''}`}
-              onClick={this.switchMapView('difference')}
-            >Difference</button>
-            <button
-              className={`c-button -inline ${mapView === 'side-by-side' ? '-active' : ''}`}
-              onClick={this.switchMapView('side-by-side')}
-            >Side by side</button>
-            <button
-              className={`c-button -inline ${mapView === 'toggle' ? '-active' : ''}`}
-              onClick={this.switchMapView('toggle')}
-            >Toggle</button>
-          </div>
-          <div className="columns small-12 medium-4">
-            <LocationSearch />
+      <div className="c-nexgddp-tool">
+        <div className="filters">
+          <div className="row">
+            <div className="columns small-12 medium-4">
+              <DateRangeSelect />
+            </div>
+            <div className="columns small-12 medium-4">
+              <ScenarioSelect />
+            </div>
           </div>
         </div>
-        <div className="row">
-          <div className="columns small-12">
-            {mapView === 'difference' && <DifferenceMap />}
-            {mapView === 'side-by-side' && <CompareMap />}
-            {mapView === 'toggle' && <ToggleMap />}
+
+        <div className="toolbar">
+          <div className="row">
+            <div className="columns small-12 medium-8">
+              <button
+                className={`c-button -inline ${mapView === 'difference' ? '-active' : ''}`}
+                onClick={this.switchMapView('difference')}
+              >Difference</button>
+              <button
+                className={`c-button -inline ${mapView === 'side-by-side' ? '-active' : ''}`}
+                onClick={this.switchMapView('side-by-side')}
+              >Side by side</button>
+              <button
+                className={`c-button -inline ${mapView === 'toggle' ? '-active' : ''}`}
+                onClick={this.switchMapView('toggle')}
+              >Toggle</button>
+            </div>
+            <div className="columns small-12 medium-4">
+              <LocationSearch />
+            </div>
+          </div>
+        </div>
+
+        <div className="map">
+          <div className="row">
+            <div className="columns small-12">
+              {mapView === 'difference' && <DifferenceMap />}
+              {mapView === 'side-by-side' && <CompareMap />}
+              {mapView === 'toggle' && <ToggleMap />}
+            </div>
           </div>
         </div>
       </div>

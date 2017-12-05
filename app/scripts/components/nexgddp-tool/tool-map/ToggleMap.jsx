@@ -14,16 +14,34 @@ const mapDefaultOptions = {
 };
 
 class ToggleMap extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      index: 0
+    };
+    this.toggleLayer = this.toggleLayer.bind(this);
+  }
+
+  toggleLayer() {
+    this.setState({ index: this.state.index === 0 ? 1 : 0 });
+  }
+
   render() {
-    const { marker } = this.props;
+    const { marker, layers } = this.props;
 
     // It will change center of map on marker location
     const mapOptions = Object.assign({}, mapDefaultOptions, {
       center: marker || mapDefaultOptions.center
     });
 
+    const currentLayer = layers[this.state.index];
+
     return (
       <div className="c-tool-map">
+        <button
+          className="c-button -filled -secondary-color switch-button"
+          onClick={this.toggleLayer}
+        >Switch</button>
         <Map
           style={{ height: 440 }}
           {...mapOptions}
@@ -31,6 +49,7 @@ class ToggleMap extends React.PureComponent {
           <TileLayer
             url={config.basemapTileUrl}
           />
+          {currentLayer && <TileLayer url={currentLayer.url} />}
           <ZoomControl position="bottomright" />
           { marker && <Marker position={marker} /> }
         </Map>
@@ -41,7 +60,8 @@ class ToggleMap extends React.PureComponent {
 
 ToggleMap.propTypes = {
   mapOptions: PropTypes.object,
-  marker: PropTypes.array
+  marker: PropTypes.array,
+  layers: PropTypes.array
 };
 
 const mapStateToProps = state => ({

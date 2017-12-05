@@ -1,0 +1,18 @@
+@import 'settings';
+
+.c-tool-map {
+  position: relative;
+
+  .leaflet-container {
+    z-index: 0;
+    position: relative;
+  }
+
+  .switch-button {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: $button-font-color;
+    z-index: 10;
+  }
+}
