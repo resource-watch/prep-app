@@ -8,11 +8,28 @@
     position: relative;
   }
 
-  .switch-button {
+  > .switch-button,
+  > .switch-button.-filled {
     position: absolute;
     top: 15px;
     left: 15px;
     color: $button-font-color;
     z-index: 10;
+  }
+
+  > .current-layer-label {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 10;
+    color: $button-font-color;
+    font-weight: bold;
+    font-size: 22px;
+    font-family: "PT Serif", serif;
+
+    &.-right {
+      left: auto;
+      right: 15px;
+    }
   }
 }

@@ -42,6 +42,9 @@ class ToggleMap extends React.PureComponent {
           className="c-button -filled -secondary-color switch-button"
           onClick={this.toggleLayer}
         >Switch</button>
+        <div
+          className="current-layer-label -right"
+        >{new Date(currentLayer.date).getFullYear()}</div>
         <Map
           style={{ height: 440 }}
           {...mapOptions}

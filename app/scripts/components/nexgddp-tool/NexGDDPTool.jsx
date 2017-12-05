@@ -6,6 +6,14 @@ import { CompareMap, ToggleMap, DifferenceMap } from './tool-map';
 import LocationSearch from './location-search/LocationSearch';
 import './style.scss';
 
+const layers = [{
+  url: `${config.apiUrlRW}/layer/dd272bc7-a5e7-41e2-8ca5-6e3353603fd0/tile/rasdaman/{z}/{x}/{y}?ansi="1960-01-01T00:00:00"`,
+  date: '1960-01-01T00:00:00'
+}, {
+  url: `${config.apiUrlRW}/layer/dd272bc7-a5e7-41e2-8ca5-6e3353603fd0/tile/rasdaman/{z}/{x}/{y}?ansi="2050-01-01T00:00:00"`,
+  date: '2050-01-01T00:00:00'
+}];
+
 class NexGDDPTool extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -62,7 +70,7 @@ class NexGDDPTool extends React.PureComponent {
             <div className="columns small-12">
               {mapView === 'difference' && <DifferenceMap />}
               {mapView === 'side-by-side' && <CompareMap />}
-              {mapView === 'toggle' && <ToggleMap />}
+              {mapView === 'toggle' && <ToggleMap layers={layers} />}
             </div>
           </div>
         </div>
