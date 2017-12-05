@@ -115,6 +115,7 @@ export function getSelectorsInfo() {
       }
 
       dispatch(setRange1Options(dateRangeOptions));
+      dispatch(setRange1Selection(dateRangeOptions[0]));
       dispatch(setRange2Options(dateRangeOptions));
 
       // We compute the scenario options
