@@ -9,14 +9,6 @@
     "L": true,
     "config": true
   },
-  "parserOptions": {
-    "ecmaVersion": 2017,
-    "ecmaFeatures": {
-      "jsx": true,
-      "experimentalObjectRestSpread": true
-    },
-    "sourceType": "module"
-  },
   "extends": [
     "vizzuality"
   ],

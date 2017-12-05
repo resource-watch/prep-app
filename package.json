@@ -21,8 +21,8 @@
   "license": "MIT",
   "devDependencies": {
     "chai": "^3.5.0",
-    "eslint": "^3.19.0",
-    "eslint-config-vizzuality": "^1.0.3",
+    "eslint": "^4.12.1",
+    "eslint-config-vizzuality": "1.0.7",
     "mocha": "^3.0.0"
   },
   "dependencies": {
@@ -45,6 +45,7 @@
     "css-loader": "0.28.0",
     "dotenv": "2.0.0",
     "es-decorators": "1.0.0",
+    "esri-leaflet": "^2.1.1",
     "express": "4.15.2",
     "extract-text-webpack-plugin": "2.1.0",
     "file-loader": "0.9.0",
@@ -71,6 +72,7 @@
     "react": "15.6.2",
     "react-addons-css-transition-group": "15.5.2",
     "react-dom": "15.6.2",
+    "react-geosuggest": "2.6.0",
     "react-leaflet": "1.7.8",
     "react-redux": "4.4.8",
     "react-router": "2.8.1",

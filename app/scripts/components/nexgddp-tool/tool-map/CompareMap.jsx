@@ -1,8 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import L from 'leaflet';
-import { Map, TileLayer, ZoomControl } from 'react-leaflet';
-import 'leaflet-side-by-side/leaflet-side-by-side';
+import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
+import 'leaflet-side-by-side';
+
+const mapDefaultOptions = {
+  center: [20, -30],
+  zoom: 3,
+  scrollWheelZoom: false,
+  attributionControl: false,
+  zoomControl: false
+};
 
 class CompareMap extends React.PureComponent {
   componentDidMount() {
@@ -29,36 +37,33 @@ class CompareMap extends React.PureComponent {
   }
 
   render() {
-    const { mapOptions } = this.props;
+    const { markerLocation } = this.props;
+
+    // It will change center of map on marker location
+    const mapOptions = Object.assign({}, mapDefaultOptions, {
+      center: markerLocation || mapDefaultOptions.center
+    });
 
     return (
-      <Map
-        ref={el => (this.mapElement = el)}
-        style={{ height: 440 }}
-        {...mapOptions}
-      >
-        <TileLayer
-          url="//stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.png"
-          attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-        />
-        <ZoomControl position="bottomright" />
-      </Map>
+      <div className="c-tool-map">
+        <Map
+          ref={el => (this.mapElement = el)}
+          style={{ height: 440 }}
+          {...mapOptions}
+        >
+          <TileLayer
+            url={config.basemapTileUrl}
+          />
+          <ZoomControl position="bottomright" />
+          { markerLocation && <Marker position={markerLocation} /> }
+        </Map>
+      </div>
     );
   }
 }
 
 CompareMap.propTypes = {
-  mapOptions: PropTypes.object
-};
-
-CompareMap.defaultProps = {
-  mapOptions: {
-    center: [0, 0],
-    zoom: 3,
-    scrollWheelZoom: false,
-    attributionControl: false,
-    zoomControl: false
-  }
+  markerLocation: PropTypes.object
 };
 
 export default CompareMap;
