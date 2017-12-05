@@ -17,6 +17,8 @@ import VegaChart from '../Chart/VegaChart';
 import SimpleMap from '../../containers/Map/SimpleMap';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
+import NexGDDPTool from '../nexgddp-tool/NexGDDPTool';
+
 class DatasetDetail extends React.Component {
 
   componentWillMount() {
@@ -57,23 +59,23 @@ class DatasetDetail extends React.Component {
         }
       };
 
-    // const widgetComponents = [];
-    // const widgets = this.props.data.widget;
-    // if (widgets && widgets.length) {
-    //   for (let i = 0, wLength = widgets.length; i < wLength; i++) {
-    //     const widget = widgets[i].attributes;
-    //     if (widget.widget_config) {
-    //       switch (widget.widget_config.type) {
-    //         case 'map':
-    //           widgetComponents.push(<div className="c-article" key={i} ><SimpleMap layerId={widget.widget_config.layer_id} /></div>);
-    //           break;
-    //         default:
-    //           widgetComponents.push(<div className="c-article" key={i} ><VegaChart data={widget.widget_config} /></div>);
-    //           break;
-    //       }
-    //     }
-    //   }
-    // }
+    const widgetComponents = [];
+    const widgets = this.props.data.widget;
+    if (widgets && widgets.length) {
+      for (let i = 0, wLength = widgets.length; i < wLength; i++) {
+        const widget = widgets[i].attributes;
+        if (widget.widget_config) {
+          switch (widget.widget_config.type) {
+            case 'map':
+              widgetComponents.push(<div className="c-article" key={i} ><SimpleMap layerId={widget.widget_config.layer_id} /></div>);
+              break;
+            default:
+              widgetComponents.push(<div className="c-article" key={i} ><VegaChart data={widget.widget_config} /></div>);
+              break;
+          }
+        }
+      }
+    }
 
     const currentSection = this.props.location.state && this.props.location.state.prevPath || 'explore';
     return (
@@ -82,7 +84,7 @@ class DatasetDetail extends React.Component {
           <MetadataList data={this.props.data} />
         </SectionIntro>
 
-        {/* {
+        {/*
           (widgetComponents && widgetComponents.length) ?
             <div className="row">
               <div className="columns small-12">
@@ -90,7 +92,7 @@ class DatasetDetail extends React.Component {
               </div>
             </div>
           : null
-        } */}
+        */}
       </div>
     );
   }
@@ -159,7 +161,14 @@ class DatasetDetail extends React.Component {
 
           {content}
 
-          { data.id && (
+          {data.id === 'defe21a1-f6a0-4bf7-a9ee-f083456130de' &&
+            <div className="row">
+              <div className="columns small-12">
+                <NexGDDPTool />
+              </div>
+            </div>}
+
+          { (data.id && data.id !== 'defe21a1-f6a0-4bf7-a9ee-f083456130de') && (
             <WidgetEditor
               datasetId={data.id}
               saveButtonMode="never"
