@@ -12,6 +12,8 @@ import {
   NEXGDDP_SET_RANGE2_SELECTION
 } from '../constants';
 
+import fieldsMock from 'components/nexgddp-tool/mocks/fields.json';
+
 export function setMapZoom(zoom) {
   return {
     type: NEXGDDP_SET_MAP_ZOOM,
@@ -86,5 +88,42 @@ export function setRange2Selection(selection) {
   return {
     type: NEXGDDP_SET_RANGE2_SELECTION,
     payload: selection
+  };
+}
+
+export function getSelectorsInfo() {
+  return (dispatch) => {
+    // Temporary code
+    const promise = Promise.resolve(fieldsMock);
+
+    promise.then(({ meta }) => {
+      const date = meta.coverageBounds.Date;
+      const scenarios = meta.coverageBounds.Scenarios;
+
+      // We compute the date range options
+      const startYear = new Date(date[0]).getFullYear();
+      const endYear = new Date(date[1]).getFullYear();
+      let yearPointer = startYear;
+      const dateRangeOptions = [];
+
+      while (yearPointer + 10 <= endYear) {
+        dateRangeOptions.push({
+          label: `${yearPointer}-${yearPointer + 10}`,
+          value: `${yearPointer}`
+        });
+        yearPointer += 10;
+      }
+
+      dispatch(setRange1Options(dateRangeOptions));
+      dispatch(setRange2Options(dateRangeOptions));
+
+      // We compute the scenario options
+      const scenarioOptions = scenarios.map(scenario => ({
+        label: { [scenario]: scenario, rcp45: 'Pessimistic', rcp85: 'Optimistic' }[scenario],
+        value: scenario
+      }));
+
+      dispatch(setScenarioOptions(scenarioOptions));
+    });
   };
 }

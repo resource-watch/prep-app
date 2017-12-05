@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import ScenarioSelect from './scenario-select/ScenarioSelect';
 import DateRangeSelect from './date-range-select/DateRangeSelect';
 import { CompareMap, ToggleMap, DifferenceMap } from './tool-map';
 import LocationSearch from './location-search/LocationSearch';
+// Redux
+import { getSelectorsInfo } from 'actions/nexgddptool';
+
 import './style.scss';
 
 const layers = [{
@@ -21,6 +25,10 @@ class NexGDDPTool extends React.PureComponent {
       mapView: props.mapView
     };
     this.switchMapView = this.switchMapView.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.getSelectorsInfo();
   }
 
   switchMapView(mapView) {
@@ -80,6 +88,7 @@ class NexGDDPTool extends React.PureComponent {
 }
 
 NexGDDPTool.propTypes = {
+  getSelectorsInfo: PropTypes.func,
   mapView: PropTypes.oneOf(['difference', 'side-by-side', 'toggle'])
 };
 
@@ -87,4 +96,8 @@ NexGDDPTool.defaultProps = {
   mapView: 'difference'
 };
 
-export default NexGDDPTool;
+const mapDispatchToProps = dispatch => ({
+  getSelectorsInfo: () => dispatch(getSelectorsInfo())
+});
+
+export default connect(null, mapDispatchToProps)(NexGDDPTool);
