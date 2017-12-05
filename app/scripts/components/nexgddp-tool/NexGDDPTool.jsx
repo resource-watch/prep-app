@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ScenarioSelect from './scenario-select/ScenarioSelect';
 import DateRangeSelect from './date-range-select/DateRangeSelect';
-import { CompareMap, ToggleMap, DifferenceMap } from './tool-map';
+import { CompareMap, ToggleMap, DifferenceMap, SimpleMap } from './tool-map';
 import LocationSearch from './location-search/LocationSearch';
 // Redux
 import { getSelectorsInfo } from 'actions/nexgddptool';
@@ -83,9 +83,10 @@ class NexGDDPTool extends React.PureComponent {
         <div className="map">
           <div className="row">
             <div className="columns small-12">
-              {mapView === 'difference' && <DifferenceMap />}
-              {mapView === 'side-by-side' && <CompareMap />}
-              {mapView === 'toggle' && <ToggleMap />}
+              {!isComparing && <SimpleMap />}
+              {(isComparing && mapView === 'difference') && <DifferenceMap />}
+              {(isComparing && mapView === 'side-by-side') && <CompareMap />}
+              {(isComparing && mapView === 'toggle') && <ToggleMap />}
             </div>
           </div>
         </div>
