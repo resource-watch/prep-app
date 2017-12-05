@@ -3,13 +3,14 @@ require('dotenv').config({ silent: true });
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const rootPath = process.cwd();
 
 const config = {
 
   entry: {
-    app: path.join(rootPath, 'app/scripts/index.jsx')
+    app: ['babel-polyfill', path.join(rootPath, 'app/scripts/index.jsx')]
   },
 
   output: {
@@ -35,7 +36,8 @@ const config = {
       path.join(rootPath, 'node_modules')
     ],
     alias: {
-      styles: path.resolve('app/styles')
+      styles: path.resolve('app/styles'),
+      components: path.resolve('app/scripts/components')
     }
   },
 
@@ -62,9 +64,15 @@ const config = {
         apiUrlRW: JSON.stringify(process.env.RW_API_URL),
         basemapTileUrl: JSON.stringify(process.env.BASEMAP_TILE_URL),
         datasetEnv: JSON.stringify(process.env.DATASET_ENV),
-        assetsUrl: JSON.stringify(process.env.ASSETS_URL)
+        assetsUrl: JSON.stringify(process.env.ASSETS_URL || '')
       }
-    })
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: 'node_modules/widget-editor/dist/images',
+        to: 'images/'
+      }
+    ])
   ]
 
 };

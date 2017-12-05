@@ -1,4 +1,5 @@
 import React from 'react';
+import { Modal, Tooltip, Icons } from 'widget-editor';
 import WelcomeModal from '../Modal/WelcomeModal';
 
 class Root extends React.Component {
@@ -26,6 +27,10 @@ class Root extends React.Component {
   render() {
     return (
       <div style={{ height: '100%' }}>
+        <Modal />
+        <Tooltip />
+        <Icons />
+
         {this.props.children}
 
         {this.state.modalWelcomeOpen &&

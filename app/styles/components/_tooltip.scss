@@ -98,4 +98,17 @@
     }
   }
 
+  &.basemap-tooltip {
+    max-height: none;
+
+    .divisor {
+      height: 1px;
+      background-color: rgba($white, 0.1);
+    }
+
+    .c-radio label,
+    .c-checkbox label {
+      color: $white;
+    }
+  }
 }

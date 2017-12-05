@@ -1,0 +1,26 @@
+@import 'settings';
+@import 'layouts';
+
+.c-user {
+    position: relative;
+    align-self: center;
+
+    .icon-nav-user {
+        width: 50px;
+        height: 50px;
+    }
+
+    .user-empty {
+        padding: 15px;
+    }
+
+    .user-avatar {
+        background-color: $white;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+    }
+}

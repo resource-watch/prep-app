@@ -7,9 +7,9 @@
 
   &.-main {
     & > ul > li {
+      position: relative;
       margin-left: 1rem;
       margin-right: 1rem;
-
       color: $inverse-font-color;
       font-weight: bold;
       letter-spacing: 0.5px;
@@ -19,7 +19,6 @@
       & > a {
         display: block;
         padding: 38px 0;
-
         color: $inverse-font-color;
 
         border-top: 5px solid transparent;
@@ -29,6 +28,11 @@
         .l-header-nav.-short & {
           padding: 20px 0;
         }
+      }
+
+      & button {
+        padding: 38px 0;
+        display: block;
       }
 
       & > a.-current,
@@ -54,6 +58,12 @@
       }
       &:last-child {
         margin-right: 0;
+
+        &.avatar-container {
+          display: flex;
+          justify-content: center;
+          width: 50px;
+        }
       }
     }
   }
