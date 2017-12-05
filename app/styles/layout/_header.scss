@@ -81,6 +81,18 @@ $header-bg-color: $dark-slate-blue-2;
   .l-header-nav .row {
     max-width: none;
   }
+
+  .c-user-options {
+    right: 0;
+    left: auto;
+    transform: none;
+
+    &:after {
+      right: 0;
+      left: auto;
+      transform: translate(-100%, -100%);
+    }
+  }
 }
 
 .l-breadcrumbs {
