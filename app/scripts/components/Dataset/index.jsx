@@ -161,13 +161,14 @@ class DatasetDetail extends React.Component {
 
           {content}
 
-          <div className="row">
-            <div className="columns small-12">
-              <NexGDDPTool />
-            </div>
-          </div>
+          {data.id === 'defe21a1-f6a0-4bf7-a9ee-f083456130de' &&
+            <div className="row">
+              <div className="columns small-12">
+                <NexGDDPTool />
+              </div>
+            </div>}
 
-          { data.id && (
+          { (data.id && data.id !== 'defe21a1-f6a0-4bf7-a9ee-f083456130de') && (
             <WidgetEditor
               datasetId={data.id}
               saveButtonMode="never"
