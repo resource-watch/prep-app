@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import L from 'leaflet';
 import { connect } from 'react-redux';
 import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 import { getLayers } from 'selectors/nexgddptool';
