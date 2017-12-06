@@ -61,7 +61,7 @@ class ToggleMap extends React.PureComponent {
           />
           {currentLayer && <TileLayer url={currentLayer.url} />}
           <ZoomControl position="bottomright" />
-          { marker && <Marker position={marker} /> }
+          { marker && <Marker position={marker} icon={L.divIcon({ className: 'map-marker' })} /> }
         </Map>
       </div>
     );

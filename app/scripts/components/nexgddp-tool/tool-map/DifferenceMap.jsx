@@ -36,7 +36,7 @@ class DifferenceMap extends React.PureComponent {
             url={config.basemapTileUrl}
           />
           <ZoomControl position="bottomright" />
-          { marker && <Marker position={marker} /> }
+          { marker && <Marker position={marker} icon={L.divIcon({ className: 'map-marker' })} /> }
         </Map>
       </div>
     );
