@@ -227,7 +227,7 @@ TimeseriesChart.propTypes = {
 };
 
 TimeseriesChart.defaultProps = {
-  width: 1102,
+  width: 1072,
   height: 440
 };
 
