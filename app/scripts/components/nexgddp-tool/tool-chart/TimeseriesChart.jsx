@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Vega from '../vega-chart/Vega';
+import Icon from 'components/ui/Icon';
+import './style.scss';
+
+// Redux
+import { setMarkerPosition } from 'actions/nexgddptool';
 
 const chartSpec = {
   "width": 700,
@@ -127,7 +133,7 @@ const chartSpec = {
     }
   ],
       "transform":[
-        
+
         ]
     },
     {"name":"test",
@@ -216,14 +222,20 @@ const chartSpec = {
   ]
 };
 
-const TimeseriesChart = ({ width, height }) => (
-  <Vega width={width} height={height} spec={chartSpec} />
+const TimeseriesChart = ({ width, height, removeMarker }) => (
+  <div className="c-tool-timeseries-chart">
+    <button type="button" className="close-button" aria-label="Close chart" onClick={removeMarker}>
+      <Icon name="icon-cross" />
+    </button>
+    <Vega width={width} height={height} spec={chartSpec} />
+  </div>
 );
 
 TimeseriesChart.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
-  spec: PropTypes.object
+  spec: PropTypes.object,
+  removeMarker: PropTypes.func
 };
 
 TimeseriesChart.defaultProps = {
@@ -231,4 +243,8 @@ TimeseriesChart.defaultProps = {
   height: 440
 };
 
-export default TimeseriesChart;
+const mapDispatchToProps = dispatch => ({
+  removeMarker: () => dispatch(setMarkerPosition(undefined))
+});
+
+export default connect(null, mapDispatchToProps)(TimeseriesChart);

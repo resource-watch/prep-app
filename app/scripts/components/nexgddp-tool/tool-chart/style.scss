@@ -1,0 +1,15 @@
+@import 'settings';
+
+.c-tool-timeseries-chart {
+  position: relative;
+  border: 2px solid $border-color;
+  border-top: 0;
+
+  .close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    z-index: 1;
+  }
+}
