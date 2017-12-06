@@ -5,6 +5,7 @@ import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 
 // Redux
 import { getLayers } from 'selectors/nexgddptool';
+import { setMarkerPosition } from 'actions/nexgddptool';
 
 const mapDefaultOptions = {
   center: [20, -30],
@@ -51,6 +52,7 @@ class ToggleMap extends React.PureComponent {
         <Map
           style={{ height: 440 }}
           {...mapOptions}
+          onClick={({ latlng }) => this.props.setMarkerPosition([latlng.lat, latlng.lng])}
         >
           <TileLayer
             url={config.basemapTileUrl}
@@ -67,7 +69,8 @@ class ToggleMap extends React.PureComponent {
 ToggleMap.propTypes = {
   mapOptions: PropTypes.object,
   marker: PropTypes.array,
-  layers: PropTypes.array
+  layers: PropTypes.array,
+  setMarkerPosition: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -75,4 +78,8 @@ const mapStateToProps = state => ({
   layers: getLayers(state)
 });
 
-export default connect(mapStateToProps)(ToggleMap);
+const mapDispatchToProps = dispatch => ({
+  setMarkerPosition: (...params) => dispatch(setMarkerPosition(...params))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ToggleMap);

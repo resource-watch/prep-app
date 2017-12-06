@@ -40,7 +40,7 @@ class SimpleMap extends React.PureComponent {
           <div
             className="current-layer-label"
           >{new Date(layers[0].date).getFullYear()}</div>}
-        
+
         <Map
           style={{ height: 440 }}
           {...mapOptions}
@@ -59,7 +59,9 @@ class SimpleMap extends React.PureComponent {
 }
 
 SimpleMap.propTypes = {
-  marker: PropTypes.array
+  marker: PropTypes.array,
+  layers: PropTypes.array,
+  setMarkerPosition: PropTypes.func
 };
 
 const mapStateToProps = state => ({
