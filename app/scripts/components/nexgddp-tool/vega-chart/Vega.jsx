@@ -122,8 +122,10 @@ class Vega extends React.Component {
         // store the vis object to be used on later updates
         this.vis = vis;
 
+        const containerWidth = this.element.offsetWidth;
+
         vis
-          .width(width || spec.width)
+          .width(width && width === 'auto' ? containerWidth : spec.width)
           .height(height || spec.height)
           .padding(padding || spec.padding)
           .viewport(viewport || spec.viewport);
@@ -181,9 +183,9 @@ Vega.propTypes = {
   className: PropTypes.string,
   style: PropTypes.object,
   spec: PropTypes.object.isRequired,
-  width: PropTypes.number,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   height: PropTypes.number,
-  padding: PropTypes.object,
+  padding: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.object]),
   viewport: PropTypes.array,
   renderer: PropTypes.string,
   data: PropTypes.object,
