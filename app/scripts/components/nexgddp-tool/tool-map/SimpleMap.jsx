@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 import { getLayers } from 'selectors/nexgddptool';
+import { setMarkerPosition } from 'actions/nexgddptool';
 
 const mapDefaultOptions = {
   center: [20, -30],
@@ -15,6 +16,15 @@ const mapDefaultOptions = {
 };
 
 class SimpleMap extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.addMarker = this.addMarker.bind(this);
+  }
+
+  addMarker({ latlng }) {
+    this.props.setMarkerPosition([latlng.lat, latlng.lng]);
+  }
+
   render() {
     const { marker, layers } = this.props;
     const currentLayer = layers[0];
@@ -34,6 +44,7 @@ class SimpleMap extends React.PureComponent {
         <Map
           style={{ height: 440 }}
           {...mapOptions}
+          onClick={this.addMarker}
         >
           <TileLayer
             url={config.basemapTileUrl}
@@ -56,4 +67,9 @@ const mapStateToProps = state => ({
   layers: getLayers(state)
 });
 
-export default connect(mapStateToProps)(SimpleMap);
+const mapDispatchToProps = dispatch => ({
+  setMarkerPosition: (...params) => dispatch(setMarkerPosition(...params))
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(SimpleMap);
