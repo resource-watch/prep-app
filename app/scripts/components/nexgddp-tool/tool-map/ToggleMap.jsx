@@ -31,7 +31,7 @@ class ToggleMap extends React.PureComponent {
   }
 
   render() {
-    const { marker, layers } = this.props;
+    const { marker, layers, range1Selection, range2Selection } = this.props;
 
     // It will change center of map on marker location
     const mapOptions = Object.assign({}, mapDefaultOptions, {
@@ -48,7 +48,9 @@ class ToggleMap extends React.PureComponent {
         >Switch</button>
         <div
           className="current-layer-label -right"
-        >{new Date(currentLayer.date).getFullYear()}</div>
+        >
+          {this.state.index === 0 ? range1Selection.label : range2Selection.label}
+        </div>
         <Map
           style={{ height: 440 }}
           {...mapOptions}
@@ -70,12 +72,16 @@ ToggleMap.propTypes = {
   mapOptions: PropTypes.object,
   marker: PropTypes.array,
   layers: PropTypes.array,
+  range1Selection: PropTypes.object,
+  range2Selection: PropTypes.object,
   setMarkerPosition: PropTypes.func
 };
 
 const mapStateToProps = state => ({
   marker: state.nexgddptool.marker,
-  layers: getLayers(state)
+  layers: getLayers(state),
+  range1Selection: state.nexgddptool.range1.selection,
+  range2Selection: state.nexgddptool.range2.selection
 });
 
 const mapDispatchToProps = dispatch => ({

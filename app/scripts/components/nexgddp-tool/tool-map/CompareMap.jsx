@@ -42,7 +42,7 @@ class CompareMap extends React.PureComponent {
   }
 
   render() {
-    const { marker, layers } = this.props;
+    const { marker, range1Selection, range2Selection } = this.props;
 
     // It will change center of map on marker location
     const mapOptions = Object.assign({}, mapDefaultOptions, {
@@ -53,10 +53,10 @@ class CompareMap extends React.PureComponent {
       <div className="c-tool-map">
         <div
           className="current-layer-label"
-        >{new Date(layers[0].date).getFullYear()}</div>
+        >{range1Selection.label}</div>
         <div
           className="current-layer-label -right"
-        >{new Date(layers[1].date).getFullYear()}</div>
+        >{range2Selection.label}</div>
         <Map
           ref={el => (this.mapElement = el)}
           style={{ height: 440 }}
@@ -77,12 +77,16 @@ class CompareMap extends React.PureComponent {
 CompareMap.propTypes = {
   layers: PropTypes.array,
   marker: PropTypes.array,
+  range1Selection: PropTypes.object,
+  range2Selection: PropTypes.object,
   setMarkerPosition: PropTypes.func
 };
 
 const mapStateToProps = state => ({
   marker: state.nexgddptool.marker,
-  layers: getLayers(state)
+  layers: getLayers(state),
+  range1Selection: state.nexgddptool.range1.selection,
+  range2Selection: state.nexgddptool.range2.selection
 });
 
 const mapDispatchToProps = dispatch => ({
