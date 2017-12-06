@@ -26,7 +26,7 @@ class SimpleMap extends React.PureComponent {
   }
 
   render() {
-    const { marker, layers } = this.props;
+    const { marker, layers, range1Selection } = this.props;
     const currentLayer = layers[0];
 
     // It will change center of map on marker location
@@ -39,8 +39,8 @@ class SimpleMap extends React.PureComponent {
         {currentLayer &&
           <div
             className="current-layer-label"
-          >{new Date(layers[0].date).getFullYear()}</div>}
-        
+          >{range1Selection.label}</div>}
+
         <Map
           style={{ height: 440 }}
           {...mapOptions}
@@ -51,7 +51,7 @@ class SimpleMap extends React.PureComponent {
           />
           {currentLayer && <TileLayer url={currentLayer.url} />}
           <ZoomControl position="bottomright" />
-          { marker && <Marker position={marker} /> }
+          { marker && <Marker position={marker} icon={L.divIcon({ className: 'map-marker' })} /> }
         </Map>
       </div>
     );
@@ -59,12 +59,16 @@ class SimpleMap extends React.PureComponent {
 }
 
 SimpleMap.propTypes = {
-  marker: PropTypes.array
+  marker: PropTypes.array,
+  layers: PropTypes.array,
+  range1Selection: PropTypes.object,
+  setMarkerPosition: PropTypes.func
 };
 
 const mapStateToProps = state => ({
   marker: state.nexgddptool.marker,
-  layers: getLayers(state)
+  layers: getLayers(state),
+  range1Selection: state.nexgddptool.range1.selection
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -5,18 +5,11 @@ import ScenarioSelect from './scenario-select/ScenarioSelect';
 import DateRangeSelect from './date-range-select/DateRangeSelect';
 import { CompareMap, ToggleMap, DifferenceMap, SimpleMap } from './tool-map';
 import LocationSearch from './location-search/LocationSearch';
+import TimeseriesChart from './tool-chart/TimeseriesChart';
 // Redux
 import { getSelectorsInfo } from 'actions/nexgddptool';
 
 import './style.scss';
-
-const layers = [{
-  url: `${config.apiUrlRW}/layer/dd272bc7-a5e7-41e2-8ca5-6e3353603fd0/tile/rasdaman/{z}/{x}/{y}?ansi="1960-01-01T00:00:00"`,
-  date: '1960-01-01T00:00:00'
-}, {
-  url: `${config.apiUrlRW}/layer/dd272bc7-a5e7-41e2-8ca5-6e3353603fd0/tile/rasdaman/{z}/{x}/{y}?ansi="2050-01-01T00:00:00"`,
-  date: '2050-01-01T00:00:00'
-}];
 
 class NexGDDPTool extends React.PureComponent {
   constructor(props) {
@@ -37,7 +30,7 @@ class NexGDDPTool extends React.PureComponent {
 
   render() {
     const { mapView } = this.state;
-    const { isComparing } = this.props;
+    const { marker, isComparing } = this.props;
 
     return (
       <div className="c-nexgddp-tool">
@@ -90,6 +83,14 @@ class NexGDDPTool extends React.PureComponent {
             </div>
           </div>
         </div>
+
+        {marker && <div className="chart">
+          <div className="row">
+            <div className="columns small-12">
+              <TimeseriesChart />
+            </div>
+          </div>
+        </div>}
       </div>
     );
   }
@@ -106,6 +107,7 @@ NexGDDPTool.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  marker: state.nexgddptool.marker,
   isComparing: !!state.nexgddptool.range2.selection
 });
 

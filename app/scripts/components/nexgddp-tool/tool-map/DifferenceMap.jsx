@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 
+// Redux
+import { setMarkerPosition } from 'actions/nexgddptool';
+
 const mapDefaultOptions = {
   center: [20, -30],
   zoom: 3,
@@ -27,12 +30,13 @@ class DifferenceMap extends React.PureComponent {
         <Map
           style={{ height: 440 }}
           {...mapOptions}
+          onClick={({ latlng }) => this.props.setMarkerPosition([latlng.lat, latlng.lng])}
         >
           <TileLayer
             url={config.basemapTileUrl}
           />
           <ZoomControl position="bottomright" />
-          { marker && <Marker position={marker} /> }
+          { marker && <Marker position={marker} icon={L.divIcon({ className: 'map-marker' })} /> }
         </Map>
       </div>
     );
@@ -40,11 +44,16 @@ class DifferenceMap extends React.PureComponent {
 }
 
 DifferenceMap.propTypes = {
-  marker: PropTypes.array
+  marker: PropTypes.array,
+  setMarkerPosition: PropTypes.func
 };
 
 const mapStateToProps = state => ({
   marker: state.nexgddptool.marker
 });
 
-export default connect(mapStateToProps)(DifferenceMap);
+const mapDispatchToProps = dispatch => ({
+  setMarkerPosition: (...params) => dispatch(setMarkerPosition(...params))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(DifferenceMap);
