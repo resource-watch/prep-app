@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 import { getLayers } from 'selectors/nexgddptool';
+import { setMarkerPosition } from 'actions/nexgddptool';
 
 const mapDefaultOptions = {
   center: [20, -30],
@@ -15,8 +16,17 @@ const mapDefaultOptions = {
 };
 
 class SimpleMap extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.addMarker = this.addMarker.bind(this);
+  }
+
+  addMarker({ latlng }) {
+    this.props.setMarkerPosition([latlng.lat, latlng.lng]);
+  }
+
   render() {
-    const { marker, layers } = this.props;
+    const { marker, layers, range1Selection } = this.props;
     const currentLayer = layers[0];
 
     // It will change center of map on marker location
@@ -29,18 +39,19 @@ class SimpleMap extends React.PureComponent {
         {currentLayer &&
           <div
             className="current-layer-label"
-          >{new Date(layers[0].date).getFullYear()}</div>}
-        
+          >{range1Selection.label}</div>}
+
         <Map
           style={{ height: 440 }}
           {...mapOptions}
+          onClick={this.addMarker}
         >
           <TileLayer
             url={config.basemapTileUrl}
           />
           {currentLayer && <TileLayer url={currentLayer.url} />}
           <ZoomControl position="bottomright" />
-          { marker && <Marker position={marker} /> }
+          { marker && <Marker position={marker} icon={L.divIcon({ className: 'map-marker' })} /> }
         </Map>
       </div>
     );
@@ -48,12 +59,21 @@ class SimpleMap extends React.PureComponent {
 }
 
 SimpleMap.propTypes = {
-  marker: PropTypes.array
+  marker: PropTypes.array,
+  layers: PropTypes.array,
+  range1Selection: PropTypes.object,
+  setMarkerPosition: PropTypes.func
 };
 
 const mapStateToProps = state => ({
   marker: state.nexgddptool.marker,
-  layers: getLayers(state)
+  layers: getLayers(state),
+  range1Selection: state.nexgddptool.range1.selection
 });
 
-export default connect(mapStateToProps)(SimpleMap);
+const mapDispatchToProps = dispatch => ({
+  setMarkerPosition: (...params) => dispatch(setMarkerPosition(...params))
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(SimpleMap);

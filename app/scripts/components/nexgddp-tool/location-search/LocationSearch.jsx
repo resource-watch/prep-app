@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Geosuggest from 'react-geosuggest';
+import isEqual from 'lodash/isEqual';
 import './style.scss';
 
 // Redux
@@ -20,7 +21,9 @@ class LocationSearch extends React.Component {
     // We clear the content of the search input if the
     // marker has been moved from the last place set by
     // this component
-    if (nextProps.marker !== this.state.marker && this.geoSuggest) {
+    if (!isEqual(nextProps.marker, this.props.marker)
+      && !isEqual(nextProps.marker, this.state.marker)
+      && this.geoSuggest) {
       this.geoSuggest.clear();
       this.setState({ marker: nextProps.marker });
     }
@@ -28,8 +31,10 @@ class LocationSearch extends React.Component {
     return false;
   }
 
-  onSuggestSelect({ location }) {
-    const { lat, lng } = location;
+  onSuggestSelect(e) {
+    if (!e) return;
+
+    const { lat, lng } = e.location;
     this.setState({ marker: [lat, lng] });
     this.props.setMarkerPosition([lat, lng]);
   }

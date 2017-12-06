@@ -8,19 +8,26 @@ export const getLayers = createSelector(
   range1Selection,
   range2Selection,
   (range1Selection, range2Selection) => { // eslint-disable-line no-shadow
-    if (!range1Selection || !range2Selection) return [];
+    if (!range1Selection && !range2Selection) return [];
 
-    const range1Date = `${range1Selection.value}-01-01T00:00:00`;
-    const range2Date = `${range2Selection.value}-01-01T00:00:00`;
-    return [
-      {
+    const result = [];
+
+    if (range1Selection) {
+      const range1Date = `${range1Selection.value}-01-01T00:00:00`;
+      result.push({
         url: `${config.apiUrlRW}/layer/dd272bc7-a5e7-41e2-8ca5-6e3353603fd0/tile/rasdaman/{z}/{x}/{y}?ansi="${range1Date}"`,
         date: range1Date
-      },
-      {
+      });
+    }
+
+    if (range2Selection) {
+      const range2Date = `${range2Selection.value}-01-01T00:00:00`;
+      result.push({
         url: `${config.apiUrlRW}/layer/dd272bc7-a5e7-41e2-8ca5-6e3353603fd0/tile/rasdaman/{z}/{x}/{y}?ansi="${range2Date}"`,
         date: range2Date
-      }
-    ];
+      });
+    }
+
+    return result;
   }
 );
