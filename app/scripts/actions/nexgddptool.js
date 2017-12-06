@@ -71,9 +71,22 @@ export function setRange1Options(options) {
 }
 
 export function setRange1Selection(selection) {
-  return {
-    type: NEXGDDP_SET_RANGE1_SELECTION,
-    payload: selection
+  return (dispatch, getState) => {
+    // We set the selection
+    dispatch({
+      type: NEXGDDP_SET_RANGE1_SELECTION,
+      payload: selection
+    });
+
+    // If the selection is the same as the one of the
+    // second range selector, we reset it
+    const range2Selection = getState().nexgddptool.range2.selection;
+    if (range2Selection && selection.value === range2Selection.value) {
+      dispatch({
+        type: NEXGDDP_SET_RANGE2_SELECTION,
+        payload: undefined
+      });
+    }
   };
 }
 
