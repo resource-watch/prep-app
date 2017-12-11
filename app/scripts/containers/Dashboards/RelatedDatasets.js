@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import RelatedDatasets from '../../components/Dashboards/RelatedDatasets';
 
-import { getDatasetById } from '../../actions/datasets';
+import { getDatasetByIdOrSlug } from '../../actions/datasets';
 
 const mapStateToProps = state => ({
   data: state.datasets.details,
@@ -9,8 +9,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getDatasetById: (id, includes) => {
-    dispatch(getDatasetById(id, includes));
+  getDatasetByIdOrSlug: (slug, includes) => {
+    dispatch(getDatasetByIdOrSlug(slug, includes));
     // dispatch(getDatasetMetadata(id));
   }
 });

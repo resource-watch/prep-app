@@ -30,7 +30,7 @@ class DatasetItem extends React.Component {
 
   onInfoClick() {
     const { dataset } = this.props;
-    this.props.onInfoClick(dataset.id);
+    this.props.onInfoClick(dataset.slug);
   }
 
   getInfoButton() {
@@ -109,7 +109,7 @@ class DatasetItem extends React.Component {
               <div className="left-element">
                 {datasetSwitch}
               </div>
-              <Link className="item-title-link" to={`/dataset/${this.props.dataset.id}`} >
+              <Link className="item-title-link" to={`/dataset/${this.props.dataset.slug}`} >
                 <h1 className="item-title">{metadata.title}</h1>
               </Link>
             </div>

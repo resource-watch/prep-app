@@ -26,7 +26,7 @@ class InfoSidebar extends React.Component {
 
   getHeader() {
     const { metadata, details } = this.props;
-    const dataset = details[metadata.datasetId];
+    const dataset = details[metadata.datasetSlug];
     let name = '';
 
     if (dataset) {
@@ -44,7 +44,7 @@ class InfoSidebar extends React.Component {
 
   getContent() {
     const { metadata, details } = this.props;
-    const dataset = details[metadata.datasetId];
+    const dataset = details[metadata.datasetSlug];
     const allFilters = filtersConfig.filters;
     const topicsList = dataset && dataset.vocabulary && dataset.vocabulary.length ?
       dataset.vocabulary[0].attributes.tags.filter(t => allFilters.topics[t]).map(t => allFilters.topics[t]) : [];
@@ -69,7 +69,7 @@ class InfoSidebar extends React.Component {
   }
 
   getActionsBar() {
-    const { dataset } = this.props;
+    const { dataset, metadata } = this.props;
     let layerIcon = null;
     let downloadIcon = null;
 
@@ -97,7 +97,7 @@ class InfoSidebar extends React.Component {
     return (
       <nav className="info-actions">
         {downloadIcon}
-        <Link to={`/dataset/${dataset.id}`} className="info-tool more">
+        <Link to={`/dataset/${metadata.datasetSlug}`} className="info-tool more">
           <Icon name="icon-arrow-up-right" className="-medium" />
           Learn more
         </Link>
@@ -109,7 +109,7 @@ class InfoSidebar extends React.Component {
   getWidget() {
     const { metadata, details } = this.props;
     const widgetComponents = [];
-    const dataset = details[metadata.datasetId];
+    const dataset = details[metadata.datasetSlug];
     const widgets = dataset.widget ? dataset.widget.filter(w => w.attributes.default) : [];
 
     widgets.forEach((w) => {
@@ -143,7 +143,7 @@ class InfoSidebar extends React.Component {
 
   render() {
     const { metadata, details } = this.props;
-    const detailDataset = details[metadata.datasetId];
+    const detailDataset = details[metadata.datasetSlug];
 
     return (
       <div className={['c-info-sidebar', metadata.open ? '-open' : ''].join(' ')}>
@@ -162,7 +162,7 @@ class InfoSidebar extends React.Component {
         <div className="info-container">
           <div className="row content collapse">
             <div className="columns small-12 dataset-items">
-              {isEmpty(details[metadata.datasetId]) && <LoadingSpinner />}
+              {isEmpty(details[metadata.datasetSlug]) && <LoadingSpinner />}
               {this.getHeader()}
               {this.getActionsBar()}
               {this.getContent()}

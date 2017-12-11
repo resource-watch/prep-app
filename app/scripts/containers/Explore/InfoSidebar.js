@@ -11,7 +11,7 @@ import { updateURL } from '../../actions/links';
 import { setInfoSidebarMetadata } from '../../actions/info-sidebar';
 
 const mapStateToProps = state => ({
-  dataset: state.datasets.filteredList.find(d => d.id === state.infoSidebar.metadata.datasetId) || {},
+  dataset: state.datasets.filteredList.find(d => d.id === state.infoSidebar.metadata.datasetSlug) || {},
   list: state.datasets.filteredList,
   details: state.datasets.details,
   metadata: state.infoSidebar.metadata,

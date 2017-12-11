@@ -3,7 +3,7 @@ import ExploreMapLegend from '../../components/Explore/ExploreLegend';
 
 import { setInfoSidebarMetadata } from '../../actions/info-sidebar';
 import { toggleTooltip } from '../../actions/tooltip';
-import { getDatasetById, setDatasetActive, setLayerGroupActiveLayer } from '../../actions/datasets';
+import { getDatasetByIdOrSlug, setDatasetActive, setLayerGroupActiveLayer } from '../../actions/datasets';
 import {
   setLayersOrder,
   toggleLayerOpacity,
@@ -62,9 +62,9 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   toggleTooltip: (open, options) => dispatch(toggleTooltip(open, options)),
-  onInfoClick: (datasetId) => {
-    dispatch(getDatasetById(datasetId, ['metadata, vocabulary', 'widget']));
-    dispatch(setInfoSidebarMetadata(true, datasetId));
+  onInfoClick: (datasetSlug) => {
+    dispatch(getDatasetByIdOrSlug(datasetSlug, ['metadata', 'vocabulary', 'widget']));
+    dispatch(setInfoSidebarMetadata(true, datasetSlug));
   },
   onCloseInfo: () => {
     dispatch(setInfoSidebarMetadata(false));

@@ -38,7 +38,7 @@ export default function (state = initialState, action) {
     }
     case DATASET_DETAIL_RECEIVED: {
       const details = Object.assign({}, state.details, {});
-      details[action.payload.data.id] = action.payload.data;
+      details[action.payload.data.slug] = action.payload.data;
       return Object.assign({}, state, { details });
     }
     case DATASET_WIDGET_RECEIVED: {
