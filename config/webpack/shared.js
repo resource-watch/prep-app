@@ -10,7 +10,7 @@ const rootPath = process.cwd();
 const config = {
 
   entry: {
-    app: ['babel-polyfill', path.join(rootPath, 'app/scripts/index.jsx')]
+    app: [path.join(rootPath, 'app/scripts/index.jsx')]
   },
 
   output: {

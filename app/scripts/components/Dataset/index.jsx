@@ -172,6 +172,7 @@ class DatasetDetail extends React.Component {
             <WidgetEditor
               datasetId={data.id}
               saveButtonMode="never"
+              embedButtonMode="never"
               titleMode="never"
               mapConfig={{ zoom: 3, lat: 40.65, lng: -98.21 }}
             />
