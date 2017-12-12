@@ -4,7 +4,7 @@ import {
 
 const initialState = {
   metadata: {
-    datasetId: null,
+    datasetSlug: null,
     open: false
   }
 };
