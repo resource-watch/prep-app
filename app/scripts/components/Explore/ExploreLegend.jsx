@@ -270,6 +270,7 @@ class DataMapLegend extends React.Component {
 
   getItemActions(layersGroup) {
     const layer = layersGroup.layers.find(l => l.active) || layersGroup.layers.find(l => l.default) || {};
+    const slug = this.props.activeDatasets.find(l => l.id === layersGroup.dataset).slug;
 
     return (
       <div className="layer-actions">
@@ -299,7 +300,7 @@ class DataMapLegend extends React.Component {
             <Icon name="icon-hide" className="-normal" />
           }
         </span>
-        {this.props.infoMetadata.open && this.props.infoMetadata.datasetId === layer.dataset ?
+        {this.props.infoMetadata.open && this.props.infoMetadata.datasetSlug === slug ?
           <span
             data-title="Info"
             className="icon -info -tooltip -active"
@@ -310,7 +311,7 @@ class DataMapLegend extends React.Component {
           <span
             data-title="Info"
             className="icon -info -tooltip"
-            onClick={() => this.props.onInfoClick(layer.dataset)}
+            onClick={() => this.props.onInfoClick(slug)}
           >
             <Icon name="icon-info" className="-normal" />
           </span>
