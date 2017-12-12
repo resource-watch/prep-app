@@ -61,9 +61,8 @@ class DatasetItem extends React.Component {
 
   getMetadata() {
     const { dataset } = this.props;
-    const metadata = { title: '', subtitle: '', description: '', tags: [] };
-    metadata.title = dataset.layer && dataset.layer.length ?
-      dataset.layer[0].attributes.name : dataset.name;
+    const metadata = { title: dataset.name, subtitle: '', description: '', tags: [] };
+
     // Set metadata
     if (dataset.metadata && dataset.metadata.length) {
       const MAX_LENGTH = 150;
