@@ -12,7 +12,7 @@ import Banner from '../../components/Banner';
 import logoImage from '../../../images/prep-logo.png';
 
 import SectionIntro from '../SectionIntro';
-import MetadataList from '../Explore/MetadataList';
+import MetadataInfo from '../Explore/MetadataInfo';
 import VegaChart from '../Chart/VegaChart';
 import SimpleMap from '../../containers/Map/SimpleMap';
 import LoadingSpinner from '../Loading/LoadingSpinner';
@@ -81,7 +81,7 @@ class DatasetDetail extends React.Component {
     return (
       <div>
         <SectionIntro data={data} downloadUrl={this.getDownloadUrl(this.props.data)} currentSection={currentSection} >
-          <MetadataList data={this.props.data} />
+          <MetadataInfo data={this.props.data} />
         </SectionIntro>
 
         {/*

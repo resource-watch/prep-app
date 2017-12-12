@@ -1,8 +1,11 @@
+
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
 // Libraries
 import isEmpty from 'lodash/isEmpty';
+import ReactMarkdown from 'react-markdown';
 
 // Components
 import { Link } from 'react-router';
@@ -44,26 +47,32 @@ class InfoSidebar extends React.Component {
 
   getContent() {
     const { metadata, details } = this.props;
-    const dataset = details[metadata.datasetSlug];
+    const dataset = details[metadata.datasetSlug] || {};
     const allFilters = filtersConfig.filters;
-    const topicsList = dataset && dataset.vocabulary && dataset.vocabulary.length ?
+    const topicsList = dataset.vocabulary && dataset.vocabulary.length ?
       dataset.vocabulary[0].attributes.tags.filter(t => allFilters.topics[t]).map(t => allFilters.topics[t]) : [];
-    const areasList = dataset && dataset.vocabulary && dataset.vocabulary.length ?
+    const areasList = dataset.vocabulary && dataset.vocabulary.length ?
       dataset.vocabulary[0].attributes.tags.filter(t => allFilters.geography[t]).map(t => allFilters.geography[t]) : [];
 
-    const infoDescription = dataset && dataset.metadata && dataset.metadata.length && dataset.metadata[0].attributes.info.short_description &&
+    const infoDescription = dataset.metadata && dataset.metadata.length && dataset.metadata[0].attributes.info.short_description &&
       dataset.metadata[0].attributes.info.short_description !== '' ?
       dataset.metadata[0].attributes.info.short_description : null;
-    const metaDescription = dataset && dataset.metadata && dataset.metadata.length ?
+    const metaDescription = dataset.metadata && dataset.metadata.length ?
       dataset.metadata[0].attributes.description : '';
     const description = infoDescription || metaDescription;
 
     return dataset ?
       <div className="content-container">
-        <p className="item-prop description"><span className="prop-label">Description: </span>{description}</p>
-        {/* <p className="item-prop"><span className="prop-label">Data source: </span>{dataset.data_source}</p> */}
-        <p className="item-prop topics"><span className="prop-label">Topics: </span>{topicsList.join(', ')}</p>
-        <p className="item-prop areas"><span className="prop-label">Area: </span>{areasList.join(', ')}</p>
+        {description && <div className="item-prop description">
+          <span className="prop-label">Description: </span>
+          <ReactMarkdown source={description} className="markdown" />
+        </div>}
+        {dataset.data_source && <div className="item-prop">
+          <span className="prop-label">Data source: </span>
+          <ReactMarkdown source={dataset.data_source} className="markdown" />
+        </div>}
+        {!!topicsList.length && <p className="item-prop topics"><span className="prop-label">Topics: </span>{topicsList.join(', ')}</p>}
+        {!!areasList.length && <p className="item-prop areas"><span className="prop-label">Area: </span>{areasList.join(', ')}</p>}
       </div> :
       <div className="content-container" />;
   }
@@ -186,7 +195,6 @@ class InfoSidebar extends React.Component {
 
 InfoSidebar.propTypes = {
   dataset: PropTypes.object,
-  list: PropTypes.array,
   /**
    * Define the dataset metadata
    */
