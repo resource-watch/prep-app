@@ -1,5 +1,5 @@
 import React from 'react';
-import Slider from '../../lib/react-slick/react-slick';
+import Slider from 'react-slick';
 import engagementSlide from '../../../images/partnerships/engagement-slide.jpg';
 import dataSlide from '../../../images/partnerships/data-slide.jpg';
 import platformsSlide from '../../../images/partnerships/platforms-slide.jpg';
