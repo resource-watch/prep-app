@@ -180,7 +180,8 @@ export function getDatasetByIdOrSlug(datasetIdentifier, includesData) {
             dispatch({
               type: DATASET_DETAIL_RECEIVED,
               payload: {
-                data: datasetData
+                data: datasetData,
+                identifier: datasetIdentifier
               }
             });
             if (datasetData.widget && datasetData.widget.length) {
