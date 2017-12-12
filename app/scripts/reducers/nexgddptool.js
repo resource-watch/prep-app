@@ -21,9 +21,6 @@ const initialState = {
   // Position of the marker
   /** @type {[number, number]} marker */
   marker: undefined,
-  // Search input text content
-  /** @type {string} search */
-  search: undefined,
   // Mode of the map
   /** @type {'difference'|'side_by_side'|'toggle'} mapMode */
   mapMode: 'difference',
