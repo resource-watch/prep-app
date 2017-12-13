@@ -326,13 +326,13 @@ class TimeseriesChart extends React.PureComponent {
 
     const range1Signal = {
       "name": "range1",
-      "init": { "expr": `{ start: datetime(${range1Selection.value}, 0, 1), end: datetime(${+range1Selection.value + 10}, 0, 1) }` }
+      "init": { "expr": `{ start: utc(${range1Selection.value}, 0, 1), end: utc(${+range1Selection.value + 10}, 0, 1) }` }
     };
 
     let range2Signal = { "name": "range2", "init": "false" };
     if (range2Selection) {
       range2Signal.init = {
-        "expr": `{ start: datetime(${range2Selection.value}, 0, 1), end: datetime(${+range2Selection.value + 10}, 0, 1) }`
+        "expr": `{ start: utc(${range2Selection.value}, 0, 1), end: utc(${+range2Selection.value + 10}, 0, 1) }`
       };
     }
 
