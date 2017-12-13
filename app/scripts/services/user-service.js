@@ -4,7 +4,7 @@ class UserService {
     return new Promise((resolve, reject) => {
       fetch(`${process.env.RW_API_LOGIN_URL}/check-logged`, {
         headers: {
-          Authorization: token
+          Authorization: `Bearer ${token}`
         }
       })
         .then((response) => {

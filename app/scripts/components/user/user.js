@@ -30,8 +30,6 @@ class UserContainer extends Component {
     const token = sessionStorage.token;
     if (!(this.props.session || token)) return;
 
-    console.log(token)
-
     const userDataPromise = UserService.getSessionUserData(token);
 
     userDataPromise
@@ -40,7 +38,7 @@ class UserContainer extends Component {
         const { status, details } = errors;
         console.error(status, details);
 
-        // this.handleLogOut();
+        this.handleLogOut();
       });
   }
 
