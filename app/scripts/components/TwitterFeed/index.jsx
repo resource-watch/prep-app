@@ -1,5 +1,5 @@
 import React from 'react';
-import Slider from '../../lib/react-slick/react-slick';
+import Slider from 'react-slick';
 
 const settings = {
   dots: false,
@@ -12,7 +12,6 @@ const settings = {
 };
 
 class TwitterFeed extends React.Component {
-
   componentDidMount() {
     if (!this.props.data.length) {
       this.props.getTwitterFeed();

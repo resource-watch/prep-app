@@ -30,7 +30,7 @@ class DatasetItem extends React.Component {
 
   onInfoClick() {
     const { dataset } = this.props;
-    this.props.onInfoClick(dataset.id);
+    this.props.onInfoClick(dataset.slug);
   }
 
   getInfoButton() {
@@ -61,9 +61,8 @@ class DatasetItem extends React.Component {
 
   getMetadata() {
     const { dataset } = this.props;
-    const metadata = { title: '', subtitle: '', description: '', tags: [] };
-    metadata.title = dataset.layer && dataset.layer.length ?
-      dataset.layer[0].attributes.name : dataset.name;
+    const metadata = { title: dataset.name, subtitle: '', description: '', tags: [] };
+
     // Set metadata
     if (dataset.metadata && dataset.metadata.length) {
       const MAX_LENGTH = 150;
@@ -109,7 +108,7 @@ class DatasetItem extends React.Component {
               <div className="left-element">
                 {datasetSwitch}
               </div>
-              <Link className="item-title-link" to={`/dataset/${this.props.dataset.id}`} >
+              <Link className="item-title-link" to={`/dataset/${this.props.dataset.slug}`} >
                 <h1 className="item-title">{metadata.title}</h1>
               </Link>
             </div>

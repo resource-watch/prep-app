@@ -140,11 +140,6 @@
       .c-button {
         margin: 0;
         line-height: 45px;
-
-        // Temporarily, we want to hide the embed button
-        &[role="button"] {
-          display: none;
-        }
       }
     }
   }

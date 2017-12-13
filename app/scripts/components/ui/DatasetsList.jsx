@@ -142,8 +142,8 @@ export default class DatasetsList extends React.Component {
   /* Datasets item content */
   getDatasetItems(list) {
     return list.map((dataset) => {
-      const isInfoPanelOpen = dataset.id && this.props.infoSidebarMetadata.open &&
-        this.props.infoSidebarMetadata.datasetId === dataset.id;
+      const isInfoPanelOpen = dataset.slug && this.props.infoSidebarMetadata.open &&
+        this.props.infoSidebarMetadata.datasetSlug === dataset.slug;
 
       return (
         <DatasetItem

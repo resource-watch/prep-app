@@ -160,7 +160,7 @@ export function resetDatasetList() {
   };
 }
 
-export function getDatasetById(datasetId, includesData) {
+export function getDatasetByIdOrSlug(datasetIdentifier, includesData) {
   const includes = includesData || [];
   const includeQuery = includes.length > 0 ?
     `&includes=${includes.join(',')}` :
@@ -168,7 +168,7 @@ export function getDatasetById(datasetId, includesData) {
 
   return (dispatch) => {
     const env = config.datasetEnv || 'production';
-    fetch(`${config.apiUrlRW}/dataset/${datasetId}?application=prep${includeQuery}&status=saved&page[size]=999&env=${env}`)
+    fetch(`${config.apiUrlRW}/dataset/${datasetIdentifier}?application=prep${includeQuery}&status=saved&page[size]=999&env=${env}`)
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
@@ -180,7 +180,8 @@ export function getDatasetById(datasetId, includesData) {
             dispatch({
               type: DATASET_DETAIL_RECEIVED,
               payload: {
-                data: datasetData
+                data: datasetData,
+                identifier: datasetIdentifier
               }
             });
             if (datasetData.widget && datasetData.widget.length) {

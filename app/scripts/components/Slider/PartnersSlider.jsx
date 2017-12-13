@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import Slider from '../../lib/react-slick/react-slick';
+import React from 'react';
+import Slider from 'react-slick';
 
 const settings = {
   dots: false,
@@ -12,13 +12,13 @@ const settings = {
   swipe: false
 };
 
-class PartnersSlider extends Component {
-
+class PartnersSlider extends React.Component {
   componentDidMount() {
     if (!this.props.data.length) {
       this.props.getPartners();
     }
   }
+
   render() {
     const partners = this.props.featured.map(d => (
       <div key={`partner-slider-${d.id}`}>

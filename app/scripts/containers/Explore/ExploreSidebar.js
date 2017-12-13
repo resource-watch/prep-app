@@ -5,7 +5,7 @@ import { switchChange, deselectDataset } from '../../actions/exploremap';
 import { updateURL } from '../../actions/links';
 import { setTooltip } from '../../actions/tooltip';
 import { setInfoSidebarMetadata } from '../../actions/info-sidebar';
-import { setDatasetActive, getDatasetById, changeTab } from '../../actions/datasets';
+import { setDatasetActive, getDatasetByIdOrSlug, changeTab } from '../../actions/datasets';
 
 // Selectors
 import filterDatasetsByTab from '../../selectors/datasets';
@@ -35,9 +35,9 @@ const mapDispatchToProps = dispatch => ({
   setTooltip: (tooltip) => {
     dispatch(setTooltip(tooltip));
   },
-  onInfoClick: (datasetId) => {
-    dispatch(getDatasetById(datasetId, ['metadata, vocabulary', 'widget']));
-    dispatch(setInfoSidebarMetadata(true, datasetId));
+  onInfoClick: (datasetSlug) => {
+    dispatch(getDatasetByIdOrSlug(datasetSlug, ['metadata, vocabulary', 'widget']));
+    dispatch(setInfoSidebarMetadata(true, datasetSlug));
   },
   onCloseInfo: () => {
     dispatch(setInfoSidebarMetadata(false));

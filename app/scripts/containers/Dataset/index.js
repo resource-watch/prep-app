@@ -1,18 +1,18 @@
 import { connect } from 'react-redux';
 import DatasetDetailPage from '../../components/Dataset';
 
-import { getDatasetById } from '../../actions/datasets';
+import { getDatasetByIdOrSlug } from '../../actions/datasets';
 
 const mapStateToProps = (state, { params, route }) => ({
   currentPage: route.path,
-  datasetId: params.id,
-  data: state.datasets.details[params.id] || null,
-  widgets: state.datasets.widgets[params.id] || []
+  datasetSlug: params.slug,
+  data: state.datasets.details[params.slug] || null,
+  widgets: state.datasets.widgets[params.slug] || []
 });
 
 const mapDispatchToProps = dispatch => ({
-  getDatasetData: (id) => {
-    dispatch(getDatasetById(id, ['metadata', 'widget']));
+  getDatasetData: (slug) => {
+    dispatch(getDatasetByIdOrSlug(slug, ['metadata', 'widget']));
   }
 });
 

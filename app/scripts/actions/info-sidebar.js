@@ -4,9 +4,9 @@ import {
 
 export default function () {}
 
-export function setInfoSidebarMetadata(open, datasetId) {
+export function setInfoSidebarMetadata(open, datasetSlug) {
   return {
     type: SET_INFO_SIDEBAR_METADATA,
-    payload: { open, datasetId }
+    payload: { open, datasetSlug }
   };
 }

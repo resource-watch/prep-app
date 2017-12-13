@@ -5,7 +5,7 @@ class RelatedDatasets extends React.Component {
 
   componentWillMount() {
     for (let i = 0, slugsLength = this.props.slugs.length; i < slugsLength; i++) {
-      if (this.props.slugs[i]) this.props.getDatasetById(this.props.slugs[i], ['metadata']);
+      if (this.props.slugs[i]) this.props.getDatasetByIdOrSlug(this.props.slugs[i], ['metadata']);
     }
   }
 
@@ -65,7 +65,7 @@ RelatedDatasets.propTypes = {
   slugs: React.PropTypes.array.isRequired,
   data: React.PropTypes.object,
   metadata: React.PropTypes.object,
-  getDatasetById: React.PropTypes.func.isRequired
+  getDatasetByIdOrSlug: React.PropTypes.func.isRequired
 };
 
 export default RelatedDatasets;
