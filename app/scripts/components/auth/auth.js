@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import { setConfig } from 'widget-editor';
 
 import { browserHistory } from 'react-router';
 import actions from './auth-actions';
@@ -20,6 +21,9 @@ class AuthContainer extends Component {
     } else {
       browserHistory.push('/');
     }
+
+    // We update the widget editor's config
+    setConfig({ userToken: token || null });
   }
 
   handleAuthenticationAction() {

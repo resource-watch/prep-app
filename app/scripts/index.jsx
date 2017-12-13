@@ -32,7 +32,8 @@ setConfig({
   url: process.env.RW_API_URL,
   env: process.env.DATASET_ENV,
   applications: process.env.APPLICATIONS,
-  authUrl: 'https://api.resourcewatch.org/auth'
+  authUrl: 'https://api.resourcewatch.org/auth',
+  userToken: sessionStorage.getItem('token') || null
 });
 
 /**
