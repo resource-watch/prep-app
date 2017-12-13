@@ -27,8 +27,10 @@ class UserContainer extends Component {
   }
 
   handleUserData() {
-    const token = sessionStorage.getItem('token');
+    const token = sessionStorage.token;
     if (!(this.props.session || token)) return;
+
+    console.log(token)
 
     const userDataPromise = UserService.getSessionUserData(token);
 
