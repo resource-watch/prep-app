@@ -27,7 +27,7 @@ class UserContainer extends Component {
   }
 
   handleUserData() {
-    const token = sessionStorage.token;
+    const token = localStorage.token;
     if (!(this.props.session || token)) return;
 
     const userDataPromise = UserService.getSessionUserData(token);
@@ -44,7 +44,7 @@ class UserContainer extends Component {
 
   handleLogOut(e) {
     if (e) e.preventDefault();
-    sessionStorage.removeItem('token');
+    localStorage.removeItem('token');
     this.props.updateUserData({});
     this.props.logOutSuccess(false);
     browserHistory.push('/');

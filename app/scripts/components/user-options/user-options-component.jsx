@@ -6,7 +6,7 @@ import isEmpty from 'lodash/isEmpty';
 import './user-options-style.scss';
 
 function UserOptions(props) {
-  const token = sessionStorage.getItem('token');
+  const token = localStorage.getItem('token');
 
   return (
     <div className="c-user-options">

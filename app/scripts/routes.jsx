@@ -94,7 +94,7 @@ function shouldUpdateScroll(prevRouterProps, { location }) {
 }
 
 const requireAuth = (nextState, replace) => {
-  if (!sessionStorage.token) {
+  if (!localStorage.token) {
     replace({
       pathname: '/',
       state: { nextPathname: nextState.location.pathname }

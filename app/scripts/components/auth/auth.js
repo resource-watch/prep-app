@@ -16,7 +16,7 @@ class AuthContainer extends Component {
 
     if (token) {
       this.handleAuthenticationAction();
-      sessionStorage.setItem('token', token);
+      localStorage.setItem('token', token);
     } else {
       browserHistory.push('/');
     }
