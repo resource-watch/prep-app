@@ -320,6 +320,10 @@ class TimeseriesChart extends React.PureComponent {
   render () {
     const { width, height, removeMarker, range1Selection, range2Selection } = this.props;
 
+    // If for some reason, the range 1 is not selected, we return
+    // This case happens when restoring the state from the URL
+    if (!range1Selection) return null;
+
     const range1Signal = {
       "name": "range1",
       "init": { "expr": `{ start: datetime(${range1Selection.value}, 0, 1), end: datetime(${+range1Selection.value + 10}, 0, 1) }` }

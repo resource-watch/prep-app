@@ -81,7 +81,8 @@ function shouldUpdateScroll(prevRouterProps, { location }) {
    * regex params match the two paths) */
   const regexes = [
     /\/dashboard\/((?:[A-z]|[1-9]|-)+)(?:\/(?:.*))?/,
-    /\/insights\/((?:[A-z]|[1-9]|-)+)/
+    /\/insights\/((?:[A-z]|[1-9]|-)+)/,
+    /\/dataset\/((?:[A-z]|[1-9]|-)+)/
   ];
 
   for (let i = 0, j = regexes.length; i < j; i++) {

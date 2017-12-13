@@ -22,7 +22,7 @@ const initialState = {
   /** @type {[number, number]} marker */
   marker: undefined,
   // Mode of the map
-  /** @type {'difference'|'side_by_side'|'toggle'} mapMode */
+  /** @type {'difference'|'side-by-side'|'toggle'} mapMode */
   mapMode: 'difference',
   // Mode of the graph
   /** @type {'timeseries'|'seasonal'} */
