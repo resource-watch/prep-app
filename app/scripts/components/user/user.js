@@ -38,7 +38,7 @@ class UserContainer extends Component {
         const { status, details } = errors;
         console.error(status, details);
 
-        this.handleLogOut();
+        // this.handleLogOut();
       });
   }
 

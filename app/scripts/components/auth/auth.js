@@ -13,6 +13,7 @@ const mapStateToProps = state => ({
 class AuthContainer extends Component {
   componentWillMount() {
     const { token } = this.props.location.query;
+
     if (token) {
       this.handleAuthenticationAction();
       sessionStorage.setItem('token', token);
