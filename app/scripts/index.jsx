@@ -22,7 +22,7 @@ import * as AuthModule from 'components/auth/auth';
 import * as UserModule from 'components/user/user';
 
 // utils
-import { handleModule } from 'redux-actions';
+import { handleModule } from 'redux-tools';
 
 import '../styles/lib/custom-foundation.css';
 import '../styles/index.scss';

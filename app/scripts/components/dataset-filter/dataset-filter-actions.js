@@ -1,4 +1,4 @@
-import { createAction, createThunkAction } from 'redux-actions';
+import { createAction, createThunkAction } from 'redux-tools';
 
 import { setDatasetsTagFilter } from 'actions/datasets';
 import { updateURL } from 'actions/links';
