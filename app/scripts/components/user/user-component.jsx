@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
+import { toastr } from 'react-redux-toastr';
+
+// services
+import UserService from 'services/user-service';
 
 import Icon from '../ui/Icon';
 import UserOptions from '../user-options/user-options-component';
@@ -9,6 +13,16 @@ import UserOptions from '../user-options/user-options-component';
 import './user-style.scss';
 
 class User extends React.PureComponent {
+  static handleLogOut() {
+    UserService.logout()
+      .then(() => { window.location.href = `/logout?callbackUrl=${window.location.href}`; })
+      .catch(({ errors }) => {
+        const { status, details } = errors;
+        console.error(status, details);
+
+        toastr.error('Ops, something went wrong.', details);
+      });
+  }
   render() {
     const {
       handleHover,

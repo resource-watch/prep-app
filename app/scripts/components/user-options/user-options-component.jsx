@@ -37,7 +37,7 @@ function UserOptions(props) {
             >Twitter</a>
           </li>
         </ul>
-        }
+      }
     </div>
   );
 }
