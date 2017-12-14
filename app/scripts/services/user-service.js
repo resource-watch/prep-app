@@ -23,6 +23,29 @@ class UserService {
         .catch(errors => reject(errors));
     });
   }
+
+  static logout() {
+    return new Promise((resolve, reject) => {
+      fetch(`${process.env.CONTROL_TOWER_URL}/auth/logout`, {
+        method: 'GET',
+        credentials: 'include'
+      })
+        .then((response) => {
+          const { status, statusText } = response;
+
+          if (status === 200) return resolve();
+
+          const errorObject = {
+            errors: {
+              status,
+              details: statusText
+            }
+          };
+          throw errorObject;
+        })
+        .catch((errors) => { reject(errors); });
+    });
+  }
 }
 
 export default UserService;
