@@ -82,7 +82,7 @@
     "react-sortable-hoc": "0.0.7",
     "react-tether": "0.5.7",
     "redux": "3.6.0",
-    "redux-actions": "git+https://git@github.com/vectorsize/redux-actions.git",
+    "redux-tools": "git+https://git@github.com/vectorsize/redux-tools.git",
     "redux-thunk": "2.2.0",
     "request": "2.81.0",
     "reselect": "3.0.1",
