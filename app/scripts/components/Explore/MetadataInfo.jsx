@@ -41,7 +41,7 @@ class MetadataInfo extends React.PureComponent {
         <span>Description: </span>
         <span>{this.props.short && metadataInfo['short-description']
           ? metadataInfo['short-description']
-          : <ReactMarkdown source={metadata.description} className="markdown" />}
+          : <ReactMarkdown source={metadata.description} className="c-markdown" />}
         </span>
       </li>);
     const createdAt = new Date(metadata.created_at);
@@ -86,7 +86,7 @@ class MetadataInfo extends React.PureComponent {
         {metadataInfo.license &&
           <li>
             <span>License: </span>
-            <ReactMarkdown source={metadataInfo.license} className="markdown -inline" />
+            <ReactMarkdown source={metadataInfo.license} className="c-markdown -inline" />
           </li>
         }
 
@@ -102,13 +102,13 @@ class MetadataInfo extends React.PureComponent {
             <span>
               <ReactMarkdown
                 source={metadataInfo.sources.map(s => s['sources-name']).join(', ')}
-                className="markdown -inline"
+                className="c-markdown -inline"
               />
             </span>
           </li> :
           <li>
             <span>Source organizations: </span>
-            <span>{metadataInfo['organization-long']} (<ReactMarkdown source={metadataInfo.organization} className="markdown -inline" />)</span>
+            <span>{metadataInfo['organization-long']} (<ReactMarkdown source={metadataInfo.organization} className="c-markdown -inline" />)</span>
           </li>
         }
 

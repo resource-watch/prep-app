@@ -1,4 +1,4 @@
-.markdown {
+.c-markdown {
 
   &.-inline {
     display: inline-block;
@@ -8,7 +8,7 @@
     margin: 0;
 
     &:not(:first-child) {
-      margin: 1rem 0 0 ;
+      margin: 1rem 0 0;
     }
   }
 }

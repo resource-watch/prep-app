@@ -65,11 +65,11 @@ class InfoSidebar extends React.Component {
       <div className="content-container">
         {description && <div className="item-prop description">
           <span className="prop-label">Description: </span>
-          <ReactMarkdown source={description} className="markdown" />
+          <ReactMarkdown source={description} className="c-markdown" />
         </div>}
         {dataset.data_source && <div className="item-prop">
           <span className="prop-label">Data source: </span>
-          <ReactMarkdown source={dataset.data_source} className="markdown" />
+          <ReactMarkdown source={dataset.data_source} className="c-markdown" />
         </div>}
         {!!topicsList.length && <p className="item-prop topics"><span className="prop-label">Topics: </span>{topicsList.join(', ')}</p>}
         {!!areasList.length && <p className="item-prop areas"><span className="prop-label">Area: </span>{areasList.join(', ')}</p>}
