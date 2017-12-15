@@ -1,4 +1,4 @@
-import { createAction } from 'redux-actions';
+import { createAction } from 'redux-tools';
 
 export const logInSuccess = createAction('logInSuccess');
 export const logOutSuccess = createAction('logOutSuccess');

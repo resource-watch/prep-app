@@ -12,7 +12,7 @@ import InfoSidebar from '../../containers/Explore/InfoSidebar';
 import ExploreMapLegend from '../../containers/Explore/ExploreLegend';
 import BasemapControl from '../../containers/Explore/BasemapControl';
 
-import MetadataList from './MetadataList';
+import MetadataInfo from './MetadataInfo';
 import Form from '../Form';
 
 import ShareModal from '../Modal/ShareModal';
@@ -27,6 +27,16 @@ import logoImage from '../../../images/prep-logo.png';
 
 
 class Explore extends React.Component {
+  static getData(key, value) {
+    let data = null;
+    for (let i = metadata.length - 1; i >= 0; i--) {
+      if (metadata[i][key] === value) {
+        data = metadata[i];
+        break;
+      }
+    }
+    return data;
+  }
 
   constructor() {
     super();
@@ -61,17 +71,6 @@ class Explore extends React.Component {
     this.props.resetExplore();
   }
 
-  getData(key, value) {
-    let data = null;
-    for (let i = metadata.length - 1; i >= 0; i--) {
-      if (metadata[i][key] === value) {
-        data = metadata[i];
-        break;
-      }
-    }
-    return data;
-  }
-
   getModalContent() {
     const { details } = this.props.data;
     const datasetData = details[this.props.metadataModal.datasetId];
@@ -88,7 +87,7 @@ class Explore extends React.Component {
               </Link>
             </h3>
             <h4> {metadataInfo.subtitle} </h4>
-            <MetadataList short download data={datasetData} />
+            <MetadataInfo short download data={datasetData} />
           </div>
         );
       }
@@ -100,7 +99,7 @@ class Explore extends React.Component {
   }
 
   render() {
-    const currentData = this.getData('pathname', '/explore');
+    const currentData = Explore.getData('pathname', '/explore');
     const modalContent = this.props.metadataModal.datasetId ? this.getModalContent() : null;
 
     document.title = currentData.title;
@@ -148,7 +147,7 @@ class Explore extends React.Component {
             </p>
             <Form type="Request data" />
           </Modal>
-          }
+        }
 
         {this.props.metadataModal &&
           <Modal

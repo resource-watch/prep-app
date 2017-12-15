@@ -1,7 +1,7 @@
 import * as actions from './auth-actions';
 
 export const initialState = {
-  session: !!sessionStorage.getItem('token')
+  session: !!localStorage.getItem('token')
 };
 
 export default {

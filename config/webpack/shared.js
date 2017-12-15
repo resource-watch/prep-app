@@ -40,7 +40,8 @@ const config = {
       components: path.resolve('app/scripts/components'),
       lib: path.resolve('app/scripts/lib'),
       actions: path.resolve('app/scripts/actions'),
-      selectors: path.resolve('app/scripts/selectors')
+      selectors: path.resolve('app/scripts/selectors'),
+      services: path.resolve('app/scripts/services')
     }
   },
 

@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 
 import { browserHistory } from 'react-router';
+
+import UserService from 'services/user-service';
+
 import authActions from '../auth/auth-actions';
 import actions from './user-actions';
 import reducers, { initialState } from './user-reducer';
 import UserComponent from './user-component';
-import getSessionUserData from './user-selectors';
-
 
 const allActions = Object.assign({}, actions, authActions);
 
@@ -26,24 +27,24 @@ class UserContainer extends Component {
   }
 
   handleUserData() {
-    if (!(this.props.session
-      || sessionStorage.getItem('token'))) return;
+    const token = localStorage.token;
+    if (!(this.props.session || token)) return;
 
-    const token = sessionStorage.getItem('token');
-    this.getUserData = getSessionUserData(token);
+    const userDataPromise = UserService.getSessionUserData(token);
 
-    this.getUserData.then((data) => {
-      if (!Object.prototype.hasOwnProperty.call(data, 'errors')) {
-        this.props.updateUserData(data);
-      } else {
+    userDataPromise
+      .then((data) => { this.props.updateUserData(data); })
+      .catch(({ errors }) => {
+        const { status, details } = errors;
+        console.error(status, details);
+
         this.handleLogOut();
-      }
-    });
+      });
   }
 
   handleLogOut(e) {
     if (e) e.preventDefault();
-    sessionStorage.removeItem('token');
+    localStorage.removeItem('token');
     this.props.updateUserData({});
     this.props.logOutSuccess(false);
     browserHistory.push('/');
