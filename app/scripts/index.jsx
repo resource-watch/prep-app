@@ -5,7 +5,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import initOpbeat from 'opbeat-react';
 import { createOpbeatMiddleware } from 'opbeat-react/redux';
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'remote-redux-devtools';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { browserHistory } from 'react-router';
@@ -71,14 +72,10 @@ const reducer = combineReducers({
 const middlewareRouter = routerMiddleware(browserHistory);
 const store = createStore(
   reducer,
-  compose(
+  composeWithDevTools(
     /* The router middleware MUST be before thunk otherwise the URL changes
      * inside a thunk function won't work properly */
-    applyMiddleware(middlewareRouter, thunk, createOpbeatMiddleware()),
-    /* Redux dev tool, install chrome extension in
-     * https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en */
-    typeof window === 'object' &&
-    typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
+    applyMiddleware(middlewareRouter, thunk, createOpbeatMiddleware())
   )
 );
 
