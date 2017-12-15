@@ -28,6 +28,7 @@ class User extends React.PureComponent {
         toastr.error('Ops, something went wrong.', details);
       });
   }
+
   render() {
     const {
       handleHover,
