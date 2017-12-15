@@ -13,9 +13,14 @@ import UserOptions from '../user-options/user-options-component';
 import './user-style.scss';
 
 class User extends React.PureComponent {
-  static handleLogOut() {
+  static handleLogOut(e) {
+    if (e) e.preventDefault();
+
     UserService.logout()
-      .then(() => { window.location.href = `/logout?callbackUrl=${window.location.href}`; })
+      .then(() => {
+        localStorage.removeItem('token');
+        window.location.href = `/logout?callbackUrl=${window.location.href}`;
+      })
       .catch(({ errors }) => {
         const { status, details } = errors;
         console.error(status, details);
@@ -28,8 +33,7 @@ class User extends React.PureComponent {
       handleHover,
       active,
       session,
-      data,
-      handleLogOut
+      data
     } = this.props;
     return (
       <div
@@ -45,7 +49,7 @@ class User extends React.PureComponent {
           </div>
         }
         { active &&
-          <UserOptions handleLogOut={e => handleLogOut(e)} session={session} data={data} />
+          <UserOptions handleLogOut={e => User.handleLogOut(e)} session={session} data={data} />
         }
       </div>
     );
@@ -54,7 +58,6 @@ class User extends React.PureComponent {
 
 User.propTypes = {
   handleHover: PropTypes.func.isRequired,
-  handleLogOut: PropTypes.func.isRequired,
   active: PropTypes.bool.isRequired,
   session: PropTypes.bool.isRequired,
   data: PropTypes.object.isRequired
