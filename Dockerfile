@@ -1,14 +1,14 @@
 FROM node:8.1.2
 
-ARG datasetEnv=preproduction,production
+ARG datasetEnv=production
 ARG facebookUser=worldresources
 ARG twitterUser=worldresources
-ARG apiUrl=https://preproduction.prepdata.org/api
+ARG apiUrl=https://beta.prepdata.org/api
 ARG assetsUrl=
 ARG rwApiUrl=https://api.resourcewatch.org/v1
 ARG basemapUrl=https://api.mapbox.com/styles/v1/wri/cism5nsz4007t2wnrp5xslf7s/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoid3JpIiwiYSI6Ik9TY2w5RTQifQ.0HV7dQTjK40mk7GpNNA64g
 ARG nodeEnv=production
-ARG callbackUrl=https://staging.prepdata.org/auth
+ARG callbackUrl=https://beta.prepdata.org/auth
 
 ENV RW_API_LOGIN_URL https://production-api.globalforestwatch.org/auth
 ENV RW_API_IS_LOGGEDIN_URL https://api.resourcewatch.org/auth/check-logged
