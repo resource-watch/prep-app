@@ -270,7 +270,7 @@ class DataMapLegend extends React.Component {
 
   getItemActions(layersGroup) {
     const { opacityTooltipOpen, layersTooltipOpen } = this.state;
-    const layer = layersGroup.layers.find(l => l.active) || layersGroup.layers.find(l => l.default) || {};
+    const layer = layersGroup.layers.find(l => l.active) || layersGroup.layers.find(l => l.default) || (!!layersGroup.layers.length && layersGroup.layers[0]) || {};
     const slug = this.props.activeDatasets.find(l => l.id === layersGroup.dataset).slug;
     const editionModeClass = (opacityTooltipOpen || layersTooltipOpen) ? '-edition' : '';
 
