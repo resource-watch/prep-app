@@ -61,6 +61,7 @@ const config = {
     }),
     new webpack.EnvironmentPlugin(Object.keys(process.env)),
     new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development'),
       config: {
         facebookUser: JSON.stringify(process.env.FACEBOOK_USER),
         twitterUser: JSON.stringify(process.env.TWITTER_USER),
