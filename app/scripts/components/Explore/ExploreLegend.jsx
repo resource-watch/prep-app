@@ -269,14 +269,16 @@ class DataMapLegend extends React.Component {
   }
 
   getItemActions(layersGroup) {
-    const layer = layersGroup.layers.find(l => l.active) || layersGroup.layers.find(l => l.default) || {};
+    const { opacityTooltipOpen, layersTooltipOpen } = this.state;
+    const layer = layersGroup.layers.find(l => l.active) || layersGroup.layers.find(l => l.default) || (!!layersGroup.layers.length && layersGroup.layers[0]) || {};
     const slug = this.props.activeDatasets.find(l => l.id === layersGroup.dataset).slug;
+    const editionModeClass = (opacityTooltipOpen || layersTooltipOpen) ? '-edition' : '';
 
     return (
       <div className="layer-actions">
         {layersGroup.layers.length > 1 &&
           <span
-            className="icon -layers -tooltip"
+            className={`icon -layers -tooltip ${editionModeClass}`}
             data-title="Layers"
             onClick={e => this.onClickLayers(e, layersGroup)}
           >
@@ -285,14 +287,14 @@ class DataMapLegend extends React.Component {
         }
         <span
           data-title="Opacity"
-          className="icon -opacity -tooltip"
+          className={`icon -opacity -tooltip ${editionModeClass}`}
           onClick={e => this.onClickOpacity(e, layer)}
         >
           <Icon name="icon-opacity" className="-normal" />
         </span>
         <span
           data-title="Visibility"
-          className={`icon ${layer.opacity === 0 ? '-hide' : ''} -tooltip`}
+          className={`icon ${layer.opacity === 0 ? '-hide' : ''} -tooltip ${editionModeClass}`}
           onClick={() => this.props.toggleLayerOpacity(layer.dataset, layer.opacity === 0 ? 1 : 0)}
         >
           {layer.opacity === 0 ?
@@ -303,14 +305,14 @@ class DataMapLegend extends React.Component {
         {this.props.infoMetadata.open && this.props.infoMetadata.datasetSlug === slug ?
           <span
             data-title="Info"
-            className="icon -info -tooltip -active"
+            className={`icon -info -tooltip -active ${editionModeClass}`}
             onClick={() => this.props.onCloseInfo()}
           >
             <Icon name="icon-info" className="-normal" />
           </span> :
           <span
             data-title="Info"
-            className="icon -info -tooltip"
+            className={`icon -info -tooltip ${editionModeClass}`}
             onClick={() => this.props.onInfoClick(slug)}
           >
             <Icon name="icon-info" className="-normal" />
