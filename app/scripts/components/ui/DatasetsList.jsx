@@ -6,6 +6,7 @@ import classnames from 'classnames';
 import isEqual from 'lodash/isEqual';
 
 // Components
+import DatasetLocationFilterContainer from 'components/dataset-location-filter/dataset-location-filter';
 import DatasetFilterContainer from 'components/dataset-filter/dataset-filter';
 import CollapsibleItem from './CollapsibleItem';
 import Icon from '../ui/Icon';
@@ -13,8 +14,7 @@ import Search from '../ui/Search';
 import DatasetItem from '../Explore/DatasetItem';
 
 // Constants
-import { DATASETS_GROUPS } from '../../general-constants/datasets-groups';
-
+import DATASETS_GROUPS from '../../general-constants/datasets-groups';
 
 export default class DatasetsList extends React.Component {
   constructor(props) {
@@ -71,7 +71,7 @@ export default class DatasetsList extends React.Component {
 
     return (
       <div className="datasets-list-content">
-        <div ref={n => this.tools = n} className={`list-filters ${filters ? '-open' : ''} ${sticky ? '-fixed' : ''}`}>
+        <div ref={(n) => { this.tools = n; }} className={`list-filters ${filters ? '-open' : ''} ${sticky ? '-fixed' : ''}`}>
           <button className="btn-filters" onClick={() => this.setState({ filters: !filters })}>
             <span>Filter results</span>
             {filters ?
@@ -99,18 +99,24 @@ export default class DatasetsList extends React.Component {
 
   /* Core datasets */
   getCoreContent() {
-    const { data } = this.props;
+    const { data, location } = this.props;
+    const isLocationGlobal = location === 'global';
 
-    return DATASETS_GROUPS.map((g, j) => (
-      <article className="dataset-group" key={j}>
+
+    return DATASETS_GROUPS.map(g => (
+      <article className="dataset-group" key={g.id}>
         <h1 className="group-title">{g.title}</h1>
         <h2 className="group-description">{g.description}</h2>
         <div className="subgroups-list">
-          {g.subgroups.map((sg, i) => {
-            const list = data.filter(d => sg.datasets.includes(d.id));
+          {g.subgroups.map((sg) => {
+            const list = data.filter((d) => {
+              const locationFilter = isLocationGlobal ?
+                true : (((d.vocabulary[0] || {}).attributes || {}).tags || []).includes(location);
+              return sg.datasets.includes(d.id) && locationFilter;
+            });
             const content = this.getDatasetItems(list);
 
-            return <CollapsibleItem key={i} title={sg.title} content={content} />
+            return <CollapsibleItem key={sg.id} title={sg.title} content={content} />;
           })}
         </div>
       </article>
@@ -122,11 +128,12 @@ export default class DatasetsList extends React.Component {
 
     return (
       <div className="datasets-list-content">
+        <DatasetLocationFilterContainer />
         <div className="list-container">
           {content}
 
           <footer className="sidebar-footer">
-            <p>These datasets are a curated collection. If you don't find what you are interested in, you can explore all the data:</p>
+            <p>These datasets are a curated collection. If you don&apos;t find what you are interested in, you can explore all the data:</p>
 
             <div className="footer-actions">
               <button className="c-button" onClick={() => this.props.onChangeTab('all_datasets')}>
@@ -180,6 +187,10 @@ export default class DatasetsList extends React.Component {
 DatasetsList.propTypes = {
   className: PropTypes.string,
   data: PropTypes.array,
+  /**
+   * Define location scope of core datasets
+   */
+  location: PropTypes.string,
   type: PropTypes.string,
   infoSidebarMetadata: PropTypes.object,
   // Actions
