@@ -12,16 +12,19 @@ const mapStateToProps = state => ({
 
 class DatasetLocationFilterContainer extends Component {
   componentWillMount() {
-    const { setDatasetsLocation } = this.props;
+    const { setLocation, onChangeLocation } = this.props;
     const { query } = this.context.location;
     const { coreDatasetsLocation } = query || {};
 
-    setDatasetsLocation(coreDatasetsLocation || 'global');
+    setLocation(coreDatasetsLocation || 'global');
+    if (onChangeLocation) onChangeLocation();
   }
 
   onClickLocation(location) {
-    const { setDatasetsLocation } = this.props;
-    setDatasetsLocation(location);
+    const { setLocation, onChangeLocation } = this.props;
+    setLocation(location);
+
+    if (onChangeLocation) onChangeLocation();
   }
 
   render() {
@@ -41,7 +44,8 @@ DatasetLocationFilterContainer.contextTypes = {
 
 DatasetLocationFilterContainer.propTypes = {
   location: PropTypes.string,
-  setDatasetsLocation: PropTypes.func
+  setLocation: PropTypes.func,
+  onChangeLocation: PropTypes.func
 };
 
 export { actions, reducers, initialState };
