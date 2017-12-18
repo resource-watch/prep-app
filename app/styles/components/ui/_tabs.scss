@@ -5,6 +5,7 @@
   align-items: center;
   width: 100%;
   padding: 10px;
+  margin: 0;
 
   .tab {
     position: relative;
@@ -30,6 +31,18 @@
         width: 100%;
         height: 3px;
         background-color: $light-gold;
+      }
+    }
+  }
+
+  &.-light {
+    .tab {
+      color: $dark-blue;
+
+      &.-active {
+        &:after {
+          background-color: $yellow-orange;
+        }
       }
     }
   }

@@ -65,7 +65,7 @@
     "postcss-loader": "2.0.8",
     "pretty-error": "2.1.0",
     "prop-types": "15.6.0",
-    "query-string": "5.0.1",
+    "query-string": "^5.0.1",
     "raw-loader": "0.5.1",
     "rc-slider": "8.3.1",
     "react": "15.6.2",

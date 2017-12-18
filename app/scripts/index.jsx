@@ -20,6 +20,7 @@ import 'widget-editor/dist/styles.min.css';
 import * as DatasetFilterModule from 'components/dataset-filter/dataset-filter';
 import * as AuthModule from 'components/auth/auth';
 import * as UserModule from 'components/user/user';
+import * as DatasetLocationModule from 'components/dataset-location-filter/dataset-location-filter';
 
 // utils
 import { handleModule } from 'redux-tools';
@@ -54,6 +55,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const componentReducers = {
   datasetFilter: handleModule(DatasetFilterModule),
+  coreDatasetsFilter: handleModule(DatasetLocationModule),
   auth: handleModule(AuthModule),
   user: handleModule(UserModule)
 };
