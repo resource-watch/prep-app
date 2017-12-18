@@ -1,13 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import Button from 'components/Button/Button';
+import Tabs from 'components/ui/Tabs';
 
 // data
 import datasetLocations from './dataset-location-filter-data';
-
-// styles
-import './dataset-location-filter-styles.scss';
 
 class DatasetLocationFilter extends PureComponent {
   render() {
@@ -15,15 +12,12 @@ class DatasetLocationFilter extends PureComponent {
 
     return (
       <div className="c-dataset-location-filter">
-        <div className="row l-row">
-          <ul className="c-tabs">
-            {datasetLocations.map(locationOption =>
-              (<li key={locationOption.id} className={`tab ${locationOption.value === location ? '-active' : ''}`}>
-                <Button click={() => onClickLocation(locationOption.value)}> {locationOption.name} </Button>
-              </li>)
-            )}
-          </ul>
-        </div>
+        <Tabs
+          options={datasetLocations}
+          className="-light"
+          onChange={(value) => { onClickLocation(value); }}
+          selected={location}
+        />
       </div>
     );
   }

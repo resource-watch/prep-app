@@ -1,12 +1,12 @@
 export default [
   {
     id: 0,
-    name: 'Global',
+    label: 'Global',
     value: 'global'
   },
   {
     id: 1,
-    name: 'us-specific',
+    label: 'us-specific',
     value: 'united states'
   }
   // {
