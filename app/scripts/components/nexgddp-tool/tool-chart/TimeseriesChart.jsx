@@ -6,127 +6,15 @@ import Icon from 'components/ui/Icon';
 import './style.scss';
 
 // Redux
-import { setMarkerPosition } from 'actions/nexgddptool';
+import { setMarkerPosition, getChartData } from 'actions/nexgddptool';
 
+/* eslint-disable */
 const chartSpec = {
   "data": [
     {
       "name": "table",
       "format": {"parse": {"date": "date"}},
-      "values": [
-        {
-          "q25": 282.878,
-          "q50": 290.087,
-          "q75": 301.295,
-          "date": "1950-01-01T00:00:00.000Z",
-          "scenario": "historic"
-        },
-        {
-          "q25": 282.923,
-          "q50": 290.137,
-          "q75": 301.35,
-          "date": "1960-01-01T00:00:00.000Z",
-          "scenario": "historic"
-        },
-        {
-          "q25": 282.968,
-          "q50": 290.187,
-          "q75": 301.405,
-          "date": "1970-01-01T00:00:00.000Z",
-          "scenario": "historic"
-        },
-        {
-          "q25": 283.013,
-          "q50": 290.237,
-          "q75": 301.46,
-          "date": "1980-01-01T00:00:00.000Z",
-          "scenario": "historic"
-        },
-        {
-          "q25": 283.058,
-          "q50": 290.287,
-          "q75": 301.515,
-          "date": "1990-01-01T00:00:00.000Z",
-          "scenario": "historic"
-        },
-        {
-          "q25": 283.103,
-          "q50": 290.337,
-          "q75": 301.57,
-          "date": "2000-01-01T00:00:00.000Z",
-          "scenario": "rcp45"
-        },
-        {
-          "q25": 283.148,
-          "q50": 290.387,
-          "q75": 301.625,
-          "date": "2010-01-01T00:00:00.000Z",
-          "scenario": "rcp45"
-        },
-        {
-          "q25": 283.193,
-          "q50": 291.437,
-          "q75": 301.68,
-          "date": "2020-01-01T00:00:00.000Z",
-          "scenario": "rcp45"
-        },
-        {
-          "q25": 283.238,
-          "q50": 291.587,
-          "q75": 301.735,
-          "date": "2030-01-01T00:00:00.000Z",
-          "scenario": "rcp45"
-        },
-        {
-          "q25": 283.283,
-          "q50": 291.637,
-          "q75": 301.79,
-          "date": "2040-01-01T00:00:00.000Z",
-          "scenario": "rcp45"
-        },
-        {
-          "q25": 283.328,
-          "q50": 291.787,
-          "q75": 301.845,
-          "date": "2050-01-01T00:00:00.000Z",
-          "scenario": "rcp45"
-        },
-        {
-          "q25": 283.373,
-          "q50": 292.637,
-          "q75": 301.9,
-          "date": "2060-01-01T00:00:00.000Z",
-          "scenario": "rcp45"
-        },
-        {
-          "q25": 283.418,
-          "q50": 292.687,
-          "q75": 301.955,
-          "date": "2070-01-01T00:00:00.000Z",
-          "scenario": "rcp45"
-        },
-        {
-          "q25": 283.463,
-          "q50": 292.737,
-          "q75": 302.01,
-          "date": "2080-01-01T00:00:00.000Z",
-          "scenario": "rcp45"
-        },
-        {
-          "q25": 283.508,
-          "q50": 294.787,
-          "q75": 302.065,
-          "date": "2090-01-01T00:00:00.000Z",
-          "scenario": "rcp45"
-        },
-        {
-          "q25": 285.553,
-          "q50": 295.837,
-          "q75": 302.12,
-          "date": "2100-01-01T00:00:00.000Z",
-          "scenario": "rcp45"
-        }
-      ]
+      "values": []
     },
     {
       "name": "range1Data",
@@ -134,7 +22,7 @@ const chartSpec = {
       "transform": [
         {
           "type": "filter",
-          "test": "datum.date >= range1.start && datum.date <= range1.end "
+          "test": "year(datum.date) >= utcyear(range1.start) && year(datum.date) <= utcyear(range1.end)"
         }
       ]
     },
@@ -144,7 +32,7 @@ const chartSpec = {
       "transform": [
         {
           "type": "filter",
-          "test": "range2 ? (datum.date >= range2.start && datum.date <= range2.end) : false"
+          "test": "range2 ? (year(datum.date) >= utcyear(range2.start) && year(datum.date) <= utcyear(range2.end)) : false"
         }
       ]
     }
@@ -178,7 +66,7 @@ const chartSpec = {
   "scales": [
     {
       "name": "x",
-      "type": "time",
+      "type": "utc",
       "range": "width",
       "zero": false,
       "domain": {"data": "table","field": "date"}
@@ -187,7 +75,7 @@ const chartSpec = {
       "name": "y",
       "type": "linear",
       "range": "height",
-      "zero": true,
+      "zero": false,
       "nice": true,
       "domain": {
         "fields": [
@@ -315,24 +203,38 @@ const chartSpec = {
     }
   ]
 };
+/* eslint-enable */
 
 class TimeseriesChart extends React.PureComponent {
-  render () {
-    const { width, height, removeMarker, range1Selection, range2Selection } = this.props;
+  componentWillMount() {
+    if (!this.props.chartDataLoaded) {
+      this.props.getChartData();
+    }
+  }
 
-    // If for some reason, the range 1 is not selected, we return
-    // This case happens when restoring the state from the URL
-    if (!range1Selection) return null;
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.chartDataLoaded && this.props.chartDataLoaded) {
+      this.props.getChartData();
+    }
+  }
+
+  render() {
+    const { width, height, removeMarker, range1Selection, range2Selection, chartData, chartDataLoaded, chartDataError } = this.props;
+
+    // If for some reason, the range 1 is not selected or if don't have
+    // data for the chart, we return
+    // The 1st reason happens when restoring the state from the URL
+    if (!range1Selection || !chartDataLoaded || chartDataError) return null;
 
     const range1Signal = {
-      "name": "range1",
-      "init": { "expr": `{ start: utc(${range1Selection.value}, 0, 1), end: utc(${+range1Selection.value + 10}, 0, 1) }` }
+      name: 'range1',
+      init: { expr: `{ start: utc(${range1Selection.value}, 0, 1), end: utc(${+range1Selection.value + 9}, 0, 1) }` }
     };
 
-    let range2Signal = { "name": "range2", "init": "false" };
+    const range2Signal = { name: 'range2', init: 'false' };
     if (range2Selection) {
       range2Signal.init = {
-        "expr": `{ start: utc(${range2Selection.value}, 0, 1), end: utc(${+range2Selection.value + 10}, 0, 1) }`
+        expr: `{ start: utc(${range2Selection.value}, 0, 1), end: utc(${+range2Selection.value + 9}, 0, 1) }`
       };
     }
 
@@ -341,6 +243,8 @@ class TimeseriesChart extends React.PureComponent {
     // We create a new spec each time so the Vega component renders again
     // WARNING: it needs immutable data to detect the changes
     const spec = Object.assign({}, chartSpec, { signals });
+    spec.data = [...spec.data];
+    spec.data[0].values = chartData;
 
     return (
       <div className="c-tool-timeseries-chart">
@@ -361,10 +265,13 @@ class TimeseriesChart extends React.PureComponent {
 TimeseriesChart.propTypes = {
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   height: PropTypes.number,
-  spec: PropTypes.object,
   removeMarker: PropTypes.func,
   range1Selection: PropTypes.object,
-  range2Selection: PropTypes.object
+  range2Selection: PropTypes.object,
+  chartDataLoaded: PropTypes.bool,
+  getChartData: PropTypes.func,
+  chartData: PropTypes.array,
+  chartDataError: PropTypes.bool
 };
 
 TimeseriesChart.defaultProps = {
@@ -374,11 +281,15 @@ TimeseriesChart.defaultProps = {
 
 const mapStateToProps = state => ({
   range1Selection: state.nexgddptool.range1.selection,
-  range2Selection: state.nexgddptool.range2.selection
+  range2Selection: state.nexgddptool.range2.selection,
+  chartDataLoaded: state.nexgddptool.chart.loaded,
+  chartData: state.nexgddptool.chart.data,
+  chartDataError: state.nexgddptool.chart.error
 });
 
 const mapDispatchToProps = dispatch => ({
-  removeMarker: () => dispatch(setMarkerPosition(undefined))
+  removeMarker: () => dispatch(setMarkerPosition(undefined)),
+  getChartData: () => dispatch(getChartData())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimeseriesChart);

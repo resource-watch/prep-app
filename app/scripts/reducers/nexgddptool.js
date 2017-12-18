@@ -9,11 +9,14 @@ import {
   NEXGDDP_SET_RANGE1_OPTIONS,
   NEXGDDP_SET_RANGE1_SELECTION,
   NEXGDDP_SET_RANGE2_OPTIONS,
-  NEXGDDP_SET_RANGE2_SELECTION
+  NEXGDDP_SET_RANGE2_SELECTION,
+  NEXGDDP_SET_CHART_DATA,
+  NEXGDDP_SET_CHART_ERROR,
+  NEXGDDP_SET_CHART_LOADED
 } from '../constants';
 
 const initialState = {
-  // Stat of the map
+  // State of the map
   map: {
     zoom: 3,
     center: [20, -30]
@@ -47,6 +50,13 @@ const initialState = {
     options: [],
     /** @type {{ label: string, value: string }} selection */
     selection: undefined
+  },
+  // Data of the chart
+  chart: {
+    /** @type {{ q25: number, q50: number, q75: number, date: string }[]} */
+    data: [],
+    loaded: false,
+    error: false
   }
 };
 
@@ -109,6 +119,24 @@ export default function (state = initialState, action) {
     case NEXGDDP_SET_RANGE2_SELECTION: {
       return Object.assign({}, state, {
         range2: Object.assign({}, state.range2, { selection: action.payload })
+      });
+    }
+
+    case NEXGDDP_SET_CHART_DATA : {
+      return Object.assign({}, state, {
+        chart: Object.assign({}, state.chart, { data: action.payload })
+      });
+    }
+
+    case NEXGDDP_SET_CHART_ERROR : {
+      return Object.assign({}, state, {
+        chart: Object.assign({}, state.chart, { error: action.payload })
+      });
+    }
+
+    case NEXGDDP_SET_CHART_LOADED : {
+      return Object.assign({}, state, {
+        chart: Object.assign({}, state.chart, { loaded: action.payload })
       });
     }
 

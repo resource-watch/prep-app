@@ -11,7 +11,10 @@ import {
   NEXGDDP_SET_RANGE1_OPTIONS,
   NEXGDDP_SET_RANGE1_SELECTION,
   NEXGDDP_SET_RANGE2_OPTIONS,
-  NEXGDDP_SET_RANGE2_SELECTION
+  NEXGDDP_SET_RANGE2_SELECTION,
+  NEXGDDP_SET_CHART_DATA,
+  NEXGDDP_SET_CHART_LOADED,
+  NEXGDDP_SET_CHART_ERROR
 } from '../constants';
 
 export function updateUrl() {
@@ -52,6 +55,25 @@ export function updateUrl() {
   };
 }
 
+export function resetChartData() {
+  return (dispatch) => {
+    dispatch({
+      type: NEXGDDP_SET_CHART_LOADED,
+      payload: false
+    });
+
+    dispatch({
+      type: NEXGDDP_SET_CHART_ERROR,
+      payload: false
+    });
+
+    dispatch({
+      type: NEXGDDP_SET_CHART_DATA,
+      payload: []
+    });
+  };
+}
+
 export function setMapZoom(zoom, changeUrl = true) {
   return (dispatch) => {
     dispatch({
@@ -80,6 +102,8 @@ export function setMarkerPosition(coordinates, changeUrl = true) {
       type: NEXGDDP_SET_MARKER_POSITION,
       payload: coordinates
     });
+
+    dispatch(resetChartData());
 
     if (changeUrl) dispatch(updateUrl());
   };
@@ -123,6 +147,8 @@ export function setScenarioSelection(selection, changeUrl = true) {
       payload: selection
     });
 
+    dispatch(resetChartData());
+
     if (changeUrl) dispatch(updateUrl());
   };
 }
@@ -154,6 +180,8 @@ export function setRange1Selection(selection, changeUrl = true) {
       });
     }
 
+    dispatch(resetChartData());
+
     if (changeUrl) dispatch(updateUrl());
   };
 }
@@ -173,6 +201,8 @@ export function setRange2Selection(selection, changeUrl = true) {
       type: NEXGDDP_SET_RANGE2_SELECTION,
       payload: selection
     });
+
+    dispatch(resetChartData());
 
     if (changeUrl) dispatch(updateUrl());
   };
@@ -292,5 +322,46 @@ export function getSelectorsInfo() {
     });
 
     return promise;
+  };
+}
+
+export function getChartData() {
+  return (dispatch, getState) => {
+    dispatch({
+      type: NEXGDDP_SET_CHART_LOADED,
+      payload: false
+    });
+
+    dispatch({
+      type: NEXGDDP_SET_CHART_ERROR,
+      payload: false
+    });
+
+    const store = getState().nexgddptool;
+    const lat = store.marker[0];
+    const lng = store.marker[1];
+
+    return fetch(`${process.env.RW_API_URL}/query?sql=select tasavg_q25 as q25, tasavg as q50, tasavg_q75 as q75, year as date from test_decadal_tasavg&lat=${lat}&lon=${lng}`)
+      .then((res) => {
+        if (res.ok) return res.json();
+        throw new Error('Unable to fetch the data of the chart');
+      })
+      .then(json => json.data)
+      .then(data => dispatch({
+        type: NEXGDDP_SET_CHART_DATA,
+        payload: data
+      }))
+      .catch((err) => {
+        console.error(err);
+
+        dispatch({
+          type: NEXGDDP_SET_CHART_ERROR,
+          payload: true
+        });
+      })
+      .then(() => dispatch({
+        type: NEXGDDP_SET_CHART_LOADED,
+        payload: true
+      }));
   };
 }
