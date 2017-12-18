@@ -1,17 +1,17 @@
 export default [
   {
     id: 0,
-    title: 'HAZARDS',
+    title: 'climate',
     description: 'How is climate changing?',
     subgroups: [
       {
         id: 0,
-        title: 'Temperature change',
+        title: 'Temperature',
         datasets: ['308f0bc1-ba4c-480e-ac11-1f261a208e2d', '6e05863a-061a-418e-9f2f-3e0eaec3f0df', 'c98806b9-2db0-4a94-90f1-71ef61d71656']
       },
       {
         id: 1,
-        title: 'Precipitation change',
+        title: 'Precipitation',
         datasets: ['d443beca-d199-4872-9d7d-d82c45e43151', 'de274c78-2194-4f7c-83d4-1282c31ca2a9', '872c46d7-9753-441e-a541-7514cae00e03']
       },
       {
