@@ -77,7 +77,7 @@ class DashboardsPage extends React.Component {
               <h2>Collections of communities’ data, insights and tools for
                 climate resilience
               </h2>
-              <p>This is a list of initial dashboards for the beta version of the PREP Platform. In PREP’s next phase, any user will be able to <Link to="/create">create</Link> and share their own dashboards and insights.</p>
+              <p>This is a list of initial dashboards for PREPdata. In PREP’s next phase, any user will be able to <Link to="/create">create</Link> and share their own dashboards and insights.</p>
             </div>
           </div>
         </article>
