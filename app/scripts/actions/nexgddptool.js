@@ -231,29 +231,56 @@ export function setDefaultState() {
 
 export function getSelectorsInfo() {
   return (dispatch) => {
+    fetch(`${process.env.RW_API_URL}/query?sql=select min(year) as startdate, max(year) as enddate from test_decadal_tasavg`)
+      .then((res) => {
+        if (res.ok) return res.json();
+        throw new Error('Unable to fetch the date range');
+      })
+      .then(json => json.data[0])
+      .then(({ startdate, enddate }) => {
+        const startYear = new Date(startdate).getUTCFullYear();
+        const endYear = new Date(enddate).getUTCFullYear();
+        let yearPointer = startYear;
+        const dateRangeOptions = [];
+
+        while (yearPointer + 10 <= endYear) {
+          dateRangeOptions.push({
+            label: `${yearPointer}-${yearPointer + 9}`,
+            value: `${yearPointer}`
+          });
+          yearPointer += 10;
+        }
+
+        dispatch(setRange1Options(dateRangeOptions));
+        dispatch(setRange1Selection(dateRangeOptions[0]));
+        dispatch(setRange2Options(dateRangeOptions));
+      })
+      .catch(err => console.error(err));
+
+
     // Temporary code
     const promise = Promise.resolve(fieldsMock);
 
-    return promise.then(({ meta }) => {
-      const date = meta.coverageBounds.Date;
+    promise.then(({ meta }) => {
+      // const date = meta.coverageBounds.Date;
       const scenarios = meta.coverageBounds.Scenarios;
 
-      // We compute the date range options
-      const startYear = new Date(date[0]).getFullYear();
-      const endYear = new Date(date[1]).getFullYear();
-      let yearPointer = startYear;
-      const dateRangeOptions = [];
+      // // We compute the date range options
+      // const startYear = new Date(date[0]).getFullYear();
+      // const endYear = new Date(date[1]).getFullYear();
+      // let yearPointer = startYear;
+      // const dateRangeOptions = [];
 
-      while (yearPointer + 10 <= endYear) {
-        dateRangeOptions.push({
-          label: `${yearPointer}-${yearPointer + 10}`,
-          value: `${yearPointer}`
-        });
-        yearPointer += 10;
-      }
+      // while (yearPointer + 10 <= endYear) {
+      //   dateRangeOptions.push({
+      //     label: `${yearPointer}-${yearPointer + 10}`,
+      //     value: `${yearPointer}`
+      //   });
+      //   yearPointer += 10;
+      // }
 
-      dispatch(setRange1Options(dateRangeOptions));
-      dispatch(setRange2Options(dateRangeOptions));
+      // dispatch(setRange1Options(dateRangeOptions));
+      // dispatch(setRange2Options(dateRangeOptions));
 
       // We compute the scenario options
       const scenarioOptions = scenarios.map(scenario => ({
@@ -263,5 +290,7 @@ export function getSelectorsInfo() {
 
       dispatch(setScenarioOptions(scenarioOptions));
     });
+
+    return promise;
   };
 }
