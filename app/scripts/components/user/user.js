@@ -2,6 +2,7 @@ import { Component, createElement } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
+import { setConfig } from 'widget-editor';
 
 import { browserHistory } from 'react-router';
 
@@ -47,6 +48,7 @@ class UserContainer extends Component {
     localStorage.removeItem('token');
     this.props.updateUserData({});
     this.props.logOutSuccess(false);
+    setConfig({ userToken: null });
     browserHistory.push('/');
   }
 

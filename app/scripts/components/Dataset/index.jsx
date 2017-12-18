@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import URI from 'urijs';
-import WidgetEditor from 'widget-editor';
+import { connect } from 'react-redux';
+import WidgetEditor, { modalActions, SaveWidgetModal } from 'widget-editor';
 
 import metadata from '../../metadata.json';
 import PartnersSlider from '../../containers/PartnersSlider';
@@ -24,6 +26,25 @@ class DatasetDetail extends React.Component {
   componentWillMount() {
     if (!this.props.data || !this.props.widgets.length) {
       this.props.getDatasetData(this.props.datasetSlug);
+    }
+  }
+
+  /**
+   * Callback executed when the user clicks the save button of
+   * the widget editor
+   */
+  onSaveWidget() {
+    if (this.getWidgetConfig) {
+      this.props.toggleModal(true, {
+        children: SaveWidgetModal,
+        childrenProps: {
+          datasetId: this.props.data.id,
+          getWidgetConfig: this.getWidgetConfig,
+          onClickCheckWidgets: () => {
+            window.location = '/myprep/widgets/my_widgets';
+          }
+        }
+      });
     }
   }
 
@@ -171,10 +192,10 @@ class DatasetDetail extends React.Component {
           { (data.id && data.id !== 'defe21a1-f6a0-4bf7-a9ee-f083456130de') && (
             <WidgetEditor
               datasetId={data.id}
-              saveButtonMode="never"
               embedButtonMode="never"
-              titleMode="never"
               mapConfig={{ zoom: 3, lat: 40.65, lng: -98.21 }}
+              provideWidgetConfig={(func) => { this.getWidgetConfig = func; }}
+              onSave={() => this.onSaveWidget()}
             />
           ) }
 
@@ -215,27 +236,34 @@ DatasetDetail.propTypes = {
   /**
    * Define the route path (from the router)
    */
-  currentPage: React.PropTypes.string,
+  currentPage: PropTypes.string,
   /**
    * Define the slug of the dataset
    */
-  datasetSlug: React.PropTypes.string.isRequired,
+  datasetSlug: PropTypes.string.isRequired,
   /**
    * Define the function to get the datataset detail data
    */
-  getDatasetData: React.PropTypes.func.isRequired,
+  getDatasetData: PropTypes.func.isRequired,
   /**
    * Define the dataset data
    */
-  data: React.PropTypes.any,
+  data: PropTypes.any,
   /**
    * Define the dataset widget
    */
-  widgets: React.PropTypes.array
+  widgets: PropTypes.array,
+
+  // REDUX
+  toggleModal: PropTypes.func
 };
 
 DatasetDetail.defaultProps = {
   data: {}
 };
 
-export default DatasetDetail;
+const mapDispatchToProps = dispatch => ({
+  toggleModal: (...params) => dispatch(modalActions.toggleModal(...params))
+});
+
+export default connect(null, mapDispatchToProps)(DatasetDetail);
