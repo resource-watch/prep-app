@@ -6,7 +6,8 @@ import { render } from 'react-dom';
 import initOpbeat from 'opbeat-react';
 import { createOpbeatMiddleware } from 'opbeat-react/redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'remote-redux-devtools';
+import { composeWithDevTools } from 'redux-devtools-extension';
+// import { composeWithDevTools } from 'remote-redux-devtools';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { browserHistory } from 'react-router';
@@ -21,6 +22,7 @@ import 'widget-editor/dist/styles.css';
 import * as DatasetFilterModule from 'components/dataset-filter/dataset-filter';
 import * as AuthModule from 'components/auth/auth';
 import * as UserModule from 'components/user/user';
+import * as DatasetLocationModule from 'components/dataset-location-filter/dataset-location-filter';
 
 // utils
 import { handleModule } from 'redux-tools';
@@ -53,6 +55,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const componentReducers = {
   datasetFilter: handleModule(DatasetFilterModule),
+  coreDatasetsFilter: handleModule(DatasetLocationModule),
   auth: handleModule(AuthModule),
   user: handleModule(UserModule)
 };

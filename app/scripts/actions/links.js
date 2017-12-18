@@ -15,6 +15,7 @@ export function updateURL() {
     const params = state().exploremap;
     const activeDatasets = state().datasets.list.filter(layer => layer.active);
     const filters = state().datasets.filters;
+    const locationFilter = state().coreDatasetsFilter.location;
     let filtersFlatten = [];
     if (Object.keys(filters).length > 0) {
       Object.keys(filters).forEach((key) => {
@@ -42,6 +43,8 @@ export function updateURL() {
         query += filter;
       });
     }
+
+    if (locationFilter) query += `&coreDatasetsLocation=${locationFilter}`;
 
     dispatch(push(`/explore/${url}${query}`));
   };

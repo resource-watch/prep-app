@@ -13,6 +13,7 @@ import filterDatasetsByTab from '../../selectors/datasets';
 const mapStateToProps = state => ({
   listReceived: state.datasets.list.length > 0,
   data: filterDatasetsByTab(state),
+  location: state.coreDatasetsFilter.location,
   infoSidebarMetadata: state.infoSidebar.metadata,
   filters: state.datasets.filters,
   selectedTab: state.datasets.tab,

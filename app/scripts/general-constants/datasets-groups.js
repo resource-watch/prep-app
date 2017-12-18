@@ -1,58 +1,70 @@
-
-export const DATASETS_GROUPS = [
+export default [
   {
+    id: 0,
     title: 'HAZARDS',
     description: 'How is climate changing?',
     subgroups: [
       {
+        id: 0,
         title: 'Temperature change',
         datasets: ['308f0bc1-ba4c-480e-ac11-1f261a208e2d', '6e05863a-061a-418e-9f2f-3e0eaec3f0df', 'c98806b9-2db0-4a94-90f1-71ef61d71656']
       },
       {
+        id: 1,
         title: 'Precipitation change',
         datasets: ['d443beca-d199-4872-9d7d-d82c45e43151', 'de274c78-2194-4f7c-83d4-1282c31ca2a9', '872c46d7-9753-441e-a541-7514cae00e03']
       },
       {
+        id: 2,
         title: 'Extreme events',
-        datasets: ['2a4382d0-026c-484e-b0a3-f02d1c207070', ]
+        datasets: ['2a4382d0-026c-484e-b0a3-f02d1c207070']
       },
       {
+        id: 3,
         title: 'Coastal risk',
         datasets: []
       }
     ]
   },
   {
+    id: 1,
     title: 'EXPOSURE',
     description: 'What could be affected?',
     subgroups: [
       {
+        id: 0,
         title: 'People',
         datasets: []
       },
       {
+        id: 1,
         title: 'Built Environment',
         datasets: ['30ae543e-58ef-44d9-9a5d-0023d1ee6096', '9e57eb35-b6bb-4361-a77f-1888a54ecd5c', 'ffc5410c-1df4-4f83-9329-9262b6e62545', '309ec594-29c4-4e7f-be61-4a380be3056d']
       },
       {
+        id: 2,
         title: 'Agriculture',
         datasets: []
       }
     ]
   },
   {
+    id: 2,
     title: 'VULNERABILITY',
     description: 'What makes us more or less vulnerable?',
     subgroups: [
       {
+        id: 0,
         title: 'Socioeconomic',
         datasets: ['8ed34061-7996-41fd-8a8e-3f9458fa6cf5']
       },
       {
+        id: 1,
         title: 'Infrastructure',
         datasets: ['c188cfb1-9156-41f1-a163-b05354ca9138']
       },
       {
+        id: 2,
         title: 'Indices of vulnerability',
         datasets: [
           '4153f918-5bf3-40f0-8bc5-3385afb6a41e',
@@ -69,7 +81,7 @@ export const DATASETS_GROUPS = [
           'bd3c2ea6-085c-4722-9444-31bc3244ddb0',
           'c3613373-cc3f-4b28-a7b1-81c4ce98665e',
           'c507e111-33cf-48d2-bbaa-ab00fac98f73',
-          -'d1ac066b-077c-4669-b7bb-aa3c1fdae553',
+          'd1ac066b-077c-4669-b7bb-aa3c1fdae553',
           'd239c23c-e88a-4569-a9cf-56ad019118f9',
           'de717628-329c-42bf-83cd-3825dc730c90',
           'e5bfea74-2e66-4734-a7ef-bf1ba9d1a33e',
