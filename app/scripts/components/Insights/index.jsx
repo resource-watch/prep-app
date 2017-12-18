@@ -77,11 +77,9 @@ class InsightsPage extends React.Component {
         <article className="c-article -no-border">
           <div className="row align-center">
             <div className="column small-12 medium-8">
-              <h2>Find data-driven stories and tools that spotlight specific climate-related risks
-                and solutions
+              <h2>Data-driven stories that spotlight specific climate-related risks and solutions
               </h2>
-              <p>In PREP’s next phase, any user will be able to <Link to="create">create</Link> and
-                share their own dashboards and stories.</p>
+              <p>This is a selection of initial stories developed by members of the PREP community. Partners are in the process of engaging with communities to develop additional stories and we welcome hearing from groups interested in developing their own.</p>
             </div>
           </div>
         </article>
