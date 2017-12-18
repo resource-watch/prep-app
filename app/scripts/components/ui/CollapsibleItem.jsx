@@ -4,10 +4,7 @@ import PropTypes from 'prop-types';
 // Libraries
 import classnames from 'classnames';
 
-// Components
-import Icon from './Icon';
-
-export default class CollapsibleList extends React.Component {
+class CollapsibleItem extends React.Component {
   constructor(props) {
     super(props);
 
@@ -24,29 +21,17 @@ export default class CollapsibleList extends React.Component {
   }
 
   render() {
-    const { className, title, list, collapse, content, arrowPosition } = this.props;
+    const { className, title, description, list, content } = this.props;
     const classNames = classnames({
       'c-collapsible-item': true,
       [className]: !!className,
       '-hidden': this.state.hidden
     });
-    const arrowIconName = this.state.hidden ? 'icon-arrow-right' : 'icon-arrow-down';
 
     return (
       <div className={classNames}>
-        <h1 className="collapsible-title">
-          {collapse && arrowPosition === 'left' &&
-            <button className="btn btn-collapse -left" onClick={this.onToggleList}>
-              <Icon name={arrowIconName} className="-smaller" />
-              {title}
-            </button>
-          }
-          {collapse && arrowPosition === 'right' &&
-            <button className="btn btn-collapse -right" onClick={this.onToggleList}>
-              <Icon name={arrowIconName} className="-smaller" />
-            </button>
-          }
-        </h1>
+        <h1 className="collapsible-title" onClick={this.onToggleList}>{title}</h1>
+        {description && <span className="collapsible-title-description">{description}</span>}
         <div className="collapsible-item-container">
           {content &&
             <div className="collapsible-item">
@@ -70,18 +55,19 @@ export default class CollapsibleList extends React.Component {
   }
 }
 
-CollapsibleList.propTypes = {
+CollapsibleItem.propTypes = {
   className: PropTypes.string,
   title: PropTypes.any.isRequired,
+  description: PropTypes.string,
   list: PropTypes.array,
   content: PropTypes.any,
-  hidden: PropTypes.any,
-  arrowPosition: PropTypes.string,
-  collapse: PropTypes.bool
+  hidden: PropTypes.any
 };
 
-CollapsibleList.defaultProps = {
+CollapsibleItem.defaultProps = {
   collapse: true,
   hidden: true,
   arrowPosition: 'left'
 };
+
+export default CollapsibleItem;

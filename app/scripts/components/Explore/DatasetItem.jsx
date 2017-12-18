@@ -64,21 +64,15 @@ class DatasetItem extends React.Component {
     const metadata = { title: dataset.name, subtitle: '', description: '', tags: [] };
 
     // Set metadata
-    if (dataset.metadata && dataset.metadata.length) {
-      const MAX_LENGTH = 150;
-      const info = dataset.metadata[0].attributes.info;
+    if ((dataset.metadata || []).length) {
+      const { info } = (dataset.metadata[0] || {}).attributes;
+      const { organization, short_description } = info || {};
 
-      if (info && info.organization) metadata.subtitle = info.organization;
-      if (info && info.short_description) {
-        if (info.short_description.length > MAX_LENGTH) {
-          metadata.description = `${info.short_description.slice(0, MAX_LENGTH)}...`;
-        } else {
-          metadata.description = info.short_description;
-        }
-      }
+      if (organization) metadata.subtitle = organization;
+      if (short_description) metadata.description = short_description;
     }
 
-    if (dataset.vocabulary && dataset.vocabulary.length && dataset.vocabulary[0].attributes.tags) {
+    if ((dataset.vocabulary || []).length && dataset.vocabulary[0].attributes.tags) {
       metadata.tags = dataset.vocabulary[0].attributes.tags;
     }
 
@@ -109,26 +103,18 @@ class DatasetItem extends React.Component {
                 {datasetSwitch}
               </div>
               <Link className="item-title-link" to={`/dataset/${this.props.dataset.slug}`} >
-                <h1 className="item-title">{metadata.title}</h1>
+                <h3 className="item-title">{metadata.title}</h3>
               </Link>
             </div>
             <div className="item-tools">
               {infoButton}
             </div>
           </div>
-          <h2 className="subtitle">{metadata.subtitle}</h2>
+          <span className="subtitle">{metadata.subtitle}</span>
         </header>
-
 
         <div className="item-content">
           {metadata.description && <p className="description">{metadata.description}</p>}
-          {metadata.tags &&
-            <div className="tags-container">
-              {metadata.tags.map((t, i) => (
-                <span key={i} className="c-tag tag">{t}</span>
-              ))}
-            </div>
-          }
         </div>
       </div>
     );
