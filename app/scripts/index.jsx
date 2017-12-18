@@ -1,12 +1,11 @@
 /* eslint-disable import/first */
 
-
 import React from 'react';
 import { render } from 'react-dom';
 import initOpbeat from 'opbeat-react';
 import { createOpbeatMiddleware } from 'opbeat-react/redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'remote-redux-devtools';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { browserHistory } from 'react-router';
@@ -71,10 +70,11 @@ const reducer = combineReducers({
  * @info(http://redux.js.org/docs/basics/Store.html)
  * @type {Object}
  */
+const composeEnhancers = composeWithDevTools({});
 const middlewareRouter = routerMiddleware(browserHistory);
 const store = createStore(
   reducer,
-  composeWithDevTools(
+  composeEnhancers(
     /* The router middleware MUST be before thunk otherwise the URL changes
      * inside a thunk function won't work properly */
     applyMiddleware(middlewareRouter, thunk, createOpbeatMiddleware())

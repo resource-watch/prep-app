@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2017-12-22
+
+### Fixed
+- Bug interacting with opacity button in legend control.
+- Fixed ImageService layers.
+- Fixed DynamicService layers.
+- Fixed FeatureService layers.
+
+### Added
+- Added tags and filtering like ResourceWatch project.
+- Added support for NexGDDP layers.
+- Added Support for GEE layers.
+- Added basemap control in explore map.
+- Including description in explore datasets.
+- Resources page from API.
+- Linking datasets from explore dataset list.
+- Added widget editor in dataset page.
+- Added support for markdown in datasets.
+
+### Changed
+- User authentication to use localStorage.
+- Changed explore sidebar with tabs.
+- Changed zoom and map control styles.
+- Using icons component in map.
+- Filter now is opened in dropdown.
+
+
 ## [1.1.0] - 2017-09-26
 
 ### Fixed
