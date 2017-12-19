@@ -81,7 +81,8 @@ module.exports = merge(sharedConfig, {
   ],
 
   externals: {
-    leaflet: 'L'
+    leaflet: 'L',
+    'esri-leaflet': 'L.esri'
   }
 
 });
