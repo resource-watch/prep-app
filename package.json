@@ -24,7 +24,8 @@
     "eslint": "^4.12.1",
     "eslint-config-vizzuality": "1.0.7",
     "eslint-import-resolver-webpack": "^0.8.3",
-    "mocha": "^3.0.0"
+    "mocha": "^3.0.0",
+    "webpack-bundle-analyzer": "^2.9.1"
   },
   "dependencies": {
     "autoprefixer": "6.7.7",
@@ -96,6 +97,7 @@
     "sparkpost": "2.1.2",
     "style-loader": "0.13.2",
     "twitter": "1.7.0",
+    "uglifyjs-webpack-plugin": "^1.1.4",
     "urijs": "1.18.10",
     "url-loader": "0.5.8",
     "vega": "2.6.3",

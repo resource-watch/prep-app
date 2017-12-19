@@ -21,6 +21,10 @@ import LoadingSpinner from '../Loading/LoadingSpinner';
 import NexGDDPTool from '../nexgddp-tool/NexGDDPTool';
 
 const logoImage = '/images/prep-logo.png';
+const nexGDDPDatasets = [
+  'defe21a1-f6a0-4bf7-a9ee-f083456130de',
+  'a0a6d98f-3cce-4a9c-b07e-ba735d1d985b'
+];
 
 class DatasetDetail extends React.Component {
   static getData(key, value) {
@@ -34,10 +38,37 @@ class DatasetDetail extends React.Component {
     return data;
   }
 
-  componentWillMount() {
+  static getDownloadUrl(data) {
+    let url = null;
+    let metadataUrl = null;
+    if (data.metadata && data.metadata.length &&
+        data.metadata[0].attributes.info.data_download) {
+      metadataUrl = data.metadata[0].attributes.info.data_download;
+    }
+    switch (data.provider) {
+      case 'cartodb':
+        if (data && data.connectorUrl && data.connectorUrl.indexOf('tables') === -1) {
+          const uri = new URI(data.connectorUrl);
+          uri.search({ format: 'csv' });
+          url = uri.toString();
+        } else {
+          url = data.connectorUrl;
+        }
+        break;
+      default:
+        url = metadataUrl;
+    }
+    return url;
+  }
+
+  componentDidMount() {
     if (!this.props.data || !this.props.widgets.length) {
       this.props.getDatasetData(this.props.datasetSlug);
     }
+  }
+
+  componentWillUnmount() {
+    if (this.props.data) this.setState({ data: {} });
   }
 
   /**
@@ -101,7 +132,7 @@ class DatasetDetail extends React.Component {
     const currentSection = this.props.location.state && this.props.location.state.prevPath || 'explore';
     return (
       <div>
-        <SectionIntro data={data} downloadUrl={this.getDownloadUrl(this.props.data)} currentSection={currentSection} >
+        <SectionIntro data={data} downloadUrl={DatasetDetail.getDownloadUrl(this.props.data)} currentSection={currentSection} >
           <MetadataInfo data={this.props.data} />
         </SectionIntro>
 
@@ -118,31 +149,11 @@ class DatasetDetail extends React.Component {
     );
   }
 
-  getDownloadUrl(data) {
-    let url = null;
-    let metadataUrl = null;
-    if (data.metadata && data.metadata.length &&
-        data.metadata[0].attributes.info.data_download) {
-      metadataUrl = data.metadata[0].attributes.info.data_download;
-    }
-    switch (data.provider) {
-      case 'cartodb':
-        if (data && data.connectorUrl && data.connectorUrl.indexOf('tables') === -1) {
-          const uri = new URI(data.connectorUrl);
-          uri.search({ format: 'csv' });
-          url = uri.toString();
-        } else {
-          url = data.connectorUrl;
-        }
-        break;
-      default:
-        url = metadataUrl;
-    }
-    return url;
-  }
-
   render() {
     const data = this.props.data ? this.props.data : {};
+
+    if (!data || !data.id) return null;
+
     const currentData = this.getCurrentData();
     const dataMetadata = data.metadata && data.metadata.length ? data.metadata : null;
     const title = dataMetadata && dataMetadata[0].attributes.info && dataMetadata[0].attributes.info.technical_title ?
@@ -182,14 +193,12 @@ class DatasetDetail extends React.Component {
 
           {content}
 
-          {data.id === 'defe21a1-f6a0-4bf7-a9ee-f083456130de' &&
+          {(data.id && nexGDDPDatasets.includes(data.id)) ?
             <div className="row">
               <div className="columns small-12">
                 <NexGDDPTool />
               </div>
-            </div>}
-
-          { (data.id && data.id !== 'defe21a1-f6a0-4bf7-a9ee-f083456130de') && (
+            </div> :
             <WidgetEditor
               datasetId={data.id}
               embedButtonMode="never"
@@ -197,7 +206,7 @@ class DatasetDetail extends React.Component {
               provideWidgetConfig={(func) => { this.getWidgetConfig = func; }}
               onSave={() => this.onSaveWidget()}
             />
-          ) }
+          }
 
         </div>
 
@@ -236,7 +245,7 @@ DatasetDetail.propTypes = {
   /**
    * Define the route path (from the router)
    */
-  currentPage: PropTypes.string,
+  location: PropTypes.object,
   /**
    * Define the slug of the dataset
    */

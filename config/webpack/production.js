@@ -1,7 +1,9 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const path = require('path');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const sharedConfig = require('./shared.js');
 
 module.exports = merge(sharedConfig, {
@@ -71,7 +73,11 @@ module.exports = merge(sharedConfig, {
       minimize: true,
       debug: false
     }),
-    new ExtractTextPlugin('styles.css')
+    new ExtractTextPlugin('styles.css'),
+    new UglifyJSPlugin(),
+    process.env.BUNDLE_ANALIZE ? new BundleAnalyzerPlugin({
+      analyzerMode: 'static'
+    }) : null
   ],
 
   externals: {
