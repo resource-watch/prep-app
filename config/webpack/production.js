@@ -72,6 +72,10 @@ module.exports = merge(sharedConfig, {
       debug: false
     }),
     new ExtractTextPlugin('styles.css')
-  ]
+  ],
+
+  externals: {
+    leaflet: 'L'
+  }
 
 });

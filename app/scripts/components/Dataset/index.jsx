@@ -11,7 +11,6 @@ import SecondaryNav from '../../components/Navigation/SecondaryNav';
 import SocialNav from '../../components/Navigation/SocialNav';
 import MainNav from '../../components/Navigation/MainNav';
 import Banner from '../../components/Banner';
-import logoImage from '../../../images/prep-logo.png';
 
 import SectionIntro from '../SectionIntro';
 import MetadataInfo from '../Explore/MetadataInfo';
@@ -21,7 +20,19 @@ import LoadingSpinner from '../Loading/LoadingSpinner';
 
 import NexGDDPTool from '../nexgddp-tool/NexGDDPTool';
 
+const logoImage = '/images/prep-logo.png';
+
 class DatasetDetail extends React.Component {
+  static getData(key, value) {
+    let data = null;
+    for (let i = metadata.length - 1; i >= 0; i--) {
+      if (value.indexOf(metadata[i][key]) > -1) {
+        data = metadata[i];
+        break;
+      }
+    }
+    return data;
+  }
 
   componentWillMount() {
     if (!this.props.data || !this.props.widgets.length) {
@@ -48,20 +59,9 @@ class DatasetDetail extends React.Component {
     }
   }
 
-  getData(key, value) {
-    let data = null;
-    for (let i = metadata.length - 1; i >= 0; i--) {
-      if (value.indexOf(metadata[i][key]) > -1) {
-        data = metadata[i];
-        break;
-      }
-    }
-    return data;
-  }
-
   getCurrentData() {
     const pathname = this.props.location.pathname;
-    const currentData = this.getData('pathname', pathname);
+    const currentData = DatasetDetail.getData('pathname', pathname);
     return currentData;
   }
 

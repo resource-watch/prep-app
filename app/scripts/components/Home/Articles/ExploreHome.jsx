@@ -1,12 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router';
-import temperaturesLayer from '../../../../images/home/temperatures-layer.jpg';
 import Modal from '../../Modal/Modal';
 import Form from '../../Form';
 
+const temperaturesLayer = '/images/home/temperatures-layer.jpg';
 
 class ExploreHome extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {

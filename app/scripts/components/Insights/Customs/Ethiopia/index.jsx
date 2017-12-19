@@ -1,13 +1,8 @@
 import React from 'react';
-import Article from '../../../Content/Article';
-import VegaChart from '../../../Chart/VegaChart';
 import ChartCard from '../../../Cards/ChartCard';
 import IFrame from '../../../IFrame';
 import EmbedMap from '../../../EmbedMap';
 import ShareModal from '../../../Modal/ShareModal';
-
-import ethiopia01 from '../../../../../images/insights/ethiopia/Insight_Ethiopia01.png';
-import ethiopiaMap from '../../../../../images/insights/ethiopia/Insight_Ethiopia02.png';
 
 import seasonal from './jsons/seasonal.json';
 import tigray from './jsons/tigray.json';
@@ -18,6 +13,9 @@ import tigraySeasonal from './jsons/tigray-seasonal.json';
 const tigrayMap = 'https://prep.carto.com/u/prep-admin/viz/c7fc6dc6-4b08-4d23-ac0b-ff07144ad89a/embed_map';
 const somaliaMap = 'https://prep.carto.com/u/prep-admin/viz/5824b7fa-705a-11e6-bb05-0e3ebc282e83/embed_map';
 const forecastMap = 'https://prep.carto.com/u/prep-admin/viz/8e9860a4-7058-11e6-aa42-0e233c30368f/embed_map';
+
+const ethiopia01 = '/images/insights/ethiopia/Insight_Ethiopia01.png';
+const ethiopiaMap = '/images/insights/ethiopia/Insight_Ethiopia02.png';
 
 
 class EthiopiaInsight extends React.Component {

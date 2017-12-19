@@ -6,8 +6,8 @@ import ExploreHome from './Articles/ExploreHome';
 import DashboardsHome from '../../containers/Home/DashboardsHome';
 import TwitterFeed from '../../containers/TwitterFeed';
 
-import ladyInLand from '../../../images/home/lady-in-land.jpg';
-import iceberg from '../../../images/home/iceberg.jpg';
+const ladyInLand = '/images/home/lady-in-land.jpg';
+const iceberg = '/images/home/iceberg.jpg';
 
 class Home extends React.Component {
   render() {

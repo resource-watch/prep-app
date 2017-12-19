@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
 import ClimateChange from '../../ClimateChange';
-import portoAlegre from '../../../../images/home/porto-alegre.jpg';
+
+const portoAlegre = '/images/home/porto-alegre.jpg';
 
 const InsightsHome = () => (
   <div>

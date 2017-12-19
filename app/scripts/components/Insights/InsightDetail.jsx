@@ -8,13 +8,14 @@ import SocialNav from '../../components/Navigation/SocialNav';
 import MainNav from '../../components/Navigation/MainNav';
 import Breadcrumbs from '../../components/Navigation/Breadcrumbs';
 import Banner from '../../components/Banner';
-import logoImage from '../../../images/prep-logo.png';
 
 import SectionIntro from '../SectionIntro';
 import IFrame from '../IFrame';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
 import EthiopiaInsight from './Customs/Ethiopia';
+
+const logoImage = '/images/prep-logo.png';
 
 class InsightsDetail extends React.Component {
 

@@ -9,7 +9,6 @@ import SocialNav from '../../components/Navigation/SocialNav';
 import MainNav from '../../components/Navigation/MainNav';
 import Breadcrumbs from '../../components/Navigation/Breadcrumbs';
 import Banner from '../../components/Banner';
-import logoImage from '../../../images/prep-logo.png';
 
 import SectionIntro from '../SectionIntro';
 import DashboardDetailIndicators from './DashboardDetailIndicators';
@@ -23,8 +22,19 @@ import LoadingSpinner from '../Loading/LoadingSpinner';
 // Constants
 import metadata from '../../metadata.json';
 
+const logoImage = '/images/prep-logo.png';
 
 class DashboardDetail extends React.Component {
+  static getData(key, value) {
+    let data = null;
+    for (let i = metadata.length - 1; i >= 0; i--) {
+      if (metadata[i][key] === value) {
+        data = metadata[i];
+        break;
+      }
+    }
+    return data;
+  }
 
   componentWillMount() {
     if (!this.props.data) {
@@ -38,20 +48,9 @@ class DashboardDetail extends React.Component {
     }
   }
 
-  getData(key, value) {
-    let data = null;
-    for (let i = metadata.length - 1; i >= 0; i--) {
-      if (metadata[i][key] === value) {
-        data = metadata[i];
-        break;
-      }
-    }
-    return data;
-  }
-
   getCurrentData() {
     const pathname = this.props.location.pathname;
-    const currentData = this.getData('pathname', (pathname !== '/') ?
+    const currentData = DashboardDetail.getData('pathname', (pathname !== '/') ?
       pathname.split('/').slice(1)[0] : pathname);
     return currentData;
   }
@@ -87,7 +86,7 @@ class DashboardDetail extends React.Component {
       return <LoadingSpinner />;
     }
 
-    const specificContent = this.getSpecificContent();
+    // const specificContent = this.getSpecificContent();
 
     return (
       <div>

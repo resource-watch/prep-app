@@ -1,8 +1,9 @@
 import React from 'react';
 import Slider from 'react-slick';
-import engagementSlide from '../../../images/partnerships/engagement-slide.jpg';
-import dataSlide from '../../../images/partnerships/data-slide.jpg';
-import platformsSlide from '../../../images/partnerships/platforms-slide.jpg';
+
+const engagementSlide = '/images/partnerships/engagement-slide.jpg';
+const dataSlide = '/images/partnerships/data-slide.jpg';
+const platformsSlide = '/images/partnerships/platforms-slide.jpg';
 
 const settings = {
   dots: false,
