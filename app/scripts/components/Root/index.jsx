@@ -35,7 +35,7 @@ class Root extends React.Component {
 
         {this.state.modalWelcomeOpen &&
           <WelcomeModal
-            title={'Welcome to Partnership for Resilience & Preparedness Beta Platform'}
+            title={'Welcome to PREPdata'}
             opened={this.state.modalWelcomeOpen}
             close={() => {
               this.setState({ modalWelcomeOpen: false });
