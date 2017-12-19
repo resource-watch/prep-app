@@ -36,9 +36,9 @@ class Resources extends React.PureComponent {
         <div className="sliced" />
 
         <Article no-border>
-          <p>Find selected resources for understanding the impacts of climate change,
-            tools for building resilience to climate change, and additional
-            climate relevant data.
+          <h2>Resources and tools to understand the impacts of climate change
+          </h2>
+          <p>This is a selection of resources to understand the impacts of climate change, learn how to build resilience, and locate additional climate relevant data. We welcome receiving suggestions for additional resources to include.
           </p>
         </Article>
 
