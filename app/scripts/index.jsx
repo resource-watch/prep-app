@@ -17,7 +17,7 @@ import 'widget-editor/dist/styles.min.css';
 
 
 // Modules
-import * as DatasetFilterModule from 'components/dataset-filter/dataset-filter';
+import * as ExploreDatasetFilterModule from 'components/explore-dataset-filters/explore-dataset-filters';
 import * as AuthModule from 'components/auth/auth';
 import * as UserModule from 'components/user/user';
 import * as DatasetLocationModule from 'components/dataset-location-filter/dataset-location-filter';
@@ -54,7 +54,7 @@ if (process.env.NODE_ENV === 'production') {
  */
 
 const componentReducers = {
-  datasetFilter: handleModule(DatasetFilterModule),
+  exploreDatasetFilter: handleModule(ExploreDatasetFilterModule),
   coreDatasetsFilter: handleModule(DatasetLocationModule),
   auth: handleModule(AuthModule),
   user: handleModule(UserModule)
