@@ -1,0 +1,32 @@
+import { Component, createElement } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import * as actions from './explore-dataset-filters-actions';
+import reducers, { initialState } from './explore-dataset-filters-reducer';
+
+import ExploreDatasetFiltersComponent from './explore-dataset-filters-component';
+
+const mapStateToProps = state => ({
+  data: state.exploreDatasetFilter.data
+});
+
+class ExploreDatasetFiltersContainer extends Component {
+  componentWillMount() {
+    this.props.getFiltersData();
+  }
+  render() {
+    return createElement(ExploreDatasetFiltersComponent, {
+      ...this.props
+    });
+  }
+}
+
+ExploreDatasetFiltersContainer.propTypes = {
+  getFiltersData: PropTypes.func
+};
+
+export { actions, reducers, initialState };
+
+
+export default connect(mapStateToProps, actions)(ExploreDatasetFiltersContainer);
