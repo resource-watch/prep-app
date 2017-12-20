@@ -7,25 +7,21 @@ export default [
       {
         id: 0,
         title: 'Temperature',
-        description: 'Average temperature, Growing season length, Heating degree days, Cooling degree days',
         datasets: ['308f0bc1-ba4c-480e-ac11-1f261a208e2d', '6e05863a-061a-418e-9f2f-3e0eaec3f0df', 'c98806b9-2db0-4a94-90f1-71ef61d71656']
       },
       {
         id: 1,
         title: 'Precipitation',
-        description: 'Average precipitation, Consecutive dry days, Water Stress',
         datasets: ['d443beca-d199-4872-9d7d-d82c45e43151', 'de274c78-2194-4f7c-83d4-1282c31ca2a9', '872c46d7-9753-441e-a541-7514cae00e03']
       },
       {
         id: 2,
         title: 'Extreme events',
-        description: 'Hurricanes, Extreme precipitation days, Extreme heat days, Flood Risk',
         datasets: ['2a4382d0-026c-484e-b0a3-f02d1c207070']
       },
       {
         id: 3,
         title: 'Coastal risk',
-        description: 'Layer group short description',
         datasets: []
       }
     ]
@@ -38,19 +34,16 @@ export default [
       {
         id: 0,
         title: 'People',
-        description: 'Population, Human Settlements',
         datasets: []
       },
       {
         id: 1,
         title: 'Built Environment',
-        description: 'Power plants, Roads, Ports and Airports',
         datasets: ['30ae543e-58ef-44d9-9a5d-0023d1ee6096', '9e57eb35-b6bb-4361-a77f-1888a54ecd5c', 'ffc5410c-1df4-4f83-9329-9262b6e62545', '309ec594-29c4-4e7f-be61-4a380be3056d']
       },
       {
         id: 2,
         title: 'Agriculture',
-        description: 'Irrigated agriculture, Cropland, Wildfire hazard',
         datasets: []
       }
     ]
@@ -63,19 +56,16 @@ export default [
       {
         id: 0,
         title: 'Socioeconomic',
-        description: 'Average incomes, Gridded GDP',
         datasets: ['8ed34061-7996-41fd-8a8e-3f9458fa6cf5']
       },
       {
         id: 1,
         title: 'Infrastructure',
-        description: 'Market accessibility, Dams, Mangroves',
         datasets: ['c188cfb1-9156-41f1-a163-b05354ca9138']
       },
       {
         id: 2,
         title: 'Indices of vulnerability',
-        description: 'Vulnerability to climate change, Crop response to climate change',
         datasets: [
           '4153f918-5bf3-40f0-8bc5-3385afb6a41e',
           '4225a2b9-680a-43b7-90fb-0d631fc6c074',
