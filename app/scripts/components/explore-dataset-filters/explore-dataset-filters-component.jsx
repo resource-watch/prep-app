@@ -7,8 +7,9 @@ import DatasetFilter from 'components/dataset-filter/dataset-filter';
 import PLACEHOLDERS_DATASET_FILTERS from './explore-dataset-filters-constants';
 
 class ExploreDatasetFilters extends PureComponent {
-  onChange(value, key) {
-    this.props.setFilter({ [key]: value });
+  onChange(values = [], key) {
+    const filterValues = values.map(v => v.value);
+    this.props.setFilter({ [key]: filterValues });
   }
 
   renderFilters() {
@@ -19,7 +20,7 @@ class ExploreDatasetFilters extends PureComponent {
         key={key}
         data={data[key]}
         placeholderText={PLACEHOLDERS_DATASET_FILTERS[key]}
-        onChange={({ value }) => this.onChange(value, key)}
+        onChange={(currentNode, selectedNodes) => this.onChange(selectedNodes, key)}
       />)
     );
 
