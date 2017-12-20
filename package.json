@@ -36,7 +36,6 @@
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-3": "6.24.1",
     "base64-js": "1.2.1",
-    "basic-auth": "1.1.0",
     "bitly": "4.1.1",
     "body-parser": "1.17.1",
     "classnames": "2.2.5",
