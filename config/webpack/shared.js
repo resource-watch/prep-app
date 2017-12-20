@@ -77,13 +77,7 @@ const config = {
         datasetEnv: JSON.stringify(process.env.DATASET_ENV),
         assetsUrl: JSON.stringify(process.env.ASSETS_URL || '')
       }
-    }),
-    new CopyWebpackPlugin([
-      {
-        from: 'node_modules/widget-editor/dist/images',
-        to: 'images/'
-      }
-    ])
+    })
   ]
 
 };

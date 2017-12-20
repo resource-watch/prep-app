@@ -4,7 +4,7 @@
   "description": "Partnership for Resilience and Preparedness",
   "main": "server.js",
   "scripts": {
-    "build": "rm -rf dist/ && webpack --config ./config/webpack/production.js --progress --colors -p",
+    "build": "rm -rf dist/ && webpack --config ./config/webpack/production.js --progress --env.production --color",
     "lint": "./node_modules/.bin/eslint --ext .js --ext .jsx .",
     "test": "npm run lint && ./node_modules/mocha/bin/mocha --compilers js:babel-core/register --recursive",
     "test:watch": "npm run test -- --watch"
@@ -39,6 +39,7 @@
     "bitly": "4.1.1",
     "body-parser": "1.17.1",
     "classnames": "2.2.5",
+    "compression-webpack-plugin": "1.1.2",
     "cookie-parser": "1.4.3",
     "copy-webpack-plugin": "^4.2.3",
     "css-loader": "0.28.0",
@@ -87,7 +88,7 @@
     "redux": "3.6.0",
     "redux-devtools-extension": "2.13.2",
     "redux-thunk": "2.2.0",
-    "redux-tools": "git+https://git@github.com/vectorsize/redux-tools.git",
+    "redux-tools": "git+https://git@github.com/vectorsize/redux-tools.git#master",
     "request": "2.81.0",
     "reselect": "3.0.1",
     "sass-loader": "6.0.6",
