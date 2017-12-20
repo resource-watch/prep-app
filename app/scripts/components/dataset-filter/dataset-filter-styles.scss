@@ -1,161 +1,249 @@
 @import 'settings';
 @import 'layouts';
 
-.filters-tab {
-  position: relative;
-  width: 100%;
-  background-color: #F7F7F7;
-  box-shadow: 0 20px 30px 0 rgba(0,0,0,0.1);
+.c-dataset-filter {
+  cursor: pointer;
 
-  @media #{$mq-medium} {
-    height: 41px;
-  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    border-top: rgba($black, .05) 1px solid;
+    background: $white;
+    box-shadow: 0 5px 8px rgba($black, .15);
 
-  > .filters-toolbar {
-    position: relative;
-    margin: 0;
-    padding: 0 22px;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-
-    @media #{$mq-medium} {
-      height: rem(39);
-      flex-direction: row;
-    }
-
-    > li {
-      position: relative;
+    .node {
       display: flex;
-      justify-content: center;
       align-items: center;
-      margin: 0;
-      list-style: none;
+      padding: 5px 10px;
 
-      &.filter-type {
-        border-bottom: 3px solid transparent;
+      &.hide {
+        display: none;
+      }
 
-        &.-selected {
-          border-bottom-color: $light-gold;
+      > label {
+        position: relative;
+        padding: 0 0 0 10px;
+      }
+
+
+      &:not(.parent-category) {
+        > .toggle {
+          visibility: hidden;
+          pointer-events: none;
         }
       }
 
-      > button {
-        padding: 0;
-        padding-bottom: 2px;
-        line-height: 19px;
-      }
-      > span {
+      .node-label {
         display: flex;
         align-items: center;
-        justify-content: center;
-        width: rem(13);
-        height: rem(13);
-        margin-left: rem(5);
-        margin-bottom: 6px;
-        color: $inverse-font-color;
-        font-weight: bold;
-        font-size: 9px;
-        line-height: 1;
 
-        border-radius: 50%;
-        background-color: $dark-blue;
+        font-size: $normal-font-size;
+        // color: $dove-grey;
 
-        &.-hide {
-          display: none;
-        }
-      }
-    }
-  }
-
-  > .filters-list-container {
-    position: relative;
-    margin: 0;
-    padding: 12px 22px;
-    color: $base-font-color;
-    background-color: #F7F7F7;
-    overflow: auto;
-    max-height: 235px;
-    z-index: 3;
-    box-shadow: 0 20px 30px 0 rgba(0,0,0,0.1);
-
-    > .pointer {
-      position: absolute;
-      top: -5px;
-      left: 0;
-      width: 0;
-      height: 0;
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
-
-      border-bottom: 5px solid $dark-slate-blue-2;
-      transition: transform 0.15s ease-out;
-    }
-
-    .filter-type-header {
-      > h3 {
-        margin: 0;
-        color: $base-font-color;
-      }
-
-      > .close-button {
-        box-sizing: content-box;
-        position: absolute;
-        right: 22px;
-        top: 15px;
-        padding: 5px;
         cursor: pointer;
 
-        svg {
-          width: 9px;
-          height: 9px;
-          fill: $base-font-color;
+        &::before {
+          content: '';
+          display: inline-block;
+          width: 15px;
+          height: 15px;
+          margin: 0 10px 0 0;
+          // border: 1px solid $light-grey;
+          pointer-events: none;
         }
+      }
+
+      input[type="checkbox"] {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        width: 16px;
+        height: 16px;
+        opacity: 0;
+        cursor: pointer;
+
+        &:checked + .node-label::before {
+          content: '✔';
+          color: $white;
+          // background: $blue-turquoise;
+          border: 1px solid transparent;
+          line-height: .9;
+        }
+      }
+
+      &:hover {
+        // background: $porcelain;
+      }
+    }
+  }
+
+  .dropdown--active {
+    position: relative;
+
+    > .dropdown-trigger {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    > .dropdown-content {
+      overflow: auto;
+      display: block;
+      max-height: 400px;
+      width: 100%;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+
+      > ul {
+        margin: 0;
+        padding: 0;
       }
     }
 
-    > .filters-list {
-      flex-direction: column;
-      margin: .5rem 0 0 0;
-      padding: 0;
+    .tag-list {
 
-      > li {
-        padding: 0.4rem 0;
-        margin: 0;
+      &:after {
+        position: absolute;
+        top: calc(50% + 1px);
+        right: 0;
+        // @include arrow(8px, 2px, $dark-blue, up);
+        transform: rotate(45deg) translate(0, -50%);
+
+        cursor: pointer;
+      }
+    }
+  }
+
+  .dropdown-trigger {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border: 1px solid red;
+    border-radius: 4px;
+    overflow: auto;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    > span {
+      display: inline-block;
+      width: 100%;
+    }
+
+    input {
+      border: none;
+      outline: none;
+    }
+  }
+
+  .searchModeOn li.node {
+    padding-left: 0 !important;
+  }
+
+  .searchModeOn .toggle {
+    display: none;
+  }
+
+  .toggle {
+    position: relative;
+    width: 12px;
+    height: 12px;
+    margin: 0 0 0 15px;
+    cursor: pointer;
+  }
+
+  .toggle.collapsed:after {
+    position: absolute;
+    top: 50%;
+    left: -2px;
+    // @include arrow(8px, 2px, $dark-blue, right);
+    transform: rotate(45deg) translate(0, -50%);
+
+    cursor: pointer;
+  }
+
+  .toggle.expanded:after {
+    position: absolute;
+    top: calc(50% - 2px);
+    left: 0;
+    // @include arrow(8px, 2px, $dark-blue, down);
+    transform: rotate(45deg) translate(0, -50%);
+
+    cursor: pointer;
+  }
+
+  // tags styles
+  .tag-list {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+
+    &:after {
+      position: absolute;
+      top: calc(50% - 2px);
+      right: 0;
+      // @include arrow(8px, 2px, $dark-blue, down);
+      transform: rotate(45deg) translate(0, -50%);
+
+      cursor: pointer;
+    }
+
+    > .tag-item {
+      display: inline-block;
+      cursor: pointer;
+
+      &.selected-item {
+        margin-top: 10px;
+      }
+
+      &:not(:last-child) {
+        margin-right: 10px;
+      }
+
+      &:last-child {
+        margin-top: 0;
         display: flex;
-        align-items: center;
+        flex: 1;
 
-        list-style: none;
-
-        > .checkbox {
-          width: 15px;
-          height: 15px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          border: 1px solid $border-color-blue;
-          margin-right: rem(9);
-
-          > svg {
-            width: 12px;
-            height: 12px;
-            fill: $base-font-color;
-            opacity: 0;
-          }
-
-          &.-selected > svg {
-            opacity: 1;
-          }
+        > input[type="text"] {
+          width: 100%;
         }
+      }
 
-        &:hover {
-          cursor: pointer;
-          > .checkbox > svg {
-            opacity: 1;
-          }
+      > .tag {
+        position: relative;
+        padding: 4px 20px 4px 10px;
+        border-radius: 15px;
+
+        background: $dark-blue;
+        color: $white;
+      }
+
+      > .tag > .tag-remove {
+        position: absolute;
+        top: 50%;
+        right: 7px;
+        transform: translate(0, -50%);
+        padding: 0;
+        margin: 0;
+        color: $white;
+        cursor: pointer;
+      }
+
+      // selector placeholder
+      > input[type="text"] {
+        font-family: $base-font-family;
+        font-size: $normal-font-size;
+        color: $dark-blue;
+        cursor: pointer;
+      }
+
+      & + .tag-item {
+        > input[type="text"] {
+          margin-top: 10px;
         }
       }
     }

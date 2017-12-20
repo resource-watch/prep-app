@@ -24,7 +24,7 @@ const mapDispatchToProps = dispatch => ({
   },
   setMapParams: (params) => {
     dispatch(updateMapParams(params));
-    dispatch(updateURL());
+    // dispatch(updateURL());
   },
   setInteractionData: (datasetId, geo) => {
     dispatch(getGeoDataInfo(datasetId, geo));

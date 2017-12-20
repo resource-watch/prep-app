@@ -1,7 +1,7 @@
 import { createAction, createThunkAction } from 'redux-tools';
 
-import { setDatasetsTagFilter } from 'actions/datasets';
 import { updateURL } from 'actions/links';
+import { setDatasetsTagFilter } from 'actions/datasets';
 
 import DatasetFilterService from 'services/dataset-filter-service';
 
@@ -23,9 +23,11 @@ export const getFiltersData = createThunkAction('explore-dataset-filters/getFilt
   }
 );
 
-export const onSetDatasetFilter = createThunkAction('explore-dataset-filters/onSetDatasetFilter', (filter, tag) =>
+export const onSetDatasetFilter = createThunkAction('explore-dataset-filters/onSetDatasetFilter', (filter = {}) =>
   (dispatch) => {
-    dispatch(setDatasetsTagFilter(filter, tag));
+    const key = Object.keys(filter)[0];
+    dispatch(setFilter(filter));
+    dispatch(setDatasetsTagFilter(Object.keys(filter)[0]), filter[key]); // this is bullshit, remove ASAP
     dispatch(updateURL());
   }
 );
