@@ -1,5 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
+import ArrowButton from '../Button/arrow-button-component';
 
 const engagementSlide = '/images/partnerships/engagement-slide.jpg';
 const dataSlide = '/images/partnerships/data-slide.jpg';
@@ -18,10 +19,14 @@ const settings = {
 function PartnersSlider() {
   return (
     <div className="c-partnership-slider">
-      <Slider {...settings}>
+      <Slider
+        {...settings}
+        nextArrow={<ArrowButton full next slidesToShow={settings.slidesToShow} />}
+        prevArrow={<ArrowButton full slidesToShow={settings.slidesToShow} />}
+      >
         <div className="partnership-slider-item -inverse" style={{ backgroundImage: `url(${engagementSlide})` }}>
           <div className="row align-center">
-            <div className="column small-12 medium-8">
+            <div className="column small-12 medium-8 align-middle">
               <h2>Engagement workgroup</h2>
               <p>Entities that develop, engage, or mobilize user communities to understand the information needs of those seeking to build preparedness and resilience.</p>
             </div>
@@ -29,7 +34,7 @@ function PartnersSlider() {
         </div>
         <div className="partnership-slider-item -inverse" style={{ backgroundImage: `url(${dataSlide})` }}>
           <div className="row align-center">
-            <div className="column small-12 medium-8">
+            <div className="column small-12 medium-8 align-middle">
               <h2>Data workgroup</h2>
               <p>Entities that work to ensure interoperability in access and use of climate-relevant data and information.</p>
             </div>
@@ -37,7 +42,7 @@ function PartnersSlider() {
         </div>
         <div className="partnership-slider-item -inverse" style={{ backgroundImage: `url(${platformsSlide})` }}>
           <div className="row align-center">
-            <div className="column small-12 medium-8">
+            <div className="column small-12 medium-8 align-middle">
               <h2>Platforms workgroup</h2>
               <p>Entities that collaborate on building platforms to enhance access and usability of data.</p>
             </div>
