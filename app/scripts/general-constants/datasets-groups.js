@@ -28,7 +28,7 @@ export default [
   },
   {
     id: 1,
-    title: 'EXPOSURE',
+    title: 'exposure',
     description: 'What could be affected?',
     subgroups: [
       {
@@ -50,7 +50,7 @@ export default [
   },
   {
     id: 2,
-    title: 'VULNERABILITY',
+    title: 'vulnerability',
     description: 'What makes us more or less vulnerable?',
     subgroups: [
       {

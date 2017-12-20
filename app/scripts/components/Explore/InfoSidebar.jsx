@@ -13,13 +13,25 @@ import VegaChart from '../Chart/VegaChart';
 import SimpleMap from '../../containers/Map/SimpleMap';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 import Icon from '../ui/Icon';
-import Switch from '../Button/Switch';
 
 // Constants
 import filtersConfig from '../../../scripts/filters.json';
 
 
 class InfoSidebar extends React.Component {
+  static getItemList(list = [], onClick = () => {}) {
+    const contentList = list.map((item, index) =>
+      (<li
+        key={item}
+        className="item-list"
+      >
+        {!!(index && index < list.length) && ', ' }
+        <span onClick={() => { onClick(item); }}>{item}</span>
+      </li>));
+
+    return (<ul className="item-list">{contentList}</ul>);
+  }
+
   constructor() {
     super();
     this.state = {
@@ -29,18 +41,22 @@ class InfoSidebar extends React.Component {
 
   getHeader() {
     const { metadata, details } = this.props;
-    const dataset = details[metadata.datasetSlug];
+    const dataset = details[metadata.datasetSlug] || {};
     let name = '';
 
+    const metadataAttributes = ((dataset.metadata || []).length && (dataset.metadata[0] || {}).attributes) || {};
+    const { name: datasetName, info, technical_title } = metadataAttributes;
+    const { organization } = info || {};
+
+
     if (dataset) {
-      name = dataset && dataset.metadata && dataset.metadata.length && dataset.metadata[0].attributes.technical_title ?
-        dataset.metadata[0].attributes.name : dataset.name;
+      name = technical_title ? datasetName : dataset.name;
     }
 
     return dataset ?
       <header className="header-container">
-        <h1 className="item-title">{name}</h1>
-        {dataset.subtitle && <h2 className="item-subtitle">{dataset.subtitle}</h2>}
+        <h3 className="item-title">{name}</h3>
+        {organization && <span className="item-subtitle">{organization}</span>}
       </header> :
       <header className="header-container" />;
   }
@@ -63,16 +79,27 @@ class InfoSidebar extends React.Component {
 
     return dataset ?
       <div className="content-container">
-        {description && <div className="item-prop description">
+        {description && <div className="item-prop">
           <span className="prop-label">Description: </span>
-          <ReactMarkdown source={description} className="c-markdown" />
+          <ReactMarkdown source={description} className="c-markdown -inline" />
         </div>}
         {dataset.data_source && <div className="item-prop">
           <span className="prop-label">Data source: </span>
           <ReactMarkdown source={dataset.data_source} className="c-markdown" />
         </div>}
-        {!!topicsList.length && <p className="item-prop topics"><span className="prop-label">Topics: </span>{topicsList.join(', ')}</p>}
-        {!!areasList.length && <p className="item-prop areas"><span className="prop-label">Area: </span>{areasList.join(', ')}</p>}
+        {!!topicsList.length && <div className="item-prop">
+          <span className="prop-label">Topics: </span>
+          {InfoSidebar.getItemList(topicsList)}
+        </div>}
+        {!!areasList.length && <div className="item-prop">
+          <span className="prop-label">Areas: </span>
+          {InfoSidebar.getItemList(areasList)}
+        </div>}
+        <div className="button-container">
+          <Link to={`/dataset/${metadata.datasetSlug}`}>
+            <button type="button" className="c-new-button -light -transparent">Learn more</button>
+          </Link>
+        </div>
       </div> :
       <div className="content-container" />;
   }
@@ -85,10 +112,13 @@ class InfoSidebar extends React.Component {
     if (dataset && dataset.layer && dataset.layer.length) {
       layerIcon = (
         <span className="info-tool layer">
-          <Switch
-            onChange={() => this.props.switchChange(dataset)}
-            checked={dataset.active || false}
-          />
+          {dataset.active ?
+            <button type="button" onClick={() => this.props.switchChange(dataset)}>
+              <Icon name="icon-show" className="-medium" />
+            </button> :
+            <button type="button" onClick={() => this.props.switchChange(dataset)}>
+              <Icon name="icon-hide" className="-medium" />
+            </button>}
           Map
         </span>
       );
@@ -107,7 +137,7 @@ class InfoSidebar extends React.Component {
       <nav className="info-actions">
         {downloadIcon}
         <Link to={`/dataset/${metadata.datasetSlug}`} className="info-tool more">
-          <Icon name="icon-arrow-up-right" className="-medium" />
+          <Icon name="icon-share" className="-medium" />
           Learn more
         </Link>
         {layerIcon}
@@ -176,6 +206,17 @@ class InfoSidebar extends React.Component {
               {this.getActionsBar()}
               {this.getContent()}
               {detailDataset && detailDataset.widget && this.getWidget()}
+
+
+              <div className="content-container">
+                <p>We’re actively adding new datasets to PREP. If you can’t find what you’re looking for, you can suggest a dataset for us to consider:</p>
+
+                <div className="button-container">
+                  <a href="https://docs.google.com/forms/d/1wZzQno3De7Ul6vlOkkdHhWK_9csErSrOlo6pOAZHIds/viewform?edit_requested=true" target="_blank" rel="noopener noreferrer">
+                    <button type="button" className="c-new-button -light -transparent">Suggest dataset</button>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
           {/* <div className="actions-mobile">
