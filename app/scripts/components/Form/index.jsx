@@ -2,7 +2,6 @@ import 'whatwg-fetch';
 import React from 'react';
 
 class Form extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -47,7 +46,10 @@ class Form extends React.Component {
                 className="asterisk"
               /></label>
               <select
-                name="MMERGE3" className="required" id="mce-MMERGE3" required
+                name="MMERGE3"
+                className="required"
+                id="mce-MMERGE3"
+                required
                 defaultValue={this.props.type}
               >
                 <option value="Contact">Contact</option>
@@ -82,7 +84,9 @@ class Form extends React.Component {
             </div>
             <div style={{ position: 'absolute', left: '-5000px', ariaHidden: 'true' }}>
               <input
-                type="text" name="b_c99e39850f4acfe33f49fea68_ccad0f31c4" tabIndex="-1"
+                type="text"
+                name="b_c99e39850f4acfe33f49fea68_ccad0f31c4"
+                tabIndex="-1"
                 value=""
               />
             </div>
@@ -92,7 +96,7 @@ class Form extends React.Component {
                 value="Submit"
                 name="subscribe"
                 id="mc-embedded-subscribe"
-                className="c-button -filled -secondary-color button"
+                className="c-button -filled -secondary-color button -no-border-radius"
               />
             </div>
           </div>
@@ -131,7 +135,6 @@ class Form extends React.Component {
       </div>
     );
   }
-
 }
 
 Form.propTypes = {
