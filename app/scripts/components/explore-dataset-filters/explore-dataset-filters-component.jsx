@@ -9,7 +9,7 @@ import PLACEHOLDERS_DATASET_FILTERS from './explore-dataset-filters-constants';
 class ExploreDatasetFilters extends PureComponent {
   onChange(values = [], key) {
     const filterValues = values.map(v => v.value);
-    this.props.setFilter({ [key]: filterValues });
+    this.props.onSetDatasetFilter({ [key]: filterValues });
   }
 
   renderFilters() {
@@ -42,7 +42,7 @@ class ExploreDatasetFilters extends PureComponent {
 
 ExploreDatasetFilters.propTypes = {
   data: PropTypes.object,
-  setFilter: PropTypes.func
+  onSetDatasetFilter: PropTypes.func
 };
 
 ExploreDatasetFilters.defaultProps = {

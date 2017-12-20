@@ -2,7 +2,9 @@ import * as actions from './explore-dataset-filters-actions';
 
 export const initialState = {
   data: {},
-  filters: {}
+  filters: {
+    topics: ['land']
+  }
 };
 
 export default {
