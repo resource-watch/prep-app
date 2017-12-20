@@ -77,7 +77,7 @@ module.exports = merge(sharedConfig, {
     new UglifyJSPlugin(),
     process.env.BUNDLE_ANALIZE ? new BundleAnalyzerPlugin({
       analyzerMode: 'static'
-    }) : null
+    }) : function() {}
   ],
 
   externals: {
