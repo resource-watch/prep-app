@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 // Components
 import Icon from '../ui/Icon';
@@ -13,7 +14,7 @@ import DatasetsList from '../ui/DatasetsList';
 import { TABS_OPTIONS } from '../../constants';
 
 
-class DataMap extends React.Component {
+class ExploreSidebar extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -72,8 +73,7 @@ class DataMap extends React.Component {
   }
 
   switchChange(dataset) {
-    dataset.id === this.props.selectedDatasetId &&
-      this.props.deselectDataset();
+    if (dataset.id === this.props.selectedDatasetId) this.props.deselectDataset();
     this.props.switchChange(dataset);
   }
 
@@ -113,7 +113,6 @@ class DataMap extends React.Component {
         />
         <div className="sidebar-container">
           <header className="sidebar-header">
-            {/* <FilterTabs /> */}
             <h1 className="sidebar-title">Explore</h1>
             <Tabs options={TABS_OPTIONS} selected={selectedTab || TABS_OPTIONS[0].value} onChange={this.props.onChangeTab} />
           </header>
@@ -123,6 +122,7 @@ class DataMap extends React.Component {
 
             <DatasetsList
               data={this.props.data}
+              location={this.props.location}
               type={selectedTab}
               infoSidebarMetadata={this.props.infoSidebarMetadata}
               onChangeTab={this.props.onChangeTab}
@@ -150,46 +150,50 @@ class DataMap extends React.Component {
   }
 }
 
-DataMap.propTypes = {
+ExploreSidebar.propTypes = {
   /**
    * Define the layers data of the map
    */
-  data: React.PropTypes.array,
-  selectedTab: React.PropTypes.string,
+  data: PropTypes.array,
+  /**
+   * Define location scope of core datasets
+   */
+  location: PropTypes.string,
+  selectedTab: PropTypes.string,
   /**
    * Define the layers on change switch function
    */
-  switchChange: React.PropTypes.func.isRequired,
+  switchChange: PropTypes.func.isRequired,
   /**
    * Define if got the dataset list
    */
-  listReceived: React.PropTypes.bool,
+  listReceived: PropTypes.bool,
   /**
    * Define if got the dataset list
    */
-  infoSidebarMetadata: React.PropTypes.any,
+  infoSidebarMetadata: PropTypes.any,
   /**
    * Define the tooltip text and position
    */
-  setTooltip: React.PropTypes.func.isRequired,
+  setTooltip: PropTypes.func.isRequired,
   /**
    * Define function to show the dataset metadata
    */
-  onInfoClick: React.PropTypes.func.isRequired,
+  onInfoClick: PropTypes.func.isRequired,
   /**
    * Define function to show the dataset metadata
    */
-  onCloseInfo: React.PropTypes.func.isRequired,
+  onCloseInfo: PropTypes.func.isRequired,
   /**
    * Define function to unselect dataset
    */
-  deselectDataset: React.PropTypes.func,
-  onChangeTab: React.PropTypes.func,
-  selectedDatasetId: React.PropTypes.string,
+  deselectDataset: PropTypes.func,
+  onChangeTab: PropTypes.func,
+  selectedDatasetId: PropTypes.string,
   /**
    * Define the tooltip properties.
    */
-  tooltip: React.PropTypes.object
+  tooltip: PropTypes.object
 };
 
-export default DataMap;
+export default ExploreSidebar;

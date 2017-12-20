@@ -13,7 +13,7 @@ class WelcomeModal extends React.Component {
       <div className="m-content">
         <article>
           <h2>{this.props.title}</h2>
-          <p>The PREP Platform is still under development as we continue to add data and functionality. Have a suggestion? Send us a message at info@prepdata.org.</p>
+          <p>We are continuing to add data and functionality to PREPdata. We welcome feedback on the platform's content and navigation and welcome suggestions for other features you would like to see. Have a suggestion? Send us a message at info@prepdata.org.</p>
           <p className="-small"><strong>DISCLAIMER:</strong> YOU AGREE THAT YOUR USE OF THE SITE AND ITS CONTENT IS AT YOUR SOLE RISK. WE MAKE NO PROMISES OR COMMITMENTS ABOUT THE SITE OR ITS CONTENT, AND THE SITE AND CONTENT ARE PROVIDED ON AN “AS IS” BASIS AND WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED. TO THE FULLEST EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, STATUTORY, EXPRESS OR IMPLIED, INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT.</p>
         </article>
         <aside>

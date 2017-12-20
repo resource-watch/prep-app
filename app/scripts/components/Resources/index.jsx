@@ -5,21 +5,21 @@ import ResourceItem from './ResourceItem';
 
 import Thumbnail from '../Thumbnails/Thumbnail';
 
-import ipccLogo from '../../../images/resources/ipcc_logo.png';
-import ncaLogo from '../../../images/resources/nationalClimateAsset_logo.png';
-import usToolkitLogo from '../../../images/resources/ustoolkit_logo.png';
-import ukcipLogo from '../../../images/resources/ukcip_logo.png';
-import calAdaptLogo from '../../../images/resources/caladapt_logo.png';
-import cakeLogo from '../../../images/resources/cake_logo.png';
-// import c40Logo from '../../../images/resources/c40cities_logo.png';
-import almLogo from '../../../images/resources/alm_logo.png';
-import copernicusLogo from '../../../images/resources/copernicus_logo.png';
-import climateDataGovLogo from '../../../images/resources/datagovclimate_logo.png';
-import iriLogo from '../../../images/resources/iri_logo.png';
-import servirLogo from '../../../images/resources/servilglobal_logo.png';
-import worldBankLogo from '../../../images/resources/WorldBankGorup_logo.png';
-import weAdaptLogo from '../../../images/resources/logo-weAdapt-resource.png';
-import ccafsLogo from '../../../images/resources/logo-CCAFS-resource.png';
+const ipccLogo = '/images/resources/ipcc_logo.png';
+const ncaLogo = '/images/resources/nationalClimateAsset_logo.png';
+const usToolkitLogo = '/images/resources/ustoolkit_logo.png';
+const ukcipLogo = '/images/resources/ukcip_logo.png';
+const calAdaptLogo = '/images/resources/caladapt_logo.png';
+const cakeLogo = '/images/resources/cake_logo.png';
+// const c40Logo = '/images/resources/c40cities_logo.png';
+const almLogo = '/images/resources/alm_logo.png';
+const copernicusLogo = '/images/resources/copernicus_logo.png';
+const climateDataGovLogo = '/images/resources/datagovclimate_logo.png';
+const iriLogo = '/images/resources/iri_logo.png';
+const servirLogo = '/images/resources/servilglobal_logo.png';
+const worldBankLogo = '/images/resources/WorldBankGorup_logo.png';
+const weAdaptLogo = '/images/resources/logo-weAdapt-resource.png';
+const ccafsLogo = '/images/resources/logo-CCAFS-resource.png';
 
 class Resources extends React.PureComponent {
   componentDidMount() {
@@ -36,9 +36,9 @@ class Resources extends React.PureComponent {
         <div className="sliced" />
 
         <Article no-border>
-          <p>Find selected resources for understanding the impacts of climate change,
-            tools for building resilience to climate change, and additional
-            climate relevant data.
+          <h2>Resources and tools to understand the impacts of climate change
+          </h2>
+          <p>This is a selection of resources to understand the impacts of climate change, learn how to build resilience, and locate additional climate relevant data. We welcome receiving suggestions for additional resources to include.
           </p>
         </Article>
 

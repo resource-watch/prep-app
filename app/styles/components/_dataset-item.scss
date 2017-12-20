@@ -1,20 +1,36 @@
 
 .c-dataset-item {
-  padding: 10px;
-  border: 2px solid #EEEEEE;
+  padding: 20px;
+  border: 2px solid $pale-grey;
   background-color: $white;
+
+  &:not(:first-child) {
+    margin-top: 10px;
+  }
 
   &.-layer-active { border-color: $light-gold; }
   &.-info-active {
-    border-color: $light-gold;
-    background-color: $light-gold;
+    position: relative;
+    border-color: $dark-slate-blue;
+    background-color: $dark-slate-blue;
+
+    &:after {
+      @include arrow(18px, 2px, 135deg);
+      position: absolute;
+      background: $dark-slate-blue;
+      top: 50%;
+      right: 0;
+      left: auto;
+
+      transform: translate(calc(50% + 2px), -50%) rotate(135deg);
+    }
 
     * {
       color: $white;
     }
 
-    .tag {
-      background-color: rgba($white, .1);
+    .subtitle {
+      color: rgba($white, .5);
     }
 
     .c-switch {
@@ -57,10 +73,10 @@
     }
 
     .item-title {
-      font-size: 16px;
+      margin: 0;
+      font-size: $normal-font-size;
       line-height: 20px;
-      text-align: left;
-      margin-right: 10px;
+      word-break: break-word;
     }
   }
 
@@ -91,21 +107,20 @@
 
 
   .subtitle {
-    font-size: 11px;
-    line-height: 15px;
-    font-weight: bold;
+    margin: 5px 0 0;
+
     font-family: $base-font-family;
+    font-size: $tiny-font-size;
+    font-weight: $font-weight-bold;
+    line-height: 15px;
+    color: rgba($dark-blue, .5);
     text-transform: uppercase;
-    opacity: .5;
-    text-align: left;
   }
 
   /* Content */
   .description {
-    font-size: 13px;
+    font-size: $small-font-size;
     line-height: 20px;
-    margin-top: 5px;
-    font-family: $base-font-family;
   }
 
   .tags-container {

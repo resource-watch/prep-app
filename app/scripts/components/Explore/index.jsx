@@ -23,7 +23,8 @@ import LoadingSpinner from '../Loading/LoadingSpinner';
 
 // Constants
 import metadata from '../../metadata.json';
-import logoImage from '../../../images/prep-logo.png';
+
+const logoImage = '/images/prep-logo.png';
 
 
 class Explore extends React.Component {

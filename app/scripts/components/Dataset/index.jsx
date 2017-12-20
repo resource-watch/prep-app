@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import URI from 'urijs';
-import WidgetEditor from 'widget-editor';
+import { connect } from 'react-redux';
+import WidgetEditor, { modalActions, SaveWidgetModal } from 'widget-editor';
 
 import metadata from '../../metadata.json';
 import PartnersSlider from '../../containers/PartnersSlider';
@@ -9,7 +11,6 @@ import SecondaryNav from '../../components/Navigation/SecondaryNav';
 import SocialNav from '../../components/Navigation/SocialNav';
 import MainNav from '../../components/Navigation/MainNav';
 import Banner from '../../components/Banner';
-import logoImage from '../../../images/prep-logo.png';
 
 import SectionIntro from '../SectionIntro';
 import MetadataInfo from '../Explore/MetadataInfo';
@@ -19,15 +20,14 @@ import LoadingSpinner from '../Loading/LoadingSpinner';
 
 import NexGDDPTool from '../nexgddp-tool/NexGDDPTool';
 
+const logoImage = '/images/prep-logo.png';
+const nexGDDPDatasets = [
+  'defe21a1-f6a0-4bf7-a9ee-f083456130de',
+  'a0a6d98f-3cce-4a9c-b07e-ba735d1d985b'
+];
+
 class DatasetDetail extends React.Component {
-
-  componentWillMount() {
-    if (!this.props.data || !this.props.widgets.length) {
-      this.props.getDatasetData(this.props.datasetSlug);
-    }
-  }
-
-  getData(key, value) {
+  static getData(key, value) {
     let data = null;
     for (let i = metadata.length - 1; i >= 0; i--) {
       if (value.indexOf(metadata[i][key]) > -1) {
@@ -38,9 +38,61 @@ class DatasetDetail extends React.Component {
     return data;
   }
 
+  static getDownloadUrl(data) {
+    let url = null;
+    let metadataUrl = null;
+    if (data.metadata && data.metadata.length &&
+        data.metadata[0].attributes.info.data_download) {
+      metadataUrl = data.metadata[0].attributes.info.data_download;
+    }
+    switch (data.provider) {
+      case 'cartodb':
+        if (data && data.connectorUrl && data.connectorUrl.indexOf('tables') === -1) {
+          const uri = new URI(data.connectorUrl);
+          uri.search({ format: 'csv' });
+          url = uri.toString();
+        } else {
+          url = data.connectorUrl;
+        }
+        break;
+      default:
+        url = metadataUrl;
+    }
+    return url;
+  }
+
+  componentDidMount() {
+    if (!this.props.data || !this.props.widgets.length) {
+      this.props.getDatasetData(this.props.datasetSlug);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.props.data) this.setState({ data: {} });
+  }
+
+  /**
+   * Callback executed when the user clicks the save button of
+   * the widget editor
+   */
+  onSaveWidget() {
+    if (this.getWidgetConfig) {
+      this.props.toggleModal(true, {
+        children: SaveWidgetModal,
+        childrenProps: {
+          datasetId: this.props.data.id,
+          getWidgetConfig: this.getWidgetConfig,
+          onClickCheckWidgets: () => {
+            window.location = '/myprep/widgets/my_widgets';
+          }
+        }
+      });
+    }
+  }
+
   getCurrentData() {
     const pathname = this.props.location.pathname;
-    const currentData = this.getData('pathname', pathname);
+    const currentData = DatasetDetail.getData('pathname', pathname);
     return currentData;
   }
 
@@ -80,7 +132,7 @@ class DatasetDetail extends React.Component {
     const currentSection = this.props.location.state && this.props.location.state.prevPath || 'explore';
     return (
       <div>
-        <SectionIntro data={data} downloadUrl={this.getDownloadUrl(this.props.data)} currentSection={currentSection} >
+        <SectionIntro data={data} downloadUrl={DatasetDetail.getDownloadUrl(this.props.data)} currentSection={currentSection} >
           <MetadataInfo data={this.props.data} />
         </SectionIntro>
 
@@ -97,31 +149,11 @@ class DatasetDetail extends React.Component {
     );
   }
 
-  getDownloadUrl(data) {
-    let url = null;
-    let metadataUrl = null;
-    if (data.metadata && data.metadata.length &&
-        data.metadata[0].attributes.info.data_download) {
-      metadataUrl = data.metadata[0].attributes.info.data_download;
-    }
-    switch (data.provider) {
-      case 'cartodb':
-        if (data && data.connectorUrl && data.connectorUrl.indexOf('tables') === -1) {
-          const uri = new URI(data.connectorUrl);
-          uri.search({ format: 'csv' });
-          url = uri.toString();
-        } else {
-          url = data.connectorUrl;
-        }
-        break;
-      default:
-        url = metadataUrl;
-    }
-    return url;
-  }
-
   render() {
     const data = this.props.data ? this.props.data : {};
+
+    if (!data || !data.id) return null;
+
     const currentData = this.getCurrentData();
     const dataMetadata = data.metadata && data.metadata.length ? data.metadata : null;
     const title = dataMetadata && dataMetadata[0].attributes.info && dataMetadata[0].attributes.info.technical_title ?
@@ -161,22 +193,20 @@ class DatasetDetail extends React.Component {
 
           {content}
 
-          {data.id === 'defe21a1-f6a0-4bf7-a9ee-f083456130de' &&
+          {(data.id && nexGDDPDatasets.includes(data.id)) ?
             <div className="row">
               <div className="columns small-12">
                 <NexGDDPTool />
               </div>
-            </div>}
-
-          { (data.id && data.id !== 'defe21a1-f6a0-4bf7-a9ee-f083456130de') && (
+            </div> :
             <WidgetEditor
               datasetId={data.id}
-              saveButtonMode="never"
               embedButtonMode="never"
-              titleMode="never"
               mapConfig={{ zoom: 3, lat: 40.65, lng: -98.21 }}
+              provideWidgetConfig={(func) => { this.getWidgetConfig = func; }}
+              onSave={() => this.onSaveWidget()}
             />
-          ) }
+          }
 
         </div>
 
@@ -215,27 +245,34 @@ DatasetDetail.propTypes = {
   /**
    * Define the route path (from the router)
    */
-  currentPage: React.PropTypes.string,
+  location: PropTypes.object,
   /**
    * Define the slug of the dataset
    */
-  datasetSlug: React.PropTypes.string.isRequired,
+  datasetSlug: PropTypes.string.isRequired,
   /**
    * Define the function to get the datataset detail data
    */
-  getDatasetData: React.PropTypes.func.isRequired,
+  getDatasetData: PropTypes.func.isRequired,
   /**
    * Define the dataset data
    */
-  data: React.PropTypes.any,
+  data: PropTypes.any,
   /**
    * Define the dataset widget
    */
-  widgets: React.PropTypes.array
+  widgets: PropTypes.array,
+
+  // REDUX
+  toggleModal: PropTypes.func
 };
 
 DatasetDetail.defaultProps = {
   data: {}
 };
 
-export default DatasetDetail;
+const mapDispatchToProps = dispatch => ({
+  toggleModal: (...params) => dispatch(modalActions.toggleModal(...params))
+});
+
+export default connect(null, mapDispatchToProps)(DatasetDetail);

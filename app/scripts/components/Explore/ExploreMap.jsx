@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import L from 'leaflet';
-import { default as esri } from 'esri-leaflet';
+import 'esri-leaflet';
 
 // Libraries
 import isEqual from 'lodash/isEqual';
@@ -12,8 +12,6 @@ import Tooltip from '../Tooltip/Tooltip';
 
 // Constants
 import { LABELS } from '../../general-constants/basemaps';
-
-if (L) L.esri = esri;
 
 const tooltipBase = {
   hidden: true,
@@ -227,8 +225,7 @@ class ExploreMap extends React.Component {
       this.labels = L.tileLayer(
         LABELS.value,
         LABELS.options
-      ).addTo(this.map)
-      .setZIndex(100000000000000000);
+      ).addTo(this.map).setZIndex(10000);
     } else {
       this.labels = null;
     }
@@ -342,7 +339,7 @@ class ExploreMap extends React.Component {
   // TODO change multilayer
   changeLayerOrder(dataset, datasetsLength) {
     const { layers } = this.props;
-    const activeLayer =this.getActiveLayer(dataset, layers);
+    const activeLayer = this.getActiveLayer(dataset, layers);
     const layer = this.mapLayers[activeLayer.id];
 
     if (dataset.index !== undefined && layer) {
@@ -428,15 +425,16 @@ class ExploreMap extends React.Component {
 
     switch (layerData.type) {
       case 'wms':
-        layer = new L.tileLayer.wms(layerData.url, layerData.body);
+        layer = L.tileLayer.wms(layerData.url, layerData.body);
         break;
       case 'tileLayer':
         if (layerData.body.indexOf('style: "function') >= 0) {
           layerData.body.style = eval(`(${layerData.body.style})`);
         }
-        layer = new L.tileLayer(layerData.url, layerData.body);
+        layer = L.tileLayer(layerData.url, layerData.body);
         break;
       default:
+        this.handleTileLoaded(layer);
         throw new Error('"type" specified in layer spec doesn`t exist');
     }
 
@@ -469,7 +467,42 @@ class ExploreMap extends React.Component {
       .replace(/"use-cors":/g, '"useCors":')
       .replace(/"use_cors":/g, '"useCors":');
 
-    if (L.esri[layer.type]) {
+    if (L[layer.type]) {
+      // Transforming data layer
+      // TODO: improve this
+      if (layer.body.crs && L.CRS[layer.body.crs]) {
+        layer.body.crs = L.CRS[layer.body.crs.replace(':', '')];
+        layer.body.pane = 'tilePane';
+      }
+
+      let newLayer;
+
+      switch (layer.type) {
+        case 'wms':
+          newLayer = L.tileLayer.wms(layer.url, layer.body);
+          break;
+        case 'tileLayer':
+          if (layer.body.indexOf('style: "function') >= 0) {
+            layer.body.style = eval(`(${layer.body.style})`);
+          }
+          newLayer = L.tileLayer(layer.url, layer.body);
+          break;
+        default:
+          this.handleTileLoaded(layer);
+          throw new Error('"type" specified in layer spec doesn`t exist');
+      }
+
+      if (newLayer) {
+        const eventName = (layer.type === 'wms' ||
+        layer.type === 'tileLayer') ? 'tileload' : 'load';
+        layer.on(eventName, () => {
+          this.handleTileLoaded(layer);
+        });
+        layer.addTo(this.map).setZIndex(datasetsLength - dataset.index);
+        this.mapLayers[layer.id] = layer;
+        this.changeLayerOpacity(dataset);
+      }
+    } else if (L.esri[layer.type]) {
       const layerConfig = JSON.parse(bodyStringified);
       // layerConfig.pane = 'tilePane';
       layerConfig.useCors = true; // forcing cors
@@ -486,6 +519,7 @@ class ExploreMap extends React.Component {
       });
       newLayer.on('requesterror', (e) => {
         console.error(e.message);
+        this.handleTileLoaded(layer);
       });
       newLayer.addTo(this.map);
       this.mapLayers[layer.id] = newLayer;
@@ -552,7 +586,7 @@ class ExploreMap extends React.Component {
         }
       })
       .catch((err) => {
-        console.error('Request failed', err);
+        this.handleTileLoaded(layer);
         this.props.onTileError(layer.id);
       });
   }

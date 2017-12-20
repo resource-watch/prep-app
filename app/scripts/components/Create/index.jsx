@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router';
 import Form from '../Form';
 
-import shareData from '../../../images/create/shareData.png';
-import communicate from '../../../images/create/communicate.png';
-import dashboards from '../../../images/create/dashboards.png';
+const shareData = '/images/create/shareData.png';
+const communicate = '/images/create/communicate.png';
+const dashboards = '/images/create/dashboards.png';
 
 
 function Create() {

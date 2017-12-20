@@ -2,54 +2,38 @@
 .c-collapsible-item {
   display: flex;
   flex-flow: column;
+  padding: 10px $sidebar-padding-content;
+  background-color: $pale-white;
 
-  &.-hidden {
-    .btn-collapse {
-      padding-bottom: 0;
-      transition: all .3s ease;
-    }
 
-    .collapsible-item {
-      position: relative;
-      transform: translateY(-200%);
-      transition: all .3s ease;
-    }
-
-    .collapsible-item-container {
-      max-height: 0;
-      transition: all .3s ease;
-    }
-  }
-
-  .collapsible-title {
+  > .collapsible-title {
     position: relative;
     display: flex;
     align-items: center;
+    padding: 0 0 0 15px;;
+    margin: 0 0 10px;
+
+    font-family: $base-font-family;
     font-size: 13px;
     line-height: 13px;
     text-transform: uppercase;
-    text-align: left;
-    margin: 0;
-    margin-bottom: 16px;
-    padding: 0;
-    font-family: $base-font-family;
+
     z-index: 1;
-    cursor: default;
+    cursor: pointer;
 
-    &:after { display: none; }
-
-    .btn {
-      padding: 0;
-      padding-bottom: 3px;
-      text-transform: uppercase;
+    &:before {
+      @include arrow(7px, 2px, 225deg);
+      position: absolute;
+      top: calc(50% - 1px);
+      left: 0;
+      border-color: $dark-blue;
+      background: transparent;
+      pointer-events: auto;
     }
+  }
 
-    .c-icon {
-      display: inline-block;
-      width: 14px;
-      height: 14px;
-      fill: $dark-blue;
-    }
+  > .collapsible-title-description {
+    display: none;
   }
 
   .btn-collapse {
@@ -61,9 +45,9 @@
     &.-right .c-icon { margin-left: 10px; }
   }
 
-  .collapsible-item-container {
+  > .collapsible-item-container {
+    padding: 0 $sidebar-padding-content;
     overflow: hidden;
-    // max-height: 300px;
     transition: all .3s ease;
   }
 
@@ -81,9 +65,50 @@
       margin-bottom: 10px;
       padding: 0 1px;
     }
+  }
 
-    .child-conatiner {
-      width: 0;
+  &.-hidden {
+    background-color: transparent;
+
+    .collapsible-title-description {
+      display: inline-block;
+      margin: 5px 0 0;
+      padding: 0 0 0 15px;
+
+      font-size: $tiny-font-size;
+      line-height: 15px;
+      color: rgba($dark-blue, .5);
+    }
+
+    .btn-collapse {
+      padding-bottom: 0;
+      transition: all .3s ease;
+    }
+
+    .collapsible-item {
+      position: relative;
+      transform: translateY(-200%);
+      transition: all .3s ease;
+    }
+
+    > .collapsible-title {
+      margin: 0;
+
+      &:before {
+        @include arrow(7px, 2px, 45deg);
+        top: calc(50% + 1px);
+        position: absolute;
+        left: 0;
+        border-color: $dark-blue;
+        background: transparent;
+        pointer-events: auto;
+      }
+    }
+
+    > .collapsible-item-container {
+      max-height: 0;
+      padding: 0 $sidebar-padding-content;
+      transition: all .3s ease;
     }
   }
 }
