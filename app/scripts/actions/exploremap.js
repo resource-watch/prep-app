@@ -10,7 +10,8 @@ import {
   MAP_GEOPOSITION_SET,
   MAP_INTERACTION_VISIBILITY_SET,
   SET_BASEMAP,
-  SET_LABELS
+  SET_LABELS,
+  SET_BOUNDARIES
 } from '../constants';
 
 import { updateURL } from './links';
@@ -120,5 +121,12 @@ export function setLabels(labelEnabled) {
   return {
     type: SET_LABELS,
     payload: labelEnabled
+  };
+}
+
+export function setBoundaries(boundariesEnabled) {
+  return {
+    type: SET_BOUNDARIES,
+    payload: boundariesEnabled
   };
 }

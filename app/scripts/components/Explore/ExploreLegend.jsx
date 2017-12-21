@@ -249,7 +249,7 @@ class DataMapLegend extends React.Component {
     if (dataset && dataset.id === this.props.selectedDatasetId) {
       this.props.deselectDataset();
     }
-    this.props.switchChange(dataset);
+    this.props.switchChange(dataset, this.props.data);
   }
 
   groupDatasetLayers(layers) {
