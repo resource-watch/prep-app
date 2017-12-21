@@ -26,7 +26,6 @@
         padding: 0 0 0 10px;
       }
 
-
       &:not(.parent-category) {
         > .toggle {
           visibility: hidden;
@@ -38,7 +37,7 @@
         display: flex;
         align-items: center;
 
-        font-size: $normal-font-size;
+        font-size: $small-font-size;
         color: $dark-blue;
 
         cursor: pointer;
@@ -72,9 +71,9 @@
         }
       }
 
-      // &:hover {
-      //   background: $dark-blue;
-      // }
+      &:hover {
+        background: $pale-grey;
+      }
     }
   }
 
@@ -170,10 +169,11 @@
 
   .toggle.expanded:after {
     position: absolute;
-    top: calc(50% - 2px);
-    left: 0;
-    // @include arrow(8px, 2px, $dark-blue, down);
-    transform: rotate(45deg) translate(0, -50%);
+    @include arrow(8px, 2px, 225deg);
+    top: 0;
+    left: 50%;
+    transform: rotate(225deg) translate(0, -50%);
+    border-color: $dark-blue;
 
     cursor: pointer;
   }
@@ -243,7 +243,7 @@
       // selector placeholder
       > input[type="text"] {
         font-family: $base-font-family;
-        font-size: $normal-font-size;
+        font-size: $small-font-size;
         color: $dark-blue;
         cursor: pointer;
       }

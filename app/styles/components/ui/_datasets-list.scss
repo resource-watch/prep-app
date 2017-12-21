@@ -11,23 +11,26 @@
   }
 
   .list-filters {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 22px;
+    padding: 20px 0;
 
     &.-fixed {
       position: fixed;
       top: 0;
+      left: 0;
       width: 100%;
+      // padding: 20px 15px;
       background-color: $white;
       z-index: 1;
-      box-shadow: 0 20px 30px 0 rgba($black, .1);
     }
 
     &.-open {
       background-color: $pale-white;
-      box-shadow: 0;
+    }
+
+    .list-filters-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .btn-filters {
@@ -50,8 +53,10 @@
   .filters-content {
     &.-fixed {
       position: fixed;
-      top: 58px;
+      top: 66px;
+      left: 0;
       width: 100%;
+      // padding: 0 15px;
       z-index: 1;
     }
   }
@@ -61,11 +66,11 @@
     flex-flow: column;
   }
 
-  .list-container {
-    &.-padding {
-      padding: 3px 22px 12px;
-    }
-  }
+  // .list-container {
+  //   &.-padding {
+  //     padding: 3px 22px 12px;
+  //   }
+  // }
 
   // .c-dataset-item {
   //   margin-bottom: 10px;
