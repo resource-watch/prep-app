@@ -57,10 +57,9 @@ class ExploreMap extends React.PureComponent {
     // Updating map only when datasets or layers have changed
     if (!isEqual(this.props.enabledDatasets, prevProps.enabledDatasets)) {
       this.updateDatasets(this.props.enabledDatasets, this.props.enabledLayers);
+    } else if (!isEqual(this.props.enabledLayers, prevProps.enabledLayers)) {
+      this.updateDatasets(this.props.enabledDatasets, this.props.enabledLayers);
     }
-    // else if (!isEqual(this.props.enabledLayers, prevProps.enabledLayers)) {
-    //   this.updateDatasets(this.props.enabledDatasets, this.props.enabledLayers);
-    // }
 
     // Updating basemap
     if (!isEqual(this.props.map.basemap, prevProps.map.basemap)) {
