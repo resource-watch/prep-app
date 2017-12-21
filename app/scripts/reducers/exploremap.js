@@ -6,7 +6,8 @@ import {
   MAP_GEODATA_RECEIVED,
   MAP_INTERACTION_VISIBILITY_SET,
   SET_BASEMAP,
-  SET_LABELS
+  SET_LABELS,
+  SET_BOUNDARIES
 } from '../constants';
 
 import { BASEMAPS } from '../general-constants/basemaps';
@@ -24,6 +25,7 @@ const initialState = {
     basemaps: BASEMAPS
   },
   labels: false,
+  boundaries: false,
   basemapOptions: { maxZoom: 18 },
   interactionData: {
     info: null,
@@ -75,6 +77,11 @@ export default function (state = initialState, action) {
     case SET_LABELS: {
       return Object.assign({}, state, {
         labels: action.payload
+      });
+    }
+    case SET_BOUNDARIES: {
+      return Object.assign({}, state, {
+        boundaries: action.payload
       });
     }
     default:

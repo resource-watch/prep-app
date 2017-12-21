@@ -12,7 +12,7 @@ import LoadingSpinner from '../Loading/LoadingSpinner';
 import Tooltip from '../Tooltip/Tooltip';
 
 // Constants
-import { LABELS } from '../../general-constants/basemaps';
+import { LABELS, BOUNDARIES } from '../../general-constants/basemaps';
 
 const tooltipBase = {
   hidden: true,
@@ -28,7 +28,8 @@ class ExploreMap extends React.PureComponent {
     super(props);
     this.state = {
       loading: false,
-      tooltip: tooltipBase
+      tooltip: tooltipBase,
+      layers: props.enabledLayers
     };
     this.latLngClicked = null;
   }
@@ -37,7 +38,7 @@ class ExploreMap extends React.PureComponent {
     this.initMap();
     this.setMapParams();
     this.setMapListeners();
-    this.updateDatasets();
+    // this.updateDatasets();
 
     // Fixing height of map
     setTimeout(() => {
@@ -45,37 +46,57 @@ class ExploreMap extends React.PureComponent {
     }, 0);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.state.loading !== nextState.loading) return true;
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   if (this.state.loading !== nextState.loading) return true;
+  //   if (!isEqual(nextProps.enabledLayers, this.props.enabledLayers)) return true;
+  //   if (!isEqual(this.props.enabledDatasets, nextProps.enabledDatasets)) return true;
+  //   return false;
+  // }
 
-    if (!isEqual(nextProps.enabledLayers, this.props.enabledLayers)) {
-      return true;
+  componentDidUpdate(prevProps, prevState) {
+    // Updating map only when datasets or layers have changed
+    if (!isEqual(this.props.enabledDatasets, prevProps.enabledDatasets)) {
+      this.updateDatasets(this.props.enabledDatasets, this.props.enabledLayers);
     }
+    // else if (!isEqual(this.props.enabledLayers, prevProps.enabledLayers)) {
+    //   this.updateDatasets(this.props.enabledDatasets, this.props.enabledLayers);
+    // }
 
-    if (!isEqual(this.props.enabledDatasets, nextProps.enabledDatasets)) {
-      return true;
+    // Updating basemap
+    if (!isEqual(this.props.map.basemap, prevProps.map.basemap)) {
+      this.addBasemap(this.props.map.basemap);
     }
-
-    return false;
-  }
-
-  componentDidUpdate() {
-    this.updateDatasets(this.props.enabledDatasets, this.props.enabledLayers);
-  }
-
-  componentWillReceiveProps(props) {
-    if (!isEqual(this.props.map.basemap, props.map.basemap)) {
-      this.addBasemap(props.map.basemap);
+    // Updating labels
+    else if (!isEqual(this.props.map.labels, prevProps.map.labels)) {
+      this.handleLabels(this.props.map.labels);
     }
-
-    if (!isEqual(this.props.map.labels, props.map.labels)) {
-      this.handleLabels(props.map.labels);
-    }
-
-    if (props.interactionData.open && props.interactionData.info) {
-      this.handleInteractivityTooltip(props.interactionData);
+    // Updating boundaries
+    else if (!isEqual(this.props.map.boundaries, prevProps.map.boundaries)) {
+      this.handleBoundaries(this.props.map.boundaries);
     }
   }
+
+  // componentWillReceiveProps(nextProps) {
+    // if (!isEqual(this.props.enabledDatasets, nextProps.enabledDatasets)) {
+    //   console.log('updating map');
+    //   this.setState(nextProps.enabledLayers);
+    // }
+    // if (!isEqual(this.props.map.basemap, props.map.basemap)) {
+    //   this.addBasemap(props.map.basemap);
+    // }
+
+    // if (!isEqual(this.props.map.labels, props.map.labels)) {
+    //   this.handleLabels(props.map.labels);
+    // }
+
+    // if (!isEqual(this.props.map.boundaries, props.map.boundaries)) {
+    //   this.handleBoundaries(props.map.boundaries);
+    // }
+
+    // if (props.interactionData.open && props.interactionData.info) {
+    //   this.handleInteractivityTooltip(props.interactionData);
+    // }
+  // }
 
   setTooltipText(data) {
     const text = [];
@@ -232,7 +253,7 @@ class ExploreMap extends React.PureComponent {
     this.basemap = L.tileLayer(
       basemap.value,
       basemap.options
-    ).addTo(this.map, 1);
+    ).addTo(this.map, 0);
   }
 
   handleLabels(labels) {
@@ -245,6 +266,19 @@ class ExploreMap extends React.PureComponent {
       ).addTo(this.map).setZIndex(10000);
     } else {
       this.labels = null;
+    }
+  }
+
+  handleBoundaries(boundaries) {
+    if (this.boundaries) this.map.removeLayer(this.boundaries);
+
+    if (boundaries) {
+      this.boundaries = L.tileLayer(
+        BOUNDARIES.value,
+        BOUNDARIES.options
+      ).addTo(this.map).setZIndex(10000 - 1);
+    } else {
+      this.boundaries = null;
     }
   }
 
@@ -282,8 +316,9 @@ class ExploreMap extends React.PureComponent {
 
     // Removing layers
     Object.keys(mapLayers).forEach((m) => {
-      const isExistingLayer = !!(find(layers, { id: m }));
       const existingLayer = mapLayers[m];
+      // this.map.removeLayer(existingLayer);
+      const isExistingLayer = !!(find(layers, { id: m }));
       if (!isExistingLayer) this.map.removeLayer(existingLayer);
     });
 
@@ -309,7 +344,7 @@ class ExploreMap extends React.PureComponent {
               existingLayer._currentImage._image.style.zIndex = zIndex;
             }
           }
-          existingLayer.setOpacity(d.opacity || 1);
+          existingLayer.setOpacity(d.opacity === 0 ? 0 : d.opacity || 1);
         } else {
           this.addMapLayer(d, layerSpec, datasetsLength);
         }

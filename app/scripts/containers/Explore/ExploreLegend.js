@@ -60,7 +60,7 @@ const mapStateToProps = state => ({
   selectedDatasetId: state.exploremap.interactionData.datasetId,
   infoMetadata: state.infoSidebar.metadata
 });
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   toggleTooltip: (open, options) => dispatch(toggleTooltip(open, options)),
   onInfoClick: (datasetSlug) => {
     dispatch(getDatasetByIdOrSlug(datasetSlug, ['metadata', 'vocabulary', 'widget']));
@@ -77,9 +77,10 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setLayerGroupActiveLayer(dataset, layer));
     dispatch(updateURL());
   },
-  switchChange: (dataset) => {
+  switchChange: (dataset, layers) => {
     dispatch(switchChange(dataset.id));
     if (dataset.active) dispatch(setDatasetActive(dataset));
+    dispatch(setLayersOrder(layers));
     dispatch(updateURL());
   },
   toggleLayerOpacity: (layerId, opacity) => dispatch(toggleLayerOpacity(layerId, opacity)),

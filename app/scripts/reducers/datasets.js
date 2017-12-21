@@ -150,7 +150,7 @@ export default function (state = initialState, action) {
       for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
         const index = idsOrdered.indexOf(datasets[i].id);
         if (index > -1) {
-          datasets[i].index = index + 1;
+          datasets[i].index = index;
         } else {
           datasets[i].index = 0;
         }
