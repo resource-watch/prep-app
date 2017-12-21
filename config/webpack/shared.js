@@ -24,6 +24,12 @@ const config = {
       test: /\.jsx?$/,
       exclude: /(node_modules|lib)/,
       use: ['babel-loader']
+    }, {
+      test: /\.(hbs|handlebars)$/,
+      use: ['handlebars-loader']
+    }, {
+      test: /\.html$/,
+      use: ['raw-loader']
     }]
   },
 
@@ -53,11 +59,11 @@ const config = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'app/index.html',
+      template: 'app/index.hbs',
       inject: 'body',
       filename: 'index.html',
-      googleAnalytics: process.env.NODE_ENV === 'production' ?
-        process.env.GOOGLE_ANALYTICS : 'UA-XXXXXXXX-YY'
+      prod: process.env.NODE_ENV === 'production',
+      googleAnalytics: process.env.GOOGLE_ANALYTICS || 'UA-XXXXXXXX-YY'
     }),
     new webpack.EnvironmentPlugin(Object.keys(process.env)),
     new webpack.DefinePlugin({
@@ -71,13 +77,7 @@ const config = {
         datasetEnv: JSON.stringify(process.env.DATASET_ENV),
         assetsUrl: JSON.stringify(process.env.ASSETS_URL || '')
       }
-    }),
-    new CopyWebpackPlugin([
-      {
-        from: 'node_modules/widget-editor/dist/images',
-        to: 'images/'
-      }
-    ])
+    })
   ]
 
 };

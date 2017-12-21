@@ -1,77 +1,81 @@
 import React from 'react';
 import { Link } from 'react-router';
-import Article from '../Content/Article';
-import InsightsHome from './Articles/InsightsHome';
-import ExploreHome from './Articles/ExploreHome';
-import DashboardsHome from '../../containers/Home/DashboardsHome';
-import TwitterFeed from '../../containers/TwitterFeed';
+import PartnersSlider from '../../containers/PartnersSlider';
+import DemoSlider from '../demo-slider/demo-slider-component';
 
-import ladyInLand from '../../../images/home/lady-in-land.jpg';
-import iceberg from '../../../images/home/iceberg.jpg';
+const module1 = '/images/home/module-1.jpg';
+const module2 = '/images/home/module-2.jpg';
+const module3 = '/images/home/module-3.jpg';
 
-class Home extends React.Component {
-  render() {
-    return (
-      <div className="c-homepage">
-        <div className="row">
-          <div className="column small-12 medium-6">
-            <Article grid="small-12" no-border>
-              <div className="padded">
-                <h2 className="-left">Our mission</h2>
-                <p>The Partnership for Resilience and Preparedness (PREP) is a public-private collaboration to empower a data-driven approach to building climate resilience. PREP aims to help planners, investors, and resource managers more easily incorporate climate risks into their decisions by enhancing access to relevant data and facilitating collective learning. PREP does this through:</p>
-
-                <h3>Engagement</h3>
-                <p>We promote collaboration among data and information producers and users.</p>
-
-                <h3>Data</h3>
-                <p>We seek to reduce the barriers to accessing, contributing, and using data for climate resilience.</p>
-
-                <h3>Platforms</h3>
-                <p>We develop platforms to enhance access to and usability of climate-relevant data and information.</p>
-
-                <Link to="/about">Learn more</Link>
-              </div>
-            </Article>
-          </div>
-
-          <div className="column small-12 medium-6">
-            <Article grid="small-12" no-border floating>
-              <img src={ladyInLand} />
-              <div className="padded">
-                <h2 className="-left">The challenge</h2>
-                <p>With climate change already upon us, a growing number of communities, companies, and civil society organizations are looking to assess climate vulnerability and to develop resilience plans. However, efforts to turn data into actionable plans are constrained by two challenges:</p>
-                <ul>
-                  <li>Robust, actionable data are limited.</li>
-                  <li>Even when data and information exist, they are difficult to find, access, and use.</li>
-                </ul>
-                <p>PREP addresses these challenges by promoting collaboration among producers and users of information, fostering standards to enhance accessibility and interoperability of data and information products, and developing platforms that improve data accessibility and knowledge sharing.</p>
-              </div>
-            </Article>
+const Home = () => (
+  <div className="c-homepage">
+    <section className="">
+      <DemoSlider offset>
+        <div>
+          <article className="demo-slider-slide">
+            <img src={module1} alt="Explore" className="hero-image" />
+            <div className="slide-content">
+              <h2 className="-left">Explore the data</h2>
+              <p>Discover and interact with climate, physical and socioeconomic data. Filter
+              by topic, geography and time period to create a custom map in seconds. Then
+              share your findings to raise awareness in your community.</p>
+              <Link to="/explore" className="c-button -border" >
+                Start exploring
+              </Link>
+            </div>
+          </article>
+        </div>
+        <div>
+          <article className="demo-slider-slide">
+            <img src={module2} alt="Dashboards" className="hero-image" />
+            <div className="slide-content">
+              <h2 className="-left">Assemble information</h2>
+              <p>Dashboards are a collection of data and tools that users compile
+              to support their climate resilience and preparedness planning. View
+              dashboards that others have created, or create your own to track
+              key issues in your area.</p>
+              <Link to="/dashboards" className="c-button -border" >
+              Go to dashboards
+              </Link>
+            </div>
+          </article>
+        </div>
+        <div>
+          <article className="demo-slider-slide">
+            <img src={module3} alt="Resources" className="hero-image" />
+            <div className="slide-content">
+              <h2 className="-left">Finding resources</h2>
+              <p>Find selected resources for understanding the impacts of climate
+              change, tools for building resilience to climate change, and
+              additional climate relevant data.</p>
+              <Link to="/dashboards" className="c-button -border" >
+              Go to resources
+              </Link>
+            </div>
+          </article>
+        </div>
+      </DemoSlider>
+    </section>
+    <section className="c-article -no-border">
+      <div className="row align-center">
+        <div className="column small-12 medium-8">
+          <h2>About the partnership</h2>
+          <p>The Partnership for Resilience and Preparedness (PREP) is a
+          public-private collaboration launched in September 2016 that
+          seeks to improve access to useful data and empower communities
+          and businesses to better plan for and build climate resilience.
+          There are two key elements to PREP: the partnership itself and
+          the online platform it supports (PREPdata).</p>
+          <div className="article-footer">
+            <Link to="/resources" className="c-button -border" >
+                Learn more
+            </Link>
           </div>
         </div>
-
-        <img src={iceberg} />
-
-        <div className="row">
-          <div className="column small-12">
-            <TwitterFeed sliced />
-          </div>
-        </div>
-
-        <Article grid={'small-12 medium-12'}>
-          <InsightsHome />
-        </Article>
-
-        <Article grid={'small-12 medium-12'}>
-          <ExploreHome />
-        </Article>
-
-        <Article grid={'small-12 medium-12'}>
-          <DashboardsHome />
-        </Article>
       </div>
-    );
-  }
-}
+    </section>
+    <PartnersSlider thumbnail />
+  </div>
+);
 
 export default Home;

@@ -20,12 +20,14 @@ class PartnersSlider extends React.Component {
   }
 
   render() {
+    const isThumbnail = this.props.thumbnail;
     const partners = this.props.featured.map(d => (
       <div key={`partner-slider-${d.id}`}>
         <a href={d.url} target="_blank" className="logo" rel="noopener noreferrer">
           <img
-            src={config.assetsUrl + d.images.white_logo}
+            src={`${config.assetsUrl}${isThumbnail ? d.images.thumbnail : d.images.white_logo}`}
             alt={d.name}
+            className={isThumbnail ? 'thumbnail' : ''}
           />
         </a>
       </div>
@@ -42,7 +44,6 @@ class PartnersSlider extends React.Component {
       </div>
     );
   }
-
 }
 
 PartnersSlider.defaultProps = {
@@ -55,6 +56,7 @@ PartnersSlider.propTypes = {
   // Define the function to get the partners list
   getPartners: React.PropTypes.func.isRequired,
   route: React.PropTypes.string,
+  thumbnail: React.PropTypes.bool,
   featured: React.PropTypes.any
 };
 

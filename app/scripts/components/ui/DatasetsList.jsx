@@ -102,7 +102,6 @@ export default class DatasetsList extends React.Component {
     const { data, location } = this.props;
     const isLocationGlobal = location === 'global';
 
-
     return DATASETS_GROUPS.map(g => (
       <article className="dataset-group" key={g.id}>
         <h1 className="group-title">{g.title}</h1>
@@ -115,8 +114,9 @@ export default class DatasetsList extends React.Component {
               return sg.datasets.includes(d.id) && locationFilter;
             });
             const content = this.getDatasetItems(list);
+            const datasetNames = list.map(dataset => ((dataset.metadata[0] || {}).attributes || {}).name).join(', ');
 
-            return <CollapsibleItem key={sg.id} title={sg.title} content={content} />;
+            return <CollapsibleItem key={sg.id} title={sg.title} description={datasetNames} content={content} />;
           })}
         </div>
       </article>
@@ -136,7 +136,11 @@ export default class DatasetsList extends React.Component {
             <p>These datasets are a curated collection. If you don&apos;t find what you are interested in, you can explore all the data:</p>
 
             <div className="footer-actions">
-              <button className="c-button" onClick={() => this.props.onChangeTab('all_datasets')}>
+              <button
+                type="button"
+                className="c-new-button -light -transparent"
+                onClick={() => this.props.onChangeTab('all_datasets')}
+              >
                 Browse all datasets
               </button>
             </div>

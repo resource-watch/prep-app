@@ -41,6 +41,7 @@ export const TABS_OPTIONS = [
 ];
 export const SET_BASEMAP = 'explore/SET_BASEMAP';
 export const SET_LABELS = 'explore/SET_LABELS';
+export const SET_BOUNDARIES = 'explore/SET_BOUNDARIES';
 
 // DATASETS
 export const DATASET_FETCH_ERROR = 'DATASET_FETCH_ERROR';

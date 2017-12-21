@@ -33,7 +33,7 @@ setConfig({
   env: process.env.DATASET_ENV,
   applications: process.env.APPLICATIONS,
   authUrl: 'https://api.resourcewatch.org/auth',
-  userToken: sessionStorage.getItem('token') || null,
+  userToken: localStorage.getItem('token') || null,
   assetsPath: '/images/'
 });
 

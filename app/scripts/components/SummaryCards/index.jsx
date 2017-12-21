@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import exploreBg from '../../../images/bg/bg-explore.jpg';
-import insightsBg from '../../../images/bg/bg-insights.jpg';
-import dashboardsBg from '../../../images/bg/bg-dashboards.jpg';
+const exploreBg = '/images/bg/bg-explore.jpg';
+const insightsBg = '/images/bg/bg-insights.jpg';
+const dashboardsBg = '/images/bg/bg-dashboards.jpg';
 
 const bg = {
   explore: exploreBg,

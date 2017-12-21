@@ -113,9 +113,13 @@ class ExploreSidebar extends React.Component {
         />
         <div className="sidebar-container">
           <header className="sidebar-header">
-            {/* <FilterTabs /> */}
             <h1 className="sidebar-title">Explore</h1>
-            <Tabs options={TABS_OPTIONS} selected={selectedTab || TABS_OPTIONS[0].value} onChange={this.props.onChangeTab} />
+            <Tabs
+              className="-center"
+              options={TABS_OPTIONS}
+              selected={selectedTab || TABS_OPTIONS[0].value}
+              onChange={this.props.onChangeTab}
+            />
           </header>
 
           <div className="content">

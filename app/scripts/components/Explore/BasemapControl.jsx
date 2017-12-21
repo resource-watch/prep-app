@@ -19,6 +19,7 @@ export default class BasemapControl extends React.Component {
     this.onScreenClick = this.onScreenClick.bind(this);
     this.onBasemapChange = this.onBasemapChange.bind(this);
     this.onLabelChange = this.onLabelChange.bind(this);
+    this.onBoundariesChange = this.onBoundariesChange.bind(this);
   }
 
   componentWillUnmount() {
@@ -42,6 +43,10 @@ export default class BasemapControl extends React.Component {
 
   onLabelChange(label) {
     this.props.setLabels(label.checked);
+  }
+
+  onBoundariesChange(boundaries) {
+    this.props.setBoundaries(boundaries.checked);
   }
 
   toggleDropdown(to) {
@@ -106,6 +111,16 @@ export default class BasemapControl extends React.Component {
                   value: 'label'
                 }}
                 onChange={this.onLabelChange}
+              />
+
+              <div className="divisor" />
+              <Checkbox
+                properties={{
+                  name: 'boundaries',
+                  title: 'Boundaries',
+                  value: 'boundaries'
+                }}
+                onChange={this.onBoundariesChange}
               />
             </div>
           }
