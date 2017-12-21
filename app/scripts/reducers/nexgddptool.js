@@ -12,7 +12,8 @@ import {
   NEXGDDP_SET_RANGE2_SELECTION,
   NEXGDDP_SET_CHART_DATA,
   NEXGDDP_SET_CHART_ERROR,
-  NEXGDDP_SET_CHART_LOADED
+  NEXGDDP_SET_CHART_LOADED,
+  NEXGDDP_SET_MAP_LAYERS
 } from '../constants';
 
 const initialState = {
@@ -21,6 +22,7 @@ const initialState = {
     zoom: 3,
     center: [20, -30]
   },
+  layers: [],
   // Position of the marker
   /** @type {[number, number]} marker */
   marker: undefined,
@@ -65,6 +67,12 @@ export default function (state = initialState, action) {
     case NEXGDDP_SET_MAP_ZOOM: {
       return Object.assign({}, state, {
         map: Object.assign({}, state.map, { zoom: action.payload })
+      });
+    }
+
+    case NEXGDDP_SET_MAP_LAYERS: {
+      return Object.assign({}, state, {
+        map: Object.assign({}, state.layers, { layers: action.payload })
       });
     }
 

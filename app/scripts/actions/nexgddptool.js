@@ -14,7 +14,8 @@ import {
   NEXGDDP_SET_RANGE2_SELECTION,
   NEXGDDP_SET_CHART_DATA,
   NEXGDDP_SET_CHART_LOADED,
-  NEXGDDP_SET_CHART_ERROR
+  NEXGDDP_SET_CHART_ERROR,
+  NEXGDDP_SET_MAP_LAYERS
 } from '../constants';
 
 export function updateUrl() {
@@ -52,6 +53,15 @@ export function updateUrl() {
       );
 
     dispatch(replace(url));
+  };
+}
+
+export function setMapLayers(layers) {
+  return (dispatch) => {
+    dispatch({
+      type: NEXGDDP_SET_MAP_LAYERS,
+      payload: layers
+    });
   };
 }
 
