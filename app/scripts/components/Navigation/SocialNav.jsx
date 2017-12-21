@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import Icon from 'components/ui/Icon';
 
 function SocialNav() {
   return (
@@ -7,7 +7,7 @@ function SocialNav() {
       <ul>
         <li>
           <a href={`https://facebook.com/${config.facebookUser}`} target="_blank">
-            <svg width="8" height="16" viewBox="0 0 8 16"><title>Facebook</title><path d="M7.172 5.18H4.728V3.52c0-.623.403-.767.679-.767h1.727V.011L4.76 0C2.124 0 1.523 2.047 1.523 3.354v1.827H0v2.825h1.523V16h3.205V8.006h2.163l.281-2.825" fill="#FFF" fillRule="evenodd" /></svg>
+            <Icon name="icon-facebook" className="-extra-large" />
           </a>
         </li>
         <li>
