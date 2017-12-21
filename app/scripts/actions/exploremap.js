@@ -44,7 +44,7 @@ export function setLayersOrder(layers) {
       type: MAP_LAYERS_ORDER_CHANGED,
       payload: layers
     });
-    // dispatch(updateURL());
+    dispatch(updateURL());
   };
 }
 

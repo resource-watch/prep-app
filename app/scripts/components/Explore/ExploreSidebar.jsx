@@ -15,8 +15,9 @@ import { TABS_OPTIONS } from '../../constants';
 
 
 class ExploreSidebar extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.state = {
       sidebarOpen: true
     };

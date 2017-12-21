@@ -1,21 +1,20 @@
 import { connect } from 'react-redux';
-import ExploreSidebar from '../../components/Explore/ExploreSidebar';
+import ExploreSidebar from 'components/Explore/ExploreSidebar';
 
-import { switchChange, deselectDataset } from '../../actions/exploremap';
-import { updateURL } from '../../actions/links';
-import { setTooltip } from '../../actions/tooltip';
-import { setInfoSidebarMetadata } from '../../actions/info-sidebar';
-import { setDatasetActive, getDatasetByIdOrSlug, changeTab } from '../../actions/datasets';
+import { switchChange, deselectDataset } from 'actions/exploremap';
+import { updateURL } from 'actions/links';
+import { setTooltip } from 'actions/tooltip';
+import { setInfoSidebarMetadata } from 'actions/info-sidebar';
+import { setDatasetActive, getDatasetByIdOrSlug, changeTab } from 'actions/datasets';
 
 // Selectors
-import filterDatasetsByTab from '../../selectors/datasets';
+import filterDatasetsByTab from 'selectors/datasets';
 
 const mapStateToProps = state => ({
   listReceived: state.datasets.list.length > 0,
   data: filterDatasetsByTab(state),
   location: state.coreDatasetsFilter.location,
   infoSidebarMetadata: state.infoSidebar.metadata,
-  filters: state.datasets.filters,
   selectedTab: state.datasets.tab,
   tooltip: state.tooltip,
   selectedDatasetId: state.exploremap.interactionData.datasetId
