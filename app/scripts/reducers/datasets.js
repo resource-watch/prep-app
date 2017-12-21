@@ -21,7 +21,6 @@ import {
 const initialState = {
   list: [],
   filteredList: [],
-  enabledDatasets: [],
   details: {},
   widgets: {},
   layers: {},
@@ -56,7 +55,7 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, { widgets });
     }
     case DATASET_LAYER_RECEIVED: {
-      const layers = Object.assign({}, state.layers, {});
+      const layers = Object.assign({}, state.layers);
       layers[action.payload.id] = action.payload;
       return Object.assign({}, state, { layers });
     }
@@ -132,9 +131,7 @@ export default function (state = initialState, action) {
         }
       }
 
-      const enabledDatasets = filter(filteredList, { active: true });
-
-      return Object.assign({}, state, { filteredList, enabledDatasets });
+      return Object.assign({}, state, { filteredList });
     }
     case SET_LAYER_STATUS: {
       const filteredList = state.filteredList.slice(0);
@@ -158,6 +155,7 @@ export default function (state = initialState, action) {
           datasets[i].index = 0;
         }
       }
+
       return Object.assign({}, state, { filteredList: datasets });
     }
     case MAP_LAYER_OPACITY_CHANGED: {

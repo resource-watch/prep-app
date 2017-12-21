@@ -23,9 +23,9 @@ const tooltipBase = {
   width: 'auto'
 };
 
-class ExploreMap extends React.Component {
-  constructor() {
-    super();
+class ExploreMap extends React.PureComponent {
+  constructor(props) {
+    super(props);
     this.state = {
       loading: false,
       tooltip: tooltipBase
@@ -45,21 +45,35 @@ class ExploreMap extends React.Component {
     }, 0);
   }
 
-  componentWillReceiveProps(props) {
-    this.updateDatasets(props.enabledDatasets, props.layers);
-
-    if (!isEqual(this.props.map.basemap, props.map.basemap)) {
-      this.addBasemap(props.map.basemap);
+  shouldComponentUpdate(nextProps) {
+    if (!isEqual(nextProps.enabledLayers, this.props.enabledLayers)) {
+      return true;
     }
 
-    if (!isEqual(this.props.map.labels, props.map.labels)) {
-      this.handleLabels(props.map.labels);
+    if (!isEqual(this.props.enabledDatasets, nextProps.enabledDatasets)) {
+      return true;
     }
 
-    if (props.interactionData.open && props.interactionData.info) {
-      this.handleInteractivityTooltip(props.interactionData);
-    }
+    return false;
   }
+
+  componentDidUpdate() {
+    this.updateDatasets(this.props.enabledDatasets, this.props.enabledLayers);
+  }
+
+  // componentWillReceiveProps(props) {
+  //   if (!isEqual(this.props.map.basemap, props.map.basemap)) {
+  //     this.addBasemap(props.map.basemap);
+  //   }
+
+  //   if (!isEqual(this.props.map.labels, props.map.labels)) {
+  //     this.handleLabels(props.map.labels);
+  //   }
+
+  //   if (props.interactionData.open && props.interactionData.info) {
+  //     this.handleInteractivityTooltip(props.interactionData);
+  //   }
+  // }
 
   setTooltipText(data) {
     const text = [];
@@ -240,7 +254,9 @@ class ExploreMap extends React.Component {
     if (!params.lat) params.lat = 48.46038;
     if (!params.lng) params.lng = -123.889823;
 
-    this.mapLayers = [];
+    // layers cache
+    this.mapLayers = {};
+
     this.map = L.map(this.refs.map, {
       zoomControl: false,
       center: [+params.lat, +params.lng],
@@ -254,103 +270,72 @@ class ExploreMap extends React.Component {
     this.addBasemap(map.basemap);
   }
 
-  removeAllLayers() {
-    // Object.keys(this.mapLayers).forEach((layerIndex) => this.map.removeLayer(this.mapLayers[layerIndex]));
-    console.log(this.mapLayers);
-    this.mapLayers.forEach(layer => this.map.removeLayer(layer));
-  }
-
-  removeDisabledLayers() {
-    if (this.mapLayers && this.enabledLayers) {
-      Object.keys(this.mapLayers).forEach((layerIndex) => {
-        if (!this.enabledLayers.includes(layerIndex)) {
-          console.log('removing', layerIndex);
-          this.map.removeLayer(this.mapLayers[layerIndex]);
-          // delete this.mapLayers[layerIndex];
-        }
-      });
-    }
-  }
-
   updateDatasets(newData, newLayers) {
     const datasets = newData || this.props.enabledDatasets;
-    const layers = newLayers || this.props.layers;
+    const layers = newLayers || this.props.enabledLayers;
     const mapLayers = this.mapLayers;
-    this.enabledLayers = [];
+    const datasetsLength = datasets.length;
 
     this.hasActiveLayers = false;
 
-    this.removeAllLayers();
-    // this.removeDisabledLayers();
+    // Removing layers
+    Object.keys(mapLayers).forEach((m) => {
+      const isExistingLayer = !!(find(layers, { id: m }));
+      const existingLayer = mapLayers[m];
+      if (!isExistingLayer) this.map.removeLayer(existingLayer);
+    });
 
     datasets.forEach((d) => {
       if (d.layer && d.layer.length) {
         const layerData = find(d.layer, { active: true }) || find(d.layer, { default: true }) || d.layer[0];
         const layerSpec = Object.assign({}, { id: layerData.id }, layerData.attributes);
-        // const layer = mapLayers[layerSpec.id];
+        const existingLayer = mapLayers[layerSpec.id];
 
-        this.addMapLayer(d, layerSpec, datasets.length);
+        if (existingLayer) {
+          const zIndex = (datasetsLength + 1) - d.index;
 
-        // this.enabledLayers.push(layerSpec.id);
-
-        // if (layer) {
-        //   console.log('layer changed');
-        //   this.map.addLayer(layer);
-        //   // this.changeLayerOrder(d, datasets.length);
-        //   layer.setOpacity(d.opacity || 1);
-        //   // if (this.hasChangedOrder(d, mapLayers[layerSpec.id])) {
-        //   //   this.changeLayerOrder(d, datasets.length);
-        //   // }
-        //   // if (this.hasChangedOpacity(d, mapLayers[layerSpec.id])) {
-        //   //   this.changeLayerOpacity(d);
-        //   // }
-        // } else {
-        //   console.log('adding layer');
-        //   this.addMapLayer(d, layerSpec, datasets.length);
-        // }
+          if (existingLayer.setZIndex && typeof existingLayer.setZIndex === 'function') {
+            this.map.addLayer(existingLayer);
+            existingLayer.setZIndex(zIndex);
+          } else {
+            existingLayer.addTo(this.map);
+            existingLayer.options.zIndex = zIndex;
+            // TODO: improve z-index for overlay layers
+            if (existingLayer._currentImage) {
+              existingLayer._currentImage._image.style.zIndex = zIndex;
+            }
+          }
+          existingLayer.setOpacity(d.opacity || 1);
+        } else {
+          this.addMapLayer(d, layerSpec, datasetsLength);
+        }
       }
     });
-
-    // OLD way
-    // datasets.forEach((d) => {
-    //   if (d.active && d.layer && d.layer.length) {
-    //     this.updateActiveLayer(d, layers, datasets.length);
-    //   } else if (!d.active && d.layer && d.layer.length) {
-    //     const layerToRemove = mapLayers.find({ id: layer.id });
-    //     if (layerToRemove) {
-    //       this.updateRemovedLayer(layerToRemove.id);
-    //     }
-    //   }
-    // });
   }
 
-  wasAlreadyAdded(dataset, layers) {
-    const layer = this.getActiveLayer(dataset, layers);
-    return layer && this.mapLayers[layer.id] || false;
-  }
+  // wasAlreadyAdded(dataset, layers) {
+  //   const layer = this.getActiveLayer(dataset, layers);
+  //   return layer && this.mapLayers[layer.id] || false;
+  // }
 
-  hasChangedOrder(dataset, layer) {
-    // const layer = this.getActiveLayer(dataset, layers);
+  // hasChangedOrder(dataset, layer) {
+  //   return dataset.index !== undefined && layer &&
+  //     dataset.index !== this.mapLayers[layer.id].index || false;
+  // }
 
-    return dataset.index !== undefined && layer &&
-      dataset.index !== this.mapLayers[layer.id].index || false;
-  }
+  // hasChangedOpacity(dataset, layer) {
+  //   const hasChanged = (dataset && layer &&
+  //     dataset.opacity !== this.mapLayers[layer.id].options.opacity) || false;
+  //   return hasChanged;
+  // }
 
-  hasChangedOpacity(dataset, layer) {
-    // const layer = this.getActiveLayer(dataset, layers);
-    const hasChanged = (dataset && layer &&
-      dataset.opacity !== this.mapLayers[layer.id].options.opacity) || false;
-
-    return hasChanged;
-  }
-
-  isLayerReady(dataset, layers) {
-    if (dataset.layer && dataset.layer.length) {
-      const layer = dataset.layer.find(l => l.attributes.active) || dataset.layer.find(l => l.attributes.default) || dataset.layer[0];
-      return layers && layer && layers[layer.id] || false;
-    }
-    return false;
-  }
+  // isLayerReady(dataset, layers) {
+  //   if (dataset.layer && dataset.layer.length) {
+  //     const layer = dataset.layer.find(l => l.attributes.active) || dataset.layer.find(l => l.attributes.default) || dataset.layer[0];
+  //     return layers && layer && layers[layer.id] || false;
+  //   }
+  //   return false;
+  // }
 
   // updateActiveLayer(dataset, layers, datasetsLength) {
   //   const activeLayer = this.getActiveLayer(dataset, layers);
@@ -413,11 +398,8 @@ class ExploreMap extends React.Component {
 
   //   if (layer) layer.setOpacity(dataset.opacity || 1);
   // }
-  changeLayerOpacity(layer, dataset) {
-    // const { layers } = this.props;
-    // const activeLayer = this.getActiveLayer(dataset, layers);
-    // const layer = this.mapLayers[activeLayer.id];
 
+  changeLayerOpacity(layer, dataset) {
     if (layer && layer.setOpacity) layer.setOpacity(dataset.opacity || 1);
   }
 
@@ -500,8 +482,7 @@ class ExploreMap extends React.Component {
         this.handleTileLoaded(layer);
       });
       layer.addTo(this.map).setZIndex((datasetsLength + 1) - dataset.index);
-      // this.mapLayers[layerData.id] = layer;
-      this.mapLayers.push(layer);
+      this.mapLayers[layerData.id] = layer;
       this.changeLayerOpacity(layer, dataset);
     }
   }
@@ -555,8 +536,7 @@ class ExploreMap extends React.Component {
           this.handleTileLoaded(layer);
         });
         layer.addTo(this.map).setZIndex((datasetsLength + 1) - dataset.index);
-        // this.mapLayers[layer.id] = newLayer;
-        this.mapLayers.push(layer);
+        this.mapLayers[layer.id] = newLayer;
         this.changeLayerOpacity(newLayer, dataset);
       }
     } else if (L.esri[layer.type]) {
@@ -580,8 +560,7 @@ class ExploreMap extends React.Component {
         console.error(e.message);
         this.handleTileLoaded(layer);
       });
-      // this.mapLayers[layer.id] = newLayer;
-      this.mapLayers.push(newLayer);
+      this.mapLayers[layer.id] = newLayer;
       this.changeLayerOpacity(newLayer, dataset);
     } else {
       throw new Error('"type" specified in layer spec doesn`t exist');
@@ -639,7 +618,7 @@ class ExploreMap extends React.Component {
           newLayer.on('tileerror', () => {
             this.handleTileError(layer);
           });
-          this.mapLayers.push(newLayer);
+          this.mapLayers[layer.id] = newLayer;
         } else {
           // delete this.mapLayers[layer.id];
         }
@@ -662,8 +641,7 @@ class ExploreMap extends React.Component {
     });
     tileLayer.addTo(this.map).setZIndex((datasetsLength + 1) - dataset.index);
 
-    // this.mapLayers[layerData.id] = tileLayer;
-    this.mapLayers.push(tileLayer);
+    this.mapLayers[layerData.id] = tileLayer;
     this.changeLayerOpacity(tileLayer, dataset);
   }
 
@@ -679,8 +657,7 @@ class ExploreMap extends React.Component {
     });
     tileLayer.addTo(this.map).setZIndex((datasetsLength + 1) - dataset.index);
 
-    // this.mapLayers[layerData.id] = tileLayer;
-    this.mapLayers.push(tileLayer);
+    this.mapLayers[layerData.id] = tileLayer;
     this.changeLayerOpacity(tileLayer, dataset);
   }
 
@@ -731,7 +708,7 @@ ExploreMap.propTypes = {
   /**
    * Define the datasets data of the map
    */
-  data: PropTypes.array.isRequired,
+  data: PropTypes.array,
   /**
    * Define the layers data of the map
    */

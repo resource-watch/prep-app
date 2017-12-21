@@ -31,7 +31,7 @@ function getActiveLayers(datasets, layers) {
     if (dataset.active && dataset.layer && dataset.layer.length) {
       dataset.layer.forEach((l) => {
         if (isLayerReady(l, layers)) {
-          const layer = layers[l.id];
+          const layer = Object.assign({}, layers[l.id]);
           layer.title = dataset.name;
           layer.index = dataset.index;
           layer.opacity = dataset.opacity;
@@ -40,7 +40,7 @@ function getActiveLayers(datasets, layers) {
       });
     }
   });
-  // activeLayers.sort(sortByIndex);
+
   return sortByIndex(activeLayers);
 }
 
