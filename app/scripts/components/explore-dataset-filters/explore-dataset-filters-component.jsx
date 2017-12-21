@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import DatasetFilter from 'components/dataset-filter/dataset-filter';
+import TreeSelector from 'components/tree-selector/tree-selector';
 
 // constants
 import PLACEHOLDERS_DATASET_FILTERS from './explore-dataset-filters-constants';
@@ -18,7 +18,7 @@ class ExploreDatasetFilters extends PureComponent {
     const { data } = this.props;
 
     const filters = Object.keys(data).map(key =>
-      (<DatasetFilter
+      (<TreeSelector
         key={key}
         data={data[key]}
         placeholderText={PLACEHOLDERS_DATASET_FILTERS[key]}

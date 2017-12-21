@@ -5,13 +5,13 @@ import classnames from 'classnames';
 import DropdownTreeSelect from 'react-dropdown-tree-select';
 
 // styles
-import './dataset-filter-styles.scss';
+import './tree-selector-styles.scss';
 
 class DatasetFilter extends PureComponent {
   render() {
     const { showDropdown, placeholderText, data, onChange, classNames } = this.props;
     const datasetFilterClass = classnames({
-      'c-dataset-filter': true,
+      'c-tree-selector': true,
       classNames: !!classNames
     });
 
