@@ -5,11 +5,10 @@
    * @param {Object[]} elements Contains values to be selected in the data tree.
    */
 const selectElementsFromTree = (tree = {}, elements = [], deselect = false)  => {
-  let found = false; // We're using this loop because indexOf was finding elements
-  // that were substrings, e.g. "co" and "economic" when only "economic" should have been found
+  let found = false;
   for (let i = 0; i < elements.length && !found; i++) {
     if (elements[i] === tree.value) {
-      tree.checked = !deselect; // eslint-disable-line no-param-reassign
+      Object.assign(tree, { checked: !deselect });
       found = true;
     }
   }
