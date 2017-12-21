@@ -109,12 +109,6 @@ module.exports = merge(sharedConfig, {
       threshold: 10240,
       minRatio: 0.8
     }),
-    // new webpack.LoaderOptionsPlugin({
-    //   minimize: true,
-    //   debug: false
-    // }),
-    // new ExtractTextPlugin('styles.css'),
-    // new UglifyJSPlugin(),
     process.env.BUNDLE_ANALIZE ? new BundleAnalyzerPlugin({
       analyzerMode: 'static'
     }) : function() {}

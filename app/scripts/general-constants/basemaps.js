@@ -47,4 +47,10 @@ const LABELS = {
   value: 'https://api.mapbox.com/styles/v1/jcawri/cj8lr4oo566da2rqrmuu9btmz/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamNhd3JpIiwiYSI6ImNqMDd6N2NybzAwMHcyd29iZWlsems0enEifQ.eIqQeyQn5oCLkyivGtiVLg'
 };
 
-export { BASEMAPS, LABELS };
+const BOUNDARIES = {
+  id: 'boundaries',
+  label: 'Boundaries',
+  value: 'https://api.mapbox.com/styles/v1/prepdata/cjbfcn5o51al72so1u5avqcur/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicHJlcGRhdGEiLCJhIjoiY2piZmNrcTRjMXRsdzJxbm9uNm1nOXJtNSJ9.Jm14P-FBGvNxiaB-3mzSPw'
+};
+
+export { BASEMAPS, LABELS, BOUNDARIES };
