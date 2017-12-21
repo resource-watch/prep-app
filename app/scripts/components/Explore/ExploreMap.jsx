@@ -503,7 +503,7 @@ class ExploreMap extends React.PureComponent {
         layer = L.tileLayer.wms(layerData.url, layerData.body);
         break;
       case 'tileLayer':
-        if (layerData.body.indexOf('style: "function') >= 0) {
+        if (JSON.stringify(layerData.body).indexOf('style: "function') >= 0) {
           layerData.body.style = eval(`(${layerData.body.style})`);
         }
         layer = L.tileLayer(layerData.url, layerData.body);
@@ -558,7 +558,7 @@ class ExploreMap extends React.PureComponent {
           newLayer = L.tileLayer.wms(layer.url, layer.body);
           break;
         case 'tileLayer':
-          if (layer.body.indexOf('style: "function') >= 0) {
+          if (JSON.stringify(layer.body).indexOf('style: "function') >= 0) {
             layer.body.style = eval(`(${layer.body.style})`);
           }
           newLayer = L.tileLayer(layer.url, layer.body);
