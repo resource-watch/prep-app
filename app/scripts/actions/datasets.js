@@ -143,7 +143,7 @@ export function getDatasets(defaultActiveLayers) {
             type: DATASET_SET_FILTER,
             payload: {}
           });
-          // dispatch(updateURL());
+          dispatch(updateURL());
         });
       })
       .catch((err) => {

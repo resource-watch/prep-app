@@ -15,13 +15,17 @@ const getDatasetsFiltered = (datasetList, datasetFilters) =>
       // if the dataset has no tags, there's no point on continue
       if (!datasetTags.length) matches = false;
 
-      // loop through selected tags until one of the tags is not found
-      const tagNotFound = selectedTags.some((tag) => !datasetTags.includes(tag));
+      if (matches) {
+        // loop through selected tags until one of the tags is not found
+        const tagNotFound = selectedTags.some((tag) => !datasetTags.includes(tag));
 
-      if (tagNotFound) matches = false;
+        if (tagNotFound) matches = false;
+      }
+
     });
 
     return matches;
   });
+
 
 export default getDatasetsFiltered;

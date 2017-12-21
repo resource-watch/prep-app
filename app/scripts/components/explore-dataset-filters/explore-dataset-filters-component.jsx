@@ -34,7 +34,11 @@ class ExploreDatasetFilters extends PureComponent {
   render() {
     return (
       <div className="c-explore-dataset-filters">
-        {this.renderFilters()}
+        <div className="row">
+          <div className="column small-12">
+            {this.renderFilters()}
+          </div>
+        </div>
       </div>
     );
   }

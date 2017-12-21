@@ -5,8 +5,7 @@ import DATASETS_GROUPS from '../../general-constants/datasets-groups';
 
 import getDatasetsFiltered from 'helpers/dataset-filter';
 
-// Get datasets
-const datasetsList = state => state.datasets.filteredList;
+const datasetsList = state => state.datasets.list;
 const tab = state => state.datasets.tab;
 const datasetFilters = state => state.exploreDatasetFilter.filters;
 
@@ -24,5 +23,4 @@ const filterDatasetsByTab = (_list, _tab, _datasetFilters) => {
   return getDatasetsFiltered(_list, _datasetFilters);
 };
 
-// Export the selector
 export default createSelector(datasetsList, tab, datasetFilters, filterDatasetsByTab);
