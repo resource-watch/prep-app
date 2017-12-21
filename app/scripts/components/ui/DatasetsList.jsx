@@ -152,15 +152,17 @@ export default class DatasetsList extends React.Component {
 
   /* Datasets item content */
   getDatasetItems(list) {
+    const { activeDatasets } = this.props;
     return list.map((dataset) => {
       const isInfoPanelOpen = dataset.slug && this.props.infoSidebarMetadata.open &&
         this.props.infoSidebarMetadata.datasetSlug === dataset.slug;
+      const isActive = activeDatasets.includes(dataset.id);
 
       return (
         <DatasetItem
           key={`map-layer-${dataset.id}`}
           dataset={dataset || {}}
-          layerActive={dataset.active || false}
+          layerActive={isActive}
           infoActive={isInfoPanelOpen}
           onCloseInfo={this.props.onCloseInfo}
           onInfoClick={this.props.onInfoClick}
@@ -191,6 +193,7 @@ export default class DatasetsList extends React.Component {
 DatasetsList.propTypes = {
   className: PropTypes.string,
   data: PropTypes.array,
+  activeDatasets: PropTypes.array,
   /**
    * Define location scope of core datasets
    */

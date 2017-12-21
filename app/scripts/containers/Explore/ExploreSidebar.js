@@ -5,7 +5,7 @@ import { switchChange, deselectDataset } from 'actions/exploremap';
 import { updateURL } from 'actions/links';
 import { setTooltip } from 'actions/tooltip';
 import { setInfoSidebarMetadata } from 'actions/info-sidebar';
-import { setDatasetActive, getDatasetByIdOrSlug, changeTab } from 'actions/datasets';
+import { setDatasetActive, getDatasetByIdOrSlug, changeTab, toggleActiveDatasets } from 'actions/datasets';
 
 // Selectors
 import filterDatasetsByTab from 'selectors/datasets';
@@ -13,6 +13,7 @@ import filterDatasetsByTab from 'selectors/datasets';
 const mapStateToProps = state => ({
   listReceived: state.datasets.list.length > 0,
   data: filterDatasetsByTab(state),
+  activeDatasets: state.datasets.activeDatasets,
   location: state.coreDatasetsFilter.location,
   infoSidebarMetadata: state.infoSidebar.metadata,
   selectedTab: state.datasets.tab,
@@ -27,6 +28,8 @@ const mapDispatchToProps = dispatch => ({
   //   if (dataset.active) dispatch(getDatasetLayer(dataset));
   //   dispatch(updateURL());
   // },
+
+  // remove at some point...
   switchChange: (dataset) => {
     dispatch(switchChange(dataset.id));
     if (dataset.active) dispatch(setDatasetActive(dataset));
@@ -45,7 +48,11 @@ const mapDispatchToProps = dispatch => ({
   onChangeTab: (tab) => {
     dispatch(changeTab(tab));
   },
-  deselectDataset: () => dispatch(deselectDataset())
+  deselectDataset: () => dispatch(deselectDataset()),
+  onSwitchDataset: (dataset) => {
+    dispatch(toggleActiveDatasets(dataset))
+    dispatch(updateURL());
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExploreSidebar);

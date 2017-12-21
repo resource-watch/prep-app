@@ -6,11 +6,12 @@ import { LINK_SHORTEN_RECEIVE, LINK_SHORTEN_ERROR } from '../constants';
 export default function () {}
 
 export function updateURL() {
-  return (dispatch, state) => {
-    const params = state().exploremap;
-    const activeDatasets = state().datasets.list.filter(layer => layer.active);
-    const { filters } = state().exploreDatasetFilter;
-    const { location } = state().coreDatasetsFilter;
+  return (dispatch, getState) => {
+    const params = getState().exploremap;
+    // keep this until we get rid of the first option.
+    const activeDatasets = getState().datasets.list.filter(layer => layer.active) || getState().datasets.activeDatasets;
+    const { filters } = getState().exploreDatasetFilter;
+    const { location } = getState().coreDatasetsFilter;
     const filterParams = {};
     const url = `${params.latLng.lat}/${params.latLng.lng}/${params.zoom}`;
 

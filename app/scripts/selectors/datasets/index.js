@@ -8,6 +8,7 @@ import getDatasetsFiltered from 'helpers/dataset-filter';
 const datasetsList = state => state.datasets.list;
 const tab = state => state.datasets.tab;
 const datasetFilters = state => state.exploreDatasetFilter.filters;
+// At some point include activeDatasets here.
 
 const filterDatasetsByTab = (_list, _tab, _datasetFilters) => {
   if (!(_list || []).length) return [];
