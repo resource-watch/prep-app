@@ -6,6 +6,8 @@ import DatasetFilter from 'components/dataset-filter/dataset-filter';
 // constants
 import PLACEHOLDERS_DATASET_FILTERS from './explore-dataset-filters-constants';
 
+import './explore-dataset-filters-styles';
+
 class ExploreDatasetFilters extends PureComponent {
   onChange(values = [], key) {
     const filterValues = values.map(v => v.value);
