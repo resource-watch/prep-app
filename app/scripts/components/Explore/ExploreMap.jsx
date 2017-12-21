@@ -45,7 +45,9 @@ class ExploreMap extends React.PureComponent {
     }, 0);
   }
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.loading !== nextState.loading) return true;
+
     if (!isEqual(nextProps.enabledLayers, this.props.enabledLayers)) {
       return true;
     }
@@ -61,19 +63,19 @@ class ExploreMap extends React.PureComponent {
     this.updateDatasets(this.props.enabledDatasets, this.props.enabledLayers);
   }
 
-  // componentWillReceiveProps(props) {
-  //   if (!isEqual(this.props.map.basemap, props.map.basemap)) {
-  //     this.addBasemap(props.map.basemap);
-  //   }
+  componentWillReceiveProps(props) {
+    if (!isEqual(this.props.map.basemap, props.map.basemap)) {
+      this.addBasemap(props.map.basemap);
+    }
 
-  //   if (!isEqual(this.props.map.labels, props.map.labels)) {
-  //     this.handleLabels(props.map.labels);
-  //   }
+    if (!isEqual(this.props.map.labels, props.map.labels)) {
+      this.handleLabels(props.map.labels);
+    }
 
-  //   if (props.interactionData.open && props.interactionData.info) {
-  //     this.handleInteractivityTooltip(props.interactionData);
-  //   }
-  // }
+    if (props.interactionData.open && props.interactionData.info) {
+      this.handleInteractivityTooltip(props.interactionData);
+    }
+  }
 
   setTooltipText(data) {
     const text = [];
@@ -257,7 +259,7 @@ class ExploreMap extends React.PureComponent {
     // layers cache
     this.mapLayers = {};
 
-    this.map = L.map(this.refs.map, {
+    this.map = L.map(this.mapElement, {
       zoomControl: false,
       center: [+params.lat, +params.lng],
       zoom: +params.zoom,
@@ -284,6 +286,8 @@ class ExploreMap extends React.PureComponent {
       const existingLayer = mapLayers[m];
       if (!isExistingLayer) this.map.removeLayer(existingLayer);
     });
+
+    if (datasetsLength) this.hasActiveLayers = true;
 
     datasets.forEach((d) => {
       if (d.layer && d.layer.length) {
@@ -481,6 +485,7 @@ class ExploreMap extends React.PureComponent {
       layer.on(eventName, () => {
         this.handleTileLoaded(layer);
       });
+      layer.on('tileerror', () => this.handleTileLoaded(layer));
       layer.addTo(this.map).setZIndex((datasetsLength + 1) - dataset.index);
       this.mapLayers[layerData.id] = layer;
       this.changeLayerOpacity(layer, dataset);
@@ -535,6 +540,7 @@ class ExploreMap extends React.PureComponent {
         layer.on(eventName, () => {
           this.handleTileLoaded(layer);
         });
+        layer.on('tileerror', () => this.handleTileLoaded(tileLayer));
         layer.addTo(this.map).setZIndex((datasetsLength + 1) - dataset.index);
         this.mapLayers[layer.id] = newLayer;
         this.changeLayerOpacity(newLayer, dataset);
@@ -557,7 +563,6 @@ class ExploreMap extends React.PureComponent {
         layerElement.id = layer.id;
       });
       newLayer.on('requesterror', (e) => {
-        console.error(e.message);
         this.handleTileLoaded(layer);
       });
       this.mapLayers[layer.id] = newLayer;
@@ -616,7 +621,7 @@ class ExploreMap extends React.PureComponent {
             this.handleTileLoaded(layer);
           });
           newLayer.on('tileerror', () => {
-            this.handleTileError(layer);
+            this.handleTileError(newLayer);
           });
           this.mapLayers[layer.id] = newLayer;
         } else {
@@ -639,6 +644,7 @@ class ExploreMap extends React.PureComponent {
     tileLayer.on(eventName, () => {
       this.handleTileLoaded(tileLayer);
     });
+    tileLayer.on('tileerror', () => this.handleTileLoaded(tileLayer));
     tileLayer.addTo(this.map).setZIndex((datasetsLength + 1) - dataset.index);
 
     this.mapLayers[layerData.id] = tileLayer;
@@ -655,6 +661,7 @@ class ExploreMap extends React.PureComponent {
     tileLayer.on(eventName, () => {
       this.handleTileLoaded(tileLayer);
     });
+    tileLayer.on('tileerror', () => this.handleTileLoaded(tileLayer));
     tileLayer.addTo(this.map).setZIndex((datasetsLength + 1) - dataset.index);
 
     this.mapLayers[layerData.id] = tileLayer;
@@ -680,14 +687,9 @@ class ExploreMap extends React.PureComponent {
   }
 
   render() {
-    let loading;
-    if (this.state.loading && this.hasActiveLayers) {
-      loading = <LoadingSpinner />;
-    }
-
     return (<div className="c-explore-map">
-      <div className="map" ref="map" />
-      {loading}
+      <div className="map" ref={(el) => (this.mapElement = el)} />
+      { (this.state.loading && this.hasActiveLayers) && <LoadingSpinner /> }
       <Tooltip
         scroll
         ref="tagTooltip"

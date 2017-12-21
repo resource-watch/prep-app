@@ -20,16 +20,18 @@
     z-index: 1;
   }
 
-  .leaflet-top {
-    bottom: 68px;
-    top: auto;
-    right: 30px;
-  }
+  // .leaflet-top {
+  //   bottom: 68px;
+  //   top: auto;
+  //   right: 30px;
+  // }
+
   .leaflet-control-zoom {
     display: flex;
     flex-flow: column;
     margin-top: 0;
-    margin-right: 0;
+    margin-right: 30px;
+    margin-bottom: 68px;
     border: 0;
     box-shadow: 0 7px 15px 0 rgba(0,0,0,0.15);
 

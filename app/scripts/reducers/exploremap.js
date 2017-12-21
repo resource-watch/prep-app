@@ -18,7 +18,7 @@ const initialState = {
     lat: null,
     lng: null
   },
-  zoomPosition: 'topright',
+  zoomPosition: 'bottomright',
   basemap: BASEMAPS.default,
   basemapControl: {
     basemaps: BASEMAPS
