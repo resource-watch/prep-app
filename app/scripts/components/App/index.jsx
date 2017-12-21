@@ -98,20 +98,24 @@ class App extends React.Component {
         }
 
         <footer className="l-footer">
-          <div className="l-footer-top -inverse">
-            <div className="row">
-              <div className="column small-12">
-                <PartnersSlider route={pathname} />
+          {pathname !== '/' &&
+            <div>
+              <div className="l-footer-top -inverse">
+                <div className="row">
+                  <div className="column small-12">
+                    <PartnersSlider route={pathname} />
+                  </div>
+                </div>
+              </div>
+              <div className="l-footer-sep">
+                <div className="row">
+                  <div className="column small-12">
+                    <div className="footer-sep-item" />
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="l-footer-sep">
-            <div className="row">
-              <div className="column small-12">
-                <div className="footer-sep-item" />
-              </div>
-            </div>
-          </div>
+          }
           <div className="l-footer-down">
             <div className="row">
               <div className="column small-6 align-middle">

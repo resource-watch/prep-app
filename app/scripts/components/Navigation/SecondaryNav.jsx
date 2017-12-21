@@ -9,6 +9,9 @@ function SecondaryNav() {
           <Link to="/partners">Partners</Link>
         </li>
         <li>
+          <Link to="/resources">Resources</Link>
+        </li>
+        <li>
           <Link to="/contact">Contact</Link>
         </li>
         <li>
