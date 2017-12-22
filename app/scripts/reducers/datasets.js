@@ -122,7 +122,7 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, { filteredList, filters: filtersChoosen });
     }
     case TOGGLE_LAYER_STATUS: {
-      const filteredList = state.filteredList.slice(0);
+      const filteredList = state.list.slice(0);
       const selectedDataset = find(filteredList, { id: action.payload });
 
       if (selectedDataset) {
