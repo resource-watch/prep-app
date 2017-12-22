@@ -50,7 +50,7 @@ const mapDispatchToProps = dispatch => ({
   },
   deselectDataset: () => dispatch(deselectDataset()),
   onSwitchDataset: (dataset) => {
-    dispatch(toggleActiveDatasets(dataset))
+    dispatch(toggleActiveDatasets(dataset));
     dispatch(updateURL());
   }
 });
