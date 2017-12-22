@@ -2,7 +2,7 @@
 @import 'mixins';
 @import 'layouts';
 
-.c-dataset-filter {
+.c-tree-selector {
   cursor: pointer;
 
   .dropdown-content {
@@ -191,7 +191,6 @@
       position: absolute;
       top: calc(50% - 2px);
       right: 0;
-      // @include arrow(8px, 2px, $dark-blue, down);
       transform: rotate(45deg) translate(0, -50%);
 
       cursor: pointer;
@@ -202,9 +201,6 @@
       margin: 0;
       cursor: pointer;
 
-      // &.selected-item {
-      //   margin-top: 10px;
-      // }
 
       &:not(:last-child) {
         margin-right: 10px;
@@ -247,16 +243,10 @@
         color: $dark-blue;
         cursor: pointer;
       }
-
-      // & + .tag-item {
-      //   > input[type="text"] {
-      //     margin-top: 10px;
-      //   }
-      // }
     }
   }
 
-  & + .c-dataset-filter {
+  & + .c-tree-selector {
     margin: 15px 0 0;
   }
 }
