@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import ExploreMap from '../../components/Explore/ExploreMap';
+import ExploreMap from 'components/Explore/ExploreMap';
 
 import {
   updateMapParams,
@@ -7,57 +7,16 @@ import {
   getGeoDataInfo,
   setInteractionPosition,
   setInteractionVisibility
-} from '../../actions/exploremap';
-import { updateURL } from '../../actions/links';
+} from 'actions/exploremap';
+import { updateURL } from 'actions/links';
 
 // Selectors
 import filterDatasetsByTab from 'selectors/datasets';
-
-function isLayerReady(layer, layers) {
-  return layers && !!layers[layer.id];
-}
-
-function sortByIndex(items) {
-  return items.sort((a, b) => a.index - b.index);
-}
-
-function getActiveLayers(datasets, layers) {
-  if (!datasets.length) {
-    return [];
-  }
-  const activeLayers = [];
-
-  datasets.forEach((dataset) => {
-    if (dataset.active && dataset.layer && dataset.layer.length) {
-      dataset.layer.forEach((l) => {
-        if (isLayerReady(l, layers)) {
-          const layer = Object.assign({}, layers[l.id]);
-          layer.title = dataset.name;
-          layer.index = dataset.index;
-          layer.opacity = dataset.opacity;
-          activeLayers.push(layer);
-        }
-      });
-    }
-  });
-  // activeLayers.sort(sortByIndex);
-  return sortByIndex(activeLayers);
-}
-
-function getActiveDatasets(datasets, layers) {
-  return datasets.filter((dataset) => {
-    let active = false;
-    dataset.layer.forEach((l) => {
-      if (isLayerReady(l, layers)) active = true;
-    });
-    return dataset.active && active;
-  });
-}
+import { getActiveDatasetsSelector, getActiveLayersSelector } from 'selectors/explore-map';
 
 const mapStateToProps = state => ({
-  // data: getActiveLayers(state.datasets.filteredList, state.datasets.layers),
-  enabledDatasets: getActiveDatasets(state.datasets.filteredList, state.datasets.layers),
-  enabledLayers: getActiveLayers(state.datasets.filteredList, state.datasets.layers),
+  enabledDatasets: getActiveDatasetsSelector(state),
+  enabledLayers: getActiveLayersSelector(state),
   data: filterDatasetsByTab(state),
   interactionData: state.exploremap.interactionData,
   layers: state.datasets.layers,

@@ -1,5 +1,4 @@
 import find from 'lodash/find';
-import filter from 'lodash/filter';
 
 import {
   DATASET_LIST_RECEIVED,
@@ -146,7 +145,7 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, { filteredList });
     }
     case MAP_LAYERS_ORDER_CHANGED: {
-      const datasets = state.filteredList.slice(0);
+      const datasets = [...state.list];
       const idsOrdered = action.payload.map(item => item.dataset);
 
       for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
@@ -158,7 +157,7 @@ export default function (state = initialState, action) {
         }
       }
 
-      return Object.assign({}, state, { filteredList: datasets });
+      return Object.assign({}, state, { list: datasets });
     }
     case MAP_LAYER_OPACITY_CHANGED: {
       const datasets = state.filteredList.slice(0);
