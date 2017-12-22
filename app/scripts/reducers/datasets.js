@@ -15,12 +15,14 @@ import {
   MAP_LAYERS_ORDER_CHANGED,
   MAP_LAYER_OPACITY_CHANGED,
   SET_LAYERGROUP_ACTIVE_LAYER,
-  CHANGE_TAB
+  CHANGE_TAB,
+  TOGGLE_DATASET_ACTIVE
 } from '../constants';
 
 const initialState = {
   list: [],
   filteredList: [],
+  activeDatasets: [],
   details: {},
   widgets: {},
   layers: {},
@@ -184,6 +186,9 @@ export default function (state = initialState, action) {
     }
     case CHANGE_TAB: {
       return Object.assign({}, state, { tab: action.payload });
+    }
+    case TOGGLE_DATASET_ACTIVE: {
+      return ({ ...state, ...{ activeDatasets: action.payload } });
     }
     default:
       return state;

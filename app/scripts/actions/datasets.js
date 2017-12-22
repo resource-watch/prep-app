@@ -11,7 +11,8 @@ import {
   DATASET_LAYER_RECEIVED,
   DATASET_SET_FILTER,
   SET_LAYERGROUP_ACTIVE_LAYER,
-  CHANGE_TAB
+  CHANGE_TAB,
+  TOGGLE_DATASET_ACTIVE
 } from '../constants';
 import { updateURL } from './links';
 
@@ -289,5 +290,24 @@ export function setLayerGroupActiveLayer(dataset, layer) {
 
     // We also update the URL
     // if (typeof window !== 'undefined') dispatch(setUrlParams());
+  };
+}
+
+export function toggleActiveDatasets(dataset) {
+  return (dispatch, getState) => {
+    const { activeDatasets } = getState().datasets;
+    const { id } = dataset;
+    let newActiveDatasets = [...activeDatasets];
+
+    if(activeDatasets.includes(id)) {
+      newActiveDatasets = activeDatasets.filter(datasetId => datasetId !== id);
+    } else {
+      newActiveDatasets.push(id);
+    }
+
+    dispatch({
+      type: TOGGLE_DATASET_ACTIVE,
+      payload: newActiveDatasets
+    });
   };
 }

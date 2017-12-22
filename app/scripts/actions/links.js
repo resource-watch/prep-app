@@ -1,31 +1,34 @@
 import 'whatwg-fetch';
 import * as queryString from 'query-string';
-import { push } from 'react-router-redux';
+import { replace } from 'react-router-redux';
 import { LINK_SHORTEN_RECEIVE, LINK_SHORTEN_ERROR } from '../constants';
 
 export default function () {}
 
 export function updateURL() {
-  return (dispatch, state) => {
-    const params = state().exploremap;
-    const activeDatasets = state().datasets.list.filter(layer => layer.active);
-    const { filters } = state().datasets;
-    const { location } = state().coreDatasetsFilter;
-    let filtersFlatten = [];
-
-    (Object.keys(filters) || []).forEach((key) => {
-      filtersFlatten = filtersFlatten.concat(filters[key]);
-    });
-
+  return (dispatch, getState) => {
+    const params = getState().exploremap;
+    // keep this until we get rid of the first option.
+    const activeDatasets = getState().datasets.list.filter(layer => layer.active) || getState().datasets.activeDatasets;
+    const { filters } = getState().exploreDatasetFilter;
+    const { location } = getState().coreDatasetsFilter;
+    const filterParams = {};
     const url = `${params.latLng.lat}/${params.latLng.lng}/${params.zoom}`;
 
-    const queryParams = queryString.stringify({
-      activeDatasets: activeDatasets.map(d => d.id).join(','),
-      activeFilters: filtersFlatten.join(','),
-      coreDatasetsLocation: location
+    (Object.keys(filters) || []).forEach((key) => {
+      Object.assign(filterParams, { [key]: filters[key].join(',') });
     });
 
-    dispatch(push(`/explore/${url}?${queryParams}`));
+    const queryParams = queryString.stringify(
+      Object.assign({},
+        filterParams,
+        {
+          activeDatasets: activeDatasets.map(d => d.id).join(','),
+          coreDatasetsLocation: location
+        }
+      ));
+
+    dispatch(replace(`/explore/${url}?${queryParams}`));
   };
 }
 

@@ -26,7 +26,6 @@ import metadata from '../../metadata.json';
 
 const logoImage = '/images/prep-logo.png';
 
-
 class Explore extends React.Component {
   static getData(key, value) {
     let data = null;

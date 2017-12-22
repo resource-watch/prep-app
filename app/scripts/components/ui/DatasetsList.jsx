@@ -7,7 +7,7 @@ import isEqual from 'lodash/isEqual';
 
 // Components
 import DatasetLocationFilterContainer from 'components/dataset-location-filter/dataset-location-filter';
-import DatasetFilterContainer from 'components/dataset-filter/dataset-filter';
+import ExploreDatasetFilterContainer from 'components/explore-dataset-filters/explore-dataset-filters';
 import CollapsibleItem from './CollapsibleItem';
 import Icon from '../ui/Icon';
 import Search from '../ui/Search';
@@ -70,26 +70,38 @@ export default class DatasetsList extends React.Component {
     const { filters, search, sticky } = this.state;
 
     return (
+
       <div className="datasets-list-content">
         <div ref={(n) => { this.tools = n; }} className={`list-filters ${filters ? '-open' : ''} ${sticky ? '-fixed' : ''}`}>
-          <button className="btn-filters" onClick={() => this.setState({ filters: !filters })}>
-            <span>Filter results</span>
-            {filters ?
-              <Icon name="icon-arrow-up" /> :
-              <Icon name="icon-arrow-down" />
-            }
-          </button>
+          <div className="row">
+            <div className="column small-12">
+              <div className="list-filters-container">
+                <button className="btn-filters" onClick={() => this.setState({ filters: !filters })}>
+                  <span>Filter results</span>
+                  {filters ?
+                    <Icon name="icon-arrow-up" /> :
+                    <Icon name="icon-arrow-down" />
+                  }
+                </button>
 
-          <Search open={filters ? false : undefined} list={this.props.data} onChange={this.onSearch} label="Search dataset" />
+                <Search open={filters ? false : undefined} list={this.props.data} onChange={this.onSearch} label="Search dataset" />
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className={`filters-content ${filters ? '-open' : ''} ${sticky ? '-fixed' : ''}`}>
-          {filters && <DatasetFilterContainer />}
+          {filters && <ExploreDatasetFilterContainer />}
         </div>
 
         {search.list.length > 0 ?
-          <div className="list-container -padding">
-            {this.getDatasetItems(search.list)}
+          <div className="list-container">
+            <div className="row">
+              <div className="column small-12">
+                {this.getDatasetItems(search.list)}
+              </div>
+            </div>
+
           </div> :
           <p className="no-data">No datasets with these filters selected</p>
         }
@@ -130,21 +142,25 @@ export default class DatasetsList extends React.Component {
       <div className="datasets-list-content">
         <DatasetLocationFilterContainer />
         <div className="list-container">
-          {content}
+          <div className="row">
+            <div className="column small-12">
+              {content}
 
-          <footer className="sidebar-footer">
-            <p>These datasets are a curated collection. If you don&apos;t find what you are interested in, you can explore all the data:</p>
+              <footer className="sidebar-footer">
+                <p>These datasets are a curated collection. If you don&apos;t find what you are interested in, you can explore all the data:</p>
 
-            <div className="footer-actions">
-              <button
-                type="button"
-                className="c-new-button -light -transparent"
-                onClick={() => this.props.onChangeTab('all_datasets')}
-              >
-                Browse all datasets
-              </button>
-            </div>
-          </footer>
+                <div className="footer-actions">
+                  <button
+                    type="button"
+                    className="c-new-button -light -transparent"
+                    onClick={() => this.props.onChangeTab('all_datasets')}
+                  >
+                    Browse all datasets
+                  </button>
+                </div>
+              </footer>
+              </div>
+          </div>
         </div>
       </div>
     );
@@ -152,15 +168,17 @@ export default class DatasetsList extends React.Component {
 
   /* Datasets item content */
   getDatasetItems(list) {
+    const { activeDatasets } = this.props;
     return list.map((dataset) => {
       const isInfoPanelOpen = dataset.slug && this.props.infoSidebarMetadata.open &&
         this.props.infoSidebarMetadata.datasetSlug === dataset.slug;
+      const isActive = activeDatasets.includes(dataset.id);
 
       return (
         <DatasetItem
           key={`map-layer-${dataset.id}`}
           dataset={dataset || {}}
-          layerActive={dataset.active || false}
+          layerActive={isActive}
           infoActive={isInfoPanelOpen}
           onCloseInfo={this.props.onCloseInfo}
           onInfoClick={this.props.onInfoClick}
@@ -191,6 +209,7 @@ export default class DatasetsList extends React.Component {
 DatasetsList.propTypes = {
   className: PropTypes.string,
   data: PropTypes.array,
+  activeDatasets: PropTypes.array,
   /**
    * Define location scope of core datasets
    */
