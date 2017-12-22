@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import ExploreMap from '../../components/Explore/ExploreMap';
+import ExploreMap from 'components/Explore/ExploreMap';
 
 import {
   updateMapParams,
@@ -7,11 +7,17 @@ import {
   getGeoDataInfo,
   setInteractionPosition,
   setInteractionVisibility
-} from '../../actions/exploremap';
-import { updateURL } from '../../actions/links';
+} from 'actions/exploremap';
+import { updateURL } from 'actions/links';
+
+// Selectors
+import filterDatasetsByTab from 'selectors/datasets';
+import { getActiveDatasetsSelector, getActiveLayersSelector } from 'selectors/explore-map';
 
 const mapStateToProps = state => ({
-  data: state.datasets.filteredList,
+  enabledDatasets: getActiveDatasetsSelector(state),
+  enabledLayers: getActiveLayersSelector(state),
+  data: filterDatasetsByTab(state),
   interactionData: state.exploremap.interactionData,
   layers: state.datasets.layers,
   map: state.exploremap

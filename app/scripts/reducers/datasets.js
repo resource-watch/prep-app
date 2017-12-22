@@ -1,3 +1,5 @@
+import find from 'lodash/find';
+
 import {
   DATASET_LIST_RECEIVED,
   DATASET_LIST_RESET,
@@ -12,12 +14,14 @@ import {
   MAP_LAYERS_ORDER_CHANGED,
   MAP_LAYER_OPACITY_CHANGED,
   SET_LAYERGROUP_ACTIVE_LAYER,
-  CHANGE_TAB
+  CHANGE_TAB,
+  TOGGLE_DATASET_ACTIVE
 } from '../constants';
 
 const initialState = {
   list: [],
   filteredList: [],
+  activeDatasets: [],
   details: {},
   widgets: {},
   layers: {},
@@ -52,7 +56,7 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, { widgets });
     }
     case DATASET_LAYER_RECEIVED: {
-      const layers = Object.assign({}, state.layers, {});
+      const layers = Object.assign({}, state.layers);
       layers[action.payload.id] = action.payload;
       return Object.assign({}, state, { layers });
     }
@@ -118,16 +122,16 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, { filteredList, filters: filtersChoosen });
     }
     case TOGGLE_LAYER_STATUS: {
-      const filteredList = state.filteredList.slice(0);
-      const index = state.filteredList.map(d => d.id).indexOf(action.payload);
+      const filteredList = state.list.slice(0);
+      const selectedDataset = find(filteredList, { id: action.payload });
 
-      if (index !== -1) {
-        filteredList[index].active = !filteredList[index].active;
-        filteredList[index].opacity = 1;
-        if (filteredList[index].active) {
-          filteredList[index].index = state.filteredList.filter(layer => layer.active).length;
+      if (selectedDataset) {
+        for (let f = 0; f < filteredList.length; f++) {
+          const element = filteredList[f];
+          if (selectedDataset.id === element.id) selectedDataset.active = !filteredList[f].active;
         }
       }
+
       return Object.assign({}, state, { filteredList });
     }
     case SET_LAYER_STATUS: {
@@ -141,29 +145,30 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, { filteredList });
     }
     case MAP_LAYERS_ORDER_CHANGED: {
-      const datasets = state.filteredList.slice(0);
+      const datasets = [...state.list];
       const idsOrdered = action.payload.map(item => item.dataset);
 
       for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
         const index = idsOrdered.indexOf(datasets[i].id);
         if (index > -1) {
-          datasets[i].index = index + 1;
+          datasets[i].index = index;
         } else {
           datasets[i].index = 0;
         }
       }
-      return Object.assign({}, state, { filteredList: datasets });
+
+      return Object.assign({}, state, { list: datasets });
     }
     case MAP_LAYER_OPACITY_CHANGED: {
       const datasets = state.filteredList.slice(0);
 
       for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
         if (datasets[i].id === action.payload.id) {
-          // datasets[i].opacity = datasets[i].opacity ? 0 : 1;
           datasets[i].opacity = action.payload.opacity !== undefined ? action.payload.opacity : 1;
           break;
         }
       }
+
       return Object.assign({}, state, { filteredList: datasets });
     }
     case SET_LAYERGROUP_ACTIVE_LAYER: {
@@ -180,6 +185,9 @@ export default function (state = initialState, action) {
     }
     case CHANGE_TAB: {
       return Object.assign({}, state, { tab: action.payload });
+    }
+    case TOGGLE_DATASET_ACTIVE: {
+      return ({ ...state, ...{ activeDatasets: action.payload } });
     }
     default:
       return state;

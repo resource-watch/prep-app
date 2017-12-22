@@ -71,11 +71,12 @@
   &.-secondary {
     & > ul > li {
       position: relative;
-      margin-left: .5rem;
-      margin-right: .5rem;
+      margin-left: .6rem;
+      margin-right: .6rem;
 
       color: $inverse-font-color;
       font-size: $small-font-size;
+      font-family: $base-font-family;
       font-weight: bold;
       line-height: 1;
       text-transform: uppercase;
@@ -93,7 +94,7 @@
         width: 1px;
         height: 100%;
 
-        background-color: $secondary-color;
+        background-color: $bay-of-many;
 
         .-theme-2 & { background-color: $thirth-color; }
         .-theme-3 & { background-color: $fourth-color; }
@@ -120,7 +121,7 @@
 
     & > ul > li {
       display: flex;
-      margin-right: 1rem;
+      margin-right: 2.5rem;
       > span {
         margin-right: .5rem;
       }
@@ -135,13 +136,16 @@
         content: "";
         position: absolute;
         top: rem(6);
-        right: 100%;
-        margin-right: .5rem;
+        left: rem(-16);
         width: 1px;
         height: rem(13);
 
-        background-color: $secondary-color;
+        background-color: $bay-of-many;
       }
+    }
+
+    .c-icon {
+      fill: $white;
     }
   }
 }

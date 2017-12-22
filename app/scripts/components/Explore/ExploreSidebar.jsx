@@ -15,8 +15,9 @@ import { TABS_OPTIONS } from '../../constants';
 
 
 class ExploreSidebar extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.state = {
       sidebarOpen: true
     };
@@ -73,6 +74,8 @@ class ExploreSidebar extends React.Component {
   }
 
   switchChange(dataset) {
+    this.props.onSwitchDataset(dataset);
+    // keep this in order to don't break anything. Remove someday...
     if (dataset.id === this.props.selectedDatasetId) this.props.deselectDataset();
     this.props.switchChange(dataset);
   }
@@ -84,7 +87,7 @@ class ExploreSidebar extends React.Component {
   }
 
   render() {
-    const { infoSidebarMetadata, selectedTab } = this.props;
+    const { infoSidebarMetadata, selectedTab, activeDatasets } = this.props;
 
     return (
       <div className={['c-explore-sidebar', this.state.sidebarOpen ? '-open' : ''].join(' ')}>
@@ -114,7 +117,12 @@ class ExploreSidebar extends React.Component {
         <div className="sidebar-container">
           <header className="sidebar-header">
             <h1 className="sidebar-title">Explore</h1>
-            <Tabs options={TABS_OPTIONS} selected={selectedTab || TABS_OPTIONS[0].value} onChange={this.props.onChangeTab} />
+            <Tabs
+              className="-center"
+              options={TABS_OPTIONS}
+              selected={selectedTab || TABS_OPTIONS[0].value}
+              onChange={this.props.onChangeTab}
+            />
           </header>
 
           <div className="content">
@@ -122,6 +130,7 @@ class ExploreSidebar extends React.Component {
 
             <DatasetsList
               data={this.props.data}
+              activeDatasets={activeDatasets}
               location={this.props.location}
               type={selectedTab}
               infoSidebarMetadata={this.props.infoSidebarMetadata}
@@ -149,6 +158,10 @@ class ExploreSidebar extends React.Component {
     );
   }
 }
+
+ExploreSidebar.defaultProps = {
+  activeDatasets: []
+};
 
 ExploreSidebar.propTypes = {
   /**
@@ -190,10 +203,12 @@ ExploreSidebar.propTypes = {
   deselectDataset: PropTypes.func,
   onChangeTab: PropTypes.func,
   selectedDatasetId: PropTypes.string,
+  onSwitchDataset: PropTypes.func,
   /**
    * Define the tooltip properties.
    */
-  tooltip: PropTypes.object
+  tooltip: PropTypes.object,
+  activeDatasets: PropTypes.array
 };
 
 export default ExploreSidebar;

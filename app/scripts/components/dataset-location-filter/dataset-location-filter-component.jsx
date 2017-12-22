@@ -14,7 +14,7 @@ class DatasetLocationFilter extends PureComponent {
       <div className="c-dataset-location-filter">
         <Tabs
           options={datasetLocations}
-          className="-light"
+          className="-center -light"
           onChange={(value) => { onClickLocation(value); }}
           selected={location}
         />
