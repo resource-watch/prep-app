@@ -454,7 +454,7 @@ class ExploreMap extends React.PureComponent {
    */
 
   addLeafletLayer(dataset, layerSpec, datasetsLength) {
-    const layerData = layerSpec.layer_config;
+    const layerData = layerSpec.layerConfig;
 
     let layer;
 
@@ -502,7 +502,7 @@ class ExploreMap extends React.PureComponent {
    */
 
   addEsriLayer(dataset, layerSpec, datasetsLength) {
-    const layer = layerSpec.layer_config;
+    const layer = layerSpec.layerConfig;
     layer.id = layerSpec.id;
 
     // Transforming layer
@@ -583,7 +583,7 @@ class ExploreMap extends React.PureComponent {
    */
 
   addCartoLayer(dataset, layerSpec, datasetsLength) {
-    const layer = layerSpec.layer_config;
+    const layer = layerSpec.layerConfig;
     layer.id = layerSpec.id;
 
     // Transforming layerSpec

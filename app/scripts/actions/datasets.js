@@ -110,7 +110,7 @@ export function setDatasetsTagFilter(filter, tag) {
 }
 
 export function getDatasets(defaultActiveLayers) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     const env = config.datasetEnv || 'production';
     fetch(`${config.apiUrlRW}/dataset?application=prep&includes=metadata,layer,vocabulary&page[size]=999&status=saved&env=${env}&published=true`)
       .then((response) => {
@@ -120,7 +120,12 @@ export function getDatasets(defaultActiveLayers) {
       .then((data) => {
         deserializer.deserialize(data, (err, datasetData) => {
           if (err) throw new Error('Error deserializing json api');
-          const datasets = datasetData || [];
+          // Ñapa: We have to conservate layer config
+          const datasets = (datasetData || []).map((d, i) => {
+            d.layer = data.data[i].attributes.layer;
+            return d;
+          });
+
           if (datasets.length) {
             for (let i = datasets.length - 1; i >= 0; i--) {
               if (defaultActiveLayers) {
