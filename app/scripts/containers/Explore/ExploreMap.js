@@ -31,29 +31,6 @@ function getActiveLayers(datasets, layers) {
     if (dataset.active && dataset.layer && dataset.layer.length) {
       dataset.layer.forEach((l) => {
         if (isLayerReady(l, layers)) {
-          const layer = layers[l.id];
-          layer.title = dataset.name;
-          layer.index = dataset.index;
-          layer.opacity = dataset.opacity;
-          activeLayers.push(layer);
-        }
-      });
-    }
-  });
-
-  return sortByIndex(activeLayers);
-}
-
-function getActiveLayers(datasets, layers) {
-  if (!datasets.length) {
-    return [];
-  }
-  const activeLayers = [];
-
-  datasets.forEach((dataset) => {
-    if (dataset.active && dataset.layer && dataset.layer.length) {
-      dataset.layer.forEach((l) => {
-        if (isLayerReady(l, layers)) {
           const layer = Object.assign({}, layers[l.id]);
           layer.title = dataset.name;
           layer.index = dataset.index;

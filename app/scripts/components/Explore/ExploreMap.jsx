@@ -46,14 +46,7 @@ class ExploreMap extends React.PureComponent {
     }, 0);
   }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   if (this.state.loading !== nextState.loading) return true;
-  //   if (!isEqual(nextProps.enabledLayers, this.props.enabledLayers)) return true;
-  //   if (!isEqual(this.props.enabledDatasets, nextProps.enabledDatasets)) return true;
-  //   return false;
-  // }
-
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     // Updating map only when datasets or layers have changed
     if (!isEqual(this.props.enabledDatasets, prevProps.enabledDatasets)) {
       this.updateDatasets(this.props.enabledDatasets, this.props.enabledLayers);
@@ -64,38 +57,14 @@ class ExploreMap extends React.PureComponent {
     // Updating basemap
     if (!isEqual(this.props.map.basemap, prevProps.map.basemap)) {
       this.addBasemap(this.props.map.basemap);
-    }
-    // Updating labels
-    else if (!isEqual(this.props.map.labels, prevProps.map.labels)) {
+    } else if (!isEqual(this.props.map.labels, prevProps.map.labels)) {
+      // Updating labels
       this.handleLabels(this.props.map.labels);
-    }
-    // Updating boundaries
-    else if (!isEqual(this.props.map.boundaries, prevProps.map.boundaries)) {
+    } else if (!isEqual(this.props.map.boundaries, prevProps.map.boundaries)) {
+      // Updating boundaries
       this.handleBoundaries(this.props.map.boundaries);
     }
   }
-
-  // componentWillReceiveProps(nextProps) {
-    // if (!isEqual(this.props.enabledDatasets, nextProps.enabledDatasets)) {
-    //   console.log('updating map');
-    //   this.setState(nextProps.enabledLayers);
-    // }
-    // if (!isEqual(this.props.map.basemap, props.map.basemap)) {
-    //   this.addBasemap(props.map.basemap);
-    // }
-
-    // if (!isEqual(this.props.map.labels, props.map.labels)) {
-    //   this.handleLabels(props.map.labels);
-    // }
-
-    // if (!isEqual(this.props.map.boundaries, props.map.boundaries)) {
-    //   this.handleBoundaries(props.map.boundaries);
-    // }
-
-    // if (props.interactionData.open && props.interactionData.info) {
-    //   this.handleInteractivityTooltip(props.interactionData);
-    // }
-  // }
 
   setTooltipText(data) {
     const text = [];
@@ -200,13 +169,13 @@ class ExploreMap extends React.PureComponent {
         <div className="header">
           <h3>Dataset info</h3>
         </div>
-        {data
-        ? <div className="content">
-          <table className="table-data">
-            <tbody>{text}</tbody>
-          </table>
-        </div>
-        : <p>No data available.</p>}
+        {data ?
+          <div className="content">
+            <table className="table-data">
+              <tbody>{text}</tbody>
+            </table>
+          </div> :
+          <p>No data available.</p>}
       </div>);
   }
 
@@ -574,7 +543,7 @@ class ExploreMap extends React.PureComponent {
         layer.on(eventName, () => {
           this.handleTileLoaded(layer);
         });
-        layer.on('tileerror', () => this.handleTileLoaded(tileLayer));
+        layer.on('tileerror', () => this.handleTileLoaded(layer));
         layer.addTo(this.map).setZIndex((datasetsLength + 1) - dataset.index);
         this.mapLayers[layer.id] = newLayer;
         this.changeLayerOpacity(newLayer, dataset);
@@ -598,6 +567,7 @@ class ExploreMap extends React.PureComponent {
       });
       newLayer.on('requesterror', (e) => {
         this.handleTileLoaded(layer);
+        console.error(e);
       });
       this.mapLayers[layer.id] = newLayer;
       this.changeLayerOpacity(newLayer, dataset);
@@ -665,6 +635,7 @@ class ExploreMap extends React.PureComponent {
       .catch((err) => {
         this.handleTileLoaded(layer);
         this.props.onTileError(layer.id);
+        console.error(err);
       });
   }
 
@@ -726,7 +697,6 @@ class ExploreMap extends React.PureComponent {
       { (this.state.loading && this.hasActiveLayers) && <LoadingSpinner /> }
       <Tooltip
         scroll
-        ref="tagTooltip"
         text={this.state.tooltip.text}
         hidden={this.state.tooltip.hidden}
         position={this.state.tooltip.position}
@@ -741,10 +711,11 @@ ExploreMap.contextTypes = {
 };
 
 ExploreMap.propTypes = {
+  enabledLayers: PropTypes.array,
   /**
    * Define the datasets data of the map
    */
-  data: PropTypes.array,
+  enabledDatasets: PropTypes.array,
   /**
    * Define the layers data of the map
    */
