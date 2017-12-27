@@ -1,12 +1,9 @@
-
 .c-dataset-item {
   padding: 20px;
+  margin: 0 40px;
   border: 2px solid $pale-grey;
   background-color: $white;
-
-  &:not(:first-child) {
-    margin-top: 10px;
-  }
+  margin-top: 10px;
 
   &.-layer-active { border-color: $light-gold; }
   &.-info-active {
