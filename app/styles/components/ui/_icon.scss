@@ -2,7 +2,7 @@
 .c-icon {
   width: 12px;
   height: 12px;
-  
+
   &.-small {
     width: 10px;
     height: 10px;
@@ -16,6 +16,7 @@
   &.-medium {
     width: 14px;
     height: 14px;
+    margin-right: 5px;
   }
 
   &.-big {
@@ -30,6 +31,14 @@
 
   &.-extra-large {
     width: 20px;
-    height: 20px;    
+    height: 20px;
+  }
+
+  .-theme-2 & {
+    fill: $thirth-color;
+  }
+
+  .-theme-3 & {
+    fill: $fourth-color;
   }
 }

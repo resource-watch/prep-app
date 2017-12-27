@@ -58,7 +58,6 @@ class ToolbarActions extends React.Component {
           <Button
             click={() => this.setShareModal(window.location.href, 'page')}
             alternative
-            border="alternative"
             action
           >
             <Icon name="icon-share" className="-medium" />
