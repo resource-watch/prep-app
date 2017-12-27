@@ -128,7 +128,9 @@ export default function (state = initialState, action) {
       if (selectedDataset) {
         for (let f = 0; f < filteredList.length; f++) {
           const element = filteredList[f];
-          if (selectedDataset.id === element.id) selectedDataset.active = !filteredList[f].active;
+          if (selectedDataset.id === element.id) {
+            selectedDataset.active = !filteredList[f].active;
+          }
         }
       }
 

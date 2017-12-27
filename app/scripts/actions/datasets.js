@@ -304,7 +304,7 @@ export function toggleActiveDatasets(dataset) {
     const { id } = dataset;
     let newActiveDatasets = [...activeDatasets];
 
-    if(activeDatasets.includes(id)) {
+    if (activeDatasets.includes(id)) {
       newActiveDatasets = activeDatasets.filter(datasetId => datasetId !== id);
     } else {
       newActiveDatasets.push(id);
