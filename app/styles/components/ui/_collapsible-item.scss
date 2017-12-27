@@ -95,7 +95,7 @@
       margin: 0;
 
       &:before {
-        @include arrow(7px, 2px, 45deg);
+        @include arrow(7px, 2px, 135deg);
         top: calc(50% + 1px);
         position: absolute;
         left: 0;
