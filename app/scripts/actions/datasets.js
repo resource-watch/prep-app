@@ -89,11 +89,31 @@ export function getDatasetLayer(dataset) {
 //   };
 // }
 
+export function toggleActiveDatasets(dataset) {
+  return (dispatch, getState) => {
+    const { activeDatasets } = getState().datasets;
+    const { id } = dataset;
+    let newActiveDatasets = [...activeDatasets];
+
+    if (activeDatasets.includes(id)) {
+      newActiveDatasets = activeDatasets.filter(datasetId => datasetId !== id);
+    } else {
+      newActiveDatasets.push(id);
+    }
+
+    dispatch({
+      type: TOGGLE_DATASET_ACTIVE,
+      payload: newActiveDatasets
+    });
+  };
+}
+
 export function getActiveDatasetLayers(datasets) {
   return (dispatch) => {
     for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
       if (datasets[i].active) {
         dispatch(setDatasetActive(datasets[i]));
+        dispatch(toggleActiveDatasets(datasets[i]));
       }
     }
   };
@@ -295,24 +315,5 @@ export function setLayerGroupActiveLayer(dataset, layer) {
 
     // We also update the URL
     // if (typeof window !== 'undefined') dispatch(setUrlParams());
-  };
-}
-
-export function toggleActiveDatasets(dataset) {
-  return (dispatch, getState) => {
-    const { activeDatasets } = getState().datasets;
-    const { id } = dataset;
-    let newActiveDatasets = [...activeDatasets];
-
-    if (activeDatasets.includes(id)) {
-      newActiveDatasets = activeDatasets.filter(datasetId => datasetId !== id);
-    } else {
-      newActiveDatasets.push(id);
-    }
-
-    dispatch({
-      type: TOGGLE_DATASET_ACTIVE,
-      payload: newActiveDatasets
-    });
   };
 }
