@@ -96,4 +96,5 @@ $hamburguer-transition: 0.3s;
   border-left: $border-width solid;
   transform: translate(-50%, -50%) rotate($deg);
   pointer-events: none;
+  transition: .2s ease-in;
 }
