@@ -83,11 +83,13 @@
       &:after {
         position: absolute;
         @include arrow(8px, 2px, 45deg);
-        top: calc(50% + 1px);
+        top: 50%;
         border-color: $dark-blue;
         right: 0;
         left: auto;
-        transform: rotate(135deg) translate(0, -50%);
+        transition: .2s ease-in;
+        transform-origin: 50%;
+        transform: translate(-50%, -50%) rotate(135deg);
 
         cursor: pointer;
       }
@@ -120,7 +122,7 @@
     .tag-list {
 
       &:after {
-        transform: rotate(225deg) translate(0, -50%);
+        transform: translate(-50%, -50%) rotate(225deg);
       }
     }
   }
