@@ -5,6 +5,10 @@
   background-color: $pale-white;
   border-top: 2px solid #eee;
 
+  .c-dataset-item {
+    margin: 0;
+  }
+
   > .collapsible-title {
     position: relative;
     display: flex;

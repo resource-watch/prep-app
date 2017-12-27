@@ -11,7 +11,7 @@
   }
 
   .list-filters {
-    padding: 20px 0;
+    padding: 20px 40px;
 
     &.-fixed {
       position: fixed;
@@ -64,13 +64,12 @@
   .datasets-list-content {
     display: flex;
     flex-flow: column;
+    // padding: 0 40px;
   }
 
-  // .list-container {
-  //   &.-padding {
-  //     padding: 3px 22px 12px;
-  //   }
-  // }
+  .list-container {
+    // padding: 0 40px;
+  }
 
   // .c-dataset-item {
   //   margin-bottom: 10px;
