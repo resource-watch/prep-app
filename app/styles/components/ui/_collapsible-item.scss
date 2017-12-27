@@ -7,6 +7,10 @@
 
   .c-dataset-item {
     margin: 0;
+
+    &:not(:first-child) {
+      margin-top: 10px;
+    }
   }
 
   > .collapsible-title {
