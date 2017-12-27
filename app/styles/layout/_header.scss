@@ -25,6 +25,7 @@ $header-bg-color: $dark-slate-blue-2;
     position: relative;
     display: block;
     float: left;
+    margin-bottom: 10px;
 
     &:after {
       display: block;
@@ -32,6 +33,7 @@ $header-bg-color: $dark-slate-blue-2;
       position: absolute;
       top: 100%;
       right: 0;
+      color: $secondary-color;
 
       font-family: $header-font-family;
       font-weight: bold;
