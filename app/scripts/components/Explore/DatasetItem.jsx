@@ -48,7 +48,7 @@ class DatasetItem extends React.Component {
   getDatasetSwitch() {
     const { dataset, layerActive } = this.props;
     // keep to not break stuff..
-    const checked = dataset.active || layerActive;
+    const checked = dataset.active;
     if (dataset.layer && dataset.layer.length) {
       return (
         <Switch
