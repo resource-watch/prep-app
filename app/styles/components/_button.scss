@@ -33,7 +33,10 @@
     color: $button-font-color-inverse;
     background-color: $main-color;
 
-    &.-secondary-color { background-color: $secondary-color; }
+    &.-secondary-color {
+      background-color: $secondary-color;
+      color: $main-color;
+    }
   }
 
   &.-action {
