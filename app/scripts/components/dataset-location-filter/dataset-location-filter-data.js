@@ -6,8 +6,8 @@ export default [
   },
   {
     id: 1,
-    label: 'us-specific',
-    value: 'united states'
+    label: 'US-Specific',
+    value: 'usa'
   }
   // {
   //   id: 2,

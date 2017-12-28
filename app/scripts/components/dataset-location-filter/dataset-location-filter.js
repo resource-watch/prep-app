@@ -10,44 +10,6 @@ const mapStateToProps = state => ({
   location: state.coreDatasetsFilter.location
 });
 
-class DatasetLocationFilterContainer extends Component {
-  componentWillMount() {
-    const { setLocation, onChangeLocation } = this.props;
-    const { query } = this.context.location;
-    const { coreDatasetsLocation } = query || {};
-
-    setLocation(coreDatasetsLocation || 'global');
-    if (onChangeLocation) onChangeLocation();
-  }
-
-  onClickLocation(location) {
-    const { setLocation, onChangeLocation } = this.props;
-    setLocation(location);
-
-    if (onChangeLocation) onChangeLocation();
-  }
-
-  render() {
-    const { location } = this.props;
-
-    return createElement(DatasetLocationFilter, {
-      ...this.props,
-      location,
-      onClickLocation: this.onClickLocation.bind(this)
-    });
-  }
-}
-
-DatasetLocationFilterContainer.contextTypes = {
-  location: PropTypes.object
-};
-
-DatasetLocationFilterContainer.propTypes = {
-  location: PropTypes.string,
-  setLocation: PropTypes.func,
-  onChangeLocation: PropTypes.func
-};
-
 export { actions, reducers, initialState };
 
-export default connect(mapStateToProps, actions)(DatasetLocationFilterContainer);
+export default connect(mapStateToProps, actions)(DatasetLocationFilter);

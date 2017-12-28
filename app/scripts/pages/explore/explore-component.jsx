@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import MainNav from 'components/Navigation/MainNav';
 import Tabs from 'components/ui/Tabs';
+import DatasetLocationFilter from 'components/dataset-location-filter/dataset-location-filter';
 import CoreDatasetsList from 'components/core-datasets-list/core-datasets-list';
 import DatasetsList from 'components/datasets-list/datasets-list';
 import { TABS_OPTIONS } from './explore-constants';
@@ -55,6 +56,7 @@ class ExplorePage extends PureComponent {
               <div className="c-datasets-list">
                 {currentTab === 'core_datasets' &&
                   <div className="datasets-list-content">
+                    <DatasetLocationFilter />
                     <div className="list-container">
                       <CoreDatasetsList />
                       <footer className="sidebar-footer">

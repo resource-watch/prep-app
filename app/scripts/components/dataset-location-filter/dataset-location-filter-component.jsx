@@ -8,14 +8,14 @@ import datasetLocations from './dataset-location-filter-data';
 
 class DatasetLocationFilter extends PureComponent {
   render() {
-    const { onClickLocation, location } = this.props;
+    const { setLocation, location } = this.props;
 
     return (
       <div className="c-dataset-location-filter">
         <Tabs
           options={datasetLocations}
           className="-center -light"
-          onChange={(value) => { onClickLocation(value); }}
+          onChange={(value) => { setLocation(value); }}
           selected={location}
         />
       </div>
@@ -25,12 +25,12 @@ class DatasetLocationFilter extends PureComponent {
 
 DatasetLocationFilter.propTypes = {
   location: PropTypes.string.isRequired,
-  onClickLocation: PropTypes.func.isRequired
+  setLocation: PropTypes.func.isRequired
 };
 
 DatasetLocationFilter.defaultProps = {
   location: 'global',
-  onClickLocation: () => {}
+  setLocation: () => {}
 };
 
 export default DatasetLocationFilter;
