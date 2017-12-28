@@ -59,4 +59,8 @@
       border-radius: 0;
     }
   }
+
+  .leaflet-control-attribution a {
+    color: $main-color;
+  }
 }
