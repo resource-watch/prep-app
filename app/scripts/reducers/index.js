@@ -13,4 +13,5 @@ export { default as layers } from './layers';
 export { default as resources } from './resources';
 export { default as auth } from '../components/auth/auth-reducer';
 export { default as nexgddptool } from './nexgddptool';
-export { default as explorepage } from '../pages/explore/explore-reducers';
+export { default as explorepage } from '../pages/explore/explore-reducer';
+export { default as datasetsList } from '../components/datasets-list/datasets-list-reducer';

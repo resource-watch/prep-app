@@ -2,7 +2,8 @@ import {
   FETCH_DATASETS_REQUEST,
   FETCH_DATASETS_FAILURE,
   FETCH_DATASETS_SUCCESS,
-  TOGGLE_DATASET
+  TOGGLE_DATASET_LAYER,
+  TOGGLE_DATASET_INFO
 } from './datasets-list-constants';
 
 const initialState = {
@@ -31,9 +32,18 @@ export default function (state = initialState, action) {
         items: action.payload
       });
 
-    case TOGGLE_DATASET:
-      return state.items.map(item => (item.id === action.payload.id ?
-        Object.assign({}, item, { isLayerActive: !item.isLayerActive }) : item));
+    case TOGGLE_DATASET_LAYER:
+      return Object.assign({}, state, {
+        items: state.items.map(item => (item.id === action.payload.id ?
+          Object.assign({}, item, { isLayerActive: !item.isLayerActive }) : item))
+      });
+    
+    case TOGGLE_DATASET_INFO:
+      return Object.assign({}, state, {
+        items: state.items.map(item => (item.id === action.payload.id ?
+          Object.assign({}, item, { isSelected: !item.isSelected }) : 
+          Object.assign({}, item, { isSelected: false })))
+      });
 
     default:
       return state;

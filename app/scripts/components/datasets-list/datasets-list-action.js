@@ -4,7 +4,8 @@ import {
   FETCH_DATASETS_REQUEST,
   FETCH_DATASETS_FAILURE,
   FETCH_DATASETS_SUCCESS,
-  TOGGLE_DATASET
+  TOGGLE_DATASET_LAYER,
+  TOGGLE_DATASET_INFO
 } from './datasets-list-constants';
 
 export function requestDatasets() {
@@ -16,7 +17,7 @@ export function requestDatasets() {
 export function receiveDatasets(json) {
   return {
     type: FETCH_DATASETS_SUCCESS,
-    payload: wriAPISerializer(json.data)
+    payload: wriAPISerializer(json)
   };
 }
 
@@ -51,7 +52,14 @@ export function fetchDatasets() {
 
 export function toggleDataset(dataset) {
   return {
-    type: TOGGLE_DATASET,
+    type: TOGGLE_DATASET_LAYER,
+    payload: dataset
+  };
+}
+
+export function toggleInfo(dataset) {
+  return {
+    type: TOGGLE_DATASET_INFO,
     payload: dataset
   };
 }

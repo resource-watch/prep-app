@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import MainNav from 'components/Navigation/MainNav';
 import Tabs from 'components/ui/Tabs';
+import DatasetsList from 'components/datasets-list/datasets-list';
 
 import { TABS_OPTIONS } from 'constants';
 
@@ -15,7 +16,7 @@ class ExplorePage extends PureComponent {
   }
 
   componentDidMount() {
-    console.log(this.props);
+    this.props.fetchDatasets();
   }
 
   render() {
@@ -51,8 +52,9 @@ class ExplorePage extends PureComponent {
             </header>
 
             <div className="content">
+              <DatasetsList />
               {/*currentTab === 'core_datasets' && <CoreDatasets />*/}
-              {/*currentTab === 'all_datasets' && <AllDatasets />*/}
+              {/*currentTab === 'all_datasets' && <DatasetsList />*/}
             </div>
           </div>
         </div>
@@ -63,13 +65,15 @@ class ExplorePage extends PureComponent {
 
 ExplorePage.defaultProps = {
   currentTab: 'core_datasets',
-  isSidebarHidden: false
+  isSidebarHidden: false,
+  fetchDatasets: () => {}
 };
 
 ExplorePage.propTypes = {
   currentTab: PropTypes.oneOf(['core_datasets', 'all_datasets']),
   onChangeTab: PropTypes.func,
-  isSidebarHidden: PropTypes.bool
+  isSidebarHidden: PropTypes.bool,
+  fetchDatasets: PropTypes.func
 };
 
 export default ExplorePage;

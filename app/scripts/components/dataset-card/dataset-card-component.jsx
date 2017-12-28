@@ -1,65 +1,65 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
 import Icon from 'components/ui/Icon';
 import Switch from 'components/Button/Switch';
 
-const DatasetCard = (props) => {
-  const { dataset, layerIsActive, selected, onToggleLayer, onClose, onInfo } = props;
-  const { metadata } = dataset;
+class DatasetCard extends PureComponent {
+  render () {
+    const { dataset, selected, onToggleDataset, onToggleInfo } = this.props;
+    const { isLayerActive } = dataset;
+    const metadata = dataset.metadata && dataset.metadata.length ? dataset.metadata[0] || {} : {};
+    const info = metadata ? metadata.info || {} : {};
+    const title = info.title || metadata.name || dataset.name;
+    const classNames = ['c-dataset-item', dataset.isSelected ? '-info-active' : null].join(' ');
 
-  return (
-    <div className="c-dataset-item">
-      <header className="item-header">
-        <div className="header-container">
-          <div className="title-container">
-            <div className="left-element">
-              <Switch
-                onChange={onToggleLayer}
-                checked={layerIsActive}
-              />
+    return (
+      <div className={classNames}>
+        <header className="item-header">
+          <div className="header-container">
+            <div className="title-container">
+              <div className="left-element">
+                <Switch
+                  onChange={() => onToggleDataset(dataset)}
+                  checked={dataset.isLayerActive}
+                />
+              </div>
+              <Link className="item-title-link" to={`/dataset/${dataset.slug}`} >
+                <h3 className="item-title">{title}</h3>
+              </Link>
             </div>
-            <Link className="item-title-link" to={`/dataset/${dataset.slug}`} >
-              <h3 className="item-title">{metadata.title}</h3>
-            </Link>
+            <div className="item-tools">
+              {dataset.isSelected ?
+                <button key={'info-close'} onClick={() => onToggleInfo(dataset)} className="cancel">
+                  <Icon name="icon-cancel" />
+                </button> :
+                <button key={'info-open'} onClick={() => onToggleInfo(dataset)} className="info">
+                  <Icon name="icon-info" />
+                </button>}
+            </div>
           </div>
-          <div className="item-tools">
-            {selected ?
-              <button key={'info-close'} onClick={onClose} className="cancel">
-                <Icon name="icon-cancel" />
-              </button> :
-              <button key={'info-open'} onClick={onInfo} className="info">
-                <Icon name="icon-info" />
-              </button>}
-          </div>
-        </div>
-        <span className="subtitle">{metadata.subtitle}</span>
-      </header>
+          <span className="subtitle">{info.subtitle}</span>
+        </header>
 
-      <div className="item-content">
-        {metadata.description && <p className="description">{metadata.description}</p>}
+        <div className="item-content">
+          {info['short-description'] && <p className="description">{info['short-description']}</p>}
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 DatasetCard.defaultProps = {
   dataset: {},
-  layerIsActive: false,
-  selected: false,
-  onClose: () => {},
-  onInfo: () => {},
-  onToggleLayer: () => {}
+  onToggleInfo: () => {},
+  onToggleDataset: () => {}
 };
 
 DatasetCard.propTypes = {
   dataset: PropTypes.object,
-  layerIsActive: PropTypes.bool,
-  selected: PropTypes.bool,
-  onClose: PropTypes.func,
-  onInfo: PropTypes.func,
-  onToggleLayer: PropTypes.func
+  onToggleInfo: PropTypes.func,
+  onToggleDataset: PropTypes.func
 };
 
 export default DatasetCard;

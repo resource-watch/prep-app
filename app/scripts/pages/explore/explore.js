@@ -1,6 +1,6 @@
 import Component from './explore-component';
 import { connect } from 'react-redux';
-import { setTab } from './explore-actions';
+import { setTab } from './explore-action';
 
 // import { getDatasets, resetDatasetList } from '../../actions/datasets';
 // import { setModalMetadata } from '../../actions/modal';
