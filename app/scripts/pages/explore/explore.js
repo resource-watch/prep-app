@@ -5,6 +5,7 @@ import { fetchDatasets, toggleDataset, toggleInfo } from 'components/datasets-li
 import { getActiveDatasets } from 'components/datasets-list/datasets-list-selector';
 
 const mapStateToProps = (state) => ({
+  datasets: state.datasetsList.items,
   activeDatasets: getActiveDatasets(state),
   datasetsList: state.datasetsList,
   currentTab: state.explorepage.tab

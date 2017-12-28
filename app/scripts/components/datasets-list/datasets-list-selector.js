@@ -5,6 +5,7 @@ import { CORE_DATASETS } from './datasets-list-constants';
 
 const getAllDatasets = (state) => state.datasetsList.items;
 const getLocationFilter = (state) => state.coreDatasetsFilter.location;
+const getSearchQuery = (state) => state.datasetsList.searchQuery;
 
 export const getActiveDatasets = createSelector(
   getAllDatasets,
@@ -22,6 +23,17 @@ export const getCoreDatasets = createSelector(
       const { vocabulary } = dataset;
       const tags = vocabulary && vocabulary.length ? vocabulary[0].tags || [] : [];
       return coreDatasets.includes(dataset.id) && tags.includes(location);
+    });
+  }
+);
+
+export const filteredDatasets = createSelector(
+  [getAllDatasets, getSearchQuery],
+  (datasets, searchQuery) => {
+    if (!searchQuery || searchQuery === '') return datasets;
+    const regex = new RegExp(`^${searchQuery}`, 'gi');
+    return datasets.filter((dataset) => {
+      return regex.test(dataset.name);
     });
   }
 );

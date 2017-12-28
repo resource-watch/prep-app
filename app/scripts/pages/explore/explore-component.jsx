@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import MainNav from 'components/Navigation/MainNav';
 import Tabs from 'components/ui/Tabs';
+import Search from 'components/ui/Search';
 import DatasetLocationFilter from 'components/dataset-location-filter/dataset-location-filter';
 import CoreDatasetsList from 'components/core-datasets-list/core-datasets-list';
 import DatasetsList from 'components/datasets-list/datasets-list';
@@ -21,7 +22,7 @@ class ExplorePage extends PureComponent {
   }
 
   render() {
-    const { isSidebarHidden, currentTab, onChangeTab } = this.props;
+    const { datasets, isSidebarHidden, currentTab, onChangeTab } = this.props;
 
     return (
       <div className="l-explore -theme-2">
@@ -76,6 +77,15 @@ class ExplorePage extends PureComponent {
                   </div>}
                 {currentTab === 'all_datasets' && 
                   <div className="datasets-list-content">
+                    <div className="list-filters">
+                      <div className="list-filters-container">
+                        <Search
+                          list={datasets}
+                          onChange={this.props.onSearch}
+                          label="Search dataset"
+                        />
+                      </div>
+                    </div>
                     <DatasetsList />
                   </div>}
               </div>
