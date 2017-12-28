@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import MainNav from 'components/Navigation/MainNav';
 import Tabs from 'components/ui/Tabs';
+import CoreDatasetsList from 'components/core-datasets-list/core-datasets-list';
 import DatasetsList from 'components/datasets-list/datasets-list';
-
-import { TABS_OPTIONS } from 'constants';
+import { TABS_OPTIONS } from './explore-constants';
 
 class ExplorePage extends PureComponent {
   constructor(props) {
@@ -20,7 +20,9 @@ class ExplorePage extends PureComponent {
   }
 
   render() {
-    const { isSidebarHidden, currentTab } = this.props;
+    const { isSidebarHidden, currentTab, onChangeTab } = this.props;
+
+    console.log(this.props.coreDatasets)
 
     return (
       <div className="l-explore -theme-2">
@@ -47,14 +49,36 @@ class ExplorePage extends PureComponent {
                 className="-center"
                 options={TABS_OPTIONS}
                 selected={currentTab || TABS_OPTIONS[0].value}
-                onChange={this.props.onChangeTab}
+                onChange={onChangeTab}
               />
             </header>
 
             <div className="content">
-              <DatasetsList />
-              {/*currentTab === 'core_datasets' && <CoreDatasets />*/}
-              {/*currentTab === 'all_datasets' && <DatasetsList />*/}
+              <div className="c-datasets-list">
+                {currentTab === 'core_datasets' &&
+                  <div className="datasets-list-content">
+                    <div className="list-container">
+                      <CoreDatasetsList />
+                      <footer className="sidebar-footer">
+                        <p>These datasets are a curated collection. If you don&apos;t find what you are interested in, you can explore all the data:</p>
+
+                        <div className="footer-actions">
+                          <button
+                            type="button"
+                            className="c-new-button -light -transparent"
+                            onClick={() => onChangeTab('all_datasets')}
+                          >
+                            Browse all datasets
+                          </button>
+                        </div>
+                      </footer>
+                    </div>
+                  </div>}
+                {currentTab === 'all_datasets' && 
+                  <div className="datasets-list-content">
+                    <DatasetsList />
+                  </div>}
+              </div>
             </div>
           </div>
         </div>

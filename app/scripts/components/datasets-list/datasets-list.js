@@ -5,6 +5,7 @@ import { fetchDatasets, toggleDataset, toggleInfo } from './datasets-list-action
 const mapStateToProps = (state) => ({
   datasets: state.datasetsList.items,
   status: state.datasetsList.status,
+  error: state.datasetsList.error,
   isFetching: state.datasetsList.isFetching
 });
 

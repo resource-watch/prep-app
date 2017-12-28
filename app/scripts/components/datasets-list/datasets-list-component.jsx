@@ -1,17 +1,14 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import LoadingSpinner from 'components/Loading/LoadingSpinner';
 import DatasetCard from 'components/dataset-card/dataset-card-component';
 
 class DatasetsList extends PureComponent {
-  componentDidMount() {
-    this.props.fetchDatasets();
-  }
-
   render() {
-    const { datasets, status, isFetching } = this.props;
+    const { datasets, status, isFetching, error } = this.props;
 
-    if (isFetching) return (<p>Is loading...</p>);
-    if (status === 'error') return (<p>Something wrong...</p>);
+    if (isFetching) return (<LoadingSpinner />);
+    if (status === 'error') return (<p>{error.statusText}</p>);
   
     return (
       <div className="list-container">
@@ -22,20 +19,22 @@ class DatasetsList extends PureComponent {
             onToggleDataset={this.props.toggleDataset}
             onToggleInfo={this.props.toggleInfo}
           />) :
-          <p>No datasets found.</p>}
+          <p>No datasets available.</p>}
       </div>
     );
   }
 }
 
 DatasetsList.defaultProps = {
-  datasets: {}
+  datasets: {},
+  toggleInfo: () => {},
+  toggleDataset: () => {}
 };
 
 DatasetsList.propTypes = {
   datasets: PropTypes.array.isRequired,
   status: PropTypes.oneOf(['success', 'error']),
-  // error: PropTypes.object,
+  error: PropTypes.object,
   isFetching: PropTypes.bool
 };
 
