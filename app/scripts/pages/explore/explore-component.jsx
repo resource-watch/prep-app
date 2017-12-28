@@ -22,8 +22,6 @@ class ExplorePage extends PureComponent {
   render() {
     const { isSidebarHidden, currentTab, onChangeTab } = this.props;
 
-    console.log(this.props.coreDatasets)
-
     return (
       <div className="l-explore -theme-2">
         <header className="l-header -expanded">
