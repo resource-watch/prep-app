@@ -43,8 +43,8 @@ class CollapsibleItem extends React.Component {
           }
           {list &&
             <ul className="collapsible-item">
-              {list.map((l, i) => (
-                <li className="list-item" key={i}>
+              {list.map(l => (
+                <li className="list-item" key={l.id}>
                   <div className="child-container">
                     <span>{l.name}</span>
                   </div>
