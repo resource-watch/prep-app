@@ -2,10 +2,11 @@ import Component from './explore-component';
 import { connect } from 'react-redux';
 import { setTab } from './explore-action';
 import { fetchDatasets, toggleDataset, toggleInfo, filterQuery } from 'components/datasets-list/datasets-list-action';
-import { getActiveDatasets } from 'components/datasets-list/datasets-list-selector';
+import { getActiveDatasets, getSelectedDataset } from 'components/datasets-list/datasets-list-selector';
 
 const mapStateToProps = (state) => ({
   datasets: state.datasetsList.items,
+  selectedDataset: getSelectedDataset(state),
   activeDatasets: getActiveDatasets(state),
   datasetsList: state.datasetsList,
   currentTab: state.explorepage.tab

@@ -22,12 +22,13 @@ class DatasetCard extends PureComponent {
         <header className="item-header">
           <div className="header-container">
             <div className="title-container">
-              <div className="left-element">
-                {hasLayer && <Switch
-                  onChange={() => onToggleDataset(dataset)}
-                  checked={dataset.isLayerActive}
-                />}
-              </div>
+              {hasLayer &&
+                <div className="left-element">
+                  <Switch
+                    onChange={() => onToggleDataset(dataset)}
+                    checked={dataset.isLayerActive}
+                  />
+                </div>}
               <Link className="item-title-link" to={`/dataset/${dataset.slug}`} >
                 <h3 className="item-title">{title}</h3>
               </Link>

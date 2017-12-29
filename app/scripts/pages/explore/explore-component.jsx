@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import MainNav from 'components/Navigation/MainNav';
 import Tabs from 'components/ui/Tabs';
 import Search from 'components/ui/Search';
+import Icon from 'components/ui/Icon';
 import DatasetLocationFilter from 'components/dataset-location-filter/dataset-location-filter';
 import CoreDatasetsList from 'components/core-datasets-list/core-datasets-list';
 import DatasetsList from 'components/datasets-list/datasets-list';
@@ -23,7 +24,8 @@ class ExplorePage extends PureComponent {
   }
 
   render() {
-    const { datasets, isSidebarHidden, currentTab, onChangeTab, filterQuery } = this.props;
+    const { datasets, selectedDataset, isSidebarHidden,
+      currentTab, onChangeTab, filterQuery, toggleInfo } = this.props;
 
     return (
       <div className="l-explore -theme-2">
@@ -96,7 +98,17 @@ class ExplorePage extends PureComponent {
         </div>
 
         {/* Datasets panel info */}
-        <div className="c-info-sidebar -open">
+        <div className={`c-info-sidebar ${selectedDataset ? '-open' : ''}`}>
+          <div className="actions">
+            <div>
+              <button
+                className="toggle-status"
+                onClick={() => toggleInfo(selectedDataset)}
+              >
+                <Icon name="icon-arrow-left" className="-medium" />
+              </button>
+            </div>
+          </div>
           <DatasetInfo />
         </div>
       </div>
