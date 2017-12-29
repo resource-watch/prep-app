@@ -34,7 +34,7 @@ export function fetchDatasets() {
     dispatch(requestDatasets());
     const params = {
       application: ['prep'].join(','),
-      includes: ['metadata', 'layer', 'vocabulary'].join(','),
+      includes: ['metadata', 'layer', 'vocabulary', 'widget'].join(','),
       'page[size]': 999,
       status: 'saved',
       published: true,

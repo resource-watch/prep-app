@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router';
 import Icon from 'components/ui/Icon';
 import Switch from 'components/Button/Switch';
+import VegaChart from 'components/Chart/VegaChart';
 import { getTitle, getInfo, getMetadata } from 'components/dataset-info/dataset-info-helper';
 
 class DatasetInfo extends PureComponent {
@@ -52,6 +53,9 @@ class DatasetInfo extends PureComponent {
     const { dataset, toggleDataset } = this.props;
     const info = getInfo(dataset);
     const hasLayer = !!(dataset.layer && dataset.layer.length);
+    const hasWidget = !!(dataset.widget && dataset.widget.length);
+
+    console.log(dataset.widget);
     
     return (
       <div className="info-container">
@@ -79,6 +83,24 @@ class DatasetInfo extends PureComponent {
             </nav>
 
             {DatasetInfo.getContent(dataset)}
+
+            {hasWidget && dataset.widget.map((w) => {
+              if (w.widgetConfig.type === 'map') { 
+                return null;
+              }
+              if (w.widgetConfig.type === 'embed') { 
+                return (
+                  <div className="widget-container" key={w.id}>
+                    <iframe src={w.widgetConfig.url} width="100%" height="500" frameBorder="0" />
+                  </div>
+                );
+              }
+              return (
+                <div className="widget-container" key={w.id}>
+                  <VegaChart data={w.widgetConfig} />
+                </div>
+              );
+            })}
 
             <div className="content-container">
               <p>We’re actively adding new datasets to PREP. If you can’t find what you’re looking for, you can suggest a dataset for us to consider:</p>
