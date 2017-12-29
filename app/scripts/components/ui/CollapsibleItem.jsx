@@ -30,7 +30,10 @@ class CollapsibleItem extends React.Component {
 
     return (
       <div className={classNames}>
-        <h1 className="collapsible-title" onClick={this.onToggleList}>{title}</h1>
+        <button className="collapsible-title" type="button" onClick={this.onToggleList}>
+          <h1>{title}</h1>
+        </button>
+
         {description && <span className="collapsible-title-description">{description}</span>}
         <div className="collapsible-item-container">
           {content &&

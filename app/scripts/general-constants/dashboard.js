@@ -1,5 +1,4 @@
-
-const DASHBOARD_NAV = [
+export const DASHBOARD_NAV = [
   {
     label: 'Data',
     value: 'data'
@@ -14,4 +13,4 @@ const DASHBOARD_NAV = [
   }
 ];
 
-export { DASHBOARD_NAV };
+export default { DASHBOARD_NAV };

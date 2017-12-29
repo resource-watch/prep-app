@@ -28,6 +28,13 @@
     z-index: 1;
     cursor: pointer;
 
+    h1  {
+      font-family: $base-font-family;
+      font-size: 13px;
+      line-height: 13px;
+      text-transform: uppercase;
+    }
+
     &:before {
       @include arrow(7px, 2px, 225deg);
       position: absolute;
