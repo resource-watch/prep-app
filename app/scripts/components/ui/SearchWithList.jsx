@@ -1,26 +1,28 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
 
 // Libraries
 import classnames from 'classnames';
+import Fuse from 'fuse.js';
 
 // Components
 import Icon from './Icon';
 
+// Constants
+import { SELECT_SEARCH_OPTIONS } from '../../general-constants/general';
 
-export default class Search extends PureComponent {
+
+export default class Search extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      value: props.value,
-      open: props.open
+      open: false
     };
 
     this.onToggle = this.onToggle.bind(this);
-    this.onSearch = this.onSearch.bind(this);
-    this.changed = debounce(this.props.onChange, 150);
+    this.onSearch = debounce(this.onSearch.bind(this), 150);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -40,10 +42,12 @@ export default class Search extends PureComponent {
   }
 
   onSearch(e) {
-    const value = e.target.value;
-    this.setState({ value }, () => {
-      this.props.onChange( value);
-    });    
+    const { list, options } = this.props;
+    const value = e.currentTarget.value;
+    const fuse = new Fuse(list, { ...SELECT_SEARCH_OPTIONS, ...options });
+    const filteredList = value !== '' ? fuse.search(value) : list;
+
+    this.props.onChange(filteredList, value);
   }
 
   render() {
@@ -68,7 +72,7 @@ export default class Search extends PureComponent {
               ref={(n) => { this.input = n; }}
               className="search-box"
               type="text"
-              onKeyUp={this.onSearch.bind(this)}
+              onKeyUp={this.onSearch}
               placeholder={placeholder}
             />
 
@@ -83,18 +87,19 @@ export default class Search extends PureComponent {
 }
 
 Search.propTypes = {
-  value: PropTypes.string,
   className: PropTypes.string,
+  list: PropTypes.array.isRequired,
   label: PropTypes.string,
   placeholder: PropTypes.string,
   options: PropTypes.object,
   open: PropTypes.bool,
+  // Actions
   onChange: PropTypes.func
 };
 
 Search.defaultProps = {
+  list: [],
   label: 'Search',
   placeholder: '',
-  options: {},
-  open: false
+  options: {}
 };

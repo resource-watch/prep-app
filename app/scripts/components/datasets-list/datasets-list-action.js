@@ -5,7 +5,8 @@ import {
   FETCH_DATASETS_FAILURE,
   FETCH_DATASETS_SUCCESS,
   TOGGLE_DATASET_LAYER,
-  TOGGLE_DATASET_INFO
+  TOGGLE_DATASET_INFO,
+  FILTER_DATASETS_QUERY
 } from './datasets-list-constants';
 
 export function requestDatasets() {
@@ -61,5 +62,12 @@ export function toggleInfo(dataset) {
   return {
     type: TOGGLE_DATASET_INFO,
     payload: dataset
+  };
+}
+
+export function filterQuery(query) {
+  return {
+    type: FILTER_DATASETS_QUERY,
+    payload: query || ''
   };
 }

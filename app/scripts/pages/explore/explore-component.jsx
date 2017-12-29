@@ -22,7 +22,7 @@ class ExplorePage extends PureComponent {
   }
 
   render() {
-    const { datasets, isSidebarHidden, currentTab, onChangeTab } = this.props;
+    const { datasets, isSidebarHidden, currentTab, onChangeTab, filterQuery } = this.props;
 
     return (
       <div className="l-explore -theme-2">
@@ -81,7 +81,7 @@ class ExplorePage extends PureComponent {
                       <div className="list-filters-container">
                         <Search
                           list={datasets}
-                          onChange={this.props.onSearch}
+                          onChange={filterQuery}
                           label="Search dataset"
                         />
                       </div>

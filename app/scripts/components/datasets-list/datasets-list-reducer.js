@@ -3,12 +3,14 @@ import {
   FETCH_DATASETS_FAILURE,
   FETCH_DATASETS_SUCCESS,
   TOGGLE_DATASET_LAYER,
-  TOGGLE_DATASET_INFO
+  TOGGLE_DATASET_INFO,
+  FILTER_DATASETS_QUERY
 } from './datasets-list-constants';
 
 const initialState = {
   items: [],
-  isFetching: false
+  isFetching: false,
+  filterQuery: ''
 };
 
 export default function (state = initialState, action) {
@@ -43,6 +45,11 @@ export default function (state = initialState, action) {
         items: state.items.map(item => (item.id === action.payload.id ?
           Object.assign({}, item, { isSelected: !item.isSelected }) : 
           Object.assign({}, item, { isSelected: false })))
+      });
+    
+    case FILTER_DATASETS_QUERY:
+      return Object.assign({}, state, {
+        filterQuery: action.payload
       });
 
     default:

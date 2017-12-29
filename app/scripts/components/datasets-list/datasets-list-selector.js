@@ -5,7 +5,7 @@ import { CORE_DATASETS } from './datasets-list-constants';
 
 const getAllDatasets = (state) => state.datasetsList.items;
 const getLocationFilter = (state) => state.coreDatasetsFilter.location;
-const getSearchQuery = (state) => state.datasetsList.searchQuery;
+const getFilterQuery = (state) => state.datasetsList.filterQuery;
 
 export const getActiveDatasets = createSelector(
   getAllDatasets,
@@ -28,11 +28,21 @@ export const getCoreDatasets = createSelector(
 );
 
 export const filteredDatasets = createSelector(
-  [getAllDatasets, getSearchQuery],
-  (datasets, searchQuery) => {
-    if (!searchQuery || searchQuery === '') return datasets;
-    const regex = new RegExp(`^${searchQuery}`, 'gi');
+  [getAllDatasets, getFilterQuery],
+  (datasets, filterQuery) => {
+    if (!filterQuery || filterQuery === '') return datasets;
+    const regex = new RegExp(`${filterQuery}`, 'gi');
     return datasets.filter((dataset) => {
+      let containsQuery = false;
+      const metadata = dataset.metadata && dataset.metadata.length ? dataset.metadata[0] : null;
+      const info = metadata && metadata.info ? metadata.info : null;
+      if (info) {
+        containsQuery = regex.test(info.title) || regex.test(info.functions) || regex.test(info.description);
+      }
+      if (!containsQuery && metadata) {
+        containsQuery = regex.test(metadata.name) || regex.test(metadata.description);
+      }
+      if (containsQuery) return containsQuery;
       return regex.test(dataset.name);
     });
   }
