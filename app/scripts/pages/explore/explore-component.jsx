@@ -7,6 +7,7 @@ import Search from 'components/ui/Search';
 import DatasetLocationFilter from 'components/dataset-location-filter/dataset-location-filter';
 import CoreDatasetsList from 'components/core-datasets-list/core-datasets-list';
 import DatasetsList from 'components/datasets-list/datasets-list';
+import DatasetInfo from 'components/dataset-info/dataset-info';
 import { TABS_OPTIONS } from './explore-constants';
 
 class ExplorePage extends PureComponent {
@@ -41,6 +42,7 @@ class ExplorePage extends PureComponent {
           </div>
         </header>
 
+        {/* Datasets list */}
         <div className={['c-explore-sidebar', isSidebarHidden ? '' : '-open'].join(' ')}>
           <div className="sidebar-container">
             <header className="sidebar-header">
@@ -91,6 +93,11 @@ class ExplorePage extends PureComponent {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Datasets panel info */}
+        <div className="c-info-sidebar -open">
+          <DatasetInfo />
         </div>
       </div>
     );

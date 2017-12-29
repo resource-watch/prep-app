@@ -1,17 +1,20 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import truncate from 'lodash/truncate';
 import { Link } from 'react-router';
 
 import Icon from 'components/ui/Icon';
 import Switch from 'components/Button/Switch';
+import { getTitle, getInfo, getMetadata } from 'components/dataset-info/dataset-info-helper';
 
 class DatasetCard extends PureComponent {
   render () {
     const { dataset, selected, onToggleDataset, onToggleInfo } = this.props;
     const { isLayerActive } = dataset;
-    const metadata = dataset.metadata && dataset.metadata.length ? dataset.metadata[0] || {} : {};
-    const info = metadata ? metadata.info || {} : {};
-    const title = info.title || metadata.name || dataset.name;
+    const metadata = getMetadata(dataset);
+    const info = getInfo(dataset);
+    const title = getTitle(dataset);
+    const hasLayer = !!(dataset.layer && dataset.layer.length);
     const classNames = ['c-dataset-item', dataset.isSelected ? '-info-active' : null].join(' ');
 
     return (
@@ -20,10 +23,10 @@ class DatasetCard extends PureComponent {
           <div className="header-container">
             <div className="title-container">
               <div className="left-element">
-                <Switch
+                {hasLayer && <Switch
                   onChange={() => onToggleDataset(dataset)}
                   checked={dataset.isLayerActive}
-                />
+                />}
               </div>
               <Link className="item-title-link" to={`/dataset/${dataset.slug}`} >
                 <h3 className="item-title">{title}</h3>
@@ -39,11 +42,12 @@ class DatasetCard extends PureComponent {
                 </button>}
             </div>
           </div>
-          <span className="subtitle">{info.subtitle}</span>
+          <span className="subtitle">{info.organization}</span>
         </header>
 
         <div className="item-content">
-          {info['short-description'] && <p className="description">{info['short-description']}</p>}
+          {info['short-description'] &&
+            <p className="description">{truncate(info['short-description'], { length: 75, omission: '[...]' })}</p>}
         </div>
       </div>
     );

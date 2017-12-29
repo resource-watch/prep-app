@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import filter from 'lodash/filter';
-import flattenDeep from 'lodash/flattenDeep';
+import find from 'lodash/find';
 import { CORE_DATASETS } from './datasets-list-constants';
 
 const getAllDatasets = (state) => state.datasetsList.items;
@@ -46,4 +46,9 @@ export const filteredDatasets = createSelector(
       return regex.test(dataset.name);
     });
   }
+);
+
+export const getSelectedDataset = createSelector(
+  getAllDatasets,
+  (datasets) => find(datasets, { isSelected: true })
 );
