@@ -9,7 +9,6 @@ import { getTitle, getInfo, getMetadata } from 'components/dataset-info/dataset-
 
 class DatasetInfo extends PureComponent {
   static getHeader(dataset) {
-    const metadata = getMetadata(dataset);
     const info = getInfo(dataset);
     const title = getTitle(dataset);
     const organization = info['organization-long'] || info.organization;
@@ -55,14 +54,12 @@ class DatasetInfo extends PureComponent {
     const hasLayer = !!(dataset.layer && dataset.layer.length);
     const hasWidget = !!(dataset.widget && dataset.widget.length);
 
-    console.log(dataset.widget);
-    
     return (
       <div className="info-container">
         <div className="row content collapse">
           <div className="columns small-12 dataset-items">
             {DatasetInfo.getHeader(dataset)}
-            
+
             <nav className="info-actions">
               {info.dataDownload &&
                 <a download href={info.dataDownload} className="info-tool download">
@@ -85,13 +82,19 @@ class DatasetInfo extends PureComponent {
             {DatasetInfo.getContent(dataset)}
 
             {hasWidget && dataset.widget.map((w) => {
-              if (w.widgetConfig.type === 'map') { 
+              if (w.widgetConfig.type === 'map') {
                 return null;
               }
-              if (w.widgetConfig.type === 'embed') { 
+              if (w.widgetConfig.type === 'embed') {
                 return (
                   <div className="widget-container" key={w.id}>
-                    <iframe src={w.widgetConfig.url} width="100%" height="500" frameBorder="0" />
+                    <iframe
+                      src={w.widgetConfig.url}
+                      width="100%"
+                      height="500"
+                      frameBorder="0"
+                      title={w.name}
+                    />
                   </div>
                 );
               }
@@ -127,4 +130,4 @@ DatasetInfo.defaultProps = {
   dataset: {}
 };
 
-export default  DatasetInfo;
+export default DatasetInfo;

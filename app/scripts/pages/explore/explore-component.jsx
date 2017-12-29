@@ -79,7 +79,7 @@ class ExplorePage extends PureComponent {
                       </footer>
                     </div>
                   </div>}
-                {currentTab === 'all_datasets' && 
+                {currentTab === 'all_datasets' &&
                   <div className="datasets-list-content">
                     <div className="list-filters">
                       <div className="list-filters-container">
@@ -123,10 +123,14 @@ ExplorePage.defaultProps = {
 };
 
 ExplorePage.propTypes = {
+  datasets: PropTypes.array,
+  selectedDataset: PropTypes.object,
   currentTab: PropTypes.oneOf(['core_datasets', 'all_datasets']),
   onChangeTab: PropTypes.func,
   isSidebarHidden: PropTypes.bool,
-  fetchDatasets: PropTypes.func
+  fetchDatasets: PropTypes.func,
+  filterQuery: PropTypes.func,
+  toggleInfo: PropTypes.func
 };
 
 export default ExplorePage;

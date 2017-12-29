@@ -39,14 +39,14 @@ export default function (state = initialState, action) {
         items: state.items.map(item => (item.id === action.payload.id ?
           Object.assign({}, item, { isLayerActive: !item.isLayerActive }) : item))
       });
-    
+
     case TOGGLE_DATASET_INFO:
       return Object.assign({}, state, {
         items: state.items.map(item => (item.id === action.payload.id ?
-          Object.assign({}, item, { isSelected: !item.isSelected }) : 
+          Object.assign({}, item, { isSelected: !item.isSelected }) :
           Object.assign({}, item, { isSelected: false })))
       });
-    
+
     case FILTER_DATASETS_QUERY:
       return Object.assign({}, state, {
         filterQuery: action.payload

@@ -9,17 +9,16 @@ class DatasetsList extends PureComponent {
 
     if (isFetching) return (<LoadingSpinner />);
     if (status === 'error') return (<p>{error.statusText}</p>);
-  
+
     return (
       <div className="list-container">
-        {datasets.length ? datasets.map((dataset) =>
-          <DatasetCard
+        {datasets.length ? datasets.map(dataset =>
+          (<DatasetCard
             key={dataset.id}
             dataset={dataset}
             onToggleDataset={this.props.toggleDataset}
             onToggleInfo={this.props.toggleInfo}
-          />) :
-          <p>No datasets available.</p>}
+          />)) : <p>No datasets available.</p>}
       </div>
     );
   }
@@ -35,7 +34,9 @@ DatasetsList.propTypes = {
   datasets: PropTypes.array.isRequired,
   status: PropTypes.oneOf(['success', 'error']),
   error: PropTypes.object,
-  isFetching: PropTypes.bool
+  isFetching: PropTypes.bool,
+  toggleDataset: PropTypes.func,
+  toggleInfo: PropTypes.func
 };
 
 export default DatasetsList;

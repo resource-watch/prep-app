@@ -1,5 +1,5 @@
-import wriAPISerializer from 'helpers/wri-api-serializer';
 import qs from 'query-string';
+import { wriAPISerializer } from 'helpers/wri-api-serializer';
 import {
   FETCH_DATASETS_REQUEST,
   FETCH_DATASETS_FAILURE,
@@ -30,7 +30,7 @@ export function failureDatasets(error) {
 }
 
 export function fetchDatasets() {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(requestDatasets());
     const params = {
       application: ['prep'].join(','),
@@ -42,7 +42,7 @@ export function fetchDatasets() {
     };
     const url = `${config.apiUrlRW}/dataset?${qs.stringify(params)}`;
     return fetch(url)
-      .then(response => {
+      .then((response) => {
         if (response.ok) return response.json();
         throw Error(response.statusText);
       })

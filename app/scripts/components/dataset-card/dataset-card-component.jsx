@@ -5,13 +5,11 @@ import { Link } from 'react-router';
 
 import Icon from 'components/ui/Icon';
 import Switch from 'components/Button/Switch';
-import { getTitle, getInfo, getMetadata } from 'components/dataset-info/dataset-info-helper';
+import { getTitle, getInfo } from 'components/dataset-info/dataset-info-helper';
 
 class DatasetCard extends PureComponent {
-  render () {
-    const { dataset, selected, onToggleDataset, onToggleInfo } = this.props;
-    const { isLayerActive } = dataset;
-    const metadata = getMetadata(dataset);
+  render() {
+    const { dataset, onToggleDataset, onToggleInfo } = this.props;
     const info = getInfo(dataset);
     const title = getTitle(dataset);
     const hasLayer = !!(dataset.layer && dataset.layer.length);

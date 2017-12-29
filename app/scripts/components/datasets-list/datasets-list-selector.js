@@ -3,13 +3,13 @@ import filter from 'lodash/filter';
 import find from 'lodash/find';
 import { CORE_DATASETS } from './datasets-list-constants';
 
-const getAllDatasets = (state) => state.datasetsList.items;
-const getLocationFilter = (state) => state.coreDatasetsFilter.location;
-const getFilterQuery = (state) => state.datasetsList.filterQuery;
+const getAllDatasets = state => state.datasetsList.items;
+const getLocationFilter = state => state.coreDatasetsFilter.location;
+const getFilterQuery = state => state.datasetsList.filterQuery;
 
 export const getActiveDatasets = createSelector(
   getAllDatasets,
-  (datasets) => filter(datasets, { isLayerActive: true })
+  datasets => filter(datasets, { isLayerActive: true })
 );
 
 export const getCoreDatasets = createSelector(
@@ -50,5 +50,5 @@ export const filteredDatasets = createSelector(
 
 export const getSelectedDataset = createSelector(
   getAllDatasets,
-  (datasets) => find(datasets, { isSelected: true })
+  datasets => find(datasets, { isSelected: true })
 );

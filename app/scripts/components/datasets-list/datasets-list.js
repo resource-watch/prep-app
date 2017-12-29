@@ -13,7 +13,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   fetchDatasets: () => dispatch(fetchDatasets()),
   toggleDataset: dataset => dispatch(toggleDataset(dataset)),
-  toggleInfo: dataset => dispatch(toggleInfo(dataset)),
+  toggleInfo: dataset => dispatch(toggleInfo(dataset))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);
