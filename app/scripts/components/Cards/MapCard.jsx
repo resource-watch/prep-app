@@ -3,7 +3,6 @@ import ContentCard from './ContentCard';
 import SimpleMap from '../../containers/Map/SimpleMap';
 
 class MapCard extends React.Component {
-
   setShareModal() {
     this.props.setShareModal(this.props.layerId, 'widget', this.props.data.slug);
   }

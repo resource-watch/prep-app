@@ -42,8 +42,8 @@ export default class Search extends PureComponent {
   onSearch(e) {
     const value = e.target.value;
     this.setState({ value }, () => {
-      this.props.onChange( value);
-    });    
+      this.props.onChange(value);
+    });
   }
 
   render() {
@@ -68,7 +68,7 @@ export default class Search extends PureComponent {
               ref={(n) => { this.input = n; }}
               className="search-box"
               type="text"
-              onKeyUp={this.onSearch.bind(this)}
+              onKeyUp={this.onSearch}
               placeholder={placeholder}
             />
 
@@ -87,7 +87,6 @@ Search.propTypes = {
   className: PropTypes.string,
   label: PropTypes.string,
   placeholder: PropTypes.string,
-  options: PropTypes.object,
   open: PropTypes.bool,
   onChange: PropTypes.func
 };
@@ -95,6 +94,5 @@ Search.propTypes = {
 Search.defaultProps = {
   label: 'Search',
   placeholder: '',
-  options: {},
   open: false
 };

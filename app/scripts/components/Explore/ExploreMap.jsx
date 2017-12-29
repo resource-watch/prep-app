@@ -694,7 +694,7 @@ class ExploreMap extends React.PureComponent {
 
   render() {
     return (<div className="c-explore-map">
-      <div className="map" ref={(el) => (this.mapElement = el)} />
+      <div className="map" ref={el => (this.mapElement = el)} />
       { (this.state.loading && this.hasActiveLayers) && <LoadingSpinner /> }
       <Tooltip
         scroll

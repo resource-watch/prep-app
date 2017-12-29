@@ -13,10 +13,8 @@ const CoreDatasetsList = (props) => {
       <h2 className="group-description">{g.description}</h2>
       <div className="subgroups-list">
         {g.subgroups.map((sg) => {
-          const list = datasets.filter((d) => {
-            return sg.datasets.includes(d.id);
-          });
-          const isActive = !!!(find(list, { isLayerActive: true }));
+          const list = datasets.filter(d => sg.datasets.includes(d.id));
+          const isActive = !find(list, { isLayerActive: true });
           const content = (
             <DatasetsList
               {...datasets}
@@ -25,7 +23,7 @@ const CoreDatasetsList = (props) => {
               datasets={list}
             />
           );
-          const datasetNames = list.map(dataset => {
+          const datasetNames = list.map((dataset) => {
             const metadata = dataset.metadata && dataset.metadata.length ? dataset.metadata[0] || {} : {};
             const info = metadata ? metadata.info || {} : {};
             const title = info.title || metadata.name || dataset.name;

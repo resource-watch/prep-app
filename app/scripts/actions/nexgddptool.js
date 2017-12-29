@@ -1,3 +1,4 @@
+import fieldsMock from 'components/nexgddp-tool/mocks/fields.json';
 import {
   NEXGDDP_SET_MAP_ZOOM,
   NEXGDDP_SET_MAP_CENTER,
@@ -11,8 +12,6 @@ import {
   NEXGDDP_SET_RANGE2_OPTIONS,
   NEXGDDP_SET_RANGE2_SELECTION
 } from '../constants';
-
-import fieldsMock from 'components/nexgddp-tool/mocks/fields.json';
 
 export function setMapZoom(zoom) {
   return {

@@ -3,7 +3,6 @@ import { Modal, Tooltip, Icons } from 'widget-editor';
 import WelcomeModal from '../Modal/WelcomeModal';
 
 class Root extends React.Component {
-
   constructor() {
     super();
     this.state = {
