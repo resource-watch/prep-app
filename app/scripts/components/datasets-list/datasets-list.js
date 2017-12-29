@@ -1,9 +1,9 @@
-import Component from './datasets-list-component';
 import { connect } from 'react-redux';
+import Component from './datasets-list-component';
 import { fetchDatasets, toggleDataset, toggleInfo } from './datasets-list-action';
 import { filteredDatasets } from './datasets-list-selector';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   datasets: filteredDatasets(state),
   status: state.datasetsList.status,
   error: state.datasetsList.error,
@@ -12,8 +12,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchDatasets: () => dispatch(fetchDatasets()),
-  toggleDataset: (dataset) => dispatch(toggleDataset(dataset)),
-  toggleInfo: (dataset) => dispatch(toggleInfo(dataset)),
+  toggleDataset: dataset => dispatch(toggleDataset(dataset)),
+  toggleInfo: dataset => dispatch(toggleInfo(dataset)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);
