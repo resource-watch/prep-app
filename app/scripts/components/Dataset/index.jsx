@@ -15,7 +15,7 @@ import Banner from '../../components/Banner';
 import SectionIntro from '../SectionIntro';
 import MetadataInfo from '../Explore/MetadataInfo';
 import VegaChart from '../Chart/VegaChart';
-import SimpleMap from '../../containers/Map/SimpleMap';
+import SimpleMap from '../../containers/SimpleMap/SimpleMap';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
 import NexGDDPTool from '../nexgddp-tool/NexGDDPTool';

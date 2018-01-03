@@ -9,6 +9,7 @@ import DatasetLocationFilter from 'components/dataset-location-filter/dataset-lo
 import CoreDatasetsList from 'components/core-datasets-list/core-datasets-list';
 import DatasetsList from 'components/datasets-list/datasets-list';
 import DatasetInfo from 'components/dataset-info/dataset-info';
+import Map from 'components/map/map';
 import { TABS_OPTIONS } from './explore-constants';
 
 class ExplorePage extends PureComponent {
@@ -110,6 +111,9 @@ class ExplorePage extends PureComponent {
             </div>
           </div>
           <DatasetInfo />
+        </div>
+
+        <div className="c-explore-map">
         </div>
       </div>
     );

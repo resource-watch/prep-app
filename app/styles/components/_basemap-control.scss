@@ -1,9 +1,10 @@
-
 .c-basemap-control {
+  position: absolute;
+  bottom: 28px;
+  right: 30px;
+  z-index: 1;
+
   .btn-basemaps {
-    position: absolute;
-    bottom: 28px;
-    right: 30px;
     width: 30px;
     height: 30px;
     background-color: $white;

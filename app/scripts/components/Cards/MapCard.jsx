@@ -1,6 +1,6 @@
 import React from 'react';
 import ContentCard from './ContentCard';
-import SimpleMap from '../../containers/Map/SimpleMap';
+import SimpleMap from '../../containers/SimpleMap/SimpleMap';
 
 class MapCard extends React.Component {
   setShareModal() {

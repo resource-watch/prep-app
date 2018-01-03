@@ -10,7 +10,7 @@ import ReactMarkdown from 'react-markdown';
 // Components
 import { Link } from 'react-router';
 import VegaChart from '../Chart/VegaChart';
-import SimpleMap from '../../containers/Map/SimpleMap';
+import SimpleMap from '../../containers/SimpleMap/SimpleMap';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 import Icon from '../ui/Icon';
 

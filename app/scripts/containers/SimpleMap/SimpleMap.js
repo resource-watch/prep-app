@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import SimpleMap from '../../components/Map/SimpleMap';
+import SimpleMap from '../../components/SimpleMap/SimpleMap';
 
 import { getLayerById } from '../../actions/layers';
 
