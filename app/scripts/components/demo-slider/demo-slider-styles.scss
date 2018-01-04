@@ -45,6 +45,10 @@
     justify-content: center;
     flex-direction: column;
 
+    &:first-child .demo-slider-slide {
+      margin-left: 0;
+    }
+
     .slide-content {
       opacity: .15;
       transition: opacity .5s ease-in-out;
@@ -52,16 +56,16 @@
 
     img {
       opacity: .15;
-      transition: opacity .5s ease-in-out; 
+      transition: opacity .5s ease-in-out;
     }
-    
+
     &.slick-active {
       .slide-content {
         opacity: 1;
       }
-  
+
       img {
-        opacity: 1;  
+        opacity: 1;
       }
     }
   }
