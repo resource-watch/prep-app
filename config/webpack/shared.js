@@ -20,15 +20,15 @@ const config = {
 
   module: {
     rules: [{
-      test: /\.jsx?$/,
+      test: /\.(js|jsx)?$/,
       exclude: /(node_modules|lib)/,
-      use: ['babel-loader']
+      loader: require.resolve('babel-loader')
     }, {
       test: /\.(hbs|handlebars)$/,
-      use: ['handlebars-loader']
+      loader: require.resolve('handlebars-loader')
     }, {
       test: /\.html$/,
-      use: ['raw-loader']
+      loader: require.resolve('raw-loader')
     }]
   },
 

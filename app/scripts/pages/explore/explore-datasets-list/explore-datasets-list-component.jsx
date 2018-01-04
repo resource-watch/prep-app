@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import LoadingSpinner from 'components/Loading/LoadingSpinner';
 import DatasetCard from 'components/dataset-card/dataset-card-component';
 
-class DatasetsList extends PureComponent {
+class ExploreDatasetsList extends PureComponent {
   render() {
     const { datasets, status, isFetching, error } = this.props;
 
@@ -24,13 +24,13 @@ class DatasetsList extends PureComponent {
   }
 }
 
-DatasetsList.defaultProps = {
+ExploreDatasetsList.defaultProps = {
   datasets: {},
   toggleInfo: () => {},
   toggleDataset: () => {}
 };
 
-DatasetsList.propTypes = {
+ExploreDatasetsList.propTypes = {
   datasets: PropTypes.array.isRequired,
   status: PropTypes.oneOf(['success', 'error']),
   error: PropTypes.object,
@@ -39,4 +39,4 @@ DatasetsList.propTypes = {
   toggleInfo: PropTypes.func
 };
 
-export default DatasetsList;
+export default ExploreDatasetsList;

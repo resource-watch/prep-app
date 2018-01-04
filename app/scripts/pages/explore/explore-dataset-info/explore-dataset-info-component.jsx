@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import Icon from 'components/ui/Icon';
 import Switch from 'components/Button/Switch';
 import VegaChart from 'components/Chart/VegaChart';
-import { getTitle, getInfo, getMetadata } from 'components/dataset-info/dataset-info-helper';
+import { getTitle, getInfo, getMetadata } from 'components/dataset-card/dataset-helper';
 
 class DatasetInfo extends PureComponent {
   static getHeader(dataset) {
@@ -49,7 +49,7 @@ class DatasetInfo extends PureComponent {
   }
 
   render() {
-    const { dataset, toggleDataset } = this.props;
+    const { dataset, toggleDataset, isFetching } = this.props;
     const info = getInfo(dataset);
     const hasLayer = !!(dataset.layer && dataset.layer.length);
     const hasWidget = !!(dataset.widget && dataset.widget.length);

@@ -1,4 +1,4 @@
-export const TABS_OPTIONS = [
+export const tabOptions = [
   {
     label: 'Core datasets',
     value: 'core_datasets'
@@ -9,4 +9,4 @@ export const TABS_OPTIONS = [
   }
 ];
 
-export const SET_TAB = 'explore_page/SET_TAB';
+export default { tabOptions };

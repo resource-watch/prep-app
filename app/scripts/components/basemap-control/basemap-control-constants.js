@@ -1,4 +1,4 @@
-export const basemaps = {
+export const basemapsSpec = {
   default: {
     id: 'default',
     value: config.basemapTileUrl || 'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
@@ -41,7 +41,12 @@ export const basemaps = {
   }
 };
 
-export const labels = {
+export const labelsSpec = {
+  none: {
+    id: 'none',
+    label: 'No labels',
+    value: 'no_labels'
+  },
   light: {
     id: 'light',
     label: 'Labels light',
@@ -49,12 +54,12 @@ export const labels = {
   },
   dark: {
     id: 'dark',
-    label: 'Labels light',
+    label: 'Labels dark',
     value: 'https://api.mapbox.com/styles/v1/jcawri/cj8lr4oo566da2rqrmuu9btmz/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamNhd3JpIiwiYSI6ImNqMDd6N2NybzAwMHcyd29iZWlsems0enEifQ.eIqQeyQn5oCLkyivGtiVLg'
   }
 };
 
-export const boundaries = {
+export const boundariesSpec = {
   dark: {
     id: 'dark',
     label: 'Boundaries',

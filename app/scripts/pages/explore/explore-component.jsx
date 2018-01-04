@@ -5,12 +5,12 @@ import MainNav from 'components/Navigation/MainNav';
 import Tabs from 'components/ui/Tabs';
 import Search from 'components/ui/Search';
 import Icon from 'components/ui/Icon';
-import DatasetLocationFilter from 'components/dataset-location-filter/dataset-location-filter';
-import CoreDatasetsList from 'components/core-datasets-list/core-datasets-list';
-import DatasetsList from 'components/datasets-list/datasets-list';
-import DatasetInfo from 'components/dataset-info/dataset-info';
-import Map from 'components/map/map';
-import { TABS_OPTIONS } from './explore-constants';
+import DatasetLocationFilter from './explore-location-filter';
+import CoreDatasetsList from './core-datasets-list';
+import DatasetsList from './explore-datasets-list';
+import DatasetInfo from './explore-dataset-info';
+import ExploreMap from './explore-map';
+import { tabOptions } from './explore-constants';
 
 class ExplorePage extends PureComponent {
   constructor(props) {
@@ -25,8 +25,8 @@ class ExplorePage extends PureComponent {
   }
 
   render() {
-    const { datasets, selectedDataset, isSidebarHidden,
-      currentTab, onChangeTab, filterQuery, toggleInfo } = this.props;
+    const { selectedDataset, isSidebarHidden,
+      currentTab, setTab, filterQuery, toggleInfo } = this.props;
 
     return (
       <div className="l-explore -theme-2">
@@ -52,9 +52,9 @@ class ExplorePage extends PureComponent {
               <h1 className="sidebar-title">Explore</h1>
               <Tabs
                 className="-center"
-                options={TABS_OPTIONS}
-                selected={currentTab || TABS_OPTIONS[0].value}
-                onChange={onChangeTab}
+                options={tabOptions}
+                selected={currentTab || tabOptions[0].value}
+                onChange={setTab}
               />
             </header>
 
@@ -72,7 +72,7 @@ class ExplorePage extends PureComponent {
                           <button
                             type="button"
                             className="c-new-button -light -transparent"
-                            onClick={() => onChangeTab('all_datasets')}
+                            onClick={() => setTab('all_datasets')}
                           >
                             Browse all datasets
                           </button>
@@ -84,11 +84,10 @@ class ExplorePage extends PureComponent {
                   <div className="datasets-list-content">
                     <div className="list-filters">
                       <div className="list-filters-container">
-                        <Search
-                          list={datasets}
+                        {<Search
                           onChange={filterQuery}
                           label="Search dataset"
-                        />
+                        />}
                       </div>
                     </div>
                     <DatasetsList />
@@ -113,8 +112,8 @@ class ExplorePage extends PureComponent {
           <DatasetInfo />
         </div>
 
-        <div className="c-explore-map">
-        </div>
+        {/* Map */}
+        <ExploreMap />
       </div>
     );
   }
@@ -127,10 +126,9 @@ ExplorePage.defaultProps = {
 };
 
 ExplorePage.propTypes = {
-  datasets: PropTypes.array,
   selectedDataset: PropTypes.object,
   currentTab: PropTypes.oneOf(['core_datasets', 'all_datasets']),
-  onChangeTab: PropTypes.func,
+  setTab: PropTypes.func,
   isSidebarHidden: PropTypes.bool,
   fetchDatasets: PropTypes.func,
   filterQuery: PropTypes.func,

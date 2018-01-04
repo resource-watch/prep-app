@@ -9,7 +9,7 @@ import Partnership from './components/Partnership';
 import EngagementWorkgroup from './components/Partnership/EngagementWorkgroup';
 import DataAccessibility from './components/Partnership/DataAccessibility';
 import PlatformWorkgroup from './components/Partnership/PlatformWorkgroup';
-import Explore from './pages/explore/explore';
+import Explore from './pages/explore';
 import DatasetDetail from './containers/Dataset';
 import FAQ from './components/FAQ';
 import Dashboards from './containers/Dashboards';

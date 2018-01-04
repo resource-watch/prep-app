@@ -16,22 +16,33 @@ class Map extends PureComponent {
     this.state = {
       loading: false
     };
+
+    this.triggerChange = this.triggerChange.bind(this);
   }
 
   componentDidMount() {
     this.initMap();
+    this.setEvents();
     // this.setBasemap();
   }
 
-  // componentDidUpdate() {
-  //   console.log(this.props.activeDatasets);
-  // }
+  setEvents() {
+    if (this.props.onChange && typeof this.props.onChange === 'function') {
+      this.map.on('zoomend', this.triggerChange);
+      this.map.on('moveend', this.triggerChange);
+    }
+  }
 
   setBasemap() {
     if (this.basemap) this.map.removeLayer(this.basemap);
     const { basemap } = this.props;
     this.basemap = L.tileLayer(basemap.value, basemap.options);
     this.map.addLayer(this.basemap);
+  }
+
+  triggerChange() {
+    const center = this.map.getCenter();
+    this.props.onChange({ zoom: this.map.getZoom(), lat: center.lat, lng: center.lng });
   }
 
   initMap() {
@@ -54,7 +65,8 @@ Map.propTypes = {
   mapOptions: PropTypes.object,
   basemap: PropTypes.object,
   children: PropTypes.any,
-  activeDatasets: PropTypes.array
+  // activeDatasets: PropTypes.array,
+  onChange: PropTypes.func
 };
 
 Map.defaultProps = {};

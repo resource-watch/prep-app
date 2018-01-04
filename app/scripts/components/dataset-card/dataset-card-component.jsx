@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 
 import Icon from 'components/ui/Icon';
 import Switch from 'components/Button/Switch';
-import { getTitle, getInfo } from 'components/dataset-info/dataset-info-helper';
+import { getTitle, getInfo } from 'components/dataset-card/dataset-helper';
 
 class DatasetCard extends PureComponent {
   render() {

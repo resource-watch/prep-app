@@ -1,8 +1,6 @@
-import Component from '../../components/Explore/BasemapControl';
+import Component from './basemap-control-component';
 import initialState from './basemap-control-initial-state';
-import * as actions from './basemap-control-actions';
-import * as reducers from './basemap-control-reducers';
 
-export { initialState, actions, reducers, Component };
+export { initialState };
 
 export default Component;

@@ -1,11 +1,4 @@
-export const FETCH_DATASETS_REQUEST = 'dataset_list/FETCH_DATASETS_REQUEST';
-export const FETCH_DATASETS_FAILURE = 'dataset_list/FETCH_DATASETS_FAILURE';
-export const FETCH_DATASETS_SUCCESS = 'dataset_list/FETCH_DATASETS_SUCCESS';
-export const TOGGLE_DATASET_LAYER = 'dataset_list/TOGGLE_DATASET_LAYER';
-export const TOGGLE_DATASET_INFO = 'dataset_list/TOGGLE_DATASET_INFO';
-export const FILTER_DATASETS_QUERY = 'dataset_list/FILTER_DATASETS_QUERY';
-
-export const CORE_DATASETS = [
+export const coreDatasets = [
   {
     id: 0,
     title: 'climate',
@@ -109,3 +102,5 @@ export const CORE_DATASETS = [
     ]
   }
 ];
+
+export default { coreDatasets };

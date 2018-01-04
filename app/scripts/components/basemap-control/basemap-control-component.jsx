@@ -6,6 +6,7 @@ import TetherComponent from 'react-tether';
 import Icon from 'components/ui/Icon';
 import Checkbox from 'components/Form/Checkbox';
 import RadioGroup from 'components/Form/RadioGroup';
+import { basemapsSpec, labelsSpec, boundariesSpec } from './basemap-control-constants';
 
 export default class BasemapControl extends React.Component {
   constructor(props) {
@@ -36,13 +37,11 @@ export default class BasemapControl extends React.Component {
   }
 
   onBasemapChange(basemap) {
-    const { basemapControl } = this.props;
-
-    this.props.setBasemap(basemapControl.basemaps[basemap]);
+    this.props.setBasemap(basemap);
   }
 
   onLabelChange(label) {
-    this.props.setLabels(label.checked);
+    this.props.setLabels(label);
   }
 
   onBoundariesChange(boundaries) {
@@ -66,8 +65,12 @@ export default class BasemapControl extends React.Component {
 
   // RENDER
   render() {
-    const { basemap, basemapControl } = this.props;
+    const { basemap, labels, boundaries } = this.props;
     const { active } = this.state;
+
+    const currentBasemap = basemapsSpec[basemap];
+    const currentLabels = labelsSpec[labels];
+    const currentBoundaries = boundariesSpec[boundaries];
 
     return (
       <div className="c-basemap-control">
@@ -90,8 +93,8 @@ export default class BasemapControl extends React.Component {
           {active &&
             <div className="basemap-options">
               <RadioGroup
-                options={Object.keys(basemapControl.basemaps).map((k) => {
-                  const bs = basemapControl.basemaps[k];
+                options={Object.keys(basemapsSpec).map((k) => {
+                  const bs = basemapsSpec[k];
                   return {
                     label: bs.label,
                     value: bs.id
@@ -99,16 +102,23 @@ export default class BasemapControl extends React.Component {
                 })}
                 name="basemap"
                 properties={{
-                  default: basemap.id
+                  default: currentBasemap.id
                 }}
                 onChange={this.onBasemapChange}
               />
+
               <div className="divisor" />
-              <Checkbox
+              <RadioGroup
+                options={Object.keys(labelsSpec).map((k) => {
+                  const ls = labelsSpec[k];
+                  return {
+                    label: ls.label,
+                    value: ls.id
+                  };
+                })}
+                name="labels"
                 properties={{
-                  name: 'label',
-                  title: 'Label',
-                  value: 'label'
+                  default: currentLabels.id
                 }}
                 onChange={this.onLabelChange}
               />
@@ -120,6 +130,7 @@ export default class BasemapControl extends React.Component {
                   title: 'Boundaries',
                   value: 'boundaries'
                 }}
+                value={currentBoundaries}
                 onChange={this.onBoundariesChange}
               />
             </div>
@@ -131,11 +142,9 @@ export default class BasemapControl extends React.Component {
 }
 
 BasemapControl.propTypes = {
-  // STORE
-  basemapControl: PropTypes.object,
-  basemap: PropTypes.object,
-
-  // ACTIONS
+  basemap: PropTypes.oneOf(['default', 'dark', 'light', 'satellite', 'terrain']),
+  labels: PropTypes.oneOf(['none', 'dark', 'light']),
+  boundaries: PropTypes.bool,
   setBasemap: PropTypes.func,
   setLabels: PropTypes.func,
   setBoundaries: PropTypes.func

@@ -1,13 +1,25 @@
 import React from 'react';
 import find from 'lodash/find';
 import PropTypes from 'prop-types';
+import LoadingSpinner from 'components/Loading/LoadingSpinner';
 import CollapsibleItem from 'components/ui/CollapsibleItem';
-import DatasetsList from 'components/datasets-list/datasets-list-component';
-import { CORE_DATASETS } from 'components/datasets-list/datasets-list-constants';
+import DatasetsList from '../explore-datasets-list/explore-datasets-list-component';
+import { coreDatasets } from './core-datasets-list-constants';
 
 const CoreDatasetsList = (props) => {
-  const { datasets, toggleDataset, toggleInfo } = props;
-  const content = CORE_DATASETS.map(g => (
+  const { datasets, toggleDataset, toggleInfo, error, isFetching } = props;
+
+  if (isFetching) return (<LoadingSpinner />);
+
+  if (error && !isFetching) {
+    return (
+      <div>
+        Something wrong.
+      </div>
+    );
+  }
+
+  const content = coreDatasets.map(g => (
     <article className="dataset-group" key={g.id}>
       <h1 className="group-title">{g.title}</h1>
       <h2 className="group-description">{g.description}</h2>
@@ -15,7 +27,7 @@ const CoreDatasetsList = (props) => {
         {g.subgroups.map((sg) => {
           const list = datasets.filter(d => sg.datasets.includes(d.id));
           const isActive = !find(list, { isLayerActive: true });
-          const content = (
+          const subContent = (
             <DatasetsList
               {...datasets}
               toggleDataset={toggleDataset}
@@ -35,7 +47,7 @@ const CoreDatasetsList = (props) => {
               key={sg.id}
               title={sg.title}
               description={datasetNames}
-              content={content}
+              content={subContent}
               hidden={isActive}
             />
           );

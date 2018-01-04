@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Tabs from 'components/ui/Tabs';
 
 // data
-import datasetLocations from './dataset-location-filter-data';
+import datasetLocations from './explore-location-filter-data';
 
 class DatasetLocationFilter extends PureComponent {
   render() {
