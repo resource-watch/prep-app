@@ -77,10 +77,10 @@ class EthiopiaInsight extends React.Component {
           <div className="c-article-module -no-top">
             <div className="row">
               <div className="column small-12 medium-12 flex align-right align-middle">
-                <button className="c-button -action highlighted -theme-3" onClick={() => this.setShareModal('http://climateserv.nsstc.nasa.gov', 'map')}>
+                <button className="c-button -action highlighted -theme-3" onClick={() => this.setShareModal('https://climateserv.servirglobal.net', 'map')}>
                   <span>Share</span>
                 </button>
-                <div className="c-button -icon flex" onClick={() => this.setShareModal('http://climateserv.nsstc.nasa.gov', 'map')}>
+                <div className="c-button -icon flex" onClick={() => this.setShareModal('https://climateserv.servirglobal.net', 'map')}>
                   <svg className="-icon" width="10" height="12" viewBox="0 0 10 12">
                     <title>icon-share</title>
                     <g fill="#25b5cd">
@@ -109,7 +109,7 @@ class EthiopiaInsight extends React.Component {
                   <li>The second compares seasonal drought forecasts in Tigray and Somali.</li>
                   <li>The third case study explores how the rainfall variability in past rainfall manifests in the forecasted rainfall over Gambela region.</li>
                 </ul>
-                <p>The goal of these case studies is to show how climate data provided by NASA SERVIR’s ClimateServ system (<a href="http://climateserv.nsstc.nasa.gov/">http://climateserv.nsstc.nasa.gov/</a>) can be used by end-users to understand historical and near-term seasonal forecasts as related to agricultural productivity. </p>
+                <p>The goal of these case studies is to show how climate data provided by NASA SERVIR’s ClimateServ system (<a href="https://climateserv.servirglobal.net">http://climateserv.nsstc.nasa.gov/</a>) can be used by end-users to understand historical and near-term seasonal forecasts as related to agricultural productivity. </p>
                 <p>Potential end-users include the following</p>
                 <ul>
                   <li><strong className="highlighted -theme-3">The Ethiopia Ministry of Agriculture and Natural Resources</strong>, which seeks to create an agricultural system that uses advanced technology to prevent poverty in its society</li>
