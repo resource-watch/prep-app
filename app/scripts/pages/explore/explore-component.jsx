@@ -20,6 +20,10 @@ class ExplorePage extends PureComponent {
     };
   }
 
+  componentWillMount() {
+    this.props.initialURLParams();
+  }
+
   componentDidMount() {
     this.props.fetchDatasets();
   }
@@ -132,7 +136,8 @@ ExplorePage.propTypes = {
   isSidebarHidden: PropTypes.bool,
   fetchDatasets: PropTypes.func,
   filterQuery: PropTypes.func,
-  toggleInfo: PropTypes.func
+  toggleInfo: PropTypes.func,
+  initialURLParams: PropTypes.func
 };
 
 export default ExplorePage;

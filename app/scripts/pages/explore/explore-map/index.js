@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { replace } from 'react-router-redux';
 import * as exploreActions from '../explore-actions';
 import * as reducers from './explore-map-reducers';
 import initialState from './explore-map-initial-state';
@@ -10,6 +11,14 @@ const mapStateToProps = state => ({
   boundaries: state.explorePage.map.boundaries
 });
 
+const mapDispatchToProps = dispatch => ({
+  ...exploreActions,
+  setBasemap: (basemap) => {
+    dispatch(exploreActions.setBasemap(basemap));
+    dispatch(exploreActions.updateURLParams());
+  }
+});
+
 export { reducers, initialState };
 
-export default connect(mapStateToProps, exploreActions)(Component);
+export default connect(mapStateToProps, mapDispatchToProps)(Component);

@@ -110,7 +110,6 @@ function Routes(props) {
     >
       <Route path={''} component={Root}>
         <Route path={'/'} component={App}>
-
           <IndexRoute component={Home} />
           <Route path={'about'}>
             <IndexRoute component={Partnership} />
@@ -130,7 +129,7 @@ function Routes(props) {
         </Route>
 
         <Route path="partners/:id" component={PartnerDetail} />
-        <Route path="explore(/:lat)(/:lng)(/:zoom)" component={Explore} />
+        <Route path="explore" component={Explore} />
         <Route path="dashboard/:slug(/:tab)" component={DashboardsDetail} />
         <Route path="insight/:slug" component={InsightsDetail} />
         <Route path="dataset/:slug" component={DatasetDetail} />
