@@ -12,7 +12,7 @@ export const coreDatasets = [{
       "title": "Precipitation",
       "slug": ["precipitation"],
       "datasets": ['d443beca-d199-4872-9d7d-d82c45e43151', 'de274c78-2194-4f7c-83d4-1282c31ca2a9', 'eadf93a6-58e7-4482-89d6-c9832d270a87'],
-      {
+    }, {
         "id": 2,
         "title": "Extreme events",
         "slug": ["flood", "landslide", "storm_surge"],

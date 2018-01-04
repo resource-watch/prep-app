@@ -10,4 +10,12 @@ const mapStateToProps = state => ({
 
 export { reducers, initialState };
 
-export default connect(mapStateToProps, exploreActions)(DatasetLocationFilter);
+const mapDispatchToProps = dispatch => ({
+  ...exploreActions,
+  setLocation: (location) => {
+    dispatch(exploreActions.setLocation(location));
+    dispatch(exploreActions.updateURLParams());
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(DatasetLocationFilter);

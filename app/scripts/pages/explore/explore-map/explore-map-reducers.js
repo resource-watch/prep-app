@@ -31,5 +31,3 @@ export const setMapParams = (state, { payload }) => ({
     lng: payload.lng
   }
 });
-
-export default { setBasemap };

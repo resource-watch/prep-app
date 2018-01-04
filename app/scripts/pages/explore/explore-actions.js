@@ -1,6 +1,20 @@
 import qs from 'query-string';
 import { createAction, createThunkAction } from 'redux-tools';
 import { replace } from 'react-router-redux';
+import { bindActionCreators } from 'redux';
+
+// Update URL
+export const updateURLParams = createThunkAction('updateURLParams', () => (dispatch, getState) => {
+  const { explorePage } = getState();
+  const query = {
+    ...explorePage.map,
+    tab: explorePage.tab,
+    filterQuery: explorePage.datasets.filterQuery,
+    location: explorePage.coreDatasets.location
+  };
+  console.log(query);
+  dispatch(replace({ pathname: '/explore', query }));
+});
 
 export const setTab = createAction('setTab');
 
@@ -38,17 +52,7 @@ export const setBasemap = createAction('setBasemap');
 export const setLabels = createAction('setLabels');
 export const setBoundaries = createAction('setBoundaries');
 
-export const updateURLParams = createThunkAction('updateURLParams', () => (dispatch, getState) => {
-  const { explorePage } = getState();
-  const query = {
-    ...explorePage.map,
-    tab: explorePage.tab,
-    filterQuery: explorePage.datasets.filterQuery,
-    location: explorePage.coreDatasets.location
-  };
-  dispatch(replace({ pathname: '/explore', query }));
-});
-
+// URL
 export const initialURLParams = createThunkAction('initialURLParams', () => (dispatch, getState) => {
   const { routing } = getState();
   const {
@@ -56,11 +60,12 @@ export const initialURLParams = createThunkAction('initialURLParams', () => (dis
     zoom, lat, lng,
     location
   } = routing.locationBeforeTransitions.query;
+  const query = routing.locationBeforeTransitions.query.filterQuery;
 
-  dispatch(setMapParams({ zoom: parseInt(zoom, 10), lat: parseFloat(lat), lng: parseFloat(lng) }));
-  dispatch(setBasemap(basemap));
-  dispatch(setLabels(labels));
-  dispatch(setBoundaries(boundaries === 'true'));
-  dispatch(setLocation(location));
-  dispatch(filterQuery(routing.locationBeforeTransitions.filterQuery));
+  if (zoom && lat && lng) dispatch(setMapParams({ zoom: parseInt(zoom, 10), lat: parseFloat(lat), lng: parseFloat(lng) }));
+  if (basemap) dispatch(setBasemap(basemap));
+  if (labels) dispatch(setLabels(labels));
+  if (boundaries) dispatch(setBoundaries(boundaries === 'true'));
+  if (location) dispatch(setLocation(location));
+  if (query) dispatch(filterQuery(query));
 });

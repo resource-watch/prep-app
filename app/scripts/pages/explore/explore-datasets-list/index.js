@@ -15,4 +15,12 @@ const mapStateToProps = state => ({
   selectedDataset: getSelectedDataset(state)
 });
 
-export default connect(mapStateToProps, exploreActions)(Component);
+const mapDispatchToProps = dispatch => ({
+  ...exploreActions,
+  filterQuery: (query) => {
+    dispatch(exploreActions.filterQuery(query));
+    dispatch(exploreActions.updateURLParams());
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Component);
