@@ -14,7 +14,6 @@ function Partners(props) {
             border={'neutral'}
           />
           <h3 className="partner-name">{partner.name}</h3>
-          <p className="partner-desc">{partner.description}</p>
           <Link to={`/partners/${partner.id}`} className="partner-link">Read more</Link>
         </div>
       </div>
