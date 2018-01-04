@@ -2,13 +2,23 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Map from 'components/map';
 import BasemapControl from 'components/basemap-control';
+import { basemapsSpec, labelsSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
 
 class ExploreMap extends PureComponent {
   render() {
     const { setMapParams, basemap, labels, boundaries, setBasemap, setLabels, setBoundaries } = this.props;
+    const currentBasemap = basemapsSpec[basemap];
+    const currentLabels = labelsSpec[labels];
+    const currentBoundaries = boundaries ? boundariesSpec.dark : {};
+
     return (
       <div className="c-explore-map">
-        <Map onChange={setMapParams}>
+        <Map
+          basemap={currentBasemap}
+          labels={currentLabels}
+          boundaries={currentBoundaries}
+          onChange={setMapParams}
+        >
           <BasemapControl
             basemap={basemap}
             setBasemap={setBasemap}

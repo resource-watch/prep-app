@@ -23,7 +23,13 @@ class Map extends PureComponent {
   componentDidMount() {
     this.initMap();
     this.setEvents();
-    // this.setBasemap();
+    this.setBasemap();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.basemap !== this.props.basemap) this.setBasemap();
+    if (prevProps.labels !== this.props.labels) this.setLabels();
+    if (prevProps.boundaries !== this.props.boundaries) this.setBoundaries();
   }
 
   setEvents() {
@@ -36,8 +42,28 @@ class Map extends PureComponent {
   setBasemap() {
     if (this.basemap) this.map.removeLayer(this.basemap);
     const { basemap } = this.props;
-    this.basemap = L.tileLayer(basemap.value, basemap.options);
-    this.map.addLayer(this.basemap);
+    if (basemap) {
+      this.basemap = L.tileLayer(basemap.value, { ...basemap.options, zIndex: 0 });
+      this.map.addLayer(this.basemap);
+    }
+  }
+
+  setLabels() {
+    if (this.labels) this.map.removeLayer(this.labels);
+    const { labels } = this.props;
+    if (labels) {
+      this.labels = L.tileLayer(labels.value, { ...labels.options, zIndex: 10001 });
+      this.map.addLayer(this.labels);
+    }
+  }
+
+  setBoundaries() {
+    if (this.boundaries) this.map.removeLayer(this.boundaries);
+    const { boundaries } = this.props;
+    if (boundaries && Object.keys(boundaries).length) {
+      this.boundaries = L.tileLayer(boundaries.value, { ...boundaries.options, zIndex: 10000 });
+      this.map.addLayer(this.boundaries);
+    }
   }
 
   triggerChange() {
@@ -64,6 +90,8 @@ class Map extends PureComponent {
 Map.propTypes = {
   mapOptions: PropTypes.object,
   basemap: PropTypes.object,
+  labels: PropTypes.object,
+  boundaries: PropTypes.object,
   children: PropTypes.any,
   // activeDatasets: PropTypes.array,
   onChange: PropTypes.func

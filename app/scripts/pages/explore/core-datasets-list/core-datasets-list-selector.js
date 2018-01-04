@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import { coreDatasets } from './core-datasets-list-constants';
 
 const getAllDatasets = state => state.explorePage.datasets.items;
-const getLocationFilter = state => state.explorePage.location;
+const getLocationFilter = state => state.explorePage.coreDatasets.location;
 
 export const getCoreDatasets = createSelector(
   [getAllDatasets, getLocationFilter],
