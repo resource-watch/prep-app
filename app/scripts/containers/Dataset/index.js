@@ -12,7 +12,7 @@ const mapStateToProps = (state, { params, route }) => ({
 
 const mapDispatchToProps = dispatch => ({
   getDatasetData: (slug) => {
-    dispatch(getDatasetByIdOrSlug(slug, ['metadata', 'widget']));
+    dispatch(getDatasetByIdOrSlug(slug, ['metadata', 'widget', 'layer']));
   }
 });
 

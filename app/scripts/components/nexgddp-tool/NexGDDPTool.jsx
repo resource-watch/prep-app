@@ -8,12 +8,14 @@ import LocationSearch from './location-search/LocationSearch';
 import TimeseriesChart from './tool-chart/TimeseriesChart';
 
 // Redux
-import { getSelectorsInfo, getUrlState, setDefaultState, setMapMode } from 'actions/nexgddptool';
+import { getSelectorsInfo, getUrlState, setDefaultState, setMapMode, setDataset } from 'actions/nexgddptool';
 
 import './style.scss';
 
 class NexGDDPTool extends React.PureComponent {
   componentDidMount() {
+    this.props.setDataset(this.props.dataset);
+
     this.props.getSelectorsInfo()
       .then(() => this.props.restoreState())
       .then(() => this.props.setDefaultState());
@@ -47,10 +49,6 @@ class NexGDDPTool extends React.PureComponent {
               { isComparing && (
                 <div>
                   <button
-                    className={`c-button -inline ${mapMode === 'difference' ? '-active' : ''}`}
-                    onClick={() => this.switchMapView('difference')}
-                  >Difference</button>
-                  <button
                     className={`c-button -inline ${mapMode === 'side-by-side' ? '-active' : ''}`}
                     onClick={() => this.switchMapView('side-by-side')}
                   >Side by side</button>
@@ -58,6 +56,10 @@ class NexGDDPTool extends React.PureComponent {
                     className={`c-button -inline ${mapMode === 'toggle' ? '-active' : ''}`}
                     onClick={() => this.switchMapView('toggle')}
                   >Toggle</button>
+                  <button
+                    className={`c-button -inline ${mapMode === 'difference' ? '-active' : ''}`}
+                    onClick={() => this.switchMapView('difference')}
+                  >Difference</button>
                 </div>
               )}
             </div>
@@ -91,10 +93,12 @@ class NexGDDPTool extends React.PureComponent {
 }
 
 NexGDDPTool.propTypes = {
+  dataset: PropTypes.string,
   getSelectorsInfo: PropTypes.func,
   restoreState: PropTypes.func,
   setDefaultState: PropTypes.func,
   setMapMode: PropTypes.func,
+  setDataset: PropTypes.func,
   isComparing: PropTypes.bool,
   marker: PropTypes.array,
   mapMode: PropTypes.oneOf(['difference', 'side-by-side', 'toggle'])
@@ -109,6 +113,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getSelectorsInfo: () => dispatch(getSelectorsInfo()),
   restoreState: () => dispatch(getUrlState()),
+  setDataset: (slug) => dispatch(setDataset(slug)),
   setDefaultState: () => dispatch(setDefaultState()),
   setMapMode: (...params) => dispatch(setMapMode(...params))
 });

@@ -34,11 +34,52 @@ class CompareMap extends React.PureComponent {
     });
 
     window.requestAnimationFrame(() => {
+      this.sideBySideControl = L.control.sideBySide();
+      this.sideBySideControl.addTo(map);
+
+      // Add layers
       leftLayer.addTo(map);
       rightLayer.addTo(map);
-      L.control.sideBySide(leftLayer, rightLayer).addTo(map);
+
+      this.sideBySideControl
+        .setLeftLayers(leftLayer)
+        .setRightLayers(rightLayer);
+
       map.invalidateSize();
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { layers: nextLayers } = nextProps;
+    const { layers: currentLayers } = this.props;
+
+    const hasChanged = nextLayers.some((l, i) => l.url !== (currentLayers[i] || {}).url);
+
+    if (hasChanged) {
+      // Not sure about this...
+      const map = this.mapElement.leafletElement;
+      const leftLayer = L.tileLayer(nextLayers[0].url, {
+        maxZoom: 10,
+        minZoom: 3
+      });
+
+      const rightLayer = L.tileLayer(nextLayers[1].url, {
+        minZoom: 3,
+        maxZoom: 10
+      });
+
+      window.requestAnimationFrame(() => {
+        // Add layers
+        leftLayer.addTo(map);
+        rightLayer.addTo(map);
+
+        this.sideBySideControl
+          .setLeftLayers(leftLayer)
+          .setRightLayers(rightLayer);
+
+        map.invalidateSize();
+      });
+    }
   }
 
   onViewportChanged({ zoom, center }) {

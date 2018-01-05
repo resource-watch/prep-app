@@ -1,6 +1,7 @@
 import { replace } from 'react-router-redux';
 import fieldsMock from 'components/nexgddp-tool/mocks/fields.json';
 import {
+  NEXGDDP_SET_DATASET,
   NEXGDDP_SET_MAP_ZOOM,
   NEXGDDP_SET_MAP_CENTER,
   NEXGDDP_SET_MARKER_POSITION,
@@ -54,6 +55,16 @@ export function updateUrl() {
 
     dispatch(replace(url));
   };
+}
+
+export function setDataset(id) {
+  return (dispatch) => {
+    dispatch({
+      type: NEXGDDP_SET_DATASET,
+      payload: id
+    });
+  };
+
 }
 
 export function setMapLayers(layers) {

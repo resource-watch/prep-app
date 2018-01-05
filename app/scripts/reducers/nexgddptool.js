@@ -1,4 +1,5 @@
 import {
+  NEXGDDP_SET_DATASET,
   NEXGDDP_SET_MAP_ZOOM,
   NEXGDDP_SET_MAP_CENTER,
   NEXGDDP_SET_MARKER_POSITION,
@@ -28,7 +29,7 @@ const initialState = {
   marker: undefined,
   // Mode of the map
   /** @type {'difference'|'side-by-side'|'toggle'} mapMode */
-  mapMode: 'difference',
+  mapMode: 'side-by-side',
   // Mode of the graph
   /** @type {'timeseries'|'seasonal'} */
   graphMode: 'timeseries',
@@ -64,6 +65,10 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case NEXGDDP_SET_DATASET: {
+      return Object.assign({}, state, { dataset: action.payload });
+    }
+
     case NEXGDDP_SET_MAP_ZOOM: {
       return Object.assign({}, state, {
         map: Object.assign({}, state.map, { zoom: action.payload })

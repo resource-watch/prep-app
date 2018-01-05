@@ -36,6 +36,9 @@ class DifferenceMap extends React.PureComponent {
 
     return (
       <div className="c-tool-map">
+        <div className="not-ready">
+          Not available
+        </div>
         <Map
           style={{ height: 440 }}
           {...mapOptions}

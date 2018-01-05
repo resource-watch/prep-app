@@ -234,7 +234,9 @@ class DatasetDetail extends React.Component {
           {(data.id && nexGDDPDatasets.includes(data.id)) ?
             <div className="row">
               <div className="columns small-12">
-                <NexGDDPTool />
+                <NexGDDPTool
+                  dataset={data.id}
+                />
               </div>
             </div> :
             <WidgetEditor
