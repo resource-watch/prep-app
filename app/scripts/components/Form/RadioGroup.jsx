@@ -30,11 +30,11 @@ class RadioGroup extends FormElement {
   }
 
   render() {
-    const { properties, options } = this.props;
+    const { properties, options, name } = this.props;
     const { value } = this.state;
 
     return (
-      <div className={`c-radio-box ${this.props.className}`}>
+      <div className={`c-radio-box ${this.props.className || ''}`}>
         {options.map(item => (
           <div key={`${item.value}`} className="c-radio">
             <input

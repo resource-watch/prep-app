@@ -1,5 +1,4 @@
 import find from 'lodash/find';
-import filter from 'lodash/filter';
 
 import {
   DATASET_LIST_RECEIVED,
@@ -15,12 +14,14 @@ import {
   MAP_LAYERS_ORDER_CHANGED,
   MAP_LAYER_OPACITY_CHANGED,
   SET_LAYERGROUP_ACTIVE_LAYER,
-  CHANGE_TAB
+  CHANGE_TAB,
+  TOGGLE_DATASET_ACTIVE
 } from '../constants';
 
 const initialState = {
   list: [],
   filteredList: [],
+  activeDatasets: [],
   details: {},
   widgets: {},
   layers: {},
@@ -121,13 +122,15 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, { filteredList, filters: filtersChoosen });
     }
     case TOGGLE_LAYER_STATUS: {
-      const filteredList = state.filteredList.slice(0);
+      const filteredList = state.list.slice(0);
       const selectedDataset = find(filteredList, { id: action.payload });
 
       if (selectedDataset) {
         for (let f = 0; f < filteredList.length; f++) {
           const element = filteredList[f];
-          if (selectedDataset.id === element.id) selectedDataset.active = !filteredList[f].active;
+          if (selectedDataset.id === element.id) {
+            selectedDataset.active = !filteredList[f].active;
+          }
         }
       }
 
@@ -144,7 +147,7 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, { filteredList });
     }
     case MAP_LAYERS_ORDER_CHANGED: {
-      const datasets = state.filteredList.slice(0);
+      const datasets = [...state.list];
       const idsOrdered = action.payload.map(item => item.dataset);
 
       for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
@@ -156,7 +159,7 @@ export default function (state = initialState, action) {
         }
       }
 
-      return Object.assign({}, state, { filteredList: datasets });
+      return Object.assign({}, state, { list: datasets });
     }
     case MAP_LAYER_OPACITY_CHANGED: {
       const datasets = state.filteredList.slice(0);
@@ -184,6 +187,9 @@ export default function (state = initialState, action) {
     }
     case CHANGE_TAB: {
       return Object.assign({}, state, { tab: action.payload });
+    }
+    case TOGGLE_DATASET_ACTIVE: {
+      return ({ ...state, ...{ activeDatasets: action.payload } });
     }
     default:
       return state;

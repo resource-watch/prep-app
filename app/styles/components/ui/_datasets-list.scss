@@ -11,23 +11,26 @@
   }
 
   .list-filters {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 22px;
+    padding: 20px 40px;
 
     &.-fixed {
       position: fixed;
       top: 0;
+      left: 0;
       width: 100%;
       background-color: $white;
       z-index: 1;
-      box-shadow: 0 20px 30px 0 rgba($black, .1);
+      border-bottom: 1px solid rgba(26,28,34,0.1);
     }
 
     &.-open {
       background-color: $pale-white;
-      box-shadow: 0;
+    }
+
+    .list-filters-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .btn-filters {
@@ -50,21 +53,22 @@
   .filters-content {
     &.-fixed {
       position: fixed;
-      top: 58px;
+      top: 66px;
+      left: 0;
       width: 100%;
       z-index: 1;
+      box-shadow: 0 20px 30px 0 rgba(0,0,0,0.1);
     }
   }
 
   .datasets-list-content {
     display: flex;
     flex-flow: column;
+    // padding: 0 40px;
   }
 
   .list-container {
-    &.-padding {
-      padding: 3px 22px 12px;
-    }
+    // padding: 0 40px;
   }
 
   // .c-dataset-item {
@@ -82,7 +86,7 @@
     }
 
     .group-description {
-      margin: 0 0 10px;
+      margin: 0 0 20px;
       font-size: 15px;
       font-family: $base-font-family;
       font-weight: $font-weight-regular;

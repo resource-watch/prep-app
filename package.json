@@ -21,9 +21,10 @@
   "license": "MIT",
   "devDependencies": {
     "chai": "^3.5.0",
-    "eslint": "^4.12.1",
+    "eslint": "4.13.1",
     "eslint-config-vizzuality": "1.0.7",
     "eslint-import-resolver-webpack": "^0.8.3",
+    "eslint-plugin-import": "^2.8.0",
     "mocha": "^3.0.0"
   },
   "dependencies": {
@@ -34,6 +35,7 @@
     "babel-plugin-transform-decorators-legacy": "1.3.4",
     "babel-preset-env": "1.6.1",
     "babel-preset-react": "6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "babel-preset-stage-3": "6.24.1",
     "base64-js": "1.2.1",
     "bitly": "4.1.1",
@@ -73,22 +75,24 @@
     "react": "15.6.2",
     "react-addons-css-transition-group": "15.5.2",
     "react-dom": "15.6.2",
+    "react-dropdown-tree-select": "^1.0.4",
     "react-geosuggest": "2.6.0",
     "react-leaflet": "1.7.8",
     "react-markdown": "^3.1.1",
-    "react-redux": "4.4.8",
+    "react-redux": "5.0.6",
     "react-redux-toastr": "^7.1.6",
     "react-router": "2.8.1",
     "react-router-redux": "4.0.8",
     "react-router-scroll": "0.2.1",
     "react-scroll": "1.6.1",
+    "react-select": "1.1.0",
     "react-slick": "0.15.0",
     "react-sortable-hoc": "0.0.7",
     "react-tether": "0.5.7",
     "redux": "3.6.0",
     "redux-devtools-extension": "2.13.2",
     "redux-thunk": "2.2.0",
-    "redux-tools": "git+https://git@github.com/vectorsize/redux-tools.git#master",
+    "redux-tools": "vectorsize/redux-tools",
     "request": "2.81.0",
     "reselect": "3.0.1",
     "sass-loader": "6.0.6",
@@ -105,6 +109,6 @@
     "webpack-dev-middleware": "1.12.2",
     "webpack-merge": "4.1.0",
     "whatwg-fetch": "2.0.3",
-    "widget-editor": "0.0.8"
+    "widget-editor": "0.0.9"
   }
 }

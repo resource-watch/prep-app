@@ -39,6 +39,10 @@ $sidebar-padding-content: 20px;
         width: 100%;
         height: 100%;
         background-color: $white;
+
+        .c-icon {
+          fill: $main-color;
+        }
       }
     }
   }

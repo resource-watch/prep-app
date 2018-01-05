@@ -3,6 +3,11 @@
   .slick-slider {
     padding: $small-margin 0;
     margin-bottom: 0;
+
+    .slick-track {
+      display: flex;
+      align-items: center;
+    }
   }
 
   .logo {

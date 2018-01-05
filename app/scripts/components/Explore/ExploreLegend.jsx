@@ -9,7 +9,7 @@ import Icon from '../ui/Icon';
 function getLinesLegend(layer) {
   return (<div className="legend -line">
     <div className="row">
-      {layer.legend_config.items.map((item, index) => (
+      {layer.legendConfig.items.map((item, index) => (
         <div className="column small-6" key={index}>
           <div className="item">
             <span className="color" style={{ backgroundColor: item.color }} />
@@ -24,7 +24,7 @@ function getLinesLegend(layer) {
 function getBasicLegend(layer) {
   return (<div className="legend -basic">
     <div className="row">
-      {layer.legend_config.items.map((item, index) => (
+      {layer.legendConfig.items.map((item, index) => (
         <div className="column small-6" key={index}>
           <div className="item">
             {item.icon
@@ -42,7 +42,7 @@ function getBasicLegend(layer) {
 function getGradientLegend(layer) {
   const colors = [];
   const values = [];
-  layer.legend_config.items.forEach((item, index) => {
+  layer.legendConfig.items.forEach((item, index) => {
     colors.push(item.color);
     values.push(<span key={index}>{item.value || item.name}</span>);
   });
@@ -63,7 +63,7 @@ function getGradientLegend(layer) {
 
 function getCloroplethLegend(layer) {
   const columns = [];
-  layer.legend_config.items.forEach((item, index) => {
+  layer.legendConfig.items.forEach((item, index) => {
     columns.push(
       <div className="column" key={index}>
         <span className="-color" style={{ backgroundColor: item.color }} />
@@ -79,7 +79,7 @@ function getCloroplethLegend(layer) {
 }
 
 function getLegend(layer) {
-  const type = layer && layer.legend_config && layer.legend_config.type || '';
+  const type = layer && layer.legendConfig && layer.legendConfig.type || '';
 
   switch (type) {
     case 'lines':
@@ -95,9 +95,9 @@ function getLegend(layer) {
   }
 }
 
-const DragHandle = SortableHandle(() => <span className="handler">
+const DragHandle = SortableHandle(() => (<span className="handler">
   <Icon name="icon-drag-dots" className="-medium" />
-</span>);
+</span>));
 
 const SortableItem = SortableElement(({ value }) => value);
 
@@ -354,8 +354,8 @@ class DataMapLegend extends React.Component {
               <div className="">
                 <span className="title">{layer.name}
                   <span className="-units">
-                    {layer && layer.legend_config && layer.legend_config.unit &&
-                    ` (${layer.legend_config.unit})`}
+                    {layer && layer.legendConfig && layer.legendConfig.unit &&
+                    ` (${layer.legendConfig.unit})`}
                   </span>
                 </span>
               </div>
@@ -387,7 +387,7 @@ class DataMapLegend extends React.Component {
               </svg>
             </span>
             <span className="action close" onClick={() => this.toggleToolbarStatus()}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="32" viewBox="0 0 20 32"><title>arrow-left</title><path d="M20.364 5.071L16 0 0 16l16 16 4.364-5.071L8.221 16z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="32" viewBox="0 0 20 32"><title>arrow-left</title><path d="M20.364 5.071L16 0 0 16l16 16 4.364-5.071L8.221 16z" /></svg>
             </span>
           </div>
 
@@ -415,7 +415,7 @@ class DataMapLegend extends React.Component {
                 </svg>
               </span>
               <span className="action close" onClick={() => this.toggleToolbarStatus()}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="32" viewBox="0 0 20 32"><title>arrow-left</title><path d="M20.364 5.071L16 0 0 16l16 16 4.364-5.071L8.221 16z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="32" viewBox="0 0 20 32"><title>arrow-left</title><path d="M20.364 5.071L16 0 0 16l16 16 4.364-5.071L8.221 16z" /></svg>
               </span>
             </div>
           }

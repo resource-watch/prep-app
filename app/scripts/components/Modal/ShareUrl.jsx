@@ -3,7 +3,6 @@ import Button from '../Button/Button';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
 class ShareUrl extends React.Component {
-
   constructor() {
     super();
     this.state = {

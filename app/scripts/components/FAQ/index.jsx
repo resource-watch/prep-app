@@ -3,7 +3,6 @@ import Article from '../Content/Article';
 import { Link } from 'react-router';
 
 class FAQ extends React.Component {
-
   render() {
     return (
       <div className="c-faq">
@@ -25,7 +24,8 @@ class FAQ extends React.Component {
           <h3>Where do I go if I have general questions about climate change?</h3>
           <p>You may find general information about the impacts of climate
             change around the world at the <a
-              href="http://www.ipcc.ch/organization/organization.shtml" target="_blank"
+              href="http://www.ipcc.ch/organization/organization.shtml"
+              target="_blank"
             >Intergovernmental
               Panel on Climate Change (IPCC)</a> and in the United States in the <a
                 href="http://nca2014.globalchange.gov/" target="_blank"
@@ -105,14 +105,16 @@ class FAQ extends React.Component {
             development. To learn more about this feature or to apply to be a pilot user, see the <Link to="/create">Create</Link> page.
           </p>
           <p>If you are interested in data storytelling, you may wish to try Esri <a
-            href="https://storymaps.arcgis.com/en/" target="_blank"
+            href="https://storymaps.arcgis.com/en/"
+            target="_blank"
           >Story Maps</a>.</p>
 
           <h3>Which web browser should I use to explore this site?</h3>
           <p>For the best experience, we recommend using a modern web browser such as <a
             href="https://www.google.com/chrome/"
           >Chrome</a> or <a
-            href="https://www.mozilla.org/en-US/firefox/new/" target="_blank"
+            href="https://www.mozilla.org/en-US/firefox/new/"
+            target="_blank"
           >Firefox</a>.</p>
 
           <h3>May I have permission to use the content in your site?</h3>
@@ -128,7 +130,6 @@ class FAQ extends React.Component {
       </div>
     );
   }
-
 }
 
 export default FAQ;

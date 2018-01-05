@@ -5,3 +5,7 @@ export const SELECT_SEARCH_OPTIONS = {
   minMatchCharLength: 1,
   keys: ['name', 'label']
 };
+
+export default {
+  SELECT_SEARCH_OPTIONS
+};

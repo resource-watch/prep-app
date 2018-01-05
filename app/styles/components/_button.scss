@@ -33,7 +33,10 @@
     color: $button-font-color-inverse;
     background-color: $main-color;
 
-    &.-secondary-color { background-color: $secondary-color; }
+    &.-secondary-color {
+      background-color: $secondary-color;
+      color: $main-color;
+    }
   }
 
   &.-action {
@@ -140,7 +143,7 @@
       right: 100%;
 
       .c-icon {
-        transform: rotate(90deg);        
+        transform: rotate(90deg);
       }
 
       transform: translate(100%, -50%);
@@ -183,11 +186,21 @@
     }
 
     & .arrow-label {
-      position: absolute; 
-      overflow: hidden; 
-      clip: rect(0 0 0 0); 
-      height: 1px; width: 1px; 
-      margin: -1px; padding: 0; border: 0; 
+      position: absolute;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      height: 1px; width: 1px;
+      margin: -1px; padding: 0; border: 0;
+    }
+  }
+
+  .c-icon {
+    fill: $link-font-color;
+  }
+
+  &.-secondary-color {
+    .c-icon {
+      fill: $main-color;
     }
   }
 }

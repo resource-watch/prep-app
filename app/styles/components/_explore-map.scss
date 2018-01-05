@@ -1,14 +1,21 @@
 .c-explore-map {
-  top: 0;
+  top: 60px;
   left: 0;
+  bottom: 0;
   width: 100%;
-  height: 100%;
   position: absolute;
   z-index: 0;
-  > .map {
-    background: $inverse-bg-color;
+
+  .map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
+
+    background: $inverse-bg-color;
   }
+
   .c-loading-spinner {
     top: $header-height-short;
     left: $sidebar-width;
@@ -58,5 +65,9 @@
       position: relative;
       border-radius: 0;
     }
+  }
+
+  .leaflet-control-attribution a {
+    color: $main-color;
   }
 }

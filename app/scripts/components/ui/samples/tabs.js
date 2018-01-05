@@ -1,4 +1,3 @@
-
 export const TABS_SAMPLE = {
   options: [
     {
@@ -13,3 +12,5 @@ export const TABS_SAMPLE = {
   selected: 'tab2',
   onChange: () => {}
 };
+
+export default { TABS_SAMPLE };

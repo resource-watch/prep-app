@@ -3,7 +3,6 @@ import ContentCard from './ContentCard';
 import IFrame from '../IFrame';
 
 class EmbedCard extends React.Component {
-
   setShareModal() {
     this.props.setShareModal(this.props.url, 'widget', this.props.data.slug);
   }

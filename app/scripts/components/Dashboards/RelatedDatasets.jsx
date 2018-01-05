@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router';
 
 class RelatedDatasets extends React.Component {
-
   componentWillMount() {
     for (let i = 0, slugsLength = this.props.slugs.length; i < slugsLength; i++) {
       if (this.props.slugs[i]) this.props.getDatasetByIdOrSlug(this.props.slugs[i], ['metadata']);

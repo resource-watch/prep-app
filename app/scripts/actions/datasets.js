@@ -11,7 +11,8 @@ import {
   DATASET_LAYER_RECEIVED,
   DATASET_SET_FILTER,
   SET_LAYERGROUP_ACTIVE_LAYER,
-  CHANGE_TAB
+  CHANGE_TAB,
+  TOGGLE_DATASET_ACTIVE
 } from '../constants';
 import { updateURL } from './links';
 
@@ -88,11 +89,31 @@ export function getDatasetLayer(dataset) {
 //   };
 // }
 
+export function toggleActiveDatasets(dataset) {
+  return (dispatch, getState) => {
+    const { activeDatasets } = getState().datasets;
+    const { id } = dataset;
+    let newActiveDatasets = [...activeDatasets];
+
+    if (activeDatasets.includes(id)) {
+      newActiveDatasets = activeDatasets.filter(datasetId => datasetId !== id);
+    } else {
+      newActiveDatasets.push(id);
+    }
+
+    dispatch({
+      type: TOGGLE_DATASET_ACTIVE,
+      payload: newActiveDatasets
+    });
+  };
+}
+
 export function getActiveDatasetLayers(datasets) {
   return (dispatch) => {
     for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
       if (datasets[i].active) {
         dispatch(setDatasetActive(datasets[i]));
+        dispatch(toggleActiveDatasets(datasets[i]));
       }
     }
   };
@@ -109,7 +130,7 @@ export function setDatasetsTagFilter(filter, tag) {
 }
 
 export function getDatasets(defaultActiveLayers) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     const env = config.datasetEnv || 'production';
     fetch(`${config.apiUrlRW}/dataset?application=prep&includes=metadata,layer,vocabulary&page[size]=999&status=saved&env=${env}&published=true`)
       .then((response) => {
@@ -119,7 +140,9 @@ export function getDatasets(defaultActiveLayers) {
       .then((data) => {
         deserializer.deserialize(data, (err, datasetData) => {
           if (err) throw new Error('Error deserializing json api');
-          const datasets = datasetData || [];
+          // Ñapa: We have to conservate layer config
+          const datasets = (datasetData || []).map((d, i) => Object.assign(d, { layer: data.data[i].attributes.layer }));
+
           if (datasets.length) {
             for (let i = datasets.length - 1; i >= 0; i--) {
               if (defaultActiveLayers) {
