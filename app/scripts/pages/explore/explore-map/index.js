@@ -10,26 +10,6 @@ const mapStateToProps = state => ({
   boundaries: state.explorePage.map.boundaries
 });
 
-const mapDispatchToProps = {
-  ...exploreActions,
-  setBasemap: basemap => (dispatch) => {
-    dispatch(exploreActions.setBasemap(basemap));
-    dispatch(exploreActions.updateURLParams());
-  },
-  setLabels: labels => (dispatch) => {
-    dispatch(exploreActions.setLabels(labels));
-    dispatch(exploreActions.updateURLParams());
-  },
-  setBoundaries: boundaries => (dispatch) => {
-    dispatch(exploreActions.setBoundaries(boundaries));
-    dispatch(exploreActions.updateURLParams());
-  },
-  setMapParams: mapParams => (dispatch) => {
-    dispatch(exploreActions.setMapParams(mapParams));
-    dispatch(exploreActions.updateURLParams());
-  }
-};
-
 export { reducers, initialState };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps, exploreActions)(Component);

@@ -16,5 +16,6 @@ export default {
   [actions.filterQuery]: datasetsListReducers.filterQuery,
   [actions.toggleDataset]: datasetsListReducers.toggleDataset,
   [actions.toggleInfo]: datasetsListReducers.toggleInfo,
-  [actions.setActiveDatasets]: datasetsListReducers.setActiveDatasets
+  [actions.setActiveDatasets]: datasetsListReducers.setActiveDatasets,
+  [actions.updateActiveDatasets]: datasetsListReducers.updateActiveDatasets
 };

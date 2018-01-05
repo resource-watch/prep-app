@@ -1,23 +1,36 @@
 import qs from 'query-string';
+import debounce from 'lodash/debounce';
 import { createAction, createThunkAction } from 'redux-tools';
 import { replace } from 'react-router-redux';
 
 // Update URL
 export const updateURLParams = createThunkAction('updateURLParams', () => (dispatch, getState) => {
   const { explorePage } = getState();
+  const { tab, datasets, coreDatasets } = explorePage;
+  const { location } = coreDatasets;
+  const { filterQuery, activeDatasets } = datasets;
+  const activeDatasetsResult = activeDatasets && activeDatasets.length ?
+    activeDatasets.map(({ id, opacity, visibility, zIndex }) => `${id}|${opacity}|${visibility}|${zIndex}`) : [];
+
   const query = {
     ...explorePage.map,
-    tab: explorePage.tab,
-    filterQuery: explorePage.datasets.filterQuery,
-    location: explorePage.coreDatasets.location
+    tab,
+    filterQuery,
+    location,
+    activeDatasets: activeDatasetsResult
   };
+
   dispatch(replace({ pathname: '/explore', query }));
 });
 
-export const setTab = createAction('setTab');
+export const setTab = createThunkAction('setTab', () => (dispatch) => {
+  dispatch(updateURLParams());
+});
 
 // Location filter
-export const setLocation = createAction('setLocation');
+export const setLocation = createThunkAction('setLocation', () => (dispatch) => {
+  dispatch(updateURLParams());
+});
 
 // Datasets list
 export const receiveDatasets = createAction('receiveDatasets');
@@ -40,16 +53,30 @@ export const fetchDatasets = createThunkAction('fetchDatasets', () => (dispatch)
     .then(json => dispatch(receiveDatasets(json)))
     .catch(error => dispatch(failureDatasets(error)));
 });
-export const toggleInfo = createAction('toggleInfo');
-export const toggleDataset = createAction('toggleDataset');
-export const filterQuery = createAction('filterQuery');
 export const setActiveDatasets = createAction('setActiveDatasets');
+export const updateActiveDatasets = createAction('updateActiveDatasets');
+export const toggleInfo = createAction('toggleInfo');
+export const toggleDataset = createThunkAction('toggleDataset', () => (dispatch) => {
+  dispatch(updateActiveDatasets());
+  dispatch(updateURLParams());
+});
+export const filterQuery = createThunkAction('filterQuery', () => (dispatch) => {
+  dispatch(updateURLParams());
+});
 
 // Map
-export const setMapParams = createAction('setMapParams');
-export const setBasemap = createAction('setBasemap');
-export const setLabels = createAction('setLabels');
-export const setBoundaries = createAction('setBoundaries');
+export const setMapParams = createThunkAction('setMapParams', () => (dispatch) => {
+  dispatch(updateURLParams());
+});
+export const setBasemap = createThunkAction('setBasemap', () => (dispatch) => {
+  dispatch(updateURLParams());
+});
+export const setLabels = createThunkAction('setLabels', () => (dispatch) => {
+  dispatch(updateURLParams());
+});
+export const setBoundaries = createThunkAction('setBoundaries', () => (dispatch) => {
+  dispatch(updateURLParams());
+});
 
 // URL
 export const initialURLParams = createThunkAction('initialURLParams', () => (dispatch, getState) => {
@@ -57,7 +84,8 @@ export const initialURLParams = createThunkAction('initialURLParams', () => (dis
   const {
     basemap, labels, boundaries,
     zoom, lat, lng,
-    location, tab
+    location, tab,
+    activeDatasets
   } = routing.locationBeforeTransitions.query;
   const query = routing.locationBeforeTransitions.query.filterQuery;
 
@@ -68,4 +96,17 @@ export const initialURLParams = createThunkAction('initialURLParams', () => (dis
   if (location) dispatch(setLocation(location));
   if (query) dispatch(filterQuery(query));
   if (tab) dispatch(setTab(tab));
+
+  if (activeDatasets) {
+    const activeDatasetsResult = typeof activeDatasets === 'string' ? [activeDatasets] : activeDatasets;
+    dispatch(setActiveDatasets(activeDatasetsResult.map((s) => {
+      const parsedSt = s.split('|');
+      return {
+        id: parsedSt[0],
+        opacity: parseInt(parsedSt[1], 10),
+        visibility: parsedSt[2] === 'true',
+        zIndex: parseInt(parsedSt[3], 10)
+      };
+    })));
+  }
 });

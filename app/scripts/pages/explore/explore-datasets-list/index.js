@@ -15,13 +15,4 @@ const mapStateToProps = state => ({
   selectedDataset: getSelectedDataset(state)
 });
 
-const mapDispatchToProps = {
-  ...exploreActions,
-  toggleDataset: dataset => (dispatch) => {
-    dispatch(exploreActions.toggleDataset(dataset));
-    dispatch(exploreActions.setActiveDatasets());
-    // dispatch(exploreActions.updateURLParams());
-  }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps, exploreActions)(Component);
