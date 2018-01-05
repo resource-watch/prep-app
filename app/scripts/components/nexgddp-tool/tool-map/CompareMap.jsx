@@ -13,7 +13,7 @@ const mapDefaultOptions = {
   center: [20, -30],
   zoom: 3,
   minZoom: 3,
-  maxZoom: 10,
+  maxZoom: 5,
   scrollWheelZoom: false,
   attributionControl: false,
   zoomControl: false
@@ -24,13 +24,13 @@ class CompareMap extends React.PureComponent {
     const { layers } = this.props;
     const map = this.mapElement.leafletElement;
     const leftLayer = L.tileLayer(layers[0].url, {
-      maxZoom: 10,
+      maxZoom: 5,
       minZoom: 3
     });
 
     const rightLayer = L.tileLayer(layers[1].url, {
       minZoom: 3,
-      maxZoom: 10
+      maxZoom: 5
     });
 
     window.requestAnimationFrame(() => {
@@ -59,13 +59,13 @@ class CompareMap extends React.PureComponent {
       // Not sure about this...
       const map = this.mapElement.leafletElement;
       const leftLayer = L.tileLayer(nextLayers[0].url, {
-        maxZoom: 10,
+        maxZoom: 5,
         minZoom: 3
       });
 
       const rightLayer = L.tileLayer(nextLayers[1].url, {
         minZoom: 3,
-        maxZoom: 10
+        maxZoom: 5
       });
 
       window.requestAnimationFrame(() => {

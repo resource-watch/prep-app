@@ -10,7 +10,7 @@ const mapDefaultOptions = {
   center: [20, -30],
   zoom: 3,
   minZoom: 3,
-  maxZoom: 10,
+  maxZoom: 5,
   scrollWheelZoom: false,
   attributionControl: false,
   zoomControl: false
@@ -61,9 +61,11 @@ class SimpleMap extends React.PureComponent {
           <TileLayer
             url={config.basemapTileUrl}
           />
+
           {currentLayer && <TileLayer url={currentLayer.url} />}
+          {marker && <Marker position={marker} icon={L.divIcon({ className: 'map-marker' })} /> }
+
           <ZoomControl position="bottomright" />
-          { marker && <Marker position={marker} icon={L.divIcon({ className: 'map-marker' })} /> }
         </Map>
       </div>
     );
