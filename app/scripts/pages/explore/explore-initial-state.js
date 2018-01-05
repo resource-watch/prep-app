@@ -7,7 +7,8 @@ const initialState = {
   tab: 'core_datasets',
   map: mapInitialState,
   datasets: datasetsInitialState,
-  coreDatasets: { ...locationInitialState, ...coreDatasetsInitialState }
+  coreDatasets: { ...locationInitialState, ...coreDatasetsInitialState },
+  activeDatasets: []
 };
 
 export default initialState;

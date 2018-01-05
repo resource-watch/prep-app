@@ -38,3 +38,8 @@ export const toggleInfo = (state, { payload }) => ({
       Object.assign({}, item, { isSelected: false })))
   }
 });
+
+export const setActiveDatasets = (state, { payload }) => ({
+  ...state,
+  activeDatasets: state.datasets.items.filter(d => !!d.isLayerActive)
+});

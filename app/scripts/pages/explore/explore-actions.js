@@ -1,7 +1,6 @@
 import qs from 'query-string';
 import { createAction, createThunkAction } from 'redux-tools';
 import { replace } from 'react-router-redux';
-import { bindActionCreators } from 'redux';
 
 // Update URL
 export const updateURLParams = createThunkAction('updateURLParams', () => (dispatch, getState) => {
@@ -12,7 +11,6 @@ export const updateURLParams = createThunkAction('updateURLParams', () => (dispa
     filterQuery: explorePage.datasets.filterQuery,
     location: explorePage.coreDatasets.location
   };
-  console.log(query);
   dispatch(replace({ pathname: '/explore', query }));
 });
 
@@ -45,6 +43,7 @@ export const fetchDatasets = createThunkAction('fetchDatasets', () => (dispatch)
 export const toggleInfo = createAction('toggleInfo');
 export const toggleDataset = createAction('toggleDataset');
 export const filterQuery = createAction('filterQuery');
+export const setActiveDatasets = createAction('setActiveDatasets');
 
 // Map
 export const setMapParams = createAction('setMapParams');
