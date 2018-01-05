@@ -42,6 +42,7 @@ class DatasetCard extends PureComponent {
             </div>
           </div>
           <span className="subtitle">{info.organization}</span>
+          {dataset.env === 'preproduction' && <p style={{ fontSize: '11px', color: 'red', margin: 0 }}>preproduction</p>}
         </header>
 
         <div className="item-content">
