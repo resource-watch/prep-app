@@ -24,6 +24,8 @@ class Map extends PureComponent {
     this.initMap();
     this.setEvents();
     this.setBasemap();
+    this.setLabels();
+    this.setBoundaries();
   }
 
   componentDidUpdate(prevProps) {

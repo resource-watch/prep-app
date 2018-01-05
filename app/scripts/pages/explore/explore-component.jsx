@@ -25,6 +25,7 @@ class ExplorePage extends PureComponent {
   }
 
   componentDidMount() {
+    this.props.updateURLParams();
     this.props.fetchDatasets();
   }
 
@@ -137,7 +138,8 @@ ExplorePage.propTypes = {
   fetchDatasets: PropTypes.func,
   filterQuery: PropTypes.func,
   toggleInfo: PropTypes.func,
-  initialURLParams: PropTypes.func
+  initialURLParams: PropTypes.func,
+  updateURLParams: PropTypes.func
 };
 
 export default ExplorePage;

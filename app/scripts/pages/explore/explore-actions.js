@@ -58,7 +58,7 @@ export const initialURLParams = createThunkAction('initialURLParams', () => (dis
   const {
     basemap, labels, boundaries,
     zoom, lat, lng,
-    location
+    location, tab
   } = routing.locationBeforeTransitions.query;
   const query = routing.locationBeforeTransitions.query.filterQuery;
 
@@ -68,4 +68,5 @@ export const initialURLParams = createThunkAction('initialURLParams', () => (dis
   if (boundaries) dispatch(setBoundaries(boundaries === 'true'));
   if (location) dispatch(setLocation(location));
   if (query) dispatch(filterQuery(query));
+  if (tab) dispatch(setTab(tab));
 });

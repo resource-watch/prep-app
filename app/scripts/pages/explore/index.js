@@ -15,4 +15,16 @@ const mapStateToProps = state => ({
   currentTab: state.explorePage.tab
 });
 
-export default connect(mapStateToProps, actions)(Component);
+const mapDispatchToProps = {
+  ...actions,
+  setTab: tab => (dispatch) => {
+    dispatch(actions.setTab(tab));
+    dispatch(actions.updateURLParams());
+  },
+  filterQuery: query => (dispatch) => {
+    dispatch(actions.filterQuery(query));
+    dispatch(actions.updateURLParams());
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Component);
