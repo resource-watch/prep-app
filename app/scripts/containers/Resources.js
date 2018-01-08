@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import { getResources } from '../actions/resources';
 import Resources from '../components/Resources';
-import { firstTypeSelector, secondTypeSelector, thirdTypeSelector } from '../selectors/resources.selector';
+
+// utils
+import groupBy from 'lodash/groupBy';
 
 const mapStateToProps = state => ({
-  list: firstTypeSelector(state),
-  secondList: secondTypeSelector(state),
-  thirdList: thirdTypeSelector(state)
+  resources: groupBy(state.resources.list, 'resource_type')
 });
 
 const mapDispatchToProps = dispatch => ({

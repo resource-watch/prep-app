@@ -9,9 +9,7 @@ class Resources extends React.PureComponent {
   }
 
   render() {
-    const firstList = this.props.list;
-    const secondList = this.props.secondList;
-    const thirdList = this.props.thirdList;
+    const { resources } = this.props;
 
     return (
       <div className="c-partners">
@@ -24,39 +22,26 @@ class Resources extends React.PureComponent {
             and locate additional climate relevant data. We welcome receiving suggestions for additional resources to include.</p>
         </Article>
 
-        <Article grid="small-12">
-          <h2>Understanding impacts of climate change</h2>
+        {Object.keys(resources).map(resourceType => (
+          <Article grid="small-12" key={resourceType}>
+          <h2>{resourceType}</h2>
 
           <div className="row align-stretch">
-            { firstList && firstList.map(resource => <ResourceItem key={`resource-${resource.id}`} data={resource} />) }
+            { (resources[resourceType] || []).map(resource => <ResourceItem key={`resource-${resource.id}`} data={resource} />) }
           </div>
         </Article>
-
-        <Article grid="small-12">
-          <h2>Climate resilience tools and services</h2>
-
-          <div className="row align-stretch">
-            { secondList && secondList.map(resource => <ResourceItem key={`resource-${resource.id}`} data={resource} />) }
-          </div>
-        </Article>
-
-        <Article grid="small-12">
-          <h2>Climate data portals</h2>
-
-          <div className="row align-stretch">
-            { thirdList && thirdList.map(resource => <ResourceItem key={`resource-${resource.id}`} data={resource} />) }
-          </div>
-
-        </Article>
+        ))}
       </div>
     );
   }
 }
 
+Resources.defaultProps = {
+  resources: {}
+};
+
 Resources.propTypes = {
-  list: PropTypes.array,
-  secondList: PropTypes.array,
-  thirdList: PropTypes.array,
+  resources: PropTypes.object,
   getResources: PropTypes.func
 };
 
