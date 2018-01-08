@@ -5,7 +5,8 @@ import { setConfig } from 'widget-editor';
 
 import { browserHistory } from 'react-router';
 import actions from './auth-actions';
-import reducers, { initialState } from './auth-reducer';
+import * as reducers from './auth-actions';
+import { initialState } from './auth-actions';
 
 const mapStateToProps = state => ({
   session: state.auth.session

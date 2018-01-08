@@ -3,7 +3,7 @@ import { getSelectedDataset } from './explore-datasets-list/explore-datasets-lis
 import Component from './explore-component';
 import initialState from './explore-initial-state';
 import * as actions from './explore-actions';
-import reducers from './explore-reducers';
+import * as reducers from './explore-reducers';
 
 export { initialState, actions, reducers, Component };
 

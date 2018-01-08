@@ -10,7 +10,8 @@ import UserService from 'services/user-service';
 
 import authActions from '../auth/auth-actions';
 import actions from './user-actions';
-import reducers, { initialState } from './user-reducer';
+import * as reducers from './user-reducer';
+import { initialState } from './user-reducer';
 import UserComponent from './user-component';
 
 const allActions = Object.assign({}, actions, authActions);

@@ -117,7 +117,9 @@ class CompareMap extends React.PureComponent {
           <TileLayer
             url={config.basemapTileUrl}
           />
+
           <ZoomControl position="bottomright" />
+
           { marker && <Marker position={marker} icon={L.divIcon({ className: 'map-marker' })} /> }
         </Map>
       </div>
