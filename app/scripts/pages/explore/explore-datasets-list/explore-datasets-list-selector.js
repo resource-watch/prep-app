@@ -42,6 +42,6 @@ export const getActiveLayers = createSelector(
   (datasets) => {
     const activeDatasets = filter(datasets, { isLayerActive: true });
     const layers = flatten(activeDatasets.map(d => d.layer));
-    return layers;
+    return filter(layers, { default: true });
   }
 );

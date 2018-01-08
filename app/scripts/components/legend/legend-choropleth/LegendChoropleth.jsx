@@ -4,10 +4,10 @@ import './legend-choropleth.scss';
 
 export const LegendChoropleth = ({ legendSpec }) => (
   <ul className="c-legend-choropleth">
-    {legendSpec.items.map(({ name, color }) => (
-      <li key={`legend-choropleth-item-${name}`}>
+    {legendSpec.items.map(({ name, value, color }) => (
+      <li key={`legend-choropleth-item-${name || value}`}>
         <div className="icon-choropleth" style={{ backgroundColor: color }} />
-        <span className="name">{name}</span>
+        <span className="name">{name || value}</span>
       </li>
     ))}
   </ul>

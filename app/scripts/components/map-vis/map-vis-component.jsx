@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import LoadingSpinner from 'components/Loading/LoadingSpinner';
+import layerManager from './layer-manager';
+import isEqual from 'lodash/isEqual';
 
 const defaultMapOptions = {
   zoom: 3,
@@ -17,6 +19,7 @@ class Map extends PureComponent {
       loading: false
     };
 
+    this.addedLayers = []; // cache layers
     this.triggerChange = this.triggerChange.bind(this);
   }
 
@@ -32,6 +35,7 @@ class Map extends PureComponent {
     if (prevProps.basemap !== this.props.basemap) this.setBasemap();
     if (prevProps.labels !== this.props.labels) this.setLabels();
     if (prevProps.boundaries !== this.props.boundaries) this.setBoundaries();
+    if (!isEqual(prevProps.layers, this.props.layers)) this.toggleLayers();
   }
 
   setEvents() {
@@ -79,6 +83,22 @@ class Map extends PureComponent {
     if (!mapOptions.zoomControl) L.control.zoom({ position: mapOptions.zoomControlPosition }).addTo(this.map);
   }
 
+  toggleLayers() {
+    if (this.addedLayers.length) {
+      this.addedLayers.forEach(layer => this.map.removeLayer(layer));
+    }
+
+    this.addedLayers = [];
+
+    this.props.layers.forEach((layerSpec) => {
+      layerManager(layerSpec)
+        .then((layer) => {
+          this.addedLayers.push(layer);
+          this.map.addLayer(layer);
+        });
+    });
+  }
+
   render() {
     return (
       <div className="map" ref={(el) => { this.mapElement = el; }}>
@@ -95,7 +115,7 @@ Map.propTypes = {
   labels: PropTypes.object,
   boundaries: PropTypes.object,
   children: PropTypes.any,
-  // activeDatasets: PropTypes.array,
+  layers: PropTypes.array,
   onChange: PropTypes.func
 };
 

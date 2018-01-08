@@ -1,4 +1,3 @@
-
 .c-datasets-list {
   height: 100%;
 
@@ -78,6 +77,10 @@
   .dataset-group {
     border-bottom: 2px solid #EEEEEE;
     padding: 24px 0;
+
+    .second-level {
+      padding-left: 30px;
+    }
 
     .group-title {
       font-size: 37px;

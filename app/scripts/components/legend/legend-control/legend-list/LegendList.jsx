@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import isEqual from 'lodash/isEqual';
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 import LegendListItem from '../legend-list-item/LegendListItem';
 import './legend-list.scss';
@@ -25,6 +26,10 @@ class LegendList extends React.PureComponent {
       items: props.items
     };
     this.onSortEnd = this.onSortEnd.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!isEqual(nextProps.items, this.props.items)) this.setState({ items: nextProps.items });
   }
 
   onSortEnd({ oldIndex, newIndex }) {

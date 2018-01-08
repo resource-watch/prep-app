@@ -2,6 +2,9 @@
   position: absolute;
   z-index: 1000;
   background: white;
+  max-width: 500px;
+  min-width: 260px;
+  width: 100%;
 
   > button {
     position: absolute;
@@ -18,8 +21,6 @@
 
 .c-legend-panel {
   border: 1px solid #ddd;
-  max-width: 500px;
-  min-width: 260px;
 
   h2 {
     font-family: 'Helvetica Neue', Arial, sans-serif;

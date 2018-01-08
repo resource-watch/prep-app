@@ -1,7 +1,7 @@
 import qs from 'query-string';
 import { createAction, createThunkAction } from 'redux-tools';
 import { replace } from 'react-router-redux';
-import datasetsMock from './mocks/datasets-spec.json';
+// import datasetsMock from './mocks/datasets-spec.json';
 
 // Update URL
 export const updateURLParams = createThunkAction('updateURLParams', () => (dispatch, getState) => {
@@ -38,27 +38,27 @@ export const updateActiveDatasets = createAction('updateActiveDatasets');
 export const receiveDatasets = createAction('receiveDatasets');
 export const failureDatasets = createAction('failureDatasets');
 export const fetchDatasets = createThunkAction('fetchDatasets', () => (dispatch) => {
-  dispatch(receiveDatasets(datasetsMock));
-  dispatch(updateActiveDatasets());
-  // const params = {
-  //   application: ['prep'].join(','),
-  //   includes: ['metadata', 'layer', 'vocabulary', 'widget'].join(','),
-  //   'page[size]': 999,
-  //   status: 'saved',
-  //   published: true,
-  //   env: config.datasetEnv || 'production'
-  // };
-  // const url = `${config.apiUrlRW}/dataset?${qs.stringify(params)}`;
-  // return fetch(url)
-  //   .then((response) => {
-  //     if (response.ok) return response.json();
-  //     throw Error(response);
-  //   })
-  //   .then((json) => {
-  //     dispatch(receiveDatasets(json));
-  //     dispatch(updateActiveDatasets());
-  //   })
-  //   .catch(error => dispatch(failureDatasets(error)));
+  // dispatch(receiveDatasets(datasetsMock));
+  // dispatch(updateActiveDatasets());
+  const params = {
+    application: ['prep'].join(','),
+    includes: ['metadata', 'layer', 'vocabulary', 'widget'].join(','),
+    'page[size]': 999,
+    status: 'saved',
+    published: true,
+    env: config.datasetEnv || 'production'
+  };
+  const url = `${config.apiUrlRW}/dataset?${qs.stringify(params)}`;
+  return fetch(url)
+    .then((response) => {
+      if (response.ok) return response.json();
+      throw Error(response);
+    })
+    .then((json) => {
+      dispatch(receiveDatasets(json));
+      dispatch(updateActiveDatasets());
+    })
+    .catch(error => dispatch(failureDatasets(error)));
 });
 export const toggleInfo = createAction('toggleInfo');
 export const toggleDataset = createThunkAction('toggleDataset', () => (dispatch) => {

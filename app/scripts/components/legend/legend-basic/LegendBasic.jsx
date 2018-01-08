@@ -17,7 +17,7 @@ export const LegendBasic = ({ legendSpec, mode }) => (
 
 LegendBasic.propTypes = {
   legendSpec: PropTypes.object.isRequired,
-  mode: PropTypes.oneOf(['horizontal', 'vertical'])
+  mode: PropTypes.oneOf(['horizontal', 'vertical', 'columns'])
 };
 
 LegendBasic.defaultProps = {

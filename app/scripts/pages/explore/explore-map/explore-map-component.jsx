@@ -8,14 +8,10 @@ import { basemapsSpec, labelsSpec, boundariesSpec } from 'components/basemap-con
 class ExploreMap extends PureComponent {
   render() {
     const { setMapParams, basemap, labels, boundaries, setBasemap,
-      setLabels, setBoundaries } = this.props;
+      setLabels, setBoundaries, activeLayers } = this.props;
     const currentBasemap = basemapsSpec[basemap];
     const currentLabels = labelsSpec[labels];
     const currentBoundaries = boundaries ? boundariesSpec.dark : {};
-
-    // Taking only the first layer for the moment
-    // TODO: add support for multilayers
-    const { activeLayers } = this.props;
 
     return (
       <div className="c-explore-map">
@@ -23,6 +19,7 @@ class ExploreMap extends PureComponent {
           basemap={currentBasemap}
           labels={currentLabels}
           boundaries={currentBoundaries}
+          layers={activeLayers}
           onChange={setMapParams}
         >
           <BasemapControl

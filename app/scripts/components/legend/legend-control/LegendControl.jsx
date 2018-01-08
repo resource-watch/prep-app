@@ -5,10 +5,6 @@ import LegendList from './legend-list/LegendList';
 import './legend-control.scss';
 
 export class LegendControl extends React.PureComponent {
-  static getLegendList({ layersSpec, sortable }) {
-    return (<LegendList items={layersSpec} sortable={sortable} />);
-  }
-
   static getMultipleLegendList({ datasetsSpec }) {
     return datasetsSpec.map(d => (
       <div key={`legent-item-${d.id}`}>
@@ -41,7 +37,7 @@ export class LegendControl extends React.PureComponent {
           <button type="button" onClick={this.toggle}>Close</button>}
         <div className={`c-legend-panel ${collapsed ? '-collapsed' : ''}`}>
           { (layersSpec && layersSpec.length > 0) &&
-            LegendControl.getLegendList({ layersSpec, sortable }) }
+            <LegendList items={layersSpec} sortable={sortable} /> }
 
           { (datasetsSpec && datasetsSpec.length > 0) &&
             LegendControl.getMultipleLegendList({ datasetsSpec }) }
