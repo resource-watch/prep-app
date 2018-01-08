@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import filter from 'lodash/filter';
 import find from 'lodash/find';
+import flatten from 'lodash/flatten';
 
 const getAllDatasets = state => state.explorePage.datasets.items;
 const getFilterQuery = state => state.explorePage.datasets.filterQuery;
@@ -34,4 +35,13 @@ export const filteredDatasets = createSelector(
 export const getSelectedDataset = createSelector(
   getAllDatasets,
   datasets => find(datasets, { isSelected: true })
+);
+
+export const getActiveLayers = createSelector(
+  getAllDatasets,
+  (datasets) => {
+    const activeDatasets = filter(datasets, { isLayerActive: true });
+    const layers = flatten(activeDatasets.map(d => d.layer));
+    return layers;
+  }
 );

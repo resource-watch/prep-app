@@ -2,14 +2,20 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Map from 'components/map-vis';
 import BasemapControl from 'components/basemap-control';
+import LegendControl from 'components/legend/legend-control';
 import { basemapsSpec, labelsSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
 
 class ExploreMap extends PureComponent {
   render() {
-    const { setMapParams, basemap, labels, boundaries, setBasemap, setLabels, setBoundaries } = this.props;
+    const { setMapParams, basemap, labels, boundaries, setBasemap,
+      setLabels, setBoundaries } = this.props;
     const currentBasemap = basemapsSpec[basemap];
     const currentLabels = labelsSpec[labels];
     const currentBoundaries = boundaries ? boundariesSpec.dark : {};
+
+    // Taking only the first layer for the moment
+    // TODO: add support for multilayers
+    const { activeLayers } = this.props;
 
     return (
       <div className="c-explore-map">
@@ -28,14 +34,25 @@ class ExploreMap extends PureComponent {
             setBoundaries={setBoundaries}
           />
         </Map>
+        {activeLayers.length &&
+          <LegendControl
+            layersSpec={activeLayers}
+            position="topright"
+            sortable
+          />}
       </div>
     );
   }
 }
 
+ExploreMap.defaultProps = {
+  activeLayers: []
+};
+
 ExploreMap.propTypes = {
   basemap: PropTypes.oneOf(['default', 'dark', 'light', 'satellite', 'terrain']),
   labels: PropTypes.oneOf(['none', 'dark', 'light']),
+  activeLayers: PropTypes.array,
   boundaries: PropTypes.bool,
   setBasemap: PropTypes.func,
   setLabels: PropTypes.func,

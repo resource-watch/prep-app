@@ -8,7 +8,7 @@ class ExploreDatasetsList extends PureComponent {
     const { datasets, status, isFetching, error } = this.props;
 
     if (isFetching) return (<LoadingSpinner />);
-    if (status === 'error') return (<p>{error.statusText}</p>);
+    if (status === 'error') return (<p>{error}</p>);
 
     return (
       <div className="list-container">
