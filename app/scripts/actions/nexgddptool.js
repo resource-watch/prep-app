@@ -15,7 +15,10 @@ import {
   NEXGDDP_SET_CHART_DATA,
   NEXGDDP_SET_CHART_LOADED,
   NEXGDDP_SET_CHART_ERROR,
-  NEXGDDP_SET_MAP_LAYERS
+  NEXGDDP_SET_MAP_LAYERS,
+  NEXGDDP_SET_BASEMAP,
+  NEXGDDP_SET_LABELS,
+  NEXGDDP_SET_BOUNDARIES
 } from '../constants';
 
 export function updateUrl() {
@@ -41,7 +44,14 @@ export function updateUrl() {
         : undefined,
       range2: state.range2.selection
         ? state.range2.selection.value
-        : undefined
+        : undefined,
+      basemap: state.map.basemap !== 'default'
+        ? state.map.basemap
+        : undefined,
+      labels: state.map.labels !== 'none'
+        ? state.map.labels
+        : undefined,
+      boundaries: !!state.map.boundaries || undefined
     };
 
     const url = Object.keys(params)
@@ -227,6 +237,39 @@ export function setRange2Selection(selection, changeUrl = true) {
   };
 }
 
+export function setBasemap(basemap, changeUrl = true) {
+  return (dispatch) => {
+    dispatch({
+      type: NEXGDDP_SET_BASEMAP,
+      payload: basemap
+    });
+
+    if (changeUrl) dispatch(updateUrl());
+  };
+}
+
+export function setLabels(labels, changeUrl = true) {
+  return (dispatch) => {
+    dispatch({
+      type: NEXGDDP_SET_LABELS,
+      payload: labels
+    });
+
+    if (changeUrl) dispatch(updateUrl());
+  };
+}
+
+export function setBoundaries(boundaries, changeUrl = true) {
+  return (dispatch) => {
+    dispatch({
+      type: NEXGDDP_SET_BOUNDARIES,
+      payload: boundaries
+    });
+
+    if (changeUrl) dispatch(updateUrl());
+  };
+}
+
 export function getUrlState() {
   return (dispatch, getState) => {
     const params = location.search
@@ -274,6 +317,15 @@ export function getUrlState() {
       if (range2Option) {
         promises.push(dispatch(setRange2Selection(range2Option, false)));
       }
+    }
+    if (params.basemap) {
+      promises.push(dispatch(setBasemap(params.basemap)));
+    }
+    if (params.labels) {
+      promises.push(dispatch(setLabels(params.labels)));
+    }
+    if (params.boundaries) {
+      promises.push(dispatch(setBoundaries(params.boundaries === 'true')));
     }
 
     // Needed to chain the action

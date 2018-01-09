@@ -14,14 +14,22 @@ import {
   NEXGDDP_SET_CHART_DATA,
   NEXGDDP_SET_CHART_ERROR,
   NEXGDDP_SET_CHART_LOADED,
-  NEXGDDP_SET_MAP_LAYERS
+  NEXGDDP_SET_MAP_LAYERS,
+  NEXGDDP_SET_BASEMAP,
+  NEXGDDP_SET_LABELS,
+  NEXGDDP_SET_BOUNDARIES
 } from '../constants';
 
 const initialState = {
   // State of the map
   map: {
     zoom: 3,
-    center: [20, -30]
+    center: [20, -30],
+    /** @type {'default'|'dark'|'light'|'satellite'|'terrain'} basemap */
+    basemap: 'default',
+    /** @type {'none'|'dark'|'light'} labels */
+    labels: 'none',
+    boundaries: false
   },
   layers: [],
   // Position of the marker
@@ -150,6 +158,24 @@ export default function (state = initialState, action) {
     case NEXGDDP_SET_CHART_LOADED : {
       return Object.assign({}, state, {
         chart: Object.assign({}, state.chart, { loaded: action.payload })
+      });
+    }
+
+    case NEXGDDP_SET_BASEMAP: {
+      return Object.assign({}, state, {
+        map: Object.assign({}, state.map, { basemap: action.payload })
+      });
+    }
+
+    case NEXGDDP_SET_LABELS: {
+      return Object.assign({}, state, {
+        map: Object.assign({}, state.map, { labels: action.payload })
+      });
+    }
+
+    case NEXGDDP_SET_BOUNDARIES: {
+      return Object.assign({}, state, {
+        map: Object.assign({}, state.map, { boundaries: action.payload })
       });
     }
 
