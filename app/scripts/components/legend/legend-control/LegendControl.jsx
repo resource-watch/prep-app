@@ -27,7 +27,7 @@ export class LegendControl extends React.PureComponent {
   }
 
   render() {
-    const { layersSpec, datasetsSpec, position, sortable } = this.props;
+    const { layersSpec, datasetsSpec, position, sortable, onClose, onInfo } = this.props;
     const { collapsed } = this.state;
 
     return (
@@ -41,6 +41,8 @@ export class LegendControl extends React.PureComponent {
               onSortChange={this.props.onSortChange}
               items={layersSpec}
               sortable={sortable}
+              onInfo={onInfo}
+              onClose={onClose}
             /> }
 
           { (datasetsSpec && datasetsSpec.length > 0) &&
@@ -57,7 +59,9 @@ LegendControl.propTypes = {
   sortable: PropTypes.bool,
   collapsed: PropTypes.bool,
   position: PropTypes.oneOf(['topright', 'topleft', 'bottomright', 'bottomleft']),
-  onSortChange: PropTypes.func
+  onSortChange: PropTypes.func,
+  onInfo: PropTypes.func,
+  onClose: PropTypes.func
 };
 
 LegendControl.defaultProps = {
@@ -66,7 +70,9 @@ LegendControl.defaultProps = {
   sortable: true,
   collapsed: false,
   position: 'bottomright',
-  onSortChange: () => {}
+  onSortChange: () => {},
+  onInfo: () => {},
+  onClose: () => {}
 };
 
 export default LegendControl;

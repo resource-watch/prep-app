@@ -7,13 +7,15 @@ import './legend-list.scss';
 
 const SortableItem = SortableElement(LegendListItem);
 
-const SortableLegendList = SortableContainer(({ items }) => (
+const SortableLegendList = SortableContainer(({ items, onClose, onInfo }) => (
   <ul>
     {items.map((value, index) => (
       <SortableItem
         key={`sortable-item-${value.id}`}
         index={index}
         value={value}
+        onInfo={onInfo}
+        onClose={onClose}
       />
     ))}
   </ul>
@@ -39,13 +41,23 @@ class LegendList extends React.PureComponent {
   }
 
   render() {
-    const { sortable } = this.props;
+    const { sortable, onClose, onInfo } = this.props;
     const { items } = this.state;
 
     if (sortable) {
       return (
         <div className="c-legend-list">
-          <SortableLegendList items={items} onSortEnd={this.onSortEnd} />
+          <SortableLegendList
+            items={items}
+            onSortEnd={this.onSortEnd}
+            axis="y"
+            lockAxis="y"
+            lockToContainerEdges
+            lockOffset="50%"
+            useDragHandle
+            onInfo={onInfo}
+            onClose={onClose}
+          />
         </div>
       );
     }
@@ -65,11 +77,15 @@ class LegendList extends React.PureComponent {
 LegendList.propTypes = {
   items: PropTypes.array,
   sortable: PropTypes.bool,
-  onSortChange: PropTypes.func
+  onSortChange: PropTypes.func,
+  onInfo: PropTypes.func,
+  onClose: PropTypes.func
 };
 
 LegendList.defaultProps = {
-  onSortChange: () => {}
+  onSortChange: () => {},
+  onInfo: () => {},
+  onClose: () => {}
 };
 
 export default LegendList;

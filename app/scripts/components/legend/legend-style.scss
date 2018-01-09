@@ -1,4 +1,6 @@
 .c-legend {
+  $dark-blue: #263e57;
+
   padding: 15px;
   font-family: 'Helvetica Neue', Arial, sans-serif;
 
@@ -18,5 +20,23 @@
 
   .name {
     line-height: 1.05;
+  }
+
+  .c-legend-header {
+    display: flex;
+
+    .c-legend-toolbar {
+      display: flex;
+      flex: 1;
+      justify-content: flex-end;
+
+      button {
+        margin-left: 10px;
+      }
+
+      .c-icon {
+        fill: $dark-blue;
+      }
+    }
   }
 }
