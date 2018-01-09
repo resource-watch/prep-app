@@ -46,7 +46,7 @@ class ExploreMap extends PureComponent {
             position="topright"
             onSortChange={this.onSortChange}
             sortable
-            onInfo={l => console.log('info') || this.props.toggleInfo({ id: l.dataset })}
+            onInfo={l => this.props.toggleInfo({ id: l.dataset })}
             onClose={l => this.props.toggleDataset({ id: l.dataset })}
           />}
       </div>
