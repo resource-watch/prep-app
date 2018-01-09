@@ -44,14 +44,20 @@ export const filterQuery = (state, { payload }) => ({
   datasets: { ...state.datasets, filterQuery: payload }
 });
 
-export const toggleDataset = (state, { payload }) => ({
-  ...state,
-  datasets: {
-    ...state.datasets,
-    items: state.datasets.items.map(item => (item.id === payload.id ?
-      Object.assign({}, item, { isLayerActive: !item.isLayerActive }) : item))
-  }
-});
+export const toggleDataset = (state, { payload }) => {
+  const activeDatasets = state.datasets.activeDatasets;
+  return {
+    ...state,
+    datasets: {
+      ...state.datasets,
+      items: state.datasets.items.map(item => (item.id === payload.id ?
+        Object.assign({}, item, {
+          isLayerActive: !item.isLayerActive,
+          zIndex: item.zIndex || activeDatasets.length + 1
+        }) : item))
+    }
+  };
+};
 
 export const toggleInfo = (state, { payload }) => ({
   ...state,
@@ -78,3 +84,20 @@ export const updateActiveDatasets = state => ({
     activeDatasets: state.datasets.items.filter(d => d.isLayerActive)
   }
 });
+
+export const updateZIndex = (state, { payload }) => {
+  const layers = payload.map((l, index) => ({ id: l.dataset, zIndex: index + 1 }));
+  const items = state.datasets.items.slice(0).map((item) => {
+    const itemFound = find(layers, { id: item.id });
+    if (itemFound) return Object.assign({}, item, { zIndex: itemFound.zIndex });
+    return item;
+  });
+
+  return {
+    ...state,
+    datasets: {
+      ...state.datasets,
+      items
+    }
+  };
+};

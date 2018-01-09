@@ -37,7 +37,11 @@ export class LegendControl extends React.PureComponent {
           <button type="button" onClick={this.toggle}>Close</button>}
         <div className={`c-legend-panel ${collapsed ? '-collapsed' : ''}`}>
           { (layersSpec && layersSpec.length > 0) &&
-            <LegendList items={layersSpec} sortable={sortable} /> }
+            <LegendList
+              onSortChange={this.props.onSortChange}
+              items={layersSpec}
+              sortable={sortable}
+            /> }
 
           { (datasetsSpec && datasetsSpec.length > 0) &&
             LegendControl.getMultipleLegendList({ datasetsSpec }) }
@@ -52,7 +56,8 @@ LegendControl.propTypes = {
   datasetsSpec: PropTypes.array,
   sortable: PropTypes.bool,
   collapsed: PropTypes.bool,
-  position: PropTypes.oneOf(['topright', 'topleft', 'bottomright', 'bottomleft'])
+  position: PropTypes.oneOf(['topright', 'topleft', 'bottomright', 'bottomleft']),
+  onSortChange: PropTypes.func
 };
 
 LegendControl.defaultProps = {
@@ -60,7 +65,8 @@ LegendControl.defaultProps = {
   datasetsSpec: [],
   sortable: true,
   collapsed: false,
-  position: 'bottomright'
+  position: 'bottomright',
+  onSortChange: () => {}
 };
 
 export default LegendControl;

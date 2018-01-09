@@ -3,7 +3,7 @@ import * as exploreActions from '../explore-actions';
 import * as reducers from './explore-map-reducers';
 import initialState from './explore-map-initial-state';
 import Component from './explore-map-component';
-import { getActiveLayers } from '../explore-datasets-list/explore-datasets-list-selector';
+import { getActiveLayers } from './explore-map-selector';
 
 const mapStateToProps = state => ({
   activeLayers: getActiveLayers(state),

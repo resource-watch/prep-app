@@ -35,6 +35,11 @@ export const setLocation = createThunkAction('setLocation', () => (dispatch) => 
 // Datasets list
 export const setActiveDatasets = createAction('setActiveDatasets');
 export const updateActiveDatasets = createAction('updateActiveDatasets');
+export const setZIndex = createAction('setZIndex');
+export const updateZIndex = createThunkAction('updateZIndex', () => (dispatch) => {
+  // dispatch(updateActiveDatasets());
+  dispatch(updateURLParams());
+});
 export const receiveDatasets = createAction('receiveDatasets');
 export const failureDatasets = createAction('failureDatasets');
 export const fetchDatasets = createThunkAction('fetchDatasets', () => (dispatch) => {

@@ -6,6 +6,15 @@ import LegendControl from 'components/legend/legend-control';
 import { basemapsSpec, labelsSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
 
 class ExploreMap extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.onSortChange = this.onSortChange.bind(this);
+  }
+
+  onSortChange(layers) {
+    this.props.updateZIndex(layers);
+  }
+
   render() {
     const { setMapParams, basemap, labels, boundaries, setBasemap,
       setLabels, setBoundaries, activeLayers } = this.props;
@@ -35,6 +44,7 @@ class ExploreMap extends PureComponent {
           <LegendControl
             layersSpec={activeLayers}
             position="topright"
+            onSortChange={this.onSortChange}
             sortable
           />}
       </div>
@@ -54,7 +64,8 @@ ExploreMap.propTypes = {
   setBasemap: PropTypes.func,
   setLabels: PropTypes.func,
   setBoundaries: PropTypes.func,
-  setMapParams: PropTypes.func
+  setMapParams: PropTypes.func,
+  updateZIndex: PropTypes.func
 };
 
 export default ExploreMap;

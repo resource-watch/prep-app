@@ -35,7 +35,7 @@ class LegendList extends React.PureComponent {
   onSortEnd({ oldIndex, newIndex }) {
     this.setState({
       items: arrayMove(this.state.items, oldIndex, newIndex)
-    });
+    }, () => this.props.onSortChange(this.state.items));
   }
 
   render() {
@@ -64,7 +64,12 @@ class LegendList extends React.PureComponent {
 
 LegendList.propTypes = {
   items: PropTypes.array,
-  sortable: PropTypes.bool
+  sortable: PropTypes.bool,
+  onSortChange: PropTypes.func
+};
+
+LegendList.defaultProps = {
+  onSortChange: () => {}
 };
 
 export default LegendList;

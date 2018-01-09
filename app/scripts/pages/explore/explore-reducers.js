@@ -17,5 +17,6 @@ export default {
   [actions.toggleDataset]: datasetsListReducers.toggleDataset,
   [actions.toggleInfo]: datasetsListReducers.toggleInfo,
   [actions.setActiveDatasets]: datasetsListReducers.setActiveDatasets,
-  [actions.updateActiveDatasets]: datasetsListReducers.updateActiveDatasets
+  [actions.updateActiveDatasets]: datasetsListReducers.updateActiveDatasets,
+  [actions.updateZIndex]: datasetsListReducers.updateZIndex
 };
