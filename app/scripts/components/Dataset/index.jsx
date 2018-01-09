@@ -235,7 +235,7 @@ class DatasetDetail extends React.Component {
             <div className="row">
               <div className="columns small-12">
                 <NexGDDPTool
-                  dataset={data.id}
+                  dataset={data.slug}
                 />
               </div>
             </div> :
