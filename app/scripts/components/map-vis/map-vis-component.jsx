@@ -84,19 +84,25 @@ class Map extends PureComponent {
   }
 
   toggleLayers() {
+    this.setState({ loading: true });
+
+    // Removing all layers
     if (this.addedLayers.length) {
       this.addedLayers.forEach(layer => this.map.removeLayer(layer));
     }
 
+    // Cleaning layers box
     this.addedLayers = [];
 
-    this.props.layers.forEach((layerSpec) => {
-      layerManager(layerSpec)
-        .then((layer) => {
-          this.addedLayers.push(layer);
-          this.map.addLayer(layer);
-        });
-    });
+    // Adding layers
+    Promise.all(this.props.layers.map(layerSpec => layerManager(this.map, layerSpec)))
+      .then((layers) => {
+        this.addedLayers = layers;
+        this.setState({ loading: false });
+      }).catch((reason) => {
+        console.error(reason);
+        this.setState({ loading: false });
+      });
   }
 
   render() {

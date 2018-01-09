@@ -4,7 +4,7 @@ import getCartoLayer from './carto-layer';
 import getGeeLayer from './gee-layer';
 import getNexGDDPLayer from './nexgddp-layer';
 
-const getLayer = (layerSpec) => {
+const getLayer = (leafletMap, layerSpec) => {
   const method = {
     // legacy/deprecated
     leaflet: getLeafletLayer,
@@ -34,7 +34,7 @@ const getLayer = (layerSpec) => {
   }[layerSpec.provider];
 
   if (method) {
-    return method.call(this, layerSpec);
+    return method.call(this, leafletMap, layerSpec);
   }
 
   return new Promise((resolve, reject) => reject(`${layerSpec.provider} provider is not yet supported.`));

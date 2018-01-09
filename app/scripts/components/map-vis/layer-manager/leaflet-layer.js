@@ -1,11 +1,10 @@
 import L from 'leaflet';
 
-export default (layerSpec) => {
-  const { layerConfig } = layerSpec;
+export default (leafletMap, layerSpec) => {
+  const { layerConfig, zIndex, opacity } = layerSpec;
   let layer;
 
   // Transforming data layer
-  // TODO: improve this
   if (layerConfig.body.crs && L.CRS[layerConfig.body.crs]) {
     layerConfig.body.crs = L.CRS[layerConfig.body.crs.replace(':', '')];
     layerConfig.body.pane = 'tilePane';
@@ -26,6 +25,15 @@ export default (layerSpec) => {
         reject('"type" specified in layer spec doesn`t exist');
     }
 
-    if (layer) resolve(layer);
+    if (layer) {
+      layer.setZIndex(zIndex);
+      layer.setOpacity(opacity);
+
+      layer.on('tileload', () => resolve(layer));
+      layer.on('tileerror', err => reject(err));
+
+      // adding map
+      leafletMap.addLayer(layer);
+    }
   });
 };

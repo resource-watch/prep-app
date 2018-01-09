@@ -2,8 +2,8 @@ import L from 'leaflet';
 import 'esri-leaflet';
 import leafletLayer from './leaflet-layer';
 
-export default (layerSpec) => {
-  const { layerConfig } = layerSpec;
+export default (leafletMap, layerSpec) => {
+  const { layerConfig, zIndex, opacity } = layerSpec;
 
   // Transforming layer
   const bodyStringified = JSON.stringify(layerConfig.body || {})
@@ -28,8 +28,24 @@ export default (layerSpec) => {
 
     const layer = L.esri[layerConfig.type](layerOptions);
 
-    if (layer) return resolve(layer);
+    if (layer) {
+      layer.on('load', () => {
+        const layerElement = leafletMap.getPane('tilePane').lastChild;
+        layerElement.style.zIndex = zIndex;
+        layerElement.style.opacity = opacity;
+        layerElement.id = layer.id;
 
-    return reject();
+        resolve(layer);
+      });
+
+      layer.on('requesterror', err => reject(err));
+
+      // adding map
+      leafletMap.addLayer(layer);
+    } else {
+      reject();
+    }
+
+    return layer;
   });
 };

@@ -113,7 +113,7 @@ export const initialURLParams = createThunkAction('initialURLParams', () => (dis
       const parsedSt = s.split('|');
       return {
         id: parsedSt[0],
-        opacity: parseInt(parsedSt[1], 10),
+        opacity: parseFloat(parsedSt[1]),
         visibility: parsedSt[2] === 'true',
         zIndex: parseInt(parsedSt[3], 10)
       };

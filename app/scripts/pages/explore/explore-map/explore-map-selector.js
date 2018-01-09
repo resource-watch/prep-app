@@ -9,8 +9,7 @@ export const getActiveLayers = createSelector(
   getAllDatasets,
   (datasets) => {
     const activeDatasets = sortBy(filter(datasets, { isLayerActive: true }), l => l.zIndex);
-    console.log(activeDatasets);
-    const layers = flatten(activeDatasets.map(d => d.layer));
+    const layers = flatten(activeDatasets.map(({ layer, opacity, zIndex }) => layer.map(l => ({ ...l, zIndex, opacity }))));
     return filter(layers, { default: true });
   }
 );

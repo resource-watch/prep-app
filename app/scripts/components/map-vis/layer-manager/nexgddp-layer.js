@@ -1,17 +1,18 @@
 import L from 'leaflet';
 
-export default (layerSpec) => {
-  const layerData = Object.assign({}, layerSpec);
-  const tileUrl = `${config.apiUrlRW}/layer/${layerData.id}/tile/nexgddp/{z}/{x}/{y}`;
-  const tileLayer = L.tileLayer(tileUrl);
+export default (leafletMap, layerSpec) => {
+  const { id, zIndex, opacity } = layerSpec;
+  const tileUrl = `${config.apiUrlRW}/layer/${id}/tile/nexgddp/{z}/{x}/{y}`;
+  const layer = L.tileLayer(tileUrl);
 
-  return new Promise(resolve => resolve(tileLayer));
+  layer.setZIndex(zIndex);
+  layer.setOpacity(opacity);
 
-  // const eventName = (layerData.type === 'wms' ||
-  // layerData.type === 'tileLayer') ? 'tileload' : 'load';
-  // tileLayer.on(eventName, () => {
-  //   this.handleTileLoaded(tileLayer);
-  // });
-  // tileLayer.on('tileerror', () => this.handleTileLoaded(tileLayer));
-  // tileLayer.addTo(this.map).setZIndex((datasetsLength + 1) - (dataset.index || 0));
+  // adding map
+  leafletMap.addLayer(layer);
+
+  return new Promise((resolve, reject) => {
+    layer.on('tileload', () => resolve(layer));
+    layer.on('tileerror', err => reject(err));
+  });
 };

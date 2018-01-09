@@ -1,7 +1,7 @@
 import L from 'leaflet';
 
-export default (layerSpec) => {
-  const { layerConfig } = layerSpec;
+export default (leafletMap, layerSpec) => {
+  const { layerConfig, zIndex, opacity } = layerSpec;
 
   // Transforming layerSpec
   const bodyStringified = JSON.stringify(layerConfig.body || {})
@@ -29,7 +29,14 @@ export default (layerSpec) => {
       .then((data) => {
         const tileUrl = `${data.cdn_url.templates.https.url}/${layerConfig.account}/api/v1/map/${data.layergroupid}/{z}/{x}/{y}.png`;
         const layer = L.tileLayer(tileUrl);
-        resolve(layer);
+        layer.setZIndex(zIndex);
+        layer.setOpacity(opacity);
+
+        layer.on('tileload', () => resolve(layer));
+        layer.on('tileerror', err => reject(err));
+
+        // adding map
+        leafletMap.addLayer(layer);
       })
       .catch(err => reject(err));
   });
