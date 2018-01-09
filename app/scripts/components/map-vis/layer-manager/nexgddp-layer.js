@@ -1,6 +1,7 @@
 import L from 'leaflet';
 
 export default (leafletMap, layerSpec) => {
+  console.log(layerSpec);
   const { id, zIndex, opacity } = layerSpec;
   const tileUrl = `${config.apiUrlRW}/layer/${id}/tile/nexgddp/{z}/{x}/{y}`;
   const layer = L.tileLayer(tileUrl);

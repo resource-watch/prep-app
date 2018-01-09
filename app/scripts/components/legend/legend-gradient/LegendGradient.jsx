@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import styles from './legend-gradient.scss';
+import './legend-gradient.scss';
 
 export const LegendGradient = ({ legendSpec }) => {
   const gradient = legendSpec.items.map(item => item.color);
@@ -11,7 +11,7 @@ export const LegendGradient = ({ legendSpec }) => {
       <ul>
         {legendSpec.items.map(({ name, color, value }) => (
           <li key={`legend-gradient-item-${color}-${value}`}>
-            <span className="name">{name}</span>
+            <span className="name">{name || value}</span>
           </li>
         ))}
       </ul>
