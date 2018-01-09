@@ -1,11 +1,12 @@
 import React from 'react';
 import Slider from 'react-slick';
+import ArrowButton from '../Button/arrow-button-component';
 
 const settings = {
   dots: false,
-  arrows: false,
+  arrows: true,
   autoplay: true,
-  autoplaySpeed: 5000,
+  autoplaySpeed: 2000,
   infinite: true,
   speed: 500,
   slidesToShow: 5,
@@ -38,7 +39,11 @@ class PartnersSlider extends React.Component {
         {this.props.route && this.props.route === '/' &&
           <h2 className="-left">Our partners</h2>
         }
-        <Slider {...settings}>
+        <Slider
+          {...settings}
+          nextArrow={<ArrowButton full next slidesToShow={settings.slidesToShow} />}
+          prevArrow={<ArrowButton full slidesToShow={settings.slidesToShow} />}
+        >
           {partners}
         </Slider>
       </div>

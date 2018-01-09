@@ -4,9 +4,24 @@
     padding: $small-margin 0;
     margin-bottom: 0;
 
+    .slick-list {
+      @media #{$mq-large} {
+        max-width: 80%;
+        margin: 0 auto;
+      }
+    }
+
     .slick-track {
       display: flex;
       align-items: center;
+    }
+
+    .c-button {
+      display: none;
+
+      @media #{$mq-large} {
+        display: inline-flex;
+      }
     }
   }
 

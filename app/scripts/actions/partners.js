@@ -1,4 +1,3 @@
-import 'whatwg-fetch';
 import { PARTNERS_LIST_RECEIVED, PARTNERS_FETCH_ERROR } from '../constants';
 
 export default function () {}
