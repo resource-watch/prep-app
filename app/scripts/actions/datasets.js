@@ -141,10 +141,7 @@ export function getDatasets(defaultActiveLayers) {
         deserializer.deserialize(data, (err, datasetData) => {
           if (err) throw new Error('Error deserializing json api');
           // Ñapa: We have to conservate layer config
-          const datasets = (datasetData || []).map((d, i) => {
-            d.layer = data.data[i].attributes.layer;
-            return d;
-          });
+          const datasets = (datasetData || []).map((d, i) => Object.assign(d, { layer: data.data[i].attributes.layer }));
 
           if (datasets.length) {
             for (let i = datasets.length - 1; i >= 0; i--) {

@@ -3,7 +3,6 @@ import Modal from './Modal';
 import Button from '../Button/Button';
 
 class WelcomeModal extends React.Component {
-
   constructor(props) {
     super(props);
   }

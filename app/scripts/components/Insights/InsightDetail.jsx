@@ -18,7 +18,6 @@ import EthiopiaInsight from './Customs/Ethiopia';
 const logoImage = '/images/prep-logo.png';
 
 class InsightsDetail extends React.Component {
-
   componentWillMount() {
     if (!this.props.data) {
       this.props.getInsightBySlug(this.props.insightSlug);

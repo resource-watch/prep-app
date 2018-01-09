@@ -17,11 +17,10 @@ const getDatasetsFiltered = (datasetList, datasetFilters) =>
 
       if (matches) {
         // loop through selected tags until one of the tags is not found
-        const tagNotFound = selectedTags.some((tag) => !datasetTags.includes(tag));
+        const tagNotFound = selectedTags.some(tag => !datasetTags.includes(tag));
 
         if (tagNotFound) matches = false;
       }
-
     });
 
     return matches;

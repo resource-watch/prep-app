@@ -4,7 +4,6 @@ import Card from '../Cards/Card';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
 class DashboardsPage extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -50,13 +49,13 @@ class DashboardsPage extends React.Component {
                 alt={item.partner.name}
               />
             </a>
-            }
+          }
           {item.attribution &&
             <span className="attribution">{item.attribution}</span>
-            }
+          }
         </Card>
       </div>
-      ));
+    ));
 
     return (
       <div className="row align-stretch">

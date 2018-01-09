@@ -2,7 +2,6 @@ import React from 'react';
 import Article from '../Content/Article';
 
 class About extends React.Component {
-
   render() {
     return (
       <div className="c-about">
@@ -96,7 +95,6 @@ class About extends React.Component {
       </div>
     );
   }
-
 }
 
 export default About;

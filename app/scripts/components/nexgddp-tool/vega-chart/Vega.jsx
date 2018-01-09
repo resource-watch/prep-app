@@ -171,7 +171,8 @@ class Vega extends React.Component {
   render() {
     return (
       // Create the container Vega draws inside
-      <div ref={(c) => { this.element = c; }}
+      <div
+        ref={(c) => { this.element = c; }}
         className={this.props.className}
         style={this.props.style}
       />

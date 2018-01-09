@@ -9,23 +9,25 @@ import {
   NEXGDDP_SET_RANGE1_OPTIONS,
   NEXGDDP_SET_RANGE1_SELECTION,
   NEXGDDP_SET_RANGE2_OPTIONS,
-  NEXGDDP_SET_RANGE2_SELECTION
+  NEXGDDP_SET_RANGE2_SELECTION,
+  NEXGDDP_SET_CHART_DATA,
+  NEXGDDP_SET_CHART_ERROR,
+  NEXGDDP_SET_CHART_LOADED,
+  NEXGDDP_SET_MAP_LAYERS
 } from '../constants';
 
 const initialState = {
-  // Stat of the map
+  // State of the map
   map: {
     zoom: 3,
     center: [20, -30]
   },
+  layers: [],
   // Position of the marker
   /** @type {[number, number]} marker */
   marker: undefined,
-  // Search input text content
-  /** @type {string} search */
-  search: undefined,
   // Mode of the map
-  /** @type {'difference'|'side_by_side'|'toggle'} mapMode */
+  /** @type {'difference'|'side-by-side'|'toggle'} mapMode */
   mapMode: 'difference',
   // Mode of the graph
   /** @type {'timeseries'|'seasonal'} */
@@ -50,6 +52,13 @@ const initialState = {
     options: [],
     /** @type {{ label: string, value: string }} selection */
     selection: undefined
+  },
+  // Data of the chart
+  chart: {
+    /** @type {{ q25: number, q50: number, q75: number, date: string }[]} */
+    data: [],
+    loaded: false,
+    error: false
   }
 };
 
@@ -58,6 +67,12 @@ export default function (state = initialState, action) {
     case NEXGDDP_SET_MAP_ZOOM: {
       return Object.assign({}, state, {
         map: Object.assign({}, state.map, { zoom: action.payload })
+      });
+    }
+
+    case NEXGDDP_SET_MAP_LAYERS: {
+      return Object.assign({}, state, {
+        map: Object.assign({}, state.layers, { layers: action.payload })
       });
     }
 
@@ -112,6 +127,24 @@ export default function (state = initialState, action) {
     case NEXGDDP_SET_RANGE2_SELECTION: {
       return Object.assign({}, state, {
         range2: Object.assign({}, state.range2, { selection: action.payload })
+      });
+    }
+
+    case NEXGDDP_SET_CHART_DATA : {
+      return Object.assign({}, state, {
+        chart: Object.assign({}, state.chart, { data: action.payload })
+      });
+    }
+
+    case NEXGDDP_SET_CHART_ERROR : {
+      return Object.assign({}, state, {
+        chart: Object.assign({}, state.chart, { error: action.payload })
+      });
+    }
+
+    case NEXGDDP_SET_CHART_LOADED : {
+      return Object.assign({}, state, {
+        chart: Object.assign({}, state.chart, { loaded: action.payload })
       });
     }
 

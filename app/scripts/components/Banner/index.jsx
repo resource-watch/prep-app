@@ -35,7 +35,6 @@ const bg = {
 };
 
 class Banner extends React.Component {
-
   getClassName() {
     let sizeClassName = `c-banner -inverse -${this.props.size || 'medium'}`;
     if (this.props.landing) {
@@ -62,7 +61,6 @@ class Banner extends React.Component {
       </div>
     );
   }
-
 }
 
 export default Banner;
