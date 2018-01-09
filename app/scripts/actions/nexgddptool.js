@@ -1,5 +1,4 @@
 import { replace } from 'react-router-redux';
-import fieldsMock from 'components/nexgddp-tool/mocks/fields.json';
 import {
   NEXGDDP_SET_DATASET,
   NEXGDDP_SET_MAP_ZOOM,
@@ -338,38 +337,18 @@ export function getSelectorsInfo() {
 
     promises.push(rangesPromise);
 
-    // Temporary code
-    const scenarioPromise = Promise.resolve(fieldsMock)
-      .then(({ meta }) => {
-        // const date = meta.coverageBounds.Date;
-        const scenarios = meta.coverageBounds.Scenarios;
+    const scenarioOptions = [
+      {
+        label: 'Pessimistic',
+        value: 'rcp45'
+      },
+      {
+        label: 'Optimistic',
+        value: 'rcp85'
+      }
+    ];
 
-        // // We compute the date range options
-        // const startYear = new Date(date[0]).getFullYear();
-        // const endYear = new Date(date[1]).getFullYear();
-        // let yearPointer = startYear;
-        // const dateRangeOptions = [];
-
-        // while (yearPointer + 10 <= endYear) {
-        //   dateRangeOptions.push({
-        //     label: `${yearPointer}-${yearPointer + 10}`,
-        //     value: `${yearPointer}`
-        //   });
-        //   yearPointer += 10;
-        // }
-
-        // dispatch(setRange1Options(dateRangeOptions));
-        // dispatch(setRange2Options(dateRangeOptions));
-
-        // We compute the scenario options
-        const scenarioOptions = scenarios.map(scenario => ({
-          label: { [scenario]: scenario, rcp45: 'Pessimistic', rcp85: 'Optimistic' }[scenario],
-          value: scenario
-        }));
-
-        return dispatch(setScenarioOptions(scenarioOptions));
-      });
-
+    const scenarioPromise = dispatch(setScenarioOptions(scenarioOptions));
     promises.push(scenarioPromise);
 
     return Promise.all(promises);
