@@ -18,7 +18,7 @@ class ExploreDatasetsList extends PureComponent {
             dataset={dataset}
             onToggleDataset={this.props.toggleDataset}
             onToggleInfo={this.props.toggleInfo}
-          />)) : <p>No datasets available.</p>}
+          />)) : <p className="no-data">There are not datasets with these filters.</p>}
       </div>
     );
   }
