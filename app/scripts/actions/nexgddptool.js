@@ -237,29 +237,49 @@ export function getUrlState() {
       .map(chunk => ({ [chunk.split('=')[0]]: decodeURIComponent(chunk.split('=')[1]) }))
       .reduce((res, param) => ({ ...res, ...param }), {});
 
-    if (params.zoom) dispatch(setMapZoom(+params.zoom, false));
-    if (params.lat && params.lng) dispatch(setMapCenter([+params.lat, +params.lng], false));
-    if (params.markerLat && params.markerLng) dispatch(setMarkerPosition([+params.markerLat, +params.markerLng], false));
-    if (params.mapMode) dispatch(setMapMode(params.mapMode, false));
-    if (params.graphMode) dispatch(setGraphMode(params.graphMode, false));
+    // We keep the promises so we wait for the state to be restored
+    // before moving on to something else
+    const promises = [];
+
+    if (params.zoom) {
+      promises.push(dispatch(setMapZoom(+params.zoom, false)));
+    }
+    if (params.lat && params.lng) {
+      promises.push(dispatch(setMapCenter([+params.lat, +params.lng], false)));
+    }
+    if (params.markerLat && params.markerLng) {
+      promises.push(dispatch(setMarkerPosition([+params.markerLat, +params.markerLng], false)));
+    }
+    if (params.mapMode) {
+      promises.push(dispatch(setMapMode(params.mapMode, false)));
+    }
+    if (params.graphMode) {
+      promises.push(dispatch(setGraphMode(params.graphMode, false)));
+    }
     if (params.scenario) {
       const scenarioOptions = getState().nexgddptool.scenario.options;
       const scenarioOption = scenarioOptions.find(s => s.value === params.scenario);
-      if (scenarioOption) dispatch(setScenarioSelection(scenarioOption, false));
+      if (scenarioOption) {
+        promises.push(dispatch(setScenarioSelection(scenarioOption, false)));
+      }
     }
     if (params.range1) {
       const range1Options = getState().nexgddptool.range1.options;
       const range1Option = range1Options.find(s => s.value === params.range1);
-      if (range1Option) dispatch(setRange1Selection(range1Option, false));
+      if (range1Option) {
+        promises.push(dispatch(setRange1Selection(range1Option, false)));
+      }
     }
     if (params.range2) {
       const range2Options = getState().nexgddptool.range2.options;
       const range2Option = range2Options.find(s => s.value === params.range2);
-      if (range2Option) dispatch(setRange2Selection(range2Option, false));
+      if (range2Option) {
+        promises.push(dispatch(setRange2Selection(range2Option, false)));
+      }
     }
 
     // Needed to chain the action
-    return Promise.resolve();
+    return Promise.all(promises);
   };
 }
 
@@ -267,22 +287,30 @@ export function setDefaultState() {
   return (dispatch, getState) => {
     const store = getState().nexgddptool;
 
+    // We keep the promises so we wait for the state to be set
+    // before moving on to something else
+    const promises = [];
+
     if (!store.range1.selection && store.range1.options.length) {
-      dispatch(setRange1Selection(store.range1.options[0]));
+      promises.push(dispatch(setRange1Selection(store.range1.options[0])));
     }
 
     if (!store.scenario.selection && store.scenario.options.length) {
-      dispatch(setScenarioSelection(store.scenario.options[0]));
+      promises.push(dispatch(setScenarioSelection(store.scenario.options[0])));
     }
 
     // Needed to chain the action
-    return Promise.resolve();
+    return Promise.all(promises);
   };
 }
 
 export function getSelectorsInfo() {
   return (dispatch) => {
-    fetch(`${process.env.RW_API_URL}/query?sql=select min(year) as startdate, max(year) as enddate from test_decadal_tasavg`)
+    // We keep the promises so we wait for the state to be set
+    // before moving on to something else
+    const promises = [];
+
+    const rangesPromise = fetch(`${process.env.RW_API_URL}/query?sql=select min(year) as startdate, max(year) as enddate from test_decadal_tasavg`)
       .then((res) => {
         if (res.ok) return res.json();
         throw new Error('Unable to fetch the date range');
@@ -302,47 +330,50 @@ export function getSelectorsInfo() {
           yearPointer += 10;
         }
 
-        dispatch(setRange1Options(dateRangeOptions));
-        dispatch(setRange1Selection(dateRangeOptions[0]));
-        dispatch(setRange2Options(dateRangeOptions));
+        return Promise.all([
+          dispatch(setRange1Options(dateRangeOptions)),
+          dispatch(setRange2Options(dateRangeOptions))
+        ]);
       })
       .catch(err => console.error(err));
 
+    promises.push(rangesPromise);
 
     // Temporary code
-    const promise = Promise.resolve(fieldsMock);
+    const scenarioPromise = Promise.resolve(fieldsMock)
+      .then(({ meta }) => {
+        // const date = meta.coverageBounds.Date;
+        const scenarios = meta.coverageBounds.Scenarios;
 
-    promise.then(({ meta }) => {
-      // const date = meta.coverageBounds.Date;
-      const scenarios = meta.coverageBounds.Scenarios;
+        // // We compute the date range options
+        // const startYear = new Date(date[0]).getFullYear();
+        // const endYear = new Date(date[1]).getFullYear();
+        // let yearPointer = startYear;
+        // const dateRangeOptions = [];
 
-      // // We compute the date range options
-      // const startYear = new Date(date[0]).getFullYear();
-      // const endYear = new Date(date[1]).getFullYear();
-      // let yearPointer = startYear;
-      // const dateRangeOptions = [];
+        // while (yearPointer + 10 <= endYear) {
+        //   dateRangeOptions.push({
+        //     label: `${yearPointer}-${yearPointer + 10}`,
+        //     value: `${yearPointer}`
+        //   });
+        //   yearPointer += 10;
+        // }
 
-      // while (yearPointer + 10 <= endYear) {
-      //   dateRangeOptions.push({
-      //     label: `${yearPointer}-${yearPointer + 10}`,
-      //     value: `${yearPointer}`
-      //   });
-      //   yearPointer += 10;
-      // }
+        // dispatch(setRange1Options(dateRangeOptions));
+        // dispatch(setRange2Options(dateRangeOptions));
 
-      // dispatch(setRange1Options(dateRangeOptions));
-      // dispatch(setRange2Options(dateRangeOptions));
+        // We compute the scenario options
+        const scenarioOptions = scenarios.map(scenario => ({
+          label: { [scenario]: scenario, rcp45: 'Pessimistic', rcp85: 'Optimistic' }[scenario],
+          value: scenario
+        }));
 
-      // We compute the scenario options
-      const scenarioOptions = scenarios.map(scenario => ({
-        label: { [scenario]: scenario, rcp45: 'Pessimistic', rcp85: 'Optimistic' }[scenario],
-        value: scenario
-      }));
+        return dispatch(setScenarioOptions(scenarioOptions));
+      });
 
-      dispatch(setScenarioOptions(scenarioOptions));
-    });
+    promises.push(scenarioPromise);
 
-    return promise;
+    return Promise.all(promises);
   };
 }
 
