@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
+import 'lib/leaflet-singleclick';
 
 // Redux
 import { getLayers } from 'selectors/nexgddptool';
@@ -42,7 +43,7 @@ class DifferenceMap extends React.PureComponent {
         <Map
           style={{ height: 440 }}
           {...mapOptions}
-          onClick={({ latlng }) => this.props.setMarkerPosition([latlng.lat, latlng.lng])}
+          onSingleclick={({ latlng }) => this.props.setMarkerPosition([latlng.lat, latlng.lng])}
           onViewportChanged={(...params) => this.onViewportChanged(...params)}
         >
           <TileLayer url={config.basemapTileUrl} />

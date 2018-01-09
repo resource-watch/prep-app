@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import L from 'leaflet';
 import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 import 'lib/leaflet-side-by-side';
+import 'lib/leaflet-singleclick';
 
 // Redux
 import { getLayers } from 'selectors/nexgddptool';
@@ -121,7 +122,7 @@ class CompareMap extends React.PureComponent {
           ref={(el) => { this.mapElement = el; }}
           style={{ height: 440 }}
           {...mapOptions}
-          onClick={e => this.onClickMap(e)}
+          onSingleclick={e => this.onClickMap(e)}
           onViewportChanged={(...params) => this.onViewportChanged(...params)}
         >
           <TileLayer

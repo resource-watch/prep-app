@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import L from 'leaflet';
+import 'lib/leaflet-singleclick';
 import { connect } from 'react-redux';
 import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 import { getLayers } from 'selectors/nexgddptool';
@@ -55,7 +56,7 @@ class SimpleMap extends React.PureComponent {
         <Map
           style={{ height: 440 }}
           {...mapOptions}
-          onClick={this.addMarker}
+          onSingleclick={this.addMarker}
           onViewportChanged={(...params) => this.onViewportChanged(...params)}
         >
           <TileLayer
