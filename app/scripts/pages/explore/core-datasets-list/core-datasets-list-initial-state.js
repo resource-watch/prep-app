@@ -1,5 +1,5 @@
 const initialState = {
-  items: []
+  location: 'global'
 };
 
 export default initialState;

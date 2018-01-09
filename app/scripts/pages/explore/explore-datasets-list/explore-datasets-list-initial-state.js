@@ -1,7 +1,8 @@
 const initialState = {
   items: [],
   isFetching: false,
-  filterQuery: ''
+  filterQuery: '',
+  activeDatasets: []
 };
 
 export default initialState;

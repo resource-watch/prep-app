@@ -5,7 +5,7 @@ import initialState from './explore-initial-state';
 import * as actions from './explore-actions';
 import * as reducers from './explore-reducers';
 
-export { initialState, actions, reducers, Component };
+export { initialState, actions, reducers };
 
 const mapStateToProps = state => ({
   routing: state.routing,

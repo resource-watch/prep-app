@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import truncate from 'lodash/truncate';
+import filter from 'lodash/filter';
 import { Link } from 'react-router';
 
 import Icon from 'components/ui/Icon';
@@ -12,8 +13,12 @@ class DatasetCard extends PureComponent {
     const { dataset, onToggleDataset, onToggleInfo } = this.props;
     const info = getInfo(dataset);
     const title = getTitle(dataset);
-    const hasLayer = !!(dataset.layer && dataset.layer.length);
-    const classNames = ['c-dataset-item', dataset.isSelected ? '-info-active' : null].join(' ');
+    const hasLayer = !!(filter(dataset.layer, { default: true }).length);
+    const classNames = [
+      'c-dataset-item',
+      dataset.isLayerActive ? '-layer-active' : null,
+      dataset.isSelected ? '-info-active' : null
+    ].join(' ');
 
     return (
       <div className={classNames}>
@@ -42,6 +47,7 @@ class DatasetCard extends PureComponent {
             </div>
           </div>
           <span className="subtitle">{info.organization}</span>
+          {dataset.env === 'preproduction' && <p style={{ fontSize: '11px', color: 'red', margin: 0 }}>preproduction</p>}
         </header>
 
         <div className="item-content">
