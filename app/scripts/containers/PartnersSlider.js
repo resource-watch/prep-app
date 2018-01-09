@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { getPartners } from '../actions/partners';
-import PartnersSlider from '../components/Slider/PartnersSlider';
+import { getPartners } from 'modules/partners/partners-actions';
+import PartnersSlider from 'components/Slider/PartnersSlider';
 
 const mapStateToProps = state => ({
   data: state.partners.list,
