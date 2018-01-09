@@ -303,12 +303,14 @@ export function setDefaultState() {
 }
 
 export function getSelectorsInfo() {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     // We keep the promises so we wait for the state to be set
     // before moving on to something else
     const promises = [];
 
-    const rangesPromise = fetch(`${process.env.RW_API_URL}/query?sql=select min(year) as startdate, max(year) as enddate from test_decadal_tasavg`)
+    const datasetIdentifier = Object.keys(getState().datasets.details)[0];
+
+    const rangesPromise = fetch(`${process.env.RW_API_URL}/query?sql=select min(year) as startdate, max(year) as enddate from ${datasetIdentifier}`)
       .then((res) => {
         if (res.ok) return res.json();
         throw new Error('Unable to fetch the date range');
