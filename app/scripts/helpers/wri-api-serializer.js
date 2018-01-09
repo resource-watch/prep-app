@@ -1,6 +1,8 @@
+import isArray from 'lodash/isArray';
+
 const serialize = ({ id, type, attributes }) => Object.assign({}, { id, type }, attributes);
 
-export const wriAPISerializer = ({ data }) => data.map(({ id, type, attributes }) => {
+const itemSerializer = ({ id, type, attributes }) => {
   const d = Object.assign({}, { id, type }, attributes);
 
   if (d.widget) d.widget = d.widget.map(serialize);
@@ -9,6 +11,11 @@ export const wriAPISerializer = ({ data }) => data.map(({ id, type, attributes }
   if (d.vocabulary) d.vocabulary = d.vocabulary.map(serialize);
 
   return d;
-});
+};
+
+export const wriAPISerializer = ({ data }) => {
+  if (data && isArray(data)) return data.map(itemSerializer);
+  return itemSerializer(data);
+};
 
 export default wriAPISerializer;
