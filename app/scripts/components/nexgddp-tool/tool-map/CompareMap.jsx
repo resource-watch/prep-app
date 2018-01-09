@@ -82,6 +82,16 @@ class CompareMap extends React.PureComponent {
     }
   }
 
+  onClickMap({ originalEvent, latlng }) {
+    // When the map divider is moved, the map receives a click event
+    // "leaflet-sbs-range" is the class of the divider
+    if (originalEvent.target.classList.contains('leaflet-sbs-range')) {
+      return;
+    }
+
+    this.props.setMarkerPosition([latlng.lat, latlng.lng]);
+  }
+
   onViewportChanged({ zoom, center }) {
     if (zoom !== this.props.map.zoom) this.props.setMapZoom(zoom);
     if (center[0] !== this.props.map.center[0]
@@ -111,7 +121,7 @@ class CompareMap extends React.PureComponent {
           ref={(el) => { this.mapElement = el; }}
           style={{ height: 440 }}
           {...mapOptions}
-          onClick={({ latlng }) => this.props.setMarkerPosition([latlng.lat, latlng.lng])}
+          onClick={e => this.onClickMap(e)}
           onViewportChanged={(...params) => this.onViewportChanged(...params)}
         >
           <TileLayer
