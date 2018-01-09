@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 
 // Redux
+import { getLayers } from 'selectors/nexgddptool';
 import { setMarkerPosition, setMapZoom, setMapCenter } from 'actions/nexgddptool';
 
 const mapDefaultOptions = {
@@ -26,7 +27,7 @@ class DifferenceMap extends React.PureComponent {
   }
 
   render() {
-    const { map, marker } = this.props;
+    const { map, marker, layers } = this.props;
 
     // It will change center of map on marker location
     const mapOptions = Object.assign({}, mapDefaultOptions, {
@@ -34,20 +35,18 @@ class DifferenceMap extends React.PureComponent {
       zoom: map.zoom || mapDefaultOptions.zoom
     });
 
+    const currentLayer = layers.length ? layers[0] : null;
+
     return (
       <div className="c-tool-map">
-        <div className="not-ready">
-          Not available
-        </div>
         <Map
           style={{ height: 440 }}
           {...mapOptions}
           onClick={({ latlng }) => this.props.setMarkerPosition([latlng.lat, latlng.lng])}
           onViewportChanged={(...params) => this.onViewportChanged(...params)}
         >
-          <TileLayer
-            url={config.basemapTileUrl}
-          />
+          <TileLayer url={config.basemapTileUrl} />
+          {currentLayer && <TileLayer url={currentLayer.url} />}
           <ZoomControl position="bottomright" />
           { marker && <Marker position={marker} icon={L.divIcon({ className: 'map-marker' })} /> }
         </Map>
@@ -64,12 +63,14 @@ DifferenceMap.propTypes = {
   marker: PropTypes.array,
   setMarkerPosition: PropTypes.func,
   setMapZoom: PropTypes.func,
-  setMapCenter: PropTypes.func
+  setMapCenter: PropTypes.func,
+  layers: PropTypes.array
 };
 
 const mapStateToProps = state => ({
   map: state.nexgddptool.map,
-  marker: state.nexgddptool.marker
+  marker: state.nexgddptool.marker,
+  layers: getLayers(state)
 });
 
 const mapDispatchToProps = dispatch => ({

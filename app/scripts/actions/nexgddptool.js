@@ -64,7 +64,6 @@ export function setDataset(id) {
       payload: id
     });
   };
-
 }
 
 export function setMapLayers(layers) {
