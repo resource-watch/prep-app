@@ -5,10 +5,7 @@ import { IndexRoute, Router, Route, applyRouterMiddleware } from 'react-router';
 
 import App from './components/App';
 import Home from './components/Home';
-import Partnership from './components/Partnership';
-import EngagementWorkgroup from './components/Partnership/EngagementWorkgroup';
-import DataAccessibility from './components/Partnership/DataAccessibility';
-import PlatformWorkgroup from './components/Partnership/PlatformWorkgroup';
+import AboutPage from './pages/about';
 import Explore from './pages/explore';
 import DatasetDetail from './containers/Dataset';
 import FAQ from './components/FAQ';
@@ -112,12 +109,7 @@ function Routes(props) {
       <Route path={''} component={Root}>
         <Route path={'/'} component={App}>
           <IndexRoute component={Home} />
-          <Route path={'about'}>
-            <IndexRoute component={Partnership} />
-            <Route path={'engagement'} component={EngagementWorkgroup} />
-            <Route path={'data'} component={DataAccessibility} />
-            <Route path={'platforms'} component={PlatformWorkgroup} />
-          </Route>
+          <Route path={'about'} component={AboutPage} />
           <Route path={'faqs'} component={FAQ} />
           <Route path={'dashboards'} component={Dashboards} />
           <Route path={'insights'} component={Insights} />
