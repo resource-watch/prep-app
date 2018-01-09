@@ -3,7 +3,6 @@ require('dotenv').config({ silent: true });
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const rootPath = process.cwd();
 
@@ -21,29 +20,26 @@ const config = {
 
   module: {
     rules: [{
-      test: /\.jsx?$/,
+      test: /\.(js|jsx)?$/,
       exclude: /(node_modules|lib)/,
-      use: ['babel-loader']
+      loader: require.resolve('babel-loader')
     }, {
       test: /\.(hbs|handlebars)$/,
-      use: ['handlebars-loader']
+      loader: require.resolve('handlebars-loader')
     }, {
       test: /\.html$/,
-      use: ['raw-loader']
+      loader: require.resolve('raw-loader')
     }]
   },
 
   resolve: {
     extensions: ['.js', '.jsx', '.scss'],
-    modules: [
-      path.join(rootPath, 'app'),
-      path.resolve('app/scripts'),
-      path.resolve('app/styles'),
-      path.join(rootPath, 'node_modules')
-    ],
     alias: {
       styles: path.resolve('app/styles'),
+      constants: path.resolve('app/scripts/constants'),
       components: path.resolve('app/scripts/components'),
+      containers: path.resolve('app/scripts/containers'),
+      helpers: path.resolve('app/scripts/helpers'),
       lib: path.resolve('app/scripts/lib'),
       actions: path.resolve('app/scripts/actions'),
       selectors: path.resolve('app/scripts/selectors'),

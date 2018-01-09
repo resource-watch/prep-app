@@ -95,9 +95,9 @@ function getLegend(layer) {
   }
 }
 
-const DragHandle = SortableHandle(() => <span className="handler">
+const DragHandle = SortableHandle(() => (<span className="handler">
   <Icon name="icon-drag-dots" className="-medium" />
-</span>);
+</span>));
 
 const SortableItem = SortableElement(({ value }) => value);
 
@@ -387,7 +387,7 @@ class DataMapLegend extends React.Component {
               </svg>
             </span>
             <span className="action close" onClick={() => this.toggleToolbarStatus()}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="32" viewBox="0 0 20 32"><title>arrow-left</title><path d="M20.364 5.071L16 0 0 16l16 16 4.364-5.071L8.221 16z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="32" viewBox="0 0 20 32"><title>arrow-left</title><path d="M20.364 5.071L16 0 0 16l16 16 4.364-5.071L8.221 16z" /></svg>
             </span>
           </div>
 
@@ -415,7 +415,7 @@ class DataMapLegend extends React.Component {
                 </svg>
               </span>
               <span className="action close" onClick={() => this.toggleToolbarStatus()}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="32" viewBox="0 0 20 32"><title>arrow-left</title><path d="M20.364 5.071L16 0 0 16l16 16 4.364-5.071L8.221 16z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="32" viewBox="0 0 20 32"><title>arrow-left</title><path d="M20.364 5.071L16 0 0 16l16 16 4.364-5.071L8.221 16z" /></svg>
               </span>
             </div>
           }

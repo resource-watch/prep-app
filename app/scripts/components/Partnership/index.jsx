@@ -6,7 +6,6 @@ import JoinPartnership from './Articles/JoinPartnership';
 import PartnershipSlider from '../Slider/PartnershipSlider';
 
 class Partnership extends React.Component {
-
   scrollTo(anchor) {
     const element = ReactDOM.findDOMNode(this.refs[anchor]);
     element.scrollIntoView({ behavior: 'smooth' });
@@ -131,7 +130,6 @@ class Partnership extends React.Component {
       </div>
     );
   }
-
 }
 
 export default Partnership;

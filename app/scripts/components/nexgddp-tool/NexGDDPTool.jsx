@@ -6,31 +6,27 @@ import DateRangeSelect from './date-range-select/DateRangeSelect';
 import { CompareMap, ToggleMap, DifferenceMap, SimpleMap } from './tool-map';
 import LocationSearch from './location-search/LocationSearch';
 import TimeseriesChart from './tool-chart/TimeseriesChart';
+
 // Redux
-import { getSelectorsInfo } from 'actions/nexgddptool';
+import { getSelectorsInfo, getUrlState, setDefaultState, setMapMode, setDataset } from 'actions/nexgddptool';
 
 import './style.scss';
 
 class NexGDDPTool extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      mapView: props.mapView
-    };
-    this.switchMapView = this.switchMapView.bind(this);
-  }
-
   componentDidMount() {
-    this.props.getSelectorsInfo();
+    this.props.setDataset(this.props.dataset);
+
+    this.props.getSelectorsInfo()
+      .then(() => this.props.restoreState())
+      .then(() => this.props.setDefaultState());
   }
 
-  switchMapView(mapView) {
-    return () => this.setState({ mapView });
+  switchMapView(mapMode) {
+    this.props.setMapMode(mapMode);
   }
 
   render() {
-    const { mapView } = this.state;
-    const { marker, isComparing } = this.props;
+    const { marker, isComparing, mapMode } = this.props;
 
     return (
       <div className="c-nexgddp-tool">
@@ -53,17 +49,17 @@ class NexGDDPTool extends React.PureComponent {
               { isComparing && (
                 <div>
                   <button
-                    className={`c-button -inline ${mapView === 'difference' ? '-active' : ''}`}
-                    onClick={this.switchMapView('difference')}
-                  >Difference</button>
-                  <button
-                    className={`c-button -inline ${mapView === 'side-by-side' ? '-active' : ''}`}
-                    onClick={this.switchMapView('side-by-side')}
+                    className={`c-button -inline ${mapMode === 'side-by-side' ? '-active' : ''}`}
+                    onClick={() => this.switchMapView('side-by-side')}
                   >Side by side</button>
                   <button
-                    className={`c-button -inline ${mapView === 'toggle' ? '-active' : ''}`}
-                    onClick={this.switchMapView('toggle')}
+                    className={`c-button -inline ${mapMode === 'toggle' ? '-active' : ''}`}
+                    onClick={() => this.switchMapView('toggle')}
                   >Toggle</button>
+                  <button
+                    className={`c-button -inline ${mapMode === 'difference' ? '-active' : ''}`}
+                    onClick={() => this.switchMapView('difference')}
+                  >Difference</button>
                 </div>
               )}
             </div>
@@ -77,9 +73,9 @@ class NexGDDPTool extends React.PureComponent {
           <div className="row">
             <div className="columns small-12">
               {!isComparing && <SimpleMap />}
-              {(isComparing && mapView === 'difference') && <DifferenceMap />}
-              {(isComparing && mapView === 'side-by-side') && <CompareMap />}
-              {(isComparing && mapView === 'toggle') && <ToggleMap />}
+              {(isComparing && mapMode === 'difference') && <DifferenceMap />}
+              {(isComparing && mapMode === 'side-by-side') && <CompareMap />}
+              {(isComparing && mapMode === 'toggle') && <ToggleMap />}
             </div>
           </div>
         </div>
@@ -97,22 +93,29 @@ class NexGDDPTool extends React.PureComponent {
 }
 
 NexGDDPTool.propTypes = {
+  dataset: PropTypes.string,
   getSelectorsInfo: PropTypes.func,
+  restoreState: PropTypes.func,
+  setDefaultState: PropTypes.func,
+  setMapMode: PropTypes.func,
+  setDataset: PropTypes.func,
   isComparing: PropTypes.bool,
-  mapView: PropTypes.oneOf(['difference', 'side-by-side', 'toggle'])
-};
-
-NexGDDPTool.defaultProps = {
-  mapView: 'difference'
+  marker: PropTypes.array,
+  mapMode: PropTypes.oneOf(['difference', 'side-by-side', 'toggle'])
 };
 
 const mapStateToProps = state => ({
   marker: state.nexgddptool.marker,
-  isComparing: !!state.nexgddptool.range2.selection
+  isComparing: !!state.nexgddptool.range2.selection,
+  mapMode: state.nexgddptool.mapMode
 });
 
 const mapDispatchToProps = dispatch => ({
-  getSelectorsInfo: () => dispatch(getSelectorsInfo())
+  getSelectorsInfo: () => dispatch(getSelectorsInfo()),
+  restoreState: () => dispatch(getUrlState()),
+  setDataset: (slug) => dispatch(setDataset(slug)),
+  setDefaultState: () => dispatch(setDefaultState()),
+  setMapMode: (...params) => dispatch(setMapMode(...params))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NexGDDPTool);

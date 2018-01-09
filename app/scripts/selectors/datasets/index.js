@@ -1,9 +1,7 @@
 import { createSelector } from 'reselect';
 import flattenDeep from 'lodash/flattenDeep';
-
-import DATASETS_GROUPS from '../../general-constants/datasets-groups';
-
 import getDatasetsFiltered from 'helpers/dataset-filter';
+import DATASETS_GROUPS from '../../general-constants/datasets-groups';
 
 const datasetsList = state => state.datasets.list;
 const tab = state => state.datasets.tab;

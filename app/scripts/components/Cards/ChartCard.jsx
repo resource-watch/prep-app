@@ -3,7 +3,6 @@ import ContentCard from './ContentCard';
 import VegaChart from '../Chart/VegaChart';
 
 class ChartCard extends React.Component {
-
   setShareModal() {
     this.props.setShareModal(this.props.data.data_url, 'widget', this.props.data.slug);
   }

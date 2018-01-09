@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const path = require('path');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CompressionPlugin = require('compression-webpack-plugin');
@@ -74,11 +73,11 @@ module.exports = merge(sharedConfig, {
   plugins: [
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        filename: 'vendor.[chunkhash].js',
-        minChunks (module) {
-            return module.context && module.context.indexOf('node_modules') >= 0;
-        }
+      name: 'vendor',
+      filename: 'vendor.[chunkhash].js',
+      minChunks(module) {
+        return module.context && module.context.indexOf('node_modules') >= 0;
+      }
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -111,7 +110,7 @@ module.exports = merge(sharedConfig, {
     }),
     process.env.BUNDLE_ANALIZE ? new BundleAnalyzerPlugin({
       analyzerMode: 'static'
-    }) : function() {}
+    }) : () => {}
   ],
 
   externals: {

@@ -36,10 +36,10 @@ function RelatedDasboards(props) {
                   alt={item.partner.name}
                 />
               </a>
-                }
+              }
             </Card>
           </div>
-          ))}
+        ))}
       </div>
     </div>
   );

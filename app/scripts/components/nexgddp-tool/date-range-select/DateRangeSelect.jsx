@@ -13,6 +13,12 @@ class DateRangeSelect extends React.PureComponent {
     // eslint-disable-next-line no-shadow
     const { range1, range2, setRange1Selection, setRange2Selection } = this.props;
 
+    const range2Options = range2.options
+      .map(o => ({
+        ...o,
+        disabled: range1.selection && o.value === range1.selection.value
+      }));
+
     return (
       <div className="c-date-range-select">
         <Select
@@ -25,7 +31,7 @@ class DateRangeSelect extends React.PureComponent {
           name="enddate"
           value={range2.selection}
           onChange={setRange2Selection}
-          options={range2.options}
+          options={range2Options}
         />
       </div>
     );

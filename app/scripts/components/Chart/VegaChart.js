@@ -3,7 +3,6 @@ import vega from 'vega';
 import theme from './theme';
 
 class VegaChart extends React.Component {
-
   componentDidMount() {
     this.resizeEvent = () => {
       this.handleResize();

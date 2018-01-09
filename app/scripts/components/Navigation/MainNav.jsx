@@ -20,9 +20,9 @@ function MainNav() {
         <li>
           <Link activeClassName="-current" to="/insights">Stories</Link>
         </li>
-        <li>
+        {/* <li>
           <Link activeClassName="-current" to="/create">Create</Link>
-        </li>
+        </li> */}
         <li>
           <Link activeClassName="-current" to="/resources">Resources</Link>
         </li>
