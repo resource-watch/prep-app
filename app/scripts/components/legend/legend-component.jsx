@@ -18,7 +18,7 @@ class Legend extends PureComponent {
         <div className="c-legend-header">
           <h3>{name} {unit && <span>({unit})</span>}</h3>
           {this.props.toolbar && <div className="c-legend-toolbar">
-            <button type="button" onClick={() => console.log('opacity')}><Icon name="icon-opacity" className="-normal" /></button>
+            {/* <button type="button" onClick={() => console.log('opacity')}><Icon name="icon-opacity" className="-normal" /></button> */}
             <button type="button" onClick={() => onInfo(layerSpec)}><Icon name="icon-info" className="-normal" /></button>
             <button type="button" onClick={() => onClose(layerSpec)}><Icon name="icon-cross" className="-normal" /></button>
           </div>}
