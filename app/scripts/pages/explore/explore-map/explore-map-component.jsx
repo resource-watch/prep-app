@@ -17,7 +17,7 @@ class ExploreMap extends PureComponent {
   }
 
   render() {
-    const { setMapParams, basemap, labels, boundaries, setBasemap,
+    const { setMapParams, basemap, labels, boundaries, zoom, lat, lng, setBasemap,
       setLabels, setBoundaries, activeLayers, embed } = this.props;
     const currentBasemap = basemapsSpec[basemap];
     const currentLabels = labelsSpec[labels];
@@ -30,6 +30,10 @@ class ExploreMap extends PureComponent {
     return (
       <div className={`c-explore-map ${classNames}`}>
         <Map
+          mapOptions={{
+            zoom,
+            center: { lat, lng }
+          }}
           basemap={currentBasemap}
           labels={currentLabels}
           boundaries={currentBoundaries}
@@ -69,6 +73,9 @@ ExploreMap.propTypes = {
   labels: PropTypes.oneOf(['none', 'dark', 'light']),
   activeLayers: PropTypes.array,
   boundaries: PropTypes.bool,
+  zoom: PropTypes.number,
+  lat: PropTypes.number,
+  lng: PropTypes.number,
   embed: PropTypes.bool,
   setBasemap: PropTypes.func,
   setLabels: PropTypes.func,
