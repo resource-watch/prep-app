@@ -10,15 +10,26 @@ import TimeseriesChart from './tool-chart/TimeseriesChart';
 // Redux
 import { getSelectorsInfo, getUrlState, setDefaultState, setMapMode, setDataset } from 'actions/nexgddptool';
 
+// Component
+import Spinner from 'components/Loading/LoadingSpinner';
+
 import './style.scss';
 
 class NexGDDPTool extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true
+    };
+  }
+
   componentDidMount() {
     this.props.setDataset(this.props.dataset);
 
     this.props.getSelectorsInfo()
       .then(() => this.props.restoreState())
-      .then(() => this.props.setDefaultState());
+      .then(() => this.props.setDefaultState())
+      .then(() => this.setState({ loading: false }));
   }
 
   switchMapView(mapMode) {
@@ -27,9 +38,11 @@ class NexGDDPTool extends React.PureComponent {
 
   render() {
     const { marker, isComparing, mapMode } = this.props;
+    const { loading } = this.state;
 
     return (
       <div className="c-nexgddp-tool">
+        { loading && <Spinner inner /> }
         <div className="filters">
           <div className="row">
             <div className="columns small-12 medium-4">
@@ -113,7 +126,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getSelectorsInfo: () => dispatch(getSelectorsInfo()),
   restoreState: () => dispatch(getUrlState()),
-  setDataset: (slug) => dispatch(setDataset(slug)),
+  setDataset: slug => dispatch(setDataset(slug)),
   setDefaultState: () => dispatch(setDefaultState()),
   setMapMode: (...params) => dispatch(setMapMode(...params))
 });

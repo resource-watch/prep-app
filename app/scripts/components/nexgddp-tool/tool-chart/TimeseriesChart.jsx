@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Vega from '../vega-chart/Vega';
 import Icon from 'components/ui/Icon';
+import Spinner from 'components/Loading/LoadingSpinner';
 import './style.scss';
 
 // Redux
@@ -221,10 +222,10 @@ class TimeseriesChart extends React.PureComponent {
   render() {
     const { width, height, removeMarker, range1Selection, range2Selection, chartData, chartDataLoaded, chartDataError } = this.props;
 
-    // If for some reason, the range 1 is not selected or if don't have
-    // data for the chart, we return
+    // If for some reason, the range 1 is not selected or if the data
+    // failed to load, we return
     // The 1st reason happens when restoring the state from the URL
-    if (!range1Selection || !chartDataLoaded || chartDataError) return null;
+    if (!range1Selection || chartDataError) return null;
 
     const range1Signal = {
       name: 'range1',
@@ -248,15 +249,18 @@ class TimeseriesChart extends React.PureComponent {
 
     return (
       <div className="c-tool-timeseries-chart">
+        { !chartDataLoaded && <Spinner inner transparent /> }
         <button type="button" className="close-button" aria-label="Close chart" onClick={removeMarker}>
           <Icon name="icon-cross" />
         </button>
-        <Vega
-          width={width}
-          height={height}
-          padding="strict"
-          spec={spec}
-        />
+        { chartDataLoaded &&
+          <Vega
+            width={width}
+            height={height}
+            padding="strict"
+            spec={spec}
+          />
+        }
       </div>
     );
   }

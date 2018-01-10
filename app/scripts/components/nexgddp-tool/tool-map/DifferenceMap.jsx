@@ -2,9 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
+import 'lib/leaflet-singleclick';
 
 // Redux
-import { setMarkerPosition, setMapZoom, setMapCenter } from 'actions/nexgddptool';
+import { getLayers } from 'selectors/nexgddptool';
+import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels } from 'actions/nexgddptool';
+
+// Components
+import BasemapControl from 'components/basemap-control';
+import { basemapsSpec, labelsSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
 
 const mapDefaultOptions = {
   center: [20, -30],
@@ -26,7 +32,7 @@ class DifferenceMap extends React.PureComponent {
   }
 
   render() {
-    const { map, marker } = this.props;
+    const { map, marker, layers } = this.props;
 
     // It will change center of map on marker location
     const mapOptions = Object.assign({}, mapDefaultOptions, {
@@ -34,23 +40,33 @@ class DifferenceMap extends React.PureComponent {
       zoom: map.zoom || mapDefaultOptions.zoom
     });
 
+    const currentLayer = layers.length ? layers[0] : null;
+
     return (
       <div className="c-tool-map">
-        <div className="not-ready">
-          Not available
-        </div>
         <Map
           style={{ height: 440 }}
           {...mapOptions}
-          onClick={({ latlng }) => this.props.setMarkerPosition([latlng.lat, latlng.lng])}
+          onSingleclick={({ latlng }) => this.props.setMarkerPosition([latlng.lat, latlng.lng])}
           onViewportChanged={(...params) => this.onViewportChanged(...params)}
         >
-          <TileLayer
-            url={config.basemapTileUrl}
-          />
+          <TileLayer url={basemapsSpec[map.basemap].value} />
+          { currentLayer && <TileLayer url={currentLayer.url} /> }
+          { map.boundaries && <TileLayer url={boundariesSpec.dark.value} /> }
+          { map.labels !== 'none' && <TileLayer url={labelsSpec[map.labels].value} /> }
+
           <ZoomControl position="bottomright" />
           { marker && <Marker position={marker} icon={L.divIcon({ className: 'map-marker' })} /> }
         </Map>
+
+        <BasemapControl
+          basemap={map.basemap}
+          labels={map.labels}
+          boundaries={map.boundaries}
+          setBasemap={this.props.setBasemap}
+          setLabels={this.props.setLabels}
+          setBoundaries={this.props.setBoundaries}
+        />
       </div>
     );
   }
@@ -64,18 +80,26 @@ DifferenceMap.propTypes = {
   marker: PropTypes.array,
   setMarkerPosition: PropTypes.func,
   setMapZoom: PropTypes.func,
-  setMapCenter: PropTypes.func
+  setMapCenter: PropTypes.func,
+  layers: PropTypes.array,
+  setBasemap: PropTypes.func,
+  setLabels: PropTypes.func,
+  setBoundaries: PropTypes.func
 };
 
 const mapStateToProps = state => ({
   map: state.nexgddptool.map,
-  marker: state.nexgddptool.marker
+  marker: state.nexgddptool.marker,
+  layers: getLayers(state)
 });
 
 const mapDispatchToProps = dispatch => ({
   setMarkerPosition: (...params) => dispatch(setMarkerPosition(...params)),
   setMapZoom: (...params) => dispatch(setMapZoom(...params)),
-  setMapCenter: (...params) => dispatch(setMapCenter(...params))
+  setMapCenter: (...params) => dispatch(setMapCenter(...params)),
+  setBasemap: (...params) => dispatch(setBasemap(...params)),
+  setLabels: (...params) => dispatch(setLabels(...params)),
+  setBoundaries: (...params) => dispatch(setBoundaries(...params))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DifferenceMap);
