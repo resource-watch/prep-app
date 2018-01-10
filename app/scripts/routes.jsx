@@ -7,6 +7,7 @@ import App from './components/App';
 import Home from './components/Home';
 import AboutPage from './pages/about';
 import Explore from './pages/explore';
+import PartnersPage from './pages/partners';
 import DatasetDetail from './containers/Dataset';
 import FAQ from './components/FAQ';
 import Dashboards from './containers/Dashboards';
@@ -14,7 +15,6 @@ import DashboardsDetail from './containers/Dashboards/DashboardDetail';
 import Insights from './containers/Insights';
 import InsightsDetail from './containers/Insights/InsightDetail';
 import Create from './components/Create';
-import Partners from './containers/Partners';
 import Resources from './containers/Resources';
 import Contact from './components/Contact';
 import Embed from './containers/Embed';
@@ -114,7 +114,7 @@ function Routes(props) {
           <Route path={'dashboards'} component={Dashboards} />
           <Route path={'insights'} component={Insights} />
           <Route path={'create'} component={Create} />
-          <Route path={'partners'} component={Partners} />
+          <Route path={'partners'} component={PartnersPage} />
           <Route path={'resources'} component={Resources} />
           <Route path={'contact'} component={Contact} />
           <Route path={'auth'} component={Auth} />

@@ -22,10 +22,12 @@ import { handleModule } from 'redux-tools';
 // import * as ExploreDatasetFilterModule from 'components/explore-dataset-filters/explore-dataset-filters';
 import * as AuthModule from 'components/auth/auth';
 import * as UserModule from 'components/user/user';
+import * as PartnersModule from 'modules/partners';
 // import * as DatasetLocationModule from 'components/dataset-location-filter/dataset-location-filter';
 
 // Pages
 import * as ExploreModule from './pages/explore';
+
 
 import '../styles/lib/custom-foundation.css';
 import '../styles/index.scss';
@@ -56,10 +58,9 @@ if (process.env.NODE_ENV === 'production') {
  */
 
 const componentReducers = {
-  // exploreDatasetFilter: handleModule(ExploreDatasetFilterModule),
-  // coreDatasetsFilter: handleModule(DatasetLocationModule),
   auth: handleModule(AuthModule),
-  user: handleModule(UserModule)
+  user: handleModule(UserModule),
+  partners: handleModule(PartnersModule)
 };
 
 const pagesReducers = {
