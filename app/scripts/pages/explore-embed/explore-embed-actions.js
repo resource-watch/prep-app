@@ -5,8 +5,9 @@ import { replace } from 'react-router-redux';
 
 // Update URL
 export const updateURLParams = createThunkAction('updateURLParams', () => (dispatch, getState) => {
-  const { explorePage } = getState();
-  const { tab, datasets, coreDatasets, map } = explorePage;
+  const { exploreEmbedPage } = getState();
+
+  const { tab, datasets, coreDatasets, map } = exploreEmbedPage;
   const { location } = coreDatasets;
   const { filterQuery, activeDatasets } = datasets;
   const activeDatasetsResult = activeDatasets && activeDatasets.length ?
@@ -21,7 +22,7 @@ export const updateURLParams = createThunkAction('updateURLParams', () => (dispa
     activeDatasets: activeDatasetsResult
   };
 
-  dispatch(replace({ pathname: '/explore', query }));
+  dispatch(replace({ pathname: '/embed/explore', query }));
 });
 
 export const setTab = createThunkAction('setTab', () => (dispatch) => {
