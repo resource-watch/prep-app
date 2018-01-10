@@ -52,6 +52,7 @@ class ExploreMap extends PureComponent {
 
         {activeLayers.length &&
           <LegendControl
+            collapsed={embed}
             layersSpec={activeLayers}
             position="topright"
             onSortChange={this.onSortChange}
