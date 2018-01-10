@@ -1,17 +1,19 @@
 .c-basemap-control {
-  position: absolute;
-  bottom: 28px;
-  right: 30px;
-  z-index: 1;
+  &.-absolute {
+    position: absolute;
+    bottom: 28px;
+    right: 30px;
+    z-index: 1;
 
-  .btn-basemaps {
-    width: 30px;
-    height: 30px;
-    background-color: $white;
-    border-radius: 2px;
+    .c-button-map {
+      width: 30px;
+      height: 30px;
+      background-color: $white;
+      border-radius: 2px;
 
-    .c-icon {
-      fill: $main-color;
+      .c-icon {
+        fill: $main-color;
+      }
     }
   }
 }

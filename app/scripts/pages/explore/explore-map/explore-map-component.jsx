@@ -41,6 +41,7 @@ class ExploreMap extends PureComponent {
           onChange={setMapParams}
         >
           <BasemapControl
+            className="-absolute" // pfff....
             basemap={basemap}
             setBasemap={setBasemap}
             labels={labels}

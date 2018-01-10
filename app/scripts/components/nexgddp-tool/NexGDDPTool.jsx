@@ -64,15 +64,23 @@ class NexGDDPTool extends React.PureComponent {
                   <button
                     className={`c-button -inline ${mapMode === 'side-by-side' ? '-active' : ''}`}
                     onClick={() => this.switchMapView('side-by-side')}
-                  >Side by side</button>
+                  >
+                    Side by side
+                  </button>
+
                   <button
                     className={`c-button -inline ${mapMode === 'toggle' ? '-active' : ''}`}
                     onClick={() => this.switchMapView('toggle')}
-                  >Toggle</button>
+                  >
+                    Toggle
+                  </button>
+
                   <button
                     className={`c-button -inline ${mapMode === 'difference' ? '-active' : ''}`}
                     onClick={() => this.switchMapView('difference')}
-                  >Difference</button>
+                  >
+                    Difference
+                  </button>
                 </div>
               )}
             </div>

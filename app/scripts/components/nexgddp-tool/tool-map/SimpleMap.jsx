@@ -1,13 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import L from 'leaflet';
-import 'lib/leaflet-singleclick';
+import classnames from 'classnames';
+
 import { connect } from 'react-redux';
+
+import L from 'leaflet';
 import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
+import Control from 'react-leaflet-control';
+
 import { getLayers } from 'selectors/nexgddptool';
-import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels } from 'actions/nexgddptool';
+import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setMarkerMode } from 'actions/nexgddptool';
+
 import BasemapControl from 'components/basemap-control';
 import { basemapsSpec, labelsSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
+
+import Icon from 'components/ui/Icon';
+
 
 const mapDefaultOptions = {
   center: [20, -30],
@@ -23,6 +31,7 @@ class SimpleMap extends React.PureComponent {
   constructor(props) {
     super(props);
     this.addMarker = this.addMarker.bind(this);
+    this.setMarkerMode = this.setMarkerMode.bind(this);
   }
 
   onViewportChanged({ zoom, center }) {
@@ -33,18 +42,36 @@ class SimpleMap extends React.PureComponent {
     }
   }
 
+  setMarkerMode() {
+    const { markerMode } = this.props;
+    this.props.setMarkerMode(!markerMode);
+  }
+
   addMarker({ latlng }) {
-    this.props.setMarkerPosition([latlng.lat, latlng.lng]);
+    const { markerMode } = this.props;
+
+    if (markerMode) {
+      this.props.setMarkerPosition([latlng.lat, latlng.lng]);
+      this.props.setMarkerMode(false);
+    }
   }
 
   render() {
-    const { map, marker, layers, range1Selection } = this.props;
+    const { map, marker, markerMode, layers, range1Selection } = this.props;
     const currentLayer = layers[0];
 
     // It will change center of map on marker location
     const mapOptions = Object.assign({}, mapDefaultOptions, {
       center: map.center || mapDefaultOptions.center,
       zoom: map.zoom || mapDefaultOptions.zoom
+    });
+
+    const mapClassNames = classnames({
+      '-crosshair': markerMode
+    });
+
+    const makerControlClassNames = classnames({
+      '-active': markerMode
     });
 
     return (
@@ -56,29 +83,50 @@ class SimpleMap extends React.PureComponent {
         }
 
         <Map
+          className={mapClassNames}
           style={{ height: 440 }}
           {...mapOptions}
-          onSingleclick={this.addMarker}
+          onClick={this.addMarker}
           onViewportChanged={(...params) => this.onViewportChanged(...params)}
         >
           <TileLayer url={basemapsSpec[map.basemap].value} />
-          { currentLayer && <TileLayer url={currentLayer.url} /> }
-          { map.boundaries && <TileLayer url={boundariesSpec.dark.value} /> }
-          { map.labels !== 'none' && <TileLayer url={labelsSpec[map.labels].value} /> }
+          {currentLayer && <TileLayer url={currentLayer.url} />}
+          {map.boundaries && <TileLayer url={boundariesSpec.dark.value} />}
+          {map.labels !== 'none' && <TileLayer url={labelsSpec[map.labels].value} />}
 
           {marker && <Marker position={marker} icon={L.divIcon({ className: 'map-marker' })} /> }
 
           <ZoomControl position="bottomright" />
+
+          <Control position="bottomright" >
+            <button
+              type="button"
+              className={`c-button-map ${makerControlClassNames}`}
+              onClick={this.setMarkerMode}
+            >
+              {markerMode &&
+                <Icon name="icon-cancel" className="-small" />
+              }
+
+              {!markerMode &&
+                <Icon name="icon-marker" className="-small" />
+              }
+            </button>
+          </Control>
+
+          <Control position="bottomright" >
+            <BasemapControl
+              basemap={map.basemap}
+              labels={map.labels}
+              boundaries={map.boundaries}
+              setBasemap={this.props.setBasemap}
+              setLabels={this.props.setLabels}
+              setBoundaries={this.props.setBoundaries}
+            />
+          </Control>
+
         </Map>
 
-        <BasemapControl
-          basemap={map.basemap}
-          labels={map.labels}
-          boundaries={map.boundaries}
-          setBasemap={this.props.setBasemap}
-          setLabels={this.props.setLabels}
-          setBoundaries={this.props.setBoundaries}
-        />
       </div>
     );
   }
@@ -90,9 +138,11 @@ SimpleMap.propTypes = {
     center: PropTypes.array
   }),
   marker: PropTypes.array,
+  markerMode: PropTypes.bool,
   layers: PropTypes.array,
   range1Selection: PropTypes.object,
   setMarkerPosition: PropTypes.func,
+  setMarkerMode: PropTypes.func,
   setMapZoom: PropTypes.func,
   setMapCenter: PropTypes.func,
   setBasemap: PropTypes.func,
@@ -103,18 +153,19 @@ SimpleMap.propTypes = {
 const mapStateToProps = state => ({
   map: state.nexgddptool.map,
   marker: state.nexgddptool.marker,
+  markerMode: state.nexgddptool.markerMode,
   layers: getLayers(state),
   range1Selection: state.nexgddptool.range1.selection
 });
 
-const mapDispatchToProps = dispatch => ({
-  setMarkerPosition: (...params) => dispatch(setMarkerPosition(...params)),
-  setMapZoom: (...params) => dispatch(setMapZoom(...params)),
-  setMapCenter: (...params) => dispatch(setMapCenter(...params)),
-  setBasemap: (...params) => dispatch(setBasemap(...params)),
-  setLabels: (...params) => dispatch(setLabels(...params)),
-  setBoundaries: (...params) => dispatch(setBoundaries(...params))
-});
-
+const mapDispatchToProps = {
+  setMarkerMode,
+  setMarkerPosition,
+  setMapZoom,
+  setMapCenter,
+  setBasemap,
+  setLabels,
+  setBoundaries
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SimpleMap);
