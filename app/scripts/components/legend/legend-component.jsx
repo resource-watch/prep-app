@@ -1,13 +1,21 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'components/ui/Icon';
-import LegendBasic from './legend-basic/LegendBasic';
-import LegendChoropleth from './legend-choropleth/LegendChoropleth';
-import LegendGradient from './legend-gradient/LegendGradient';
+import LegendActions from './legend-actions';
+import LegendNexGDDPToolbar from './legend-nexgddp-toolbar';
+import LegendBasic from './legend-types/legend-basic/LegendBasic';
+import LegendChoropleth from './legend-types/legend-choropleth/LegendChoropleth';
+import LegendGradient from './legend-types/legend-gradient/LegendGradient';
 
 import './legend-style.scss';
 
 class Legend extends PureComponent {
+  getLegendToolbar() {
+    const { layerSpec } = this.props;
+    if (layerSpec.provider === 'nexgddp') return (<LegendNexGDDPToolbar layerSpec={layerSpec} />);
+    return null;
+  }
+
   render() {
     const { layerSpec, onClose, onInfo } = this.props;
     const { name, legendConfig } = layerSpec;
@@ -17,12 +25,13 @@ class Legend extends PureComponent {
       <div className="c-legend">
         <div className="c-legend-header">
           <h3>{name} {unit && <span>({unit})</span>}</h3>
-          {this.props.toolbar && <div className="c-legend-toolbar">
-            {/* <button type="button" onClick={() => console.log('opacity')}><Icon name="icon-opacity" className="-normal" /></button> */}
-            <button type="button" onClick={() => onInfo(layerSpec)}><Icon name="icon-info" className="-normal" /></button>
-            <button type="button" onClick={() => onClose(layerSpec)}><Icon name="icon-cross" className="-normal" /></button>
-          </div>}
+          {this.props.actions &&
+            <LegendActions
+              onInfo={() => onInfo(layerSpec)}
+              onClose={() => onClose(layerSpec)}
+            />}
         </div>
+        {this.props.toolbar && this.getLegendToolbar()}
         <div className="c-legend-content">
           {(type === 'basic') && <LegendBasic legendSpec={legendConfig} />}
           {(type === 'choropleth') && <LegendChoropleth legendSpec={legendConfig} />}
@@ -35,12 +44,14 @@ class Legend extends PureComponent {
 
 Legend.propTypes = {
   layerSpec: PropTypes.object,
+  actions: PropTypes.bool,
   toolbar: PropTypes.bool,
   onInfo: PropTypes.func,
   onClose: PropTypes.func
 };
 
 Legend.defaultProps = {
+  actions: true,
   toolbar: true,
   onInfo: () => {},
   onClose: () => {}
