@@ -21,5 +21,6 @@ export default {
   [actions.updateActiveDatasets]: datasetsListReducers.updateActiveDatasets,
   [actions.updateZIndex]: datasetsListReducers.updateZIndex,
   [actions.setDataFilters]: datasetFiltersReducers.setDataFilters,
-  [actions.setDatasetFilter]: datasetFiltersReducers.setDatasetFilter
+  [actions.setDatasetFilter]: datasetFiltersReducers.setDatasetFilter,
+  [actions.setGraphFilter]: datasetFiltersReducers.setGraphFilter
 };

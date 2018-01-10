@@ -12,6 +12,7 @@ class ExploreDatasetFilters extends PureComponent {
   onChange(values = [], key) {
     const filterValues = values.map(v => v.value);
     this.props.onSetDatasetFilter({ [key]: filterValues });
+    this.props.getDatasetsByGraph();
   }
 
   renderFilters() {
@@ -47,7 +48,8 @@ class ExploreDatasetFilters extends PureComponent {
 
 ExploreDatasetFilters.propTypes = {
   data: PropTypes.object,
-  onSetDatasetFilter: PropTypes.func
+  onSetDatasetFilter: PropTypes.func,
+  getDatasetsByGraph: PropTypes.func
 };
 
 ExploreDatasetFilters.defaultProps = {

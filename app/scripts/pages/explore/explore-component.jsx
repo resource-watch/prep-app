@@ -24,6 +24,7 @@ class ExplorePage extends PureComponent {
 
   componentWillMount() {
     this.props.initialURLParams();
+    this.props.getDatasetsByGraph();
   }
 
   componentDidMount() {
@@ -138,7 +139,8 @@ class ExplorePage extends PureComponent {
 ExplorePage.defaultProps = {
   currentTab: 'core_datasets',
   isSidebarHidden: false,
-  fetchDatasets: () => {}
+  fetchDatasets: () => {},
+  getDatasetsByGraph: () => {}
 };
 
 ExplorePage.propTypes = {
@@ -150,7 +152,8 @@ ExplorePage.propTypes = {
   filterQuery: PropTypes.func,
   toggleInfo: PropTypes.func,
   initialURLParams: PropTypes.func,
-  updateURLParams: PropTypes.func
+  updateURLParams: PropTypes.func,
+  getDatasetsByGraph: PropTypes.func
 };
 
 export default ExplorePage;

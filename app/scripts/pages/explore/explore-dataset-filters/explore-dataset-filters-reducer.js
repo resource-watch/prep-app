@@ -1,6 +1,7 @@
 export const initialState = {
   data: {},
-  filters: {}
+  filters: {},
+  graphs: [] // array of dataset ID matching the graph criteria
 };
 
 export const setDataFilters = (state, { payload }) => ({
@@ -10,6 +11,7 @@ export const setDataFilters = (state, { payload }) => ({
     data: payload
   }
 });
+
 export const setDatasetFilter = (state, { payload }) => ({
   ...state,
   datasetFilters: {
@@ -18,7 +20,16 @@ export const setDatasetFilter = (state, { payload }) => ({
   }
 });
 
+export const setGraphFilter = (state, { payload }) => ({
+  ...state,
+  datasetFilters: {
+    ...state.datasetFilters,
+    graphs: payload
+  }
+});
+
 export default {
   setDataFilters,
-  setDatasetFilter
+  setDatasetFilter,
+  setGraphFilter
 };

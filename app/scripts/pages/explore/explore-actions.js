@@ -7,6 +7,7 @@ import { setDatasetsTagFilter } from 'actions/datasets';
 
 // services
 import DatasetFilterService from 'services/dataset-filter-service';
+import GraphService from 'services/graph-service';
 
 // Update URL
 export const updateURLParams = createThunkAction('updateURLParams', () => (dispatch, getState) => {
@@ -57,9 +58,7 @@ export const failureDatasets = createAction('failureDatasets');
 
 // Dataset filters
 export const setDataFilters = createAction('explore-dataset-filters/setDataFilters');
-export const setDatasetFilter = createThunkAction('explore-dataset-filters/setDatasetFilter', () => (dispatch) => {
-  dispatch(updateURLParams());
-});
+export const setGraphFilter = createAction('explore-dataset-filters/setGraphFilter');
 
 export const fetchDatasets = createThunkAction('fetchDatasets', () => (dispatch) => {
   // dispatch(receiveDatasets(datasetsMock));
@@ -104,6 +103,11 @@ export const setLabels = createThunkAction('setLabels', () => (dispatch) => {
   dispatch(updateURLParams());
 });
 export const setBoundaries = createThunkAction('setBoundaries', () => (dispatch) => {
+  dispatch(updateURLParams());
+});
+
+
+export const setDatasetFilter = createThunkAction('explore-dataset-filters/setDatasetFilter', () => (dispatch) => {
   dispatch(updateURLParams());
 });
 
@@ -167,5 +171,25 @@ export const onSetDatasetFilter = createThunkAction('explore-dataset-filters/onS
     dispatch(setDatasetFilter(filter));
     dispatch(setDatasetsTagFilter(key, filter[key])); // this is bullshit, but need it to keep consistency. Remove ASAP
     dispatch(updateURLParams());
+  }
+);
+
+export const getDatasetsByGraph = createThunkAction('explore-page/getDatasetsByGraph', () =>
+  (dispatch, getState) => {
+    const { explorePage } = getState();
+    const { filters } = explorePage.datasetFilters;
+    const { topics, geographies, dataTypes } = filters;
+
+    if (!((topics || []).length) && !((geographies || []).length) && !((dataTypes || []).length)) {
+      dispatch(setGraphFilter([]));
+      return;
+    }
+
+    GraphService.searchDatasetsByConcepts(filters)
+      .then(({ data }) => dispatch(setGraphFilter(data)))
+      .catch(({ errors }) => {
+        const { status, details } = errors;
+        console.error(status, details);
+      });
   }
 );
