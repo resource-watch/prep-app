@@ -13,7 +13,6 @@ export const updateURLParams = createThunkAction('updateURLParams', () => (dispa
     activeDatasets.map(({ id, opacity, visibility, zIndex }) => `${id}|${opacity}|${visibility}|${zIndex}`) : [];
 
   const pathname = routing.locationBeforeTransitions.pathname;
-  console.log(pathname);
 
   const query = {
     ...explorePage.map,
