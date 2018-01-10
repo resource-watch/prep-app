@@ -1,11 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
-import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
+import { SortableContainer, SortableElement, SortableHandle, arrayMove } from 'react-sortable-hoc';
+import Icon from 'components/ui/Icon';
 import LegendListItem from '../legend-list-item/LegendListItem';
 import './legend-list.scss';
 
-const SortableItem = SortableElement(LegendListItem);
+const DragHandle = SortableHandle(() => (
+  <div className="handler">
+    <Icon name="icon-drag-dots" className="-medium" />
+  </div>
+));
+
+const SortableItem = SortableElement(props => (
+  <div className="c-legend-draggable">
+    <DragHandle />
+    <LegendListItem {...props} />
+  </div>
+));
 
 const SortableLegendList = SortableContainer(({ items, onClose, onInfo }) => (
   <ul>
