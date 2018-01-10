@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import Component from './explore-component';
+import Component from './explore-embed-component';
 import initialState from 'pages/explore/explore-initial-state';
 import * as actions from 'pages/explore/explore-actions';
 import * as reducers from 'pages/explore/explore-reducers';
