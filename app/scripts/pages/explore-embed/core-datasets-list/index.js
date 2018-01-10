@@ -6,9 +6,9 @@ import { getCoreDatasets } from './core-datasets-list-selector';
 
 const mapStateToProps = state => ({
   datasets: getCoreDatasets(state),
-  status: state.explorePage.datasets.status,
-  error: state.explorePage.datasets.error,
-  isFetching: state.explorePage.datasets.isFetching
+  status: state.exploreEmbedPage.datasets.status,
+  error: state.exploreEmbedPage.datasets.error,
+  isFetching: state.exploreEmbedPage.datasets.isFetching
 });
 
 export { initialState, Component };

@@ -101,6 +101,8 @@ export const initialURLParams = createThunkAction('initialURLParams', () => (dis
   } = routing.locationBeforeTransitions.query;
   const query = routing.locationBeforeTransitions.query.filterQuery;
 
+  debugger;
+
   if (zoom && lat && lng) dispatch(setMapParams({ zoom: parseInt(zoom, 10), lat: parseFloat(lat), lng: parseFloat(lng) }));
   if (basemap) dispatch(setBasemap(basemap));
   if (labels) dispatch(setLabels(labels));

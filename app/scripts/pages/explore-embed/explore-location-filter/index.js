@@ -5,7 +5,7 @@ import initialState from 'pages/explore/explore-location-filter/explore-location
 import DatasetLocationFilter from 'pages/explore/explore-location-filter/explore-location-filter-component';
 
 const mapStateToProps = state => ({
-  location: state.explorePage.coreDatasets.location
+  location: state.exploreEmbedPage.coreDatasets.location
 });
 
 export { reducers, initialState };
