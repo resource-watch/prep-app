@@ -33,13 +33,18 @@
       display: inline-block;
 
       font-size: $normal-font-size;
+      line-height: 26px;
       -webkit-font-smoothing: subpixel-antialiased;
       color: $navy;
 
       border: none;
       border-radius: 0;
-      border-left: 1px solid rgba($base-bg-color, 0.1);
       background-color: $white;
+
+      &.leaflet-disabled {
+        background-color: darken($white, 10%);
+        color: rgba($navy, 0.5);
+      }
     }
 
     .leaflet-control-zoom-in {
