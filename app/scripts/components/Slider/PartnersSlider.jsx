@@ -1,15 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
+import ArrowButton from 'components/Button/arrow-button-component';
+
+const slidesToShow = 5;
 
 const defaultSettings = {
   dots: false,
-  arrows: false,
+  arrows: true,
+  nextArrow: <ArrowButton full next slidesToShow={slidesToShow} />,
+  prevArrow: <ArrowButton full slidesToShow={slidesToShow} />,
   autoplay: true,
   autoplaySpeed: 2000,
   infinite: true,
   speed: 500,
-  slidesToShow: 5,
+  slidesToShow,
   swipe: false
 };
 
@@ -21,8 +26,7 @@ class PartnersSlider extends React.Component {
   }
 
   render() {
-    const { thumbnail, settings } = this.props;
-    const newSettings = { ...defaultSettings, ...settings };
+    const { thumbnail } = this.props;
     const partners = this.props.featured.map(d => (
       <div key={`partner-slider-${d.id}`}>
         <a href={d.url} target="_blank" className="logo" rel="noopener noreferrer">
@@ -40,7 +44,7 @@ class PartnersSlider extends React.Component {
         {this.props.route && this.props.route === '/' &&
           <h2 className="-left">Our partners</h2>
         }
-        <Slider {...newSettings}>
+        <Slider {...defaultSettings}>
           {partners}
         </Slider>
       </div>
@@ -49,8 +53,7 @@ class PartnersSlider extends React.Component {
 }
 
 PartnersSlider.defaultProps = {
-  data: [],
-  settings: {}
+  data: []
 };
 
 PartnersSlider.propTypes = {
@@ -60,7 +63,6 @@ PartnersSlider.propTypes = {
   getPartners: PropTypes.func.isRequired,
   route: PropTypes.string,
   thumbnail: PropTypes.bool,
-  settings: PropTypes.object,
   featured: PropTypes.any
 };
 
