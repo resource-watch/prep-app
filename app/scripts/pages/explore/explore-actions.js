@@ -5,12 +5,15 @@ import { replace } from 'react-router-redux';
 
 // Update URL
 export const updateURLParams = createThunkAction('updateURLParams', () => (dispatch, getState) => {
-  const { explorePage } = getState();
+  const { routing, explorePage } = getState();
   const { tab, datasets, coreDatasets } = explorePage;
   const { location } = coreDatasets;
   const { filterQuery, activeDatasets } = datasets;
   const activeDatasetsResult = activeDatasets && activeDatasets.length ?
     activeDatasets.map(({ id, opacity, visibility, zIndex }) => `${id}|${opacity}|${visibility}|${zIndex}`) : [];
+
+  const pathname = routing.locationBeforeTransitions.pathname;
+  console.log(pathname);
 
   const query = {
     ...explorePage.map,
@@ -20,7 +23,7 @@ export const updateURLParams = createThunkAction('updateURLParams', () => (dispa
     activeDatasets: activeDatasetsResult
   };
 
-  dispatch(replace({ pathname: '/explore', query }));
+  dispatch(replace({ pathname, query }));
 });
 
 export const setTab = createThunkAction('setTab', () => (dispatch) => {

@@ -6,6 +6,17 @@
   position: absolute;
   z-index: 0;
 
+  &.-embed {
+    top: 0;
+
+    .c-loading-spinner {
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+
+  }
+
   .map {
     position: absolute;
     top: 0;
@@ -21,6 +32,7 @@
     left: $sidebar-width;
     width: calc(100% - 380px);
   }
+
   .leaflet-pane { z-index: 0}
 
   .leaflet-top, .leaflet-bottom {

@@ -15,6 +15,12 @@
     transform: translateX(0);
   }
 
+  &.-embed {
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+
   @media #{$mq-medium} {
     width: $sidebar-width;
     background-color: $base-bg-color;

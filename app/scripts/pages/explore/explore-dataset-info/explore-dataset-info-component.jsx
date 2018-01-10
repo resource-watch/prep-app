@@ -40,16 +40,16 @@ class DatasetInfo extends PureComponent {
         </div>}
 
         <div className="button-container">
-          <Link to={`/dataset/${dataset.slug}`}>
-            <button type="button" className="c-new-button -light -transparent">Learn more</button>
-          </Link>
+          <a className="c-new-button -light -transparent" href={`${window.location.host}/dataset/${dataset.slug}`}>
+            Learn more
+          </a>
         </div>
       </div>
     );
   }
 
   render() {
-    const { dataset, toggleDataset, isFetching } = this.props;
+    const { dataset, toggleDataset } = this.props;
     const info = getInfo(dataset);
     const hasLayer = !!(dataset.layer && dataset.layer.length);
     const hasWidget = !!(dataset.widget && dataset.widget.length);
@@ -65,11 +65,14 @@ class DatasetInfo extends PureComponent {
                 <a download href={info.dataDownload} className="info-tool download">
                   <Icon name="icon-download" className="-medium" />
                   Download
-                </a>}
-              <Link to={`/dataset/${dataset.slug}`} className="info-tool more">
+                </a>
+              }
+
+              <a href={`${window.location.host}/dataset/${dataset.slug}`} className="info-tool more">
                 <Icon name="icon-share" className="-medium" />
                 Learn more
-              </Link>
+              </a>
+
               {hasLayer && <span className="info-tool layer">
                 <Switch
                   onChange={() => toggleDataset(dataset)}
