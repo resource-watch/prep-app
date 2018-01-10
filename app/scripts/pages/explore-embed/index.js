@@ -5,7 +5,7 @@ import initialState from 'pages/explore/explore-initial-state';
 import * as actions from 'pages/explore/explore-actions';
 import * as reducers from 'pages/explore/explore-reducers';
 
-import { getSelectedDataset } from 'pages/explore/explore-datasets-list/explore-datasets-list-selector';
+import { getSelectedDataset } from 'pages/explore-embed/explore-datasets-list/explore-datasets-list-selector';
 
 export { initialState, actions, reducers };
 

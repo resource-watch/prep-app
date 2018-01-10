@@ -5,17 +5,18 @@ import { replace } from 'react-router-redux';
 
 // Update URL
 export const updateURLParams = createThunkAction('updateURLParams', () => (dispatch, getState) => {
-  const { routing, explorePage } = getState();
-  const { tab, datasets, coreDatasets } = explorePage;
+  const { routing, explorePage, exploreEmbedPage } = getState();
+  const pathname = routing.locationBeforeTransitions.pathname;
+
+  const { tab, datasets, coreDatasets, map } = (pathname === '/embed/explore') ? exploreEmbedPage : explorePage;
   const { location } = coreDatasets;
   const { filterQuery, activeDatasets } = datasets;
   const activeDatasetsResult = activeDatasets && activeDatasets.length ?
     activeDatasets.map(({ id, opacity, visibility, zIndex }) => `${id}|${opacity}|${visibility}|${zIndex}`) : [];
 
-  const pathname = routing.locationBeforeTransitions.pathname;
 
   const query = {
-    ...explorePage.map,
+    ...map,
     tab,
     filterQuery,
     location,
