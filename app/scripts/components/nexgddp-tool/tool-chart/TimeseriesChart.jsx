@@ -8,6 +8,7 @@ import './style.scss';
 
 // Redux
 import { setMarkerPosition, getChartData } from 'actions/nexgddptool';
+import { getIndicatorUnit } from 'selectors/nexgddptool';
 
 /* eslint-disable */
 const chartSpec = {
@@ -105,6 +106,32 @@ const chartSpec = {
           "stroke": {"value": "#393F44"},
           "opacity": {"value": 0.3}
         },
+      }
+    },
+    {
+      "type": "y",
+      "scale": "y",
+      "properties": {
+        "labels": {
+          "font": {"value": "Open Sans"},
+          "fontSize": {"value": 10},
+          "fill": {"value": "#3B4F63"},
+          "opacity": {"value": 0.7}
+        },
+        "axis": {
+          "stroke": {"value": "#393F44"},
+          "opacity": {"value": 0.3}
+        },
+        "ticks": {
+          "stroke": {"value": "#393F44"},
+          "opacity": {"value": 0.3}
+        },
+        "title": {
+          "font": {"value": "Open Sans"},
+          "fontSize": {"value": 10},
+          "fill": {"value": "#3B4F63"},
+          "opacity": {"value": 0.7}
+        }
       }
     }
   ],
@@ -220,7 +247,7 @@ class TimeseriesChart extends React.PureComponent {
   }
 
   render() {
-    const { width, height, removeMarker, range1Selection, range2Selection, chartData, chartDataLoaded, chartDataError } = this.props;
+    const { width, height, removeMarker, range1Selection, range2Selection, chartData, chartDataLoaded, chartDataError, indicatorUnit } = this.props;
 
     // If for some reason, the range 1 is not selected or if the data
     // failed to load, we return
@@ -246,6 +273,18 @@ class TimeseriesChart extends React.PureComponent {
     const spec = Object.assign({}, chartSpec, { signals });
     spec.data = [...spec.data];
     spec.data[0].values = chartData;
+
+    // We add the unit to the y axis
+    if (indicatorUnit) {
+      const yAxis = Object.assign({}, spec.axes.find(axis => axis.type === 'y'), { title: indicatorUnit });
+      spec.axes = [...spec.axes];
+      for (let i = 0, j = spec.axes.length; i < j; i++) {
+        if (spec.axes[i].type === 'y') {
+          spec.axes[i] = yAxis;
+          break;
+        }
+      }
+    }
 
     return (
       <div className="c-tool-timeseries-chart">
@@ -275,7 +314,8 @@ TimeseriesChart.propTypes = {
   chartDataLoaded: PropTypes.bool,
   getChartData: PropTypes.func,
   chartData: PropTypes.array,
-  chartDataError: PropTypes.bool
+  chartDataError: PropTypes.bool,
+  indicatorUnit: PropTypes.string
 };
 
 TimeseriesChart.defaultProps = {
@@ -288,7 +328,8 @@ const mapStateToProps = state => ({
   range2Selection: state.nexgddptool.range2.selection,
   chartDataLoaded: state.nexgddptool.chart.loaded,
   chartData: state.nexgddptool.chart.data,
-  chartDataError: state.nexgddptool.chart.error
+  chartDataError: state.nexgddptool.chart.error,
+  indicatorUnit: getIndicatorUnit(state)
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,10 +1,34 @@
 import { createSelector } from 'reselect';
 
+// Temporal code
+const mapIndicatorToUnit = {
+  hdds: 'Degrees',
+  cdds: 'Degrees',
+  cum_pr: 'kg*m-2*s-1',
+  dry: 'nº 5-day periods',
+  tasmax: 'Kelvin',
+  tasavg: 'Kelvin',
+  xpr: 'days',
+  xs: 'days',
+  ffs: 'days',
+  tasmin: 'Kelvin'
+};
 
+const state = state => state; // eslint-disable-line no-shadow
 const datasetId = ({ nexgddptool }) => nexgddptool.dataset;
 const mapMode = ({ nexgddptool }) => nexgddptool.mapMode;
 const range1Selection = ({ nexgddptool }) => nexgddptool.range1.selection;
 const range2Selection = ({ nexgddptool }) => nexgddptool.range2.selection;
+const dataset = ({ datasets }) => {
+  if (!datasets) return null;
+
+  const keys = Object.keys(datasets.details);
+  if (keys.length) {
+    return datasets.details[keys[0]];
+  }
+
+  return null;
+};
 
 const datasetDetails = ({ datasets }) => datasets.details;
 
@@ -54,5 +78,25 @@ export const getLayers = createSelector(
     }
 
     return activeLayers;
+  }
+);
+
+export const getIndicatorId = createSelector(
+  dataset,
+  (dataset) => { // eslint-disable-line no-shadow
+    const metadata = dataset && dataset.metadata.length ? dataset.metadata[0] : null;
+    const indicatorId = metadata
+      && metadata.attributes.info
+      && metadata.attributes.info.nexgddp
+      && metadata.attributes.info.nexgddp.indicator_id;
+    return indicatorId || null;
+  }
+);
+
+export const getIndicatorUnit = createSelector(
+  state,
+  (state) => { // eslint-disable-line no-shadow
+    const indicatorId = getIndicatorId(state);
+    return indicatorId ? mapIndicatorToUnit[indicatorId] : null;
   }
 );
