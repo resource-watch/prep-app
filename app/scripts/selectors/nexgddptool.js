@@ -81,6 +81,21 @@ export const getLayers = createSelector(
   }
 );
 
+export const getRawLayers = createSelector(
+  dataset,
+  datasetId,
+  mapMode,
+  (dataset, datasetId, mapMode) => { // eslint-disable-line no-shadow
+    const layers = dataset.layer || [];
+
+    if (mapMode !== 'difference') {
+      return [layers.find(l => !l.attributes.layer_config.compare_with)];
+    }
+
+    return [layers.find(l => l.attributes.layer_config.compare_with)];
+  }
+);
+
 export const getIndicatorId = createSelector(
   dataset,
   (dataset) => { // eslint-disable-line no-shadow

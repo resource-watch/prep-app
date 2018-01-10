@@ -8,11 +8,11 @@ import L from 'leaflet';
 import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 
-import { getLayers } from 'selectors/nexgddptool';
+import { getLayers, getRawLayers } from 'selectors/nexgddptool';
 import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setMarkerMode } from 'actions/nexgddptool';
-
 import BasemapControl from 'components/basemap-control';
 import { basemapsSpec, labelsSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
+import Legend from 'components/legend/index';
 
 import Icon from 'components/ui/Icon';
 
@@ -57,7 +57,7 @@ class SimpleMap extends React.PureComponent {
   }
 
   render() {
-    const { map, marker, markerMode, layers, range1Selection } = this.props;
+    const { map, marker, markerMode, layers, range1Selection, rawLayers } = this.props;
     const currentLayer = layers[0];
 
     // It will change center of map on marker location
@@ -73,6 +73,17 @@ class SimpleMap extends React.PureComponent {
     const makerControlClassNames = classnames({
       '-active': markerMode
     });
+
+    // FIXME: Very hacky
+    // We need the layers to be deserialized but jsonapi-serializer's
+    // function is async and we can't create async selectors with
+    // reselect
+    const deserializedLayers = rawLayers.map(l => Object.assign(
+      {},
+      l,
+      { ...l.attributes },
+      { legendConfig: l.attributes.legend_config }
+    ));
 
     return (
       <div className="c-tool-map">
@@ -127,6 +138,10 @@ class SimpleMap extends React.PureComponent {
 
         </Map>
 
+        <Legend
+          layerSpec={deserializedLayers[0]}
+          toolbar={false}
+        />
       </div>
     );
   }
@@ -140,6 +155,7 @@ SimpleMap.propTypes = {
   marker: PropTypes.array,
   markerMode: PropTypes.bool,
   layers: PropTypes.array,
+  rawLayers: PropTypes.array,
   range1Selection: PropTypes.object,
   setMarkerPosition: PropTypes.func,
   setMarkerMode: PropTypes.func,
@@ -155,6 +171,7 @@ const mapStateToProps = state => ({
   marker: state.nexgddptool.marker,
   markerMode: state.nexgddptool.markerMode,
   layers: getLayers(state),
+  rawLayers: getRawLayers(state),
   range1Selection: state.nexgddptool.range1.selection
 });
 

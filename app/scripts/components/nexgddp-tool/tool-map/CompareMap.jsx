@@ -10,11 +10,12 @@ import Control from 'react-leaflet-control';
 import 'lib/leaflet-side-by-side/leaflet-side-by-side';
 
 // Redux
-import { getLayers } from 'selectors/nexgddptool';
+import { getLayers, getRawLayers } from 'selectors/nexgddptool';
 import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setMarkerMode } from 'actions/nexgddptool';
 
 import BasemapControl from 'components/basemap-control';
 import { basemapsSpec, labelsSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
+import Legend from 'components/legend/index';
 
 // Components
 import Icon from 'components/ui/Icon';
@@ -155,7 +156,7 @@ class CompareMap extends React.PureComponent {
   }
 
   render() {
-    const { map, marker, markerMode, range1Selection, range2Selection } = this.props;
+    const { map, marker, markerMode, range1Selection, range2Selection, rawLayers } = this.props;
 
     // It will change center of map on marker location
     const mapOptions = Object.assign({}, mapDefaultOptions, {
@@ -170,6 +171,17 @@ class CompareMap extends React.PureComponent {
     const makerControlClassNames = classnames({
       '-active': markerMode
     });
+
+    // FIXME: Very hacky
+    // We need the layers to be deserialized but jsonapi-serializer's
+    // function is async and we can't create async selectors with
+    // reselect
+    const deserializedLayers = rawLayers.map(l => Object.assign(
+      {},
+      l,
+      { ...l.attributes },
+      { legendConfig: l.attributes.legend_config }
+    ));
 
     return (
       <div className="c-tool-map">
@@ -226,6 +238,11 @@ class CompareMap extends React.PureComponent {
             />
           </Control>
         </Map>
+
+        <Legend
+          layerSpec={deserializedLayers[0]}
+          toolbar={false}
+        />
       </div>
     );
   }
@@ -239,6 +256,7 @@ CompareMap.propTypes = {
     boundaries: PropTypes.bool
   }),
   layers: PropTypes.array,
+  rawLayers: PropTypes.array,
   marker: PropTypes.array,
   markerMode: PropTypes.bool,
   range1Selection: PropTypes.object,
@@ -257,6 +275,7 @@ const mapStateToProps = state => ({
   marker: state.nexgddptool.marker,
   markerMode: state.nexgddptool.markerMode,
   layers: getLayers(state),
+  rawLayers: getRawLayers(state),
   range1Selection: state.nexgddptool.range1.selection,
   range2Selection: state.nexgddptool.range2.selection
 });
