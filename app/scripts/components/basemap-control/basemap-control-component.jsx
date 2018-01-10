@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 // Components
 import TetherComponent from 'react-tether';
@@ -65,14 +66,18 @@ export default class BasemapControl extends React.Component {
 
   // RENDER
   render() {
-    const { basemap, labels, boundaries } = this.props;
+    const { basemap, labels, boundaries, className } = this.props;
     const { active } = this.state;
 
     const currentBasemap = basemapsSpec[basemap];
     const currentLabels = labelsSpec[labels];
 
+    const classNames = classnames({
+      [this.props.className]: !!this.props.className
+    });
+
     return (
-      <div className="c-basemap-control">
+      <div className={`c-basemap-control ${classNames}`}>
         <TetherComponent
           attachment="bottom right"
           constraints={[{
@@ -147,6 +152,7 @@ BasemapControl.propTypes = {
   basemap: PropTypes.oneOf(['default', 'dark', 'light', 'satellite', 'terrain']),
   labels: PropTypes.oneOf(['none', 'dark', 'light']),
   boundaries: PropTypes.bool,
+  className: PropTypes.string,
   setBasemap: PropTypes.func,
   setLabels: PropTypes.func,
   setBoundaries: PropTypes.func
