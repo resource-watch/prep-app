@@ -5,6 +5,13 @@ import DateRangeSelect from 'components/nexgddp-tool/date-range-select/DateRange
 import './legend-nexgddp-toolbar-style.scss';
 
 class LegendNexGDDPToolbar extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      scenarios: null
+    };
+  }
+
   componentDidMount() {
     const { layerSpec } = this.props;
     const { layerConfig } = layerSpec;
@@ -17,16 +24,22 @@ class LegendNexGDDPToolbar extends PureComponent {
         throw Error(response);
       })
       .then((json) => {
-        console.log(json);
+        const scenariosData = json.scenarios.map(s => ({ label: s.label, value: s.id }));
+        const scenarios = {
+          options: scenariosData,
+          selection: scenariosData[0]
+        };
+        this.setState({ scenarios });
       })
       .catch(error => console.error(error));
   }
 
   render() {
+    console.log(this.state.scenarios);
     return (
       <div className="c-legend-nexgddp-toolbar">
         <DateRangeSelect />
-        <ScenarioSelect />
+        {this.state.scenarios && <ScenarioSelect scenario={this.state.scenarios} />}
       </div>
     );
   }

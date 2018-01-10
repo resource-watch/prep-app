@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ScenarioSelect from './scenario-select/ScenarioSelect';
+import ScenarioSelect from './scenario-select';
 import DateRangeSelect from './date-range-select/DateRangeSelect';
 import { CompareMap, ToggleMap, DifferenceMap, SimpleMap } from './tool-map';
 import LocationSearch from './location-search/LocationSearch';
