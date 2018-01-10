@@ -6,7 +6,7 @@ import TreeSelector from 'components/tree-selector/tree-selector';
 // constants
 import PLACEHOLDERS_DATASET_FILTERS from './explore-dataset-filters-constants';
 
-import './explore-dataset-filters-styles';
+import './explore-dataset-filters-styles.scss';
 
 class ExploreDatasetFilters extends PureComponent {
   onChange(values = [], key) {
@@ -16,7 +16,6 @@ class ExploreDatasetFilters extends PureComponent {
 
   renderFilters() {
     const { data } = this.props;
-
     const filters = Object.keys(data).map(key =>
       (<TreeSelector
         key={key}

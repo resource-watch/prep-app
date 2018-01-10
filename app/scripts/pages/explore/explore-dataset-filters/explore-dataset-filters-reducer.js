@@ -1,11 +1,24 @@
-import * as actions from './explore-dataset-filters-actions';
-
 export const initialState = {
   data: {},
   filters: {}
 };
 
+export const setDataFilters = (state, { payload }) => ({
+  ...state,
+  datasetFilters: {
+    ...state.datasetFilters,
+    data: payload
+  }
+});
+export const setDatasetFilter = (state, { payload }) => ({
+  ...state,
+  datasetFilters: {
+    ...state.datasetFilters,
+    filters: { ...state.datasetFilters.filters, ...payload }
+  }
+});
+
 export default {
-  [actions.setDataFilters]: (state, { payload }) => ({ ...state, data: payload }),
-  [actions.setFilter]: (state, { payload }) => ({ ...state, filters: { ...state.filters, ...payload } })
+  setDataFilters,
+  setDatasetFilter
 };

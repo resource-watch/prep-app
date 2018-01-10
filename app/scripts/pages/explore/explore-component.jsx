@@ -6,6 +6,7 @@ import Tabs from 'components/ui/Tabs';
 import Search from 'components/ui/Search';
 import Icon from 'components/ui/Icon';
 import DatasetLocationFilter from './explore-location-filter';
+import ExploreDatasetFilters from './explore-dataset-filters/explore-dataset-filters';
 import CoreDatasetsList from './core-datasets-list';
 import DatasetsList from './explore-datasets-list';
 import DatasetInfo from './explore-dataset-info';
@@ -16,7 +17,8 @@ class ExplorePage extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      isSidebarHidden: props.isSidebarHidden
+      isSidebarHidden: props.isSidebarHidden,
+      filters: false
     };
   }
 
@@ -32,6 +34,7 @@ class ExplorePage extends PureComponent {
   render() {
     const { selectedDataset, isSidebarHidden,
       currentTab, setTab, filterQuery, toggleInfo } = this.props;
+    const { filters } = this.state;
 
     return (
       <div className="l-explore -theme-2">
@@ -89,12 +92,20 @@ class ExplorePage extends PureComponent {
                   <div className="datasets-list-content">
                     <div className="list-filters">
                       <div className="list-filters-container">
+                        <button className="btn-filters" onClick={() => this.setState({ filters: !filters })}>
+                          <span>Filter results</span>
+                          {filters ?
+                            <Icon name="icon-arrow-up" /> :
+                            <Icon name="icon-arrow-down" />
+                          }
+                        </button>
                         {<Search
                           onChange={filterQuery}
                           label="Search dataset"
                         />}
                       </div>
                     </div>
+                    {filters && <ExploreDatasetFilters />}
                     <DatasetsList />
                   </div>}
               </div>
