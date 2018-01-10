@@ -1,7 +1,7 @@
 import L from 'leaflet';
 
 export default (leafletMap, layerSpec) => {
-  const { layerConfig, zIndex, opacity } = layerSpec;
+  const { layerConfig, layerIndex, opacity } = layerSpec;
 
   // Transforming layerSpec
   const bodyStringified = JSON.stringify(layerConfig.body || {})
@@ -29,7 +29,7 @@ export default (leafletMap, layerSpec) => {
       .then((data) => {
         const tileUrl = `${data.cdn_url.templates.https.url}/${layerConfig.account}/api/v1/map/${data.layergroupid}/{z}/{x}/{y}.png`;
         const layer = L.tileLayer(tileUrl);
-        layer.setZIndex(zIndex);
+        layer.setZIndex(layerIndex);
         layer.setOpacity(opacity);
 
         layer.on('tileload', () => resolve(layer));

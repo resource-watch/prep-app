@@ -3,7 +3,7 @@ import 'esri-leaflet';
 import leafletLayer from './leaflet-layer';
 
 export default (leafletMap, layerSpec) => {
-  const { layerConfig, zIndex, opacity } = layerSpec;
+  const { layerConfig, layerIndex, opacity } = layerSpec;
 
   // Transforming layer
   const bodyStringified = JSON.stringify(layerConfig.body || {})
@@ -31,7 +31,7 @@ export default (leafletMap, layerSpec) => {
     if (layer) {
       layer.on('load', () => {
         const layerElement = leafletMap.getPane('tilePane').lastChild;
-        layerElement.style.zIndex = zIndex;
+        layerElement.style.zIndex = layerIndex;
         layerElement.style.opacity = opacity;
         layerElement.id = layer.id;
 

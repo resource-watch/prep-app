@@ -1,11 +1,11 @@
 import L from 'leaflet';
 
 export default (leafletMap, layerSpec) => {
-  const { id, zIndex, opacity } = layerSpec;
+  const { id, layerIndex, opacity } = layerSpec;
   const tileUrl = `${config.apiUrlRW}/layer/${id}/tile/gee/{z}/{x}/{y}`;
   const layer = L.tileLayer(tileUrl);
 
-  layer.setZIndex(zIndex);
+  layer.setZIndex(layerIndex);
   layer.setOpacity(opacity);
 
   // adding map
