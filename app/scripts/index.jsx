@@ -27,6 +27,7 @@ import * as PartnersModule from 'modules/partners';
 
 // Pages
 import * as ExploreModule from './pages/explore';
+import * as ExploreEmbedModule from './pages/explore-embed';
 
 
 import '../styles/lib/custom-foundation.css';
@@ -64,7 +65,8 @@ const componentReducers = {
 };
 
 const pagesReducers = {
-  explorePage: handleModule(ExploreModule)
+  explorePage: handleModule(ExploreModule),
+  exploreEmbedPage: handleModule(ExploreEmbedModule)
 };
 
 const reducer = combineReducers({

@@ -6,7 +6,8 @@ import { IndexRoute, Router, Route, applyRouterMiddleware } from 'react-router';
 import App from './components/App';
 import Home from './components/Home';
 import AboutPage from './pages/about';
-import Explore from './pages/explore';
+import ExplorePage from './pages/explore';
+import ExploreEmbedPage from './pages/explore-embed';
 import PartnersPage from './pages/partners';
 import DatasetDetail from './containers/Dataset';
 import FAQ from './components/FAQ';
@@ -122,7 +123,8 @@ function Routes(props) {
         </Route>
 
         <Route path="partners/:id" component={PartnerDetail} />
-        <Route path="explore" component={Explore} />
+        <Route path="explore" component={ExplorePage} />
+        <Route path="embed/explore" component={ExploreEmbedPage} />
         <Route path="dashboard/:slug(/:tab)" component={DashboardsDetail} />
         <Route path="insight/:slug" component={InsightsDetail} />
         <Route path="dataset/:slug" component={DatasetDetail} />
