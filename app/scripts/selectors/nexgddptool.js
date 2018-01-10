@@ -24,29 +24,34 @@ export const getLayers = createSelector(
     const layers = datasetDetails[datasetId].layer || [];
 
     if (mapMode !== 'difference') {
-      currentLayer = layers.find(l => ((mapMode !== 'difference') ?
-        !l.attributes.layer_config.compareWith :
-        l.attributes.layer_config.compareWith));
-    }
+      currentLayer = layers.find(l => !l.attributes.layer_config.compare_with);
 
-    if (currentLayer && mapMode !== 'difference' && range1Selection) {
-      const range1Date = `${range1Selection.value}`;
-      activeLayers.push({
-        url: `${config.apiUrlRW}/layer/${currentLayer.id}/tile/nexgddp/{z}/{x}/{y}?year=${range1Date}`,
-        date: range1Date
-      });
-    }
+      if (currentLayer && range1Selection) {
+        const range1Date = `${range1Selection.value}`;
+        activeLayers.push({
+          url: `${config.apiUrlRW}/layer/${currentLayer.id}/tile/nexgddp/{z}/{x}/{y}?year=${range1Date}`,
+          date: range1Date
+        });
+      }
 
-    if (currentLayer && mapMode !== 'difference' && range2Selection) {
-      const range2Date = `${range2Selection.value}`;
-      activeLayers.push({
-        url: `${config.apiUrlRW}/layer/${currentLayer.id}/tile/nexgddp/{z}/{x}/{y}?year=${range2Date}`,
-        date: range2Date
-      });
-    }
+      if (currentLayer && range2Selection) {
+        const range2Date = `${range2Selection.value}`;
+        activeLayers.push({
+          url: `${config.apiUrlRW}/layer/${currentLayer.id}/tile/nexgddp/{z}/{x}/{y}?year=${range2Date}`,
+          date: range2Date
+        });
+      }
+    } else {
+      currentLayer = layers.find(l => l.attributes.layer_config.compare_with);
 
-    // Difference
-    // year=1971&compareYear=2021&compareTo=74cf0091-1541-4cd9-b748-e2464173ba3e
+      if (currentLayer && range1Selection && range2Selection) {
+        const range1Date = `${range1Selection.value}`;
+        const range2Date = `${range2Selection.value}`;
+        activeLayers.push({
+          url: `${config.apiUrlRW}/layer/${currentLayer.id}/tile/nexgddp/{z}/{x}/{y}?year=${range1Date}&compareYear=${range2Date}`
+        });
+      }
+    }
 
     return activeLayers;
   }

@@ -2,6 +2,7 @@
 
 .c-tool-timeseries-chart {
   position: relative;
+  min-height: 100px; // Needed for the loader
   padding-top: 20px;
   border: 2px solid $border-color;
   border-top: 0;

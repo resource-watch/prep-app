@@ -32,5 +32,11 @@
         "config": "config/webpack/development.js"
       }
     }
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
   }
 }

@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import L from 'leaflet';
+import 'lib/leaflet-singleclick';
 import { connect } from 'react-redux';
 import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 import { getLayers } from 'selectors/nexgddptool';
-import { setMarkerPosition, setMapZoom, setMapCenter } from 'actions/nexgddptool';
+import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels } from 'actions/nexgddptool';
+import BasemapControl from 'components/basemap-control';
+import { basemapsSpec, labelsSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
 
 const mapDefaultOptions = {
   center: [20, -30],
@@ -55,18 +58,27 @@ class SimpleMap extends React.PureComponent {
         <Map
           style={{ height: 440 }}
           {...mapOptions}
-          onClick={this.addMarker}
+          onSingleclick={this.addMarker}
           onViewportChanged={(...params) => this.onViewportChanged(...params)}
         >
-          <TileLayer
-            url={config.basemapTileUrl}
-          />
+          <TileLayer url={basemapsSpec[map.basemap].value} />
+          { currentLayer && <TileLayer url={currentLayer.url} /> }
+          { map.boundaries && <TileLayer url={boundariesSpec.dark.value} /> }
+          { map.labels !== 'none' && <TileLayer url={labelsSpec[map.labels].value} /> }
 
-          {currentLayer && <TileLayer url={currentLayer.url} />}
           {marker && <Marker position={marker} icon={L.divIcon({ className: 'map-marker' })} /> }
 
           <ZoomControl position="bottomright" />
         </Map>
+
+        <BasemapControl
+          basemap={map.basemap}
+          labels={map.labels}
+          boundaries={map.boundaries}
+          setBasemap={this.props.setBasemap}
+          setLabels={this.props.setLabels}
+          setBoundaries={this.props.setBoundaries}
+        />
       </div>
     );
   }
@@ -82,7 +94,10 @@ SimpleMap.propTypes = {
   range1Selection: PropTypes.object,
   setMarkerPosition: PropTypes.func,
   setMapZoom: PropTypes.func,
-  setMapCenter: PropTypes.func
+  setMapCenter: PropTypes.func,
+  setBasemap: PropTypes.func,
+  setLabels: PropTypes.func,
+  setBoundaries: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -95,7 +110,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setMarkerPosition: (...params) => dispatch(setMarkerPosition(...params)),
   setMapZoom: (...params) => dispatch(setMapZoom(...params)),
-  setMapCenter: (...params) => dispatch(setMapCenter(...params))
+  setMapCenter: (...params) => dispatch(setMapCenter(...params)),
+  setBasemap: (...params) => dispatch(setBasemap(...params)),
+  setLabels: (...params) => dispatch(setLabels(...params)),
+  setBoundaries: (...params) => dispatch(setBoundaries(...params))
 });
 
 

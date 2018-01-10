@@ -6,7 +6,7 @@ import TetherComponent from 'react-tether';
 import Icon from 'components/ui/Icon';
 import Checkbox from 'components/Form/Checkbox';
 import RadioGroup from 'components/Form/RadioGroup';
-import { basemapsSpec, labelsSpec, boundariesSpec } from './basemap-control-constants';
+import { basemapsSpec, labelsSpec } from './basemap-control-constants';
 
 export default class BasemapControl extends React.Component {
   constructor(props) {
@@ -70,7 +70,6 @@ export default class BasemapControl extends React.Component {
 
     const currentBasemap = basemapsSpec[basemap];
     const currentLabels = labelsSpec[labels];
-    const currentBoundaries = boundariesSpec[boundaries];
 
     return (
       <div className="c-basemap-control">
@@ -128,9 +127,8 @@ export default class BasemapControl extends React.Component {
                 properties={{
                   name: 'boundaries',
                   title: 'Boundaries',
-                  value: 'boundaries'
+                  checked: boundaries
                 }}
-                value={currentBoundaries}
                 onChange={this.onBoundariesChange}
               />
             </div>
