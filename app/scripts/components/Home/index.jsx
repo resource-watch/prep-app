@@ -2,19 +2,10 @@ import React from 'react';
 import { Link } from 'react-router';
 import DemoSlider from '../demo-slider/demo-slider-component';
 import PartnersSlider from '../../containers/PartnersSlider';
-import ArrowButton from '../Button/arrow-button-component';
 
 const module1 = '/images/home/module-1.jpg';
 const module2 = '/images/home/module-2.jpg';
 const module3 = '/images/home/module-3.jpg';
-
-const slidesToShow = 1;
-
-const partnerSliderSettings = {
-  arrows: true,
-  nextArrow: <ArrowButton full next slidesToShow={slidesToShow} />,
-  prevArrow: <ArrowButton full slidesToShow={slidesToShow} />
-};
 
 const Home = () => (
   <div className="c-homepage">
@@ -83,10 +74,7 @@ const Home = () => (
         </div>
       </div>
     </section>
-    <PartnersSlider
-      thumbnail
-      settings={partnerSliderSettings}
-    />
+    <PartnersSlider thumbnail />
   </div>
 );
 
