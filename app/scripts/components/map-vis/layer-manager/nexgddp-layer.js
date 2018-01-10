@@ -19,7 +19,7 @@ export default (leafletMap, layerSpec) => {
         const datasetSpec = wriAPISerializer(data);
         const { nexgddp } = getInfo(datasetSpec);
         const year = nexgddp ?
-          new Date(nexgddp.date_range[0]).getFullYear().toString() : '';
+          new Date(nexgddp.date_range[0]).getUTCFullYear().toString() : '';
         const tileUrl = `${config.apiUrlRW}/layer/${id}/tile/nexgddp/{z}/{x}/{y}?year=${year}`;
         const layer = L.tileLayer(tileUrl);
 
