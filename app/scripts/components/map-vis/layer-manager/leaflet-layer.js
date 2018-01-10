@@ -1,7 +1,7 @@
 import L from 'leaflet';
 
 export default (leafletMap, layerSpec) => {
-  const { layerConfig, zIndex, opacity } = layerSpec;
+  const { layerConfig, layerIndex, opacity } = layerSpec;
   let layer;
 
   // Transforming data layer
@@ -26,7 +26,7 @@ export default (leafletMap, layerSpec) => {
     }
 
     if (layer) {
-      layer.setZIndex(zIndex);
+      layer.setZIndex(layerIndex);
       layer.setOpacity(opacity);
 
       layer.on('tileload', () => resolve(layer));

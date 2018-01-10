@@ -1,5 +1,6 @@
 import find from 'lodash/find';
 import { wriAPISerializer } from 'helpers/wri-api-serializer';
+import { calcZIndex } from 'components/map-vis/map-vis-helper';
 
 /**
  * This function will add all necessary attributes to work in explore page.
@@ -14,6 +15,7 @@ function addExploreAttributes(items, activeDatasets) {
       opacity: 1,
       visibility: true,
       zIndex: 0,
+      layerIndex: 0,
       isLayerActive: !!existingDataset
     }, existingDataset || {}, dataset);
   });
@@ -46,15 +48,21 @@ export const filterQuery = (state, { payload }) => ({
 
 export const toggleDataset = (state, { payload }) => {
   const activeDatasets = state.datasets.activeDatasets;
+  const { length } = activeDatasets;
   return {
     ...state,
     datasets: {
       ...state.datasets,
-      items: state.datasets.items.map(item => (item.id === payload.id ?
-        Object.assign({}, item, {
-          isLayerActive: !item.isLayerActive,
-          zIndex: item.zIndex || activeDatasets.length + 1
-        }) : item))
+      items: state.datasets.items.map((item) => {
+        const zIndex = (length + 1) === 1 ? 0 : length;
+        if (item.id === payload.id) {
+          return Object.assign({}, item, {
+            isLayerActive: !item.isLayerActive,
+            zIndex
+          });
+        }
+        return item;
+      })
     }
   };
 };
@@ -86,10 +94,17 @@ export const updateActiveDatasets = state => ({
 });
 
 export const updateZIndex = (state, { payload }) => {
-  const layers = payload.map((l, index) => ({ id: l.dataset, zIndex: index + 1 }));
+  const layers = payload.map((l, index) => ({ id: l.dataset, zIndex: index }));
+  const { length } = layers;
   const items = state.datasets.items.slice(0).map((item) => {
     const itemFound = find(layers, { id: item.id });
-    if (itemFound) return Object.assign({}, item, { zIndex: itemFound.zIndex });
+    if (itemFound) {
+      const { zIndex } = itemFound;
+      return Object.assign({}, item, {
+        zIndex,
+        layerIndex: calcZIndex(length, zIndex)
+      });
+    }
     return item;
   });
 
