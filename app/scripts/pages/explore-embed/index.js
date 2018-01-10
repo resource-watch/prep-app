@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 
 import Component from './explore-embed-component';
-import initialState from 'pages/explore/explore-initial-state';
-import * as actions from 'pages/explore/explore-actions';
-import * as reducers from 'pages/explore/explore-reducers';
+import initialState from './explore-initial-state';
+import * as reducers from './explore-reducers';
 
-import { getSelectedDataset } from 'pages/explore-embed/explore-datasets-list/explore-datasets-list-selector';
+import * as actions from './explore-embed-actions';
+import { getSelectedDataset } from './explore-datasets-list/explore-datasets-list-selector';
 
 export { initialState, actions, reducers };
 

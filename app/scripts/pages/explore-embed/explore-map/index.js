@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import * as exploreActions from 'pages/explore/explore-actions';
+import * as exploreActions from 'pages/explore-embed/explore-embed-actions';
 import * as reducers from 'pages/explore/explore-map/explore-map-reducers';
 import initialState from 'pages/explore/explore-map/explore-map-initial-state';
 import Component from 'pages/explore/explore-map/explore-map-component';
