@@ -10,10 +10,12 @@ import Control from 'react-leaflet-control';
 
 import { getLayers } from 'selectors/nexgddptool';
 import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setMarkerMode } from 'actions/nexgddptool';
+
+import BasemapControl from 'components/basemap-control';
 import { basemapsSpec, labelsSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
 
 import Icon from 'components/ui/Icon';
-import BasemapControl from 'components/basemap-control';
+
 
 const mapDefaultOptions = {
   center: [20, -30],
