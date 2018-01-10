@@ -2,6 +2,7 @@ import {
   NEXGDDP_SET_DATASET,
   NEXGDDP_SET_MAP_ZOOM,
   NEXGDDP_SET_MAP_CENTER,
+  NEXGDDP_SET_MARKER_MODE,
   NEXGDDP_SET_MARKER_POSITION,
   NEXGDDP_SET_MAP_MODE,
   NEXGDDP_SET_GRAPH_MODE,
@@ -35,6 +36,8 @@ const initialState = {
   // Position of the marker
   /** @type {[number, number]} marker */
   marker: undefined,
+  /** @type {boolean} marker */
+  markerMode: false,
   // Mode of the map
   /** @type {'difference'|'side-by-side'|'toggle'} mapMode */
   mapMode: 'side-by-side',
@@ -93,6 +96,10 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, {
         map: Object.assign({}, state.map, { center: action.payload })
       });
+    }
+
+    case NEXGDDP_SET_MARKER_MODE: {
+      return Object.assign({}, state, { markerMode: action.payload });
     }
 
     case NEXGDDP_SET_MARKER_POSITION: {

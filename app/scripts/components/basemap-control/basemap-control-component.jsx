@@ -84,7 +84,11 @@ export default class BasemapControl extends React.Component {
           }}
         >
           {/* First child: This is what the item will be tethered to */}
-          <button type="button" className="btn-basemaps" onClick={() => this.toggleDropdown(true)}>
+          <button
+            type="button"
+            className="c-button-map"
+            onClick={() => this.toggleDropdown(true)}
+          >
             <Icon name="icon-layers" className="-small" />
           </button>
 
