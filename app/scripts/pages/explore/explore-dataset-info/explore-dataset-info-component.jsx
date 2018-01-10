@@ -49,7 +49,7 @@ class DatasetInfo extends PureComponent {
   }
 
   render() {
-    const { dataset, toggleDataset, isFetching } = this.props;
+    const { dataset, toggleDataset } = this.props;
     const info = getInfo(dataset);
     const hasLayer = !!(dataset.layer && dataset.layer.length);
     const hasWidget = !!(dataset.widget && dataset.widget.length);

@@ -29,6 +29,7 @@ class Map extends PureComponent {
     this.setBasemap();
     this.setLabels();
     this.setBoundaries();
+    this.toggleLayers();
   }
 
   componentDidUpdate(prevProps) {
