@@ -1,13 +1,15 @@
 .c-explore-map {
-  top: 60px;
-  left: 0;
+  top: $header-height-short;
+  left: $sidebar-width;
   bottom: 0;
-  width: 100%;
+  width: calc(100% - #{$sidebar-width});
   position: absolute;
   z-index: 0;
 
   &.-embed {
     top: 0;
+    left: 0;
+    width: 100%;
 
     .c-loading-spinner {
       top: 0;
