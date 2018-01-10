@@ -194,9 +194,10 @@ class CompareMap extends React.PureComponent {
           onViewportChanged={(...params) => this.onViewportChanged(...params)}
         >
           <TileLayer url={basemapsSpec[map.basemap].value} />
-          <ZoomControl position="bottomright" />
 
           { marker && <Marker position={marker} icon={L.divIcon({ className: 'map-marker' })} /> }
+
+          <ZoomControl position="bottomright" />
 
           <Control position="bottomright" >
             <button

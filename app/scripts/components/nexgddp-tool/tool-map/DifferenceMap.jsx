@@ -89,9 +89,9 @@ class DifferenceMap extends React.PureComponent {
           { currentLayer && <TileLayer url={currentLayer.url} /> }
           { map.boundaries && <TileLayer url={boundariesSpec.dark.value} /> }
           { map.labels !== 'none' && <TileLayer url={labelsSpec[map.labels].value} /> }
+          { marker && <Marker position={marker} icon={L.divIcon({ className: 'map-marker' })} /> }
 
           <ZoomControl position="bottomright" />
-          { marker && <Marker position={marker} icon={L.divIcon({ className: 'map-marker' })} /> }
 
           <Control position="bottomright" >
             <button
