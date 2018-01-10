@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
-import { Link } from 'react-router';
+
 import Icon from 'components/ui/Icon';
 import Switch from 'components/Button/Switch';
 import VegaChart from 'components/Chart/VegaChart';
@@ -21,11 +21,16 @@ class DatasetInfo extends PureComponent {
     );
   }
 
-  static getContent(dataset) {
+  getContent(dataset) {
+    const { embed } = this.props;
     const metadata = getMetadata(dataset);
     const info = getInfo(dataset);
     const description = metadata.description || info.description;
     const { source } = info;
+
+    const linkTarget = {
+      ...embed && { target: '_blank' }
+    };
 
     return (
       <div className="content-container">
@@ -40,7 +45,11 @@ class DatasetInfo extends PureComponent {
         </div>}
 
         <div className="button-container">
-          <a className="c-new-button -light -transparent" href={`${window.location.host}/dataset/${dataset.slug}`}>
+          <a
+            className="c-new-button -light -transparent"
+            href={`${window.location.origin}/dataset/${dataset.slug}`}
+            {...linkTarget}
+          >
             Learn more
           </a>
         </div>
@@ -49,10 +58,14 @@ class DatasetInfo extends PureComponent {
   }
 
   render() {
-    const { dataset, toggleDataset } = this.props;
+    const { dataset, toggleDataset, embed } = this.props;
     const info = getInfo(dataset);
     const hasLayer = !!(dataset.layer && dataset.layer.length);
     const hasWidget = !!(dataset.widget && dataset.widget.length);
+    const linkTarget = {
+      ...embed && { target: '_blank' }
+    };
+
 
     return (
       <div className="info-container">
@@ -68,7 +81,11 @@ class DatasetInfo extends PureComponent {
                 </a>
               }
 
-              <a href={`${window.location.host}/dataset/${dataset.slug}`} className="info-tool more">
+              <a
+                href={`${window.location.origin}/dataset/${dataset.slug}`}
+                className="info-tool more"
+                {...linkTarget}
+              >
                 <Icon name="icon-share" className="-medium" />
                 Learn more
               </a>
@@ -82,7 +99,7 @@ class DatasetInfo extends PureComponent {
               </span>}
             </nav>
 
-            {DatasetInfo.getContent(dataset)}
+            {this.getContent(dataset)}
 
             {hasWidget && dataset.widget.map((w) => {
               if (w.widgetConfig.type === 'map') {
@@ -126,6 +143,7 @@ class DatasetInfo extends PureComponent {
 
 DatasetInfo.propTypes = {
   dataset: PropTypes.object,
+  embed: PropTypes.bool,
   toggleDataset: PropTypes.func
 };
 
