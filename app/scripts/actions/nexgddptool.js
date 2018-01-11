@@ -371,7 +371,7 @@ export function getSelectorsInfo() {
     // before moving on to something else
     const promises = [];
 
-    const datasetIdentifier = Object.keys(getState().datasets.details)[0];
+    const datasetIdentifier = getState().nexgddptool.dataset;
 
     const rangesPromise = fetch(`${process.env.RW_API_URL}/query?sql=select min(year) as startdate, max(year) as enddate from ${datasetIdentifier}`)
       .then((res) => {
