@@ -38,10 +38,10 @@ class ShareControl extends Component {
 }
 
 ShareControl.propTypes = {
-  setOpen: PropTypes.func,
-  setLinks: PropTypes.func,
+  className: PropTypes.string,
   open: PropTypes.bool,
-  className: PropTypes.string
+  setOpen: PropTypes.func,
+  setLinks: PropTypes.func
 };
 
 export default ShareControl;
