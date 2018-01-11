@@ -2,7 +2,7 @@ import { Component, createElement } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import * as actions from './explore-dataset-filters-actions';
+import * as exploreActions from '../explore-actions';
 import reducers, { initialState } from './explore-dataset-filters-reducer';
 
 import ExploreDatasetFiltersComponent from './explore-dataset-filters-component';
@@ -28,7 +28,7 @@ ExploreDatasetFiltersContainer.propTypes = {
   getFiltersData: PropTypes.func
 };
 
-export { actions, reducers, initialState };
+export { exploreActions, reducers, initialState };
 
 
-export default connect(mapStateToProps, actions)(ExploreDatasetFiltersContainer);
+export default connect(mapStateToProps, exploreActions)(ExploreDatasetFiltersContainer);

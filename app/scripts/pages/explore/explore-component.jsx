@@ -6,6 +6,7 @@ import Tabs from 'components/ui/Tabs';
 import Search from 'components/ui/Search';
 import Icon from 'components/ui/Icon';
 import DatasetLocationFilter from './explore-location-filter';
+import ExploreDatasetFilters from './explore-dataset-filters/explore-dataset-filters';
 import CoreDatasetsList from './core-datasets-list';
 import DatasetsList from './explore-datasets-list';
 import DatasetInfo from './explore-dataset-info';
@@ -16,12 +17,14 @@ class ExplorePage extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      isSidebarHidden: props.isSidebarHidden
+      isSidebarHidden: props.isSidebarHidden,
+      filters: false
     };
   }
 
   componentWillMount() {
     this.props.initialURLParams();
+    this.props.getDatasetsByGraph();
   }
 
   componentDidMount() {
@@ -32,6 +35,7 @@ class ExplorePage extends PureComponent {
   render() {
     const { selectedDataset, isSidebarHidden,
       currentTab, setTab, filterQuery, toggleInfo } = this.props;
+    const { filters } = this.state;
 
     return (
       <div className="l-explore">
@@ -99,12 +103,20 @@ class ExplorePage extends PureComponent {
                   <div className="datasets-list-content">
                     <div className="list-filters">
                       <div className="list-filters-container">
+                        <button className="btn-filters" onClick={() => this.setState({ filters: !filters })}>
+                          <span>Filter results</span>
+                          {filters ?
+                            <Icon name="icon-arrow-up" /> :
+                            <Icon name="icon-arrow-down" />
+                          }
+                        </button>
                         {<Search
                           onChange={filterQuery}
                           label="Search dataset"
                         />}
                       </div>
                     </div>
+                    {filters && <ExploreDatasetFilters />}
                     <DatasetsList />
                     <footer className="sidebar-footer -border">
                       <div className="footer-section">
@@ -147,7 +159,8 @@ class ExplorePage extends PureComponent {
 ExplorePage.defaultProps = {
   currentTab: 'core_datasets',
   isSidebarHidden: false,
-  fetchDatasets: () => {}
+  fetchDatasets: () => {},
+  getDatasetsByGraph: () => {}
 };
 
 ExplorePage.propTypes = {
@@ -159,7 +172,8 @@ ExplorePage.propTypes = {
   filterQuery: PropTypes.func,
   toggleInfo: PropTypes.func,
   initialURLParams: PropTypes.func,
-  updateURLParams: PropTypes.func
+  updateURLParams: PropTypes.func,
+  getDatasetsByGraph: PropTypes.func
 };
 
 export default ExplorePage;
