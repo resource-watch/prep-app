@@ -2,7 +2,7 @@
   position: absolute;
   top: $header-height-short;
   left: $sidebar-width;
-  height: calc(100% - #{$header-height-short}});
+  height: calc(100% - #{$header-height-short});
   width: 100%;
   background-color: $base-bg-color;
   z-index: 2;
@@ -106,8 +106,8 @@
         > li {
           display: inline-block;
           > span {
-            color: $dark-blue;
-            text-decoration: underline;
+            color: $yellow-orange;
+            font-weight: $font-weight-bold;
             cursor: pointer;
           }
         }

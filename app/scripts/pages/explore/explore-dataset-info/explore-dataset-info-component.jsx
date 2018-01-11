@@ -7,6 +7,10 @@ import Switch from 'components/Button/Switch';
 import VegaChart from 'components/Chart/VegaChart';
 import { getTitle, getInfo, getMetadata } from 'components/dataset-card/dataset-helper';
 
+// data
+import TOPICS from 'pages/explore/explore-dataset-filters/data/topics.json';
+import GEOGRAPHIES from 'pages/explore/explore-dataset-filters/data/geographies.json';
+
 class DatasetInfo extends PureComponent {
   static getHeader(dataset) {
     const info = getInfo(dataset);
@@ -21,12 +25,77 @@ class DatasetInfo extends PureComponent {
     );
   }
 
+  onClickTag(tag) {
+    const { key, value } = tag;
+
+    this.props.onSetDatasetFilter({ [key]: [value] });
+    this.props.getDatasetsByGraph();
+  }
+
+  getItemList(list = []) {
+    const contentList = list.map((item, index) =>
+      (<li
+        key={item.value}
+        className="item-list"
+      >
+        {!!(index && index < list.length) && ', ' }
+        <span onClick={() => { this.onClickTag(item); }}>{item.label}</span>
+      </li>));
+
+    return (<ul className="item-list">{contentList}</ul>);
+  }
+
   getContent(dataset) {
     const { embed } = this.props;
     const metadata = getMetadata(dataset);
     const info = getInfo(dataset);
     const description = metadata.description || info.description;
     const { source } = info;
+    const datasetTags = (((dataset.vocabulary || [])[0] || {}).tags || []);
+    const areasList = [];
+
+    const topicsList = datasetTags.filter(tag =>
+      TOPICS.find(topic => topic.value === tag))
+      .map((tagValue) => {
+        if (TOPICS.find(topic => topic.value === tagValue)) {
+          const foundTopic = TOPICS.find(topic => topic.value === tagValue);
+
+          if (foundTopic) return ({ label: foundTopic.label, value: tagValue, key: 'topics' });
+        }
+
+        return false;
+      });
+
+    datasetTags.filter(tag =>
+      GEOGRAPHIES.find(topic => topic.value === tag || (topic.children || []).find(child => child.value === tag)))
+      .map(tagValue =>
+        GEOGRAPHIES.forEach((_topic) => {
+          if (_topic.value === tagValue) {
+            areasList.push({ label: _topic.label, value: tagValue, key: 'geographies' });
+            return false;
+          }
+
+          if ((_topic.children || []).find(child => child.value === tagValue)) {
+            (_topic.children || []).forEach((child) => {
+              if (child.value === tagValue) {
+                areasList.push({ label: child.label, value: tagValue, key: 'geographies' });
+                return false;
+              } else if ((child.children || []).length) {
+                child.children.find((subchild) => {
+                  if (subchild.value === tagValue) {
+                    areasList.push({ label: subchild.label, value: tagValue, key: 'geographies' });
+                    return false;
+                  }
+                  return false;
+                });
+              }
+              return false;
+            });
+          }
+
+          return false;
+        })
+      );
 
     const linkTarget = {
       ...embed && { target: '_blank' }
@@ -37,6 +106,19 @@ class DatasetInfo extends PureComponent {
         {description && <div className="item-prop">
           <span className="prop-label">Description: </span>
           <ReactMarkdown source={description} className="c-markdown -inline" />
+        </div>}
+
+        {dataset.data_source && <div className="item-prop">
+          <span className="prop-label">Data source: </span>
+          <ReactMarkdown source={dataset.data_source} className="c-markdown" />
+        </div>}
+        {!!topicsList.length && <div className="item-prop">
+          <span className="prop-label">Topics: </span>
+          {this.getItemList(topicsList)}
+        </div>}
+        {!!areasList.length && <div className="item-prop">
+          <span className="prop-label">Areas: </span>
+          {this.getItemList(areasList)}
         </div>}
 
         {source && <div className="item-prop">
@@ -144,7 +226,9 @@ class DatasetInfo extends PureComponent {
 DatasetInfo.propTypes = {
   dataset: PropTypes.object,
   embed: PropTypes.bool,
-  toggleDataset: PropTypes.func
+  toggleDataset: PropTypes.func,
+  onSetDatasetFilter: PropTypes.func,
+  getDatasetsByGraph: PropTypes.func
 };
 
 DatasetInfo.defaultProps = {
