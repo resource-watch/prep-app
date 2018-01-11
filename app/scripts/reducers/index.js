@@ -16,6 +16,6 @@ export { default as nexgddptool } from './nexgddptool';
 // export { default as basemapControl } from 'components/basemap-control/basemap-control-reducer';
 
 // export { default as layers } from './layers';
-// export { default as links } from './links';
+export { default as links } from './links';
 // export { default as infoSidebar } from './info-sidebar';
 // export { default as exploremap } from './exploremap';

@@ -14,20 +14,35 @@ class ShareUrl extends React.Component {
     this.props.getShortLink(this.props.url);
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { url: nextUrl } = nextProps;
+    const { url: prevUrl } = this.props;
+
+    if (nextUrl !== prevUrl) {
+      this.props.getShortLink(nextUrl);
+    }
+  }
+
   onCopyClick() {
-    const copyTextarea = this.refs.url;
-    copyTextarea.select();
+    this.input.select();
 
     try {
       document.execCommand('copy');
       this.setState({ copied: true });
+
+      setTimeout(() => {
+        this.setState({ copied: false });
+        this.input.blur();
+      }, 2000);
     } catch (err) {
       console.warn('Oops, unable to copy');
     }
   }
 
   render() {
-    let shortUrl = this.props.links[this.props.url];
+    const { copied } = this.state;
+
+    let shortUrl = this.props.links[this.props.url] || this.props.url;
 
     let content = <LoadingSpinner transparent inner />;
 
@@ -38,9 +53,9 @@ class ShareUrl extends React.Component {
 
       content = shortUrl !== false ?
         (<div className="url-container">
-          <input ref="url" value={shortUrl} className="url" readOnly />
+          <input ref={(node) => { this.input = node; }} value={shortUrl} className="url" readOnly />
           <Button click={() => this.onCopyClick()} fill border>
-            Copy
+            {copied ? 'Copied' : 'Copy'}
           </Button>
         </div>) :
         <p>The url is not available.</p>;
