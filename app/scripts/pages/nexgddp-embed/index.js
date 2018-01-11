@@ -13,8 +13,8 @@ import Component from './nexgddp-embed-component';
 
 const mapStateToProps = (state, { params }) => ({
   embed: true,
-  dataset: params.slug,
-  data: state.datasets.details[params.slug]
+  datasetSlug: params.slug,
+  dataset: state.datasets.details[params.slug]
 });
 
 const mapDispatchToProps = {

@@ -22,8 +22,6 @@ export const getLayers = createSelector(
     const activeLayers = [];
 
     const layers = (datasetDetails[datasetId] || {}).layer || [];
-    console.log(datasetDetails);
-    console.log(datasetId);
 
     if (mapMode !== 'difference') {
       currentLayer = layers.find(l => !l.attributes.layer_config.compare_with);
