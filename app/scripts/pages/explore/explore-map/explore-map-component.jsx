@@ -52,8 +52,6 @@ class ExploreMap extends PureComponent {
           />
           <ShareControl
             className="-absolute" // pfff....
-            linkUrl="htpp://google.com"
-            embedUrl="htpp://google.com"
           />
         </Map>
 

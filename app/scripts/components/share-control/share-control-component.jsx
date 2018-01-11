@@ -7,10 +7,14 @@ import Icon from 'components/ui/Icon';
 
 class ShareControl extends Component {
   handleClick(event) {
+    const { open } = this.props;
+    const { href, origin, pathname, search } = window.location;
     event.preventDefault();
-    this.props.toggleSharedModal(!this.props.open);
-    this.props.updateLinks({
-      linkUrl: this.props.linkUrl
+    this.props.setOpen(!open);
+
+    this.props.setLinks({
+      link: href,
+      embed: `${origin}/embed${pathname}${search}`
     });
   }
 
@@ -34,11 +38,10 @@ class ShareControl extends Component {
 }
 
 ShareControl.propTypes = {
-  toggleSharedModal: PropTypes.func,
-  updateLinks: PropTypes.func,
+  setOpen: PropTypes.func,
+  setLinks: PropTypes.func,
   open: PropTypes.bool,
-  className: PropTypes.string,
-  linkUrl: PropTypes.string
+  className: PropTypes.string
 };
 
 export default ShareControl;

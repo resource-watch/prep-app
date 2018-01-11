@@ -6,15 +6,22 @@ import * as reducers from './share-modal-reducers';
 
 const initialState = {
   open: false,
+  tabs: ['link', 'embed'],
   links: {
-    linkUrl: '',
-    embedUrl: ''
+    link: '',
+    embed: ''
   },
-  activeTab: ''
+  tab: 'link'
 };
 
 export { initialState, actions, reducers };
 
-const mapStateToProps = state => ({ open: state.shareModal.open });
+const mapStateToProps = state => ({
+  ...state.shareModal
+});
 
-export default connect(mapStateToProps, {})(ShareModalComponent);
+const mapDispatchToProps = {
+  ...actions
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShareModalComponent);
