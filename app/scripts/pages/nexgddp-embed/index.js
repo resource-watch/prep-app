@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
 
+import { getDatasetByIdOrSlug } from 'actions/datasets';
+
 import Component from './nexgddp-embed-component';
 // import initialState from './explore-initial-state';
 // import * as reducers from './explore-reducers';
@@ -9,13 +11,15 @@ import Component from './nexgddp-embed-component';
 //
 // export { initialState, actions, reducers };
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state, { params }) => ({
   embed: true,
-  dataset: ownProps.params.slug
+  dataset: params.slug,
+  data: state.datasets.details[params.slug]
 });
 
 const mapDispatchToProps = {
   // ...actions
+  getDatasetByIdOrSlug
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);
