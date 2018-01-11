@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import LayerOpacitySelector from 'components/legend/layer-opacity-selector';
 import Icon from 'components/ui/Icon';
+
 import './legend-actions-style.scss';
 
 export const LegendActions = ({ layerSpec, onOpacity, onVisibility, onInfo, onClose }) => (
   <div className="c-legend-actions">
-    <button
-      type="button"
-    >
-      <Icon name="icon-opacity" className="-normal" />
-    </button>
+    <LayerOpacitySelector
+      layerSpec={layerSpec}
+      onOpacityChange={onOpacity}
+    />
     <button
       type="button"
       className={layerSpec.visibility ? '' : '-active'}

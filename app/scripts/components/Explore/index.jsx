@@ -156,8 +156,6 @@ class Explore extends React.Component {
             {modalContent}
           </Modal>
         }
-
-        <TooltipTether />
       </div>
     );
   }

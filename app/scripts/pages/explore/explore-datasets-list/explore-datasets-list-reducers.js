@@ -125,3 +125,21 @@ export const updateZIndex = (state, { payload }) => {
     }
   };
 };
+
+export const updateOpacity = (state, { payload }) => {
+  const { id, opacity } = payload;
+  const datasets = [...state.datasets.items];
+
+  const items = datasets.map((dataset) => {
+    if (dataset.id === id) return { ...dataset, opacity };
+    return dataset;
+  });
+
+  return {
+    ...state,
+    datasets: {
+      ...state.datasets,
+      items
+    }
+  };
+};

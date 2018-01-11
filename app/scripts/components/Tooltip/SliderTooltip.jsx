@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { Autobind } from 'es-decorators';
 import 'rc-slider/assets/index.css';
 
 // Components
@@ -33,13 +32,18 @@ class SliderTooltip extends React.Component {
     }
   }
 
-  onChange(value) {
-    this.setState({ value });
+  onChange() {
+    const { value } = this.state;
     this.props.onChange(value);
   }
 
+  onReset() {
+    const { max } = this.props.options;
+    this.setState({ value: max }, () => this.props.onChange(this.state.value));
+  }
+
   render() {
-    const { className, options, title } = this.props;
+    const { className, options, title, onClose } = this.props;
 
     return (
       <div className="c-explore-slider-tooltip" ref={(node) => { this.el = node; }}>
@@ -51,11 +55,12 @@ class SliderTooltip extends React.Component {
           step={options.step}
           value={this.state.value !== null ? this.state.value : options.defaultValue}
           defaultValue={this.state.value !== null ? this.state.value : options.defaultValue}
-          onChange={this.onChange}
+          onChange={value => this.setState({ value })}
+          onAfterChange={this.onChange}
         />
         <div className="actions-container">
-          <button className="c-button -primary" onClick={this.props.onClose}>Done</button>
-          <button className="c-button" onClick={() => this.onChange(options.max)}>Reset</button>
+          <button className="c-button -primary" onClick={onClose}>Done</button>
+          <button className="c-button" onClick={() => this.onReset()}>Reset</button>
         </div>
       </div>
     );
@@ -75,10 +80,12 @@ SliderTooltip.propTypes = {
 };
 
 SliderTooltip.defaultProps = {
-  min: 0,
-  max: 1,
-  step: 0.1,
-  defaultValue: 1
+  options: {
+    min: 0,
+    max: 100,
+    step: 1,
+    defaultValue: 100
+  }
 };
 
 export default SliderTooltip;
