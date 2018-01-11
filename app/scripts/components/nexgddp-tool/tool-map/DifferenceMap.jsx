@@ -126,6 +126,7 @@ class DifferenceMap extends React.PureComponent {
           <Legend
             layerSpec={rawLayers[0]}
             toolbar={false}
+            actions={false}
           />
         )}
       </div>
