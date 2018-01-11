@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Map from 'components/map-vis';
 import BasemapControl from 'components/basemap-control';
 import LegendControl from 'components/legend/legend-control';
+import ShareControl from 'components/share-control';
 import { basemapsSpec, labelsSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
 
 class ExploreMap extends PureComponent {
@@ -38,6 +39,10 @@ class ExploreMap extends PureComponent {
             setLabels={setLabels}
             boundaries={boundaries}
             setBoundaries={setBoundaries}
+          />
+          <ShareControl
+            linkUrl="htpp://google.com"
+            embedUrl="htpp://google.com"
           />
         </Map>
         {activeLayers.length &&

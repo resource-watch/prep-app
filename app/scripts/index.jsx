@@ -23,6 +23,7 @@ import { handleModule } from 'redux-tools';
 import * as AuthModule from 'components/auth/auth';
 import * as UserModule from 'components/user/user';
 import * as PartnersModule from 'modules/partners';
+import * as ShareModalModule from 'components/share-modal';
 // import * as DatasetLocationModule from 'components/dataset-location-filter/dataset-location-filter';
 
 // Pages
@@ -60,7 +61,8 @@ if (process.env.NODE_ENV === 'production') {
 const componentReducers = {
   auth: handleModule(AuthModule),
   user: handleModule(UserModule),
-  partners: handleModule(PartnersModule)
+  partners: handleModule(PartnersModule),
+  shareModal: handleModule(ShareModalModule)
 };
 
 const pagesReducers = {

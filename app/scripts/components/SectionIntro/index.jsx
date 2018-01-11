@@ -1,5 +1,6 @@
 import React from 'react';
 import ToolbarActions from '../ToolbarActions';
+import ShareModalComponent from '../share-modal';
 
 function SectionIntro(props) {
   return (

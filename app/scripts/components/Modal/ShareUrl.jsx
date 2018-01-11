@@ -20,7 +20,7 @@ class ShareUrl extends React.Component {
 
     try {
       document.execCommand('copy');
-      this.setState({ copied: true });
+      this.setState({ copied: true });// Add time out and set state to false
     } catch (err) {
       console.warn('Oops, unable to copy');
     }
