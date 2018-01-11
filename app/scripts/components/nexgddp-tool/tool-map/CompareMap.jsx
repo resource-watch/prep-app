@@ -1,18 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
+
 import { connect } from 'react-redux';
+
 import L from 'leaflet';
 import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
-import 'lib/leaflet-side-by-side';
-import 'lib/leaflet-singleclick';
+import Control from 'react-leaflet-control';
+import 'lib/leaflet-side-by-side/leaflet-side-by-side';
 
 // Redux
 import { getLayers } from 'selectors/nexgddptool';
-import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels } from 'actions/nexgddptool';
+import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setMarkerMode } from 'actions/nexgddptool';
 
-// Components
 import BasemapControl from 'components/basemap-control';
 import { basemapsSpec, labelsSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
+
+// Components
+import Icon from 'components/ui/Icon';
 
 const mapDefaultOptions = {
   center: [20, -30],
@@ -25,6 +30,14 @@ const mapDefaultOptions = {
 };
 
 class CompareMap extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    // BINDINGS
+    this.addMarker = this.addMarker.bind(this);
+    this.setMarkerMode = this.setMarkerMode.bind(this);
+  }
+
   componentDidMount() {
     const { layers } = this.props;
     const map = this.mapElement.leafletElement;
@@ -95,14 +108,18 @@ class CompareMap extends React.PureComponent {
     }
   }
 
-  onClickMap({ originalEvent, latlng }) {
-    // When the map divider is moved, the map receives a click event
-    // "leaflet-sbs-range" is the class of the divider
-    if (originalEvent.target.classList.contains('leaflet-sbs-range')) {
-      return;
-    }
+  setMarkerMode() {
+    const { markerMode } = this.props;
+    this.props.setMarkerMode(!markerMode);
+  }
 
-    this.props.setMarkerPosition([latlng.lat, latlng.lng]);
+  addMarker({ latlng }) {
+    const { markerMode } = this.props;
+
+    if (markerMode) {
+      this.props.setMarkerPosition([latlng.lat, latlng.lng]);
+      this.props.setMarkerMode(false);
+    }
   }
 
   onViewportChanged({ zoom, center }) {
@@ -138,7 +155,7 @@ class CompareMap extends React.PureComponent {
   }
 
   render() {
-    const { map, marker, range1Selection, range2Selection } = this.props;
+    const { map, marker, markerMode, range1Selection, range2Selection } = this.props;
 
     // It will change center of map on marker location
     const mapOptions = Object.assign({}, mapDefaultOptions, {
@@ -146,35 +163,69 @@ class CompareMap extends React.PureComponent {
       zoom: map.zoom || mapDefaultOptions.zoom
     });
 
+    const mapClassNames = classnames({
+      '-crosshair': markerMode
+    });
+
+    const makerControlClassNames = classnames({
+      '-active': markerMode
+    });
+
     return (
       <div className="c-tool-map">
         <div
           className="current-layer-label"
-        >{range1Selection.label}</div>
+        >
+          {range1Selection.label}
+        </div>
+
         <div
           className="current-layer-label -right"
-        >{range2Selection.label}</div>
+        >
+          {range2Selection.label}
+        </div>
+
         <Map
+          className={mapClassNames}
           ref={(el) => { this.mapElement = el; }}
           style={{ height: 440 }}
           {...mapOptions}
-          onSingleclick={e => this.onClickMap(e)}
+          onClick={this.addMarker}
           onViewportChanged={(...params) => this.onViewportChanged(...params)}
         >
           <TileLayer url={basemapsSpec[map.basemap].value} />
-          <ZoomControl position="bottomright" />
 
           { marker && <Marker position={marker} icon={L.divIcon({ className: 'map-marker' })} /> }
-        </Map>
 
-        <BasemapControl
-          basemap={map.basemap}
-          labels={map.labels}
-          boundaries={map.boundaries}
-          setBasemap={this.props.setBasemap}
-          setLabels={this.props.setLabels}
-          setBoundaries={this.props.setBoundaries}
-        />
+          <ZoomControl position="bottomright" />
+
+          <Control position="bottomright" >
+            <button
+              type="button"
+              className={`c-button-map ${makerControlClassNames}`}
+              onClick={this.setMarkerMode}
+            >
+              {markerMode &&
+                <Icon name="icon-cancel" className="-small" />
+              }
+
+              {!markerMode &&
+                <Icon name="icon-marker" className="-small" />
+              }
+            </button>
+          </Control>
+
+          <Control position="bottomright" >
+            <BasemapControl
+              basemap={map.basemap}
+              labels={map.labels}
+              boundaries={map.boundaries}
+              setBasemap={this.props.setBasemap}
+              setLabels={this.props.setLabels}
+              setBoundaries={this.props.setBoundaries}
+            />
+          </Control>
+        </Map>
       </div>
     );
   }
@@ -189,8 +240,10 @@ CompareMap.propTypes = {
   }),
   layers: PropTypes.array,
   marker: PropTypes.array,
+  markerMode: PropTypes.bool,
   range1Selection: PropTypes.object,
   range2Selection: PropTypes.object,
+  setMarkerMode: PropTypes.func,
   setMarkerPosition: PropTypes.func,
   setMapZoom: PropTypes.func,
   setMapCenter: PropTypes.func,
@@ -202,18 +255,20 @@ CompareMap.propTypes = {
 const mapStateToProps = state => ({
   map: state.nexgddptool.map,
   marker: state.nexgddptool.marker,
+  markerMode: state.nexgddptool.markerMode,
   layers: getLayers(state),
   range1Selection: state.nexgddptool.range1.selection,
   range2Selection: state.nexgddptool.range2.selection
 });
 
-const mapDispatchToProps = dispatch => ({
-  setMarkerPosition: (...params) => dispatch(setMarkerPosition(...params)),
-  setMapZoom: (...params) => dispatch(setMapZoom(...params)),
-  setMapCenter: (...params) => dispatch(setMapCenter(...params)),
-  setBasemap: (...params) => dispatch(setBasemap(...params)),
-  setLabels: (...params) => dispatch(setLabels(...params)),
-  setBoundaries: (...params) => dispatch(setBoundaries(...params))
-});
+const mapDispatchToProps = {
+  setMarkerMode,
+  setMarkerPosition,
+  setMapZoom,
+  setMapCenter,
+  setBasemap,
+  setLabels,
+  setBoundaries
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CompareMap);

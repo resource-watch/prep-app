@@ -6,6 +6,7 @@ import Tabs from 'components/ui/Tabs';
 import Search from 'components/ui/Search';
 import Icon from 'components/ui/Icon';
 import DatasetLocationFilter from './explore-location-filter';
+import ExploreDatasetFilters from './explore-dataset-filters/explore-dataset-filters';
 import CoreDatasetsList from './core-datasets-list';
 import DatasetsList from './explore-datasets-list';
 import DatasetInfo from './explore-dataset-info';
@@ -16,12 +17,14 @@ class ExplorePage extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      isSidebarHidden: props.isSidebarHidden
+      isSidebarHidden: props.isSidebarHidden,
+      filters: false
     };
   }
 
   componentWillMount() {
     this.props.initialURLParams();
+    this.props.getDatasetsByGraph();
   }
 
   componentDidMount() {
@@ -32,9 +35,10 @@ class ExplorePage extends PureComponent {
   render() {
     const { selectedDataset, isSidebarHidden,
       currentTab, setTab, filterQuery, toggleInfo } = this.props;
+    const { filters } = this.state;
 
     return (
-      <div className="l-explore -theme-2">
+      <div className="l-explore">
         <header className="l-header -expanded">
           <div className="l-header-nav -short">
             <div className="row align-middle">
@@ -71,16 +75,26 @@ class ExplorePage extends PureComponent {
                     <div className="list-container">
                       <CoreDatasetsList />
                       <footer className="sidebar-footer">
-                        <p>These datasets are a curated collection. If you don&apos;t find what you are interested in, you can explore all the data:</p>
+                        <div className="footer-section">
+                          <p>These datasets are a curated collection. If you don&apos;t find what you are interested in, you can explore all the data:</p>
 
-                        <div className="footer-actions">
-                          <button
-                            type="button"
-                            className="c-new-button -light -transparent"
-                            onClick={() => setTab('all_datasets')}
-                          >
-                            Browse all datasets
-                          </button>
+                          <div className="footer-actions">
+                            <button
+                              type="button"
+                              className="c-new-button -light -transparent"
+                              onClick={() => setTab('all_datasets')}
+                            >
+                              Browse all datasets
+                            </button>
+                          </div>
+                        </div>
+                        <div className="footer-section">
+                          <p>We’re actively adding new datasets to PREP. If you can’t find what you’re looking for, you can suggest a dataset for us to consider:</p>
+                          <div className="footer-actions">
+                            <a href="https://docs.google.com/forms/d/1wZzQno3De7Ul6vlOkkdHhWK_9csErSrOlo6pOAZHIds/viewform?edit_requested=true" target="_blank" rel="noopener noreferrer">
+                              <button type="button" className="c-new-button -light -transparent">Suggest dataset</button>
+                            </a>
+                          </div>
                         </div>
                       </footer>
                     </div>
@@ -89,13 +103,31 @@ class ExplorePage extends PureComponent {
                   <div className="datasets-list-content">
                     <div className="list-filters">
                       <div className="list-filters-container">
+                        <button className="btn-filters" onClick={() => this.setState({ filters: !filters })}>
+                          <span>Filter results</span>
+                          {filters ?
+                            <Icon name="icon-arrow-up" /> :
+                            <Icon name="icon-arrow-down" />
+                          }
+                        </button>
                         {<Search
                           onChange={filterQuery}
                           label="Search dataset"
                         />}
                       </div>
                     </div>
+                    {filters && <ExploreDatasetFilters />}
                     <DatasetsList />
+                    <footer className="sidebar-footer -border">
+                      <div className="footer-section">
+                        <p>We’re actively adding new datasets to PREP. If you can’t find what you’re looking for, you can suggest a dataset for us to consider:</p>
+                        <div className="footer-actions">
+                          <a href="https://docs.google.com/forms/d/1wZzQno3De7Ul6vlOkkdHhWK_9csErSrOlo6pOAZHIds/viewform?edit_requested=true" target="_blank" rel="noopener noreferrer">
+                            <button type="button" className="c-new-button -light -transparent">Suggest dataset</button>
+                          </a>
+                        </div>
+                      </div>
+                    </footer>
                   </div>}
               </div>
             </div>
@@ -127,7 +159,8 @@ class ExplorePage extends PureComponent {
 ExplorePage.defaultProps = {
   currentTab: 'core_datasets',
   isSidebarHidden: false,
-  fetchDatasets: () => {}
+  fetchDatasets: () => {},
+  getDatasetsByGraph: () => {}
 };
 
 ExplorePage.propTypes = {
@@ -139,7 +172,8 @@ ExplorePage.propTypes = {
   filterQuery: PropTypes.func,
   toggleInfo: PropTypes.func,
   initialURLParams: PropTypes.func,
-  updateURLParams: PropTypes.func
+  updateURLParams: PropTypes.func,
+  getDatasetsByGraph: PropTypes.func
 };
 
 export default ExplorePage;

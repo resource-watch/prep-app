@@ -3,7 +3,7 @@ import 'esri-leaflet';
 import leafletLayer from './leaflet-layer';
 
 export default (leafletMap, layerSpec) => {
-  const { layerConfig, zIndex, opacity } = layerSpec;
+  const { layerConfig, layerIndex, visibility, opacity } = layerSpec;
 
   // Transforming layer
   const bodyStringified = JSON.stringify(layerConfig.body || {})
@@ -31,10 +31,13 @@ export default (leafletMap, layerSpec) => {
     if (layer) {
       layer.on('load', () => {
         const layerElement = leafletMap.getPane('tilePane').lastChild;
-        layerElement.style.zIndex = zIndex;
-        layerElement.style.opacity = opacity;
-        layerElement.id = layer.id;
-
+        layerElement.style.zIndex = layerIndex;
+        // If visibility is enabled, set opacity to zero
+        if (visibility) {
+          layerElement.style.opacity = opacity;
+        } else {
+          layerElement.style.opacity = 0;
+        }
         resolve(layer);
       });
 

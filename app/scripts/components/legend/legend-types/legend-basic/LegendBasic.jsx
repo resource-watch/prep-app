@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LegendItem from '../legend-item/LegendItem';
+import LegendItem from '../../legend-item/LegendItem';
 import './legend-basic.scss';
 
 export const LegendBasic = ({ legendSpec, mode }) => (

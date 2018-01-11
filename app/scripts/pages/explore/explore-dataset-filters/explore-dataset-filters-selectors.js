@@ -2,8 +2,8 @@ import { createSelector } from 'reselect';
 
 import selectElementsFromTree from 'helpers/dropdown-tree';
 
-const data = state => state.exploreDatasetFilter.data;
-const filters = state => state.exploreDatasetFilter.filters;
+const data = state => state.explorePage.datasetFilters.data;
+const filters = state => state.explorePage.datasetFilters.filters;
 
 const getFilterStatus = (_data, _filters) => {
   if (!Object.keys(_data).length) return {};

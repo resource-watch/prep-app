@@ -10,7 +10,6 @@ import ExploreMap from '../../containers/Explore/ExploreMap';
 import ExploreMapSidebar from '../../containers/Explore/ExploreSidebar';
 import InfoSidebar from '../../containers/Explore/InfoSidebar';
 import ExploreMapLegend from '../../containers/Explore/ExploreLegend';
-import BasemapControl from '../../containers/Explore/BasemapControl';
 
 import MetadataInfo from './MetadataInfo';
 import Form from '../Form';
@@ -125,7 +124,6 @@ class Explore extends React.Component {
         <InfoSidebar />
         <ExploreMap />
         <ExploreMapLegend />
-        <BasemapControl />
 
         {this.state.modalShareOpen &&
           <ShareModal

@@ -6,6 +6,10 @@
   .leaflet-container {
     z-index: 0;
     position: relative;
+
+    &.-crosshair {
+      cursor: crosshair;
+    }
   }
 
   .leaflet-touch .leaflet-control-layers,
@@ -17,8 +21,6 @@
     display: flex;
     flex-flow: column;
     margin-top: 0;
-    margin-right: 20px;
-    margin-bottom: 60px;
     border: 0;
     box-shadow: 0 7px 15px 0 rgba(0,0,0,0.15);
 
@@ -33,13 +35,18 @@
       display: inline-block;
 
       font-size: $normal-font-size;
+      line-height: 26px;
       -webkit-font-smoothing: subpixel-antialiased;
       color: $navy;
 
       border: none;
-      border-radius: 0;
-      border-left: 1px solid rgba($base-bg-color, 0.1);
+      border-radius: 0 !important;
       background-color: $white;
+
+      &.leaflet-disabled {
+        background-color: darken($white, 10%);
+        color: rgba($navy, 0.5);
+      }
     }
 
     .leaflet-control-zoom-in {
@@ -53,13 +60,42 @@
     }
   }
 
-  > .c-basemap-control {
-    right: 20px;
-    bottom: 20px;
+  .c-button-map {
+    width: 30px;
+    height: 30px;
+    margin: 0;
+    display: inline-block;
 
-    > button {
-      border-radius: 0;
-      box-shadow: 0 7px 15px 0 rgba(0,0,0,0.15);
+    font-size: $normal-font-size;
+    line-height: 26px;
+    -webkit-font-smoothing: subpixel-antialiased;
+    color: $navy;
+    fill: $navy;
+
+    border: none;
+    border-radius: 0 !important;
+    background-color: $white;
+
+    .c-icon {
+      fill: $navy;
+    }
+
+    &.-disabled {
+      background-color: darken($white, 10%);
+      color: rgba($navy, 0.5);
+
+      .c-icon {
+        fill: rgba($navy, 0.5);
+      }
+    }
+
+    &.-active {
+      background-color: $navy;
+      color: $white;
+
+      .c-icon {
+        fill: $white;
+      }
     }
   }
 

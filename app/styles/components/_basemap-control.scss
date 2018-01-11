@@ -1,22 +1,19 @@
 .c-basemap-control {
-  position: absolute;
-  bottom: 28px;
-  right: 30px;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 174px;
+  &.-absolute {
+    position: absolute;
+    bottom: 28px;
+    right: 30px;
+    z-index: 1;
 
-  .btn-basemaps {
-    width: 30px;
-    height: 30px;
-    background-color: $white;
-    border-radius: 2px;
-    box-shadow: 0 7px 15px 0 rgba(0, 0, 0, 0.15);
+    .c-button-map {
+      width: 30px;
+      height: 30px;
+      background-color: $white;
+      border-radius: 2px;
 
-    .c-icon {
-      fill: $main-color;
+      .c-icon {
+        fill: $main-color;
+      }
     }
   }
 }

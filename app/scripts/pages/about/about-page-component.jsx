@@ -38,7 +38,7 @@ class AboutPage extends PureComponent {
                   <div className="column small-12 medium-4">
                     <div className="c-card -border -border-neutral">
                       <h3>Our Approach</h3>
-                      <p>We promote communication between data users and producers and make high priority data available through a map-based platform</p>
+                      <p>We promote communication between data users and producers and make high priority data available through a map-based platform.</p>
                       <a style={{ cursor: 'pointer' }} onClick={() => AboutPage.scrollTo(this.approach)}>Learn more</a>
                     </div>
                   </div>
@@ -73,7 +73,7 @@ class AboutPage extends PureComponent {
           <p>The PREP Partnership brings together stakeholders from the public, private and nonprofit sectors, including government agencies,
                 leading technology companies and networks of climate preparedness practitioners. The Partnership supports the adaptation planning community by:</p>
           <ul>
-            <li>Promoting dialog between climate data providers and users;</li>
+            <li>Promoting dialogue between climate data providers and users;</li>
             <li>Soliciting input on user needs and data priorities to streamline and curate data for resilience planning;</li>
             <li>Working to improve interoperability across different data products and platforms; and</li>
             <li>Developing products, creating guidance and supporting PREPdata applications to build capacity for adaptation planning.</li>
@@ -92,7 +92,7 @@ class AboutPage extends PureComponent {
           <ul>
             <li>A visual, map-based platform that is user-friendly and customized to different contexts and skill levels;</li>
             <li>Active curation of datasets focused on climate resilience, streamlining the process of accessing and navigating to relevant data;</li>
-            <li>A commitment to global coverage, with an emphasis on increasing access to datasets for the Global South, and support for applications across different scales and geographies;</li>
+            <li>A commitment to global coverage, with an emphasis on increasing access to datasets for the Global South, and support for applications across different scales and geographies; and</li>
             <li>A user-needs based strategy for platform development, utilizing the knowledge and network of the partners and platform users to enable continuous improvement. </li>
           </ul>
 
@@ -102,7 +102,7 @@ class AboutPage extends PureComponent {
           <p>PREP has begun working with partners at city, state, and national scales across the globe to put the platform to use in support of efforts
             to prepare for climate change. Sonoma County has applied PREPdata to support climate resilience planning, with a focus on changes that
             could affect the wine-growing and tourism-dependent region. In India, PREPdata is being used to support climate adaptation plans in
-            two Indian states -- Uttarakhand and Madhya Pradesh – through the development of state-level dashboards to track key indicators of
+            two Indian states – Uttarakhand and Madhya Pradesh – through the development of state-level dashboards to track key indicators of
             climate hazard, vulnerability and adaptation.  In Africa, PREP partners are exploring the use of PREPdata as a platform for regional-scale
             analysis of vulnerability to climate change.</p>
 
@@ -120,11 +120,11 @@ class AboutPage extends PureComponent {
 
           <ul>
             <li>A commitment to support the PREP mission through in-kind or direct contributions, for example: sharing resources, tools, or expertise; contributing
-              to PREPdata or facilitation of the partnership; or raising awareness of the partnership through your networks.</li>
-            <li>A designated point of contact who will be actively involved in PREP as needed.</li>
-            <li>CORE and Contributing partners join at least one of two working groups (WG) – Engagement WG (members collaborate with user communities to
+              to PREPdata or facilitation of the partnership; or raising awareness of the partnership through your networks;</li>
+            <li>A designated point of contact who will be actively involved in PREP as needed; and</li>
+            <li>Core and Contributing partners join at least one of two working groups (WG) – <b>Engagement WG</b> (members collaborate with user communities to
               understand the information needs of those seeking to build preparedness and resilience, and help them advance solutions) and
-              Technical WG (members work to reduce the barriers to accessing, contributing and using data for climate resilience, both through PREPdata
+              <b>Technical WG</b> (members work to reduce the barriers to accessing, contributing and using data for climate resilience, both through PREPdata
               and through promoting interoperability).</li>
           </ul>
 

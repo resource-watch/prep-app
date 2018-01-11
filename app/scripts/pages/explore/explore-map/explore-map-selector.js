@@ -2,6 +2,7 @@ import { createSelector } from 'reselect';
 import filter from 'lodash/filter';
 import flatten from 'lodash/flatten';
 import sortBy from 'lodash/sortBy';
+import { calcZIndex } from 'components/map-vis/map-vis-helper';
 
 const getAllDatasets = state => state.explorePage.datasets.items;
 
@@ -9,9 +10,14 @@ export const getActiveLayers = createSelector(
   getAllDatasets,
   (datasets) => {
     const activeDatasets = sortBy(filter(datasets, { isLayerActive: true }), l => l.zIndex);
-    const layers = flatten(activeDatasets.map(({ layer, opacity, zIndex }) =>
-      layer.map(l => ({ ...l, zIndex, opacity }))));
-    return filter(layers, { default: true });
+    const { length } = activeDatasets;
+    const layers = filter(flatten(
+      activeDatasets.map(({ layer, opacity, visibility, zIndex, isSelected }) => layer.map((l) => {
+        const layerIndex = calcZIndex(length, zIndex);
+        return { ...l, zIndex, layerIndex, opacity, visibility, isSelected };
+      }))
+    ), { default: true });
+    return layers;
   }
 );
 

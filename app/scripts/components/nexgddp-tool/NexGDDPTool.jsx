@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ScenarioSelect from './scenario-select/ScenarioSelect';
+import ScenarioSelect from './scenario-select';
 import DateRangeSelect from './date-range-select/DateRangeSelect';
 import { CompareMap, ToggleMap, DifferenceMap, SimpleMap } from './tool-map';
 import LocationSearch from './location-search/LocationSearch';
@@ -64,15 +64,23 @@ class NexGDDPTool extends React.PureComponent {
                   <button
                     className={`c-button -inline ${mapMode === 'side-by-side' ? '-active' : ''}`}
                     onClick={() => this.switchMapView('side-by-side')}
-                  >Side by side</button>
+                  >
+                    Side by side
+                  </button>
+
                   <button
                     className={`c-button -inline ${mapMode === 'toggle' ? '-active' : ''}`}
                     onClick={() => this.switchMapView('toggle')}
-                  >Toggle</button>
+                  >
+                    Toggle
+                  </button>
+
                   <button
                     className={`c-button -inline ${mapMode === 'difference' ? '-active' : ''}`}
                     onClick={() => this.switchMapView('difference')}
-                  >Difference</button>
+                  >
+                    Difference
+                  </button>
                 </div>
               )}
             </div>
