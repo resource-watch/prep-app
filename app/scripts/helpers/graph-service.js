@@ -1,7 +1,8 @@
 export const concatenateFilters = (filters = {}) => {
-  const { topics, geographies, dataTypes } = filters;
+  const { topics, geographies, dataTypes, periods } = filters;
 
-  if (!((topics || []).length) && !((geographies || []).length) && !((dataTypes || []).length)) return null;
+  if (!((topics || []).length) && !((geographies || []).length)
+    && !((dataTypes || []).length) && !((periods || []).length)) return null;
 
   let counter = 0;
   const topicsSt = topics ? topics.map((val, index) => `concepts[${counter}][${index}]=${val}`).join('&') : null;
@@ -9,6 +10,8 @@ export const concatenateFilters = (filters = {}) => {
   const geographiesSt = geographies ? `${geographies.map((val, index) => `concepts[${counter}][${index}]=${val}`).join('&')}` : null;
   if ((geographies || []).length) counter++;
   const dataTypesSt = dataTypes ? `${dataTypes.map((val, index) => `concepts[${counter}][${index}]=${val}`).join('&')}` : null;
+  if ((dataTypes || []).length) counter++;
+  const periodsTypesSt = periods ? `${periods.map((val, index) => `concepts[${counter}][${index}]=${val}`).join('&')}` : null;
 
   let querySt = topicsSt;
   if (geographiesSt) {
@@ -23,6 +26,14 @@ export const concatenateFilters = (filters = {}) => {
       querySt += `&${dataTypesSt}`;
     } else {
       querySt = dataTypesSt;
+    }
+  }
+
+  if (periodsTypesSt) {
+    if (querySt) {
+      querySt += `&${periodsTypesSt}`;
+    } else {
+      querySt = periodsTypesSt;
     }
   }
 
