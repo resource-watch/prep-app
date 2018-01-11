@@ -24,6 +24,7 @@ class NexGDDPTool extends React.PureComponent {
   }
 
   componentDidMount() {
+    console.log(this.props.dataset);
     this.props.setDataset(this.props.dataset);
 
     this.props.getSelectorsInfo()

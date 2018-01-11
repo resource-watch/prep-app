@@ -7,7 +7,6 @@ import App from './components/App';
 import Home from './components/Home';
 import AboutPage from './pages/about';
 import ExplorePage from './pages/explore';
-import ExploreEmbedPage from './pages/explore-embed';
 import PartnersPage from './pages/partners';
 import DatasetDetail from './containers/Dataset';
 import FAQ from './components/FAQ';
@@ -22,6 +21,8 @@ import Embed from './containers/Embed';
 import Root from './components/Root';
 import PartnerDetail from './containers/PartnerDetail';
 import Auth from './components/auth/auth';
+import ExploreEmbedPage from './pages/explore-embed';
+import NexGDDPEmbedPage from './pages/nexgddp-embed';
 
 function shouldUpdateScroll(prevRouterProps, { location }) {
   /**
@@ -124,10 +125,13 @@ function Routes(props) {
 
         <Route path="partners/:id" component={PartnerDetail} />
         <Route path="explore" component={ExplorePage} />
-        <Route path="embed/explore" component={ExploreEmbedPage} />
         <Route path="dashboard/:slug(/:tab)" component={DashboardsDetail} />
         <Route path="insight/:slug" component={InsightsDetail} />
         <Route path="dataset/:slug" component={DatasetDetail} />
+
+        {/* Embed */}
+        <Route path="embed/explore" component={ExploreEmbedPage} />
+        <Route path="embed/nexgddp/:slug" component={NexGDDPEmbedPage} />
         <Route path="embed/:slug" component={Embed} />
       </Route>
     </Router>
