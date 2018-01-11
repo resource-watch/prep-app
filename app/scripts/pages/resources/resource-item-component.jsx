@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Thumbnail from '../Thumbnails/Thumbnail';
+import Thumbnail from 'components/Thumbnails/Thumbnail';
 
 export default function ResourceItem(props) {
   const { data } = props;
