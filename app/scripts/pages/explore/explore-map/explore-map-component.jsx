@@ -51,6 +51,7 @@ class ExploreMap extends PureComponent {
             setBoundaries={setBoundaries}
           />
           <ShareControl
+            className="-absolute" // pfff....
             linkUrl="htpp://google.com"
             embedUrl="htpp://google.com"
           />
