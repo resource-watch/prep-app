@@ -4,17 +4,13 @@
   margin-top: 10px;
   position: relative;
 
-  .c-date-range-select {
-    width: 60%;
-  }
-  .c-scenario-select {
-    width: 40%;
-  }
+  .react-selectize {
+    width: auto;
+    margin-right: 10px;
+    font-size: 12px;
 
-  .c-date-range-select,
-  .c-scenario-select {
-     > .Select {
-      min-width: 50px;
+    &:last-child {
+      margin-right: 0;
     }
   }
 }

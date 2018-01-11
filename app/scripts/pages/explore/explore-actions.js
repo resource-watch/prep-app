@@ -71,6 +71,10 @@ export const toggleDataset = createThunkAction('toggleDataset', () => (dispatch)
   dispatch(updateActiveDatasets());
   dispatch(updateURLParams());
 });
+export const toggleVisibility = createThunkAction('toggleVisibility', () => (dispatch) => {
+  dispatch(updateActiveDatasets());
+  dispatch(updateURLParams());
+});
 export const filterQuery = createThunkAction('filterQuery', () => (dispatch) => {
   dispatch(updateURLParams());
 });

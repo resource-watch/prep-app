@@ -34,7 +34,7 @@ class ExplorePage extends PureComponent {
       currentTab, setTab, filterQuery, toggleInfo } = this.props;
 
     return (
-      <div className="l-explore -theme-2">
+      <div className="l-explore">
         <header className="l-header -expanded">
           <div className="l-header-nav -short">
             <div className="row align-middle">

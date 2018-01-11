@@ -3,7 +3,7 @@ import { wriAPISerializer } from 'helpers/wri-api-serializer';
 import { getInfo } from 'components/dataset-card/dataset-helper';
 
 export default (leafletMap, layerSpec) => {
-  const { id, dataset, layerIndex, opacity } = layerSpec;
+  const { id, dataset, layerIndex, visibility, opacity } = layerSpec;
   const request = new Request(`${config.apiUrlRW}/dataset/${dataset}?includes=metadata`);
 
   return new Promise((resolve, reject) => {
@@ -24,7 +24,13 @@ export default (leafletMap, layerSpec) => {
         const layer = L.tileLayer(tileUrl);
 
         layer.setZIndex(layerIndex);
-        layer.setOpacity(opacity);
+
+        // If visibility is enabled, set opacity to zero
+        if (visibility) {
+          layer.setOpacity(opacity);
+        } else {
+          layer.setOpacity(0);
+        }
 
         layer.on('tileload', () => resolve(layer));
         layer.on('tileerror', err => reject(err));
