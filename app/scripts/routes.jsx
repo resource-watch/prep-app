@@ -9,6 +9,7 @@ import AboutPage from './pages/about';
 import ExplorePage from './pages/explore';
 import ExploreEmbedPage from './pages/explore-embed';
 import PartnersPage from './pages/partners';
+import ResourcesPage from './pages/resources';
 import DatasetDetail from './containers/Dataset';
 import FAQ from './components/FAQ';
 import Dashboards from './containers/Dashboards';
@@ -16,7 +17,6 @@ import DashboardsDetail from './containers/Dashboards/DashboardDetail';
 import Insights from './containers/Insights';
 import InsightsDetail from './containers/Insights/InsightDetail';
 import Create from './components/Create';
-import Resources from './containers/Resources';
 import Contact from './components/Contact';
 import Embed from './containers/Embed';
 import Root from './components/Root';
@@ -116,7 +116,7 @@ function Routes(props) {
           <Route path={'insights'} component={Insights} />
           <Route path={'create'} component={Create} />
           <Route path={'partners'} component={PartnersPage} />
-          <Route path={'resources'} component={Resources} />
+          <Route path={'resources'} component={ResourcesPage} />
           <Route path={'contact'} component={Contact} />
           <Route path={'auth'} component={Auth} />
           <Route path={'myprep'} onEnter={requireAuth} component={Home} />
