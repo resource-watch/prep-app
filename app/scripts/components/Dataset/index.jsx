@@ -5,6 +5,7 @@ import URI from 'urijs';
 import { connect } from 'react-redux';
 import WidgetEditor, { modalActions, SaveWidgetModal } from 'widget-editor';
 
+import TooltipTether from 'components/Tooltip/TooltipTether';
 import metadata from '../../metadata.json';
 import PartnersSlider from '../../containers/PartnersSlider';
 import SecondaryNav from '../../components/Navigation/SecondaryNav';
@@ -277,6 +278,8 @@ class DatasetDetail extends React.Component {
             </div>
           </div>
         </footer>
+
+        <TooltipTether />
       </div>
     );
   }

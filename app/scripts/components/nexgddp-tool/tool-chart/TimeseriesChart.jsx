@@ -1,14 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Vega from '../vega-chart/Vega';
-import Icon from 'components/ui/Icon';
-import Spinner from 'components/Loading/LoadingSpinner';
+import { getConfig } from 'widget-editor';
 import './style.scss';
 
 // Redux
 import { setMarkerPosition } from 'actions/nexgddptool';
 import { getIndicatorUnit } from 'selectors/nexgddptool';
+import { toggleTooltip } from 'actions/tooltip';
+
+// Component
+import Vega from '../vega-chart/Vega';
+import Icon from 'components/ui/Icon';
+import Spinner from 'components/Loading/LoadingSpinner';
+import ShareNexgddpChartTooltip from 'components/Tooltip/ShareNexgddpChartTooltip';
 
 /* eslint-disable */
 const chartSpec = {
@@ -234,8 +239,34 @@ const chartSpec = {
 /* eslint-enable */
 
 class TimeseriesChart extends React.PureComponent {
-  render() {
-    const { width, height, removeMarker, range1Selection, range2Selection, chartData, chartDataLoaded, chartDataError, indicatorUnit } = this.props;
+  /**
+   * Event handler executed when the user clicks the share button
+   * @param {MouseEvent} e Event object
+   */
+  onClickShare(e) {
+    // Prevent the tooltip from auto-closing
+    e.stopPropagation();
+
+    this.props.toggleTooltip(true, {
+      follow: false,
+      position: {
+        x: window.scrollX + e.clientX,
+        y: window.scrollY + e.clientY
+      },
+      direction: 'bottom',
+      children: ShareNexgddpChartTooltip,
+      childrenProps: {
+        getWidgetConfig: this.generateVegaSpec.bind(this)
+      }
+    });
+  }
+
+  /**
+   * Generate the vega specification
+   * @returns {object}
+   */
+  generateVegaSpec() {
+    const { range1Selection, range2Selection, chartData, indicatorUnit, chartDataError } = this.props;
 
     // If for some reason, the range 1 is not selected or if the data
     // failed to load, we return
@@ -280,6 +311,20 @@ class TimeseriesChart extends React.PureComponent {
       }
     }
 
+    return spec;
+  }
+
+  render() {
+    const { width, height, removeMarker, range1Selection, chartDataLoaded, chartDataError, datasetId } = this.props;
+
+    // If for some reason, the range 1 is not selected or if the data
+    // failed to load, we return
+    // The 1st reason happens when restoring the state from the URL
+    if (!range1Selection || chartDataError) return null;
+
+    const spec = this.generateVegaSpec();
+    const canSave = !!getConfig().userToken;
+
     return (
       <div className="c-tool-timeseries-chart">
         { !chartDataLoaded && <Spinner inner transparent /> }
@@ -294,6 +339,13 @@ class TimeseriesChart extends React.PureComponent {
             spec={spec}
           />
         }
+        { chartDataLoaded && datasetId && canSave && (
+          <div className="toolbar">
+            <button type="button" className="share-button" onClick={e => this.onClickShare(e)} aria-label="Share/Save options">
+              <Icon name="icon-share-dots" />
+            </button>
+          </div>
+        )}
       </div>
     );
   }
@@ -308,7 +360,9 @@ TimeseriesChart.propTypes = {
   chartDataLoaded: PropTypes.bool,
   chartData: PropTypes.array,
   chartDataError: PropTypes.bool,
-  indicatorUnit: PropTypes.string
+  indicatorUnit: PropTypes.string,
+  toggleTooltip: PropTypes.func,
+  datasetId: PropTypes.string
 };
 
 TimeseriesChart.defaultProps = {
@@ -322,11 +376,13 @@ const mapStateToProps = state => ({
   chartDataLoaded: state.nexgddptool.chart.loaded,
   chartData: state.nexgddptool.chart.data,
   chartDataError: state.nexgddptool.chart.error,
-  indicatorUnit: getIndicatorUnit(state)
+  indicatorUnit: getIndicatorUnit(state),
+  datasetId: state.nexgddptool.dataset ? state.nexgddptool.dataset.id : null
 });
 
 const mapDispatchToProps = dispatch => ({
-  removeMarker: () => dispatch(setMarkerPosition(undefined))
+  removeMarker: () => dispatch(setMarkerPosition(undefined)),
+  toggleTooltip: (...params) => dispatch(toggleTooltip(...params))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimeseriesChart);
