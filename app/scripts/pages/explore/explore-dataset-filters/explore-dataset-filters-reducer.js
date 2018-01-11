@@ -1,11 +1,35 @@
-import * as actions from './explore-dataset-filters-actions';
-
 export const initialState = {
   data: {},
-  filters: {}
+  filters: {},
+  graphs: [] // array of dataset ID matching the graph criteria
 };
 
+export const setDataFilters = (state, { payload }) => ({
+  ...state,
+  datasetFilters: {
+    ...state.datasetFilters,
+    data: payload
+  }
+});
+
+export const setDatasetFilter = (state, { payload }) => ({
+  ...state,
+  datasetFilters: {
+    ...state.datasetFilters,
+    filters: { ...state.datasetFilters.filters, ...payload }
+  }
+});
+
+export const setGraphFilter = (state, { payload }) => ({
+  ...state,
+  datasetFilters: {
+    ...state.datasetFilters,
+    graphs: payload
+  }
+});
+
 export default {
-  [actions.setDataFilters]: (state, { payload }) => ({ ...state, data: payload }),
-  [actions.setFilter]: (state, { payload }) => ({ ...state, filters: { ...state.filters, ...payload } })
+  setDataFilters,
+  setDatasetFilter,
+  setGraphFilter
 };

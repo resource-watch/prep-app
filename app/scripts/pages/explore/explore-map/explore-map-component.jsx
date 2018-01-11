@@ -58,6 +58,7 @@ class ExploreMap extends PureComponent {
             position="topright"
             onSortChange={this.onSortChange}
             sortable
+            onVisibility={l => this.props.toggleVisibility({ id: l.dataset })}
             onInfo={l => this.props.toggleInfo({ id: l.dataset })}
             onClose={l => this.props.toggleDataset({ id: l.dataset })}
           />}
@@ -85,7 +86,8 @@ ExploreMap.propTypes = {
   setMapParams: PropTypes.func,
   updateZIndex: PropTypes.func,
   toggleInfo: PropTypes.func,
-  toggleDataset: PropTypes.func
+  toggleDataset: PropTypes.func,
+  toggleVisibility: PropTypes.func
 };
 
 export default ExploreMap;

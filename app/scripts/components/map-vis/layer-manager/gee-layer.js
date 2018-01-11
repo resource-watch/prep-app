@@ -6,7 +6,13 @@ export default (leafletMap, layerSpec) => {
   const layer = L.tileLayer(tileUrl);
 
   layer.setZIndex(layerIndex);
-  layer.setOpacity(opacity);
+
+  // If visibility is enabled, set opacity to zero
+  if (visibility) {
+    layer.setOpacity(opacity);
+  } else {
+    layer.setOpacity(0);
+  }
 
   // adding map
   leafletMap.addLayer(layer);

@@ -1,6 +1,6 @@
-import TOPICS from 'components/explore-dataset-filters/data/topics.json';
-import GEOGRAPHIES from 'components/explore-dataset-filters/data/geographies.json';
-import DATATYPES from 'components/explore-dataset-filters/data/data-types.json';
+import TOPICS from 'pages/explore/explore-dataset-filters/data/topics.json';
+import GEOGRAPHIES from 'pages/explore/explore-dataset-filters/data/geographies.json';
+import DATATYPES from 'pages/explore/explore-dataset-filters/data/data-types.json';
 
 class DatasetFilterService {
   static getTopics() {

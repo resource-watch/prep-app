@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import Icon from 'components/ui/Icon';
 import LegendActions from './legend-actions';
 import LegendNexGDDPToolbar from './legend-nexgddp-toolbar';
 import LegendBasic from './legend-types/legend-basic/LegendBasic';
@@ -17,7 +16,7 @@ class Legend extends PureComponent {
   }
 
   render() {
-    const { layerSpec, onClose, onInfo } = this.props;
+    const { layerSpec, onOpacity, onVisibility, onClose, onInfo } = this.props;
     const { name, legendConfig } = layerSpec;
     const { type, unit } = legendConfig;
 
@@ -27,8 +26,11 @@ class Legend extends PureComponent {
           <h3>{name} {unit && <span>({unit})</span>}</h3>
           {this.props.actions &&
             <LegendActions
-              onInfo={() => onInfo(layerSpec)}
-              onClose={() => onClose(layerSpec)}
+              layerSpec={layerSpec}
+              onOpacity={onOpacity}
+              onVisibility={onVisibility}
+              onInfo={onInfo}
+              onClose={onClose}
             />}
         </div>
         {this.props.toolbar && this.getLegendToolbar()}
@@ -46,6 +48,8 @@ Legend.propTypes = {
   layerSpec: PropTypes.object,
   actions: PropTypes.bool,
   toolbar: PropTypes.bool,
+  onOpacity: PropTypes.func,
+  onVisibility: PropTypes.func,
   onInfo: PropTypes.func,
   onClose: PropTypes.func
 };
@@ -53,6 +57,8 @@ Legend.propTypes = {
 Legend.defaultProps = {
   actions: true,
   toolbar: true,
+  onOpacity: () => {},
+  onVisibility: () => {},
   onInfo: () => {},
   onClose: () => {}
 };
