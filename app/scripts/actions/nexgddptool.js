@@ -19,7 +19,9 @@ import {
   NEXGDDP_SET_BASEMAP,
   NEXGDDP_SET_LABELS,
   NEXGDDP_SET_BOUNDARIES,
-  NEXGDDP_SET_DATASET
+  NEXGDDP_SET_DATASET,
+  NEXGDDP_SET_INDICATOR_DATASET,
+  NEXGDDP_RESET_STATE
 } from '../constants';
 
 export function updateUrl() {
@@ -67,9 +69,9 @@ export function updateUrl() {
   };
 }
 
-export function setDataset(dataset) {
+export function setIndicatorDataset(dataset) {
   return dispatch => dispatch({
-    type: NEXGDDP_SET_DATASET,
+    type: NEXGDDP_SET_INDICATOR_DATASET,
     payload: dataset
   });
 }
@@ -140,7 +142,7 @@ export function getChartData() {
     const lat = state.nexgddptool.marker[0];
     const lng = state.nexgddptool.marker[1];
     const indicatorId = getIndicatorId(state);
-    const slug = state.nexgddptool.dataset.slug;
+    const slug = state.nexgddptool.indicatorDataset.slug;
 
     return fetch(`${process.env.RW_API_URL}/query?sql=select ${indicatorId}_q25 as q25, ${indicatorId} as q50, ${indicatorId}_q75 as q75, year as date from ${slug}&lat=${lat}&lon=${lng}`)
       .then((res) => {
@@ -178,7 +180,7 @@ export function setMarkerPosition(coordinates, changeUrl = true) {
 
     // We load the data of the chart for this
     // location
-    if (getState().nexgddptool.dataset) dispatch(getChartData());
+    if (getState().nexgddptool.indicatorDataset) dispatch(getChartData());
   };
 }
 
@@ -213,7 +215,7 @@ export function setScenarioOptions(options) {
   };
 }
 
-export function loadDataset() {
+export function loadIndicatorDataset() {
   return (dispatch, getState) => {
     const state = getState();
     const indicatorId = getIndicatorId(state);
@@ -236,7 +238,7 @@ export function loadDataset() {
           data.attributes,
           { layer: data.attributes.layer.map(l => Object.assign({}, l, l.attributes)) }
         );
-        const datasetPromise = dispatch(setDataset(dataset));
+        const datasetPromise = dispatch(setIndicatorDataset(dataset));
         promises.push(datasetPromise);
 
         if (state.nexgddptool.marker) {
@@ -257,7 +259,7 @@ export function setScenarioSelection(selection, changeUrl = true) {
       payload: selection
     });
 
-    dispatch(loadDataset());
+    dispatch(loadIndicatorDataset());
 
     if (changeUrl) dispatch(updateUrl());
   };
@@ -465,4 +467,17 @@ export function getSelectorsInfo() {
       })
       .catch(err => console.error(err));
   };
+}
+
+export function resetState() {
+  return dispatch => Promise.resolve(dispatch({
+    type: NEXGDDP_RESET_STATE
+  }));
+}
+
+export function setDataset(dataset) {
+  return dispatch => Promise.resolve(dispatch({
+    type: NEXGDDP_SET_DATASET,
+    payload: dataset
+  }));
 }

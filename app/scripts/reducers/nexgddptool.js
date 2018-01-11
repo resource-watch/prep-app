@@ -17,7 +17,9 @@ import {
   NEXGDDP_SET_BASEMAP,
   NEXGDDP_SET_LABELS,
   NEXGDDP_SET_BOUNDARIES,
-  NEXGDDP_SET_DATASET
+  NEXGDDP_SET_DATASET,
+  NEXGDDP_SET_INDICATOR_DATASET,
+  NEXGDDP_RESET_STATE
 } from '../constants';
 
 const initialState = {
@@ -31,10 +33,13 @@ const initialState = {
     labels: 'none',
     boundaries: false
   },
-  // Dataset defined by indicator, scenario and
-  // temporal resolution)
+  // Dataset loaded in the dataset page
   /** @type {object} dataset */
   dataset: null,
+  // Dataset defined by indicator, scenario and
+  // temporal resolution)
+  /** @type {object} indicatorDataset */
+  indicatorDataset: null,
   // Position of the marker
   /** @type {[number, number]} marker */
   marker: undefined,
@@ -178,8 +183,16 @@ export default function (state = initialState, action) {
       });
     }
 
+    case NEXGDDP_SET_INDICATOR_DATASET: {
+      return Object.assign({}, state, { indicatorDataset: action.payload });
+    }
+
     case NEXGDDP_SET_DATASET: {
-      return Object.assign({}, state, { dataset: action.payload })
+      return Object.assign({}, state, { dataset: action.payload });
+    }
+
+    case NEXGDDP_RESET_STATE: {
+      return initialState;
     }
 
     default: {

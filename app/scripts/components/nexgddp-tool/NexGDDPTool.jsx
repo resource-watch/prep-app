@@ -8,7 +8,7 @@ import LocationSearch from './location-search/LocationSearch';
 import TimeseriesChart from './tool-chart/TimeseriesChart';
 
 // Redux
-import { getSelectorsInfo, getUrlState, setDefaultState, setMapMode } from 'actions/nexgddptool';
+import { getSelectorsInfo, getUrlState, setDefaultState, setMapMode, resetState, setDataset } from 'actions/nexgddptool';
 
 // Component
 import Spinner from 'components/Loading/LoadingSpinner';
@@ -24,7 +24,9 @@ class NexGDDPTool extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.props.getSelectorsInfo()
+    this.props.resetState()
+      .then(() => this.props.setDataset(this.props.dataset))
+      .then(() => this.props.getSelectorsInfo())
       .then(() => this.props.restoreState())
       .then(() => this.props.setDefaultState())
       .then(() => this.setState({ loading: false }));
@@ -35,7 +37,7 @@ class NexGDDPTool extends React.PureComponent {
   }
 
   render() {
-    const { marker, isComparing, mapMode, dataset } = this.props;
+    const { marker, isComparing, mapMode, indicatorDataset } = this.props;
     const { loading } = this.state;
 
     return (
@@ -99,7 +101,7 @@ class NexGDDPTool extends React.PureComponent {
           </div>
         </div>
 
-        {marker && dataset && (
+        {marker && indicatorDataset && (
           <div className="chart">
             <div className="row">
               <div className="columns small-12">
@@ -121,21 +123,26 @@ NexGDDPTool.propTypes = {
   isComparing: PropTypes.bool,
   marker: PropTypes.array,
   mapMode: PropTypes.oneOf(['difference', 'side-by-side', 'toggle']),
-  dataset: PropTypes.object
+  indicatorDataset: PropTypes.object,
+  resetState: PropTypes.func,
+  dataset: PropTypes.object.isRequired,
+  setDataset: PropTypes.func
 };
 
 const mapStateToProps = state => ({
   marker: state.nexgddptool.marker,
   isComparing: !!state.nexgddptool.range2.selection,
   mapMode: state.nexgddptool.mapMode,
-  dataset: state.nexgddptool.dataset
+  indicatorDataset: state.nexgddptool.indicatorDataset
 });
 
 const mapDispatchToProps = dispatch => ({
   getSelectorsInfo: () => dispatch(getSelectorsInfo()),
   restoreState: () => dispatch(getUrlState()),
   setDefaultState: () => dispatch(setDefaultState()),
-  setMapMode: (...params) => dispatch(setMapMode(...params))
+  setMapMode: (...params) => dispatch(setMapMode(...params)),
+  resetState: () => dispatch(resetState()),
+  setDataset: (...params) => dispatch(setDataset(...params))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NexGDDPTool);

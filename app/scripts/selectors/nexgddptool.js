@@ -18,17 +18,8 @@ const state = state => state; // eslint-disable-line no-shadow
 const mapMode = ({ nexgddptool }) => nexgddptool.mapMode;
 const range1Selection = ({ nexgddptool }) => nexgddptool.range1.selection;
 const range2Selection = ({ nexgddptool }) => nexgddptool.range2.selection;
-const dataset = ({ datasets }) => {
-  if (!datasets) return null;
-
-  const keys = Object.keys(datasets.details);
-  if (keys.length) {
-    return datasets.details[keys[0]];
-  }
-
-  return null;
-};
-const layers = ({ nexgddptool }) => (nexgddptool.dataset ? nexgddptool.dataset.layer : []);
+const dataset = ({ nexgddptool }) => nexgddptool.dataset || null;
+const layers = ({ nexgddptool }) => (nexgddptool.indicatorDataset ? nexgddptool.indicatorDataset.layer : []);
 
 // eslint-disable-next-line import/prefer-default-export
 export const getLayers = createSelector(
