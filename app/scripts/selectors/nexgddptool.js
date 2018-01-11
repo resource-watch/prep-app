@@ -15,7 +15,6 @@ const mapIndicatorToUnit = {
 };
 
 const state = state => state; // eslint-disable-line no-shadow
-const datasetId = ({ nexgddptool }) => nexgddptool.dataset;
 const mapMode = ({ nexgddptool }) => nexgddptool.mapMode;
 const range1Selection = ({ nexgddptool }) => nexgddptool.range1.selection;
 const range2Selection = ({ nexgddptool }) => nexgddptool.range2.selection;
@@ -29,26 +28,22 @@ const dataset = ({ datasets }) => {
 
   return null;
 };
-
-const datasetDetails = ({ datasets }) => datasets.details;
+const layers = ({ nexgddptool }) => (nexgddptool.dataset ? nexgddptool.dataset.layer : []);
 
 // eslint-disable-next-line import/prefer-default-export
 export const getLayers = createSelector(
-  datasetDetails,
-  datasetId,
+  layers,
   mapMode,
   range1Selection,
   range2Selection,
-  (datasetDetails, datasetId, mapMode, range1Selection, range2Selection) => { // eslint-disable-line no-shadow
-    if (!range1Selection && !range2Selection) return [];
+  (layers, mapMode, range1Selection, range2Selection) => { // eslint-disable-line no-shadow
+    if ((!range1Selection && !range2Selection) || !layers.length) return [];
 
     let currentLayer = {};
     const activeLayers = [];
 
-    const layers = (datasetDetails[datasetId] || {}).layer || [];
-
     if (mapMode !== 'difference') {
-      currentLayer = layers.find(l => !l.attributes.layer_config.compare_with);
+      currentLayer = layers.find(l => !l.attributes.layerConfig.compareWith);
 
       if (currentLayer && range1Selection) {
         const range1Date = `${range1Selection.value}`;
@@ -66,7 +61,7 @@ export const getLayers = createSelector(
         });
       }
     } else {
-      currentLayer = layers.find(l => l.attributes.layer_config.compare_with);
+      currentLayer = layers.find(l => l.attributes.layerConfig.compareWith);
 
       if (currentLayer && range1Selection && range2Selection) {
         const range1Date = `${range1Selection.value}`;
@@ -82,17 +77,16 @@ export const getLayers = createSelector(
 );
 
 export const getRawLayers = createSelector(
-  dataset,
-  datasetId,
+  layers,
   mapMode,
-  (dataset, datasetId, mapMode) => { // eslint-disable-line no-shadow
-    const layers = dataset.layer || [];
+  (layers, mapMode) => { // eslint-disable-line no-shadow
+    if (!layers.length) return [];
 
     if (mapMode !== 'difference') {
-      return [layers.find(l => !l.attributes.layer_config.compare_with)];
+      return [layers.find(l => !l.attributes.layerConfig.compareWith)];
     }
 
-    return [layers.find(l => l.attributes.layer_config.compare_with)];
+    return [layers.find(l => l.attributes.layerConfig.compareWith)];
   }
 );
 
@@ -113,5 +107,17 @@ export const getIndicatorUnit = createSelector(
   (state) => { // eslint-disable-line no-shadow
     const indicatorId = getIndicatorId(state);
     return indicatorId ? mapIndicatorToUnit[indicatorId] : null;
+  }
+);
+
+export const getTempResolution = createSelector(
+  dataset,
+  (dataset) => { // eslint-disable-line no-shadow
+    const metadata = dataset && dataset.metadata.length ? dataset.metadata[0] : null;
+    const tempResolution = metadata
+      && metadata.attributes.info
+      && metadata.attributes.info.nexgddp
+      && metadata.attributes.info.nexgddp.temp_resolution;
+    return tempResolution || null;
   }
 );

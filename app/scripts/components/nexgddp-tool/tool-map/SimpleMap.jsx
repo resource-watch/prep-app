@@ -58,7 +58,7 @@ class SimpleMap extends React.PureComponent {
 
   render() {
     const { map, marker, markerMode, layers, range1Selection, rawLayers } = this.props;
-    const currentLayer = layers[0];
+    const currentLayer = !!layers.length && layers[0];
 
     // It will change center of map on marker location
     const mapOptions = Object.assign({}, mapDefaultOptions, {
@@ -73,17 +73,6 @@ class SimpleMap extends React.PureComponent {
     const makerControlClassNames = classnames({
       '-active': markerMode
     });
-
-    // FIXME: Very hacky
-    // We need the layers to be deserialized but jsonapi-serializer's
-    // function is async and we can't create async selectors with
-    // reselect
-    const deserializedLayers = rawLayers.map(l => Object.assign(
-      {},
-      l,
-      { ...l.attributes },
-      { legendConfig: l.attributes.legend_config }
-    ));
 
     return (
       <div className="c-tool-map">
@@ -138,10 +127,12 @@ class SimpleMap extends React.PureComponent {
 
         </Map>
 
-        <Legend
-          layerSpec={deserializedLayers[0]}
-          toolbar={false}
-        />
+        { !!rawLayers.length && (
+          <Legend
+            layerSpec={rawLayers[0]}
+            toolbar={false}
+          />
+        )}
       </div>
     );
   }

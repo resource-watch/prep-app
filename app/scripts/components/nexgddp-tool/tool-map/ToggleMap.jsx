@@ -76,8 +76,6 @@ class ToggleMap extends React.PureComponent {
       zoom: map.zoom || mapDefaultOptions.zoom
     });
 
-    const currentLayer = layers[this.state.index];
-
     const mapClassNames = classnames({
       '-crosshair': markerMode
     });
@@ -86,16 +84,7 @@ class ToggleMap extends React.PureComponent {
       '-active': markerMode
     });
 
-    // FIXME: Very hacky
-    // We need the layers to be deserialized but jsonapi-serializer's
-    // function is async and we can't create async selectors with
-    // reselect
-    const deserializedLayers = rawLayers.map(l => Object.assign(
-      {},
-      l,
-      { ...l.attributes },
-      { legendConfig: l.attributes.legend_config }
-    ));
+    const currentLayer = !!layers.length && layers[this.state.index];
 
     return (
       <div className="c-tool-map">
@@ -155,10 +144,12 @@ class ToggleMap extends React.PureComponent {
           </Control>
         </Map>
 
-        <Legend
-          layerSpec={deserializedLayers[0]}
-          toolbar={false}
-        />
+        { !!rawLayers.length && (
+          <Legend
+            layerSpec={rawLayers[0]}
+            toolbar={false}
+          />
+        )}
       </div>
     );
   }

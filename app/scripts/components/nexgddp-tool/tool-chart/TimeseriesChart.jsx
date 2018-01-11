@@ -7,7 +7,7 @@ import Spinner from 'components/Loading/LoadingSpinner';
 import './style.scss';
 
 // Redux
-import { setMarkerPosition, getChartData } from 'actions/nexgddptool';
+import { setMarkerPosition } from 'actions/nexgddptool';
 import { getIndicatorUnit } from 'selectors/nexgddptool';
 
 /* eslint-disable */
@@ -234,18 +234,6 @@ const chartSpec = {
 /* eslint-enable */
 
 class TimeseriesChart extends React.PureComponent {
-  componentWillMount() {
-    if (!this.props.chartDataLoaded) {
-      this.props.getChartData();
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (!nextProps.chartDataLoaded && this.props.chartDataLoaded) {
-      this.props.getChartData();
-    }
-  }
-
   render() {
     const { width, height, removeMarker, range1Selection, range2Selection, chartData, chartDataLoaded, chartDataError, indicatorUnit } = this.props;
 
@@ -254,15 +242,21 @@ class TimeseriesChart extends React.PureComponent {
     // The 1st reason happens when restoring the state from the URL
     if (!range1Selection || chartDataError) return null;
 
+    const range1 = range1Selection.label.split('-')
+      .map(v => +v);
+
     const range1Signal = {
       name: 'range1',
-      init: { expr: `{ start: utc(${range1Selection.value}, 0, 1), end: utc(${+range1Selection.value + 9}, 0, 1) }` }
+      init: { expr: `{ start: utc(${range1[0]}, 0, 1), end: utc(${range1[1]}, 0, 1) }` }
     };
 
     const range2Signal = { name: 'range2', init: 'false' };
     if (range2Selection) {
+      const range2 = range2Selection.label.split('-')
+        .map(v => +v);
+
       range2Signal.init = {
-        expr: `{ start: utc(${range2Selection.value}, 0, 1), end: utc(${+range2Selection.value + 9}, 0, 1) }`
+        expr: `{ start: utc(${range2[0]}, 0, 1), end: utc(${range2[1]}, 0, 1) }`
       };
     }
 
@@ -312,7 +306,6 @@ TimeseriesChart.propTypes = {
   range1Selection: PropTypes.object,
   range2Selection: PropTypes.object,
   chartDataLoaded: PropTypes.bool,
-  getChartData: PropTypes.func,
   chartData: PropTypes.array,
   chartDataError: PropTypes.bool,
   indicatorUnit: PropTypes.string
@@ -333,8 +326,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  removeMarker: () => dispatch(setMarkerPosition(undefined)),
-  getChartData: () => dispatch(getChartData())
+  removeMarker: () => dispatch(setMarkerPosition(undefined))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimeseriesChart);

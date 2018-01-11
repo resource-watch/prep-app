@@ -1,5 +1,4 @@
 import {
-  NEXGDDP_SET_DATASET,
   NEXGDDP_SET_MAP_ZOOM,
   NEXGDDP_SET_MAP_CENTER,
   NEXGDDP_SET_MARKER_MODE,
@@ -15,10 +14,10 @@ import {
   NEXGDDP_SET_CHART_DATA,
   NEXGDDP_SET_CHART_ERROR,
   NEXGDDP_SET_CHART_LOADED,
-  NEXGDDP_SET_MAP_LAYERS,
   NEXGDDP_SET_BASEMAP,
   NEXGDDP_SET_LABELS,
-  NEXGDDP_SET_BOUNDARIES
+  NEXGDDP_SET_BOUNDARIES,
+  NEXGDDP_SET_DATASET
 } from '../constants';
 
 const initialState = {
@@ -32,7 +31,10 @@ const initialState = {
     labels: 'none',
     boundaries: false
   },
-  layers: [],
+  // Dataset defined by indicator, scenario and
+  // temporal resolution)
+  /** @type {object} dataset */
+  dataset: null,
   // Position of the marker
   /** @type {[number, number]} marker */
   marker: undefined,
@@ -76,19 +78,9 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case NEXGDDP_SET_DATASET: {
-      return Object.assign({}, state, { dataset: action.payload });
-    }
-
     case NEXGDDP_SET_MAP_ZOOM: {
       return Object.assign({}, state, {
         map: Object.assign({}, state.map, { zoom: action.payload })
-      });
-    }
-
-    case NEXGDDP_SET_MAP_LAYERS: {
-      return Object.assign({}, state, {
-        map: Object.assign({}, state.layers, { layers: action.payload })
       });
     }
 
@@ -184,6 +176,10 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, {
         map: Object.assign({}, state.map, { boundaries: action.payload })
       });
+    }
+
+    case NEXGDDP_SET_DATASET: {
+      return Object.assign({}, state, { dataset: action.payload })
     }
 
     default: {

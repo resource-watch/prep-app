@@ -1,6 +1,6 @@
 import { replace } from 'react-router-redux';
+import { getIndicatorId, getTempResolution } from 'selectors/nexgddptool';
 import {
-  NEXGDDP_SET_DATASET,
   NEXGDDP_SET_MAP_ZOOM,
   NEXGDDP_SET_MAP_CENTER,
   NEXGDDP_SET_MARKER_MODE,
@@ -16,10 +16,10 @@ import {
   NEXGDDP_SET_CHART_DATA,
   NEXGDDP_SET_CHART_LOADED,
   NEXGDDP_SET_CHART_ERROR,
-  NEXGDDP_SET_MAP_LAYERS,
   NEXGDDP_SET_BASEMAP,
   NEXGDDP_SET_LABELS,
-  NEXGDDP_SET_BOUNDARIES
+  NEXGDDP_SET_BOUNDARIES,
+  NEXGDDP_SET_DATASET
 } from '../constants';
 
 export function updateUrl() {
@@ -67,22 +67,11 @@ export function updateUrl() {
   };
 }
 
-export function setDataset(id) {
-  return (dispatch) => {
-    dispatch({
-      type: NEXGDDP_SET_DATASET,
-      payload: id
-    });
-  };
-}
-
-export function setMapLayers(layers) {
-  return (dispatch) => {
-    dispatch({
-      type: NEXGDDP_SET_MAP_LAYERS,
-      payload: layers
-    });
-  };
+export function setDataset(dataset) {
+  return dispatch => dispatch({
+    type: NEXGDDP_SET_DATASET,
+    payload: dataset
+  });
 }
 
 export function resetChartData() {
@@ -135,17 +124,61 @@ export function setMarkerMode(mode) {
   };
 }
 
+export function getChartData() {
+  return (dispatch, getState) => {
+    dispatch({
+      type: NEXGDDP_SET_CHART_LOADED,
+      payload: false
+    });
+
+    dispatch({
+      type: NEXGDDP_SET_CHART_ERROR,
+      payload: false
+    });
+
+    const state = getState();
+    const lat = state.nexgddptool.marker[0];
+    const lng = state.nexgddptool.marker[1];
+    const indicatorId = getIndicatorId(state);
+    const slug = state.nexgddptool.dataset.slug;
+
+    return fetch(`${process.env.RW_API_URL}/query?sql=select ${indicatorId}_q25 as q25, ${indicatorId} as q50, ${indicatorId}_q75 as q75, year as date from ${slug}&lat=${lat}&lon=${lng}`)
+      .then((res) => {
+        if (res.ok) return res.json();
+        throw new Error('Unable to fetch the data of the chart');
+      })
+      .then(json => json.data)
+      .then(data => dispatch({
+        type: NEXGDDP_SET_CHART_DATA,
+        payload: data
+      }))
+      .catch((err) => {
+        console.error(err);
+
+        dispatch({
+          type: NEXGDDP_SET_CHART_ERROR,
+          payload: true
+        });
+      })
+      .then(() => dispatch({
+        type: NEXGDDP_SET_CHART_LOADED,
+        payload: true
+      }));
+  };
+}
 
 export function setMarkerPosition(coordinates, changeUrl = true) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch({
       type: NEXGDDP_SET_MARKER_POSITION,
       payload: coordinates
     });
 
-    dispatch(resetChartData());
-
     if (changeUrl) dispatch(updateUrl());
+
+    // We load the data of the chart for this
+    // location
+    if (getState().nexgddptool.dataset) dispatch(getChartData());
   };
 }
 
@@ -180,6 +213,43 @@ export function setScenarioOptions(options) {
   };
 }
 
+export function loadDataset() {
+  return (dispatch, getState) => {
+    const state = getState();
+    const indicatorId = getIndicatorId(state);
+    const scenario = state.nexgddptool.scenario.selection.value;
+    const tempResolution = getTempResolution(state);
+
+    return fetch(`${process.env.RW_API_URL}/nexgddp/dataset/${indicatorId}/${scenario}/${tempResolution}?env=${config.datasetEnv}`)
+      .then((res) => {
+        if (res.ok) return res.json();
+        throw new Error('Unable to fetch the layers');
+      })
+      .then(({ data }) => {
+        // We keep the promises so we wait for the state to be set
+        // before moving on to something else
+        const promises = [];
+
+        const dataset = Object.assign(
+          {},
+          data,
+          data.attributes,
+          { layer: data.attributes.layer.map(l => Object.assign({}, l, l.attributes)) }
+        );
+        const datasetPromise = dispatch(setDataset(dataset));
+        promises.push(datasetPromise);
+
+        if (state.nexgddptool.marker) {
+          const chartDataPromise = dispatch(getChartData());
+          promises.push(chartDataPromise);
+        }
+
+        return promises;
+      })
+      .catch(err => console.error(err));
+  };
+}
+
 export function setScenarioSelection(selection, changeUrl = true) {
   return (dispatch) => {
     dispatch({
@@ -187,7 +257,7 @@ export function setScenarioSelection(selection, changeUrl = true) {
       payload: selection
     });
 
-    dispatch(resetChartData());
+    dispatch(loadDataset());
 
     if (changeUrl) dispatch(updateUrl());
   };
@@ -220,8 +290,6 @@ export function setRange1Selection(selection, changeUrl = true) {
       });
     }
 
-    dispatch(resetChartData());
-
     if (changeUrl) dispatch(updateUrl());
   };
 }
@@ -241,8 +309,6 @@ export function setRange2Selection(selection, changeUrl = true) {
       type: NEXGDDP_SET_RANGE2_SELECTION,
       payload: selection
     });
-
-    dispatch(resetChartData());
 
     if (changeUrl) dispatch(updateUrl());
   };
@@ -367,96 +433,36 @@ export function setDefaultState() {
 
 export function getSelectorsInfo() {
   return (dispatch, getState) => {
-    // We keep the promises so we wait for the state to be set
-    // before moving on to something else
-    const promises = [];
+    const state = getState();
+    const indicatorId = getIndicatorId(state);
+    const tempResolution = getTempResolution(state);
 
-    const datasetIdentifier = getState().nexgddptool.dataset;
-
-    const rangesPromise = fetch(`${process.env.RW_API_URL}/query?sql=select min(year) as startdate, max(year) as enddate from ${datasetIdentifier}`)
+    return fetch(`${process.env.RW_API_URL}/nexgddp/info/${indicatorId}`)
       .then((res) => {
         if (res.ok) return res.json();
-        throw new Error('Unable to fetch the date range');
+        throw new Error('Unable to fetch the data of the selectors');
       })
-      .then(json => json.data[0])
-      .then(({ startdate, enddate }) => {
-        const startYear = new Date(startdate).getUTCFullYear();
-        const endYear = new Date(enddate).getUTCFullYear();
-        let yearPointer = startYear;
-        const dateRangeOptions = [];
+      .then(({ scenarios, temporalResolution }) => {
+        // We keep the promises so we wait for the state to be set
+        // before moving on to something else
+        const promises = [];
 
-        while (yearPointer + 10 <= endYear) {
-          dateRangeOptions.push({
-            label: `${yearPointer}-${yearPointer + 9}`,
-            value: `${yearPointer}`
-          });
-          yearPointer += 10;
-        }
+        // We populate the scenario selector
+        const scenarioOptions = scenarios.map(s => ({ label: s.label, value: s.id }));
+        const scenarioPromise = dispatch(setScenarioOptions(scenarioOptions));
+        promises.push(scenarioPromise);
 
-        return Promise.all([
+        // We populate the date range selectors
+        const dateRangeOptions = temporalResolution.find(t => t.id === tempResolution).periods
+          .map(d => ({ label: d.label, value: d.id }));
+        const dateRangePromise = Promise.all([
           dispatch(setRange1Options(dateRangeOptions)),
           dispatch(setRange2Options(dateRangeOptions))
         ]);
+        promises.push(dateRangePromise);
+
+        return promises;
       })
       .catch(err => console.error(err));
-
-    promises.push(rangesPromise);
-
-    const scenarioOptions = [
-      {
-        label: 'Pessimistic',
-        value: 'rcp45'
-      },
-      {
-        label: 'Optimistic',
-        value: 'rcp85'
-      }
-    ];
-
-    const scenarioPromise = dispatch(setScenarioOptions(scenarioOptions));
-    promises.push(scenarioPromise);
-
-    return Promise.all(promises);
-  };
-}
-
-export function getChartData() {
-  return (dispatch, getState) => {
-    dispatch({
-      type: NEXGDDP_SET_CHART_LOADED,
-      payload: false
-    });
-
-    dispatch({
-      type: NEXGDDP_SET_CHART_ERROR,
-      payload: false
-    });
-
-    const store = getState().nexgddptool;
-    const lat = store.marker[0];
-    const lng = store.marker[1];
-
-    return fetch(`${process.env.RW_API_URL}/query?sql=select tasavg_q25 as q25, tasavg as q50, tasavg_q75 as q75, year as date from test_decadal_tasavg&lat=${lat}&lon=${lng}`)
-      .then((res) => {
-        if (res.ok) return res.json();
-        throw new Error('Unable to fetch the data of the chart');
-      })
-      .then(json => json.data)
-      .then(data => dispatch({
-        type: NEXGDDP_SET_CHART_DATA,
-        payload: data
-      }))
-      .catch((err) => {
-        console.error(err);
-
-        dispatch({
-          type: NEXGDDP_SET_CHART_ERROR,
-          payload: true
-        });
-      })
-      .then(() => dispatch({
-        type: NEXGDDP_SET_CHART_LOADED,
-        payload: true
-      }));
   };
 }

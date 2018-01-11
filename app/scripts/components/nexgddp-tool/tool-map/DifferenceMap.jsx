@@ -77,17 +77,6 @@ class DifferenceMap extends React.PureComponent {
       '-active': markerMode
     });
 
-    // FIXME: Very hacky
-    // We need the layers to be deserialized but jsonapi-serializer's
-    // function is async and we can't create async selectors with
-    // reselect
-    const deserializedLayers = rawLayers.map(l => Object.assign(
-      {},
-      l,
-      { ...l.attributes },
-      { legendConfig: l.attributes.legend_config }
-    ));
-
     return (
       <div className="c-tool-map">
         <Map
@@ -133,10 +122,12 @@ class DifferenceMap extends React.PureComponent {
           </Control>
         </Map>
 
-        <Legend
-          layerSpec={deserializedLayers[0]}
-          toolbar={false}
-        />
+        { !!rawLayers.length && (
+          <Legend
+            layerSpec={rawLayers[0]}
+            toolbar={false}
+          />
+        )}
       </div>
     );
   }

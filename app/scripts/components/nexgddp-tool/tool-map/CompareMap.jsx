@@ -41,31 +41,34 @@ class CompareMap extends React.PureComponent {
 
   componentDidMount() {
     const { layers } = this.props;
+
     const map = this.mapElement.leafletElement;
-    const leftLayer = L.tileLayer(layers[0].url, {
-      maxZoom: 5,
-      minZoom: 3
-    });
+    this.sideBySideControl = L.control.sideBySide();
+    this.sideBySideControl.addTo(map);
 
-    const rightLayer = L.tileLayer(layers[1].url, {
-      minZoom: 3,
-      maxZoom: 5
-    });
+    if (layers.length) {
+      const leftLayer = L.tileLayer(layers[0].url, {
+        maxZoom: 5,
+        minZoom: 3
+      });
 
-    window.requestAnimationFrame(() => {
-      this.sideBySideControl = L.control.sideBySide();
-      this.sideBySideControl.addTo(map);
+      const rightLayer = L.tileLayer(layers[1].url, {
+        minZoom: 3,
+        maxZoom: 5
+      });
 
-      // Add layers
-      leftLayer.addTo(map);
-      rightLayer.addTo(map);
+      window.requestAnimationFrame(() => {
+        // Add layers
+        leftLayer.addTo(map);
+        rightLayer.addTo(map);
 
-      this.sideBySideControl
-        .setLeftLayers(leftLayer)
-        .setRightLayers(rightLayer);
+        this.sideBySideControl
+          .setLeftLayers(leftLayer)
+          .setRightLayers(rightLayer);
 
-      map.invalidateSize();
-    });
+        map.invalidateSize();
+      });
+    }
 
     // We add the static layers
     this.updateStaticLayers(this.props);
@@ -75,7 +78,8 @@ class CompareMap extends React.PureComponent {
     const { layers: nextLayers } = nextProps;
     const { layers: currentLayers } = this.props;
 
-    const hasChangedLayers = nextLayers.some((l, i) => l.url !== (currentLayers[i] || {}).url);
+    const hasChangedLayers = (currentLayers.length !== nextLayers.length)
+      || nextLayers.some((l, i) => l.url !== (currentLayers[i] || {}).url);
 
     if (hasChangedLayers) {
       // Not sure about this...
@@ -109,6 +113,14 @@ class CompareMap extends React.PureComponent {
     }
   }
 
+  onViewportChanged({ zoom, center }) {
+    if (zoom !== this.props.map.zoom) this.props.setMapZoom(zoom);
+    if (center[0] !== this.props.map.center[0]
+      || center[1] !== this.props.map.center[1]) {
+      this.props.setMapCenter(center);
+    }
+  }
+
   setMarkerMode() {
     const { markerMode } = this.props;
     this.props.setMarkerMode(!markerMode);
@@ -120,14 +132,6 @@ class CompareMap extends React.PureComponent {
     if (markerMode) {
       this.props.setMarkerPosition([latlng.lat, latlng.lng]);
       this.props.setMarkerMode(false);
-    }
-  }
-
-  onViewportChanged({ zoom, center }) {
-    if (zoom !== this.props.map.zoom) this.props.setMapZoom(zoom);
-    if (center[0] !== this.props.map.center[0]
-      || center[1] !== this.props.map.center[1]) {
-      this.props.setMapCenter(center);
     }
   }
 
@@ -171,17 +175,6 @@ class CompareMap extends React.PureComponent {
     const makerControlClassNames = classnames({
       '-active': markerMode
     });
-
-    // FIXME: Very hacky
-    // We need the layers to be deserialized but jsonapi-serializer's
-    // function is async and we can't create async selectors with
-    // reselect
-    const deserializedLayers = rawLayers.map(l => Object.assign(
-      {},
-      l,
-      { ...l.attributes },
-      { legendConfig: l.attributes.legend_config }
-    ));
 
     return (
       <div className="c-tool-map">
@@ -239,10 +232,12 @@ class CompareMap extends React.PureComponent {
           </Control>
         </Map>
 
-        <Legend
-          layerSpec={deserializedLayers[0]}
-          toolbar={false}
-        />
+        { !!rawLayers.length && (
+          <Legend
+            layerSpec={rawLayers[0]}
+            toolbar={false}
+          />
+        )}
       </div>
     );
   }
