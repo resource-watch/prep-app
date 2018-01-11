@@ -123,7 +123,7 @@ class AboutPage extends PureComponent {
               to PREPdata or facilitation of the partnership; or raising awareness of the partnership through your networks;</li>
             <li>A designated point of contact who will be actively involved in PREP as needed; and</li>
             <li>Core and Contributing partners join at least one of two working groups (WG) – <b>Engagement WG</b> (members collaborate with user communities to
-              understand the information needs of those seeking to build preparedness and resilience, and help them advance solutions) and
+              understand the information needs of those seeking to build preparedness and resilience, and help them advance solutions) and 
               <b>Technical WG</b> (members work to reduce the barriers to accessing, contributing and using data for climate resilience, both through PREPdata
               and through promoting interoperability).</li>
           </ul>
