@@ -180,7 +180,9 @@ export function setMarkerPosition(coordinates, changeUrl = true) {
 
     // We load the data of the chart for this
     // location
-    if (getState().nexgddptool.indicatorDataset) dispatch(getChartData());
+    if (getState().nexgddptool.indicatorDataset && getState().nexgddptool.marker) {
+      dispatch(getChartData());
+    }
   };
 }
 
