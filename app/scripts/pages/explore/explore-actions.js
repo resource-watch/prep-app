@@ -125,7 +125,8 @@ export const initialURLParams = createThunkAction('initialURLParams', () => (dis
     activeDatasets,
     topics,
     geographies,
-    dataTypes
+    dataTypes,
+    periods
   } = routing.locationBeforeTransitions.query;
   const query = routing.locationBeforeTransitions.query.filterQuery;
 
@@ -139,6 +140,7 @@ export const initialURLParams = createThunkAction('initialURLParams', () => (dis
   if (topics) dispatch(setDatasetFilter({ topics: topics.split(',') }));
   if (geographies) dispatch(setDatasetFilter({ geographies: geographies.split(',') }));
   if (dataTypes) dispatch(setDatasetFilter({ dataTypes: dataTypes.split(',') }));
+  if (periods) dispatch(setDatasetFilter({ periods: periods.split(',') }));
 
   if (activeDatasets) {
     const activeDatasetsResult = typeof activeDatasets === 'string' ? [activeDatasets] : activeDatasets;
@@ -159,7 +161,8 @@ export const getFiltersData = createThunkAction('explore-dataset-filters/getFilt
     Promise.all([
       DatasetFilterService.getTopics(),
       DatasetFilterService.getGeographies(),
-      DatasetFilterService.getDataTypes()
+      DatasetFilterService.getDataTypes(),
+      DatasetFilterService.getPeriods()
     ]
     ).then((values = []) => {
       const data = {};
@@ -182,9 +185,10 @@ export const getDatasetsByGraph = createThunkAction('explore-page/getDatasetsByG
   (dispatch, getState) => {
     const { explorePage } = getState();
     const { filters } = explorePage.datasetFilters;
-    const { topics, geographies, dataTypes } = filters;
+    const { topics, geographies, dataTypes, periods } = filters;
 
-    if (!((topics || []).length) && !((geographies || []).length) && !((dataTypes || []).length)) {
+    if (!((topics || []).length) && !((geographies || []).length)
+      && !((dataTypes || []).length) && !((periods || []).length)) {
       dispatch(setGraphFilter([]));
       return;
     }

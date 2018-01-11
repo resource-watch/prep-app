@@ -15,8 +15,9 @@ export const getActiveDatasets = createSelector(
 export const filteredDatasets = createSelector(
   [getAllDatasets, getFilterQuery, getFilters, getGraphs],
   (datasets, filterQuery, filters, graphs) => {
-    const { topics, geographies, dataTypes } = filters;
-    const enabledFilters = (((topics || []).length) || ((geographies || []).length) || ((dataTypes || []).length));
+    const { topics, geographies, dataTypes, periods } = filters;
+    const enabledFilters = (((topics || []).length)
+      || ((geographies || []).length) || ((dataTypes || []).length) || ((periods || []).length));
 
     const existsQuery = (filterQuery && filterQuery !== '');
     if ((!existsQuery) && !enabledFilters) return datasets;

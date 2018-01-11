@@ -9,11 +9,13 @@ import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 
 // Redux
-import { getLayers } from 'selectors/nexgddptool';
+import { getLayers, getRawLayers } from 'selectors/nexgddptool';
 import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setMarkerMode } from 'actions/nexgddptool';
 
+// Components
 import BasemapControl from 'components/basemap-control';
 import { basemapsSpec, labelsSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
+import Legend from 'components/legend/index';
 
 import Icon from 'components/ui/Icon';
 
@@ -66,15 +68,13 @@ class ToggleMap extends React.PureComponent {
   }
 
   render() {
-    const { map, marker, markerMode, layers, range1Selection, range2Selection } = this.props;
+    const { map, marker, markerMode, layers, range1Selection, range2Selection, rawLayers } = this.props;
 
     // It will change center of map on marker location
     const mapOptions = Object.assign({}, mapDefaultOptions, {
       center: map.center || mapDefaultOptions.center,
       zoom: map.zoom || mapDefaultOptions.zoom
     });
-
-    const currentLayer = layers[this.state.index];
 
     const mapClassNames = classnames({
       '-crosshair': markerMode
@@ -83,6 +83,8 @@ class ToggleMap extends React.PureComponent {
     const makerControlClassNames = classnames({
       '-active': markerMode
     });
+
+    const currentLayer = !!layers.length && layers[this.state.index];
 
     return (
       <div className="c-tool-map">
@@ -108,8 +110,8 @@ class ToggleMap extends React.PureComponent {
         >
           <TileLayer url={basemapsSpec[map.basemap].value} />
           { currentLayer && <TileLayer url={currentLayer.url} /> }
-          { map.boundaries && <TileLayer url={boundariesSpec.dark.value} /> }
-          { map.labels !== 'none' && <TileLayer url={labelsSpec[map.labels].value} /> }
+          { map.boundaries && <TileLayer url={boundariesSpec.dark.value} zIndex={9} /> }
+          { map.labels !== 'none' && <TileLayer url={labelsSpec[map.labels].value} zIndex={10} /> }
           { marker && <Marker position={marker} icon={L.divIcon({ className: 'map-marker' })} /> }
 
           <ZoomControl position="bottomright" />
@@ -141,6 +143,14 @@ class ToggleMap extends React.PureComponent {
             />
           </Control>
         </Map>
+
+        { !!rawLayers.length && (
+          <Legend
+            layerSpec={rawLayers[0]}
+            toolbar={false}
+            actions={false}
+          />
+        )}
       </div>
     );
   }
@@ -155,6 +165,7 @@ ToggleMap.propTypes = {
   marker: PropTypes.array,
   markerMode: PropTypes.bool,
   layers: PropTypes.array,
+  rawLayers: PropTypes.array,
   range1Selection: PropTypes.object,
   range2Selection: PropTypes.object,
   setMarkerPosition: PropTypes.func,
@@ -171,6 +182,7 @@ const mapStateToProps = state => ({
   marker: state.nexgddptool.marker,
   markerMode: state.nexgddptool.markerMode,
   layers: getLayers(state),
+  rawLayers: getRawLayers(state),
   range1Selection: state.nexgddptool.range1.selection,
   range2Selection: state.nexgddptool.range2.selection
 });

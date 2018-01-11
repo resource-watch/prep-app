@@ -61,7 +61,8 @@ const nexGDDPDatasets = [
   '17d07d93-7b2a-4a1e-b285-3af903f6ee2d',
   '8fee450f-a625-4e15-8541-f84de6205b4e',
   'a92b3919-19f2-4431-8c0c-8ddc91ad0168',
-  '6b158f1e-0794-465a-95a3-94019b6154ce'
+  '6b158f1e-0794-465a-95a3-94019b6154ce',
+  'a37b7ce6-8d14-4e3d-a57b-963557ee9ef5'
 ];
 
 class DatasetDetail extends React.Component {

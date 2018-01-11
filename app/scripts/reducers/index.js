@@ -5,7 +5,6 @@ export { default as insights } from './insights';
 export { default as twitterFeed } from './twitter';
 export { default as tooltip } from './tooltip';
 export { default as widgets } from './widgets';
-export { default as resources } from './resources';
 export { default as auth } from '../components/auth/auth-reducer';
 
 // NexGDDP

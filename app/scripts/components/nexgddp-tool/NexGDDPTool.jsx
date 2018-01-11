@@ -8,7 +8,7 @@ import LocationSearch from './location-search/LocationSearch';
 import TimeseriesChart from './tool-chart/TimeseriesChart';
 
 // Redux
-import { getSelectorsInfo, getUrlState, setDefaultState, setMapMode, setDataset } from 'actions/nexgddptool';
+import { getSelectorsInfo, getUrlState, setDefaultState, setMapMode } from 'actions/nexgddptool';
 
 // Component
 import Spinner from 'components/Loading/LoadingSpinner';
@@ -24,8 +24,6 @@ class NexGDDPTool extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.props.setDataset(this.props.dataset);
-
     this.props.getSelectorsInfo()
       .then(() => this.props.restoreState())
       .then(() => this.props.setDefaultState())
@@ -37,7 +35,7 @@ class NexGDDPTool extends React.PureComponent {
   }
 
   render() {
-    const { marker, isComparing, mapMode } = this.props;
+    const { marker, isComparing, mapMode, dataset } = this.props;
     const { loading } = this.state;
 
     return (
@@ -101,40 +99,41 @@ class NexGDDPTool extends React.PureComponent {
           </div>
         </div>
 
-        {marker && <div className="chart">
-          <div className="row">
-            <div className="columns small-12">
-              <TimeseriesChart />
+        {marker && dataset && (
+          <div className="chart">
+            <div className="row">
+              <div className="columns small-12">
+                <TimeseriesChart />
+              </div>
             </div>
           </div>
-        </div>}
+        )}
       </div>
     );
   }
 }
 
 NexGDDPTool.propTypes = {
-  dataset: PropTypes.string,
   getSelectorsInfo: PropTypes.func,
   restoreState: PropTypes.func,
   setDefaultState: PropTypes.func,
   setMapMode: PropTypes.func,
-  setDataset: PropTypes.func,
   isComparing: PropTypes.bool,
   marker: PropTypes.array,
-  mapMode: PropTypes.oneOf(['difference', 'side-by-side', 'toggle'])
+  mapMode: PropTypes.oneOf(['difference', 'side-by-side', 'toggle']),
+  dataset: PropTypes.object
 };
 
 const mapStateToProps = state => ({
   marker: state.nexgddptool.marker,
   isComparing: !!state.nexgddptool.range2.selection,
-  mapMode: state.nexgddptool.mapMode
+  mapMode: state.nexgddptool.mapMode,
+  dataset: state.nexgddptool.dataset
 });
 
 const mapDispatchToProps = dispatch => ({
   getSelectorsInfo: () => dispatch(getSelectorsInfo()),
   restoreState: () => dispatch(getUrlState()),
-  setDataset: slug => dispatch(setDataset(slug)),
   setDefaultState: () => dispatch(setDefaultState()),
   setMapMode: (...params) => dispatch(setMapMode(...params))
 });
