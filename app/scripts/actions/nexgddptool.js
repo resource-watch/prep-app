@@ -3,6 +3,7 @@ import {
   NEXGDDP_SET_DATASET,
   NEXGDDP_SET_MAP_ZOOM,
   NEXGDDP_SET_MAP_CENTER,
+  NEXGDDP_SET_MARKER_MODE,
   NEXGDDP_SET_MARKER_POSITION,
   NEXGDDP_SET_MAP_MODE,
   NEXGDDP_SET_GRAPH_MODE,
@@ -124,6 +125,16 @@ export function setMapCenter(center, changeUrl = true) {
     if (changeUrl) dispatch(updateUrl());
   };
 }
+
+export function setMarkerMode(mode) {
+  return (dispatch) => {
+    dispatch({
+      type: NEXGDDP_SET_MARKER_MODE,
+      payload: mode
+    });
+  };
+}
+
 
 export function setMarkerPosition(coordinates, changeUrl = true) {
   return (dispatch) => {

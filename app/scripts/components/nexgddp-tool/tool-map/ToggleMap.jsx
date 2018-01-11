@@ -1,14 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
+
 import { connect } from 'react-redux';
+
+import L from 'leaflet';
 import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
-import 'lib/leaflet-singleclick';
+import Control from 'react-leaflet-control';
 
 // Redux
 import { getLayers } from 'selectors/nexgddptool';
-import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels } from 'actions/nexgddptool';
+import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setMarkerMode } from 'actions/nexgddptool';
+
 import BasemapControl from 'components/basemap-control';
 import { basemapsSpec, labelsSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
+
+import Icon from 'components/ui/Icon';
 
 const mapDefaultOptions = {
   center: [20, -30],
@@ -27,6 +34,9 @@ class ToggleMap extends React.PureComponent {
       index: 0
     };
     this.toggleLayer = this.toggleLayer.bind(this);
+
+    this.addMarker = this.addMarker.bind(this);
+    this.setMarkerMode = this.setMarkerMode.bind(this);
   }
 
   onViewportChanged({ zoom, center }) {
@@ -37,12 +47,26 @@ class ToggleMap extends React.PureComponent {
     }
   }
 
+  setMarkerMode() {
+    const { markerMode } = this.props;
+    this.props.setMarkerMode(!markerMode);
+  }
+
+  addMarker({ latlng }) {
+    const { markerMode } = this.props;
+
+    if (markerMode) {
+      this.props.setMarkerPosition([latlng.lat, latlng.lng]);
+      this.props.setMarkerMode(false);
+    }
+  }
+
   toggleLayer() {
     this.setState({ index: this.state.index === 0 ? 1 : 0 });
   }
 
   render() {
-    const { map, marker, layers, range1Selection, range2Selection } = this.props;
+    const { map, marker, markerMode, layers, range1Selection, range2Selection } = this.props;
 
     // It will change center of map on marker location
     const mapOptions = Object.assign({}, mapDefaultOptions, {
@@ -52,19 +76,32 @@ class ToggleMap extends React.PureComponent {
 
     const currentLayer = layers[this.state.index];
 
+    const mapClassNames = classnames({
+      '-crosshair': markerMode
+    });
+
+    const makerControlClassNames = classnames({
+      '-active': markerMode
+    });
+
     return (
       <div className="c-tool-map">
         <button
           className="c-button -filled -secondary-color switch-button"
           onClick={this.toggleLayer}
-        >Switch</button>
+        >
+          Switch
+        </button>
+
         <div
           className="current-layer-label -right"
         >
           {this.state.index === 0 ? range1Selection.label : range2Selection.label}
         </div>
+
         <Map
           style={{ height: 440 }}
+          className={mapClassNames}
           {...mapOptions}
           onSingleclick={({ latlng }) => this.props.setMarkerPosition([latlng.lat, latlng.lng])}
           onViewportChanged={(...params) => this.onViewportChanged(...params)}
@@ -73,19 +110,37 @@ class ToggleMap extends React.PureComponent {
           { currentLayer && <TileLayer url={currentLayer.url} /> }
           { map.boundaries && <TileLayer url={boundariesSpec.dark.value} /> }
           { map.labels !== 'none' && <TileLayer url={labelsSpec[map.labels].value} /> }
+          { marker && <Marker position={marker} icon={L.divIcon({ className: 'map-marker' })} /> }
 
           <ZoomControl position="bottomright" />
-          { marker && <Marker position={marker} icon={L.divIcon({ className: 'map-marker' })} /> }
-        </Map>
 
-        <BasemapControl
-          basemap={map.basemap}
-          labels={map.labels}
-          boundaries={map.boundaries}
-          setBasemap={this.props.setBasemap}
-          setLabels={this.props.setLabels}
-          setBoundaries={this.props.setBoundaries}
-        />
+          <Control position="bottomright" >
+            <button
+              type="button"
+              className={`c-button-map ${makerControlClassNames}`}
+              onClick={this.setMarkerMode}
+            >
+              {markerMode &&
+                <Icon name="icon-cancel" className="-small" />
+              }
+
+              {!markerMode &&
+                <Icon name="icon-marker" className="-small" />
+              }
+            </button>
+          </Control>
+
+          <Control position="bottomright" >
+            <BasemapControl
+              basemap={map.basemap}
+              labels={map.labels}
+              boundaries={map.boundaries}
+              setBasemap={this.props.setBasemap}
+              setLabels={this.props.setLabels}
+              setBoundaries={this.props.setBoundaries}
+            />
+          </Control>
+        </Map>
       </div>
     );
   }
@@ -98,10 +153,12 @@ ToggleMap.propTypes = {
   }),
   mapOptions: PropTypes.object,
   marker: PropTypes.array,
+  markerMode: PropTypes.bool,
   layers: PropTypes.array,
   range1Selection: PropTypes.object,
   range2Selection: PropTypes.object,
   setMarkerPosition: PropTypes.func,
+  setMarkerMode: PropTypes.func,
   setMapZoom: PropTypes.func,
   setMapCenter: PropTypes.func,
   setBasemap: PropTypes.func,
@@ -112,18 +169,20 @@ ToggleMap.propTypes = {
 const mapStateToProps = state => ({
   map: state.nexgddptool.map,
   marker: state.nexgddptool.marker,
+  markerMode: state.nexgddptool.markerMode,
   layers: getLayers(state),
   range1Selection: state.nexgddptool.range1.selection,
   range2Selection: state.nexgddptool.range2.selection
 });
 
-const mapDispatchToProps = dispatch => ({
-  setMarkerPosition: (...params) => dispatch(setMarkerPosition(...params)),
-  setMapZoom: (...params) => dispatch(setMapZoom(...params)),
-  setMapCenter: (...params) => dispatch(setMapCenter(...params)),
-  setBasemap: (...params) => dispatch(setBasemap(...params)),
-  setLabels: (...params) => dispatch(setLabels(...params)),
-  setBoundaries: (...params) => dispatch(setBoundaries(...params))
-});
+const mapDispatchToProps = {
+  setMarkerPosition,
+  setMarkerMode,
+  setMapZoom,
+  setMapCenter,
+  setBasemap,
+  setLabels,
+  setBoundaries
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToggleMap);
