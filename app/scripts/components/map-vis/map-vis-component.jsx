@@ -39,6 +39,11 @@ class Map extends PureComponent {
     if (!isEqual(prevProps.layers, this.props.layers)) this.toggleLayers();
   }
 
+  componentWillUnmount() {
+    this.map.off('zoomend');
+    this.map.off('moveend');
+  }
+
   setEvents() {
     if (this.props.onChange && typeof this.props.onChange === 'function') {
       this.map.on('zoomend', this.triggerChange);
