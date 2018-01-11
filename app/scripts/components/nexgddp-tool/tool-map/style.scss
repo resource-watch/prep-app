@@ -123,4 +123,14 @@
       right: 15px;
     }
   }
+
+  > .c-legend {
+    width: 100%;
+    max-width: 430px;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: $white;
+    box-shadow: 0 7px 15px 0 rgba(0,0,0,0.15);
+  }
 }

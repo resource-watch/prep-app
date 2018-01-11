@@ -9,12 +9,13 @@ import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 
 // Redux
-import { getLayers } from 'selectors/nexgddptool';
+import { getLayers, getRawLayers } from 'selectors/nexgddptool';
 import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setMarkerMode } from 'actions/nexgddptool';
 
 // Components
 import BasemapControl from 'components/basemap-control';
 import { basemapsSpec, labelsSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
+import Legend from 'components/legend/index';
 
 import Icon from 'components/ui/Icon';
 
@@ -58,7 +59,7 @@ class DifferenceMap extends React.PureComponent {
   }
 
   render() {
-    const { map, marker, markerMode, layers } = this.props;
+    const { map, marker, markerMode, layers, rawLayers } = this.props;
 
     // It will change center of map on marker location
     const mapOptions = Object.assign({}, mapDefaultOptions, {
@@ -87,8 +88,8 @@ class DifferenceMap extends React.PureComponent {
         >
           <TileLayer url={basemapsSpec[map.basemap].value} />
           { currentLayer && <TileLayer url={currentLayer.url} /> }
-          { map.boundaries && <TileLayer url={boundariesSpec.dark.value} /> }
-          { map.labels !== 'none' && <TileLayer url={labelsSpec[map.labels].value} /> }
+          { map.boundaries && <TileLayer url={boundariesSpec.dark.value} zIndex={9} /> }
+          { map.labels !== 'none' && <TileLayer url={labelsSpec[map.labels].value} zIndex={10} /> }
           { marker && <Marker position={marker} icon={L.divIcon({ className: 'map-marker' })} /> }
 
           <ZoomControl position="bottomright" />
@@ -120,6 +121,14 @@ class DifferenceMap extends React.PureComponent {
             />
           </Control>
         </Map>
+
+        { !!rawLayers.length && (
+          <Legend
+            layerSpec={rawLayers[0]}
+            toolbar={false}
+            actions={false}
+          />
+        )}
       </div>
     );
   }
@@ -137,6 +146,7 @@ DifferenceMap.propTypes = {
   setMapZoom: PropTypes.func,
   setMapCenter: PropTypes.func,
   layers: PropTypes.array,
+  rawLayers: PropTypes.array,
   setBasemap: PropTypes.func,
   setLabels: PropTypes.func,
   setBoundaries: PropTypes.func
@@ -146,7 +156,8 @@ const mapStateToProps = state => ({
   map: state.nexgddptool.map,
   marker: state.nexgddptool.marker,
   markerMode: state.nexgddptool.markerMode,
-  layers: getLayers(state)
+  layers: getLayers(state),
+  rawLayers: getRawLayers(state)
 });
 
 const mapDispatchToProps = {
