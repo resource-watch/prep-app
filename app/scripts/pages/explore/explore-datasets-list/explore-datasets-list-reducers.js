@@ -77,6 +77,15 @@ export const toggleInfo = (state, { payload }) => ({
   }
 });
 
+export const toggleVisibility = (state, { payload }) => ({
+  ...state,
+  datasets: {
+    ...state.datasets,
+    items: state.datasets.items.map(item => (item.id === payload.id ?
+      Object.assign({}, item, { visibility: !item.visibility }) : item))
+  }
+});
+
 export const setActiveDatasets = (state, { payload }) => ({
   ...state,
   datasets: {

@@ -12,9 +12,9 @@ export const getActiveLayers = createSelector(
     const activeDatasets = sortBy(filter(datasets, { isLayerActive: true }), l => l.zIndex);
     const { length } = activeDatasets;
     const layers = filter(flatten(
-      activeDatasets.map(({ layer, opacity, zIndex }) => layer.map((l) => {
+      activeDatasets.map(({ layer, opacity, visibility, zIndex, isSelected }) => layer.map((l) => {
         const layerIndex = calcZIndex(length, zIndex);
-        return { ...l, zIndex, layerIndex, opacity };
+        return { ...l, zIndex, layerIndex, opacity, visibility, isSelected };
       }))
     ), { default: true });
     return layers;
