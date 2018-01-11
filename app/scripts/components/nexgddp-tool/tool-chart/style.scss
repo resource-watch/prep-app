@@ -14,4 +14,21 @@
     cursor: pointer;
     z-index: 1;
   }
+
+  .toolbar {
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px 20px 10px;
+
+    .share-button {
+      padding: 5px;
+      cursor: pointer;
+
+      > .c-icon {
+        width: 17px;
+        height: 15px;
+        fill: $dark-blue;
+      }
+    }
+  }
 }

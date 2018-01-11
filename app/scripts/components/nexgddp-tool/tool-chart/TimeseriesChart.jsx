@@ -1,17 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getConfig, modalActions, SaveWidgetModal } from 'widget-editor';
+import { getConfig } from 'widget-editor';
 import './style.scss';
 
 // Redux
 import { setMarkerPosition } from 'actions/nexgddptool';
 import { getIndicatorUnit } from 'selectors/nexgddptool';
+import { toggleTooltip } from 'actions/tooltip';
 
 // Component
 import Vega from '../vega-chart/Vega';
 import Icon from 'components/ui/Icon';
 import Spinner from 'components/Loading/LoadingSpinner';
+import ShareNexgddpChartTooltip from 'components/Tooltip/ShareNexgddpChartTooltip';
 
 /* eslint-disable */
 const chartSpec = {
@@ -237,15 +239,24 @@ const chartSpec = {
 /* eslint-enable */
 
 class TimeseriesChart extends React.PureComponent {
-  onClickSaveWidget() {
-    this.props.toggleModal(true, {
-      children: SaveWidgetModal,
+  /**
+   * Event handler executed when the user clicks the share button
+   * @param {MouseEvent} e Event object
+   */
+  onClickShare(e) {
+    // Prevent the tooltip from auto-closing
+    e.stopPropagation();
+
+    this.props.toggleTooltip(true, {
+      follow: false,
+      position: {
+        x: window.scrollX + e.clientX,
+        y: window.scrollY + e.clientY
+      },
+      direction: 'bottom',
+      children: ShareNexgddpChartTooltip,
       childrenProps: {
-        datasetId: this.props.datasetId,
-        getWidgetConfig: this.generateVegaSpec.bind(this),
-        onClickCheckWidgets: () => {
-          window.location = '/myprep/widgets/my_widgets';
-        }
+        getWidgetConfig: this.generateVegaSpec.bind(this)
       }
     });
   }
@@ -329,9 +340,11 @@ class TimeseriesChart extends React.PureComponent {
           />
         }
         { chartDataLoaded && datasetId && canSave && (
-          <button type="button" onClick={() => this.onClickSaveWidget()}>
-            Save widget
-          </button>
+          <div className="toolbar">
+            <button type="button" className="share-button" onClick={e => this.onClickShare(e)} aria-label="Share/Save options">
+              <Icon name="icon-share-dots" />
+            </button>
+          </div>
         )}
       </div>
     );
@@ -348,7 +361,7 @@ TimeseriesChart.propTypes = {
   chartData: PropTypes.array,
   chartDataError: PropTypes.bool,
   indicatorUnit: PropTypes.string,
-  toggleModal: PropTypes.func,
+  toggleTooltip: PropTypes.func,
   datasetId: PropTypes.string
 };
 
@@ -369,7 +382,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   removeMarker: () => dispatch(setMarkerPosition(undefined)),
-  toggleModal: (...params) => dispatch(modalActions.toggleModal(...params))
+  toggleTooltip: (...params) => dispatch(toggleTooltip(...params))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimeseriesChart);
