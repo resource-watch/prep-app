@@ -71,16 +71,26 @@ class ExplorePage extends PureComponent {
                     <div className="list-container">
                       <CoreDatasetsList />
                       <footer className="sidebar-footer">
-                        <p>These datasets are a curated collection. If you don&apos;t find what you are interested in, you can explore all the data:</p>
+                        <div className="footer-section">
+                          <p>These datasets are a curated collection. If you don&apos;t find what you are interested in, you can explore all the data:</p>
 
-                        <div className="footer-actions">
-                          <button
-                            type="button"
-                            className="c-new-button -light -transparent"
-                            onClick={() => setTab('all_datasets')}
-                          >
-                            Browse all datasets
-                          </button>
+                          <div className="footer-actions">
+                            <button
+                              type="button"
+                              className="c-new-button -light -transparent"
+                              onClick={() => setTab('all_datasets')}
+                            >
+                              Browse all datasets
+                            </button>
+                          </div>
+                        </div>
+                        <div className="footer-section">
+                          <p>We’re actively adding new datasets to PREP. If you can’t find what you’re looking for, you can suggest a dataset for us to consider:</p>
+                          <div className="footer-actions">
+                            <a href="https://docs.google.com/forms/d/1wZzQno3De7Ul6vlOkkdHhWK_9csErSrOlo6pOAZHIds/viewform?edit_requested=true" target="_blank" rel="noopener noreferrer">
+                              <button type="button" className="c-new-button -light -transparent">Suggest dataset</button>
+                            </a>
+                          </div>
                         </div>
                       </footer>
                     </div>
@@ -96,6 +106,16 @@ class ExplorePage extends PureComponent {
                       </div>
                     </div>
                     <DatasetsList />
+                    <footer className="sidebar-footer -border">
+                      <div className="footer-section">
+                        <p>We’re actively adding new datasets to PREP. If you can’t find what you’re looking for, you can suggest a dataset for us to consider:</p>
+                        <div className="footer-actions">
+                          <a href="https://docs.google.com/forms/d/1wZzQno3De7Ul6vlOkkdHhWK_9csErSrOlo6pOAZHIds/viewform?edit_requested=true" target="_blank" rel="noopener noreferrer">
+                            <button type="button" className="c-new-button -light -transparent">Suggest dataset</button>
+                          </a>
+                        </div>
+                      </div>
+                    </footer>
                   </div>}
               </div>
             </div>

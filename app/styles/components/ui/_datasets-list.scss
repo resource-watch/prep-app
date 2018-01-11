@@ -63,20 +63,11 @@
   .datasets-list-content {
     display: flex;
     flex-flow: column;
-    // padding: 0 40px;
   }
-
-  .list-container {
-    // padding: 0 40px;
-  }
-
-  // .c-dataset-item {
-  //   margin-bottom: 10px;
-  // }
 
   .dataset-group {
-    border-bottom: 2px solid #EEEEEE;
-    padding: 24px 0;
+    border-bottom: 2px solid $pale-grey;
+    padding: 25px 0;
 
     .second-level {
       padding-left: 30px;
@@ -97,9 +88,20 @@
   }
 
   .sidebar-footer {
-    padding: 12px 22px 40px;
+    padding: 15px 22px 40px;
+
+    &.-border {
+      margin-top: 45px;
+      border-top: 2px solid $pale-grey;
+    }
 
     p { margin: 0; }
+
+    .footer-section {
+      & + .footer-section {
+        margin: 30px 0 0;
+      }
+    }
 
     .footer-actions {
       display: flex;
