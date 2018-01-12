@@ -1,4 +1,9 @@
 import L from 'leaflet';
+import Promise from 'bluebird';
+
+Promise.config({
+  cancellation: true
+});
 
 export default (leafletMap, layerSpec) => {
   const { id, layerIndex, opacity } = layerSpec;

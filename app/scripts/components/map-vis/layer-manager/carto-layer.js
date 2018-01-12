@@ -1,7 +1,30 @@
 import L from 'leaflet';
+import Promise from 'bluebird';
+
+Promise.config({
+  cancellation: true
+});
+
+function makeCancellableRequest(url, bodyStringified) {
+  // Don't use fetch here because xhr have abort, very useful to make a cancelable request
+  return new Promise((resolve, reject, onCancel) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = () => resolve(xhr);
+    xhr.send(bodyStringified);
+    // Note the onCancel argument only exists if cancellation has been enabled!
+    onCancel(() => xhr.abort());
+  });
+}
 
 export default (leafletMap, layerSpec) => {
-  const { layerConfig, layerIndex, visibility, opacity } = layerSpec;
+  const {
+    layerConfig,
+    layerIndex,
+    visibility,
+    opacity
+  } = layerSpec;
 
   // Transforming layerSpec
   const bodyStringified = JSON.stringify(layerConfig.body || {})
@@ -9,22 +32,15 @@ export default (leafletMap, layerSpec) => {
     .replace(/"geom-column"/g, '"geom_column"')
     .replace(/"geom-type"/g, '"geom_type"')
     .replace(/"raster-band"/g, '"raster_band"');
+  const url = `https://${layerConfig.account}.carto.com/api/v1/map`;
 
-  const request = new Request(`https://${layerConfig.account}.carto.com/api/v1/map`, {
-    method: 'POST',
-    headers: new Headers({
-      'Content-Type': 'application/json'
-    }),
-    body: bodyStringified
-  });
+  return new Promise((resolve, reject, onCancel) => {
+    const postRequest = makeCancellableRequest(url, bodyStringified);
 
-  return new Promise((resolve, reject) => {
-    fetch(request)
+    postRequest
       .then((res) => {
-        if (!res.ok) {
-          reject(res);
-        }
-        return res.json();
+        if (res.status !== 200) reject(res);
+        return JSON.parse(res.response);
       })
       .then((data) => {
         const tileUrl = `${data.cdn_url.templates.https.url}/${layerConfig.account}/api/v1/map/${data.layergroupid}/{z}/{x}/{y}.png`;
@@ -45,5 +61,7 @@ export default (leafletMap, layerSpec) => {
         leafletMap.addLayer(layer);
       })
       .catch(err => reject(err));
+
+    onCancel(() => postRequest.cancel());
   });
 };

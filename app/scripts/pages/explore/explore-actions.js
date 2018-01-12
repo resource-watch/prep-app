@@ -3,8 +3,6 @@ import { createAction, createThunkAction } from 'redux-tools';
 import { replace } from 'react-router-redux';
 import { setDatasetsTagFilter } from 'actions/datasets';
 
-// import datasetsMock from './mocks/datasets-spec.json';
-
 // services
 import DatasetFilterService from 'services/dataset-filter-service';
 import GraphService from 'services/graph-service';
@@ -50,7 +48,6 @@ export const setActiveDatasets = createAction('setActiveDatasets');
 export const updateActiveDatasets = createAction('updateActiveDatasets');
 export const setZIndex = createAction('setZIndex');
 export const updateZIndex = createThunkAction('updateZIndex', () => (dispatch) => {
-  // dispatch(updateActiveDatasets());
   dispatch(updateURLParams());
 });
 export const receiveDatasets = createAction('receiveDatasets');
@@ -61,8 +58,6 @@ export const setDataFilters = createAction('explore-dataset-filters/setDataFilte
 export const setGraphFilter = createAction('explore-dataset-filters/setGraphFilter');
 
 export const fetchDatasets = createThunkAction('fetchDatasets', () => (dispatch) => {
-  // dispatch(receiveDatasets(datasetsMock));
-  // dispatch(updateActiveDatasets());
   const params = {
     application: ['prep'].join(','),
     includes: ['metadata', 'layer', 'vocabulary', 'widget'].join(','),
