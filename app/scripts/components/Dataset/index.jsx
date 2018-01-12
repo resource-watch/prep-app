@@ -191,7 +191,7 @@ class DatasetDetail extends React.Component {
     const content = this.getContent();
 
     return (
-      <div className="-theme-2">
+      <div>
         <header className="l-header">
           <div className={`l-header-nav ${currentData.name === 'home' ? '-no-bg' : ''}`}>
             <div className="row align-middle">
