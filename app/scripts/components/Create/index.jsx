@@ -80,7 +80,7 @@ function Create() {
                 how it can or is being used to inform and manage climate risk. Embed your dashboard
                 or stories on your own website and share them with your community.
               </p>
-              <Link to="/insights"> See stories </Link>
+              <Link to="/stories">See stories</Link>
             </div>
 
             <div className="column align-middle small-12 medium-6">

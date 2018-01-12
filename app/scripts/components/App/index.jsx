@@ -17,7 +17,7 @@ const logoImage = '/images/prep-logo.png';
 
 const theme = {
   '/resources': '-theme-2',
-  '/insights': '-theme-3'
+  '/stories': '-theme-3'
 };
 
 class App extends React.Component {
@@ -52,7 +52,7 @@ class App extends React.Component {
     const currentData = this.getCurrentData();
     const isHomepage = (currentData.name === 'home');
     const pathname = window.location.pathname;
-    const summaryCardsPages = ['/contact', '/insights', '/dashboards'];
+    const summaryCardsPages = ['/contact', '/stories', '/dashboards'];
 
     document.title = currentData.title;
 
@@ -89,7 +89,7 @@ class App extends React.Component {
 
         {summaryCardsPages.indexOf(pathname) !== -1 &&
         <SummaryCards
-          extraCard={pathname === '/insights' ? 'dashboards' : 'stories'}
+          extraCard={pathname === '/stories' ? 'dashboards' : 'stories'}
         />
         }
 

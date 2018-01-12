@@ -145,7 +145,7 @@ class InsightsDetail extends React.Component {
           data={this.props.data}
           insightSlug={this.props.insightSlug}
           insightUrl={this.props.data.content_url}
-          currentSection={'insights'}
+          currentSection={'stories'}
         >
           <p> {this.props.data.summary} </p>
         </SectionIntro>
