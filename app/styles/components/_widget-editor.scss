@@ -1,4 +1,4 @@
-.c-widget-editor {
+.c-we-widget-editor {
   max-width: rem($max-width);
   margin: 0 auto;
 
@@ -15,15 +15,15 @@
     }
   }
 
-  .c-columnbox {
+  .c-we-columnbox {
     color: $base-font-color;
     background-color: $light-gold;
 
-    .c-icon { fill: $base-font-color; }
+    .c-we-icon { fill: $base-font-color; }
     .order-by { color: $base-font-color; }
   }
 
-  .c-column-container {
+  .c-we-column-container {
     .columnbox-container {
       &.-release {
         border-color: $base-font-color;
@@ -33,7 +33,7 @@
     }
   }
 
-  .c-filter-container {
+  .c-we-filter-container {
     .filter-box {
       &.-release {
         border-color: $base-font-color;
@@ -43,7 +43,7 @@
     }
   }
 
-  .c-map {
+  .c-we-map {
     .leaflet-control-attribution {
       a {
         display: inline;
@@ -66,7 +66,7 @@
     }
   }
 
-  .c-map-controls {
+  .c-we-map-controls {
     .map-controls-item {
       margin: 0;
 
@@ -74,7 +74,7 @@
     }
   }
 
-  .c-legend-map {
+  .c-we-legend-map {
     .legend-title {
       font-family: $base-font-family;
 
@@ -95,10 +95,10 @@
   }
 }
 
-.c-widget-editor,
-.c-tooltip-editor,
-.c-modal-editor {
-  .c-spinner {
+.c-we-widget-editor,
+.c-we-tooltip,
+.c-we-modal {
+  .c-we-spinner {
     .spinner-box {
       .icon {
         border-top-color: $base-font-color;
@@ -106,9 +106,12 @@
     }
   }
 
-  .c-button,
-  .c-btn {
+  .c-we-button,
+  .c-we-btn {
+    @extend .c-button;
+
     &.-primary {
+      color: $white;
       background: $base-font-color;
     }
 
@@ -117,16 +120,21 @@
 
       &:hover { background: rgba($base-font-color, 0.1); }
     }
+
+    &:hover {
+      transform: none;
+      box-shadow: none;
+    }
   }
 
-  .c-checkbox {
+  .c-we-checkbox {
     .checkbox-icon,
     .checkbox-icon:after {
       border-color: $base-font-color;
     }
   }
 
-  .c-radio {
+  .c-we-radio {
     label {
       span {
         border-color: $base-font-color;
@@ -136,9 +144,9 @@
     }
   }
 
-  .c-chart-editor {
+  .c-we-chart {
     .save-widget-container {
-      .c-button {
+      .c-we-button {
         margin: 0;
         line-height: 45px;
       }
@@ -146,7 +154,7 @@
   }
 }
 
-.c-filter-string-tooltip {
+.c-we-filter-string-tooltip {
   .rc-slider-rail { background: $pale-grey; }
   .rc-slider-track { background: $base-font-color; }
   .rc-slider-handle {
@@ -160,7 +168,7 @@
   }
 }
 
-.c-legend-unit {
+.c-we-legend-unit {
   .-dark {
     color: $base-font-color;
     font-family: $base-font-family;
@@ -168,7 +176,7 @@
   }
 }
 
-.c-custom-select {
+.c-we-custom-select {
   &:after { border-bottom-color: $base-font-color; }
 
   .custom-select-text {
@@ -180,12 +188,12 @@
 
   .custom-select-options {
     .next {
-      .c-icon { fill: $base-font-color; }
+      .c-we-icon { fill: $base-font-color; }
     }
 
     & > li {
       & > div {
-        .c-icon { fill: $base-font-color; }
+        .c-we-icon { fill: $base-font-color; }
 
         span {
           font-family: $base-font-family;
@@ -197,8 +205,8 @@
   }
 }
 
-.c-save-widget-modal {
-  .c-field-container {
+.c-we-save-widget-modal {
+  .c-we-field-container {
     border: 0;
   }
 }
