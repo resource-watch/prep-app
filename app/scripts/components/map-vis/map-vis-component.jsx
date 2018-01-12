@@ -1,8 +1,14 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import Promise from 'bluebird';
+import isEqual from 'lodash/isEqual';
+import debounce from 'lodash/debounce';
 import LoadingSpinner from 'components/Loading/LoadingSpinner';
 import layerManager from './layer-manager';
-import isEqual from 'lodash/isEqual';
+
+Promise.config({
+  cancellation: true
+});
 
 const defaultMapOptions = {
   zoom: 3,
@@ -21,6 +27,7 @@ class Map extends PureComponent {
 
     this.addedLayers = []; // cache layers
     this.triggerChange = this.triggerChange.bind(this);
+    this.addLayers = debounce(this.addLayers.bind(this), 1000);
   }
 
   componentDidMount() {
@@ -89,19 +96,17 @@ class Map extends PureComponent {
     if (!mapOptions.zoomControl) L.control.zoom({ position: mapOptions.zoomControlPosition }).addTo(this.map);
   }
 
-  toggleLayers() {
-    this.setState({ loading: true });
-
-    // Removing all layers
+  removeAllLayers() {
     if (this.addedLayers.length) {
       this.addedLayers.forEach(layer => this.map.removeLayer(layer));
+      this.addedLayers = [];
     }
+  }
 
-    // Cleaning layers box
-    this.addedLayers = [];
-
-    // Adding layers
-    Promise.all(this.props.layers.map(layerSpec => layerManager(this.map, layerSpec)))
+  addLayers() {
+    const promises = this.props.layers.map(layerSpec => layerManager(this.map, layerSpec));
+    if (this.getLayersPromise) this.getLayersPromise.cancel();
+    this.getLayersPromise = Promise.all(promises)
       .then((layers) => {
         this.addedLayers = layers;
         this.setState({ loading: false });
@@ -109,6 +114,20 @@ class Map extends PureComponent {
         console.error(reason);
         this.setState({ loading: false });
       });
+  }
+
+  toggleLayers() {
+    this.setState({ loading: true });
+
+    // Removing all layers
+    this.removeAllLayers();
+
+    // Adding layers
+    if (this.props.layers.length) {
+      this.addLayers();
+    } else {
+      this.setState({ loading: false });
+    }
   }
 
   render() {
