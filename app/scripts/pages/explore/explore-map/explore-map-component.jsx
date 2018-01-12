@@ -64,6 +64,7 @@ class ExploreMap extends PureComponent {
             sortable
             onVisibility={l => this.props.toggleVisibility({ id: l.dataset })}
             onInfo={l => this.props.toggleInfo({ id: l.dataset })}
+            onOpacity={this.props.updateOpacity}
             onClose={l => this.props.toggleDataset({ id: l.dataset })}
           />}
       </div>
@@ -91,7 +92,8 @@ ExploreMap.propTypes = {
   updateZIndex: PropTypes.func,
   toggleInfo: PropTypes.func,
   toggleDataset: PropTypes.func,
-  toggleVisibility: PropTypes.func
+  toggleVisibility: PropTypes.func,
+  updateOpacity: PropTypes.func
 };
 
 export default ExploreMap;

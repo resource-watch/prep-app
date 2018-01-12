@@ -57,7 +57,7 @@ Legend.propTypes = {
 Legend.defaultProps = {
   actions: true,
   toolbar: true,
-  onOpacity: () => {},
+  updateOpacity: () => {},
   onVisibility: () => {},
   onInfo: () => {},
   onClose: () => {}

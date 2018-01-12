@@ -53,6 +53,9 @@ export const updateZIndex = createThunkAction('updateZIndex', () => (dispatch) =
   // dispatch(updateActiveDatasets());
   dispatch(updateURLParams());
 });
+export const updateOpacity = createThunkAction('updateOpacity', () => (dispatch) => {
+  dispatch(updateURLParams());
+});
 export const receiveDatasets = createAction('receiveDatasets');
 export const failureDatasets = createAction('failureDatasets');
 
