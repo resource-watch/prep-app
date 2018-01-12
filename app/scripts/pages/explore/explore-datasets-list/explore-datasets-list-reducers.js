@@ -1,5 +1,4 @@
 import find from 'lodash/find';
-import { wriAPISerializer } from 'helpers/wri-api-serializer';
 import { calcZIndex } from 'components/map-vis/map-vis-helper';
 
 /**
@@ -32,7 +31,7 @@ export const receiveDatasets = (state, { payload }) => ({
     ...state.datasets,
     isFetching: false,
     status: 'success',
-    items: addExploreAttributes(wriAPISerializer(payload), state.datasets.activeDatasets)
+    items: addExploreAttributes(payload, state.datasets.activeDatasets)
   }
 });
 

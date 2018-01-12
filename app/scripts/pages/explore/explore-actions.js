@@ -2,6 +2,7 @@ import qs from 'query-string';
 import { createAction, createThunkAction } from 'redux-tools';
 import { replace } from 'react-router-redux';
 import { setDatasetsTagFilter } from 'actions/datasets';
+import { wriAPISerializer } from 'helpers/wri-api-serializer';
 
 // services
 import DatasetFilterService from 'services/dataset-filter-service';
@@ -76,7 +77,10 @@ export const fetchDatasets = createThunkAction('fetchDatasets', () => (dispatch)
       throw Error(response);
     })
     .then((json) => {
-      dispatch(receiveDatasets(json));
+      const datasets = wriAPISerializer(json);
+      // const nexgdpDatasets = datasets.filter(d => (d.provider === 'nexgddp'));
+      // console.log(nexgdpDatasets);
+      dispatch(receiveDatasets(datasets));
       dispatch(updateActiveDatasets());
     })
     .catch(error => dispatch(failureDatasets(error)));

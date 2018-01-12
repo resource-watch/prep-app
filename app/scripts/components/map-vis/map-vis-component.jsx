@@ -27,7 +27,8 @@ class Map extends PureComponent {
 
     this.addedLayers = []; // cache layers
     this.triggerChange = this.triggerChange.bind(this);
-    this.addLayers = debounce(this.addLayers.bind(this), 1000);
+    this.addLayers = this.addLayers.bind(this);
+    // this.addLayers = debounce(this.addLayers.bind(this), 1000);
   }
 
   componentDidMount() {
@@ -105,14 +106,19 @@ class Map extends PureComponent {
 
   addLayers() {
     const promises = this.props.layers.map(layerSpec => layerManager(this.map, layerSpec));
-    if (this.getLayersPromise) this.getLayersPromise.cancel();
-    this.getLayersPromise = Promise.all(promises)
+    if (this.layersRequest) this.layersRequest.cancel();
+    this.layersRequest = Promise.all(promises)
       .then((layers) => {
+        console.log(layers);
         this.addedLayers = layers;
         this.setState({ loading: false });
       }).catch((reason) => {
         console.error(reason);
         this.setState({ loading: false });
+      }).finally(() => {
+        if (this.layersRequest.isCancelled()) {
+          console.log('all canceled')
+        }
       });
   }
 

@@ -14,9 +14,11 @@ function makeCancellableRequest(url, bodyStringified) {
     xhr.onload = () => resolve(xhr);
     xhr.send(bodyStringified);
     // Note the onCancel argument only exists if cancellation has been enabled!
-    onCancel(() => xhr.abort());
+    onCancel(() => console.log('xhr aborted') || xhr.abort());
   });
 }
+
+let postRequest;
 
 export default (leafletMap, layerSpec) => {
   const {
@@ -35,7 +37,10 @@ export default (leafletMap, layerSpec) => {
   const url = `https://${layerConfig.account}.carto.com/api/v1/map`;
 
   return new Promise((resolve, reject, onCancel) => {
-    const postRequest = makeCancellableRequest(url, bodyStringified);
+    if (postRequest) postRequest.cancel();
+    postRequest = makeCancellableRequest(url, bodyStringified);
+    // onCancel(() => postRequest.cancel());
+    // if (postRequest.isCancelled()) console.log('canceled') || postRequest.cancel();
 
     postRequest
       .then((res) => {
@@ -58,10 +63,12 @@ export default (leafletMap, layerSpec) => {
         layer.on('tileerror', err => reject(err));
 
         // adding map
+        console.log('added');
         leafletMap.addLayer(layer);
       })
-      .catch(err => reject(err));
-
-    onCancel(() => postRequest.cancel());
+      .catch(err => reject(err))
+      .finally(() => {
+        if (postRequest.isCancelled()) console.log('canceled');
+      });
   });
 };
