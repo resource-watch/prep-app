@@ -18,6 +18,8 @@ function makeCancellableRequest(url, bodyStringified) {
   });
 }
 
+let postRequest;
+
 export default (leafletMap, layerSpec) => {
   const {
     layerConfig,
@@ -35,8 +37,8 @@ export default (leafletMap, layerSpec) => {
   const url = `https://${layerConfig.account}.carto.com/api/v1/map`;
 
   return new Promise((resolve, reject, onCancel) => {
-    const postRequest = makeCancellableRequest(url, bodyStringified);
-
+    if (postRequest) postRequest.cancel();
+    postRequest = makeCancellableRequest(url, bodyStringified);
     postRequest
       .then((res) => {
         if (res.status !== 200) reject(res);
@@ -59,9 +61,11 @@ export default (leafletMap, layerSpec) => {
 
         // adding map
         leafletMap.addLayer(layer);
+
+        // removing layer before resolve
+        onCancel(() => leafletMap.removeLayer(layer));
       })
       .catch(err => reject(err));
-
     onCancel(() => postRequest.cancel());
   });
 };

@@ -7,7 +7,9 @@ import LoadingSpinner from 'components/Loading/LoadingSpinner';
 import layerManager from './layer-manager';
 
 Promise.config({
-  cancellation: true
+  warnings: true,
+  cancellation: true,
+  monitoring: true
 });
 
 const defaultMapOptions = {
@@ -25,9 +27,9 @@ class Map extends PureComponent {
       loading: false
     };
 
-    this.addedLayers = []; // cache layers
+    this.addedLayers = []; // cached layers
     this.triggerChange = this.triggerChange.bind(this);
-    this.addLayers = debounce(this.addLayers.bind(this), 1000);
+    this.addLayers = debounce(this.addLayers.bind(this), 300);
   }
 
   componentDidMount() {
@@ -104,30 +106,31 @@ class Map extends PureComponent {
   }
 
   addLayers() {
+    this.setState({ loading: true });
+
+    // Cleaning all layers before add the new ones
+    // TODO: cached layers instead remove all layers everytime
+    this.removeAllLayers();
+
+    if (this.layersRequest) this.layersRequest.cancel();
+    if (this.props.layers.length === 0) return this.setState({ loading: false });
+
     const promises = this.props.layers.map(layerSpec => layerManager(this.map, layerSpec));
-    if (this.getLayersPromise) this.getLayersPromise.cancel();
-    this.getLayersPromise = Promise.all(promises)
+
+    this.layersRequest = Promise.all(promises)
       .then((layers) => {
         this.addedLayers = layers;
-        this.setState({ loading: false });
       }).catch((reason) => {
         console.error(reason);
-        this.setState({ loading: false });
+      }).finally(() => {
+        if (!this.layersRequest.isCancelled()) this.setState({ loading: false });
       });
   }
 
   toggleLayers() {
-    this.setState({ loading: true });
-
-    // Removing all layers
-    this.removeAllLayers();
-
-    // Adding layers
-    if (this.props.layers.length) {
-      this.addLayers();
-    } else {
-      this.setState({ loading: false });
-    }
+    if (this.layersRequest) this.layersRequest.cancel();
+    // Executing debounced add layers
+    this.addLayers();
   }
 
   render() {
