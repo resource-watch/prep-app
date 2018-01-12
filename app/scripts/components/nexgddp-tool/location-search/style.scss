@@ -3,6 +3,8 @@
 .c-location-search {
   width: auto;
   margin-top: 5px;
+  display: flex;
+  align-items: center;
 }
 
 /**
@@ -11,7 +13,6 @@
  */
  .geosuggest {
   font-size: 13px;
-  text-transform: uppercase;
   font-weight: bold;
   position: relative;
   width: 100%;
@@ -22,7 +23,14 @@
   width: 100%;
   border: 2px solid transparent;
   padding: 5px;
+  text-transform: uppercase;
 }
+
+.geosuggest__input::placeholder {
+  color: $dark-blue;
+  text-transform: uppercase;
+}
+
 .geosuggest__input:focus {
   border-color: $border-color-blue;
   box-shadow: 0 0 0 transparent;
