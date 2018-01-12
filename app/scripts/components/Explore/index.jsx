@@ -17,7 +17,6 @@ import Form from '../Form';
 import ShareModal from '../Modal/ShareModal';
 import Modal from '../Modal/Modal';
 
-import TooltipTether from '../Tooltip/TooltipTether';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
 // Constants
