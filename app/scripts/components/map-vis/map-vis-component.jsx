@@ -37,6 +37,7 @@ class Map extends PureComponent {
     if (prevProps.labels !== this.props.labels) this.setLabels();
     if (prevProps.boundaries !== this.props.boundaries) this.setBoundaries();
     if (!isEqual(prevProps.layers, this.props.layers)) this.toggleLayers();
+    if (this.props.layers.length === 0) this.removeAllLayers();
   }
 
   componentWillUnmount() {
@@ -89,13 +90,17 @@ class Map extends PureComponent {
     if (!mapOptions.zoomControl) L.control.zoom({ position: mapOptions.zoomControlPosition }).addTo(this.map);
   }
 
+  removeAllLayers() {
+    if (this.addedLayers.length) {
+      this.addedLayers.forEach(layer => this.map.removeLayer(layer));
+    }
+  }
+
   toggleLayers() {
     this.setState({ loading: true });
 
     // Removing all layers
-    if (this.addedLayers.length) {
-      this.addedLayers.forEach(layer => this.map.removeLayer(layer));
-    }
+    this.removeAllLayers();
 
     // Cleaning layers box
     this.addedLayers = [];
