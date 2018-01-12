@@ -17,9 +17,9 @@ const cards = {
       className="simple-card -inverse"
       style={{ backgroundImage: `url(${bg.insights})` }}
     >
-      <h3>Insights</h3>
+      <h3>Stories</h3>
       <p>Find data-driven stories and tools that spotlight specific climate-related risks and solutions</p>
-      <Link to="/insights">EXPLORE THE INSIGHTS</Link>
+      <Link to="/stories">EXPLORE THE STORIES</Link>
     </div>),
   dashboards: (
     <div

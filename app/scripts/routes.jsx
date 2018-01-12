@@ -114,7 +114,7 @@ function Routes(props) {
           <Route path={'about'} component={AboutPage} />
           <Route path={'faqs'} component={FAQ} />
           <Route path={'dashboards'} component={Dashboards} />
-          <Route path={'insights'} component={Insights} />
+          <Route path={'stories'} component={Insights} />
           <Route path={'create'} component={Create} />
           <Route path={'partners'} component={PartnersPage} />
           <Route path={'resources'} component={ResourcesPage} />
@@ -126,7 +126,7 @@ function Routes(props) {
         <Route path="partners/:id" component={PartnerDetail} />
         <Route path="explore" component={ExplorePage} />
         <Route path="dashboard/:slug(/:tab)" component={DashboardsDetail} />
-        <Route path="insight/:slug" component={InsightsDetail} />
+        <Route path="stories/:slug" component={InsightsDetail} />
         <Route path="dataset/:slug" component={DatasetDetail} />
 
         {/* Embed */}

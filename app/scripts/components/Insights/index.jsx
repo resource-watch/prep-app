@@ -36,7 +36,7 @@ class InsightsPage extends React.Component {
         >
           <Card border="neutral">
             <h3>
-              <Link to={`/insight/${item.slug}`}>
+              <Link to={`/stories/${item.slug}`}>
                 {item.title}
               </Link>
             </h3>

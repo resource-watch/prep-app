@@ -10,7 +10,7 @@ function DashboardDetailInsights(props) {
           <div className="columns small-12 medium-6" key={`insight-card-${index}`} style={{ display: 'flex' }} >
             <Card border="neutral">
               <h3>
-                <Link to={`/insight/${card.slug}`}>
+                <Link to={`/stories/${card.slug}`}>
                   {card.title}
                 </Link>
               </h3>
