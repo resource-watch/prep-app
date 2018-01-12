@@ -90,6 +90,7 @@ class LegendNexGDDPToolbar extends PureComponent {
           options={temporalResolutionOptions}
           onValueChange={this.onResolutionChange}
           theme="material"
+          hideResetButton
           tether
         />}
         {periodsOptions && <SimpleSelect
@@ -98,6 +99,7 @@ class LegendNexGDDPToolbar extends PureComponent {
           options={periodsOptions}
           onValueChange={this.onPeriodChange}
           theme="material"
+          hideResetButton
           tether
         />}
         {scenariosOptions && <SimpleSelect
@@ -106,6 +108,7 @@ class LegendNexGDDPToolbar extends PureComponent {
           options={scenariosOptions}
           onValueChange={this.onScenarioChange}
           theme="material"
+          hideResetButton
           tether
         />}
       </div>
