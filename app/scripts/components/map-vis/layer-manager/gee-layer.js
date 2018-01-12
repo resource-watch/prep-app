@@ -22,8 +22,11 @@ export default (leafletMap, layerSpec) => {
   // adding map
   leafletMap.addLayer(layer);
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject, onCancel) => {
     layer.on('tileload', () => resolve(layer));
     layer.on('tileerror', err => reject(err));
+
+    // removing layer before resolve
+    onCancel(() => leafletMap.removeLayer(layer));
   });
 };

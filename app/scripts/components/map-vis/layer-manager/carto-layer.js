@@ -14,7 +14,7 @@ function makeCancellableRequest(url, bodyStringified) {
     xhr.onload = () => resolve(xhr);
     xhr.send(bodyStringified);
     // Note the onCancel argument only exists if cancellation has been enabled!
-    onCancel(() => console.log('xhr aborted') || xhr.abort());
+    onCancel(() => xhr.abort());
   });
 }
 
@@ -39,9 +39,6 @@ export default (leafletMap, layerSpec) => {
   return new Promise((resolve, reject, onCancel) => {
     if (postRequest) postRequest.cancel();
     postRequest = makeCancellableRequest(url, bodyStringified);
-    // onCancel(() => postRequest.cancel());
-    // if (postRequest.isCancelled()) console.log('canceled') || postRequest.cancel();
-
     postRequest
       .then((res) => {
         if (res.status !== 200) reject(res);
@@ -63,12 +60,12 @@ export default (leafletMap, layerSpec) => {
         layer.on('tileerror', err => reject(err));
 
         // adding map
-        console.log('added');
         leafletMap.addLayer(layer);
+
+        // removing layer before resolve
+        onCancel(() => leafletMap.removeLayer(layer));
       })
-      .catch(err => reject(err))
-      .finally(() => {
-        if (postRequest.isCancelled()) console.log('canceled');
-      });
+      .catch(err => reject(err));
+    onCancel(() => postRequest.cancel());
   });
 };

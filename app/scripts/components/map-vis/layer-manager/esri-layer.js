@@ -19,7 +19,7 @@ export default (leafletMap, layerSpec) => {
 
   if (L[layerConfig.type]) return leafletLayer();
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject, onCancel) => {
     const layerOptions = JSON.parse(bodyStringified);
 
     if (!L.esri[layerConfig.type]) return reject('"type" specified in layer spec doesn`t exist');
@@ -50,6 +50,9 @@ export default (leafletMap, layerSpec) => {
 
       // adding map
       leafletMap.addLayer(layer);
+
+      // removing layer before resolve
+      onCancel(() => leafletMap.removeLayer(layer));
     } else {
       reject();
     }
