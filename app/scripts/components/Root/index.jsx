@@ -1,9 +1,9 @@
 import React from 'react';
 import { Modal, Tooltip, Icons } from 'widget-editor';
 import WelcomeModal from '../Modal/WelcomeModal';
+import ShareModalComponent from '../share-modal';
 
 class Root extends React.Component {
-
   constructor() {
     super();
     this.state = {
@@ -30,6 +30,7 @@ class Root extends React.Component {
         <Modal />
         <Tooltip />
         <Icons />
+        <ShareModalComponent />
 
         {this.props.children}
 

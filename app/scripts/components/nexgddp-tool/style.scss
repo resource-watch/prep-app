@@ -1,6 +1,7 @@
 @import 'settings';
 
 .c-nexgddp-tool {
+  position: relative; // Needed for the loader
   margin: $small-margin 0 $large-margin 0;
 
   > .filters {
@@ -14,6 +15,7 @@
 
   > .toolbar {
     border: 2px solid $border-color;
+    border-bottom: none;
     padding: 5px 15px;
   }
 

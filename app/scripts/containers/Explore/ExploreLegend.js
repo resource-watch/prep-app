@@ -3,7 +3,7 @@ import ExploreMapLegend from 'components/Explore/ExploreLegend';
 
 import { setInfoSidebarMetadata } from 'actions/info-sidebar';
 import { toggleTooltip } from 'actions/tooltip';
-import { getDatasetByIdOrSlug, setDatasetActive, setLayerGroupActiveLayer } from 'actions/datasets';
+import { getDatasetByIdOrSlug, setDatasetActive, setLayerGroupActiveLayer, toggleActiveDatasets } from 'actions/datasets';
 import {
   setLayersOrder,
   toggleLayerOpacity,
@@ -43,6 +43,7 @@ const mapDispatchToProps = dispatch => ({
   switchChange: (dataset, layers) => {
     dispatch(switchChange(dataset.id));
     if (dataset.active) dispatch(setDatasetActive(dataset));
+    dispatch(toggleActiveDatasets(dataset));
     dispatch(setLayersOrder(layers));
     dispatch(updateURL());
   },

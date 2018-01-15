@@ -6,6 +6,10 @@
   .leaflet-container {
     z-index: 0;
     position: relative;
+
+    &.-crosshair {
+      cursor: crosshair;
+    }
   }
 
   .leaflet-touch .leaflet-control-layers,
@@ -14,12 +18,85 @@
   }
 
   .leaflet-control-zoom {
+    display: flex;
+    flex-flow: column;
+    margin-top: 0;
     border: 0;
+    box-shadow: 0 7px 15px 0 rgba(0,0,0,0.15);
+
+    .leaflet-control-zoom-in {
+      border-bottom: 1px solid ;
+    }
+
+    a {
+      width: 30px;
+      height: 30px;
+      margin: 0;
+      display: inline-block;
+
+      font-size: $normal-font-size;
+      line-height: 26px;
+      -webkit-font-smoothing: subpixel-antialiased;
+      color: $navy;
+
+      border: none;
+      border-radius: 0 !important;
+      background-color: $white;
+
+      &.leaflet-disabled {
+        background-color: darken($white, 10%);
+        color: rgba($navy, 0.5);
+      }
+    }
+
+    .leaflet-control-zoom-in {
+      position: relative;
+      border-radius: 0;
+    }
+
+    .leaflet-control-zoom-out {
+      position: relative;
+      border-radius: 0;
+    }
   }
 
-  .leaflet-control-zoom-in,
-  .leaflet-control-zoom-out {
+  .c-button-map {
+    width: 30px;
+    height: 30px;
     margin: 0;
+    display: inline-block;
+
+    font-size: $normal-font-size;
+    line-height: 26px;
+    -webkit-font-smoothing: subpixel-antialiased;
+    color: $navy;
+    fill: $navy;
+
+    border: none;
+    border-radius: 0 !important;
+    background-color: $white;
+
+    .c-icon {
+      fill: $navy;
+    }
+
+    &.-disabled {
+      background-color: darken($white, 10%);
+      color: rgba($navy, 0.5);
+
+      .c-icon {
+        fill: rgba($navy, 0.5);
+      }
+    }
+
+    &.-active {
+      background-color: $navy;
+      color: $white;
+
+      .c-icon {
+        fill: $white;
+      }
+    }
   }
 
   > .switch-button,
@@ -45,5 +122,15 @@
       left: auto;
       right: 15px;
     }
+  }
+
+  > .c-legend {
+    width: 100%;
+    max-width: 430px;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: $white;
+    box-shadow: 0 7px 15px 0 rgba(0,0,0,0.15);
   }
 }

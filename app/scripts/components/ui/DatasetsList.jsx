@@ -73,20 +73,16 @@ export default class DatasetsList extends React.Component {
 
       <div className="datasets-list-content">
         <div ref={(n) => { this.tools = n; }} className={`list-filters ${filters ? '-open' : ''} ${sticky ? '-fixed' : ''}`}>
-          <div className="row">
-            <div className="column small-12">
-              <div className="list-filters-container">
-                <button className="btn-filters" onClick={() => this.setState({ filters: !filters })}>
-                  <span>Filter results</span>
-                  {filters ?
-                    <Icon name="icon-arrow-up" /> :
-                    <Icon name="icon-arrow-down" />
-                  }
-                </button>
+          <div className="list-filters-container">
+            <button className="btn-filters" onClick={() => this.setState({ filters: !filters })}>
+              <span>Filter results</span>
+              {filters ?
+                <Icon name="icon-arrow-up" /> :
+                <Icon name="icon-arrow-down" />
+              }
+            </button>
 
-                <Search open={filters ? false : undefined} list={this.props.data} onChange={this.onSearch} label="Search dataset" />
-              </div>
-            </div>
+            <Search open={filters ? false : undefined} list={this.props.data} onChange={this.onSearch} label="Search dataset" />
           </div>
         </div>
 
@@ -96,12 +92,7 @@ export default class DatasetsList extends React.Component {
 
         {search.list.length > 0 ?
           <div className="list-container">
-            <div className="row">
-              <div className="column small-12">
-                {this.getDatasetItems(search.list)}
-              </div>
-            </div>
-
+            {this.getDatasetItems(search.list)}
           </div> :
           <p className="no-data">No datasets with these filters selected</p>
         }
@@ -142,25 +133,21 @@ export default class DatasetsList extends React.Component {
       <div className="datasets-list-content">
         <DatasetLocationFilterContainer />
         <div className="list-container">
-          <div className="row">
-            <div className="column small-12">
-              {content}
+          {content}
 
-              <footer className="sidebar-footer">
-                <p>These datasets are a curated collection. If you don&apos;t find what you are interested in, you can explore all the data:</p>
+          <footer className="sidebar-footer">
+            <p>These datasets are a curated collection. If you don&apos;t find what you are interested in, you can explore all the data:</p>
 
-                <div className="footer-actions">
-                  <button
-                    type="button"
-                    className="c-new-button -light -transparent"
-                    onClick={() => this.props.onChangeTab('all_datasets')}
-                  >
-                    Browse all datasets
-                  </button>
-                </div>
-              </footer>
-              </div>
-          </div>
+            <div className="footer-actions">
+              <button
+                type="button"
+                className="c-new-button -light -transparent"
+                onClick={() => this.props.onChangeTab('all_datasets')}
+              >
+                Browse all datasets
+              </button>
+            </div>
+          </footer>
         </div>
       </div>
     );

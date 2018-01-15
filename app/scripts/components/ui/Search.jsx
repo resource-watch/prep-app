@@ -1,27 +1,26 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import debounce from 'lodash/debounce';
 
 // Libraries
 import classnames from 'classnames';
-import Fuse from 'fuse.js';
 
 // Components
 import Icon from './Icon';
 
-// Constants
-import { SELECT_SEARCH_OPTIONS } from '../../general-constants/general';
 
-
-export default class Search extends React.Component {
+export default class Search extends PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
-      open: false
+      value: props.value,
+      open: props.open
     };
 
     this.onToggle = this.onToggle.bind(this);
     this.onSearch = this.onSearch.bind(this);
+    this.changed = debounce(this.props.onChange, 150);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -41,12 +40,10 @@ export default class Search extends React.Component {
   }
 
   onSearch(e) {
-    const { list, options } = this.props;
-    const value = e.currentTarget.value;
-    const fuse = new Fuse(list, { ...SELECT_SEARCH_OPTIONS, ...options });
-    const filteredList = value !== '' ? fuse.search(value) : list;
-
-    this.props.onChange(filteredList, value);
+    const value = e.target.value;
+    this.setState({ value }, () => {
+      this.props.onChange(value);
+    });
   }
 
   render() {
@@ -86,19 +83,16 @@ export default class Search extends React.Component {
 }
 
 Search.propTypes = {
+  value: PropTypes.string,
   className: PropTypes.string,
-  list: PropTypes.array.isRequired,
   label: PropTypes.string,
   placeholder: PropTypes.string,
-  options: PropTypes.object,
   open: PropTypes.bool,
-  // Actions
   onChange: PropTypes.func
 };
 
 Search.defaultProps = {
-  list: [],
   label: 'Search',
   placeholder: '',
-  options: {}
+  open: false
 };

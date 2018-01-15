@@ -18,11 +18,11 @@ function MainNav() {
           <Link activeClassName="-current" to="/dashboards">Dashboards</Link>
         </li>
         <li>
-          <Link activeClassName="-current" to="/insights">Stories</Link>
+          <Link activeClassName="-current" to="/stories">Stories</Link>
         </li>
-        <li>
+        {/* <li>
           <Link activeClassName="-current" to="/create">Create</Link>
-        </li>
+        </li> */}
         <li>
           <Link activeClassName="-current" to="/resources">Resources</Link>
         </li>

@@ -1,14 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Slider from 'react-slick';
+import ArrowButton from 'components/Button/arrow-button-component';
 
-const settings = {
+const slidesToShow = 5;
+
+const defaultSettings = {
   dots: false,
-  arrows: false,
+  arrows: true,
+  nextArrow: <ArrowButton full next slidesToShow={slidesToShow} />,
+  prevArrow: <ArrowButton full slidesToShow={slidesToShow} />,
   autoplay: true,
-  autoplaySpeed: 5000,
+  autoplaySpeed: 2000,
   infinite: true,
   speed: 500,
-  slidesToShow: 5,
+  slidesToShow,
   swipe: false
 };
 
@@ -20,14 +26,14 @@ class PartnersSlider extends React.Component {
   }
 
   render() {
-    const isThumbnail = this.props.thumbnail;
+    const { thumbnail } = this.props;
     const partners = this.props.featured.map(d => (
       <div key={`partner-slider-${d.id}`}>
         <a href={d.url} target="_blank" className="logo" rel="noopener noreferrer">
           <img
-            src={`${config.assetsUrl}${isThumbnail ? d.images.thumbnail : d.images.white_logo}`}
+            src={`${config.assetsUrl}${thumbnail ? d.images.thumbnail : d.images.white_logo}`}
             alt={d.name}
-            className={isThumbnail ? 'thumbnail' : ''}
+            className={thumbnail ? 'thumbnail' : ''}
           />
         </a>
       </div>
@@ -38,7 +44,7 @@ class PartnersSlider extends React.Component {
         {this.props.route && this.props.route === '/' &&
           <h2 className="-left">Our partners</h2>
         }
-        <Slider {...settings}>
+        <Slider {...defaultSettings}>
           {partners}
         </Slider>
       </div>
@@ -52,12 +58,12 @@ PartnersSlider.defaultProps = {
 
 PartnersSlider.propTypes = {
   // Define the partners list
-  data: React.PropTypes.array,
+  data: PropTypes.array,
   // Define the function to get the partners list
-  getPartners: React.PropTypes.func.isRequired,
-  route: React.PropTypes.string,
-  thumbnail: React.PropTypes.bool,
-  featured: React.PropTypes.any
+  getPartners: PropTypes.func.isRequired,
+  route: PropTypes.string,
+  thumbnail: PropTypes.bool,
+  featured: PropTypes.any
 };
 
 export default PartnersSlider;

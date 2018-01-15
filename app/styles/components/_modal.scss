@@ -39,32 +39,6 @@
       overflow: auto;
     }
 
-    > .c-nav-tab {
-
-      @media #{$mq-medium} {
-        padding-left: 80px;
-        padding-right: 80px;
-      }
-
-      .columns {
-        padding: 0;
-      }
-
-      ul {
-        justify-content: center;
-
-        @media #{$mq-medium} {
-          justify-content: flex-start;
-        }
-      }
-
-      li {
-        @media #{$mq-medium} {
-          margin-right: 80px;
-        }
-      }
-    }
-
     &.share {
       width: auto;
       min-width: auto;

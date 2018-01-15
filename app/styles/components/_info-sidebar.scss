@@ -2,7 +2,7 @@
   position: absolute;
   top: $header-height-short;
   left: $sidebar-width;
-  height: calc(100% - #{$header-height-short}});
+  height: calc(100% - #{$header-height-short});
   width: 100%;
   background-color: $base-bg-color;
   z-index: 2;
@@ -13,6 +13,12 @@
 
   &.-open {
     transform: translateX(0);
+  }
+
+  &.-embed {
+    top: 0;
+    left: 0;
+    height: 100%;
   }
 
   @media #{$mq-medium} {
@@ -26,17 +32,18 @@
     height: 100%;
     overflow-y: auto;
 
+    //I desactivate this shadow because IMHO, it is a bit too much and I can not find it in Dani's design.
+    //In Dani's design there is a shadow in the whole screen width. Clara.
+    // &:before {
+    //   content: '';
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   width: 100%;
+    //   height: 30px;
 
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 30px;
-
-      background: linear-gradient(180deg, rgba($black, .2) 0%, transparent 100%);
-    }
+    //   background: linear-gradient(180deg, rgba($black, .2) 0%, transparent 100%);
+    // }
   }
 
   .actions {
@@ -99,8 +106,8 @@
         > li {
           display: inline-block;
           > span {
-            color: $dark-blue;
-            text-decoration: underline;
+            color: $yellow-orange;
+            font-weight: $font-weight-bold;
             cursor: pointer;
           }
         }

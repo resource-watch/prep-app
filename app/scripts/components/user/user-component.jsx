@@ -46,7 +46,7 @@ class User extends React.PureComponent {
           <div className="user-avatar" style={{ backgroundImage: `url(${data.photo})` }} />
           :
           <div className="user-empty">
-            <Icon name="icon-nav-user" className="-bigger" />
+            <Icon name="icon-user" className="-extra-large" />
           </div>
         }
         { active &&

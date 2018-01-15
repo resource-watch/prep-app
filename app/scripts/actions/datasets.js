@@ -89,11 +89,31 @@ export function getDatasetLayer(dataset) {
 //   };
 // }
 
+export function toggleActiveDatasets(dataset) {
+  return (dispatch, getState) => {
+    const { activeDatasets } = getState().datasets;
+    const { id } = dataset;
+    let newActiveDatasets = [...activeDatasets];
+
+    if (activeDatasets.includes(id)) {
+      newActiveDatasets = activeDatasets.filter(datasetId => datasetId !== id);
+    } else {
+      newActiveDatasets.push(id);
+    }
+
+    dispatch({
+      type: TOGGLE_DATASET_ACTIVE,
+      payload: newActiveDatasets
+    });
+  };
+}
+
 export function getActiveDatasetLayers(datasets) {
   return (dispatch) => {
     for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
       if (datasets[i].active) {
         dispatch(setDatasetActive(datasets[i]));
+        dispatch(toggleActiveDatasets(datasets[i]));
       }
     }
   };
@@ -121,10 +141,7 @@ export function getDatasets(defaultActiveLayers) {
         deserializer.deserialize(data, (err, datasetData) => {
           if (err) throw new Error('Error deserializing json api');
           // Ñapa: We have to conservate layer config
-          const datasets = (datasetData || []).map((d, i) => {
-            d.layer = data.data[i].attributes.layer;
-            return d;
-          });
+          const datasets = (datasetData || []).map((d, i) => Object.assign(d, { layer: data.data[i].attributes.layer }));
 
           if (datasets.length) {
             for (let i = datasets.length - 1; i >= 0; i--) {
@@ -295,24 +312,5 @@ export function setLayerGroupActiveLayer(dataset, layer) {
 
     // We also update the URL
     // if (typeof window !== 'undefined') dispatch(setUrlParams());
-  };
-}
-
-export function toggleActiveDatasets(dataset) {
-  return (dispatch, getState) => {
-    const { activeDatasets } = getState().datasets;
-    const { id } = dataset;
-    let newActiveDatasets = [...activeDatasets];
-
-    if(activeDatasets.includes(id)) {
-      newActiveDatasets = activeDatasets.filter(datasetId => datasetId !== id);
-    } else {
-      newActiveDatasets.push(id);
-    }
-
-    dispatch({
-      type: TOGGLE_DATASET_ACTIVE,
-      payload: newActiveDatasets
-    });
   };
 }

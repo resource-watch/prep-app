@@ -5,11 +5,10 @@ import { IndexRoute, Router, Route, applyRouterMiddleware } from 'react-router';
 
 import App from './components/App';
 import Home from './components/Home';
-import Partnership from './components/Partnership';
-import EngagementWorkgroup from './components/Partnership/EngagementWorkgroup';
-import DataAccessibility from './components/Partnership/DataAccessibility';
-import PlatformWorkgroup from './components/Partnership/PlatformWorkgroup';
-import Explore from './containers/Explore';
+import AboutPage from './pages/about';
+import ExplorePage from './pages/explore';
+import PartnersPage from './pages/partners';
+import ResourcesPage from './pages/resources';
 import DatasetDetail from './containers/Dataset';
 import FAQ from './components/FAQ';
 import Dashboards from './containers/Dashboards';
@@ -17,13 +16,13 @@ import DashboardsDetail from './containers/Dashboards/DashboardDetail';
 import Insights from './containers/Insights';
 import InsightsDetail from './containers/Insights/InsightDetail';
 import Create from './components/Create';
-import Partners from './containers/Partners';
-import Resources from './containers/Resources';
 import Contact from './components/Contact';
 import Embed from './containers/Embed';
 import Root from './components/Root';
 import PartnerDetail from './containers/PartnerDetail';
 import Auth from './components/auth/auth';
+import ExploreEmbedPage from './pages/explore-embed';
+import NexGDDPEmbedPage from './pages/nexgddp-embed';
 
 function shouldUpdateScroll(prevRouterProps, { location }) {
   /**
@@ -81,7 +80,8 @@ function shouldUpdateScroll(prevRouterProps, { location }) {
    * regex params match the two paths) */
   const regexes = [
     /\/dashboard\/((?:[A-z]|[1-9]|-)+)(?:\/(?:.*))?/,
-    /\/insights\/((?:[A-z]|[1-9]|-)+)/
+    /\/insights\/((?:[A-z]|[1-9]|-)+)/,
+    /\/dataset\/((?:[A-z]|[1-9]|-)+)/
   ];
 
   for (let i = 0, j = regexes.length; i < j; i++) {
@@ -110,30 +110,28 @@ function Routes(props) {
     >
       <Route path={''} component={Root}>
         <Route path={'/'} component={App}>
-
           <IndexRoute component={Home} />
-          <Route path={'about'}>
-            <IndexRoute component={Partnership} />
-            <Route path={'engagement'} component={EngagementWorkgroup} />
-            <Route path={'data'} component={DataAccessibility} />
-            <Route path={'platforms'} component={PlatformWorkgroup} />
-          </Route>
+          <Route path={'about'} component={AboutPage} />
           <Route path={'faqs'} component={FAQ} />
           <Route path={'dashboards'} component={Dashboards} />
-          <Route path={'insights'} component={Insights} />
+          <Route path={'stories'} component={Insights} />
           <Route path={'create'} component={Create} />
-          <Route path={'partners'} component={Partners} />
-          <Route path={'resources'} component={Resources} />
+          <Route path={'partners'} component={PartnersPage} />
+          <Route path={'resources'} component={ResourcesPage} />
           <Route path={'contact'} component={Contact} />
           <Route path={'auth'} component={Auth} />
           <Route path={'myprep'} onEnter={requireAuth} component={Home} />
         </Route>
 
         <Route path="partners/:id" component={PartnerDetail} />
-        <Route path="explore(/:lat)(/:lng)(/:zoom)" component={Explore} />
+        <Route path="explore" component={ExplorePage} />
         <Route path="dashboard/:slug(/:tab)" component={DashboardsDetail} />
-        <Route path="insight/:slug" component={InsightsDetail} />
+        <Route path="stories/:slug" component={InsightsDetail} />
         <Route path="dataset/:slug" component={DatasetDetail} />
+
+        {/* Embed */}
+        <Route path="embed/explore" component={ExploreEmbedPage} />
+        <Route path="embed/nexgddp/:slug" component={NexGDDPEmbedPage} />
         <Route path="embed/:slug" component={Embed} />
       </Route>
     </Router>

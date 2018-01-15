@@ -4,7 +4,6 @@ import Card from '../Cards/Card';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
 class DashboardsPage extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -30,14 +29,14 @@ class DashboardsPage extends React.Component {
     const items = this.props.data.map((item, index) => (
       <div
         className={`columns small-10 medium-5 align-stretch ${index % 2 === 0 ? 'small-offset-1' : ''}`}
-        key={`dashboard-item-${index}`}
+        key={item.slug}
         style={{ display: 'flex' }}
       >
         <Card border="neutral">
           <h3>
-            <Link to={`/dashboard/${item.slug}/data`}>
+            <a href={`/dashboards/${item.slug}`}>
               {item.title}
-            </Link>
+            </a>
           </h3>
           <p>
             {item.summary}
@@ -50,13 +49,13 @@ class DashboardsPage extends React.Component {
                 alt={item.partner.name}
               />
             </a>
-            }
+          }
           {item.attribution &&
             <span className="attribution">{item.attribution}</span>
-            }
+          }
         </Card>
       </div>
-      ));
+    ));
 
     return (
       <div className="row align-stretch">

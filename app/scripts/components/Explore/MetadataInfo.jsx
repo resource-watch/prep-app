@@ -54,7 +54,7 @@ class MetadataInfo extends React.PureComponent {
         }
 
         {/* Description */}
-        {description}
+        {/* description */}
 
         {/* Dataset language */}
         <li><span>Dataset Language: </span><span>{metadata.language}</span></li>

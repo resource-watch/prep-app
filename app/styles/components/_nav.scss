@@ -110,6 +110,17 @@
         }
       }
     }
+    @media #{$mq-medium} {
+      ul {
+        justify-content: flex-start;
+      }
+    }
+
+    @media #{$mq-large} {
+      ul {
+        justify-content: flex-end;
+      }
+    }
   }
 
   &.-social {
@@ -127,21 +138,34 @@
       }
     }
 
-    .powered-by {
+    .social-links {
+      padding-right: 20px;
       position: relative;
-      margin-top: rem(5);
+      margin-right: 20px;
 
-      &:before {
+      &:after {
         display: block;
         content: "";
         position: absolute;
         top: rem(6);
-        left: rem(-16);
+        right: 0;
         width: 1px;
         height: rem(13);
-
         background-color: $bay-of-many;
       }
+
+      a {
+        line-height: 0;
+      }
+
+      a:not(:last-child) {
+        margin-right: 20px;
+      }
+    }
+
+    .powered-by {
+      position: relative;
+      margin-top: rem(5);
     }
 
     .c-icon {

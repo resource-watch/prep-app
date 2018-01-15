@@ -101,7 +101,7 @@ class DashboardDetail extends React.Component {
 
         <NavTab
           activeTab={this.props.dashboardTab}
-          baseUrl={`/dashboard/${this.props.dashboardSlug}`}
+          baseUrl={`/dashboards/${this.props.dashboardSlug}`}
           anchor
         />
 

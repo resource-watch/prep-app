@@ -5,7 +5,6 @@ import MapCard from '../Cards/MapCard';
 
 
 class EmbedDetail extends React.Component {
-
   componentWillMount() {
     if (!this.props.data) {
       this.props.getWidgetBySlug(this.props.slug);

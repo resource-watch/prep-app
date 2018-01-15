@@ -299,7 +299,7 @@ class ExploreMap extends React.PureComponent {
         const existingLayer = mapLayers[layerSpec.id];
 
         if (existingLayer) {
-          const zIndex = (datasetsLength + 1) - d.index;
+          const zIndex = (datasetsLength + 1) - (d.index || 0);
 
           if (existingLayer.setZIndex && typeof existingLayer.setZIndex === 'function') {
             this.map.addLayer(existingLayer);
@@ -385,13 +385,13 @@ class ExploreMap extends React.PureComponent {
     if (dataset.index !== undefined && layer) {
       if (typeof layer.setZIndex === 'function') {
         layer.index = dataset.index;
-        layer.setZIndex((datasetsLength + 1) - dataset.index);
+        layer.setZIndex((datasetsLength + 1) - (dataset.index || 0));
       } else {
         const layersElements = this.map.getPane('tilePane').children;
 
         for (let i = 0; i < layersElements.length; i++) {
           if (layersElements[i].id === activeLayer.id) {
-            layersElements[i].style.zIndex = datasetsLength - dataset.index;
+            layersElements[i].style.zIndex = datasetsLength - (dataset.index || 0);
           }
         }
       }
@@ -489,7 +489,7 @@ class ExploreMap extends React.PureComponent {
         this.handleTileLoaded(layer);
       });
       layer.on('tileerror', () => this.handleTileLoaded(layer));
-      layer.addTo(this.map).setZIndex((datasetsLength + 1) - dataset.index);
+      layer.addTo(this.map).setZIndex((datasetsLength + 1) - (dataset.index || 0));
       this.mapLayers[layerData.id] = layer;
       this.changeLayerOpacity(layer, dataset);
     }
@@ -544,7 +544,7 @@ class ExploreMap extends React.PureComponent {
           this.handleTileLoaded(layer);
         });
         layer.on('tileerror', () => this.handleTileLoaded(layer));
-        layer.addTo(this.map).setZIndex((datasetsLength + 1) - dataset.index);
+        layer.addTo(this.map).setZIndex((datasetsLength + 1) - (dataset.index || 0));
         this.mapLayers[layer.id] = newLayer;
         this.changeLayerOpacity(newLayer, dataset);
       }
@@ -552,7 +552,7 @@ class ExploreMap extends React.PureComponent {
       const layerConfig = JSON.parse(bodyStringified);
       layerConfig.pane = 'tilePane';
       layerConfig.useCors = true; // forcing cors
-      layerConfig.zIndex = (datasetsLength + 1) - dataset.index;
+      layerConfig.zIndex = (datasetsLength + 1) - (dataset.index || 0);
       if (layerConfig.style &&
         layerConfig.style.indexOf('function') >= 0) {
         layerConfig.style = eval(`(${layerConfig.style})`);
@@ -562,7 +562,7 @@ class ExploreMap extends React.PureComponent {
       newLayer.on('load', () => {
         this.handleTileLoaded(layer);
         const layerElement = this.map.getPane('tilePane').lastChild;
-        layerElement.style.zIndex = (datasetsLength + 1) - dataset.index;
+        layerElement.style.zIndex = (datasetsLength + 1) - (dataset.index || 0);
         layerElement.id = layer.id;
       });
       newLayer.on('requesterror', (e) => {
@@ -617,9 +617,10 @@ class ExploreMap extends React.PureComponent {
       .then((data) => {
         // we can switch off the layer while it is loading
         if (dataset.active) {
+          const zIndex = (datasetsLength + 1) - (dataset.index || 0);
           const tileUrl = `${data.cdn_url.templates.https.url}/${layer.account}/api/v1/map/${data.layergroupid}/{z}/{x}/{y}.png`;
-          const newLayer = L.tileLayer(tileUrl).addTo(this.map).setZIndex((datasetsLength + 1) - dataset.index);
-          newLayer.index = dataset.index;
+          const newLayer = L.tileLayer(tileUrl).addTo(this.map).setZIndex(zIndex);
+          // newLayer.index = dataset.index;
           newLayer.on('load', () => {
             this.changeLayerOpacity(layer, dataset);
             this.handleTileLoaded(layer);
@@ -650,7 +651,7 @@ class ExploreMap extends React.PureComponent {
       this.handleTileLoaded(tileLayer);
     });
     tileLayer.on('tileerror', () => this.handleTileLoaded(tileLayer));
-    tileLayer.addTo(this.map).setZIndex((datasetsLength + 1) - dataset.index);
+    tileLayer.addTo(this.map).setZIndex((datasetsLength + 1) - (dataset.index || 0));
 
     this.mapLayers[layerData.id] = tileLayer;
     this.changeLayerOpacity(tileLayer, dataset);
@@ -667,7 +668,7 @@ class ExploreMap extends React.PureComponent {
       this.handleTileLoaded(tileLayer);
     });
     tileLayer.on('tileerror', () => this.handleTileLoaded(tileLayer));
-    tileLayer.addTo(this.map).setZIndex((datasetsLength + 1) - dataset.index);
+    tileLayer.addTo(this.map).setZIndex((datasetsLength + 1) - (dataset.index || 0));
 
     this.mapLayers[layerData.id] = tileLayer;
     this.changeLayerOpacity(tileLayer, dataset);
@@ -693,7 +694,7 @@ class ExploreMap extends React.PureComponent {
 
   render() {
     return (<div className="c-explore-map">
-      <div className="map" ref={(el) => (this.mapElement = el)} />
+      <div className="map" ref={el => (this.mapElement = el)} />
       { (this.state.loading && this.hasActiveLayers) && <LoadingSpinner /> }
       <Tooltip
         scroll

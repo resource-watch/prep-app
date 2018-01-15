@@ -15,15 +15,22 @@ import Routes from './routes';
 import { reducers as widgetEditorReducers, setConfig } from 'widget-editor';
 import 'widget-editor/dist/styles.min.css';
 
-
-// Modules
-import * as ExploreDatasetFilterModule from 'components/explore-dataset-filters/explore-dataset-filters';
-import * as AuthModule from 'components/auth/auth';
-import * as UserModule from 'components/user/user';
-import * as DatasetLocationModule from 'components/dataset-location-filter/dataset-location-filter';
-
 // utils
 import { handleModule } from 'redux-tools';
+
+// Modules
+// import * as ExploreDatasetFilterModule from 'components/explore-dataset-filters/explore-dataset-filters';
+import * as AuthModule from 'components/auth/auth';
+import * as UserModule from 'components/user/user';
+import * as PartnersModule from 'modules/partners';
+import * as ShareModalModule from 'components/share-modal';
+// import * as DatasetLocationModule from 'components/dataset-location-filter/dataset-location-filter';
+
+// Pages
+import * as ExploreModule from './pages/explore';
+import * as ResourcesModule from './pages/resources';
+import * as ExploreEmbedModule from './pages/explore-embed';
+
 
 import '../styles/lib/custom-foundation.css';
 import '../styles/index.scss';
@@ -54,16 +61,23 @@ if (process.env.NODE_ENV === 'production') {
  */
 
 const componentReducers = {
-  exploreDatasetFilter: handleModule(ExploreDatasetFilterModule),
-  coreDatasetsFilter: handleModule(DatasetLocationModule),
   auth: handleModule(AuthModule),
-  user: handleModule(UserModule)
+  user: handleModule(UserModule),
+  partners: handleModule(PartnersModule),
+  shareModal: handleModule(ShareModalModule)
+};
+
+const pagesReducers = {
+  explorePage: handleModule(ExploreModule),
+  exploreEmbedPage: handleModule(ExploreEmbedModule),
+  resourcePage: handleModule(ResourcesModule)
 };
 
 const reducer = combineReducers({
   ...reducers,
   ...widgetEditorReducers,
   ...componentReducers,
+  ...pagesReducers,
   routing: routerReducer
 });
 

@@ -1,0 +1,11 @@
+@import "settings";
+
+.c-explore-dataset-filters {
+  padding: 20px 0;
+  background: $pale-white;
+  border-bottom: 1px solid rgba(26,28,34,0.1);
+
+  .filters-container {
+    padding: 0 20px;
+  }
+}

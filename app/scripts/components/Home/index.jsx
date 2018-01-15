@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
-import PartnersSlider from '../../containers/PartnersSlider';
 import DemoSlider from '../demo-slider/demo-slider-component';
+import PartnersSlider from '../../containers/PartnersSlider';
 
 const module1 = '/images/home/module-1.jpg';
 const module2 = '/images/home/module-2.jpg';
@@ -48,7 +48,7 @@ const Home = () => (
               <p>Find selected resources for understanding the impacts of climate
               change, tools for building resilience to climate change, and
               additional climate relevant data.</p>
-              <Link to="/dashboards" className="c-button -border" >
+              <Link to="/resources" className="c-button -border" >
               Go to resources
               </Link>
             </div>
@@ -67,7 +67,7 @@ const Home = () => (
           There are two key elements to PREP: the partnership itself and
           the online platform it supports (PREPdata).</p>
           <div className="article-footer">
-            <Link to="/resources" className="c-button -border" >
+            <Link to="/about" className="c-button -border" >
                 Learn more
             </Link>
           </div>

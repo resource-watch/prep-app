@@ -25,19 +25,6 @@ $header-bg-color: $dark-slate-blue-2;
     position: relative;
     display: block;
     float: left;
-
-    &:after {
-      display: block;
-      content: "BETA";
-      position: absolute;
-      top: 100%;
-      right: 0;
-
-      font-family: $header-font-family;
-      font-weight: bold;
-      font-style: italic;
-      font-size: 12px;
-    }
   }
 
   &.-short .logo {

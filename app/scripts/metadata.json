@@ -104,22 +104,13 @@
     "bannerBg": "dashboard"
   },
   {
-    "name": "insights",
-    "pathname": "/insights",
+    "name": "stories",
+    "pathname": "stories",
     "metaTitle": "Stories",
     "metaDescription": "",
     "title": "Stories",
     "bannerSize": "medium",
     "bannerBg": "insights"
-  },
-  {
-    "name": "insight",
-    "pathname": "insight",
-    "metaTitle": "Stories",
-    "metaDescription": "",
-    "title": "Stories",
-    "bannerSize": "medium",
-    "bannerBg": "insight"
   },
   {
     "name": "create",

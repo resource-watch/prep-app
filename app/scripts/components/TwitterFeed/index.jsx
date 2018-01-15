@@ -26,7 +26,7 @@ class TwitterFeed extends React.Component {
         <div className="tweet-item" key={tweet.id}>
           <p>{tweet.text}</p>
         </div>
-        ));
+      ));
     } else {
       tweets = (<div className="tweet-item" key={'no-tweets'} />);
     }

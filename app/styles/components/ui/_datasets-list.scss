@@ -1,4 +1,3 @@
-
 .c-datasets-list {
   height: 100%;
 
@@ -11,16 +10,16 @@
   }
 
   .list-filters {
-    padding: 20px 0;
+    padding: 20px 40px;
 
     &.-fixed {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      // padding: 20px 15px;
       background-color: $white;
       z-index: 1;
+      border-bottom: 1px solid rgba(26,28,34,0.1);
     }
 
     &.-open {
@@ -56,8 +55,8 @@
       top: 66px;
       left: 0;
       width: 100%;
-      // padding: 0 15px;
       z-index: 1;
+      box-shadow: 0 20px 30px 0 rgba(0,0,0,0.1);
     }
   }
 
@@ -66,19 +65,13 @@
     flex-flow: column;
   }
 
-  // .list-container {
-  //   &.-padding {
-  //     padding: 3px 22px 12px;
-  //   }
-  // }
-
-  // .c-dataset-item {
-  //   margin-bottom: 10px;
-  // }
-
   .dataset-group {
-    border-bottom: 2px solid #EEEEEE;
-    padding: 24px 0;
+    border-bottom: 2px solid $pale-grey;
+    padding: 25px 0;
+
+    .second-level {
+      padding-left: 30px;
+    }
 
     .group-title {
       font-size: 37px;
@@ -87,7 +80,7 @@
     }
 
     .group-description {
-      margin: 0 0 10px;
+      margin: 0 0 20px;
       font-size: 15px;
       font-family: $base-font-family;
       font-weight: $font-weight-regular;
@@ -95,9 +88,20 @@
   }
 
   .sidebar-footer {
-    padding: 12px 22px 40px;
+    padding: 15px 22px 40px;
+
+    &.-border {
+      margin-top: 45px;
+      border-top: 2px solid $pale-grey;
+    }
 
     p { margin: 0; }
+
+    .footer-section {
+      & + .footer-section {
+        margin: 30px 0 0;
+      }
+    }
 
     .footer-actions {
       display: flex;

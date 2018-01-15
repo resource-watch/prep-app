@@ -1,17 +1,24 @@
-
 .c-collapsible-item {
   display: flex;
   flex-flow: column;
-  padding: 10px $sidebar-padding-content;
+  padding: 20px 40px;
   background-color: $pale-white;
+  border-top: 2px solid #eee;
 
+  .c-dataset-item {
+    margin: 0;
+
+    &:not(:first-child) {
+      margin-top: 10px;
+    }
+  }
 
   > .collapsible-title {
     position: relative;
     display: flex;
     align-items: center;
     padding: 0 0 0 15px;;
-    margin: 0 0 10px;
+    margin: 0 0 20px -10px;
 
     font-family: $base-font-family;
     font-size: 13px;
@@ -20,6 +27,13 @@
 
     z-index: 1;
     cursor: pointer;
+
+    h1  {
+      font-family: $base-font-family;
+      font-size: 13px;
+      line-height: 13px;
+      text-transform: uppercase;
+    }
 
     &:before {
       @include arrow(7px, 2px, 225deg);
@@ -46,7 +60,7 @@
   }
 
   > .collapsible-item-container {
-    padding: 0 $sidebar-padding-content;
+    padding: 0;
     overflow: hidden;
     transition: all .3s ease;
   }
@@ -69,11 +83,12 @@
 
   &.-hidden {
     background-color: transparent;
+    border-top: 0;
 
     .collapsible-title-description {
       display: inline-block;
       margin: 5px 0 0;
-      padding: 0 0 0 15px;
+      padding: 0 0 0 5px;
 
       font-size: $tiny-font-size;
       line-height: 15px;
@@ -92,10 +107,10 @@
     }
 
     > .collapsible-title {
-      margin: 0;
+      margin-bottom: 0;
 
       &:before {
-        @include arrow(7px, 2px, 45deg);
+        @include arrow(7px, 2px, 135deg);
         top: calc(50% + 1px);
         position: absolute;
         left: 0;
