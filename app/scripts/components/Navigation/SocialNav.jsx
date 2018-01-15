@@ -5,12 +5,10 @@ function SocialNav() {
   return (
     <nav className="c-nav -social">
       <ul>
-        <li>
+        <li className="social-links">
           <a href={`https://facebook.com/${config.facebookUser}`} target="_blank">
             <Icon name="icon-facebook" className="-extra-large" />
           </a>
-        </li>
-        <li>
           <a href={`https://twitter.com/${config.twitterUser}`} target="_blank">
             <Icon name="icon-twitter" className="-extra-large" />
           </a>
