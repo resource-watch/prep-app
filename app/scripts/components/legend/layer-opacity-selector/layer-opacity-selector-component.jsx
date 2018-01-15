@@ -16,6 +16,15 @@ class LegendOpacitySelector extends Component {
     this.state = {
       visibility: false
     };
+
+    // BINDINGS //
+    this.onVisibleChange = this.onVisibleChange.bind(this);
+  }
+
+  onVisibleChange(visibility) {
+    this.setState({
+      visibility
+    });
   }
 
   render() {
@@ -49,7 +58,7 @@ class LegendOpacitySelector extends Component {
           overlay={tooltipContent}
           placement="bottom"
           trigger="click"
-          visible={visibility}
+          onVisibleChange={this.onVisibleChange}
         >
           <button
             type="button"
