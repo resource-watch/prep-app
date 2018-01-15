@@ -46,11 +46,11 @@ class NexGDDPTool extends React.PureComponent {
         <div className="filters">
           <div className="row">
             <div className="columns small-12 medium-4">
-              <label>Date(s)</label>
+              <label htmlFor="nexgddp-date-range-select">Date(s)</label>
               <DateRangeSelect />
             </div>
             <div className="columns small-12 medium-4">
-              <label>Scenario</label>
+              <label htmlFor="nexgddp-scenario-select">Scenario</label>
               <ScenarioSelect />
             </div>
           </div>

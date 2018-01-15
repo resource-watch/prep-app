@@ -23,6 +23,7 @@ class DateRangeSelect extends React.PureComponent {
       <div className="c-date-range-select">
         <Select
           name="startdate"
+          id="nexgddp-date-range-select"
           value={range1.selection}
           onChange={setRange1Selection}
           options={range1.options}
