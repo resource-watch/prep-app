@@ -40,15 +40,22 @@ class LegendNexGDDPToolbar extends PureComponent {
   }
 
   onResolutionChange(temporalResolution) {
-    this.setState({ temporalResolution }, this.updatingPeriods);
+    this.setState({ temporalResolution }, () => {
+      this.updatingPeriods();
+      this.props.setNexGDDPActiveLayer({ ...this.state, id: this.props.layerSpec.dataset });
+    });
   }
 
   onPeriodChange(period) {
-    this.setState({ period });
+    this.setState({ period }, () => {
+      this.props.setNexGDDPActiveLayer({ ...this.state, id: this.props.layerSpec.dataset });
+    });
   }
 
   onScenarioChange(scenario) {
-    this.setState({ scenario });
+    this.setState({ scenario }, () => {
+      this.props.setNexGDDPActiveLayer({ ...this.state, id: this.props.layerSpec.dataset });
+    });
   }
 
   updatingPeriods() {
@@ -117,7 +124,8 @@ class LegendNexGDDPToolbar extends PureComponent {
 }
 
 LegendNexGDDPToolbar.propTypes = {
-  layerSpec: PropTypes.object
+  layerSpec: PropTypes.object,
+  setNexGDDPActiveLayer: PropTypes.func
 };
 
 export default LegendNexGDDPToolbar;

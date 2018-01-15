@@ -203,3 +203,5 @@ export const getDatasetsByGraph = createThunkAction('explore-page/getDatasetsByG
       });
   }
 );
+
+export const setNexGDDPActiveLayer = createAction('explore-dataset-list/setNexGDDPActiveLayer');
