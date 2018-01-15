@@ -39,6 +39,15 @@ class ExploreDatasetFilters extends PureComponent {
         <div className="row">
           <div className="column small-12">
             {this.renderFilters()}
+            <div className="button-container">
+              <button
+                type="button"
+                className="c-new-button -light -transparent"
+                onClick={() => this.props.onClearFilters()}
+              >
+                Clear filters
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -49,7 +58,8 @@ class ExploreDatasetFilters extends PureComponent {
 ExploreDatasetFilters.propTypes = {
   data: PropTypes.object,
   onSetDatasetFilter: PropTypes.func,
-  getDatasetsByGraph: PropTypes.func
+  getDatasetsByGraph: PropTypes.func,
+  onClearFilters: PropTypes.func
 };
 
 ExploreDatasetFilters.defaultProps = {

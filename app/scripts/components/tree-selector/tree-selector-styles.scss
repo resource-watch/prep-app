@@ -83,11 +83,11 @@
       &:after {
         position: absolute;
         @include arrow(8px, 2px, 45deg);
-        top: 50%;
+        top: 12px;
         border-color: $dark-blue;
         right: 0;
         left: auto;
-        z-index: 100;
+        z-index: 2;
         transform-origin: 50%;
         transform: translate(-50%, -50%) rotate(135deg);
 
@@ -111,7 +111,7 @@
       width: 100%;
       border-top-left-radius: 0;
       border-top-right-radius: 0;
-      z-index: 2;
+      z-index: 3;
 
       > ul {
         margin: 0;
@@ -130,7 +130,7 @@
   .dropdown-trigger {
     display: flex;
     align-items: center;
-    padding: 10px 15px;
+    padding: 10px 15px 0;
     border-bottom: 2px solid #EEEEEE;
     // border: 1px solid $dark-blue;
     // border-radius: 4px;
@@ -239,6 +239,7 @@
 
       &:not(:last-child) {
         margin-right: 10px;
+        margin-bottom: 10px;
       }
 
       &:last-child {
@@ -247,7 +248,7 @@
         flex: 1;
 
         > input[type="text"] {
-          width: 100%;
+          width: calc(100% - 16px);
         }
       }
 
@@ -273,6 +274,7 @@
 
       // selector placeholder
       > input[type="text"] {
+        margin-bottom: 10px;
         font-family: $base-font-family;
         font-size: $small-font-size;
         color: $dark-blue;

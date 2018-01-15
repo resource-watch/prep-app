@@ -10,6 +10,7 @@ const mapStateToProps = state => ({
   lat: state.explorePage.map.lat,
   lng: state.explorePage.map.lng,
   zoom: state.explorePage.map.zoom,
+  minZoom: state.explorePage.map.minZoom,
   basemap: state.explorePage.map.basemap,
   labels: state.explorePage.map.labels,
   boundaries: state.explorePage.map.boundaries

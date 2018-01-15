@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import find from 'lodash/find';
 import { SimpleSelect } from 'react-selectize';
 import 'react-selectize/themes/index.css';
 import './legend-nexgddp-toolbar-style.scss';
@@ -42,39 +41,52 @@ class LegendNexGDDPToolbar extends PureComponent {
   onResolutionChange(temporalResolution) {
     this.setState({ temporalResolution }, () => {
       this.updatingPeriods();
-      this.props.setNexGDDPActiveLayer({ ...this.state, id: this.props.layerSpec.dataset });
+      this.props.setMultiActiveLayer({ ...this.state, id: this.props.layerSpec.dataset });
     });
   }
 
   onPeriodChange(period) {
     this.setState({ period }, () => {
-      this.props.setNexGDDPActiveLayer({ ...this.state, id: this.props.layerSpec.dataset });
+      this.props.setMultiActiveLayer({ ...this.state, id: this.props.layerSpec.dataset });
     });
   }
 
   onScenarioChange(scenario) {
     this.setState({ scenario }, () => {
-      this.props.setNexGDDPActiveLayer({ ...this.state, id: this.props.layerSpec.dataset });
+      this.props.setMultiActiveLayer({ ...this.state, id: this.props.layerSpec.dataset });
     });
   }
 
   updatingPeriods() {
-    const periodsOptions = find(this.state.temporalResolutionOptions, {
-      value: this.state.temporalResolution.value
-    }).periods.map(p => ({ label: p.label, value: p.id }));
-    this.setState({ period: periodsOptions[0], periodsOptions });
+    const { period: propPeriod } = this.props.layerSpec;
+    const temporalResolution = this.state.temporalResolutionOptions.find(t => t.value === this.state.temporalResolution.value);
+    const periodsOptions = temporalResolution.periods.map(p => ({ label: p.label, value: p.id }));
+    const period = periodsOptions.find(s => s.value === (propPeriod || {}).label) || periodsOptions[0];
+
+    this.setState({
+      period,
+      periodsOptions
+    });
   }
 
   updatingCombos(data) {
+    const {
+      temp_resolution: propTemporalSolution,
+      scenario: propScenarioSolution
+    } = this.props.layerSpec;
+
     // Temporal resolution (decadal, 30 years)
     const temporalResolutionOptions = data.temporalResolution.map(t => ({ label: t.label, value: t.id, periods: t.periods }));
+    const temporalResolution = temporalResolutionOptions.find(t => t.value === propTemporalSolution) || temporalResolutionOptions[0];
+
     // Scenarios
     const scenariosOptions = data.scenarios.map(s => ({ label: s.label, value: s.id }));
+    const scenario = scenariosOptions.find(s => s.value === propScenarioSolution) || scenariosOptions[0];
 
     this.setState({
-      temporalResolution: temporalResolutionOptions[0],
+      temporalResolution,
       temporalResolutionOptions,
-      scenario: scenariosOptions[0],
+      scenario,
       scenariosOptions
     }, this.updatingPeriods);
   }
@@ -125,7 +137,7 @@ class LegendNexGDDPToolbar extends PureComponent {
 
 LegendNexGDDPToolbar.propTypes = {
   layerSpec: PropTypes.object,
-  setNexGDDPActiveLayer: PropTypes.func
+  setMultiActiveLayer: PropTypes.func
 };
 
 export default LegendNexGDDPToolbar;
