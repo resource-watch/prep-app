@@ -113,13 +113,14 @@ class Map extends PureComponent {
     this.removeAllLayers();
 
     if (this.layersRequest) this.layersRequest.cancel();
-    if (this.props.layers.length === 0) return this.setState({ loading: false });
 
     const promises = this.props.layers.map(layerSpec => layerManager(this.map, layerSpec));
 
     this.layersRequest = Promise.all(promises)
       .then((layers) => {
+        this.removeAllLayers();
         this.addedLayers = layers;
+        this.addedLayers.forEach(layer => this.map.addLayer(layer));
       }).catch((reason) => {
         console.error(reason);
       }).finally(() => {

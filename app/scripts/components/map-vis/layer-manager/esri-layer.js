@@ -43,13 +43,15 @@ export default (leafletMap, layerSpec) => {
         } else {
           layerElement.style.opacity = 0;
         }
-        resolve(layer);
+        // resolve(layer);
       });
 
-      layer.on('requesterror', err => reject(err));
+      resolve(layer);
+
+      // layer.on('requesterror', err => reject(err));
 
       // adding map
-      leafletMap.addLayer(layer);
+      // leafletMap.addLayer(layer);
 
       // removing layer before resolve
       onCancel(() => leafletMap.removeLayer(layer));
