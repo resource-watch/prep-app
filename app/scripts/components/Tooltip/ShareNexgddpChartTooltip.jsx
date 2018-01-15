@@ -35,7 +35,7 @@ class ShareNexgddpChartTooltip extends React.Component {
       children: SaveWidgetModal,
       childrenProps: {
         datasetId: this.props.datasetId,
-        getWidgetConfig: this.props.generateVegaSpec,
+        getWidgetConfig: this.props.getWidgetConfig,
         onClickCheckWidgets: this.props.onClickCheckWidgets
       }
     });
@@ -56,7 +56,7 @@ class ShareNexgddpChartTooltip extends React.Component {
 ShareNexgddpChartTooltip.propTypes = {
   datasetId: PropTypes.string,
   toggleTooltip: PropTypes.func,
-  generateVegaSpec: PropTypes.func,
+  getWidgetConfig: PropTypes.func,
   onClickCheckWidgets: PropTypes.func,
   toggleEditorModal: PropTypes.func
 };
