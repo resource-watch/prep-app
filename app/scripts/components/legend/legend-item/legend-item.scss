@@ -41,4 +41,15 @@
     border-right: 6px solid transparent;
     border-bottom: 9px solid black;
   }
+
+  .custom-icon {
+    width: 14px;
+    height: 14px;
+
+    img {
+      display: block;
+      width: 14px;
+      height: 14px;
+    }
+  }
 }
