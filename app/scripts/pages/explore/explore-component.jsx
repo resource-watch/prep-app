@@ -138,18 +138,19 @@ class ExplorePage extends PureComponent {
               </div>
             </div>
           </div>
-          <div className="actions">
-            <div>
-              <button
-                className="toggle-status"
-                onClick={() => this.setState({ isSidebarHidden: !isSidebarHidden })}
-              >
-                {isSidebarHidden ?
-                  <Icon name="icon-arrow-right" className="-medium" /> :
-                  <Icon name="icon-arrow-left" className="-medium" />}
-              </button>
-            </div>
-          </div>
+          {!selectedDataset &&
+            <div className="actions">
+              <div>
+                <button
+                  className="toggle-status"
+                  onClick={() => this.setState({ isSidebarHidden: !isSidebarHidden })}
+                >
+                  {isSidebarHidden ?
+                    <Icon name="icon-arrow-right" className="-medium" /> :
+                    <Icon name="icon-arrow-left" className="-medium" />}
+                </button>
+              </div>
+            </div>}
         </div>
 
         {/* Datasets panel info */}
