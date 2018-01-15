@@ -31,7 +31,7 @@ const initialState = {
     basemap: 'default',
     /** @type {'none'|'dark'|'light'} labels */
     labels: 'none',
-    boundaries: false
+    boundaries: true
   },
   // Dataset loaded in the dataset page
   /** @type {object} dataset */
