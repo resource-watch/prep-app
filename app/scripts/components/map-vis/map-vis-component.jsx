@@ -110,7 +110,7 @@ class Map extends PureComponent {
 
     // Cleaning all layers before add the new ones
     // TODO: cached layers instead remove all layers everytime
-    this.removeAllLayers();
+    // this.removeAllLayers();
 
     if (this.layersRequest) this.layersRequest.cancel();
 
