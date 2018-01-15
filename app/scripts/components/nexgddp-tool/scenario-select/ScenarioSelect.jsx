@@ -13,9 +13,11 @@ class ScenarioSelect extends React.PureComponent {
       <div className="c-scenario-select">
         <Select
           name="scenario"
+          id="nexgddp-scenario-select"
           value={scenario.selection}
           onChange={setScenarioSelection}
           options={scenario.options}
+          clearable={false}
         />
       </div>
     );

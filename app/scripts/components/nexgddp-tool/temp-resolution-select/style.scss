@@ -1,0 +1,20 @@
+@import 'settings';
+
+.c-temp-resolution-select {
+  position: relative;
+  z-index: 1;
+
+  .Select {
+    border: 0;
+    border-radius: 0;
+
+    .Select-control {
+      border: 2px solid $border-color;
+      border-radius: 0;
+    }
+
+    .Select-menu-outer {
+      z-index: 10000;
+    }
+  }
+}

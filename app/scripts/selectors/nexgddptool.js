@@ -101,6 +101,8 @@ export const getIndicatorUnit = createSelector(
   }
 );
 
+// NOTE: only use this selector if the tempResolution attribute
+// has not been set yet in the reducer
 export const getTempResolution = createSelector(
   dataset,
   (dataset) => { // eslint-disable-line no-shadow
