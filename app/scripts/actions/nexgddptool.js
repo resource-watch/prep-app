@@ -9,6 +9,8 @@ import {
   NEXGDDP_SET_GRAPH_MODE,
   NEXGDDP_SET_SCENARIO_OPTIONS,
   NEXGDDP_SET_SCENARIO_SELECTION,
+  NEXGDDP_SET_TEMP_RESOLUTION_OPTIONS,
+  NEXGDDP_SET_TEMP_RESOLUTION_SELECTION,
   NEXGDDP_SET_RANGE1_OPTIONS,
   NEXGDDP_SET_RANGE1_SELECTION,
   NEXGDDP_SET_RANGE2_OPTIONS,
@@ -41,6 +43,9 @@ export function updateUrl() {
       graphMode: state.graphMode,
       scenario: state.scenario.selection
         ? state.scenario.selection.value
+        : undefined,
+      tempResolution: state.tempResolution.selection
+        ? state.tempResolution.selection.value
         : undefined,
       range1: state.range1.selection
         ? state.range1.selection.value
@@ -222,9 +227,9 @@ export function loadIndicatorDataset() {
     const state = getState();
     const indicatorId = getIndicatorId(state);
     const scenario = state.nexgddptool.scenario.selection.value;
-    const tempResolution = getTempResolution(state);
+    const tempResolution = state.nexgddptool.tempResolution.selection;
 
-    return fetch(`${process.env.RW_API_URL}/nexgddp/dataset/${indicatorId}/${scenario}/${tempResolution}?env=${config.datasetEnv}`)
+    return fetch(`${process.env.RW_API_URL}/nexgddp/dataset/${indicatorId}/${scenario}/${tempResolution.value}?env=${config.datasetEnv}`)
       .then((res) => {
         if (res.ok) return res.json();
         throw new Error('Unable to fetch the layers');
@@ -255,13 +260,50 @@ export function loadIndicatorDataset() {
 }
 
 export function setScenarioSelection(selection, changeUrl = true) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch({
       type: NEXGDDP_SET_SCENARIO_SELECTION,
       payload: selection
     });
 
+    if (getState().nexgddptool.tempResolution.selection) {
+      dispatch(loadIndicatorDataset());
+    }
+
+    if (changeUrl) dispatch(updateUrl());
+  };
+}
+
+export function setTempResolutionOptions(options) {
+  return (dispatch) => {
+    dispatch({
+      type: NEXGDDP_SET_TEMP_RESOLUTION_OPTIONS,
+      payload: options
+    });
+  };
+}
+
+export function setTempResolutionSelection(selection, changeUrl = true) {
+  return (dispatch, getState) => {
+    // We set the selection
+    dispatch({
+      type: NEXGDDP_SET_TEMP_RESOLUTION_SELECTION,
+      payload: selection
+    });
+
     dispatch(loadIndicatorDataset());
+
+    // We need to reset the date selectors too
+    const range1Options = getState().nexgddptool.range1.options;
+    dispatch({
+      type: NEXGDDP_SET_RANGE1_SELECTION,
+      payload: range1Options[selection.value][0]
+    });
+
+    dispatch({
+      type: NEXGDDP_SET_RANGE2_SELECTION,
+      payload: undefined
+    });
 
     if (changeUrl) dispatch(updateUrl());
   };
@@ -385,18 +427,29 @@ export function getUrlState() {
         promises.push(dispatch(setScenarioSelection(scenarioOption, false)));
       }
     }
-    if (params.range1) {
-      const range1Options = getState().nexgddptool.range1.options;
-      const range1Option = range1Options.find(s => s.value === params.range1);
-      if (range1Option) {
-        promises.push(dispatch(setRange1Selection(range1Option, false)));
+    if (params.tempResolution) {
+      const tempResolutionOptions = getState().nexgddptool.tempResolution.options;
+      const tempResolutionOption = tempResolutionOptions.find(t => t.value === params.tempResolution);
+      if (tempResolutionOption) {
+        promises.push(dispatch(setTempResolutionSelection(tempResolutionOption, false)));
       }
-    }
-    if (params.range2) {
-      const range2Options = getState().nexgddptool.range2.options;
-      const range2Option = range2Options.find(s => s.value === params.range2);
-      if (range2Option) {
-        promises.push(dispatch(setRange2Selection(range2Option, false)));
+
+      if (params.range1) {
+        const range1Options = getState().nexgddptool.range1.options;
+        const range1Option = range1Options[tempResolutionOption.value]
+          && range1Options[tempResolutionOption.value].find(s => s.value === params.range1);
+        if (range1Option) {
+          promises.push(dispatch(setRange1Selection(range1Option, false)));
+        }
+      }
+
+      if (params.range2) {
+        const range2Options = getState().nexgddptool.range2.options;
+        const range2Option = range2Options[tempResolutionOption.value]
+          && range2Options[tempResolutionOption.value].find(s => s.value === params.range2);
+        if (range2Option) {
+          promises.push(dispatch(setRange2Selection(range2Option, false)));
+        }
       }
     }
     if (params.basemap) {
@@ -416,18 +469,32 @@ export function getUrlState() {
 
 export function setDefaultState() {
   return (dispatch, getState) => {
-    const store = getState().nexgddptool;
+    const store = getState();
+    const tempResolutionValue = getTempResolution(store);
 
     // We keep the promises so we wait for the state to be set
     // before moving on to something else
     const promises = [];
 
-    if (!store.range1.selection && store.range1.options.length) {
-      promises.push(dispatch(setRange1Selection(store.range1.options[0])));
+    // NOTE: do not change the order of the three dispatchs without
+    // testing this function
+    // setTempResolutionSelection will execute loadIndicatorDataset
+
+    if (!store.nexgddptool.scenario.selection && store.nexgddptool.scenario.options.length) {
+      promises.push(dispatch(setScenarioSelection(store.nexgddptool.scenario.options[0])));
     }
 
-    if (!store.scenario.selection && store.scenario.options.length) {
-      promises.push(dispatch(setScenarioSelection(store.scenario.options[0])));
+    if (!store.nexgddptool.range1.selection && Object.keys(store.nexgddptool.range1.options).length && store.nexgddptool.tempResolution.options.length) {
+      const options = store.nexgddptool.range1.options[tempResolutionValue];
+      if (options && options.length) {
+        const range1Promise = dispatch(setRange1Selection(options[0]));
+        promises.push(range1Promise);
+      }
+    }
+
+    if (!store.nexgddptool.tempResolution.selection && store.nexgddptool.tempResolution.options.length) {
+      const tempResolution = store.nexgddptool.tempResolution.options.find(t => t.value === tempResolutionValue);
+      promises.push(dispatch(setTempResolutionSelection(tempResolution || store.nexgddptool.tempResolution.options[0])));
     }
 
     // Needed to chain the action
@@ -439,7 +506,6 @@ export function getSelectorsInfo() {
   return (dispatch, getState) => {
     const state = getState();
     const indicatorId = getIndicatorId(state);
-    const tempResolution = getTempResolution(state);
 
     return fetch(`${process.env.RW_API_URL}/nexgddp/info/${indicatorId}`)
       .then((res) => {
@@ -456,9 +522,21 @@ export function getSelectorsInfo() {
         const scenarioPromise = dispatch(setScenarioOptions(scenarioOptions));
         promises.push(scenarioPromise);
 
+        // We populate the temporal resoution selector
+        const tempResolutionOptions = temporalResolution.map(t => ({ label: t.label, value: t.id }));
+        const tempResolutionPromise = dispatch(setTempResolutionOptions(tempResolutionOptions));
+        promises.push(tempResolutionPromise);
+
         // We populate the date range selectors
-        const dateRangeOptions = temporalResolution.find(t => t.id === tempResolution).periods
-          .map(d => ({ label: d.label, value: d.id }));
+        const dateRangeOptions = tempResolutionOptions
+          .map((tempResolutionOption) => { // eslint-disable-line arrow-body-style
+            return {
+              [tempResolutionOption.value]: temporalResolution
+                .find(t => t.id === tempResolutionOption.value).periods
+                .map(d => ({ label: d.label, value: d.id }))
+            };
+          })
+          .reduce((res, options) => Object.assign({}, res, options), {});
         const dateRangePromise = Promise.all([
           dispatch(setRange1Options(dateRangeOptions)),
           dispatch(setRange2Options(dateRangeOptions))

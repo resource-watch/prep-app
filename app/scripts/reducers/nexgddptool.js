@@ -7,6 +7,8 @@ import {
   NEXGDDP_SET_GRAPH_MODE,
   NEXGDDP_SET_SCENARIO_OPTIONS,
   NEXGDDP_SET_SCENARIO_SELECTION,
+  NEXGDDP_SET_TEMP_RESOLUTION_OPTIONS,
+  NEXGDDP_SET_TEMP_RESOLUTION_SELECTION,
   NEXGDDP_SET_RANGE1_OPTIONS,
   NEXGDDP_SET_RANGE1_SELECTION,
   NEXGDDP_SET_RANGE2_OPTIONS,
@@ -58,17 +60,24 @@ const initialState = {
     /** @type {{ label: string, value: string }} selection */
     selection: undefined
   },
-  // Range for the visualization
-  range1: {
+  // Resolution temporal used by the dates selectors
+  tempResolution: {
     /** @type {{ label: string, value: string }[]} options */
     options: [],
     /** @type {{ label: string, value: string }} selection */
     selection: undefined
   },
+  // Range for the visualization
+  range1: {
+    /** @type {{ [tempResolution: string]: { label: string, value: string }[] }} options */
+    options: {},
+    /** @type {{ label: string, value: string }} selection */
+    selection: undefined
+  },
   // Comparison range for the visualization
   range2: {
-    /** @type {{ label: string, value: string }[]} options */
-    options: [],
+    /** @type {{ [tempResolution: string]: { label: string, value: string }[] }} options */
+    options: {},
     /** @type {{ label: string, value: string }} selection */
     selection: undefined
   },
@@ -120,6 +129,18 @@ export default function (state = initialState, action) {
     case NEXGDDP_SET_SCENARIO_SELECTION: {
       return Object.assign({}, state, {
         scenario: Object.assign({}, state.scenario, { selection: action.payload })
+      });
+    }
+
+    case NEXGDDP_SET_TEMP_RESOLUTION_OPTIONS: {
+      return Object.assign({}, state, {
+        tempResolution: Object.assign({}, state.tempResolution, { options: action.payload })
+      });
+    }
+
+    case NEXGDDP_SET_TEMP_RESOLUTION_SELECTION: {
+      return Object.assign({}, state, {
+        tempResolution: Object.assign({}, state.tempResolution, { selection: action.payload })
       });
     }
 

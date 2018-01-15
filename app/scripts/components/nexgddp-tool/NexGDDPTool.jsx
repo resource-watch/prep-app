@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ScenarioSelect from './scenario-select';
 import DateRangeSelect from './date-range-select/DateRangeSelect';
+import TempResolutionSelect from './temp-resolution-select';
 import { CompareMap, ToggleMap, DifferenceMap, SimpleMap } from './tool-map';
 import LocationSearch from './location-search/LocationSearch';
 import TimeseriesChart from './tool-chart/TimeseriesChart';
@@ -45,6 +46,10 @@ class NexGDDPTool extends React.PureComponent {
         { loading && <Spinner inner /> }
         <div className="filters">
           <div className="row">
+            <div className="columns small-12 medium-4">
+              <label htmlFor="nexgddp-temp-resolution-select">Temporal resolution</label>
+              <TempResolutionSelect />
+            </div>
             <div className="columns small-12 medium-4">
               <label htmlFor="nexgddp-date-range-select">Date(s)</label>
               <DateRangeSelect />
