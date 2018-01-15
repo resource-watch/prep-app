@@ -1,8 +1,8 @@
 .c-explore-map {
   top: $header-height-short;
-  left: $sidebar-width;
+  left: 0;
   bottom: 0;
-  width: calc(100% - #{$sidebar-width});
+  width: 100%;
   position: absolute;
   z-index: 0;
 
