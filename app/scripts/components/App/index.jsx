@@ -118,10 +118,10 @@ class App extends React.Component {
           }
           <div className="l-footer-down">
             <div className="row">
-              <div className="column small-6 align-middle">
+              <div className="column small-12 medium-12 large-6 align-middle">
                 <SocialNav />
               </div>
-              <div className="column small-6 align-middle">
+              <div className="column small-6 medium-12 large-6 align-middle">
                 <SecondaryNav />
               </div>
             </div>
