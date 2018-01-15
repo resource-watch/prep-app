@@ -25,5 +25,8 @@ export default {
   [actions.setDataFilters]: datasetFiltersReducers.setDataFilters,
   [actions.setDatasetFilter]: datasetFiltersReducers.setDatasetFilter,
   [actions.setGraphFilter]: datasetFiltersReducers.setGraphFilter,
-  [actions.setNexGDDPActiveLayer]: datasetsListReducers.setNexGDDPActiveLayer
+  [actions.setNexGDDPActiveLayer]: datasetsListReducers.setNexGDDPActiveLayer,
+  [actions.clearFilters]: datasetFiltersReducers.clearFilters,
+  [actions.onClearFilters]: datasetFiltersReducers.onClearFilters,
+  [actions.updateDataFilters]: datasetFiltersReducers.updateDataFilters
 };

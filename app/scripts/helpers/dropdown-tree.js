@@ -4,7 +4,7 @@
    * @param {Object} tree used to populate selectors. Contains all options available.
    * @param {Object[]} elements Contains values to be selected in the data tree.
    */
-const selectElementsFromTree = (tree = {}, elements = [], deselect = false) => {
+export const selectElementsFromTree = (tree = {}, elements = [], deselect = false) => {
   let found = false;
   for (let i = 0; i < elements.length && !found; i++) {
     if (elements[i] === tree.value) {
@@ -13,10 +13,28 @@ const selectElementsFromTree = (tree = {}, elements = [], deselect = false) => {
     }
   }
 
-  (tree.children || []).forEach((child) => {
-    selectElementsFromTree(child, elements, deselect);
-  });
+  if ((tree.children || []).length) {
+    tree.children.forEach((child) => {
+      selectElementsFromTree(child, elements, deselect);
+    });
+  }
 };
 
-export default selectElementsFromTree;
+export const getSelectedElements = (tree = {}, filters) => {
+  const newTree = Object.assign({}, tree);
+
+  Object.keys(filters).forEach((filterKey) => {
+    const filterValues = filters[filterKey];
+    const dataTree = newTree[filterKey] || [];
+
+    dataTree.forEach(child => selectElementsFromTree(child, filterValues));
+  });
+
+  return newTree;
+}
+
+export default {
+  selectElementsFromTree,
+  getSelectedElements
+};
 
