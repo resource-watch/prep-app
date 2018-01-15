@@ -8,6 +8,9 @@ import { wriAPISerializer } from 'helpers/wri-api-serializer';
 import DatasetFilterService from 'services/dataset-filter-service';
 import GraphService from 'services/graph-service';
 
+// helpers
+import { getSelectedElements, selectElementsFromTree } from 'helpers/dropdown-tree';
+
 // Update URL
 export const updateURLParams = createThunkAction('updateURLParams', () => (dispatch, getState) => {
   const { explorePage } = getState();
@@ -60,6 +63,13 @@ export const failureDatasets = createAction('failureDatasets');
 // Dataset filters
 export const setDataFilters = createAction('explore-dataset-filters/setDataFilters');
 export const setGraphFilter = createAction('explore-dataset-filters/setGraphFilter');
+export const clearFilters = createAction('explore-dataset-filters/clearFilters');
+
+export const onClearFilters = createThunkAction('explore-dataset-filters/onClearFilters', () => (dispatch) => {
+  dispatch(clearFilters());
+  dispatch(setInitialFilterStatus());
+  dispatch(updateURLParams());
+});
 
 export const fetchDatasets = createThunkAction('fetchDatasets', () => (dispatch) => {
   const params = {
@@ -112,10 +122,36 @@ export const setBoundaries = createThunkAction('setBoundaries', () => (dispatch)
   dispatch(updateURLParams());
 });
 
+export const setDatasetFilter = createAction('explore-dataset-filters/setDatasetFilter');
+export const updateDataFilters = createAction('explore-dataset-filters/updateDataFilters');
+export const setInitialFilterStatus = createThunkAction('explore-dataset-filters/setInitialFilterStatus', () => (dispatch, getState) => {
+  const { data, originalData, filters } = getState().explorePage.datasetFilters;
+  const _data = Object.assign({}, data);
+  const _originalData = Object.assign({}, originalData);
 
-export const setDatasetFilter = createThunkAction('explore-dataset-filters/setDatasetFilter', () => (dispatch) => {
-  dispatch(updateURLParams());
+  if (!Object.keys(data).length) {
+    dispatch(updateDataFilters({}));
+    return;
+  }
+  if (!Object.keys(filters).length) {
+    dispatch(updateDataFilters({ ...originalData }));
+    return;
+  }
+
+  // const newData = Object.assign({}, data);
+
+  const newData = getSelectedElements(_data, filters);
+
+  Object.keys(filters).forEach((filterKey) => {
+    const filterValues = filters[filterKey];
+    const dataTree = newData[filterKey] || [];
+
+    dataTree.forEach(child => selectElementsFromTree(child, filterValues));
+  });
+
+  dispatch(updateDataFilters(newData));
 });
+
 
 // URL
 export const initialURLParams = createThunkAction('initialURLParams', () => (dispatch, getState) => {
@@ -162,14 +198,15 @@ export const getFiltersData = createThunkAction('explore-dataset-filters/getFilt
   (dispatch) => {
     Promise.all([
       DatasetFilterService.getTopics(),
-      DatasetFilterService.getGeographies(),
-      DatasetFilterService.getDataTypes(),
-      DatasetFilterService.getPeriods()
+      // DatasetFilterService.getGeographies(),
+      DatasetFilterService.getDataTypes()
+      // DatasetFilterService.getPeriods()
     ]
     ).then((values = []) => {
       const data = {};
-      values.map(val => Object.assign(data, val));
+      values.forEach(val => Object.assign(data, val));
       dispatch(setDataFilters(data));
+      dispatch(setInitialFilterStatus());
     });
   }
 );
@@ -178,6 +215,7 @@ export const onSetDatasetFilter = createThunkAction('explore-dataset-filters/onS
   (dispatch) => {
     const key = Object.keys(filter)[0];
     dispatch(setDatasetFilter(filter));
+    // dispatch(updateDataFilters());
     dispatch(setDatasetsTagFilter(key, filter[key])); // this is bullshit, but need it to keep consistency. Remove ASAP
     dispatch(updateURLParams());
   }

@@ -6,15 +6,15 @@ import * as exploreActions from '../explore-actions';
 import reducers, { initialState } from './explore-dataset-filters-reducer';
 
 import ExploreDatasetFiltersComponent from './explore-dataset-filters-component';
-import getFilterStatus from './explore-dataset-filters-selectors';
+// import getFilterStatus from './explore-dataset-filters-selectors';
 
 const mapStateToProps = state => ({
-  data: getFilterStatus(state)
+  data: state.explorePage.datasetFilters.data
 });
 
 class ExploreDatasetFiltersContainer extends Component {
   componentWillMount() {
-    this.props.getFiltersData();
+    if (!Object.keys(this.props.data).length) this.props.getFiltersData();
   }
 
   render() {
@@ -25,7 +25,8 @@ class ExploreDatasetFiltersContainer extends Component {
 }
 
 ExploreDatasetFiltersContainer.propTypes = {
-  getFiltersData: PropTypes.func
+  getFiltersData: PropTypes.func,
+  data: PropTypes.object
 };
 
 export { exploreActions, reducers, initialState };

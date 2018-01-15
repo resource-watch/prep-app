@@ -20,7 +20,7 @@ const chartSpec = {
   "data": [
     {
       "name": "table",
-      "format": {"parse": {"date": "date"}},
+      "format": {"parse": {"x": "date"}},
       "values": []
     },
     {
@@ -29,7 +29,7 @@ const chartSpec = {
       "transform": [
         {
           "type": "filter",
-          "test": "year(datum.date) >= utcyear(range1.start) && year(datum.date) <= utcyear(range1.end)"
+          "test": "year(datum.x) >= utcyear(range1.start) && year(datum.x) <= utcyear(range1.end)"
         }
       ]
     },
@@ -39,7 +39,7 @@ const chartSpec = {
       "transform": [
         {
           "type": "filter",
-          "test": "range2 ? (year(datum.date) >= utcyear(range2.start) && year(datum.date) <= utcyear(range2.end)) : false"
+          "test": "range2 ? (year(datum.x) >= utcyear(range2.start) && year(datum.x) <= utcyear(range2.end)) : false"
         }
       ]
     }
@@ -76,7 +76,7 @@ const chartSpec = {
       "type": "utc",
       "range": "width",
       "zero": false,
-      "domain": {"data": "table","field": "date"}
+      "domain": {"data": "table","field": "x"}
     },
     {
       "name": "y",
@@ -147,7 +147,7 @@ const chartSpec = {
       "properties": {
         "enter": {
           "interpolate": {"value": "monotone"},
-          "x": {"scale": "x","field": "date"},
+          "x": {"scale": "x","field": "x"},
           "y": {"scale": "y","field": "q75"},
           "y2": {"scale": "y","field": "q25"},
           "fill": {"value": "#E9ECEE"}
@@ -160,7 +160,7 @@ const chartSpec = {
       "properties": {
         "enter": {
           "interpolate": {"value": "monotone"},
-          "x": {"scale": "x","field": "date"},
+          "x": {"scale": "x","field": "x"},
           "y": {"scale": "y","field": "q50"},
           "stroke": {"value": "#263e57"},
           "strokeWidth": {"value": 2},
@@ -174,7 +174,7 @@ const chartSpec = {
       "properties": {
         "enter": {
           "interpolate": {"value": "monotone"},
-          "x": {"scale": "x","field": "date"},
+          "x": {"scale": "x","field": "x"},
           "y": {"scale": "y","field": "q75"},
           "y2": {"scale": "y","field": "q25"},
           "fillOpacity": {"value": 0},
@@ -207,7 +207,7 @@ const chartSpec = {
       "properties": {
         "enter": {
           "interpolate": {"value": "monotone"},
-          "x": {"scale": "x","field": "date"},
+          "x": {"scale": "x","field": "x"},
           "y": {"scale": "y","field": "q75"},
           "y2": {"scale": "y","field": "q25"},
           "fillOpacity": {"value": 0},
@@ -234,7 +234,36 @@ const chartSpec = {
         }
       }
     }
-  ]
+  ],
+  "interaction_config": [
+    {
+      "name": "tooltip",
+      "config": {
+        "fields": [
+          {
+            "key": "x",
+            "label": "Date",
+            "format": "%Y"
+          },
+          {
+            "key": "q50",
+            "label": "Average",
+            "format": ".2f"
+          },
+          {
+            "key": "q25",
+            "label": "25th percentile",
+            "format": ".2f"
+          },
+          {
+            "key": "q75",
+            "label": "75th percentile",
+            "format": ".2f"
+          }
+        ]
+      }
+    }
+]
 };
 /* eslint-enable */
 
