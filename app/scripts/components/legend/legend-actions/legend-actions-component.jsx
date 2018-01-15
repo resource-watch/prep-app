@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import LayerOpacitySelector from 'components/legend/layer-opacity-selector';
+import LegendMultiLayerSelector from 'components/legend/legend-multi-layer-selector';
 import Icon from 'components/ui/Icon';
 
 import './legend-actions-style.scss';
@@ -12,6 +13,13 @@ export const LegendActions = ({ layerSpec, onOpacity, onVisibility, onInfo, onCl
       layerSpec={layerSpec}
       onOpacityChange={onOpacity}
     />
+
+    {layerSpec.layers.length > 1 &&
+      <LegendMultiLayerSelector
+        layerSpec={layerSpec}
+      />
+    }
+
     <button
       type="button"
       className={layerSpec.visibility ? '' : '-active'}

@@ -199,12 +199,12 @@ export const getFiltersData = createThunkAction('explore-dataset-filters/getFilt
     Promise.all([
       DatasetFilterService.getTopics(),
       DatasetFilterService.getGeographies(),
-      DatasetFilterService.getDataTypes(),
-      DatasetFilterService.getPeriods()
+      DatasetFilterService.getDataTypes()
+      // DatasetFilterService.getPeriods()
     ]
     ).then((values = []) => {
       const data = {};
-      values.map(val => Object.assign(data, val));
+      values.forEach(val => Object.assign(data, val));
       dispatch(setDataFilters(data));
       dispatch(setInitialFilterStatus());
     });
@@ -242,4 +242,4 @@ export const getDatasetsByGraph = createThunkAction('explore-page/getDatasetsByG
   }
 );
 
-export const setNexGDDPActiveLayer = createAction('explore-dataset-list/setNexGDDPActiveLayer');
+export const setMultiActiveLayer = createAction('explore-dataset-list/setMultiActiveLayer');
