@@ -14,7 +14,7 @@ export const getActiveLayers = createSelector(
     const layers = filter(flatten(
       activeDatasets.map(({ layer, opacity, visibility, zIndex, isSelected }) => layer.map((l) => {
         const layerIndex = calcZIndex(length, zIndex);
-        return { ...l, zIndex, layerIndex, opacity, visibility, isSelected };
+        return { ...l, zIndex, layerIndex, opacity, visibility, isSelected, layers: layer };
       }))
     ), { isActive: true });
     return layers;

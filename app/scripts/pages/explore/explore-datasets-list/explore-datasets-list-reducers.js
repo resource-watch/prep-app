@@ -151,11 +151,12 @@ export const updateOpacity = (state, { payload }) => {
   };
 };
 
-export const setNexGDDPActiveLayer = (state, { payload }) => {
-  const { temporalResolution, period, scenario, id } = payload;
+export const setMultiActiveLayer = (state, { payload }) => {
+  const { temporalResolution, period, scenario, id, layerId } = payload;
 
 
   const items = state.datasets.items.map((d) => {
+
     if (d.id === id && d.provider === 'nexgddp') {
       const currentLayer = d.metadata[0].info.nexgddp.layers.find(l =>
         l.temp_resolution === temporalResolution.value &&
@@ -178,6 +179,15 @@ export const setNexGDDPActiveLayer = (state, { payload }) => {
         isActive: true,
         period
       }];
+    }
+
+    if (d.id === id && d.provider !== 'nexgddp') {
+      d.layer = d.layer.map(l => ({
+        ...l,
+        isActive: l.id === layerId
+      }));
+
+      console.log(d.layer);
     }
 
     return d;

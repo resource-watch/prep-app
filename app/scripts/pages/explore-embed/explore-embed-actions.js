@@ -204,4 +204,4 @@ export const getDatasetsByGraph = createThunkAction('explore-page/getDatasetsByG
   }
 );
 
-export const setNexGDDPActiveLayer = createAction('explore-dataset-list/setNexGDDPActiveLayer');
+export const setMultiActiveLayer = createAction('explore-dataset-list/setMultiActiveLayer');

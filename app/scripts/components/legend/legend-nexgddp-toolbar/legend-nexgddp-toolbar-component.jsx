@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import find from 'lodash/find';
 import { SimpleSelect } from 'react-selectize';
 import 'react-selectize/themes/index.css';
 import './legend-nexgddp-toolbar-style.scss';
@@ -42,19 +41,19 @@ class LegendNexGDDPToolbar extends PureComponent {
   onResolutionChange(temporalResolution) {
     this.setState({ temporalResolution }, () => {
       this.updatingPeriods();
-      this.props.setNexGDDPActiveLayer({ ...this.state, id: this.props.layerSpec.dataset });
+      this.props.setMultiActiveLayer({ ...this.state, id: this.props.layerSpec.dataset });
     });
   }
 
   onPeriodChange(period) {
     this.setState({ period }, () => {
-      this.props.setNexGDDPActiveLayer({ ...this.state, id: this.props.layerSpec.dataset });
+      this.props.setMultiActiveLayer({ ...this.state, id: this.props.layerSpec.dataset });
     });
   }
 
   onScenarioChange(scenario) {
     this.setState({ scenario }, () => {
-      this.props.setNexGDDPActiveLayer({ ...this.state, id: this.props.layerSpec.dataset });
+      this.props.setMultiActiveLayer({ ...this.state, id: this.props.layerSpec.dataset });
     });
   }
 
@@ -102,8 +101,6 @@ class LegendNexGDDPToolbar extends PureComponent {
       scenariosOptions
     } = this.state;
 
-    console.log(period);
-
     return (
       <div className="c-legend-nexgddp-toolbar">
         {temporalResolutionOptions && <SimpleSelect
@@ -140,7 +137,7 @@ class LegendNexGDDPToolbar extends PureComponent {
 
 LegendNexGDDPToolbar.propTypes = {
   layerSpec: PropTypes.object,
-  setNexGDDPActiveLayer: PropTypes.func
+  setMultiActiveLayer: PropTypes.func
 };
 
 export default LegendNexGDDPToolbar;
