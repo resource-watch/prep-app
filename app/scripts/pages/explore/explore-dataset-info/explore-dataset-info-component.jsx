@@ -15,7 +15,7 @@ class DatasetInfo extends PureComponent {
   static getHeader(dataset) {
     const info = getInfo(dataset);
     const title = getTitle(dataset);
-    const organization = info['organization-long'] || info.organization;
+    const organization = info['organization-long'] || info.organization_long || info.organization;
 
     return (
       <header className="header-container">
