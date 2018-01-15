@@ -47,9 +47,8 @@ class DatasetInfo extends PureComponent {
 
   getContent(dataset) {
     const { embed } = this.props;
-    const metadata = getMetadata(dataset);
     const info = getInfo(dataset);
-    const description = metadata.description || info.description;
+    const description = info.function;
     const { source } = info;
     const datasetTags = (((dataset.vocabulary || [])[0] || {}).tags || []);
     const areasList = [];

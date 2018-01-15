@@ -99,6 +99,14 @@ class DatasetDetail extends React.Component {
       return <LoadingSpinner />;
     }
 
+    const metaData = this.props.data.metadata && this.props.data.metadata.length ?
+      this.props.data.metadata[0].attributes : {
+        id: this.props.data.id,
+        attributes: {
+          title: this.props.data.name,
+          message: 'Content cooming soon'
+        }
+      };
     const data = this.props.data.metadata && this.props.data.metadata.length > 0
       ? this.props.data.metadata[0].attributes.info
       : {
@@ -135,7 +143,7 @@ class DatasetDetail extends React.Component {
       <div>
         <SectionIntro data={data} downloadUrl={DatasetDetail.getDownloadUrl(this.props.data)} currentSection={currentSection} >
           <div className="c-article">
-            <ReactMarkdown source={data.description} className="c-markdown" />
+            <ReactMarkdown source={data.description || metaData.description} className="c-markdown" />
           </div>
         </SectionIntro>
 

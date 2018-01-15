@@ -125,6 +125,8 @@ class Map extends PureComponent {
       }).finally(() => {
         if (!this.layersRequest.isCancelled()) this.setState({ loading: false });
       });
+
+    return this.layersRequest;
   }
 
   toggleLayers() {
