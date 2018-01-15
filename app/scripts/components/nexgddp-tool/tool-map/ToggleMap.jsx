@@ -105,6 +105,7 @@ class ToggleMap extends React.PureComponent {
           style={{ height: 440 }}
           className={mapClassNames}
           {...mapOptions}
+          onClick={this.addMarker}
           onSingleclick={({ latlng }) => this.props.setMarkerPosition([latlng.lat, latlng.lng])}
           onViewportChanged={(...params) => this.onViewportChanged(...params)}
         >

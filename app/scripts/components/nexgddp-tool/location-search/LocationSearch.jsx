@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Geosuggest from 'react-geosuggest';
 import isEqual from 'lodash/isEqual';
-import './style.scss';
+import Icon from 'components/ui/Icon';
 
 // Redux
 import { setMarkerPosition } from 'actions/nexgddptool';
+
+import './style.scss';
 
 class LocationSearch extends React.Component {
   constructor(props) {
@@ -42,6 +44,7 @@ class LocationSearch extends React.Component {
   render() {
     return (
       <div className="c-location-search">
+        <Icon name="icon-search" />
         <Geosuggest
           ref={(node) => { this.geoSuggest = node; }}
           onSuggestSelect={this.onSuggestSelect}
