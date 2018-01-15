@@ -5,6 +5,7 @@ import URI from 'urijs';
 import { connect } from 'react-redux';
 import WidgetEditor, { modalActions, SaveWidgetModal } from 'widget-editor';
 import ReactMarkdown from 'react-markdown';
+import { wriAPISerializer } from 'helpers/wri-api-serializer';
 
 import TooltipTether from 'components/Tooltip/TooltipTether';
 import metadata from '../../metadata.json';
@@ -15,7 +16,7 @@ import MainNav from '../../components/Navigation/MainNav';
 import Banner from '../../components/Banner';
 
 import SectionIntro from '../SectionIntro';
-import MetadataInfo from '../Explore/MetadataInfo';
+import MetadataInfo from './MetadataInfo';
 import VegaChart from '../Chart/VegaChart';
 import SimpleMap from '../../containers/SimpleMap/SimpleMap';
 import LoadingSpinner from '../Loading/LoadingSpinner';
@@ -138,6 +139,13 @@ class DatasetDetail extends React.Component {
     const currentSection = this.props.location.state && this.props.location.state.prevPath || 'explore';
 
     const dataset = this.props.data;
+    const datasetSpec = {
+      ...dataset,
+      metadata: dataset.metadata.map(m => ({
+        ...m,
+        ...m.attributes
+      }))
+    };
 
     return (
       <div>
@@ -165,7 +173,7 @@ class DatasetDetail extends React.Component {
           <div className="columns small-12 medium-8">
             <div className="c-article">
               <h3>More info</h3>
-              <MetadataInfo data={dataset} />
+              <MetadataInfo dataset={datasetSpec} />
             </div>
           </div>
         </div>
