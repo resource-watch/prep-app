@@ -23,17 +23,17 @@ function UserOptions(props) {
         <ul className="user-options-list">
           <li>
             <a
-              href={`${process.env.RW_API_LOGIN_URL}/facebook?callbackUrl=${process.env.CALLBACK_URL}&applications=${process.env.APPLICATIONS}&token=true&application=prep`}
+              href={`${process.env.RW_API_LOGIN_URL}/facebook?callbackUrl=${process.env.CALLBACK_URL}&origin=${process.env.APPLICATIONS}&token=true&application=prep`}
             >Facebook</a>
           </li>
           <li>
             <a
-              href={`${process.env.RW_API_LOGIN_URL}/google?callbackUrl=${process.env.CALLBACK_URL}&applications=${process.env.APPLICATIONS}&token=true&application=prep`}
+              href={`${process.env.RW_API_LOGIN_URL}/google?callbackUrl=${process.env.CALLBACK_URL}&origin=${process.env.APPLICATIONS}&token=true&application=prep`}
             >Google</a>
           </li>
           <li>
             <a
-              href={`${process.env.RW_API_LOGIN_URL}/twitter?callbackUrl=${process.env.CALLBACK_URL}&applications=${process.env.APPLICATIONS}&token=true&application=prep`}
+              href={`${process.env.RW_API_LOGIN_URL}/twitter?callbackUrl=${process.env.CALLBACK_URL}&origin=${process.env.APPLICATIONS}&token=true&application=prep`}
             >Twitter</a>
           </li>
         </ul>
