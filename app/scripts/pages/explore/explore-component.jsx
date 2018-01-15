@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import { Link } from 'react-router';
 import MainNav from 'components/Navigation/MainNav';
 import Tabs from 'components/ui/Tabs';
@@ -33,9 +34,14 @@ class ExplorePage extends PureComponent {
   }
 
   render() {
-    const { selectedDataset, isSidebarHidden,
+    const { selectedDataset,
       currentTab, setTab, filterQuery, toggleInfo } = this.props;
-    const { filters } = this.state;
+    const { filters, isSidebarHidden } = this.state;
+
+    const sidebarExploreClass = classnames({
+      'c-explore-sidebar': true,
+      '-open': !isSidebarHidden
+    });
 
     return (
       <div className="l-explore">
@@ -55,7 +61,7 @@ class ExplorePage extends PureComponent {
         </header>
 
         {/* Datasets list */}
-        <div className={['c-explore-sidebar', isSidebarHidden ? '' : '-open'].join(' ')}>
+        <div className={sidebarExploreClass}>
           <div className="sidebar-container">
             <header className="sidebar-header">
               <h1 className="sidebar-title">Explore</h1>
@@ -130,6 +136,18 @@ class ExplorePage extends PureComponent {
                     </footer>
                   </div>}
               </div>
+            </div>
+          </div>
+          <div className="actions">
+            <div>
+              <button
+                className="toggle-status"
+                onClick={() => this.setState({ isSidebarHidden: !isSidebarHidden })}
+              >
+                {isSidebarHidden ?
+                  <Icon name="icon-arrow-right" className="-medium" /> :
+                  <Icon name="icon-arrow-left" className="-medium" />}
+              </button>
             </div>
           </div>
         </div>
