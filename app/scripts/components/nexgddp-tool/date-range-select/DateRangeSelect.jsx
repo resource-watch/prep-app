@@ -27,6 +27,7 @@ class DateRangeSelect extends React.PureComponent {
           value={range1.selection}
           onChange={setRange1Selection}
           options={range1.options}
+          clearable={false}
         />
         <Select
           name="enddate"

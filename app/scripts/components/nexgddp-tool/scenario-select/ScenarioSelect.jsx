@@ -17,6 +17,7 @@ class ScenarioSelect extends React.PureComponent {
           value={scenario.selection}
           onChange={setScenarioSelection}
           options={scenario.options}
+          clearable={false}
         />
       </div>
     );
