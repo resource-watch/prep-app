@@ -149,7 +149,7 @@ export function getChartData() {
     const indicatorId = getIndicatorId(state);
     const slug = state.nexgddptool.indicatorDataset.slug;
 
-    return fetch(`${process.env.RW_API_URL}/query?sql=select ${indicatorId}_q25 as q25, ${indicatorId} as q50, ${indicatorId}_q75 as q75, year as date from ${slug}&lat=${lat}&lon=${lng}`)
+    return fetch(`${process.env.RW_API_URL}/query?sql=select ${indicatorId}_q25 as q25, ${indicatorId} as q50, ${indicatorId}_q75 as q75, year as x from ${slug}&lat=${lat}&lon=${lng}`)
       .then((res) => {
         if (res.ok) return res.json();
         throw new Error('Unable to fetch the data of the chart');
