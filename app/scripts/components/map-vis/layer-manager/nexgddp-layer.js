@@ -8,19 +8,19 @@ Promise.config({
   cancellation: true
 });
 
-let fetchRequest;
+// let fetchRequest;
 
-function makeCancellableRequest(url) {
-  // Don't use fetch here because xhr have abort, very useful to make a cancelable request
-  return new Promise((resolve, reject, onCancel) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.onload = () => resolve(xhr);
-    // Note the onCancel argument only exists if cancellation has been enabled!
-    onCancel(() => xhr.abort());
-    xhr.send(null);
-  });
-}
+// function makeCancellableRequest(url) {
+//   // Don't use fetch here because xhr have abort, very useful to make a cancelable request
+//   return new Promise((resolve, reject, onCancel) => {
+//     const xhr = new XMLHttpRequest();
+//     xhr.open('GET', url, true);
+//     xhr.onload = () => resolve(xhr);
+//     // Note the onCancel argument only exists if cancellation has been enabled!
+//     onCancel(() => xhr.abort());
+//     xhr.send(null);
+//   });
+// }
 
 export default (leafletMap, layerSpec) => {
   const { id, layerIndex, opacity, visibility, period } = layerSpec;
@@ -41,13 +41,16 @@ export default (leafletMap, layerSpec) => {
   }
 
   // adding map
-  leafletMap.addLayer(layer);
+  // leafletMap.addLayer(layer);
 
-  return new Promise((resolve, reject, onCancel) => {
-    layer.on('tileload', () => resolve(layer));
-    layer.on('tileerror', err => reject(err));
+  return new Promise((resolve, reject) => {
+    if (layer) return resolve(layer);
+    return reject();
 
-    // removing layer before resolve
-    onCancel(() => leafletMap.removeLayer(layer));
+    // layer.on('tileload', () => resolve(layer));
+    // layer.on('tileerror', err => reject(err));
+
+    // // removing layer before resolve
+    // onCancel(() => leafletMap.removeLayer(layer));
   });
 };

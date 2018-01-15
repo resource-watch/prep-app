@@ -56,14 +56,16 @@ export default (leafletMap, layerSpec) => {
           layer.setOpacity(0);
         }
 
-        layer.on('tileload', () => resolve(layer));
-        layer.on('tileerror', err => reject(err));
+        resolve(layer);
+
+        // layer.on('tileload', () => resolve(layer));
+        // layer.on('tileerror', err => reject(err));
 
         // adding map
-        leafletMap.addLayer(layer);
+        // leafletMap.addLayer(layer);
 
         // removing layer before resolve
-        onCancel(() => leafletMap.removeLayer(layer));
+        // onCancel(() => leafletMap.removeLayer(layer));
       })
       .catch(err => reject(err));
     onCancel(() => postRequest.cancel());

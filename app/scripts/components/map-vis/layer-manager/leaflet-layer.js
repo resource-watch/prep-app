@@ -15,7 +15,7 @@ export default (leafletMap, layerSpec) => {
     layerConfig.body.pane = 'tilePane';
   }
 
-  return new Promise((resolve, reject, onCancel) => {
+  return new Promise((resolve, reject) => {
     switch (layerConfig.type) {
       case 'wms':
         layer = L.tileLayer.wms(layerConfig.url, layerConfig.body);
@@ -40,14 +40,18 @@ export default (leafletMap, layerSpec) => {
         layer.setOpacity(0);
       }
 
-      layer.on('tileload', () => resolve(layer));
-      layer.on('tileerror', err => reject(err));
+      return resolve(layer);
 
-      // adding map
-      leafletMap.addLayer(layer);
+      // layer.on('tileload', () => resolve(layer));
+      // layer.on('tileerror', err => reject(err));
 
-      // removing layer before resolve
-      onCancel(() => leafletMap.removeLayer(layer));
+      // // adding map
+      // leafletMap.addLayer(layer);
+
+      // // removing layer before resolve
+      // onCancel(() => leafletMap.removeLayer(layer));
     }
+
+    return reject();
   });
 };
