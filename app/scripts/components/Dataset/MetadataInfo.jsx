@@ -9,6 +9,7 @@ function parseDate(dateString) {
 const MetadataInfo = ({ dataset }) => {
   const metadata = getMetadata(dataset);
   const info = getInfo(dataset);
+  console.log(metadata)
   return (
     <ul>
       {(info.published_date && info.published_date !== '') &&
@@ -69,10 +70,10 @@ const MetadataInfo = ({ dataset }) => {
         </li>
       }
 
-      {(info['organization-long'] && info['organization-long'] !== '') &&
+      {(info.organization_long && info.organization_long !== '') &&
         <li>
           <span>Organization: </span>
-          <span>{info['organization-long']}</span>
+          <span>{info.organization_long}</span>
         </li>
       }
 
