@@ -59,22 +59,35 @@ class LegendNexGDDPToolbar extends PureComponent {
   }
 
   updatingPeriods() {
-    const periodsOptions = find(this.state.temporalResolutionOptions, {
-      value: this.state.temporalResolution.value
-    }).periods.map(p => ({ label: p.label, value: p.id }));
-    this.setState({ period: periodsOptions[0], periodsOptions });
+    const { period: propPeriod } = this.props.layerSpec;
+    const temporalResolution = this.state.temporalResolutionOptions.find(t => t.value === this.state.temporalResolution.value);
+    const periodsOptions = temporalResolution.periods.map(p => ({ label: p.label, value: p.id }));
+    const period = periodsOptions.find(s => s.value === (propPeriod || {}).label) || periodsOptions[0];
+
+    this.setState({
+      period,
+      periodsOptions
+    });
   }
 
   updatingCombos(data) {
+    const {
+      temp_resolution: propTemporalSolution,
+      scenario: propScenarioSolution
+    } = this.props.layerSpec;
+
     // Temporal resolution (decadal, 30 years)
     const temporalResolutionOptions = data.temporalResolution.map(t => ({ label: t.label, value: t.id, periods: t.periods }));
+    const temporalResolution = temporalResolutionOptions.find(t => t.value === propTemporalSolution) || temporalResolutionOptions[0];
+
     // Scenarios
     const scenariosOptions = data.scenarios.map(s => ({ label: s.label, value: s.id }));
+    const scenario = scenariosOptions.find(s => s.value === propScenarioSolution) || scenariosOptions[0];
 
     this.setState({
-      temporalResolution: temporalResolutionOptions[0],
+      temporalResolution,
       temporalResolutionOptions,
-      scenario: scenariosOptions[0],
+      scenario,
       scenariosOptions
     }, this.updatingPeriods);
   }
@@ -88,6 +101,8 @@ class LegendNexGDDPToolbar extends PureComponent {
       scenario,
       scenariosOptions
     } = this.state;
+
+    console.log(period);
 
     return (
       <div className="c-legend-nexgddp-toolbar">
