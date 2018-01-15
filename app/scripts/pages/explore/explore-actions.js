@@ -198,13 +198,13 @@ export const getFiltersData = createThunkAction('explore-dataset-filters/getFilt
   (dispatch) => {
     Promise.all([
       DatasetFilterService.getTopics(),
-      DatasetFilterService.getGeographies(),
-      DatasetFilterService.getDataTypes(),
-      DatasetFilterService.getPeriods()
+      // DatasetFilterService.getGeographies(),
+      DatasetFilterService.getDataTypes()
+      // DatasetFilterService.getPeriods()
     ]
     ).then((values = []) => {
       const data = {};
-      values.map(val => Object.assign(data, val));
+      values.forEach(val => Object.assign(data, val));
       dispatch(setDataFilters(data));
       dispatch(setInitialFilterStatus());
     });
