@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
+import './style.scss';
 
 class TempResolutionSelect extends React.PureComponent {
   render() {
