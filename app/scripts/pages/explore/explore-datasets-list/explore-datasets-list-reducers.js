@@ -10,13 +10,21 @@ import { calcZIndex } from 'components/map-vis/map-vis-helper';
 function addExploreAttributes(items, activeDatasets) {
   return items.map((dataset) => {
     const existingDataset = find(activeDatasets, { id: dataset.id });
+
+    const layers = dataset.layer.map(l => ({
+      ...l,
+      isActive: l.default
+    }));
+
     return Object.assign({}, {
       opacity: 1,
       visibility: true,
       zIndex: 0,
       layerIndex: 0,
       isLayerActive: !!existingDataset
-    }, existingDataset || {}, dataset);
+    }, existingDataset || {}, dataset, {
+      layer: layers
+    });
   });
 }
 
@@ -132,6 +140,47 @@ export const updateOpacity = (state, { payload }) => {
   const items = datasets.map((dataset) => {
     if (dataset.id === id) return { ...dataset, opacity };
     return dataset;
+  });
+
+  return {
+    ...state,
+    datasets: {
+      ...state.datasets,
+      items
+    }
+  };
+};
+
+export const setNexGDDPActiveLayer = (state, { payload }) => {
+  const { temporalResolution, period, scenario, id } = payload;
+
+
+  const items = state.datasets.items.map((d) => {
+    if (d.id === id && d.provider === 'nexgddp') {
+      const currentLayer = d.metadata[0].info.nexgddp.layers.find(l =>
+        l.temp_resolution === temporalResolution.value &&
+        l.scenario === scenario.value
+      );
+
+      if (!currentLayer) {
+        console.error('There is no layer with the params selected. Check that metadata has all the possibilities');
+        return d;
+      }
+
+      d.layer = [{
+        ...d.layer[0],
+        ...currentLayer,
+        opacity: d.opacity,
+        visibility: d.visibility,
+        layerIndex: d.layerIndex,
+        dataset: id,
+        id: currentLayer.layerId,
+        isActive: true,
+        period
+      }];
+    }
+
+    return d;
   });
 
   return {

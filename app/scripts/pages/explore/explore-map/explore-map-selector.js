@@ -16,7 +16,7 @@ export const getActiveLayers = createSelector(
         const layerIndex = calcZIndex(length, zIndex);
         return { ...l, zIndex, layerIndex, opacity, visibility, isSelected };
       }))
-    ), { default: true });
+    ), { isActive: true });
     return layers;
   }
 );
