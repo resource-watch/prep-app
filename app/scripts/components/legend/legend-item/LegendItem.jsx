@@ -22,11 +22,19 @@ export const LegendItem = ({ name, color, size, icon }) => {
       return (<div className={`icon-${icon}`} style={{ width: size, backgroundColor: color }} />);
     }
 
+    if (iconName === 'square' || iconName === 'circle') {
+      return (
+        <div
+          className={`icon-${icon}`}
+          style={{ width: size, height: size, backgroundColor: color }}
+        />
+      );
+    }
+
     return (
-      <div
-        className={`icon-${icon}`}
-        style={{ width: size, height: size, backgroundColor: color }}
-      />
+      <div className="custom-icon">
+        <img src={icon} alt={name} />
+      </div>
     );
   };
 
@@ -42,11 +50,11 @@ LegendItem.propTypes = {
   size: PropTypes.number,
   color: PropTypes.string,
   name: PropTypes.string.isRequired,
-  icon: PropTypes.oneOf(['square', 'line', 'circle', 'triangle'])
+  icon: PropTypes.string // triangle, circle, square, line
 };
 
 LegendItem.defaultProps = {
-  size: 11,
+  size: 12,
   color: '#64d1b8',
   name: 'Power',
   icon: 'square'
