@@ -6,7 +6,7 @@ Promise.config({
 });
 
 export default (leafletMap, layerSpec) => {
-  const { id, layerIndex, opacity } = layerSpec;
+  const { id, layerIndex, opacity, visibility } = layerSpec;
   const tileUrl = `${config.apiUrlRW}/layer/${id}/tile/gee/{z}/{x}/{y}`;
   const layer = L.tileLayer(tileUrl);
 
