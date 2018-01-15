@@ -6,11 +6,12 @@ import { Link } from 'react-router';
 
 import Icon from 'components/ui/Icon';
 import Switch from 'components/Button/Switch';
-import { getTitle, getInfo } from 'components/dataset-card/dataset-helper';
+import { getTitle, getMetadata, getInfo } from 'components/dataset-card/dataset-helper';
 
 class DatasetCard extends PureComponent {
   render() {
     const { dataset, onToggleDataset, onToggleInfo } = this.props;
+    const metadata = getMetadata(dataset);
     const info = getInfo(dataset);
     const title = getTitle(dataset);
     const hasLayer = !!(filter(dataset.layer, { default: true }).length);
@@ -46,13 +47,13 @@ class DatasetCard extends PureComponent {
                 </button>}
             </div>
           </div>
-          <span className="subtitle">{info.organization}</span>
+          <span className="subtitle">{metadata.source}</span>
           {dataset.env === 'preproduction' && <p style={{ fontSize: '11px', color: 'red', margin: 0 }}>preproduction</p>}
         </header>
 
         <div className="item-content">
-          {info['short-description'] &&
-            <p className="description">{truncate(info['short-description'], { length: 75, omission: '[...]' })}</p>}
+          {info.function &&
+            <p className="description">{truncate(info.function, { length: 75, omission: '[...]' })}</p>}
         </div>
       </div>
     );
