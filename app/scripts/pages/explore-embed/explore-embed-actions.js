@@ -52,6 +52,7 @@ export const setActiveDatasets = createAction('setActiveDatasets');
 export const updateActiveDatasets = createAction('updateActiveDatasets');
 export const setZIndex = createAction('setZIndex');
 export const updateZIndex = createThunkAction('updateZIndex', () => (dispatch) => {
+  dispatch(updateActiveDatasets());
   dispatch(updateURLParams());
 });
 export const updateOpacity = createThunkAction('updateOpacity', () => (dispatch) => {
