@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Icon from 'components/ui/Icon';
 import ScenarioSelect from './scenario-select';
 import DateRangeSelect from './date-range-select/DateRangeSelect';
 import TempResolutionSelect from './temp-resolution-select';
@@ -105,6 +106,12 @@ class NexGDDPTool extends React.PureComponent {
             </div>
           </div>
         </div>
+
+        {!marker && (
+          <div className="help-text">
+            Click on the <span aria-label="Marker icon on the map"><Icon name="icon-marker" /></span> icon or search for a place to analyze in detail.
+          </div>
+        )}
 
         {marker && indicatorDataset && (
           <div className="chart">
