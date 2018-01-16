@@ -55,6 +55,7 @@ export const updateZIndex = createThunkAction('updateZIndex', () => (dispatch) =
   dispatch(updateURLParams());
 });
 export const updateOpacity = createThunkAction('updateOpacity', () => (dispatch) => {
+  dispatch(updateActiveDatasets());
   dispatch(updateURLParams());
 });
 export const receiveDatasets = createAction('receiveDatasets');
@@ -64,6 +65,34 @@ export const failureDatasets = createAction('failureDatasets');
 export const setDataFilters = createAction('explore-dataset-filters/setDataFilters');
 export const setGraphFilter = createAction('explore-dataset-filters/setGraphFilter');
 export const clearFilters = createAction('explore-dataset-filters/clearFilters');
+
+export const setDatasetFilter = createAction('explore-dataset-filters/setDatasetFilter');
+export const updateDataFilters = createAction('explore-dataset-filters/updateDataFilters');
+export const setInitialFilterStatus = createThunkAction('explore-dataset-filters/setInitialFilterStatus', () => (dispatch, getState) => {
+  const { data, originalData, filters } = getState().explorePage.datasetFilters;
+  const newdata = Object.assign({}, data);
+  // const _originalData = Object.assign({}, originalData);
+
+  if (!Object.keys(data).length) {
+    dispatch(updateDataFilters({}));
+    return;
+  }
+  if (!Object.keys(filters).length) {
+    dispatch(updateDataFilters({ ...originalData }));
+    return;
+  }
+
+  const newData = getSelectedElements(newdata, filters);
+
+  Object.keys(filters).forEach((filterKey) => {
+    const filterValues = filters[filterKey];
+    const dataTree = newData[filterKey] || [];
+
+    dataTree.forEach(child => selectElementsFromTree(child, filterValues));
+  });
+
+  dispatch(updateDataFilters(newData));
+});
 
 export const onClearFilters = createThunkAction('explore-dataset-filters/onClearFilters', () => (dispatch) => {
   dispatch(clearFilters());
@@ -88,8 +117,6 @@ export const fetchDatasets = createThunkAction('fetchDatasets', () => (dispatch)
     })
     .then((json) => {
       const datasets = wriAPISerializer(json);
-      // const nexgdpDatasets = datasets.filter(d => (d.provider === 'nexgddp'));
-      // console.log(nexgdpDatasets);
       dispatch(receiveDatasets(datasets));
       dispatch(updateActiveDatasets());
     })
@@ -121,37 +148,6 @@ export const setLabels = createThunkAction('setLabels', () => (dispatch) => {
 export const setBoundaries = createThunkAction('setBoundaries', () => (dispatch) => {
   dispatch(updateURLParams());
 });
-
-export const setDatasetFilter = createAction('explore-dataset-filters/setDatasetFilter');
-export const updateDataFilters = createAction('explore-dataset-filters/updateDataFilters');
-export const setInitialFilterStatus = createThunkAction('explore-dataset-filters/setInitialFilterStatus', () => (dispatch, getState) => {
-  const { data, originalData, filters } = getState().explorePage.datasetFilters;
-  const _data = Object.assign({}, data);
-  const _originalData = Object.assign({}, originalData);
-
-  if (!Object.keys(data).length) {
-    dispatch(updateDataFilters({}));
-    return;
-  }
-  if (!Object.keys(filters).length) {
-    dispatch(updateDataFilters({ ...originalData }));
-    return;
-  }
-
-  // const newData = Object.assign({}, data);
-
-  const newData = getSelectedElements(_data, filters);
-
-  Object.keys(filters).forEach((filterKey) => {
-    const filterValues = filters[filterKey];
-    const dataTree = newData[filterKey] || [];
-
-    dataTree.forEach(child => selectElementsFromTree(child, filterValues));
-  });
-
-  dispatch(updateDataFilters(newData));
-});
-
 
 // URL
 export const initialURLParams = createThunkAction('initialURLParams', () => (dispatch, getState) => {
