@@ -9,6 +9,7 @@ function parseDate(dateString) {
 const MetadataInfo = ({ dataset }) => {
   const metadata = getMetadata(dataset);
   const info = getInfo(dataset);
+  console.log(dataset);
   return (
     <ul>
       {(info.published_date && info.published_date !== '') &&
@@ -101,7 +102,7 @@ const MetadataInfo = ({ dataset }) => {
       {/* /Metadata date creation */ }
       <li>
         <span>Date of creation: </span>
-        <span>{parseDate(metadata.created_at)}</span>
+        <span>{parseDate(dataset.updated_at)}</span>
       </li>
     </ul>
   );

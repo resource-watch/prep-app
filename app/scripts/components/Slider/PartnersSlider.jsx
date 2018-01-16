@@ -31,7 +31,7 @@ class PartnersSlider extends React.Component {
       <div key={`partner-slider-${d.id}`}>
         <a href={d.url} target="_blank" className="logo" rel="noopener noreferrer">
           <img
-            src={`${config.assetsUrl}${thumbnail ? d.images.thumbnail : d.images.white_logo}`}
+            src={`${config.assetsUrl}${thumbnail ? d.thumbnail : d.white_logo}`}
             alt={d.name}
             className={thumbnail ? 'thumbnail' : ''}
           />
