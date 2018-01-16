@@ -7,7 +7,7 @@ import SliderTooltip from 'components/Tooltip/SliderTooltip';
 import Icon from 'components/ui/Icon';
 
 import 'rc-tooltip/assets/bootstrap_white.css';
-import './layer-opacity-selector-styles.scss';
+import './legend-opacity-selector-styles.scss';
 
 class LegendOpacitySelector extends Component {
   constructor(props) {
@@ -53,16 +53,17 @@ class LegendOpacitySelector extends Component {
     );
 
     return (
-      <div className="c-layer-opacity-selector">
+      <div className="c-legend-opacity-selector">
         <Tooltip
           overlay={tooltipContent}
           placement="bottom"
           trigger="click"
+          overlayClassName="c-legend-opacity-selector"
           onVisibleChange={this.onVisibleChange}
         >
           <button
             type="button"
-            onClick={() => this.setState({ visibility: !visibility })}
+            onClick={() => !visibility && this.setState({ visibility: true })}
             className={buttonClass}
           >
             <Icon name="icon-opacity" className="-normal" />

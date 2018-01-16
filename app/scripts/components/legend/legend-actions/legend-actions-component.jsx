@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import LayerOpacitySelector from 'components/legend/layer-opacity-selector';
+import LegendOpacitySelector from 'components/legend/legend-opacity-selector';
 import LegendMultiLayerSelector from 'components/legend/legend-multi-layer-selector';
 import Icon from 'components/ui/Icon';
 
@@ -9,7 +9,7 @@ import './legend-actions-style.scss';
 
 export const LegendActions = ({ layerSpec, onOpacity, onVisibility, onInfo, onClose }) => (
   <div className="c-legend-actions">
-    <LayerOpacitySelector
+    <LegendOpacitySelector
       layerSpec={layerSpec}
       onOpacityChange={onOpacity}
     />
