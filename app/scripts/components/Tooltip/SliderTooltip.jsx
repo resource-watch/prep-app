@@ -43,7 +43,7 @@ class SliderTooltip extends React.Component {
   }
 
   render() {
-    const { className, options, title, onClose } = this.props;
+    const { className, options, title } = this.props;
 
     return (
       <div className="c-explore-slider-tooltip" ref={(node) => { this.el = node; }}>
@@ -59,8 +59,7 @@ class SliderTooltip extends React.Component {
           onAfterChange={this.onChange}
         />
         <div className="actions-container">
-          <button className="c-button -primary" onClick={onClose}>Done</button>
-          <button className="c-button" onClick={() => this.onReset()}>Reset</button>
+          <button className="c-button -primary" onClick={() => this.onReset()}>Reset</button>
         </div>
       </div>
     );

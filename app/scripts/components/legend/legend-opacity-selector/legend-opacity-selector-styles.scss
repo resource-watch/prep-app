@@ -1,6 +1,13 @@
 @import 'settings';
 
+.c-legend-opacity-selector {
+  .rc-tooltip-inner {
+    padding: 16px;
+  }
+}
+
 // tooltip styles
+// This is wrong... We should try to isolate the map tooltip styles instead of doind this :shit:
 .rc-tooltip {
   opacity: 1;
 
@@ -30,4 +37,3 @@
     }
   }
 }
-
