@@ -22,6 +22,7 @@ ENV ASSETS_URL $assetsUrl
 ENV RW_API_URL $rwApiUrl
 ENV BASEMAP_TILE_URL $basemapUrl
 ENV NODE_ENV $nodeEnv
+ENV GOOGLE_ANALYTICS UA-67196006-2
 
 RUN apt-get update && \
     apt-get install -y bash git build-essential \
