@@ -24,6 +24,8 @@ class ExploreMap extends PureComponent {
     const currentLabels = labelsSpec[labels];
     const currentBoundaries = boundaries ? boundariesSpec.dark : {};
 
+    console.log(activeLayers);
+
     const classNames = classnames({
       '-embed': embed
     });
@@ -56,7 +58,7 @@ class ExploreMap extends PureComponent {
           />
         </Map>
 
-        {activeLayers.length &&
+        {!!activeLayers.length &&
           <LegendControl
             collapsed={embed}
             layersSpec={activeLayers}
