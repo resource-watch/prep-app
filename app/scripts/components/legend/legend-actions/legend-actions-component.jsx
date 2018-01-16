@@ -14,7 +14,7 @@ export const LegendActions = ({ layerSpec, onOpacity, onVisibility, onInfo, onCl
       onOpacityChange={onOpacity}
     />
 
-    {layerSpec.layers.length > 1 &&
+    {layerSpec.provider !== 'nexgddp' && layerSpec.layers.length > 1 &&
       <LegendMultiLayerSelector
         layerSpec={layerSpec}
       />
