@@ -1,19 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Link } from 'react-router';
+import PropTypes from 'prop-types';
 
-import FilterTabs from '../../containers/Explore/FilterTabs';
-import Switch from '../Button/Switch';
+// Components
+import Icon from '../ui/Icon';
+import Tabs from '../ui/Tabs';
 import Button from '../Button/Button';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 import Tooltip from '../Tooltip/Tooltip';
+import DatasetsList from '../ui/DatasetsList';
 
-class DataMap extends React.Component {
-  constructor() {
-    super();
+// Constants
+import { TABS_OPTIONS } from '../../constants';
+
+
+class ExploreSidebar extends React.Component {
+  constructor(props) {
+    super(props);
+
     this.state = {
       sidebarOpen: true
     };
+
+    this.switchChange = this.switchChange.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.onCloseInfo();
   }
 
   componentDidMount() {
@@ -61,101 +74,10 @@ class DataMap extends React.Component {
   }
 
   switchChange(dataset) {
-    dataset.id === this.props.selectedDatasetId &&
-      this.props.deselectDataset();
+    this.props.onSwitchDataset(dataset);
+    // keep this in order to don't break anything. Remove someday...
+    if (dataset.id === this.props.selectedDatasetId) this.props.deselectDataset();
     this.props.switchChange(dataset);
-  }
-
-  getContent() {
-    if (!this.props.listReceived) {
-      return <LoadingSpinner />;
-    }
-    if (!this.props.data.length) {
-      return <p>No datasets with these filters selected</p>;
-    }
-
-    const layers = this.props.data.map((dataset, index) => {
-      let layerIcon = (
-        <div className="detail-space" />
-      );
-
-      let datasetIcon = null;
-
-      let subtitle = '';
-      let partner = '';
-
-      if (dataset.metadata && dataset.metadata.length) {
-        const metadata = dataset.metadata[0].attributes.info;
-        if (metadata) {
-          if (metadata.subtitle) {
-            subtitle = metadata.subtitle;
-          }
-          if (metadata.organization) {
-            partner = metadata.organization;
-          }
-        }
-      }
-
-      if (dataset.layer && dataset.layer.length) {
-        layerIcon = (
-          <Switch
-            onChange={() => this.switchChange(dataset)}
-            checked={dataset.active || false}
-          />
-        );
-      }
-      if (dataset.id) {
-        datasetIcon = (
-          <Link className="detail-link" to={`/dataset/${dataset.id}`}>
-            <svg width="16" height="16" viewBox="0 0 16 16"><title>View page</title>
-              <path d="M0 0v16h14v-2H2V2h12V0H0zm12 4l4 4-4 4V4zM6 7h6v2H6V7z" fillRule="evenodd" />
-            </svg>
-          </Link>
-        );
-      }
-
-      let cdiTag = false;
-      for (let i = 0; i < dataset.vocabulary[0].attributes.tags.length; i++) {
-        if (dataset.vocabulary[0].attributes.tags[i] === 'cdi') {
-          cdiTag = true;
-        }
-      }
-
-      return (
-        <div className="layer" key={`map-layer-${index}`}>
-          {layerIcon}
-          <span className="layerItem">
-            {cdiTag
-              ? <strong
-                className="title"
-                onClick={() => this.props.onInfoClick(dataset.id)}
-              >
-                {dataset.name}
-                <div
-                  onMouseEnter={e => this.onTagHover(e)}
-                  onMouseLeave={() => this.onTagLeave()}
-                  className="-highlighted-tag"
-                >
-                  CDI
-                </div>
-              </strong>
-              : <strong
-                className="title"
-                onClick={() => this.props.onInfoClick(dataset.id)}
-              >
-                {dataset.name}
-              </strong>
-            }
-            <span className="subtitle">{subtitle}</span>
-            { dataset.env === 'preproduction' ? <span style={{ color: 'red', fontSize: '11px' }}>Preproduction</span> : null }
-            <span className="subtitle">Source: <strong>{partner}</strong></span>
-          </span>
-          {datasetIcon}
-        </div>
-      );
-    });
-
-    return layers;
   }
 
   toggleToolbarStatus() {
@@ -165,78 +87,128 @@ class DataMap extends React.Component {
   }
 
   render() {
-    const content = this.getContent();
-    return (
+    const { infoSidebarMetadata, selectedTab, activeDatasets } = this.props;
 
+    return (
       <div className={['c-explore-sidebar', this.state.sidebarOpen ? '-open' : ''].join(' ')}>
-        <div className="actions">
-          <div>
-            <button
-              className={['toggle-status', this.state.sidebarOpen ? '-open' : ''].join(' ')}
-              onClick={() => this.toggleToolbarStatus()}
-            >
-              <span />
-            </button>
+        {!infoSidebarMetadata.open &&
+          <div className="actions">
+            <div>
+              <button
+                className={['toggle-status', this.state.sidebarOpen ? '-open' : ''].join(' ')}
+                onClick={() => this.toggleToolbarStatus()}
+              >
+                {this.state.sidebarOpen ?
+                  <Icon name="icon-arrow-left" className="-normal" /> :
+                  <Icon name="icon-arrow-right" className="-normal" />
+                }
+              </button>
+            </div>
           </div>
-        </div>
+        }
         <Tooltip
-          ref={(tagTooltip) => {this.tagTooltip = tagTooltip}}
+          ref={(tagTooltip) => { this.tagTooltip = tagTooltip; }}
           text={this.props.tooltip.text}
           hidden={this.props.tooltip.hidden}
           position={this.props.tooltip.position}
           width={this.props.tooltip.width}
           padding="15px"
         />
-        <div className="row content">
-          <FilterTabs />
-          <div className="columns small-12 dataset-items">
-            {content}
-          </div>
-        </div>
-        <div className="actions-mobile">
-          <Button
-            border
-            click={() => this.toggleToolbarStatus()}
-          >
-            Apply
-          </Button>
+        <div className="sidebar-container">
+          <header className="sidebar-header">
+            <h1 className="sidebar-title">Explore</h1>
+            <Tabs
+              className="-center"
+              options={TABS_OPTIONS}
+              selected={selectedTab || TABS_OPTIONS[0].value}
+              onChange={this.props.onChangeTab}
+            />
+          </header>
 
+          <div className="content">
+            {!this.props.listReceived && <LoadingSpinner />}
+
+            <DatasetsList
+              data={this.props.data}
+              activeDatasets={activeDatasets}
+              location={this.props.location}
+              type={selectedTab}
+              infoSidebarMetadata={this.props.infoSidebarMetadata}
+              onChangeTab={this.props.onChangeTab}
+              onSwitchChange={this.switchChange}
+              onCloseInfo={this.props.onCloseInfo}
+              onInfoClick={this.props.onInfoClick}
+            />
+
+            {!this.props.data.length &&
+              <p className="no-data">No datasets with these filters selected</p>
+            }
+          </div>
+          <div className="actions-mobile">
+            <Button
+              border
+              click={() => this.toggleToolbarStatus()}
+            >
+              Apply
+            </Button>
+
+          </div>
         </div>
       </div>
     );
   }
 }
 
-DataMap.propTypes = {
+ExploreSidebar.defaultProps = {
+  activeDatasets: []
+};
+
+ExploreSidebar.propTypes = {
   /**
    * Define the layers data of the map
    */
-  data: React.PropTypes.array,
+  data: PropTypes.array,
+  /**
+   * Define location scope of core datasets
+   */
+  location: PropTypes.string,
+  selectedTab: PropTypes.string,
   /**
    * Define the layers on change switch function
    */
-  switchChange: React.PropTypes.func.isRequired,
+  switchChange: PropTypes.func.isRequired,
   /**
    * Define if got the dataset list
    */
-  listReceived: React.PropTypes.bool,
+  listReceived: PropTypes.bool,
+  /**
+   * Define if got the dataset list
+   */
+  infoSidebarMetadata: PropTypes.any,
   /**
    * Define the tooltip text and position
    */
-  setTooltip: React.PropTypes.func.isRequired,
+  setTooltip: PropTypes.func.isRequired,
   /**
    * Define function to show the dataset metadata
    */
-  onInfoClick: React.PropTypes.func.isRequired,
+  onInfoClick: PropTypes.func.isRequired,
+  /**
+   * Define function to show the dataset metadata
+   */
+  onCloseInfo: PropTypes.func.isRequired,
   /**
    * Define function to unselect dataset
    */
-  deselectDataset: React.PropTypes.func,
-  selectedDatasetId: React.PropTypes.string,
+  deselectDataset: PropTypes.func,
+  onChangeTab: PropTypes.func,
+  selectedDatasetId: PropTypes.string,
+  onSwitchDataset: PropTypes.func,
   /**
    * Define the tooltip properties.
    */
-  tooltip: React.PropTypes.object
+  tooltip: PropTypes.object,
+  activeDatasets: PropTypes.array
 };
 
-export default DataMap;
+export default ExploreSidebar;

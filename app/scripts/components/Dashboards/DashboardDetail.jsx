@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import metadata from '../../metadata.json';
+
+// Components
 import PartnersSlider from '../../containers/PartnersSlider';
 import SecondaryNav from '../../components/Navigation/SecondaryNav';
 import SocialNav from '../../components/Navigation/SocialNav';
 import MainNav from '../../components/Navigation/MainNav';
 import Breadcrumbs from '../../components/Navigation/Breadcrumbs';
 import Banner from '../../components/Banner';
-import logoImage from '../../../images/prep-logo.png';
 
 import SectionIntro from '../SectionIntro';
 import DashboardDetailIndicators from './DashboardDetailIndicators';
@@ -19,7 +19,22 @@ import RelatedDashboards from './RelatedDashboards';
 import NavTab from './NavTab';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
+// Constants
+import metadata from '../../metadata.json';
+
+const logoImage = '/images/prep-logo.png';
+
 class DashboardDetail extends React.Component {
+  static getData(key, value) {
+    let data = null;
+    for (let i = metadata.length - 1; i >= 0; i--) {
+      if (metadata[i][key] === value) {
+        data = metadata[i];
+        break;
+      }
+    }
+    return data;
+  }
 
   componentWillMount() {
     if (!this.props.data) {
@@ -33,29 +48,14 @@ class DashboardDetail extends React.Component {
     }
   }
 
-  getData(key, value) {
-    let data = null;
-    for (let i = metadata.length - 1; i >= 0; i--) {
-      if (metadata[i][key] === value) {
-        data = metadata[i];
-        break;
-      }
-    }
-    return data;
-  }
-
   getCurrentData() {
     const pathname = this.props.location.pathname;
-    const currentData = this.getData('pathname', (pathname !== '/') ?
+    const currentData = DashboardDetail.getData('pathname', (pathname !== '/') ?
       pathname.split('/').slice(1)[0] : pathname);
     return currentData;
   }
 
-  getContent() {
-    if (!this.props.data) {
-      return <LoadingSpinner />;
-    }
-
+  getSpecificContent() {
     let content;
 
     switch (this.props.dashboardTab) {
@@ -78,6 +78,15 @@ class DashboardDetail extends React.Component {
         />);
         break;
     }
+    return content;
+  }
+
+  getContent() {
+    if (!this.props.data) {
+      return <LoadingSpinner />;
+    }
+
+    // const specificContent = this.getSpecificContent();
 
     return (
       <div>
@@ -92,11 +101,33 @@ class DashboardDetail extends React.Component {
 
         <NavTab
           activeTab={this.props.dashboardTab}
-          baseUrl={`/dashboard/${this.props.dashboardSlug}`}
+          baseUrl={`/dashboards/${this.props.dashboardSlug}`}
+          anchor
         />
 
         <div className="wrapper tab-container">
-          {content}
+          {/* {specificContent} */}
+          <article id="data">
+            <h2>Data</h2>
+            <DashboardDetailInsights
+              data={this.props.data.insights}
+            />
+          </article>
+
+          <article id="stories">
+            <h2>Stories</h2>
+            <DashboardDetailTools
+              data={this.props.data.tools}
+            />
+          </article>
+
+          <article id="tools">
+            <h2>Tools</h2>
+            <DashboardDetailIndicators
+              dashboardSlug={this.props.dashboardSlug}
+              data={this.props.data.indicator}
+            />
+          </article>
         </div>
       </div>
     );
@@ -107,7 +138,7 @@ class DashboardDetail extends React.Component {
     const content = this.getContent();
     const title = this.props.data ? this.props.data.title : currentData.title;
     const imageUrl = !this.props.data || this.props.data.image.indexOf('missing.png') >= 0 ?
-      null : `${config.apiUrl}${this.props.data.image}`;
+      null : `${config.assetsUrl}${this.props.data.image}`;
 
     document.title = title;
 
@@ -182,6 +213,7 @@ class DashboardDetail extends React.Component {
 }
 
 DashboardDetail.propTypes = {
+  location: React.PropTypes.object,
   /**
    * Define the route path (from the router)
    */

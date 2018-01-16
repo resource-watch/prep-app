@@ -1,0 +1,12 @@
+.l-about-page {
+  .cards {
+    .column {
+      display: flex;
+    }
+
+    .c-card {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

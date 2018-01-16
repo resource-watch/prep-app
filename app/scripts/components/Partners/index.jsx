@@ -9,12 +9,11 @@ function Partners(props) {
       <div className="columns small-12 medium-4" key={partner.id}>
         <div className="c-article-module">
           <Thumbnail
-            src={partner.images.thumbnail}
+            src={config.assetsUrl + partner.images.thumbnail}
             alt={partner.name}
             border={'neutral'}
           />
           <h3 className="partner-name">{partner.name}</h3>
-          <p className="partner-desc">{partner.description}</p>
           <Link to={`/partners/${partner.id}`} className="partner-link">Read more</Link>
         </div>
       </div>

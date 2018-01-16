@@ -8,7 +8,7 @@ export default function () {}
 
 export function getWidgetBySlug(slug) {
   return (dispatch) => {
-    fetch(`${config.apiUrl}/api/widgets/${slug}?cache=false`)
+    fetch(`${config.apiUrl}/widgets/${slug}?cache=false`)
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);

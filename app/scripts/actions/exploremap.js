@@ -8,7 +8,10 @@ import {
   MAP_DESELECT_DATASET,
   MAP_GEODATA_RECEIVED,
   MAP_GEOPOSITION_SET,
-  MAP_INTERACTION_VISIBILITY_SET
+  MAP_INTERACTION_VISIBILITY_SET,
+  SET_BASEMAP,
+  SET_LABELS,
+  SET_BOUNDARIES
 } from '../constants';
 
 import { updateURL } from './links';
@@ -46,10 +49,10 @@ export function setLayersOrder(layers) {
   };
 }
 
-export function toggleLayerOpacity(layerId) {
+export function toggleLayerOpacity(layerId, opacity) {
   return {
     type: MAP_LAYER_OPACITY_CHANGED,
-    payload: layerId
+    payload: { id: layerId, opacity }
   };
 }
 
@@ -103,5 +106,27 @@ export function getGeoDataInfo(datasetId, geo) {
           payload: data
         });
       });
+  };
+}
+
+export function setBasemap(basemap) {
+  return {
+    type: SET_BASEMAP,
+    payload: basemap
+  };
+}
+
+
+export function setLabels(labelEnabled) {
+  return {
+    type: SET_LABELS,
+    payload: labelEnabled
+  };
+}
+
+export function setBoundaries(boundariesEnabled) {
+  return {
+    type: SET_BOUNDARIES,
+    payload: boundariesEnabled
   };
 }

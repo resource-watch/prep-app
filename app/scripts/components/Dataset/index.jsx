@@ -1,30 +1,32 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import URI from 'urijs';
+import { connect } from 'react-redux';
+import WidgetEditor, { modalActions, SaveWidgetModal } from 'widget-editor';
+import ReactMarkdown from 'react-markdown';
+import { wriAPISerializer } from 'helpers/wri-api-serializer';
 
+import TooltipTether from 'components/Tooltip/TooltipTether';
 import metadata from '../../metadata.json';
 import PartnersSlider from '../../containers/PartnersSlider';
 import SecondaryNav from '../../components/Navigation/SecondaryNav';
 import SocialNav from '../../components/Navigation/SocialNav';
 import MainNav from '../../components/Navigation/MainNav';
 import Banner from '../../components/Banner';
-import logoImage from '../../../images/prep-logo.png';
 
 import SectionIntro from '../SectionIntro';
-import MetadataList from '../Explore/MetadataList';
+import MetadataInfo from './MetadataInfo';
 import VegaChart from '../Chart/VegaChart';
-import SimpleMap from '../../containers/Map/SimpleMap';
+import SimpleMap from '../../containers/SimpleMap/SimpleMap';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
+import NexGDDPTool from '../nexgddp-tool/NexGDDPTool';
+
+const logoImage = '/images/prep-logo.png';
+
 class DatasetDetail extends React.Component {
-
-  componentWillMount() {
-    if (!this.props.data || !this.props.widgets.length) {
-      this.props.getDatasetData(this.props.datasetSlug);
-    }
-  }
-
-  getData(key, value) {
+  static getData(key, value) {
     let data = null;
     for (let i = metadata.length - 1; i >= 0; i--) {
       if (value.indexOf(metadata[i][key]) > -1) {
@@ -35,66 +37,7 @@ class DatasetDetail extends React.Component {
     return data;
   }
 
-  getCurrentData() {
-    const pathname = this.props.location.pathname;
-    const currentData = this.getData('pathname', pathname);
-    return currentData;
-  }
-
-  getContent() {
-    if (!this.props.data) {
-      return <LoadingSpinner />;
-    }
-
-    const data = this.props.data.metadata && this.props.data.metadata.length > 0
-      ? this.props.data.metadata[0].attributes.info
-      : {
-        id: this.props.data.id,
-        attributes: {
-          title: this.props.data.name,
-          message: 'Content cooming soon'
-        }
-      };
-
-    const widgetComponents = [];
-    const { widgets } = this.props;
-    if (widgets && widgets.length) {
-      for (let i = 0, wLength = widgets.length; i < wLength; i++) {
-        const widget = widgets[i].attributes;
-        if (widget.widgetConfig) {
-          switch (widget.widgetConfig.type) {
-            case 'map':
-              widgetComponents.push(<div className="c-article" key={i} ><SimpleMap layerId={widget.widgetConfig.layerId} /></div>);
-              break;
-            default:
-              widgetComponents.push(<div className="c-article" key={i} ><VegaChart data={widget.widgetConfig} /></div>);
-              break;
-          }
-        }
-      }
-    }
-
-    const currentSection = this.props.location.state && this.props.location.state.prevPath || 'explore';
-    return (
-      <div>
-        <SectionIntro data={data} downloadUrl={this.getDownloadUrl(this.props.data)} currentSection={currentSection} >
-          <MetadataList data={this.props.data} />
-        </SectionIntro>
-
-        {
-          (widgetComponents && widgetComponents.length) ?
-            <div className="row">
-              <div className="columns small-12">
-                {widgetComponents}
-              </div>
-            </div>
-          : null
-        }
-      </div>
-    );
-  }
-
-  getDownloadUrl(data) {
+  static getDownloadUrl(data) {
     let url = null;
     let metadataUrl = null;
     if (data.metadata && data.metadata.length &&
@@ -103,7 +46,7 @@ class DatasetDetail extends React.Component {
     }
     switch (data.provider) {
       case 'cartodb':
-        if (data.connectorUrl.indexOf('tables') === -1) {
+        if (data && data.connectorUrl && data.connectorUrl.indexOf('tables') === -1) {
           const uri = new URI(data.connectorUrl);
           uri.search({ format: 'csv' });
           url = uri.toString();
@@ -117,19 +60,154 @@ class DatasetDetail extends React.Component {
     return url;
   }
 
+  componentDidMount() {
+    if (!this.props.data || !this.props.widgets.length) {
+      this.props.getDatasetData(this.props.datasetSlug);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.props.data) this.setState({ data: {} });
+  }
+
+  /**
+   * Callback executed when the user clicks the save button of
+   * the widget editor
+   */
+  onSaveWidget() {
+    if (this.getWidgetConfig) {
+      this.props.toggleModal(true, {
+        children: SaveWidgetModal,
+        childrenProps: {
+          datasetId: this.props.data.id,
+          getWidgetConfig: this.getWidgetConfig,
+          onClickCheckWidgets: () => {
+            window.location = '/myprep/widgets/my_widgets';
+          }
+        }
+      });
+    }
+  }
+
+  getCurrentData() {
+    const pathname = this.props.location.pathname;
+    const currentData = DatasetDetail.getData('pathname', pathname);
+    return currentData;
+  }
+
+  getContent() {
+    if (!this.props.data) {
+      return <LoadingSpinner />;
+    }
+
+    const metaData = this.props.data.metadata && this.props.data.metadata.length ?
+      this.props.data.metadata[0].attributes : {
+        id: this.props.data.id,
+        attributes: {
+          title: this.props.data.name,
+          message: 'Content cooming soon'
+        }
+      };
+    const data = this.props.data.metadata && this.props.data.metadata.length > 0
+      ? this.props.data.metadata[0].attributes.info
+      : {
+        id: this.props.data.id,
+        attributes: {
+          title: this.props.data.name,
+          message: 'Content cooming soon'
+        }
+      };
+
+    const widgetComponents = [];
+    const widgets = this.props.data.widget;
+    if (widgets && widgets.length) {
+      for (let i = 0, wLength = widgets.length; i < wLength; i++) {
+        const widget = widgets[i].attributes;
+        if (widget.widget_config) {
+          switch (widget.widget_config.type) {
+            case 'map':
+              widgetComponents.push(<div className="c-article" key={i} ><SimpleMap layerId={widget.widget_config.layer_id} /></div>);
+              break;
+            default:
+              widgetComponents.push(<div className="c-article" key={i} ><VegaChart data={widget.widget_config} /></div>);
+              break;
+          }
+        }
+      }
+    }
+
+    const currentSection = this.props.location.state && this.props.location.state.prevPath || 'explore';
+
+    const dataset = this.props.data;
+    const datasetSpec = {
+      ...dataset,
+      metadata: dataset.metadata.map(m => ({
+        ...m,
+        ...m.attributes
+      }))
+    };
+
+    return (
+      <div>
+        <SectionIntro data={data} downloadUrl={DatasetDetail.getDownloadUrl(this.props.data)} currentSection={currentSection} >
+          <div className="c-article">
+            <ReactMarkdown source={data.description || metaData.description} className="c-markdown" />
+          </div>
+        </SectionIntro>
+
+        {(dataset.id && dataset.provider === 'nexgddp') ?
+          <div className="row">
+            <div className="columns small-12">
+              <NexGDDPTool dataset={dataset} />
+            </div>
+          </div> :
+          <WidgetEditor
+            datasetId={dataset.id}
+            embedButtonMode="never"
+            mapConfig={{ zoom: 3, lat: 40.65, lng: -98.21 }}
+            provideWidgetConfig={(func) => { this.getWidgetConfig = func; }}
+            onSave={() => this.onSaveWidget()}
+          />
+        }
+        <div className="row align-center">
+          <div className="columns small-12 medium-8">
+            <div className="c-article">
+              <h3>More info</h3>
+              <MetadataInfo dataset={datasetSpec} />
+            </div>
+          </div>
+        </div>
+
+        {/*
+          (widgetComponents && widgetComponents.length) ?
+            <div className="row">
+              <div className="columns small-12">
+                {widgetComponents}
+              </div>
+            </div>
+          : null
+        */}
+      </div>
+    );
+  }
+
   render() {
+    const data = this.props.data ? this.props.data : {};
+
+    if (!data || !data.id) return null;
+
     const currentData = this.getCurrentData();
-
-    const data = this.props.data && this.props.data || null;
-
-    const title = data ? data.name : currentData.title;
+    const dataMetadata = data.metadata && data.metadata.length ? data.metadata : null;
+    const title = dataMetadata && dataMetadata[0].attributes.info && dataMetadata[0].attributes.info.technical_title ?
+      dataMetadata[0].attributes.info.technical_title :
+      data.name;
 
     document.title = title;
 
     const content = this.getContent();
 
     return (
-      <div className="-theme-2">
+      <div>
         <header className="l-header">
           <div className={`l-header-nav ${currentData.name === 'home' ? '-no-bg' : ''}`}>
             <div className="row align-middle">
@@ -154,9 +232,7 @@ class DatasetDetail extends React.Component {
         </header>
 
         <div className="l-main">
-
           {content}
-
         </div>
 
         <footer className="l-footer">
@@ -185,6 +261,8 @@ class DatasetDetail extends React.Component {
             </div>
           </div>
         </footer>
+
+        <TooltipTether />
       </div>
     );
   }
@@ -194,23 +272,34 @@ DatasetDetail.propTypes = {
   /**
    * Define the route path (from the router)
    */
-  currentPage: React.PropTypes.string,
+  location: PropTypes.object,
   /**
    * Define the slug of the dataset
    */
-  datasetSlug: React.PropTypes.string.isRequired,
+  datasetSlug: PropTypes.string.isRequired,
   /**
    * Define the function to get the datataset detail data
    */
-  getDatasetData: React.PropTypes.func.isRequired,
+  getDatasetData: PropTypes.func.isRequired,
   /**
    * Define the dataset data
    */
-  data: React.PropTypes.any,
+  data: PropTypes.any,
   /**
    * Define the dataset widget
    */
-  widgets: React.PropTypes.array
+  widgets: PropTypes.array,
+
+  // REDUX
+  toggleModal: PropTypes.func
 };
 
-export default DatasetDetail;
+DatasetDetail.defaultProps = {
+  data: {}
+};
+
+const mapDispatchToProps = dispatch => ({
+  toggleModal: (...params) => dispatch(modalActions.toggleModal(...params))
+});
+
+export default connect(null, mapDispatchToProps)(DatasetDetail);

@@ -4,8 +4,14 @@ import {
   MAP_DESELECT_DATASET,
   MAP_GEOPOSITION_SET,
   MAP_GEODATA_RECEIVED,
-  MAP_INTERACTION_VISIBILITY_SET
+  MAP_INTERACTION_VISIBILITY_SET,
+  SET_BASEMAP,
+  SET_LABELS,
+  SET_BOUNDARIES
 } from '../constants';
+
+import { BASEMAPS } from '../general-constants/basemaps';
+
 
 const initialState = {
   zoom: null,
@@ -13,8 +19,13 @@ const initialState = {
     lat: null,
     lng: null
   },
-  zoomPosition: 'topright',
-  basemap: config.basemapTileUrl || 'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
+  zoomPosition: 'bottomright',
+  basemap: BASEMAPS.default,
+  basemapControl: {
+    basemaps: BASEMAPS
+  },
+  labels: false,
+  boundaries: false,
   basemapOptions: { maxZoom: 18 },
   interactionData: {
     info: null,
@@ -57,6 +68,21 @@ export default function (state = initialState, action) {
       interactionData.info = action.payload;
       interactionData.open = true;
       return Object.assign({}, state, { interactionData });
+    }
+    case SET_BASEMAP: {
+      return Object.assign({}, state, {
+        basemap: action.payload
+      });
+    }
+    case SET_LABELS: {
+      return Object.assign({}, state, {
+        labels: action.payload
+      });
+    }
+    case SET_BOUNDARIES: {
+      return Object.assign({}, state, {
+        boundaries: action.payload
+      });
     }
     default:
       return state;

@@ -1,0 +1,14 @@
+.c-markdown {
+
+  &.-inline {
+    display: inline-block;
+  }
+
+  p {
+    margin: 0;
+
+    &:not(:first-child) {
+      margin: 1rem 0 0;
+    }
+  }
+}

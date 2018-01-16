@@ -9,7 +9,7 @@ $header-bg-color: $dark-slate-blue-2;
 
 .l-header-nav {
   position: relative;
-  background-color: rgba($navy, .45);
+  background-color: $dark-slate-blue;
   height: $header-height;
   z-index: 1;
 
@@ -25,19 +25,6 @@ $header-bg-color: $dark-slate-blue-2;
     position: relative;
     display: block;
     float: left;
-
-    &:after {
-      display: block;
-      content: "BETA";
-      position: absolute;
-      top: 100%;
-      right: 0;
-
-      font-family: $header-font-family;
-      font-weight: bold;
-      font-style: italic;
-      font-size: 12px;
-    }
   }
 
   &.-short .logo {
@@ -45,6 +32,11 @@ $header-bg-color: $dark-slate-blue-2;
     &:after {
       font-size: 10px;
     }
+  }
+
+  &.-short .user-avatar {
+    width: 35px;
+    height: 35px;
   }
 }
 
@@ -68,8 +60,30 @@ $header-bg-color: $dark-slate-blue-2;
   background-color: $header-bg-color;
 }
 
-.l-header.-expanded .l-header-nav .row {
-  max-width: none;
+.l-header.-expanded {
+  position: relative;
+  z-index: 1000;
+
+  .l-header-nav .row {
+    max-width: none;
+  }
+
+  .c-user {
+    min-width: 100%;
+    text-align: center;
+  }
+
+  .c-user-options {
+    right: 0;
+    left: auto;
+    transform: none;
+
+    &:before {
+      transform: translate(-33px, -100%);
+      right: auto;
+      left: 100%;
+    }
+  }
 }
 
 .l-breadcrumbs {

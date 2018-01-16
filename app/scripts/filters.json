@@ -1,10 +1,16 @@
 {
   "filtersNames": {
-    "topics": "topics",
     "geography": "geography",
+    "topics": "topics",
     "dataType": "data type"
   },
   "filters": {
+    "geography":
+      {
+        "global": "Global",
+        "national": "National",
+        "local": "Local"
+      },
     "topics":
       {
         "arctic": "Arctic",
@@ -20,12 +26,6 @@
         "weather-climate": "Weather/Climate",
         "built-environment": "Built Environment",
         "oceans": "Oceans"
-      },
-    "geography":
-      {
-        "global": "Global",
-        "national": "National",
-        "local": "Local"
       },
     "dataType":
       {

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import exploreBg from '../../../images/bg/bg-explore.jpg';
-import insightsBg from '../../../images/bg/bg-insights.jpg';
-import dashboardsBg from '../../../images/bg/bg-dashboards.jpg';
+const exploreBg = '/images/bg/bg-explore.jpg';
+const insightsBg = '/images/bg/bg-insights.jpg';
+const dashboardsBg = '/images/bg/bg-dashboards.jpg';
 
 const bg = {
   explore: exploreBg,
@@ -17,9 +17,9 @@ const cards = {
       className="simple-card -inverse"
       style={{ backgroundImage: `url(${bg.insights})` }}
     >
-      <h3>Insights</h3>
+      <h3>Stories</h3>
       <p>Find data-driven stories and tools that spotlight specific climate-related risks and solutions</p>
-      <Link to="/insights">EXPLORE THE INSIGHTS</Link>
+      <Link to="/stories">EXPLORE THE STORIES</Link>
     </div>),
   dashboards: (
     <div

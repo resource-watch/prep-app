@@ -25,7 +25,7 @@ class DashboardDetailIndicators extends React.Component {
     });
   }
 
-  render() {
+  getContent() {
     const content = [];
     if (this.props.data && this.props.data.widgets.length) {
       this.props.data.widgets.forEach((indicator, index) => {
@@ -38,7 +38,7 @@ class DashboardDetailIndicators extends React.Component {
               <div className="column small-12" key={`indicator-${index}`} style={{ display: 'flex' }}>
                 <MapCard
                   data={indicator}
-                  layerId={widgetConfig.layerId}
+                  layerId={widgetConfig.layer_id}
                   setShareModal={this.setShareModal}
                   dashboardSlug={this.props.dashboardSlug}
                   link={`/dataset/${indicator.dataset}`}
@@ -75,6 +75,12 @@ class DashboardDetailIndicators extends React.Component {
         }
       });
     }
+
+    return content;
+  }
+
+  render() {
+    const content = this.getContent();
 
     return (
       <div className="row align-stretch">

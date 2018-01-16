@@ -9,6 +9,18 @@
   cursor: pointer;
   background-color: transparent;
 
+  &.-inline {
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  &.-active {
+    color: $link-font-color;
+    border-bottom: 3px solid $link-font-color;
+    padding-bottom: rem(12);
+  }
+
   &.-theme-color {
     color: $secondary-color;
     .-theme-2 & { color: $thirth-color; }
@@ -21,7 +33,10 @@
     color: $button-font-color-inverse;
     background-color: $main-color;
 
-    &.-secondary-color { background-color: $secondary-color; }
+    &.-secondary-color {
+      background-color: $secondary-color;
+      color: $main-color;
+    }
   }
 
   &.-action {
@@ -68,6 +83,10 @@
     }
   }
 
+  &.-no-border-radius {
+    border-radius: 0;
+  }
+
   &.-icon {
     width: 22px;
     height: 22px;
@@ -110,6 +129,130 @@
     &.-action {
       position: relative;
       height: ($small-margin / 2) + $small-margin;
+    }
+  }
+
+  &.-arrow {
+    padding: 15px;
+    border-radius: 100%;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+
+    &.-previous {
+      right: 100%;
+
+      .c-icon {
+        transform: rotate(90deg);
+      }
+
+      transform: translate(100%, -50%);
+
+      @media #{$mq-large} {
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    &.-next {
+      left: 100%;
+
+      .c-icon {
+        transform: rotate(-90deg);
+      }
+
+      transform: translate(-100%, -50%);
+
+      @media #{$mq-large} {
+        transform: translate(50%, -50%);
+      }
+    }
+
+    &.-full {
+      &.-previous {
+        left: $medium-margin;
+        right: auto;
+        transform: translateY(-50%);
+      }
+
+      &.-next {
+        left: auto;
+        right: $medium-margin;
+        transform: translateY(-50%);
+      }
+    }
+
+    &.-hidden {
+      display: none;
+    }
+
+    & .arrow-label {
+      position: absolute;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      height: 1px; width: 1px;
+      margin: -1px; padding: 0; border: 0;
+    }
+  }
+
+  .c-icon {
+    fill: $link-font-color;
+  }
+
+  &.-secondary-color {
+    .c-icon {
+      fill: $main-color;
+    }
+  }
+}
+
+.c-button + .c-button {
+  margin-left: 15px;
+}
+
+
+// These styles should replace c-button styles. Please,
+// if you find some button with previous styles, try to
+// change to new ones.
+.c-new-button {
+  display: inline-block;
+  padding: 15px 35px;
+
+  border-width: 2px;
+  border-style: solid;
+  border-color: $light-gold;
+  border-radius: 0;
+  background: $light-gold;
+
+  font-family: $base-font-family;
+  font-size: $tiny-font-size;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+
+  &:hover {
+    box-shadow: 0 20px 30px 0 rgba($black, .1);
+  }
+
+  &.-transparent {
+    background: transparent;
+
+    &:hover {
+      background: rgba($light-gold, .1);
+      box-shadow: none;
+    }
+  }
+
+  // used on dark backgrounds
+  &.-dark {
+    &.-transparent {
+      color: $white;
+    }
+  }
+
+  // used on light backgrounds
+  &.-light {
+    &.-transparent {
+      border-color: $yellow-orange;
+      color: $dark-blue;
     }
   }
 }

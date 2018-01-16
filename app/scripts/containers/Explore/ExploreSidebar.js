@@ -1,16 +1,22 @@
 import { connect } from 'react-redux';
-import ExploreSidebar from '../../components/Explore/ExploreSidebar';
+import ExploreSidebar from 'components/Explore/ExploreSidebar';
 
-import { switchChange, deselectDataset } from '../../actions/exploremap';
-import { updateURL } from '../../actions/links';
-import { setTooltip } from '../../actions/tooltip';
-import { setModalMetadata } from '../../actions/modal';
-import { setDatasetActive, getDatasetById } from '../../actions/datasets';
+import { switchChange, deselectDataset } from 'actions/exploremap';
+import { updateURL } from 'actions/links';
+import { setTooltip } from 'actions/tooltip';
+import { setInfoSidebarMetadata } from 'actions/info-sidebar';
+import { setDatasetActive, getDatasetByIdOrSlug, changeTab, toggleActiveDatasets } from 'actions/datasets';
+
+// Selectors
+import filterDatasetsByTab from 'selectors/datasets';
 
 const mapStateToProps = state => ({
   listReceived: state.datasets.list.length > 0,
-  data: state.datasets.filteredList,
-  filters: state.datasets.filters,
+  data: filterDatasetsByTab(state),
+  activeDatasets: state.datasets.activeDatasets,
+  location: state.coreDatasetsFilter.location,
+  infoSidebarMetadata: state.infoSidebar.metadata,
+  selectedTab: state.datasets.tab,
   tooltip: state.tooltip,
   selectedDatasetId: state.exploremap.interactionData.datasetId
 });
@@ -22,6 +28,8 @@ const mapDispatchToProps = dispatch => ({
   //   if (dataset.active) dispatch(getDatasetLayer(dataset));
   //   dispatch(updateURL());
   // },
+
+  // remove at some point...
   switchChange: (dataset) => {
     dispatch(switchChange(dataset.id));
     if (dataset.active) dispatch(setDatasetActive(dataset));
@@ -30,11 +38,21 @@ const mapDispatchToProps = dispatch => ({
   setTooltip: (tooltip) => {
     dispatch(setTooltip(tooltip));
   },
-  onInfoClick: (datasetId) => {
-    dispatch(getDatasetById(datasetId, ['metadata']));
-    dispatch(setModalMetadata(true, datasetId));
+  onInfoClick: (datasetSlug) => {
+    dispatch(getDatasetByIdOrSlug(datasetSlug, ['metadata, vocabulary', 'widget']));
+    dispatch(setInfoSidebarMetadata(true, datasetSlug));
   },
-  deselectDataset: () => dispatch(deselectDataset())
+  onCloseInfo: () => {
+    dispatch(setInfoSidebarMetadata(false));
+  },
+  onChangeTab: (tab) => {
+    dispatch(changeTab(tab));
+  },
+  deselectDataset: () => dispatch(deselectDataset()),
+  onSwitchDataset: (dataset) => {
+    dispatch(toggleActiveDatasets(dataset));
+    dispatch(updateURL());
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExploreSidebar);

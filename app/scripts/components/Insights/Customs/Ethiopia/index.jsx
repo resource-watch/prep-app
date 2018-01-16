@@ -1,13 +1,8 @@
 import React from 'react';
-import Article from '../../../Content/Article';
-import VegaChart from '../../../Chart/VegaChart';
 import ChartCard from '../../../Cards/ChartCard';
 import IFrame from '../../../IFrame';
 import EmbedMap from '../../../EmbedMap';
 import ShareModal from '../../../Modal/ShareModal';
-
-import ethiopia01 from '../../../../../images/insights/ethiopia/Insight_Ethiopia01.png';
-import ethiopiaMap from '../../../../../images/insights/ethiopia/Insight_Ethiopia02.png';
 
 import seasonal from './jsons/seasonal.json';
 import tigray from './jsons/tigray.json';
@@ -18,6 +13,9 @@ import tigraySeasonal from './jsons/tigray-seasonal.json';
 const tigrayMap = 'https://prep.carto.com/u/prep-admin/viz/c7fc6dc6-4b08-4d23-ac0b-ff07144ad89a/embed_map';
 const somaliaMap = 'https://prep.carto.com/u/prep-admin/viz/5824b7fa-705a-11e6-bb05-0e3ebc282e83/embed_map';
 const forecastMap = 'https://prep.carto.com/u/prep-admin/viz/8e9860a4-7058-11e6-aa42-0e233c30368f/embed_map';
+
+const ethiopia01 = '/images/insights/ethiopia/Insight_Ethiopia01.png';
+const ethiopiaMap = '/images/insights/ethiopia/Insight_Ethiopia02.png';
 
 
 class EthiopiaInsight extends React.Component {
@@ -79,10 +77,10 @@ class EthiopiaInsight extends React.Component {
           <div className="c-article-module -no-top">
             <div className="row">
               <div className="column small-12 medium-12 flex align-right align-middle">
-                <button className="c-button -action highlighted -theme-3" onClick={() => this.setShareModal('http://climateserv.nsstc.nasa.gov', 'map')}>
+                <button className="c-button -action highlighted -theme-3" onClick={() => this.setShareModal('https://climateserv.servirglobal.net', 'map')}>
                   <span>Share</span>
                 </button>
-                <div className="c-button -icon flex" onClick={() => this.setShareModal('http://climateserv.nsstc.nasa.gov', 'map')}>
+                <div className="c-button -icon flex" onClick={() => this.setShareModal('https://climateserv.servirglobal.net', 'map')}>
                   <svg className="-icon" width="10" height="12" viewBox="0 0 10 12">
                     <title>icon-share</title>
                     <g fill="#25b5cd">
@@ -98,7 +96,7 @@ class EthiopiaInsight extends React.Component {
           <div className="c-article-module -large-margin -no-top">
             <div className="row align-center">
               <div className="column small-12 medium-12">
-                <IFrame src="http://climateserv.nsstc.nasa.gov" />
+                <IFrame src="https://climateserv.servirglobal.net" />
               </div>
             </div>
           </div>
@@ -111,7 +109,7 @@ class EthiopiaInsight extends React.Component {
                   <li>The second compares seasonal drought forecasts in Tigray and Somali.</li>
                   <li>The third case study explores how the rainfall variability in past rainfall manifests in the forecasted rainfall over Gambela region.</li>
                 </ul>
-                <p>The goal of these case studies is to show how climate data provided by NASA SERVIR’s ClimateServ system (<a href="http://climateserv.nsstc.nasa.gov/">http://climateserv.nsstc.nasa.gov/</a>) can be used by end-users to understand historical and near-term seasonal forecasts as related to agricultural productivity. </p>
+                <p>The goal of these case studies is to show how climate data provided by NASA SERVIR’s ClimateServ system (<a href="https://climateserv.servirglobal.net">https://climateserv.servirglobal.net</a>) can be used by end-users to understand historical and near-term seasonal forecasts as related to agricultural productivity. </p>
                 <p>Potential end-users include the following</p>
                 <ul>
                   <li><strong className="highlighted -theme-3">The Ethiopia Ministry of Agriculture and Natural Resources</strong>, which seeks to create an agricultural system that uses advanced technology to prevent poverty in its society</li>

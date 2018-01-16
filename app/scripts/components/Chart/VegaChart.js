@@ -1,8 +1,8 @@
 import React from 'react';
 import vega from 'vega';
+import theme from './theme';
 
 class VegaChart extends React.Component {
-
   componentDidMount() {
     this.resizeEvent = () => {
       this.handleResize();
@@ -51,8 +51,12 @@ class VegaChart extends React.Component {
 
   parseVega() {
     const dataObj = this.getData();
+    const themeObj = theme();
+    themeObj.width = dataObj.width;
 
-    vega.parse.spec(dataObj, (chart) => {
+    vega.parse.spec(dataObj, themeObj, (err, chart) => {
+      if (err) throw err;
+
       const chartVis = chart({
         el: this.refs.vegaChart
       });

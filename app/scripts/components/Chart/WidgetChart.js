@@ -2,7 +2,6 @@ import React from 'react';
 import VegaChart from './VegaChart';
 
 class WidgetChart extends React.Component {
-
   componentDidMount() {
     this.props.getWidgetBySlug(this.props.slug);
   }

@@ -33,8 +33,14 @@ node {
       switch ("${env.BRANCH_NAME}") {
         // Roll out to staging
         case "develop":
-          sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production,preproduction --build-arg apiUrl=https://staging.prepdata.org/api .")
-          sh("docker -H :2375 build -t ${dockerUsername}/${appName}:latest --build-arg datasetEnv=production,preproduction .")
+          sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production,preproduction --build-arg apiUrl=https://staging.prepdata.org/api --build-arg basemapUrl=https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png --build-arg callbackUrl=https://staging.prepdata.org/auth .")
+          break
+        case "preproduction":
+          sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production,preproduction --build-arg apiUrl=https://preproduction.prepdata.org/api --build-arg callbackUrl=https://preproduction.prepdata.org/auth .")
+          break
+        case "master":
+          sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production --build-arg apiUrl=https://beta.prepdata.org/api .")
+          sh("docker -H :2375 build -t ${dockerUsername}/${appName}:latest --build-arg datasetEnv=production --build-arg apiUrl=https://beta.prepdata.org/api .")
           break
         case "preproduction":
           sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production,preproduction --build-arg apiUrl=https://preproduction.prepdata.org/api .")
@@ -60,7 +66,9 @@ node {
       withCredentials([usernamePassword(credentialsId: 'Vizzuality Docker Hub', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
         sh("docker -H :2375 login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}")
         sh("docker -H :2375 push ${imageTag}")
-        sh("docker -H :2375 push ${dockerUsername}/${appName}:latest")
+        if ("${env.BRANCH_NAME}" == "master") {
+          sh("docker -H :2375 push ${dockerUsername}/${appName}:latest")
+        }
         sh("docker -H :2375 rmi ${imageTag}")
       }
     }

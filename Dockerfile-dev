@@ -1,0 +1,25 @@
+FROM node:8.1.2
+
+ENV NODE_ENV development
+
+RUN apt-get update && \
+    apt-get install -y bash git build-essential \
+    automake autoconf make g++ libtool \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+    && npm install -g node-gyp --loglevel warn \
+    && mkdir -p /usr/src/app
+
+WORKDIR /usr/src/app
+
+# Install app dependencies
+COPY package.json /usr/src/app/
+COPY package-lock.json /usr/src/app/
+RUN npm install --loglevel warn
+
+# Bundle app source
+COPY . /usr/src/app
+
+EXPOSE 3000
+
+CMD ["npm", "start"]

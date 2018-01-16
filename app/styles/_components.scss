@@ -4,9 +4,9 @@
   "components/nav",
   "components/banner",
   "components/article",
+  "components/dataset-item",
   "components/climate-change",
   "components/partners-slider",
-  "components/partnership-slider",
   "components/explore-map",
   "components/button",
   "components/switch",
@@ -22,6 +22,7 @@
   "components/section-intro",
   "components/iframe",
   "components/explore-sidebar",
+  "components/info-sidebar",
   "components/twitter-feed",
   "components/form",
   "components/article-module",
@@ -34,4 +35,20 @@
   "components/simple-map",
   "components/breadcrumbs",
   "components/partners",
-  "components/insight-link";
+  "components/tag",
+  "components/insight-link",
+  "components/slider-tooltip",
+  "components/layers-tooltip",
+  "components/tooltip-tether",
+  "components/basemap-control",
+  "components/share-control",
+  "components/widget-editor",
+  "components/share-nexgddp-chart-tooltip",
+  "components/markdown";
+
+  // Ui
+  @import "components/ui/collapsible-item";
+  @import "components/ui/datasets-list";
+  @import "components/ui/icon";
+  @import "components/ui/search";
+  @import "components/ui/tabs";

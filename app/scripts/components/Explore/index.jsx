@@ -1,25 +1,40 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+
+// Components
 import { Link } from 'react-router';
 import MainNav from '../../components/Navigation/MainNav';
 
 import ExploreMap from '../../containers/Explore/ExploreMap';
 import ExploreMapSidebar from '../../containers/Explore/ExploreSidebar';
+import InfoSidebar from '../../containers/Explore/InfoSidebar';
 import ExploreMapLegend from '../../containers/Explore/ExploreLegend';
 
-import MetadataList from './MetadataList';
+import MetadataInfo from './MetadataInfo';
+import Form from '../Form';
 
 import ShareModal from '../Modal/ShareModal';
 import Modal from '../Modal/Modal';
 
-import Button from '../Button/Button';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
+// Constants
 import metadata from '../../metadata.json';
-import logoImage from '../../../images/prep-logo.png';
 
-import Form from '../Form';
+const logoImage = '/images/prep-logo.png';
 
 class Explore extends React.Component {
+  static getData(key, value) {
+    let data = null;
+    for (let i = metadata.length - 1; i >= 0; i--) {
+      if (metadata[i][key] === value) {
+        data = metadata[i];
+        break;
+      }
+    }
+    return data;
+  }
 
   constructor() {
     super();
@@ -54,17 +69,6 @@ class Explore extends React.Component {
     this.props.resetExplore();
   }
 
-  getData(key, value) {
-    let data = null;
-    for (let i = metadata.length - 1; i >= 0; i--) {
-      if (metadata[i][key] === value) {
-        data = metadata[i];
-        break;
-      }
-    }
-    return data;
-  }
-
   getModalContent() {
     const { details } = this.props.data;
     const datasetData = details[this.props.metadataModal.datasetId];
@@ -81,7 +85,7 @@ class Explore extends React.Component {
               </Link>
             </h3>
             <h4> {metadataInfo.subtitle} </h4>
-            <MetadataList short download data={datasetData} />
+            <MetadataInfo short download data={datasetData} />
           </div>
         );
       }
@@ -93,7 +97,7 @@ class Explore extends React.Component {
   }
 
   render() {
-    const currentData = this.getData('pathname', '/explore');
+    const currentData = Explore.getData('pathname', '/explore');
     const modalContent = this.props.metadataModal.datasetId ? this.getModalContent() : null;
 
     document.title = currentData.title;
@@ -113,15 +117,10 @@ class Explore extends React.Component {
               </div>
             </div>
           </div>
-          <div className="l-header-tools-map">
-            <a className="c-button -theme-color" href="https://docs.google.com/forms/d/1wZzQno3De7Ul6vlOkkdHhWK_9csErSrOlo6pOAZHIds/edit">Request data</a>
-            <Button themeColor click={() => this.setState({ modalShareOpen: true })}>
-              Share
-            </Button>
-          </div>
         </header>
 
         <ExploreMapSidebar />
+        <InfoSidebar />
         <ExploreMap />
         <ExploreMapLegend />
 
@@ -145,7 +144,7 @@ class Explore extends React.Component {
             </p>
             <Form type="Request data" />
           </Modal>
-          }
+        }
 
         {this.props.metadataModal &&
           <Modal
@@ -153,29 +152,26 @@ class Explore extends React.Component {
             opened={this.props.metadataModal.open}
             close={() => this.props.setModalMetadata(false)}
           >
-
             {modalContent}
-
           </Modal>
         }
-
       </div>
     );
   }
 }
 
 Explore.childContextTypes = {
-  location: React.PropTypes.object
+  location: PropTypes.object
 };
 
 Explore.propTypes = {
-  getDatasets: React.PropTypes.func.isRequired,
-  data: React.PropTypes.any.isRequired,
-  location: React.PropTypes.object.isRequired,
-  params: React.PropTypes.object.isRequired,
-  metadataModal: React.PropTypes.object,
-  setModalMetadata: React.PropTypes.func.isRequired,
-  resetExplore: React.PropTypes.func.isRequired
+  getDatasets: PropTypes.func.isRequired,
+  data: PropTypes.any.isRequired,
+  location: PropTypes.object.isRequired,
+  params: PropTypes.object.isRequired,
+  metadataModal: PropTypes.object,
+  setModalMetadata: PropTypes.func.isRequired,
+  resetExplore: PropTypes.func.isRequired
 };
 
 export default Explore;

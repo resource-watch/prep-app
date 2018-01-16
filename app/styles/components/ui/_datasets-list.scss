@@ -1,0 +1,119 @@
+.c-datasets-list {
+  height: 100%;
+
+  h1,
+  h2 {
+    margin: 0;
+    padding: 0;
+
+    &:after { display: none; }
+  }
+
+  .list-filters {
+    padding: 20px 40px;
+
+    &.-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: $white;
+      z-index: 1;
+      border-bottom: 1px solid rgba(26,28,34,0.1);
+    }
+
+    &.-open {
+      background-color: $pale-white;
+    }
+
+    .list-filters-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .btn-filters {
+      display: flex;
+      align-items: center;
+
+      font-size: 15px;
+      line-height: 26px;
+    }
+
+    .c-icon {
+      width: 12px;
+      height: 12px;
+      fill: $light-gold;
+      margin-left: 5px;
+      margin-top: 1px;
+    }
+  }
+
+  .filters-content {
+    &.-fixed {
+      position: fixed;
+      top: 66px;
+      left: 0;
+      width: 100%;
+      z-index: 1;
+      box-shadow: 0 20px 30px 0 rgba(0,0,0,0.1);
+    }
+  }
+
+  .datasets-list-content {
+    display: flex;
+    flex-flow: column;
+  }
+
+  .dataset-group {
+    border-bottom: 2px solid $pale-grey;
+    padding: 25px 0;
+
+    .second-level {
+      padding-left: 30px;
+    }
+
+    .group-title {
+      font-size: 37px;
+      font-weight: $font-weight-bold;
+      text-transform: capitalize;
+    }
+
+    .group-description {
+      margin: 0 0 20px;
+      font-size: 15px;
+      font-family: $base-font-family;
+      font-weight: $font-weight-regular;
+    }
+  }
+
+  .sidebar-footer {
+    padding: 15px 22px 40px;
+
+    &.-border {
+      margin-top: 45px;
+      border-top: 2px solid $pale-grey;
+    }
+
+    p { margin: 0; }
+
+    .footer-section {
+      & + .footer-section {
+        margin: 30px 0 0;
+      }
+    }
+
+    .footer-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .c-button {
+      border: 1px solid $light-gold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

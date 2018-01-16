@@ -9,7 +9,10 @@ import {
   DATASET_DETAIL_RECEIVED,
   DATASET_METADATA_RECEIVED,
   DATASET_LAYER_RECEIVED,
-  DATASET_SET_FILTER
+  DATASET_SET_FILTER,
+  SET_LAYERGROUP_ACTIVE_LAYER,
+  CHANGE_TAB,
+  TOGGLE_DATASET_ACTIVE
 } from '../constants';
 import { updateURL } from './links';
 
@@ -17,12 +20,23 @@ const deserializer = new Deserializer({ keyForAttribute: 'underscore_case' });
 
 export default function () { }
 
+export function changeTab(tab) {
+  return (dispatch) => {
+    dispatch({
+      type: CHANGE_TAB,
+      payload: tab
+    });
+  };
+}
+
 export function setDatasetActive(dataset) {
   return (dispatch) => {
-    const layerData = Object.assign({}, dataset.layer[0].attributes, { id: dataset.layer[0].id });
-    dispatch({
-      type: DATASET_LAYER_RECEIVED,
-      payload: layerData
+    dataset.layer.forEach((l) => {
+      const layerData = Object.assign({}, l.attributes, { id: l.id });
+      dispatch({
+        type: DATASET_LAYER_RECEIVED,
+        payload: layerData
+      });
     });
   };
 }
@@ -75,11 +89,31 @@ export function getDatasetLayer(dataset) {
 //   };
 // }
 
+export function toggleActiveDatasets(dataset) {
+  return (dispatch, getState) => {
+    const { activeDatasets } = getState().datasets;
+    const { id } = dataset;
+    let newActiveDatasets = [...activeDatasets];
+
+    if (activeDatasets.includes(id)) {
+      newActiveDatasets = activeDatasets.filter(datasetId => datasetId !== id);
+    } else {
+      newActiveDatasets.push(id);
+    }
+
+    dispatch({
+      type: TOGGLE_DATASET_ACTIVE,
+      payload: newActiveDatasets
+    });
+  };
+}
+
 export function getActiveDatasetLayers(datasets) {
   return (dispatch) => {
     for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
       if (datasets[i].active) {
         dispatch(setDatasetActive(datasets[i]));
+        dispatch(toggleActiveDatasets(datasets[i]));
       }
     }
   };
@@ -96,7 +130,7 @@ export function setDatasetsTagFilter(filter, tag) {
 }
 
 export function getDatasets(defaultActiveLayers) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     const env = config.datasetEnv || 'production';
     fetch(`${config.apiUrlRW}/dataset?application=prep&includes=metadata,layer,vocabulary&page[size]=999&status=saved&env=${env}&published=true`)
       .then((response) => {
@@ -106,7 +140,9 @@ export function getDatasets(defaultActiveLayers) {
       .then((data) => {
         deserializer.deserialize(data, (err, datasetData) => {
           if (err) throw new Error('Error deserializing json api');
-          const datasets = datasetData || [];
+          // Ñapa: We have to conservate layer config
+          const datasets = (datasetData || []).map((d, i) => Object.assign(d, { layer: data.data[i].attributes.layer }));
+
           if (datasets.length) {
             for (let i = datasets.length - 1; i >= 0; i--) {
               if (defaultActiveLayers) {
@@ -147,14 +183,15 @@ export function resetDatasetList() {
   };
 }
 
-export function getDatasetById(datasetId, includesData) {
+export function getDatasetByIdOrSlug(datasetIdentifier, includesData) {
   const includes = includesData || [];
   const includeQuery = includes.length > 0 ?
     `&includes=${includes.join(',')}` :
     '';
 
   return (dispatch) => {
-    fetch(`${config.apiUrlRW}/dataset/${datasetId}?application=prep${includeQuery}&status=saved&page[size]=999`)
+    const env = config.datasetEnv || 'production';
+    fetch(`${config.apiUrlRW}/dataset/${datasetIdentifier}?application=prep${includeQuery}&status=saved&page[size]=999&env=${env}`)
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
@@ -166,10 +203,11 @@ export function getDatasetById(datasetId, includesData) {
             dispatch({
               type: DATASET_DETAIL_RECEIVED,
               payload: {
-                data: datasetData
+                data: datasetData,
+                identifier: datasetIdentifier
               }
             });
-            if (datasetData.widget.length) {
+            if (datasetData.widget && datasetData.widget.length) {
               dispatch({
                 type: DATASET_WIDGET_RECEIVED,
                 payload: {
@@ -261,5 +299,18 @@ export function getDatasetMetadata(datasetId) {
           payload: err.message
         });
       });
+  };
+}
+
+
+export function setLayerGroupActiveLayer(dataset, layer) {
+  return (dispatch) => {
+    dispatch({
+      type: SET_LAYERGROUP_ACTIVE_LAYER,
+      payload: { dataset, layer }
+    });
+
+    // We also update the URL
+    // if (typeof window !== 'undefined') dispatch(setUrlParams());
   };
 }

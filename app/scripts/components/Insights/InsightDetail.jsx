@@ -8,7 +8,6 @@ import SocialNav from '../../components/Navigation/SocialNav';
 import MainNav from '../../components/Navigation/MainNav';
 import Breadcrumbs from '../../components/Navigation/Breadcrumbs';
 import Banner from '../../components/Banner';
-import logoImage from '../../../images/prep-logo.png';
 
 import SectionIntro from '../SectionIntro';
 import IFrame from '../IFrame';
@@ -16,8 +15,9 @@ import LoadingSpinner from '../Loading/LoadingSpinner';
 
 import EthiopiaInsight from './Customs/Ethiopia';
 
-class InsightsDetail extends React.Component {
+const logoImage = '/images/prep-logo.png';
 
+class InsightsDetail extends React.Component {
   componentWillMount() {
     if (!this.props.data) {
       this.props.getInsightBySlug(this.props.insightSlug);
@@ -68,7 +68,7 @@ class InsightsDetail extends React.Component {
     const currentData = this.getCurrentData();
     const title = this.props.data ? this.props.data.title : currentData.title;
     const imageUrl = !this.props.data || this.props.data.image.indexOf('missing.png') >= 0 ?
-      null : `${config.apiUrl}${this.props.data.image}`;
+      null : `${config.assetsUrl}${this.props.data.image}`;
 
     document.title = title;
     return (<header className="l-header">
@@ -113,7 +113,7 @@ class InsightsDetail extends React.Component {
         contentComponent = (<div className="row">
           <div className="column small-12">
             <div className="c-insight-link">
-              <img alt="" src={config.apiUrl + this.props.data.image} />
+              <img alt="" src={config.assetsUrl + this.props.data.image} />
               <a className="c-button -border" href={this.props.data.content_url} target="_blank">
                 See insight
               </a>
@@ -145,7 +145,7 @@ class InsightsDetail extends React.Component {
           data={this.props.data}
           insightSlug={this.props.insightSlug}
           insightUrl={this.props.data.content_url}
-          currentSection={'insights'}
+          currentSection={'stories'}
         >
           <p> {this.props.data.summary} </p>
         </SectionIntro>

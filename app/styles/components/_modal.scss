@@ -35,34 +35,8 @@
 
     .m-content {
       padding: $medium-margin;
-      height: 90vh;
+      max-height: 90vh;
       overflow: auto;
-    }
-
-    > .c-nav-tab {
-
-      @media #{$mq-medium} {
-        padding-left: 80px;
-        padding-right: 80px;
-      }
-
-      .columns {
-        padding: 0;
-      }
-
-      ul {
-        justify-content: center;
-
-        @media #{$mq-medium} {
-          justify-content: flex-start;
-        }
-      }
-
-      li {
-        @media #{$mq-medium} {
-          margin-right: 80px;
-        }
-      }
     }
 
     &.share {
@@ -95,7 +69,7 @@
       > .close-button {
         top: $small-margin;
         right: $small-margin;
-        fill: $dark-grey-blue;
+        fill: $dark-blue;
 
         & :hover {
           fill: $fourth-color;

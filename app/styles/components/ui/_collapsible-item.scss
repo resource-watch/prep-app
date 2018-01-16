@@ -1,0 +1,129 @@
+.c-collapsible-item {
+  display: flex;
+  flex-flow: column;
+  padding: 20px 40px;
+  background-color: $pale-white;
+  border-top: 2px solid #eee;
+
+  .c-dataset-item {
+    margin: 0;
+
+    &:not(:first-child) {
+      margin-top: 10px;
+    }
+  }
+
+  > .collapsible-title {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 15px;;
+    margin: 0 0 20px -10px;
+
+    font-family: $base-font-family;
+    font-size: 13px;
+    line-height: 13px;
+    text-transform: uppercase;
+
+    z-index: 1;
+    cursor: pointer;
+
+    h1  {
+      font-family: $base-font-family;
+      font-size: 13px;
+      line-height: 13px;
+      text-transform: uppercase;
+    }
+
+    &:before {
+      @include arrow(7px, 2px, 225deg);
+      position: absolute;
+      top: calc(50% - 1px);
+      left: 0;
+      border-color: $dark-blue;
+      background: transparent;
+      pointer-events: auto;
+    }
+  }
+
+  > .collapsible-title-description {
+    display: none;
+  }
+
+  .btn-collapse {
+    display: flex;
+    align-items: center;
+    transition: all .3s ease;
+
+    &.-left .c-icon { margin-right: 10px; }
+    &.-right .c-icon { margin-left: 10px; }
+  }
+
+  > .collapsible-item-container {
+    padding: 0;
+    overflow: hidden;
+    transition: all .3s ease;
+  }
+
+  .collapsible-item {
+    transform: translateY(0);
+    transition: all .2s ease;
+
+    .list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      line-height: 16px;
+      text-transform: capitalize;
+      margin-bottom: 10px;
+      padding: 0 1px;
+    }
+  }
+
+  &.-hidden {
+    background-color: transparent;
+    border-top: 0;
+
+    .collapsible-title-description {
+      display: inline-block;
+      margin: 5px 0 0;
+      padding: 0 0 0 5px;
+
+      font-size: $tiny-font-size;
+      line-height: 15px;
+      color: rgba($dark-blue, .5);
+    }
+
+    .btn-collapse {
+      padding-bottom: 0;
+      transition: all .3s ease;
+    }
+
+    .collapsible-item {
+      position: relative;
+      transform: translateY(-200%);
+      transition: all .3s ease;
+    }
+
+    > .collapsible-title {
+      margin-bottom: 0;
+
+      &:before {
+        @include arrow(7px, 2px, 135deg);
+        top: calc(50% + 1px);
+        position: absolute;
+        left: 0;
+        border-color: $dark-blue;
+        background: transparent;
+        pointer-events: auto;
+      }
+    }
+
+    > .collapsible-item-container {
+      max-height: 0;
+      padding: 0 $sidebar-padding-content;
+      transition: all .3s ease;
+    }
+  }
+}

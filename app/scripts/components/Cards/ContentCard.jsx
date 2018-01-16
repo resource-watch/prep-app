@@ -53,7 +53,8 @@ function ContentCard(props) {
         <div className="card-options">
           {props.downloadUrl &&
           <a
-            href={downloadUrl} target="_blank"
+            href={downloadUrl}
+            target="_blank"
             className="c-button -action -icon"
           >
             <svg className="icon" width="10" height="12" viewBox="0 0 10 12"><title>Download</title>

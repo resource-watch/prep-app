@@ -1,3 +1,5 @@
+import find from 'lodash/find';
+
 import {
   DATASET_LIST_RECEIVED,
   DATASET_LIST_RESET,
@@ -10,19 +12,24 @@ import {
   DATASET_LAYER_FETCH_ERROR,
   DATASET_SET_FILTER,
   MAP_LAYERS_ORDER_CHANGED,
-  MAP_LAYER_OPACITY_CHANGED
+  MAP_LAYER_OPACITY_CHANGED,
+  SET_LAYERGROUP_ACTIVE_LAYER,
+  CHANGE_TAB,
+  TOGGLE_DATASET_ACTIVE
 } from '../constants';
 
 const initialState = {
   list: [],
   filteredList: [],
+  activeDatasets: [],
   details: {},
   widgets: {},
   layers: {},
   metadatas: {},
   filters: {
     geography: ['global', 'national']
-  }
+  },
+  tab: 'core_datasets'
 };
 
 export default function (state = initialState, action) {
@@ -35,7 +42,7 @@ export default function (state = initialState, action) {
     }
     case DATASET_DETAIL_RECEIVED: {
       const details = Object.assign({}, state.details, {});
-      details[action.payload.data.id] = action.payload.data;
+      details[action.payload.identifier] = action.payload.data;
       return Object.assign({}, state, { details });
     }
     case DATASET_WIDGET_RECEIVED: {
@@ -49,7 +56,7 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, { widgets });
     }
     case DATASET_LAYER_RECEIVED: {
-      const layers = Object.assign({}, state.layers, {});
+      const layers = Object.assign({}, state.layers);
       layers[action.payload.id] = action.payload;
       return Object.assign({}, state, { layers });
     }
@@ -115,16 +122,18 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, { filteredList, filters: filtersChoosen });
     }
     case TOGGLE_LAYER_STATUS: {
-      const filteredList = state.filteredList.slice(0);
-      const index = state.filteredList.map(d => d.id).indexOf(action.payload);
+      const filteredList = state.list.slice(0);
+      const selectedDataset = find(filteredList, { id: action.payload });
 
-      if (index !== -1) {
-        filteredList[index].active = !filteredList[index].active;
-        filteredList[index].opacity = 1;
-        if (filteredList[index].active) {
-          filteredList[index].index = state.filteredList.filter(layer => layer.active).length;
+      if (selectedDataset) {
+        for (let f = 0; f < filteredList.length; f++) {
+          const element = filteredList[f];
+          if (selectedDataset.id === element.id) {
+            selectedDataset.active = !filteredList[f].active;
+          }
         }
       }
+
       return Object.assign({}, state, { filteredList });
     }
     case SET_LAYER_STATUS: {
@@ -138,29 +147,49 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, { filteredList });
     }
     case MAP_LAYERS_ORDER_CHANGED: {
-      const datasets = state.filteredList.slice(0);
+      const datasets = [...state.list];
       const idsOrdered = action.payload.map(item => item.dataset);
 
       for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
         const index = idsOrdered.indexOf(datasets[i].id);
         if (index > -1) {
-          datasets[i].index = index + 1;
+          datasets[i].index = index;
         } else {
           datasets[i].index = 0;
         }
       }
-      return Object.assign({}, state, { filteredList: datasets });
+
+      return Object.assign({}, state, { list: datasets });
     }
     case MAP_LAYER_OPACITY_CHANGED: {
       const datasets = state.filteredList.slice(0);
 
       for (let i = 0, dsLength = datasets.length; i < dsLength; i++) {
-        if (datasets[i].id === action.payload) {
-          datasets[i].opacity = datasets[i].opacity ? 0 : 1;
+        if (datasets[i].id === action.payload.id) {
+          datasets[i].opacity = action.payload.opacity !== undefined ? action.payload.opacity : 1;
           break;
         }
       }
+
       return Object.assign({}, state, { filteredList: datasets });
+    }
+    case SET_LAYERGROUP_ACTIVE_LAYER: {
+      const newLayers = {};
+      Object.keys(state.layers).forEach((key) => {
+        const l = state.layers[key];
+
+        if (l.dataset !== action.payload.dataset) newLayers[key] = l;
+        else if (l.dataset === action.payload.dataset && key === action.payload.layer) {
+          newLayers[key] = Object.assign({}, l, { active: true });
+        } else newLayers[key] = Object.assign({}, l, { active: false });
+      });
+      return Object.assign({}, state, { layers: newLayers });
+    }
+    case CHANGE_TAB: {
+      return Object.assign({}, state, { tab: action.payload });
+    }
+    case TOGGLE_DATASET_ACTIVE: {
+      return ({ ...state, ...{ activeDatasets: action.payload } });
     }
     default:
       return state;

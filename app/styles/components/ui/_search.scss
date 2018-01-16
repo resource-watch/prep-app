@@ -1,0 +1,18 @@
+.c-search {
+  .label-container {
+    display: flex;
+    align-items: center;
+
+    .c-icon {
+      margin-left: 5px;
+    }
+  }
+
+  input {
+    font-size: 15px;
+    line-height: 16px;
+    border: 0;
+    background-color: transparent;
+    border-bottom: 1px solid $light-gold;
+  }
+}

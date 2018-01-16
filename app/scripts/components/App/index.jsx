@@ -1,4 +1,6 @@
 import React from 'react';
+
+// Components
 import { Link } from 'react-router';
 import PartnersSlider from '../../containers/PartnersSlider';
 import SecondaryNav from '../../components/Navigation/SecondaryNav';
@@ -10,16 +12,16 @@ import SummaryCards from '../../components/SummaryCards';
 import ContactForm from '../../components/ContactForm';
 
 import metadata from '../../metadata.json';
-import logoImage from '../../../images/prep-logo.png';
+
+const logoImage = '/images/prep-logo.png';
 
 const theme = {
   '/resources': '-theme-2',
-  '/insights': '-theme-3'
+  '/stories': '-theme-3'
 };
 
 class App extends React.Component {
-
-  getData(key, value) {
+  static getData(key, value) {
     let data = null;
     // First search for exactly match
     for (let i = metadata.length - 1; i >= 0; i--) {
@@ -42,7 +44,7 @@ class App extends React.Component {
 
   getCurrentData() {
     const pathname = this.props.location.pathname;
-    const currentData = this.getData('pathname', pathname);
+    const currentData = App.getData('pathname', pathname);
     return currentData;
   }
 
@@ -50,7 +52,7 @@ class App extends React.Component {
     const currentData = this.getCurrentData();
     const isHomepage = (currentData.name === 'home');
     const pathname = window.location.pathname;
-    const summaryCardsPages = ['/contact', '/insights', '/dashboards'];
+    const summaryCardsPages = ['/contact', '/stories', '/dashboards'];
 
     document.title = currentData.title;
 
@@ -87,9 +89,7 @@ class App extends React.Component {
 
         {summaryCardsPages.indexOf(pathname) !== -1 &&
         <SummaryCards
-          extraCard={pathname === '/insights' ?
-          'dashboards' :
-          'insights'}
+          extraCard={pathname === '/stories' ? 'dashboards' : 'stories'}
         />
         }
 
@@ -98,26 +98,30 @@ class App extends React.Component {
         }
 
         <footer className="l-footer">
-          <div className="l-footer-top -inverse">
-            <div className="row">
-              <div className="column small-12">
-                <PartnersSlider route={pathname} />
+          {pathname !== '/' &&
+            <div>
+              <div className="l-footer-top -inverse">
+                <div className="row">
+                  <div className="column small-12">
+                    <PartnersSlider route={pathname} />
+                  </div>
+                </div>
+              </div>
+              <div className="l-footer-sep">
+                <div className="row">
+                  <div className="column small-12">
+                    <div className="footer-sep-item" />
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="l-footer-sep">
-            <div className="row">
-              <div className="column small-12">
-                <div className="footer-sep-item" />
-              </div>
-            </div>
-          </div>
+          }
           <div className="l-footer-down">
             <div className="row">
-              <div className="column small-6 align-middle">
+              <div className="column small-12 medium-12 large-6 align-middle">
                 <SocialNav />
               </div>
-              <div className="column small-6 align-middle">
+              <div className="column small-6 medium-12 large-6 align-middle">
                 <SecondaryNav />
               </div>
             </div>
@@ -126,7 +130,6 @@ class App extends React.Component {
       </div>
     );
   }
-
 }
 
 App.childContextTypes = {

@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router';
 import MainNav from '../../components/Navigation/MainNav';
-import logoImage from '../../../images/prep-logo.png';
 import SecondaryNav from '../../components/Navigation/SecondaryNav';
 import SocialNav from '../../components/Navigation/SocialNav';
 import PartnersSlider from '../../containers/PartnersSlider';
 import SummaryCards from '../../components/SummaryCards';
 import Banner from '../../components/Banner';
 import Breadcrumbs from '../../components/Navigation/Breadcrumbs';
+
+const logoImage = '/images/prep-logo.png';
 
 function getHeader() {
   return (
@@ -71,7 +72,7 @@ export default function PartnerDetail(props) {
       {getHeader()}
       <div className="l-header-banner">
         <Breadcrumbs pathname={`/partners/${partner ? partner.name : ''}`} />
-        <img className="partner-logo" alt={partner ? partner.name : ''} src={partner ? `${partner.images.white_logo}` : ''} />
+        <img className="partner-logo" alt={partner ? partner.name : ''} src={partner ? `${config.assetsUrl}${partner.images.white_logo}` : ''} />
         <Banner size="small" bg="partnerDetail" />
       </div>
       <div className="l-main -collapsed">

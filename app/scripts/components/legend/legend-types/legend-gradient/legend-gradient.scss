@@ -1,0 +1,33 @@
+.c-legend-gradient {
+  ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    padding: 0;
+    margin: 0;
+    flex: 1;
+
+    &:before {
+      content: none !important; // For the NexGDDP tool
+    }
+  }
+
+  .name {
+    display: block;
+
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .icon-gradient {
+    display: block;
+    height: 5px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+}

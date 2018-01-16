@@ -1,0 +1,34 @@
+@import 'settings';
+
+.c-nexgddp-tool {
+  position: relative; // Needed for the loader
+  margin: $small-margin 0 $large-margin 0;
+
+  > .filters {
+    margin-bottom: $small-margin;
+
+    label {
+      font-size: 13px;
+      font-weight: bold;
+    }
+  }
+
+  > .toolbar {
+    border: 2px solid $border-color;
+    border-bottom: none;
+    padding: 5px 15px;
+  }
+
+  > .map {
+    border: 2px solid $border-color;
+    border-top: 0;
+  }
+
+  .map-marker {
+    width: 12px;
+    height: 12px;
+    background: $yellow-orange;
+    border-radius: 100%;
+    box-shadow: 0 7px 15px 0 rgba(0, 0, 0, .15);
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true,
+    "es6": true
+  },
+  "globals": {
+    "L": true,
+    "config": true
+  },
+  "extends": [
+    "vizzuality"
+  ],
+  "rules": {
+    "jsx-a11y/href-no-hash": "off",
+    "max-len": ["error", {
+      "code": 200,
+      "tabWidth": 2,
+      "ignoreComments": true,
+      "ignoreUrls": true,
+      "ignoreStrings": true,
+      "ignoreTemplateLiterals": true
+    }],
+    "no-plusplus": ["error", {
+      "allowForLoopAfterthoughts": true
+    }]
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "config/webpack/development.js"
+      }
+    }
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  }
+}

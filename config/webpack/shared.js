@@ -3,14 +3,13 @@ require('dotenv').config({ silent: true });
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const rootPath = process.cwd();
 
 const config = {
 
   entry: {
-    app: path.join(rootPath, 'app/scripts/index.jsx')
+    app: [path.join(rootPath, 'app/scripts/index.jsx')]
   },
 
   output: {
@@ -21,31 +20,33 @@ const config = {
 
   module: {
     rules: [{
-      test: /\.jsx?$/,
+      test: /\.(js|jsx)?$/,
       exclude: /(node_modules|lib)/,
-      use: ['babel-loader']
+      loader: require.resolve('babel-loader')
     }, {
-      test: /\.css$/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: 'css-loader'
-      })
+      test: /\.(hbs|handlebars)$/,
+      loader: require.resolve('handlebars-loader')
     }, {
-      test: /\.(scss|sass)$/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: ['css-loader', 'sass-loader', 'postcss-loader']
-      })
+      test: /\.html$/,
+      loader: require.resolve('raw-loader')
     }]
   },
 
   resolve: {
-    extensions: ['.js', '.jsx'],
-    modules: [
-      path.join(rootPath, 'app'),
-      path.resolve('app/scripts'),
-      path.join(rootPath, 'node_modules')
-    ]
+    extensions: ['.js', '.jsx', '.scss'],
+    alias: {
+      styles: path.resolve('app/styles'),
+      constants: path.resolve('app/scripts/constants'),
+      pages: path.resolve('app/scripts/pages'),
+      components: path.resolve('app/scripts/components'),
+      containers: path.resolve('app/scripts/containers'),
+      modules: path.resolve('app/scripts/modules'),
+      helpers: path.resolve('app/scripts/helpers'),
+      lib: path.resolve('app/scripts/lib'),
+      actions: path.resolve('app/scripts/actions'),
+      selectors: path.resolve('app/scripts/selectors'),
+      services: path.resolve('app/scripts/services')
+    }
   },
 
   resolveLoader: {
@@ -56,22 +57,23 @@ const config = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'app/index.html',
+      template: 'app/index.hbs',
       inject: 'body',
       filename: 'index.html',
-      googleAnalytics: process.env.NODE_ENV === 'production' ?
-        process.env.GOOGLE_ANALYTICS : 'UA-XXXXXXXX-YY'
+      prod: process.env.NODE_ENV === 'production',
+      googleAnalytics: process.env.GOOGLE_ANALYTICS || 'UA-XXXXXXXX-YY'
     }),
-    new ExtractTextPlugin('styles.css'),
     new webpack.EnvironmentPlugin(Object.keys(process.env)),
     new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development'),
       config: {
         facebookUser: JSON.stringify(process.env.FACEBOOK_USER),
         twitterUser: JSON.stringify(process.env.TWITTER_USER),
         apiUrl: JSON.stringify(process.env.API_URL),
         apiUrlRW: JSON.stringify(process.env.RW_API_URL),
         basemapTileUrl: JSON.stringify(process.env.BASEMAP_TILE_URL),
-        datasetEnv: JSON.stringify(process.env.DATASET_ENV)
+        datasetEnv: JSON.stringify(process.env.DATASET_ENV),
+        assetsUrl: JSON.stringify(process.env.ASSETS_URL || '')
       }
     })
   ]

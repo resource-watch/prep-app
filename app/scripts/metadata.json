@@ -4,7 +4,7 @@
     "pathname": "/",
     "metaTitle": "Welcome",
     "metaDescription": "",
-    "title": "Enabling collective action to manage climate risks",
+    "title": "Visualizing data to build climate resilience",
     "bannerSize": "big",
     "bg": "home",
     "widgets": [
@@ -104,22 +104,13 @@
     "bannerBg": "dashboard"
   },
   {
-    "name": "insights",
-    "pathname": "/insights",
-    "metaTitle": "Insights",
+    "name": "stories",
+    "pathname": "stories",
+    "metaTitle": "Stories",
     "metaDescription": "",
-    "title": "Insights",
+    "title": "Stories",
     "bannerSize": "medium",
     "bannerBg": "insights"
-  },
-  {
-    "name": "insight",
-    "pathname": "insight",
-    "metaTitle": "Insights",
-    "metaDescription": "",
-    "title": "Insights",
-    "bannerSize": "medium",
-    "bannerBg": "insight"
   },
   {
     "name": "create",

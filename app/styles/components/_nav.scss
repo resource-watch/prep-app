@@ -7,9 +7,9 @@
 
   &.-main {
     & > ul > li {
+      position: relative;
       margin-left: 1rem;
       margin-right: 1rem;
-
       color: $inverse-font-color;
       font-weight: bold;
       letter-spacing: 0.5px;
@@ -19,7 +19,6 @@
       & > a {
         display: block;
         padding: 38px 0;
-
         color: $inverse-font-color;
 
         border-top: 5px solid transparent;
@@ -29,6 +28,11 @@
         .l-header-nav.-short & {
           padding: 20px 0;
         }
+      }
+
+      & button {
+        padding: 38px 0;
+        display: block;
       }
 
       & > a.-current,
@@ -54,6 +58,12 @@
       }
       &:last-child {
         margin-right: 0;
+
+        &.avatar-container {
+          display: flex;
+          justify-content: center;
+          width: 50px;
+        }
       }
     }
   }
@@ -61,11 +71,12 @@
   &.-secondary {
     & > ul > li {
       position: relative;
-      margin-left: .5rem;
-      margin-right: .5rem;
+      margin-left: .6rem;
+      margin-right: .6rem;
 
       color: $inverse-font-color;
       font-size: $small-font-size;
+      font-family: $base-font-family;
       font-weight: bold;
       line-height: 1;
       text-transform: uppercase;
@@ -83,7 +94,7 @@
         width: 1px;
         height: 100%;
 
-        background-color: $secondary-color;
+        background-color: $bay-of-many;
 
         .-theme-2 & { background-color: $thirth-color; }
         .-theme-3 & { background-color: $fourth-color; }
@@ -99,6 +110,17 @@
         }
       }
     }
+    @media #{$mq-medium} {
+      ul {
+        justify-content: flex-start;
+      }
+    }
+
+    @media #{$mq-large} {
+      ul {
+        justify-content: flex-end;
+      }
+    }
   }
 
   &.-social {
@@ -110,28 +132,44 @@
 
     & > ul > li {
       display: flex;
-      margin-right: 1rem;
+      margin-right: 2.5rem;
       > span {
         margin-right: .5rem;
+      }
+    }
+
+    .social-links {
+      padding-right: 20px;
+      position: relative;
+      margin-right: 20px;
+
+      &:after {
+        display: block;
+        content: "";
+        position: absolute;
+        top: rem(6);
+        right: 0;
+        width: 1px;
+        height: rem(13);
+        background-color: $bay-of-many;
+      }
+
+      a {
+        line-height: 0;
+      }
+
+      a:not(:last-child) {
+        margin-right: 20px;
       }
     }
 
     .powered-by {
       position: relative;
       margin-top: rem(5);
+    }
 
-      &:before {
-        display: block;
-        content: "";
-        position: absolute;
-        top: rem(6);
-        right: 100%;
-        margin-right: .5rem;
-        width: 1px;
-        height: rem(13);
-
-        background-color: $secondary-color;
-      }
+    .c-icon {
+      fill: $white;
     }
   }
 }

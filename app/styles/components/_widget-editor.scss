@@ -1,0 +1,212 @@
+.c-we-widget-editor {
+  max-width: rem($max-width);
+  margin: 0 auto;
+
+  .customize-visualization {
+    .title {
+      @extend h2;
+      margin-bottom: 30px;
+      padding: 0;
+      text-align: left;
+      font-size: $h3-font-size;
+      font-weight: bold;
+
+      &:after { content: none; }
+    }
+  }
+
+  .c-we-columnbox {
+    color: $base-font-color;
+    background-color: $light-gold;
+
+    .c-we-icon { fill: $base-font-color; }
+    .order-by { color: $base-font-color; }
+  }
+
+  .c-we-column-container {
+    .columnbox-container {
+      &.-release {
+        border-color: $base-font-color;
+
+        .placeholder { color: $base-font-color; }
+      }
+    }
+  }
+
+  .c-we-filter-container {
+    .filter-box {
+      &.-release {
+        border-color: $base-font-color;
+
+        .placeholder { color: $base-font-color; }
+      }
+    }
+  }
+
+  .c-we-map {
+    .leaflet-control-attribution {
+      a {
+        display: inline;
+        text-transform: none;
+        text-decoration: none;
+        font-weight: normal;
+      }
+    }
+
+    .leaflet-control-zoom {
+      a {
+        margin: 0;
+        color: $base-font-color;
+
+        &:hover {
+          color: $base-font-color;
+          background-color: $pale-grey;
+        }
+      }
+    }
+  }
+
+  .c-we-map-controls {
+    .map-controls-item {
+      margin: 0;
+
+      &:before { content: none; }
+    }
+  }
+
+  .c-we-legend-map {
+    .legend-title {
+      font-family: $base-font-family;
+
+      &:after { content: none; }
+    }
+
+    .legend-list {
+      li {
+        &:before { content: none; }
+      }
+
+      .-dark {
+        color: $base-font-color;
+        font-family: $base-font-family;
+        background: transparent;
+      }
+    }
+  }
+}
+
+.c-we-widget-editor,
+.c-we-tooltip,
+.c-we-modal {
+  .c-we-spinner {
+    .spinner-box {
+      .icon {
+        border-top-color: $base-font-color;
+      }
+    }
+  }
+
+  .c-we-button,
+  .c-we-btn {
+    @extend .c-button;
+
+    &.-primary {
+      color: $white;
+      background: $base-font-color;
+    }
+
+    &.-secondary {
+      color: $base-font-color;
+
+      &:hover { background: rgba($base-font-color, 0.1); }
+    }
+
+    &:hover {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+
+  .c-we-checkbox {
+    .checkbox-icon,
+    .checkbox-icon:after {
+      border-color: $base-font-color;
+    }
+  }
+
+  .c-we-radio {
+    label {
+      span {
+        border-color: $base-font-color;
+
+        &:after { background: $base-font-color; }
+      }
+    }
+  }
+
+  .c-we-chart {
+    .save-widget-container {
+      .c-we-button {
+        margin: 0;
+        line-height: 45px;
+      }
+    }
+  }
+}
+
+.c-we-filter-string-tooltip {
+  .rc-slider-rail { background: $pale-grey; }
+  .rc-slider-track { background: $base-font-color; }
+  .rc-slider-handle {
+    &:hover,
+    &:active {
+      border-color: $base-font-color;
+      box-shadow: 0 0 5px rgba($base-font-color, 0.5);
+    }
+
+    &:focus { box-shadow: 0 0 0 5px $light-gold; }
+  }
+}
+
+.c-we-legend-unit {
+  .-dark {
+    color: $base-font-color;
+    font-family: $base-font-family;
+    background: transparent;
+  }
+}
+
+.c-we-custom-select {
+  &:after { border-bottom-color: $base-font-color; }
+
+  .custom-select-text {
+    .custom-select-search {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  .custom-select-options {
+    .next {
+      .c-we-icon { fill: $base-font-color; }
+    }
+
+    & > li {
+      & > div {
+        .c-we-icon { fill: $base-font-color; }
+
+        span {
+          font-family: $base-font-family;
+          font-size: $base-font-size;
+          color: $base-font-color;
+        }
+      }
+    }
+  }
+}
+
+.c-we-save-widget-modal {
+  .c-we-field-container {
+    border: 0;
+  }
+}

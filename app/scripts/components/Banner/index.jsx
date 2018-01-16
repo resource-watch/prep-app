@@ -1,18 +1,18 @@
 import React from 'react';
 
-import homepageBg from '../../../images/bg/bg-home.jpg';
-import partnershipBg from '../../../images/bg/bg-partnership.jpg';
-import dashboardsBg from '../../../images/bg/bg-dashboards.jpg';
-import dashboardBg from '../../../images/bg/bg-dashboard.png';
-import insightsBg from '../../../images/bg/bg-insights.jpg';
-import partnershipEngagementBg from '../../../images/bg/bg-partnership-engagement.jpg';
-import partnershipPlatformsBg from '../../../images/bg/bg-partnership-platforms.jpg';
-import partnerDetailBg from '../../../images/bg/bg-partner-detail.png';
-import contactBg from '../../../images/bg/bg-contact.jpg';
-import resourcesBg from '../../../images/bg/bg-resources.jpg';
-import createBg from '../../../images/bg/bg-create.jpg';
-import partnersBg from '../../../images/bg/bg-partners.jpg';
-import faqBg from '../../../images/bg/bg-faq.jpg';
+const homepageBg = '/images/bg/bg-home.jpg';
+const partnershipBg = '/images/bg/bg-partnership.jpg';
+const dashboardsBg = '/images/bg/bg-dashboards.jpg';
+const dashboardBg = '/images/bg/bg-dashboard.png';
+const insightsBg = '/images/bg/bg-insights.jpg';
+const partnershipEngagementBg = '/images/bg/bg-partnership-engagement.jpg';
+const partnershipPlatformsBg = '/images/bg/bg-partnership-platforms.jpg';
+const partnerDetailBg = '/images/bg/bg-partner-detail.png';
+const contactBg = '/images/bg/bg-contact.jpg';
+const resourcesBg = '/images/bg/bg-resources.jpg';
+const createBg = '/images/bg/bg-create.jpg';
+const partnersBg = '/images/bg/bg-partners.jpg';
+const faqBg = '/images/bg/bg-faq.jpg';
 
 const bg = {
   defaults: homepageBg,
@@ -35,7 +35,6 @@ const bg = {
 };
 
 class Banner extends React.Component {
-
   getClassName() {
     let sizeClassName = `c-banner -inverse -${this.props.size || 'medium'}`;
     if (this.props.landing) {
@@ -62,7 +61,6 @@ class Banner extends React.Component {
       </div>
     );
   }
-
 }
 
 export default Banner;

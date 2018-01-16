@@ -1,0 +1,71 @@
+
+.c-explore-slider-tooltip {
+  min-width: 180px;
+  padding-right: 10px;
+  color: $white;
+
+  .title {
+    font-size: 16px;
+    color: $white;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
+  .actions-container {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+
+    .c-button {
+      padding: 8px 16px;
+      height: auto;
+      margin-right: 5px;
+      text-transform: uppercase;
+      color: $light-gold;
+
+      &.-primary {
+        color: $white;
+        border: 2px solid $light-gold;
+        border-radius: 0;
+        background-color: transparent;
+      }
+    }
+  }
+}
+
+
+/* Slider override */
+.rc-slider {
+  cursor: pointer;
+}
+
+.rc-slider-track {
+  background-color: $white;
+  height: 2px;
+}
+
+.rc-slider-rail {
+  height: 2px;
+}
+
+.rc-slider-step {
+  height: 2px;
+}
+
+.rc-slider-rail {
+  background-color: $light-blue;
+}
+
+.rc-slider-handle {
+  margin-top: -8px;
+  width: 17px;
+  height: 17px;
+  border-color: $dark-blue;
+  background-color: $white;
+
+  &:focus,
+  &:hover, {
+    border-color: $white;
+    outline: none;
+  }
+}

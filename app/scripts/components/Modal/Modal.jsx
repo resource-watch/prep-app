@@ -2,7 +2,6 @@ import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Modal extends React.Component {
-
   componentDidMount() {
     this.onKeyPress = (e) => {
       if (e.keyCode === 27) {
@@ -61,7 +60,6 @@ class Modal extends React.Component {
       </ReactCSSTransitionGroup>
     );
   }
-
 }
 
 Modal.propTypes = {

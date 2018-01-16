@@ -3,32 +3,30 @@
   display: inline-block;
   width: 17px;
   height: 10px;
-  flex-shrink: 0;
-  line-height: 1;
   border-radius: 22px;
-  background-color: rgba($inverse-bg-color, 0.3);
+  border: 1px solid $dark-blue;
   cursor: pointer;
-  transition: background-color 0.15s ease-out;
 
   &:after {
-    content: " ";
+    content: '';
     position: absolute;
     width: 6px;
     height: 6px;
-    left: 0;
-    top: 2px;
+    left: 2px;
+    top: 50%;
     border-radius: 50%;
-    background-color: $base-bg-color;
-    cursor: pointer;
-    transform: translateX(2px);
-    transition: transform 0.15s ease-out;
+    background-color: $dark-blue;
+    transform: translate(0, -50%);
+    transition: transform .15s ease-out;
   }
 
   &.-checked {
-    background-color: $thirth-color;
+    background-color: $yellow-orange;
+    border-color: $yellow-orange;
 
     &:after{
-      transform: translateX(9px);
+      transform: translate(100%, -50%);
+      background-color: $white;
     }
   }
 

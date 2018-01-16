@@ -44,6 +44,12 @@
     border-top: 10px solid $dark-slate-blue-2;
   }
 
+  &.-arrow-bottom-right:after {
+    left: auto;
+    right: 5px;
+    transform: translateX(0);
+  }
+
   &.-visible {
     display: inherit;
   }
@@ -92,4 +98,17 @@
     }
   }
 
+  &.basemap-tooltip {
+    max-height: none;
+
+    .divisor {
+      height: 1px;
+      background-color: rgba($white, 0.1);
+    }
+
+    .c-radio label,
+    .c-checkbox label {
+      color: $white;
+    }
+  }
 }
