@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import truncate from 'lodash/truncate';
 import filter from 'lodash/filter';
 import { Link } from 'react-router';
+import { shorten } from 'helpers/string-helper';
 
 import Icon from 'components/ui/Icon';
 import Switch from 'components/Button/Switch';
@@ -53,7 +53,7 @@ class DatasetCard extends PureComponent {
 
         <div className="item-content">
           {info.function &&
-            <p className="description">{truncate(info.function, { length: 75, omission: '[...]' })}</p>}
+            <p className="description">{shorten(info.function, 75)}</p>}
         </div>
       </div>
     );
