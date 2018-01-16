@@ -242,7 +242,6 @@ const chartSpec = {
         "enter": {
           "interpolate": {"value": "monotone"},
           "x": {"scale": "x","field": "x"},
-          "x2": {"scale": "x","field": "date_end"},
           "y": {"scale": "y","field": "q75"},
           "y2": {"scale": "y","field": "q25"},
           "fillOpacity": {"value": 0},
@@ -276,7 +275,6 @@ const chartSpec = {
         "enter": {
           "interpolate": {"value": "monotone"},
           "x": {"scale": "x","field": "x"},
-          "x2": {"scale": "x","field": "date_end"},
           "y": {"scale": "y","field": "q75"},
           "y2": {"scale": "y","field": "q25"},
           "fillOpacity": {"value": 0},
@@ -412,7 +410,7 @@ class TimeseriesChart extends React.PureComponent {
 
     const range1Signal = {
       name: 'range1',
-      init: { expr: `{ start: utc(${range1[0]}, 0, 1), end: utc(${range1[1] + 1}, 0, 1) }` }
+      init: { expr: `{ start: utc(${range1[0]}, 0, 1), end: utc(${range1[1]}, 0, 1) }` }
     };
 
     const range2Signal = { name: 'range2', init: 'false' };
@@ -421,7 +419,7 @@ class TimeseriesChart extends React.PureComponent {
         .map(v => +v);
 
       range2Signal.init = {
-        expr: `{ start: utc(${range2[0]}, 0, 1), end: utc(${range2[1] + 1}, 0, 1) }`
+        expr: `{ start: utc(${range2[0]}, 0, 1), end: utc(${range2[1]}, 0, 1) }`
       };
     }
 
