@@ -186,8 +186,6 @@ export const setMultiActiveLayer = (state, { payload }) => {
         ...l,
         isActive: l.id === layerId
       }));
-
-      console.log(d.layer);
     }
 
     return d;
