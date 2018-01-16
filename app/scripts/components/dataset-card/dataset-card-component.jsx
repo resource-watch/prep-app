@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import filter from 'lodash/filter';
 import truncate from 'lodash/truncate';
 import { Link } from 'react-router';
-import { shorten } from 'helpers/string-helper';
 
 import Icon from 'components/ui/Icon';
 import Switch from 'components/Button/Switch';
