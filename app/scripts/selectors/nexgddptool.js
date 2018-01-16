@@ -1,17 +1,17 @@
 import { createSelector } from 'reselect';
 
 // Temporal code
-const mapIndicatorToUnit = {
-  hdds: 'Degrees',
-  cdds: 'Degrees',
-  cum_pr: 'kg*m-2*s-1',
-  dry: 'nº 5-day periods',
-  tasmax: 'Kelvin',
-  tasavg: 'Kelvin',
-  xpr: 'days',
-  xs: 'days',
-  ffs: 'days',
-  tasmin: 'Kelvin'
+const mapIndicatorToUnitSignal = {
+  hdds: { from: 'Degrees', to: 'Degrees', value: 1, type: 'factor' },
+  cdds: { from: 'Degrees', to: 'Degrees', value: 1, type: 'factor' },
+  cum_pr: { from: 'Kg*m-2*s-1', to: 'mm', value: 86400, type: 'factor' },
+  dry: { from: 'Nº 5-day periods', to: 'Nº 5-day periods', value: 1, type: 'factor' },
+  tasmax: { from: 'Kelvin', to: 'ºC', value: 273.23, type: 'minus' },
+  tasavg: { from: 'Kelvin', to: 'ºC', value: 273.23, type: 'minus' },
+  xpr: { from: 'Days', to: 'Days', value: 1, type: 'factor' },
+  xs: { from: 'Days', to: 'Days', value: 1, type: 'factor' },
+  ffs: { from: 'Days', to: 'Days', value: 1, type: 'factor' },
+  tasmin: { from: 'Kelvin', to: 'ºC', value: 273.23, type: 'minus' }
 };
 
 const state = state => state; // eslint-disable-line no-shadow
@@ -93,11 +93,11 @@ export const getIndicatorId = createSelector(
   }
 );
 
-export const getIndicatorUnit = createSelector(
+export const getIndicatorUnitSignal = createSelector(
   state,
   (state) => { // eslint-disable-line no-shadow
     const indicatorId = getIndicatorId(state);
-    return indicatorId ? mapIndicatorToUnit[indicatorId] : null;
+    return indicatorId ? mapIndicatorToUnitSignal[indicatorId] : null;
   }
 );
 
