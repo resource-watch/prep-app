@@ -103,11 +103,11 @@ export const onClearFilters = createThunkAction('explore-dataset-filters/onClear
 
 export const fetchDatasets = createThunkAction('fetchDatasets', () => (dispatch) => {
   const params = {
-    application: ['prep'].join(','),
+    application: process.env.APPLICATIONS,
     includes: ['metadata', 'layer', 'vocabulary', 'widget'].join(','),
     'page[size]': 999,
     status: 'saved',
-    published: true,
+    published: `[${process.env.APPLICATIONS}]`,
     env: config.datasetEnv || 'production'
   };
   const url = `${config.apiUrlRW}/dataset?${qs.stringify(params)}`;

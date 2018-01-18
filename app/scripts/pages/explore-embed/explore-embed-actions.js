@@ -67,7 +67,7 @@ export const fetchDatasets = createThunkAction('fetchDatasets', () => (dispatch)
     includes: ['metadata', 'layer', 'vocabulary', 'widget'].join(','),
     'page[size]': 999,
     status: 'saved',
-    published: true,
+    published: `[${process.env.APPLICATIONS}]`,
     env: config.datasetEnv || 'production'
   };
   const url = `${config.apiUrlRW}/dataset?${qs.stringify(params)}`;
@@ -78,8 +78,6 @@ export const fetchDatasets = createThunkAction('fetchDatasets', () => (dispatch)
     })
     .then((json) => {
       const datasets = wriAPISerializer(json);
-      // const nexgdpDatasets = datasets.filter(d => (d.provider === 'nexgddp'));
-      // console.log(nexgdpDatasets);
       dispatch(receiveDatasets(datasets));
       dispatch(updateActiveDatasets());
     })
