@@ -8,7 +8,7 @@ class GraphService {
     const filtersString = concatenateFilters(filters);
     const queryParams = queryString.stringify(
       Object.assign({},
-        { published: true },
+        { published: `[${process.env.APPLICATIONS}]` },
         { env: process.env.DATASET_ENV },
         { application: process.env.APPLICATIONS },
         { 'page[size]': 999999 }

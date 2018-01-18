@@ -1,4 +1,5 @@
 import 'whatwg-fetch';
+import * as queryString from 'query-string';
 import { Deserializer } from 'jsonapi-serializer';
 import {
   DATASET_LIST_RECEIVED,
@@ -132,7 +133,16 @@ export function setDatasetsTagFilter(filter, tag) {
 export function getDatasets(defaultActiveLayers) {
   return (dispatch) => {
     const env = config.datasetEnv || 'production';
-    fetch(`${config.apiUrlRW}/dataset?application=prep&includes=metadata,layer,vocabulary&page[size]=999&status=saved&env=${env}&published=true`)
+    const queryParams = queryString.stringify({
+      application: process.env.APPLICATIONS,
+      includes: ['metadata', 'layer', 'vocabulary'].join(','),
+      'page[size]': 999,
+      status: 'saved',
+      env,
+      published: `[${process.env.APPLICATIONS}]`
+    });
+
+    fetch(`${config.apiUrlRW}/dataset?${queryParams}`)
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);

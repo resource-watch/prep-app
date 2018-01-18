@@ -9,7 +9,7 @@ export const getResources = createThunkAction('resources-page/getResources', () 
   (dispatch) => {
     dispatch(setResourcesLoading(true));
     const queryParams = queryString.stringify({
-      published: true
+      published: `[${process.env.APPLICATIONS}]`
     });
 
     fetch(`${config.apiUrl}/resources?${queryParams}`)
