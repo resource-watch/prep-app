@@ -41,19 +41,19 @@ class LegendNexGDDPToolbar extends PureComponent {
   onResolutionChange(temporalResolution) {
     this.setState({ temporalResolution }, () => {
       this.updatingPeriods();
-      this.props.setMultiActiveLayer({ ...this.state, id: this.props.layerSpec.dataset });
+      this.props.onMultiLayer({ ...this.state, id: this.props.layerSpec.dataset });
     });
   }
 
   onPeriodChange(period) {
     this.setState({ period }, () => {
-      this.props.setMultiActiveLayer({ ...this.state, id: this.props.layerSpec.dataset });
+      this.props.onMultiLayer({ ...this.state, id: this.props.layerSpec.dataset });
     });
   }
 
   onScenarioChange(scenario) {
     this.setState({ scenario }, () => {
-      this.props.setMultiActiveLayer({ ...this.state, id: this.props.layerSpec.dataset });
+      this.props.onMultiLayer({ ...this.state, id: this.props.layerSpec.dataset });
     });
   }
 
@@ -137,7 +137,7 @@ class LegendNexGDDPToolbar extends PureComponent {
 
 LegendNexGDDPToolbar.propTypes = {
   layerSpec: PropTypes.object,
-  setMultiActiveLayer: PropTypes.func
+  onMultiLayer: PropTypes.func
 };
 
 export default LegendNexGDDPToolbar;

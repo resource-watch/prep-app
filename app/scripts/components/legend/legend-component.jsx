@@ -10,13 +10,20 @@ import './legend-style.scss';
 
 class Legend extends PureComponent {
   getLegendToolbar() {
-    const { layerSpec } = this.props;
-    if (layerSpec.provider === 'nexgddp') return (<LegendNexGDDPToolbar layerSpec={layerSpec} />);
+    const { layerSpec, onMultiLayer } = this.props;
+    if (layerSpec.provider === 'nexgddp') {
+      return (
+        <LegendNexGDDPToolbar
+          layerSpec={layerSpec}
+          onMultiLayer={onMultiLayer}
+        />
+      );
+    }
     return null;
   }
 
   render() {
-    const { layerSpec, onOpacity, onVisibility, onClose, onInfo } = this.props;
+    const { layerSpec, onOpacity, onVisibility, onClose, onMultiLayer, onInfo } = this.props;
     const { name, legendConfig } = layerSpec;
     const { type, unit } = legendConfig;
 
@@ -31,6 +38,7 @@ class Legend extends PureComponent {
               onVisibility={onVisibility}
               onInfo={onInfo}
               onClose={onClose}
+              onMultiLayer={onMultiLayer}
             />}
         </div>
         {this.props.toolbar && this.getLegendToolbar()}
@@ -51,7 +59,8 @@ Legend.propTypes = {
   onOpacity: PropTypes.func,
   onVisibility: PropTypes.func,
   onInfo: PropTypes.func,
-  onClose: PropTypes.func
+  onClose: PropTypes.func,
+  onMultiLayer: PropTypes.func
 };
 
 Legend.defaultProps = {
@@ -60,7 +69,8 @@ Legend.defaultProps = {
   updateOpacity: () => {},
   onVisibility: () => {},
   onInfo: () => {},
-  onClose: () => {}
+  onClose: () => {},
+  onMultiLayer: () => {}
 };
 
 export default Legend;

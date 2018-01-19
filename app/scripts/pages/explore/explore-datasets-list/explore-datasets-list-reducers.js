@@ -154,7 +154,6 @@ export const updateOpacity = (state, { payload }) => {
 export const setMultiActiveLayer = (state, { payload }) => {
   const { temporalResolution, period, scenario, id, layerId } = payload;
 
-
   const items = state.datasets.items.map((d) => {
 
     if (d.id === id && d.provider === 'nexgddp') {
