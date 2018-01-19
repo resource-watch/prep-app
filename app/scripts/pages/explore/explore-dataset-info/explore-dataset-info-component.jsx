@@ -5,7 +5,9 @@ import ReactMarkdown from 'react-markdown';
 import Icon from 'components/ui/Icon';
 import Switch from 'components/Button/Switch';
 import VegaChart from 'components/Chart/VegaChart';
-import { getTitle, getInfo, getMetadata } from 'components/dataset-card/dataset-helper';
+import { getTitle, getInfo } from 'components/dataset-card/dataset-helper';
+import Tooltip from 'rc-tooltip/dist/rc-tooltip';
+import CollectionsPanel from 'components/collections-panel';
 
 // data
 import TOPICS from 'pages/explore/explore-dataset-filters/data/topics.json';
@@ -139,13 +141,12 @@ class DatasetInfo extends PureComponent {
   }
 
   render() {
-    const { dataset, toggleDataset, embed } = this.props;
+    const { dataset, toggleDataset, embed, user } = this.props;
     const info = getInfo(dataset);
     const hasLayer = !!(dataset.layer && dataset.layer.length);
     const hasWidget = !!(dataset.widget && dataset.widget.length);
-    const linkTarget = {
-      ...embed && { target: '_blank' }
-    };
+    const linkTarget = { ...embed && { target: '_blank' } };
+    const { token } = user;
 
 
     return (
@@ -161,6 +162,24 @@ class DatasetInfo extends PureComponent {
                   Download
                 </a>
               }
+
+              {token && <Tooltip
+                overlay={<CollectionsPanel
+                  resource={dataset}
+                  resourceType="dataset"
+                />}
+                overlayClassName="c-rc-tooltip -blue-arrow"
+                overlayStyle={{
+                  color: '#1a3e62'
+                }}
+                placement="bottom"
+                trigger="click"
+              >
+                <button className="c-btn star-button save">
+                  <Icon name="icon-star-full" className="-medium" />
+                  Save dataset
+                </button>
+              </Tooltip>}
 
               <a
                 href={`${window.location.origin}/dataset/${dataset.slug}`}
@@ -224,6 +243,7 @@ class DatasetInfo extends PureComponent {
 
 DatasetInfo.propTypes = {
   dataset: PropTypes.object,
+  user: PropTypes.object,
   embed: PropTypes.bool,
   toggleDataset: PropTypes.func,
   onSetDatasetFilter: PropTypes.func,
