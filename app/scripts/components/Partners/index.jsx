@@ -9,7 +9,7 @@ function Partners(props) {
       <div className="columns small-12 medium-4" key={partner.id}>
         <div className="c-article-module">
           <Thumbnail
-            src={config.assetsUrl + partner.images.thumbnail}
+            src={config.assetsUrl + partner.thumbnail}
             alt={partner.name}
             border={'neutral'}
           />

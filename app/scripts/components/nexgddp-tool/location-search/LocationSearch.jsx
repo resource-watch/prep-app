@@ -6,7 +6,7 @@ import isEqual from 'lodash/isEqual';
 import Icon from 'components/ui/Icon';
 
 // Redux
-import { setMarkerPosition } from 'actions/nexgddptool';
+import { setMapZoom, setMapCenter, setMarkerPosition } from 'actions/nexgddptool';
 
 import './style.scss';
 
@@ -39,6 +39,12 @@ class LocationSearch extends React.Component {
     const { lat, lng } = e.location;
     this.setState({ marker: [lat, lng] });
     this.props.setMarkerPosition([lat, lng]);
+    this.props.setMapCenter([lat, lng]);
+
+    // Yes I know... But without it the map will only zoom and it won't center
+    requestAnimationFrame(() => {
+      this.props.setMapZoom(7);
+    });
   }
 
   render() {
@@ -56,15 +62,19 @@ class LocationSearch extends React.Component {
 
 LocationSearch.propTypes = {
   marker: PropTypes.array, // eslint-disable-line react/no-unused-prop-types
-  setMarkerPosition: PropTypes.func
+  setMarkerPosition: PropTypes.func,
+  setMapCenter: PropTypes.func,
+  setMapZoom: PropTypes.func
 };
 
 const mapStateToProps = state => ({
   marker: state.nexgddptool.marker
 });
 
-const mapDispatchToProps = dispatch => ({
-  setMarkerPosition: (...params) => dispatch(setMarkerPosition(...params))
-});
+const mapDispatchToProps = {
+  setMarkerPosition,
+  setMapZoom,
+  setMapCenter
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocationSearch);

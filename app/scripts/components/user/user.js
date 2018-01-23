@@ -33,9 +33,15 @@ class UserContainer extends Component {
     if (!(this.props.session || token)) return;
 
     const userDataPromise = UserService.getSessionUserData(token);
+    this.props.setUserToken(`Bearer ${token}`);
 
     userDataPromise
-      .then((data) => { this.props.updateUserData(data); })
+      .then((data) => {
+        const { updateUserData, getUserFavourites, getUserCollections } = this.props;
+        updateUserData(data);
+        getUserFavourites();
+        getUserCollections();
+      })
       .catch(({ errors }) => {
         const { status, details } = errors;
         console.error(status, details);
@@ -70,6 +76,9 @@ UserContainer.propTypes = {
   toggleActive: PropTypes.func.isRequired,
   logOutSuccess: PropTypes.func.isRequired,
   updateUserData: PropTypes.func.isRequired,
+  setUserToken: PropTypes.func.isRequired,
+  getUserFavourites: PropTypes.func.isRequired,
+  getUserCollections: PropTypes.func.isRequired,
   session: PropTypes.bool.isRequired,
   data: PropTypes.object.isRequired
 };

@@ -24,7 +24,7 @@ function DashboardDetailTools(props) {
               {card.partner &&
               <a target="_blank" href={card.partner.href}>
                 <img
-                  src={config.assetsUrl + card.partner.images.logo}
+                  src={config.assetsUrl + card.partner.logo}
                   className="logo"
                   alt={card.partner.name}
                 />

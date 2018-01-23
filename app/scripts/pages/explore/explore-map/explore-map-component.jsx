@@ -51,12 +51,16 @@ class ExploreMap extends PureComponent {
             boundaries={boundaries}
             setBoundaries={setBoundaries}
           />
-          <ShareControl
-            className="-absolute" // pfff....
-          />
+
+          {!embed &&
+
+            <ShareControl
+              className="-absolute" // pfff....
+            />
+          }
         </Map>
 
-        {activeLayers.length &&
+        {!!activeLayers.length &&
           <LegendControl
             collapsed={embed}
             layersSpec={activeLayers}
@@ -67,6 +71,7 @@ class ExploreMap extends PureComponent {
             onInfo={l => this.props.toggleInfo({ id: l.dataset })}
             onOpacity={this.props.updateOpacity}
             onClose={l => this.props.toggleDataset({ id: l.dataset })}
+            onMultiLayer={context => this.props.setMultiActiveLayer(context)}
           />}
       </div>
     );
@@ -95,7 +100,8 @@ ExploreMap.propTypes = {
   toggleInfo: PropTypes.func,
   toggleDataset: PropTypes.func,
   toggleVisibility: PropTypes.func,
-  updateOpacity: PropTypes.func
+  updateOpacity: PropTypes.func,
+  setMultiActiveLayer: PropTypes.func
 };
 
 export default ExploreMap;

@@ -10,7 +10,7 @@ function SectionIntro(props) {
             <div className="column small-6">
               <div className="logo">
                 <img
-                  src={config.assetsUrl + props.data.partner.images.white_logo}
+                  src={config.assetsUrl + props.data.partner.white_logo}
                   alt={props.data.partner.name}
                 />
               </div>

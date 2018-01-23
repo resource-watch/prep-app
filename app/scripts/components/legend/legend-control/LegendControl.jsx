@@ -27,7 +27,7 @@ export class LegendControl extends React.PureComponent {
   }
 
   render() {
-    const { layersSpec, datasetsSpec, position, sortable, onOpacity, onVisibility, onClose, onInfo } = this.props;
+    const { layersSpec, datasetsSpec, position, sortable, onOpacity, onVisibility, onClose, onInfo, onMultiLayer } = this.props;
     const { collapsed } = this.state;
 
     return (
@@ -58,6 +58,7 @@ export class LegendControl extends React.PureComponent {
               onVisibility={onVisibility}
               onInfo={onInfo}
               onClose={onClose}
+              onMultiLayer={onMultiLayer}
             /> }
 
           { (datasetsSpec && datasetsSpec.length > 0) &&
@@ -78,7 +79,8 @@ LegendControl.propTypes = {
   onOpacity: PropTypes.func,
   onVisibility: PropTypes.func,
   onInfo: PropTypes.func,
-  onClose: PropTypes.func
+  onClose: PropTypes.func,
+  onMultiLayer: PropTypes.func
 };
 
 LegendControl.defaultProps = {
@@ -91,7 +93,8 @@ LegendControl.defaultProps = {
   onOpacity: () => {},
   onVisibility: () => {},
   onInfo: () => {},
-  onClose: () => {}
+  onClose: () => {},
+  onMultiLayer: () => {}
 };
 
 export default LegendControl;

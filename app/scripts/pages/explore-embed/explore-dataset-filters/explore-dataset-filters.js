@@ -2,19 +2,18 @@ import { Component, createElement } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import * as exploreActions from 'pages/explore/explore-actions';
+import * as exploreActions from 'pages/explore-embed/explore-embed-actions';
 import reducers, { initialState } from 'pages/explore/explore-dataset-filters/explore-dataset-filters-reducer';
 
 import ExploreDatasetFiltersComponent from 'pages/explore/explore-dataset-filters/explore-dataset-filters-component';
-import getFilterStatus from './explore-dataset-filters-selectors';
 
 const mapStateToProps = state => ({
-  data: getFilterStatus(state)
+  data: state.explorePage.datasetFilters.data
 });
 
 class ExploreDatasetFiltersContainer extends Component {
   componentWillMount() {
-    this.props.getFiltersData();
+    if (!Object.keys(this.props.data).length) this.props.getFiltersData();
   }
 
   render() {
@@ -25,7 +24,8 @@ class ExploreDatasetFiltersContainer extends Component {
 }
 
 ExploreDatasetFiltersContainer.propTypes = {
-  getFiltersData: PropTypes.func
+  getFiltersData: PropTypes.func,
+  data: PropTypes.object
 };
 
 export { exploreActions, reducers, initialState };

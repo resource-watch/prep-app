@@ -1,4 +1,14 @@
 export default {
   active: false,
-  data: {}
+  data: {},
+  favourites: {
+    items: [],
+    loading: false,
+    error: null
+  },
+  collections: {
+    items: [],
+    loadingQueue: [],
+    error: null
+  }
 };

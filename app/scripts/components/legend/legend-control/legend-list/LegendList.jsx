@@ -19,7 +19,7 @@ const SortableItem = SortableElement(props => (
   </div>
 ));
 
-const SortableLegendList = SortableContainer(({ items, onOpacity, onVisibility, onClose, onInfo }) => (
+const SortableLegendList = SortableContainer(({ items, onOpacity, onVisibility, onClose, onInfo, onMultiLayer }) => (
   <ul>
     {items.map((value, index) => (
       <SortableItem
@@ -30,6 +30,7 @@ const SortableLegendList = SortableContainer(({ items, onOpacity, onVisibility, 
         onVisibility={onVisibility}
         onInfo={onInfo}
         onClose={onClose}
+        onMultiLayer={onMultiLayer}
       />
     ))}
   </ul>
@@ -55,7 +56,7 @@ class LegendList extends React.PureComponent {
   }
 
   render() {
-    const { sortable, onOpacity, onVisibility, onClose, onInfo } = this.props;
+    const { sortable, onOpacity, onVisibility, onClose, onInfo, onMultiLayer } = this.props;
     const { items } = this.state;
 
     if (sortable) {
@@ -73,6 +74,7 @@ class LegendList extends React.PureComponent {
             onVisibility={onVisibility}
             onInfo={onInfo}
             onClose={onClose}
+            onMultiLayer={onMultiLayer}
           />
         </div>
       );
@@ -97,7 +99,8 @@ LegendList.propTypes = {
   onOpacity: PropTypes.func,
   onVisibility: PropTypes.func,
   onInfo: PropTypes.func,
-  onClose: PropTypes.func
+  onClose: PropTypes.func,
+  onMultiLayer: PropTypes.func
 };
 
 LegendList.defaultProps = {
@@ -105,7 +108,8 @@ LegendList.defaultProps = {
   onVisibility: () => {},
   onSortChange: () => {},
   onInfo: () => {},
-  onClose: () => {}
+  onClose: () => {},
+  onMultiLayer: () => {}
 };
 
 export default LegendList;

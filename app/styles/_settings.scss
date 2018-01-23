@@ -101,3 +101,7 @@ $bp-large: 65em;
 // Mediaqueries
 $mq-medium: "screen and (min-width: #{$bp-medium})";
 $mq-large: "screen and (min-width: #{$bp-large})";
+
+// animations
+$animation-time-4: .75s;
+$ease-in-out-sine: cubic-bezier(0.445, 0.050, 0.550, 0.950);

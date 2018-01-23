@@ -2,10 +2,12 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Link } from 'react-router';
+
 import MainNav from 'components/Navigation/MainNav';
 import Tabs from 'components/ui/Tabs';
 import Search from 'components/ui/Search';
 import Icon from 'components/ui/Icon';
+
 import DatasetLocationFilter from './explore-location-filter';
 import ExploreDatasetFilters from './explore-dataset-filters/explore-dataset-filters';
 import CoreDatasetsList from './core-datasets-list';
