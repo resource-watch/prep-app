@@ -8,17 +8,17 @@ import ShareUrl from '../../containers/Modal/ShareUrl';
 
 class ShareModalComponent extends PureComponent {
   componentWillMount() {
-    const { linkUrl, embedUrl } = this.props.links;
+    const { link, embed } = this.props.links;
 
-    if (!linkUrl && embedUrl) {
+    if (!link && embed) {
       this.props.setTab('embed');
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    const { linkUrl, embedUrl } = nextProps.links;
+    const { link, embed } = nextProps.links;
 
-    if (!linkUrl && embedUrl) {
+    if (!link && embed) {
       this.props.setTab('embed');
     }
   }
@@ -94,8 +94,6 @@ ShareModalComponent.propTypes = {
   open: PropTypes.bool,
   tab: PropTypes.string,
   links: PropTypes.object,
-  linkUrl: PropTypes.string,
-  embedUrl: PropTypes.string,
   setOpen: PropTypes.func,
   setTab: PropTypes.func
 };

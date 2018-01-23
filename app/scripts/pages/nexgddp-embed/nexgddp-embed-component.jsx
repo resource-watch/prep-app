@@ -21,24 +21,27 @@ class NexGDDPEmbedPage extends PureComponent {
   }
 
   render() {
-    const { datasetSlug, dataset } = this.props;
+    const { dataset, embed } = this.props;
 
     return (
       <div className="-theme-2">
         <h2>{dataset.name}</h2>
 
-        <NexGDDPTool
-          dataset={datasetSlug}
-        />
+        {!isEmpty(dataset) &&
+          <NexGDDPTool
+            embed={embed}
+            dataset={dataset}
+          />
+        }
       </div>
     );
   }
 }
 
 NexGDDPEmbedPage.propTypes = {
+  embed: PropTypes.bool,
   datasetSlug: PropTypes.string,
   dataset: PropTypes.object,
-
   getDatasetByIdOrSlug: PropTypes.func
 };
 

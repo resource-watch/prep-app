@@ -19,6 +19,7 @@ import {
   NEXGDDP_SET_BASEMAP,
   NEXGDDP_SET_LABELS,
   NEXGDDP_SET_BOUNDARIES,
+  NEXGDDP_SET_RENDER,
   NEXGDDP_SET_DATASET,
   NEXGDDP_SET_INDICATOR_DATASET,
   NEXGDDP_RESET_STATE
@@ -87,7 +88,9 @@ const initialState = {
     data: [],
     loaded: false,
     error: false
-  }
+  },
+  /** @type {'map'|'chart'|undefined} */
+  render: null
 };
 
 export default function (state = initialState, action) {
@@ -202,6 +205,10 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, {
         map: Object.assign({}, state.map, { boundaries: action.payload })
       });
+    }
+
+    case NEXGDDP_SET_RENDER: {
+      return Object.assign({}, state, { render: action.payload });
     }
 
     case NEXGDDP_SET_INDICATOR_DATASET: {

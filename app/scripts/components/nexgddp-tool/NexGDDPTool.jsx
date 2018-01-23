@@ -25,7 +25,7 @@ class NexGDDPTool extends React.PureComponent {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.resetState()
       .then(() => this.props.setDataset(this.props.dataset))
       .then(() => this.props.getSelectorsInfo())
@@ -39,7 +39,15 @@ class NexGDDPTool extends React.PureComponent {
   }
 
   render() {
-    const { marker, isComparing, mapMode, indicatorDataset } = this.props;
+    const {
+      marker,
+      isComparing,
+      mapMode,
+      indicatorDataset,
+      render,
+      embed
+    } = this.props;
+
     const { loading } = this.state;
 
     return (
@@ -62,58 +70,77 @@ class NexGDDPTool extends React.PureComponent {
           </div>
         </div>
 
-        <div className="toolbar">
-          <div className="row">
-            <div className="columns small-12 medium-8">
-              { isComparing && (
-                <div>
-                  <button
-                    className={`c-button -inline ${mapMode === 'side-by-side' ? '-active' : ''}`}
-                    onClick={() => this.switchMapView('side-by-side')}
-                  >
-                    Side by side
-                  </button>
+        {(render === 'map' || !render) &&
+          <div className="toolbar">
+            <div className="row">
+              <div className="columns small-12 medium-8">
+                { isComparing && (
+                  <div>
+                    <button
+                      className={`c-button -inline ${mapMode === 'side-by-side' ? '-active' : ''}`}
+                      onClick={() => this.switchMapView('side-by-side')}
+                    >
+                      Side by side
+                    </button>
 
-                  <button
-                    className={`c-button -inline ${mapMode === 'toggle' ? '-active' : ''}`}
-                    onClick={() => this.switchMapView('toggle')}
-                  >
-                    Toggle
-                  </button>
+                    <button
+                      className={`c-button -inline ${mapMode === 'toggle' ? '-active' : ''}`}
+                      onClick={() => this.switchMapView('toggle')}
+                    >
+                      Toggle
+                    </button>
 
-                  <button
-                    className={`c-button -inline ${mapMode === 'difference' ? '-active' : ''}`}
-                    onClick={() => this.switchMapView('difference')}
-                  >
-                    Difference
-                  </button>
-                </div>
-              )}
-            </div>
-            <div className="columns small-12 medium-4">
-              <LocationSearch />
+                    <button
+                      className={`c-button -inline ${mapMode === 'difference' ? '-active' : ''}`}
+                      onClick={() => this.switchMapView('difference')}
+                    >
+                      Difference
+                    </button>
+                  </div>
+                )}
+              </div>
+              <div className="columns small-12 medium-4">
+                <LocationSearch />
+              </div>
             </div>
           </div>
-        </div>
+        }
 
-        <div className="map">
+        {(render === 'map' || !render) &&
+          <div className="map">
+            <div className="row">
+              <div className="columns small-12">
+                {!isComparing &&
+                  <SimpleMap embed={embed} />
+                }
+
+                {(isComparing && mapMode === 'difference') &&
+                  <DifferenceMap embed={embed} />
+                }
+
+                {(isComparing && mapMode === 'side-by-side') &&
+                  <CompareMap embed={embed} />
+                }
+
+                {(isComparing && mapMode === 'toggle') &&
+                  <ToggleMap embed={embed} />
+                }
+              </div>
+            </div>
+          </div>
+        }
+
+        {!render && !marker && (
           <div className="row">
             <div className="columns small-12">
-              {!isComparing && <SimpleMap />}
-              {(isComparing && mapMode === 'difference') && <DifferenceMap />}
-              {(isComparing && mapMode === 'side-by-side') && <CompareMap />}
-              {(isComparing && mapMode === 'toggle') && <ToggleMap />}
+              <div className="help-text">
+                Click on the <span aria-label="Marker icon on the map"><Icon name="icon-marker" /></span> icon or search for a place to analyze in detail.
+              </div>
             </div>
-          </div>
-        </div>
-
-        {!marker && (
-          <div className="help-text">
-            Click on the <span aria-label="Marker icon on the map"><Icon name="icon-marker" /></span> icon or search for a place to analyze in detail.
           </div>
         )}
 
-        {marker && indicatorDataset && (
+        {(render === 'chart' || !render) && marker && indicatorDataset && (
           <div className="chart">
             <div className="row">
               <div className="columns small-12">
@@ -128,11 +155,13 @@ class NexGDDPTool extends React.PureComponent {
 }
 
 NexGDDPTool.propTypes = {
+  embed: PropTypes.bool,
   getSelectorsInfo: PropTypes.func,
   restoreState: PropTypes.func,
   setDefaultState: PropTypes.func,
   setMapMode: PropTypes.func,
   isComparing: PropTypes.bool,
+  render: PropTypes.oneOf(['map', 'chart', undefined]),
   marker: PropTypes.array,
   mapMode: PropTypes.oneOf(['difference', 'side-by-side', 'toggle']),
   indicatorDataset: PropTypes.object,
@@ -142,6 +171,8 @@ NexGDDPTool.propTypes = {
 };
 
 const mapStateToProps = state => ({
+  open: state.shareModal.open,
+  render: state.nexgddptool.render,
   marker: state.nexgddptool.marker,
   isComparing: !!state.nexgddptool.range2.selection,
   mapMode: state.nexgddptool.mapMode,
