@@ -21,6 +21,7 @@ import {
   NEXGDDP_SET_BASEMAP,
   NEXGDDP_SET_LABELS,
   NEXGDDP_SET_BOUNDARIES,
+  NEXGDDP_SET_RENDER,
   NEXGDDP_SET_DATASET,
   NEXGDDP_SET_INDICATOR_DATASET,
   NEXGDDP_RESET_STATE
@@ -59,7 +60,8 @@ export function updateUrl() {
       labels: state.map.labels !== 'none'
         ? state.map.labels
         : undefined,
-      boundaries: !!state.map.boundaries || undefined
+      boundaries: !!state.map.boundaries || undefined,
+      render: state.render || undefined
     };
 
     const url = Object.keys(params)
@@ -393,6 +395,17 @@ export function setBoundaries(boundaries, changeUrl = true) {
   };
 }
 
+export function setRender(render, changeUrl = true) {
+  return (dispatch) => {
+    dispatch({
+      type: NEXGDDP_SET_RENDER,
+      payload: render
+    });
+
+    if (changeUrl) dispatch(updateUrl());
+  };
+}
+
 export function getUrlState() {
   return (dispatch, getState) => {
     const params = location.search
@@ -460,6 +473,9 @@ export function getUrlState() {
     }
     if (params.boundaries) {
       promises.push(dispatch(setBoundaries(params.boundaries === 'true')));
+    }
+    if (params.render) {
+      promises.push(dispatch(setRender(params.render)));
     }
 
     // Needed to chain the action

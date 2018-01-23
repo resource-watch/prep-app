@@ -8,14 +8,9 @@ import Icon from 'components/ui/Icon';
 class ShareControl extends Component {
   handleClick(event) {
     const { open } = this.props;
-    const { href, origin, pathname, search } = window.location;
     event.preventDefault();
     this.props.setOpen(!open);
-
-    this.props.setLinks({
-      link: href,
-      embed: `${origin}/embed${pathname}${search}`
-    });
+    this.props.setLinks(this.props.links);
   }
 
   render() {
@@ -40,6 +35,7 @@ class ShareControl extends Component {
 ShareControl.propTypes = {
   className: PropTypes.string,
   open: PropTypes.bool,
+  links: PropTypes.object,
   setOpen: PropTypes.func,
   setLinks: PropTypes.func
 };
