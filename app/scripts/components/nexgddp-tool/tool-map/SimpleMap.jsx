@@ -10,12 +10,14 @@ import Control from 'react-leaflet-control';
 
 import { getLayers, getRawLayers } from 'selectors/nexgddptool';
 import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setMarkerMode } from 'actions/nexgddptool';
+import * as shareModalActions from 'components/share-modal/share-modal-actions';
+
 import BasemapControl from 'components/basemap-control';
 import { basemapsSpec, labelsSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
+import ShareControl from 'components/share-control/share-control-component';
 import Legend from 'components/legend/index';
 
 import Icon from 'components/ui/Icon';
-
 
 const mapDefaultOptions = {
   center: [20, -30],
@@ -57,7 +59,7 @@ class SimpleMap extends React.PureComponent {
   }
 
   render() {
-    const { map, marker, markerMode, layers, range1Selection, rawLayers } = this.props;
+    const { dataset, map, marker, markerMode, layers, range1Selection, rawLayers, embed } = this.props;
     const currentLayer = !!layers.length && layers[0];
 
     // It will change center of map on marker location
@@ -73,6 +75,8 @@ class SimpleMap extends React.PureComponent {
     const makerControlClassNames = classnames({
       '-active': markerMode
     });
+
+    const { origin, search } = window.location;
 
     return (
       <div className="c-tool-map">
@@ -125,6 +129,19 @@ class SimpleMap extends React.PureComponent {
             />
           </Control>
 
+          {!embed &&
+            <Control position="bottomright">
+              <ShareControl
+                open={this.props.open}
+                links={{
+                  embed: `${origin}/embed/nexgddp/${(dataset || {}).slug}${search}&render=map`
+                }}
+                setOpen={this.props.setOpen}
+                setLinks={this.props.setLinks}
+              />
+            </Control>
+          }
+
         </Map>
 
         { !!rawLayers.length && (
@@ -140,6 +157,7 @@ class SimpleMap extends React.PureComponent {
 }
 
 SimpleMap.propTypes = {
+  dataset: PropTypes.object,
   map: PropTypes.shape({
     zoom: PropTypes.number,
     center: PropTypes.array
@@ -149,22 +167,28 @@ SimpleMap.propTypes = {
   layers: PropTypes.array,
   rawLayers: PropTypes.array,
   range1Selection: PropTypes.object,
+  open: PropTypes.bool,
+  embed: PropTypes.bool,
   setMarkerPosition: PropTypes.func,
   setMarkerMode: PropTypes.func,
   setMapZoom: PropTypes.func,
   setMapCenter: PropTypes.func,
   setBasemap: PropTypes.func,
   setLabels: PropTypes.func,
-  setBoundaries: PropTypes.func
+  setBoundaries: PropTypes.func,
+  setOpen: PropTypes.func,
+  setLinks: PropTypes.func
 };
 
 const mapStateToProps = state => ({
+  dataset: state.nexgddptool.dataset,
   map: state.nexgddptool.map,
   marker: state.nexgddptool.marker,
   markerMode: state.nexgddptool.markerMode,
   layers: getLayers(state),
   rawLayers: getRawLayers(state),
-  range1Selection: state.nexgddptool.range1.selection
+  range1Selection: state.nexgddptool.range1.selection,
+  open: state.shareModal.open
 });
 
 const mapDispatchToProps = {
@@ -174,7 +198,8 @@ const mapDispatchToProps = {
   setMapCenter,
   setBasemap,
   setLabels,
-  setBoundaries
+  setBoundaries,
+  ...shareModalActions
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SimpleMap);

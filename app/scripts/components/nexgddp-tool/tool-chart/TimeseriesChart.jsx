@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import deepClone from 'lodash/cloneDeep';
 import { getConfig } from 'widget-editor';
-import './style.scss';
 
 // Redux
 import { setMarkerPosition } from 'actions/nexgddptool';
@@ -11,10 +10,12 @@ import { getIndicatorId, getIndicatorUnitSignal } from 'selectors/nexgddptool';
 import { toggleTooltip } from 'actions/tooltip';
 
 // Component
-import Vega from '../vega-chart/Vega';
 import Icon from 'components/ui/Icon';
 import Spinner from 'components/Loading/LoadingSpinner';
 import ShareNexgddpChartTooltip from 'components/Tooltip/ShareNexgddpChartTooltip';
+import Vega from '../vega-chart/Vega';
+
+import './style.scss';
 
 /* eslint-disable */
 const chartSpec = {
@@ -460,7 +461,7 @@ class TimeseriesChart extends React.PureComponent {
   }
 
   render() {
-    const { width, height, removeMarker, range1Selection, chartDataLoaded, chartDataError, datasetId } = this.props;
+    const { width, height, removeMarker, range1Selection, chartDataLoaded, chartDataError, datasetId, render } = this.props;
 
     // If for some reason, the range 1 is not selected or if the data
     // failed to load, we return
@@ -472,11 +473,22 @@ class TimeseriesChart extends React.PureComponent {
 
     return (
       <div className="c-tool-timeseries-chart">
-        { !chartDataLoaded && <Spinner inner transparent /> }
-        <button type="button" className="close-button" aria-label="Close chart" onClick={removeMarker}>
-          <Icon name="icon-cross" />
-        </button>
-        { chartDataLoaded &&
+        {!chartDataLoaded &&
+          <Spinner inner transparent />
+        }
+
+        {render !== 'chart' &&
+          <button
+            type="button"
+            className="close-button"
+            aria-label="Close chart"
+            onClick={removeMarker}
+          >
+            <Icon name="icon-cross" />
+          </button>
+        }
+
+        {chartDataLoaded &&
           <Vega
             width={width}
             height={height}
@@ -484,7 +496,8 @@ class TimeseriesChart extends React.PureComponent {
             spec={spec}
           />
         }
-        { chartDataLoaded && datasetId && canSave && (
+
+        {chartDataLoaded && datasetId && canSave && render !== 'chart' && (
           <div className="toolbar">
             <button type="button" className="share-button" onClick={e => this.onClickShare(e)} aria-label="Share/Save options">
               <Icon name="icon-share-dots" />
@@ -499,6 +512,7 @@ class TimeseriesChart extends React.PureComponent {
 TimeseriesChart.propTypes = {
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   height: PropTypes.number,
+  render: PropTypes.oneOf(['map', 'chart', undefined]),
   removeMarker: PropTypes.func,
   range1Selection: PropTypes.object,
   range2Selection: PropTypes.object,
@@ -517,6 +531,7 @@ TimeseriesChart.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  render: state.nexgddptool.render,
   range1Selection: state.nexgddptool.range1.selection,
   range2Selection: state.nexgddptool.range2.selection,
   chartDataLoaded: state.nexgddptool.chart.loaded,

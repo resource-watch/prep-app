@@ -11,11 +11,13 @@ import Control from 'react-leaflet-control';
 // Redux
 import { getLayers, getRawLayers } from 'selectors/nexgddptool';
 import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setMarkerMode } from 'actions/nexgddptool';
+import * as shareModalActions from 'components/share-modal/share-modal-actions';
 
 // Components
-import BasemapControl from 'components/basemap-control';
-import { basemapsSpec, labelsSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
 import Legend from 'components/legend/index';
+import BasemapControl from 'components/basemap-control';
+import ShareControl from 'components/share-control/share-control-component';
+import { basemapsSpec, labelsSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
 
 import Icon from 'components/ui/Icon';
 
@@ -68,7 +70,7 @@ class ToggleMap extends React.PureComponent {
   }
 
   render() {
-    const { map, marker, markerMode, layers, range1Selection, range2Selection, rawLayers } = this.props;
+    const { dataset, embed, map, marker, markerMode, layers, range1Selection, range2Selection, rawLayers } = this.props;
 
     // It will change center of map on marker location
     const mapOptions = Object.assign({}, mapDefaultOptions, {
@@ -83,6 +85,8 @@ class ToggleMap extends React.PureComponent {
     const makerControlClassNames = classnames({
       '-active': markerMode
     });
+
+    const { origin, search } = window.location;
 
     const currentLayer = !!layers.length && layers[this.state.index];
 
@@ -143,6 +147,20 @@ class ToggleMap extends React.PureComponent {
               setBoundaries={this.props.setBoundaries}
             />
           </Control>
+
+          {!embed &&
+            <Control position="bottomright">
+              <ShareControl
+                open={this.props.open}
+                links={{
+                  embed: `${origin}/embed/nexgddp/${(dataset || {}).slug}${search}&render=map`
+                }}
+                setOpen={this.props.setOpen}
+                setLinks={this.props.setLinks}
+              />
+            </Control>
+          }
+
         </Map>
 
         { !!rawLayers.length && (
@@ -169,13 +187,17 @@ ToggleMap.propTypes = {
   rawLayers: PropTypes.array,
   range1Selection: PropTypes.object,
   range2Selection: PropTypes.object,
+  open: PropTypes.bool,
+  embed: PropTypes.bool,
   setMarkerPosition: PropTypes.func,
   setMarkerMode: PropTypes.func,
   setMapZoom: PropTypes.func,
   setMapCenter: PropTypes.func,
   setBasemap: PropTypes.func,
   setLabels: PropTypes.func,
-  setBoundaries: PropTypes.func
+  setBoundaries: PropTypes.func,
+  setOpen: PropTypes.func,
+  setLinks: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -185,7 +207,9 @@ const mapStateToProps = state => ({
   layers: getLayers(state),
   rawLayers: getRawLayers(state),
   range1Selection: state.nexgddptool.range1.selection,
-  range2Selection: state.nexgddptool.range2.selection
+  range2Selection: state.nexgddptool.range2.selection,
+  dataset: state.nexgddptool.dataset,
+  open: state.shareModal.open
 });
 
 const mapDispatchToProps = {
@@ -195,7 +219,8 @@ const mapDispatchToProps = {
   setMapCenter,
   setBasemap,
   setLabels,
-  setBoundaries
+  setBoundaries,
+  ...shareModalActions
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToggleMap);

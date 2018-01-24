@@ -7,7 +7,7 @@ import Icon from 'components/ui/Icon';
 
 import './legend-actions-style.scss';
 
-export const LegendActions = ({ layerSpec, onOpacity, onVisibility, onInfo, onClose }) => (
+export const LegendActions = ({ layerSpec, onOpacity, onVisibility, onMultiLayer, onInfo, onClose }) => (
   <div className="c-legend-actions">
     <LegendOpacitySelector
       layerSpec={layerSpec}
@@ -17,6 +17,7 @@ export const LegendActions = ({ layerSpec, onOpacity, onVisibility, onInfo, onCl
     {layerSpec.provider !== 'nexgddp' && layerSpec.layers.length > 1 &&
       <LegendMultiLayerSelector
         layerSpec={layerSpec}
+        onMultiLayer={onMultiLayer}
       />
     }
 
@@ -52,14 +53,16 @@ LegendActions.propTypes = {
   onOpacity: PropTypes.func,
   onVisibility: PropTypes.func,
   onInfo: PropTypes.func,
-  onClose: PropTypes.func
+  onClose: PropTypes.func,
+  onMultiLayer: PropTypes.func
 };
 
 LegendActions.defaultProps = {
   onOpacity: () => {},
   onVisibility: () => {},
   onInfo: () => {},
-  onClose: () => {}
+  onClose: () => {},
+  onMultiLayer: () => {}
 };
 
 export default LegendActions;

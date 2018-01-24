@@ -29,7 +29,7 @@ class LegendMultiLayerSelector extends Component {
   }
 
   onChangeLayer(layer) {
-    this.props.setMultiActiveLayer({
+    this.props.onMultiLayer({
       layerId: layer.id,
       id: layer.dataset
     });
@@ -92,7 +92,7 @@ class LegendMultiLayerSelector extends Component {
 
 LegendMultiLayerSelector.propTypes = {
   layerSpec: PropTypes.object,
-  setMultiActiveLayer: PropTypes.func
+  onMultiLayer: PropTypes.func
 };
 
 export default LegendMultiLayerSelector;

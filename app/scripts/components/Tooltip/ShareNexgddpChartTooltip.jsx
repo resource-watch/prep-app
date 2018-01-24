@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import { SaveWidgetModal, modalActions } from 'widget-editor';
+import * as shareModalActions from 'components/share-modal/share-modal-actions';
+
 
 // Redux
 import { toggleTooltip } from 'actions/tooltip';
@@ -11,6 +14,7 @@ class ShareNexgddpChartTooltip extends React.Component {
     super(props);
     this.onClickOutside = this.onClickOutside.bind(this);
     this.onClickSave = this.onClickSave.bind(this);
+    this.onClickShare = this.onClickShare.bind(this);
   }
 
   componentDidMount() {
@@ -41,12 +45,22 @@ class ShareNexgddpChartTooltip extends React.Component {
     });
   }
 
+  onClickShare() {
+    const { open, datasetSlug } = this.props;
+    const { origin, search } = window.location;
+    event.preventDefault();
+    this.props.setOpen(!open);
+    this.props.setLinks({
+      embed: `${origin}/embed/nexgddp/${datasetSlug}${search}&render=chart`
+    });
+  }
+
   render() {
     return (
       <div className="c-share-nexgddp-chart-tooltip">
         <ul>
           <li><button type="button" onClick={this.onClickSave}>Save widget</button></li>
-          {/* <li><button type="button">Share/Embed</button></li> */}
+          <li><button type="button" onClick={this.onClickShare}>Embed</button></li>
         </ul>
       </div>
     );
@@ -54,11 +68,15 @@ class ShareNexgddpChartTooltip extends React.Component {
 }
 
 ShareNexgddpChartTooltip.propTypes = {
+  open: PropTypes.bool,
   datasetId: PropTypes.string,
+  datasetSlug: PropTypes.string,
   toggleTooltip: PropTypes.func,
   getWidgetConfig: PropTypes.func,
   onClickCheckWidgets: PropTypes.func,
-  toggleEditorModal: PropTypes.func
+  toggleEditorModal: PropTypes.func,
+  setOpen: PropTypes.func,
+  setLinks: PropTypes.func
 };
 
 ShareNexgddpChartTooltip.defaultProps = {
@@ -68,12 +86,14 @@ ShareNexgddpChartTooltip.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  datasetId: state.nexgddptool.dataset ? state.nexgddptool.dataset.id : null
+  datasetId: state.nexgddptool.dataset ? state.nexgddptool.dataset.id : null,
+  datasetSlug: state.nexgddptool.dataset ? state.nexgddptool.dataset.slug : null
 });
 
-const mapDispatchToProps = dispatch => ({
-  toggleTooltip: (...params) => dispatch(toggleTooltip(...params)),
-  toggleEditorModal: (...params) => dispatch(modalActions.toggleModal(...params))
-});
+const mapDispatchToProps = {
+  toggleTooltip,
+  ...modalActions,
+  ...shareModalActions
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShareNexgddpChartTooltip);
