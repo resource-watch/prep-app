@@ -28,6 +28,8 @@ class ExploreMap extends PureComponent {
       '-embed': embed
     });
 
+    const { origin, search } = window.location;
+
     return (
       <div className={`c-explore-map ${classNames}`}>
         <Map
@@ -56,6 +58,13 @@ class ExploreMap extends PureComponent {
 
             <ShareControl
               className="-absolute" // pfff....
+              open={this.props.open}
+              links={{
+                link: window.location.href,
+                embed: `${origin}/embed/explore/${search}`
+              }}
+              setOpen={this.props.setOpen}
+              setLinks={this.props.setLinks}
             />
           }
         </Map>
@@ -92,6 +101,7 @@ ExploreMap.propTypes = {
   lat: PropTypes.number,
   lng: PropTypes.number,
   embed: PropTypes.bool,
+  open: PropTypes.bool,
   setBasemap: PropTypes.func,
   setLabels: PropTypes.func,
   setBoundaries: PropTypes.func,
@@ -101,7 +111,9 @@ ExploreMap.propTypes = {
   toggleDataset: PropTypes.func,
   toggleVisibility: PropTypes.func,
   updateOpacity: PropTypes.func,
-  setMultiActiveLayer: PropTypes.func
+  setMultiActiveLayer: PropTypes.func,
+  setOpen: PropTypes.func,
+  setLinks: PropTypes.func
 };
 
 export default ExploreMap;
