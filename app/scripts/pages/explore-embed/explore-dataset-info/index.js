@@ -7,7 +7,8 @@ import { getSelectedDataset } from '../explore-datasets-list/explore-datasets-li
 
 const mapStateToProps = state => ({
   embed: true,
-  dataset: getSelectedDataset(state)
+  dataset: getSelectedDataset(state),
+  user: state.user
 });
 
 export { initialState };

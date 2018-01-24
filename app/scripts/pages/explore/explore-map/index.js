@@ -1,9 +1,12 @@
 import { connect } from 'react-redux';
+import * as shareModalActions from 'components/share-modal/share-modal-actions';
+
 import * as exploreActions from '../explore-actions';
 import * as reducers from './explore-map-reducers';
 import initialState from './explore-map-initial-state';
-import Component from './explore-map-component';
 import { getActiveLayers } from './explore-map-selector';
+
+import Component from './explore-map-component';
 
 const mapStateToProps = state => ({
   activeLayers: getActiveLayers(state),
@@ -13,9 +16,16 @@ const mapStateToProps = state => ({
   minZoom: state.explorePage.map.minZoom,
   basemap: state.explorePage.map.basemap,
   labels: state.explorePage.map.labels,
-  boundaries: state.explorePage.map.boundaries
+  boundaries: state.explorePage.map.boundaries,
+  open: state.shareModal.open
 });
 
 export { reducers, initialState };
 
-export default connect(mapStateToProps, exploreActions)(Component);
+export default connect(
+  mapStateToProps,
+  {
+    ...exploreActions,
+    ...shareModalActions
+  }
+)(Component);
