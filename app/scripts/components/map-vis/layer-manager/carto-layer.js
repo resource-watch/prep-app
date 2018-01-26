@@ -1,6 +1,8 @@
 import L from 'leaflet';
 import Promise from 'bluebird';
 
+import 'leaflet-utfgrid/L.UTFGrid-min';
+
 Promise.config({
   cancellation: true
 });
@@ -28,6 +30,8 @@ export default (leafletMap, layerSpec) => {
     opacity
   } = layerSpec;
 
+  layerConfig.body.layers[0].options.interactivity = ['cartodb_id'];
+
   // Transforming layerSpec
   const bodyStringified = JSON.stringify(layerConfig.body || {})
     .replace(/"cartocss-version":/g, '"cartocss_version":')
@@ -47,7 +51,23 @@ export default (leafletMap, layerSpec) => {
       .then((data) => {
         const tileUrl = `${data.cdn_url.templates.https.url}/${layerConfig.account}/api/v1/map/${data.layergroupid}/{z}/{x}/{y}.png`;
         const layer = L.tileLayer(tileUrl);
+
+        // Grid
+        const gridUrl = `https://${layerConfig.account}.carto.com/api/v1/map/${data.layergroupid}/0/{z}/{x}/{y}.grid.json`;
+        const grid = L.utfGrid(gridUrl).addTo(leafletMap);
+
+        grid.on('mouseover', (e) => {
+          console.info(e.data);
+        });
+        grid.on('mousemove', (e) => {
+          console.info(e.data);
+        });
+        grid.on('mouseout', (e) => {
+          console.info(e.data);
+        });
+
         layer.setZIndex(layerIndex);
+        grid.setZIndex(10000);
 
         // If visibility is enabled, set opacity to zero
         if (visibility) {
