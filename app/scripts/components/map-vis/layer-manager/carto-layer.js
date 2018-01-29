@@ -18,8 +18,6 @@ function makeCancellableRequest(url, bodyStringified) {
   });
 }
 
-let postRequest;
-
 export default (leafletMap, layerSpec) => {
   const {
     layerConfig,
@@ -37,8 +35,7 @@ export default (leafletMap, layerSpec) => {
   const url = `https://${layerConfig.account}.carto.com/api/v1/map`;
 
   return new Promise((resolve, reject, onCancel) => {
-    if (postRequest) postRequest.cancel();
-    postRequest = makeCancellableRequest(url, bodyStringified);
+    const postRequest = makeCancellableRequest(url, bodyStringified);
     postRequest
       .then((res) => {
         if (res.status !== 200) reject(res);
