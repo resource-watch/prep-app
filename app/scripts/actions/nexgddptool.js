@@ -299,8 +299,8 @@ export function setTempResolutionSelection(selection, changeUrl = true) {
     const range1Options = getState().nexgddptool.range1.options;
     const currentYear = (new Date()).getUTCFullYear();
     const selectedOption = range1Options[selection.value]
-      .find(option => currentYear > option.label.split('-')[0]
-        && currentYear < option.label.split('-')[1]);
+      .find(option => currentYear >= option.label.split('-')[0]
+        && currentYear <= option.label.split('-')[1]);
     dispatch({
       type: NEXGDDP_SET_RANGE1_SELECTION,
       payload: selectedOption || range1Options[selection.value][0]
