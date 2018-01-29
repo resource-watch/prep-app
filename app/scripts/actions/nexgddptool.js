@@ -297,9 +297,13 @@ export function setTempResolutionSelection(selection, changeUrl = true) {
 
     // We need to reset the date selectors too
     const range1Options = getState().nexgddptool.range1.options;
+    const currentYear = (new Date()).getUTCFullYear();
+    const selectedOption = range1Options[selection.value]
+      .find(option => currentYear > option.label.split('-')[0]
+        && currentYear < option.label.split('-')[1]);
     dispatch({
       type: NEXGDDP_SET_RANGE1_SELECTION,
-      payload: range1Options[selection.value][0]
+      payload: selectedOption || range1Options[selection.value][0]
     });
 
     dispatch({
@@ -503,7 +507,10 @@ export function setDefaultState() {
     if (!store.nexgddptool.range1.selection && Object.keys(store.nexgddptool.range1.options).length && store.nexgddptool.tempResolution.options.length) {
       const options = store.nexgddptool.range1.options[tempResolutionValue];
       if (options && options.length) {
-        const range1Promise = dispatch(setRange1Selection(options[0]));
+        const currentYear = (new Date()).getUTCFullYear();
+        const selectedOption = options.find(option => currentYear > option.label.split('-')[0]
+          && currentYear < option.label.split('-')[1]);
+        const range1Promise = dispatch(setRange1Selection(selectedOption || options[0]));
         promises.push(range1Promise);
       }
     }
