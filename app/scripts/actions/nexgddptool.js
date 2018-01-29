@@ -508,8 +508,8 @@ export function setDefaultState() {
       const options = store.nexgddptool.range1.options[tempResolutionValue];
       if (options && options.length) {
         const currentYear = (new Date()).getUTCFullYear();
-        const selectedOption = options.find(option => currentYear > option.label.split('-')[0]
-          && currentYear < option.label.split('-')[1]);
+        const selectedOption = options.find(option => currentYear >= option.label.split('-')[0]
+          && currentYear <= option.label.split('-')[1]);
         const range1Promise = dispatch(setRange1Selection(selectedOption || options[0]));
         promises.push(range1Promise);
       }
