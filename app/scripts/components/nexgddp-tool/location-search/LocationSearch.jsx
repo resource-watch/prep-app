@@ -39,12 +39,12 @@ class LocationSearch extends React.Component {
     const { lat, lng } = e.location;
     this.setState({ marker: [lat, lng] });
     this.props.setMarkerPosition([lat, lng]);
-    this.props.setMapCenter([lat, lng]);
+    this.props.setMapZoom(7);
 
     // Yes I know... But without it the map will only zoom and it won't center
-    requestAnimationFrame(() => {
-      this.props.setMapZoom(7);
-    });
+    setTimeout(() => {
+      this.props.setMapCenter([lat, lng]);
+    }, 500);
   }
 
   render() {
