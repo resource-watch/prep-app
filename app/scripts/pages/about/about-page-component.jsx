@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router';
 import { findDOMNode } from 'react-dom';
+import { logEvent } from 'helpers/analytics';
 import Article from 'components/Content/Article';
 
 // constants
@@ -123,12 +124,16 @@ class AboutPage extends PureComponent {
               to PREPdata or facilitation of the partnership; or raising awareness of the partnership through your networks;</li>
             <li>A designated point of contact who will be actively involved in PREP as needed; and</li>
             <li>Core and Contributing partners join at least one of two working groups (WG) – <b>Engagement WG</b> (members collaborate with user communities to
-              understand the information needs of those seeking to build preparedness and resilience, and help them advance solutions) and 
+              understand the information needs of those seeking to build preparedness and resilience, and help them advance solutions) and
               <b>Technical WG</b> (members work to reduce the barriers to accessing, contributing and using data for climate resilience, both through PREPdata
               and through promoting interoperability).</li>
           </ul>
 
-          <p><a href={PARTNERS_APPLICATION_FORM_URL} target="_blank" rel="noopener noreferrer">PREP&apos;s partner application form</a></p>
+          <p>
+            <a href={PARTNERS_APPLICATION_FORM_URL} target="_blank" rel="noopener noreferrer" onClick={() => logEvent('About', 'Download', 'Partner application form')}>
+              PREP&apos;s partner application form
+            </a>
+          </p>
         </Article>
       </div>
     );

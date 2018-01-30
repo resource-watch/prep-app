@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
+import { logEvent } from 'helpers/analytics';
+
 import TreeSelector from 'components/tree-selector/tree-selector';
 
 // constants
@@ -13,6 +15,23 @@ class ExploreDatasetFilters extends PureComponent {
     const filterValues = values.map(v => v.value);
     this.props.onSetDatasetFilter({ [key]: filterValues });
     this.props.getDatasetsByGraph();
+
+    let action = 'Topic Filter';
+    if (key === 'geographies') {
+      action = 'Geographies';
+    } else if (key === 'dataTypes') {
+      action = 'Data Types';
+    }
+    logEvent('Explore menu', action, filterValues.join(', '));
+  }
+
+  /**
+   * Event handler executed when the user clicks the
+   * "clear filters" button
+   */
+  onClearFilters() {
+    this.props.onClearFilters();
+    logEvent('Explore menu', 'Clear filter', 'Click');
   }
 
   renderFilters() {
@@ -43,7 +62,7 @@ class ExploreDatasetFilters extends PureComponent {
               <button
                 type="button"
                 className="c-new-button -light -transparent"
-                onClick={() => this.props.onClearFilters()}
+                onClick={() => this.onClearFilters()}
               >
                 Clear filters
               </button>

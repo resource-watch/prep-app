@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+import { logEvent } from 'helpers/analytics';
+
 import Icon from 'components/ui/Icon';
 
 
@@ -11,6 +13,8 @@ class ShareControl extends Component {
     event.preventDefault();
     this.props.setOpen(!open);
     this.props.setLinks(this.props.links);
+
+    logEvent('Explore data', 'Share a map', 'Opens infowindow');
   }
 
   render() {

@@ -4,13 +4,41 @@ import filter from 'lodash/filter';
 import truncate from 'lodash/truncate';
 import { Link } from 'react-router';
 
+import { logEvent } from 'helpers/analytics';
+
 import Icon from 'components/ui/Icon';
 import Switch from 'components/Button/Switch';
 import { getTitle, getMetadata, getInfo } from 'components/dataset-card/dataset-helper';
 
 class DatasetCard extends PureComponent {
+  /**
+   * Event handler executed when the user toggles
+   * on or off a dataset
+   * @param {object} dataset Dataset
+   */
+  onToggleDataset(dataset) {
+    this.props.onToggleDataset(dataset);
+
+    if (!dataset.isLayerActive) {
+      logEvent('Explore data', 'Toggles on a layer', getTitle(dataset));
+    }
+  }
+
+  /**
+   * Event handler executed when the user toggles the
+   * info sidebar of a dataset
+   * @param {object} dataset Dataset
+   */
+  onToggleInfo(dataset) {
+    this.props.onToggleInfo(dataset);
+
+    if (!dataset.isSelected) {
+      logEvent('Explore menu', 'Click for more info', getTitle(dataset));
+    }
+  }
+
   render() {
-    const { dataset, onToggleDataset, onToggleInfo } = this.props;
+    const { dataset } = this.props;
     const metadata = getMetadata(dataset);
     const info = getInfo(dataset);
     const title = getTitle(dataset);
@@ -29,7 +57,7 @@ class DatasetCard extends PureComponent {
               {hasLayer &&
                 <div className="left-element">
                   <Switch
-                    onChange={() => onToggleDataset(dataset)}
+                    onChange={() => this.onToggleDataset(dataset)}
                     checked={dataset.isLayerActive}
                   />
                 </div>}
@@ -39,10 +67,10 @@ class DatasetCard extends PureComponent {
             </div>
             <div className="item-tools">
               {dataset.isSelected ?
-                <button key={'info-close'} onClick={() => onToggleInfo(dataset)} className="cancel">
+                <button key={'info-close'} onClick={() => this.onToggleInfo(dataset)} className="cancel">
                   <Icon name="icon-cancel" />
                 </button> :
-                <button key={'info-open'} onClick={() => onToggleInfo(dataset)} className="info">
+                <button key={'info-open'} onClick={() => this.onToggleInfo(dataset)} className="info">
                   <Icon name="icon-info" />
                 </button>}
             </div>

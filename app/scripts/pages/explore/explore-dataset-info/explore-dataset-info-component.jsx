@@ -2,12 +2,15 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 
+import { logEvent } from 'helpers/analytics';
+
 import Icon from 'components/ui/Icon';
 import Switch from 'components/Button/Switch';
 import VegaChart from 'components/Chart/VegaChart';
 import { getTitle, getInfo } from 'components/dataset-card/dataset-helper';
 import Tooltip from 'rc-tooltip/dist/rc-tooltip';
 import CollectionsPanel from 'components/collections-panel';
+import { Link } from 'react-router';
 
 // data
 import TOPICS from 'pages/explore/explore-dataset-filters/data/topics.json';
@@ -32,6 +35,33 @@ class DatasetInfo extends PureComponent {
 
     this.props.onSetDatasetFilter({ [key]: [value] });
     this.props.getDatasetsByGraph();
+  }
+
+  /**
+   * Event handler executed when the user toggles
+   * on or off a dataset
+   * @param {object} dataset Dataset
+   */
+  onToggleDataset(dataset) {
+    this.props.toggleDataset(dataset);
+
+    if (!dataset.isLayerActive) {
+      logEvent('Explore data', 'Toggles on a layer', getTitle(dataset));
+    }
+  }
+
+  /**
+   * Return the basic props of the links ("href" or "to" and
+   * eventually "_target")
+   * @param {string} relativeHref Relative URL
+   */
+  getLinkProps(relativeHref) {
+    return Object.assign(
+      {},
+      this.props.embed
+        ? { href: `${window.location.origin}${relativeHref}`, target: '_blank' }
+        : { to: relativeHref }
+    );
   }
 
   getItemList(list = []) {
@@ -98,9 +128,7 @@ class DatasetInfo extends PureComponent {
         })
       );
 
-    const linkTarget = {
-      ...embed && { target: '_blank' }
-    };
+    const LinkComponent = embed ? 'a' : Link;
 
     return (
       <div className="content-container">
@@ -128,26 +156,26 @@ class DatasetInfo extends PureComponent {
         </div>}
 
         <div className="button-container">
-          <a
+          <LinkComponent
+            {...this.getLinkProps(`/dataset/${dataset.slug}`)}
             className="c-new-button -light -transparent"
-            href={`${window.location.origin}/dataset/${dataset.slug}`}
-            {...linkTarget}
+            onClick={() => logEvent('Explore menu', 'Click through to dataset page', getTitle(dataset))}
           >
             Learn more
-          </a>
+          </LinkComponent>
         </div>
       </div>
     );
   }
 
   render() {
-    const { dataset, toggleDataset, embed, user } = this.props;
+    const { dataset, embed, user } = this.props;
     const info = getInfo(dataset);
     const hasLayer = !!(dataset.layer && dataset.layer.length);
     const hasWidget = !!(dataset.widget && dataset.widget.length);
-    const linkTarget = { ...embed && { target: '_blank' } };
     const { token } = user;
 
+    const LinkComponent = embed ? 'a' : Link;
 
     return (
       <div className="info-container">
@@ -181,18 +209,18 @@ class DatasetInfo extends PureComponent {
                 </button>
               </Tooltip>}
 
-              <a
-                href={`${window.location.origin}/dataset/${dataset.slug}`}
+              <LinkComponent
+                {...this.getLinkProps(`/dataset/${dataset.slug}`)}
                 className="info-tool more"
-                {...linkTarget}
+                onClick={() => logEvent('Explore menu', 'Click through to dataset page', getTitle(dataset))}
               >
                 <Icon name="icon-share" className="-medium" />
                 Learn more
-              </a>
+              </LinkComponent>
 
               {hasLayer && <span className="info-tool layer">
                 <Switch
-                  onChange={() => toggleDataset(dataset)}
+                  onChange={() => this.onToggleDataset(dataset)}
                   checked={dataset.isLayerActive}
                 />
                 Map
@@ -229,8 +257,14 @@ class DatasetInfo extends PureComponent {
               <p>We’re actively adding new datasets to PREP. If you can’t find what you’re looking for, you can suggest a dataset for us to consider:</p>
 
               <div className="button-container">
-                <a href="https://docs.google.com/forms/d/1wZzQno3De7Ul6vlOkkdHhWK_9csErSrOlo6pOAZHIds/viewform?edit_requested=true" target="_blank" rel="noopener noreferrer">
-                  <button type="button" className="c-new-button -light -transparent">Suggest dataset</button>
+                <a
+                  href="https://docs.google.com/forms/d/1wZzQno3De7Ul6vlOkkdHhWK_9csErSrOlo6pOAZHIds/viewform?edit_requested=true"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="c-new-button -light -transparent"
+                  onClick={() => logEvent('Explore menu', 'Click to suggest a dataset', 'Click')}
+                >
+                  Suggest dataset
                 </a>
               </div>
             </div>

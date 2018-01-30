@@ -1,4 +1,5 @@
 import React from 'react';
+import { logEvent } from 'helpers/analytics';
 import Button from '../Button/Button';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
@@ -29,6 +30,8 @@ class ShareUrl extends React.Component {
     try {
       document.execCommand('copy');
       this.setState({ copied: true });
+
+      logEvent('Explore data', 'Share a map', `Clicks to copy ${this.props.iframe ? 'embed' : 'link'}`);
 
       setTimeout(() => {
         this.setState({ copied: false });

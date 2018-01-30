@@ -17,6 +17,7 @@ import 'widget-editor/dist/styles.min.css';
 
 // utils
 import { handleModule } from 'redux-tools';
+import { initGA } from 'helpers/analytics';
 
 // Modules
 // import * as ExploreDatasetFilterModule from 'components/explore-dataset-filters/explore-dataset-filters';
@@ -43,6 +44,12 @@ setConfig({
   userToken: localStorage.getItem('token') || null,
   assetsPath: '/images/'
 });
+
+// Google Analytics
+if (!window.GA_INITIALIZED) {
+  initGA();
+  window.GA_INITIALIZED = true;
+}
 
 /**
  * Monitoring with Opbeat
