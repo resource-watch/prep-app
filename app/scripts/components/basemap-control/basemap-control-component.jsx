@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+// Helpers
+import { logEvent } from 'helpers/analytics';
+
 // Components
 import TetherComponent from 'react-tether';
 import Icon from 'components/ui/Icon';
@@ -39,10 +42,14 @@ export default class BasemapControl extends React.Component {
 
   onBasemapChange(basemap) {
     this.props.setBasemap(basemap);
+
+    logEvent('Explore data', 'Change basemap', basemap);
   }
 
   onLabelChange(label) {
     this.props.setLabels(label);
+
+    logEvent('Explore data', 'Change labels', label);
   }
 
   onBoundariesChange(boundaries) {
