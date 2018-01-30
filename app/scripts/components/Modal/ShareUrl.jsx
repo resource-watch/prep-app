@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { logEvent } from 'helpers/analytics';
 import Button from '../Button/Button';
 import LoadingSpinner from '../Loading/LoadingSpinner';
@@ -31,7 +32,9 @@ class ShareUrl extends React.Component {
       document.execCommand('copy');
       this.setState({ copied: true });
 
-      logEvent('Explore data', 'Share a map', `Clicks to copy ${this.props.iframe ? 'embed' : 'link'}`);
+      if (this.props.analytics) {
+        logEvent(this.props.analytics.category, this.props.analytics.action, `Clicks to copy ${this.props.iframe ? 'embed' : 'link'}`);
+      }
 
       setTimeout(() => {
         this.setState({ copied: false });
@@ -76,19 +79,27 @@ ShareUrl.propTypes = {
   /**
    * Function to get the short link url
    */
-  getShortLink: React.PropTypes.func.isRequired,
+  getShortLink: PropTypes.func.isRequired,
   /**
    * Urls to generate
    */
-  url: React.PropTypes.string,
+  url: PropTypes.string,
   /**
    * Set if the url will be inside a iframe
    */
-  iframe: React.PropTypes.bool,
+  iframe: PropTypes.bool,
   /**
    * Short urls generated
    */
-  links: React.PropTypes.object
+  links: PropTypes.object,
+  /**
+   * Define the category and action for the analytics
+   * event
+   */
+  analytics: PropTypes.shape({
+    category: PropTypes.string,
+    action: PropTypes.string
+  })
 };
 
 

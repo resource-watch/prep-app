@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ToolbarActions from '../ToolbarActions';
 
 function SectionIntro(props) {
@@ -32,6 +33,7 @@ function SectionIntro(props) {
               downloadUrl={props.downloadUrl}
               insightUrl={props.insightUrl}
               currentSection={props.currentSection}
+              analytics={props.analytics}
             />
             {props.children}
           </div>
@@ -50,23 +52,31 @@ SectionIntro.propTypes = {
    * - companyLogoUrl: string
    * Required
    */
-  data: React.PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
   /**
    * Define the insight url to the embed
    */
-  insightUrl: React.PropTypes.string,
+  insightUrl: PropTypes.string,
   /**
    * Define the download url to the dataset
    */
-  downloadUrl: React.PropTypes.string,
+  downloadUrl: PropTypes.string,
   /**
    * Define the current section
    */
-  currentSection: React.PropTypes.string,
+  currentSection: PropTypes.string,
   /**
    * Define the component childrens
    */
-  children: React.PropTypes.any
+  children: PropTypes.any,
+  /**
+   * Define the category and action for the analytics
+   * event of the share modal
+   */
+  analytics: PropTypes.shape({
+    category: PropTypes.string,
+    action: PropTypes.string
+  })
 };
 
 export default SectionIntro;
