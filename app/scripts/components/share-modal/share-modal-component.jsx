@@ -77,6 +77,7 @@ class ShareModalComponent extends PureComponent {
             <ShareUrl
               url={links[tab]}
               iframe={tab === 'embed'}
+              analytics={this.props.analytics}
             />
           </div>
         </div>
@@ -95,7 +96,15 @@ ShareModalComponent.propTypes = {
   tab: PropTypes.string,
   links: PropTypes.object,
   setOpen: PropTypes.func,
-  setTab: PropTypes.func
+  setTab: PropTypes.func,
+  /**
+   * Define the category and action for the analytics
+   * event
+   */
+  analytics: PropTypes.shape({
+    category: PropTypes.string,
+    action: PropTypes.string
+  })
 };
 
 export default ShareModalComponent;
