@@ -245,6 +245,7 @@ class CompareMap extends React.PureComponent {
                 }}
                 setOpen={this.props.setOpen}
                 setLinks={this.props.setLinks}
+                setAnalytics={shareModalActions.setAnalytics}
               />
             </Control>
           }
