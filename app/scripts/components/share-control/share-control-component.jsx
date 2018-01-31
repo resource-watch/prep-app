@@ -12,13 +12,17 @@ class ShareControl extends Component {
     const { open } = this.props;
     event.preventDefault();
     this.props.setOpen(!open);
-    this.props.setAnalytics({
-      category: 'Explore data',
-      action: 'Share a map'
-    });
     this.props.setLinks(this.props.links);
 
-    logEvent('Explore data', 'Share a map', 'Opens infowindow');
+    // Only for Explore
+    if (this.props.analytics) {
+      const { category, action } = this.props.analytics;
+      this.props.setAnalytics({
+        category,
+        action
+      });
+      logEvent(category, action, 'Opens infowindow');
+    }
   }
 
   render() {
@@ -46,7 +50,15 @@ ShareControl.propTypes = {
   links: PropTypes.object,
   setOpen: PropTypes.func,
   setLinks: PropTypes.func,
-  setAnalytics: PropTypes.func
+  setAnalytics: PropTypes.func.isRequired,
+  /**
+   * Define the category and action for the analytics
+   * event of the share modal
+   */
+  analytics: PropTypes.shape({
+    category: PropTypes.string,
+    action: PropTypes.string
+  })
 };
 
 export default ShareControl;
