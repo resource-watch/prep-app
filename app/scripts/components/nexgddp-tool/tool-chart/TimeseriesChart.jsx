@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import deepClone from 'lodash/cloneDeep';
-import { getConfig } from 'widget-editor';
+import isEqual from 'lodash/isEqual';
+import { getConfig, VegaChart } from 'widget-editor';
 
 // Redux
 import { setMarkerPosition } from 'actions/nexgddptool';
@@ -13,7 +14,6 @@ import { toggleTooltip } from 'actions/tooltip';
 import Icon from 'components/ui/Icon';
 import Spinner from 'components/Loading/LoadingSpinner';
 import ShareNexgddpChartTooltip from 'components/Tooltip/ShareNexgddpChartTooltip';
-import Vega from '../vega-chart/Vega';
 
 import './style.scss';
 
@@ -345,11 +345,6 @@ const chartSpec = {
       "config": {
         "fields": [
           {
-            "key": "x",
-            "label": "Date",
-            "format": "%Y"
-          },
-          {
             "key": "q50",
             "label": "Average",
             "format": ".2f"
@@ -363,6 +358,11 @@ const chartSpec = {
             "key": "q75",
             "label": "75th percentile",
             "format": ".2f"
+          },
+          {
+            "key": "range",
+            "label": "Date range",
+            "format": null
           }
         ]
       }
@@ -371,35 +371,14 @@ const chartSpec = {
 };
 /* eslint-enable */
 
-class TimeseriesChart extends React.PureComponent {
-  /**
-   * Event handler executed when the user clicks the share button
-   * @param {MouseEvent} e Event object
-   */
-  onClickShare(e) {
-    // Prevent the tooltip from auto-closing
-    e.stopPropagation();
-
-    this.props.toggleTooltip(true, {
-      follow: false,
-      position: {
-        x: window.scrollX + e.clientX,
-        y: window.scrollY + e.clientY
-      },
-      direction: 'bottom',
-      children: ShareNexgddpChartTooltip,
-      childrenProps: {
-        getWidgetConfig: this.generateVegaSpec.bind(this)
-      }
-    });
-  }
-
+class TimeseriesChart extends React.Component {
   /**
    * Generate the vega specification
+   * @param {object} props Props
    * @returns {object}
    */
-  generateVegaSpec() {
-    const { range1Selection, range2Selection, chartData, indicatorId, indicatorUnitSignal, chartDataError } = this.props;
+  static generateVegaSpec(props) {
+    const { range1Selection, range2Selection, chartData, indicatorId, indicatorUnitSignal, chartDataError } = props;
 
     // If for some reason, the range 1 is not selected or if the data
     // failed to load, we return
@@ -435,7 +414,18 @@ class TimeseriesChart extends React.PureComponent {
     // WARNING: it needs immutable data to detect the changes
     const spec = Object.assign({}, chartSpec, { signals });
     spec.data = [...spec.data];
-    spec.data[0].values = chartData;
+
+    // We add a new column to the data "range" so we can display the
+    // date range in the tooltip
+    const resolution = chartData.length >= 2
+      ? new Date(chartData[1].x).getUTCFullYear() - new Date(chartData[0].x).getUTCFullYear()
+      : null;
+    spec.data[0].values = chartData.map((d) => {
+      if (!resolution) return d;
+      const start = new Date(d.x).getUTCFullYear();
+      const end = (start + resolution) - 1;
+      return Object.assign({}, d, { range: `${start}-${end}` });
+    });
 
     // We add the unit to the y axis
     if (indicatorUnitSignal) {
@@ -460,21 +450,66 @@ class TimeseriesChart extends React.PureComponent {
     return spec;
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      chartLoaded: false,
+      vegaSpec: null
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const propsChanged = !isEqual(this.props, nextProps);
+
+    if (propsChanged) {
+      const vegaSpec = TimeseriesChart.generateVegaSpec(nextProps);
+      this.setState({ vegaSpec });
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const propsChanged = !isEqual(this.props, nextProps);
+    const stateChanged = !isEqual(this.state, nextState);
+    return propsChanged || stateChanged;
+  }
+
+  /**
+   * Event handler executed when the user clicks the share button
+   * @param {MouseEvent} e Event object
+   */
+  onClickShare(e) {
+    // Prevent the tooltip from auto-closing
+    e.stopPropagation();
+
+    this.props.toggleTooltip(true, {
+      follow: false,
+      position: {
+        x: window.scrollX + e.clientX,
+        y: window.scrollY + e.clientY
+      },
+      direction: 'bottom',
+      children: ShareNexgddpChartTooltip,
+      childrenProps: {
+        getWidgetConfig: () => TimeseriesChart.generateVegaSpec(this.props)
+      }
+    });
+  }
+
   render() {
-    const { width, height, removeMarker, range1Selection, chartDataLoaded, chartDataError, datasetId, render } = this.props;
+    const { removeMarker, range1Selection, chartDataLoaded, chartDataError, datasetId, render } = this.props;
+    const { chartLoaded, vegaSpec } = this.state;
 
     // If for some reason, the range 1 is not selected or if the data
     // failed to load, we return
     // The 1st reason happens when restoring the state from the URL
     if (!range1Selection || chartDataError) return null;
 
-    const spec = this.generateVegaSpec();
     const canSave = !!getConfig().userToken;
 
     return (
       <div className="c-tool-timeseries-chart">
-        {!chartDataLoaded &&
-          <Spinner inner transparent />
+        {!chartLoaded &&
+          <Spinner inner transparent={!chartDataLoaded} />
         }
 
         {render !== 'chart' &&
@@ -489,12 +524,7 @@ class TimeseriesChart extends React.PureComponent {
         }
 
         {chartDataLoaded &&
-          <Vega
-            width={width}
-            height={height}
-            padding="strict"
-            spec={spec}
-          />
+          <VegaChart data={vegaSpec} reloadOnResize toggleLoading={loading => this.setState({ chartLoaded: !loading })} />
         }
 
         {chartDataLoaded && datasetId && canSave && render !== 'chart' && (
@@ -509,9 +539,8 @@ class TimeseriesChart extends React.PureComponent {
   }
 }
 
+/* eslint-disable react/no-unused-prop-types */
 TimeseriesChart.propTypes = {
-  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  height: PropTypes.number,
   render: PropTypes.oneOf(['map', 'chart', undefined]),
   removeMarker: PropTypes.func,
   range1Selection: PropTypes.object,
@@ -524,11 +553,7 @@ TimeseriesChart.propTypes = {
   toggleTooltip: PropTypes.func,
   datasetId: PropTypes.string
 };
-
-TimeseriesChart.defaultProps = {
-  width: 'auto',
-  height: 350
-};
+/* estlint-enable react/no-unused-prop-types */
 
 const mapStateToProps = state => ({
   render: state.nexgddptool.render,
