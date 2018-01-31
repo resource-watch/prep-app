@@ -22,6 +22,8 @@ function makeCancellableRequest(url, bodyStringified) {
 
 export default (leafletMap, layerSpec) => {
   const {
+    id,
+    name,
     layerConfig,
     layerIndex,
     visibility,
@@ -53,14 +55,8 @@ export default (leafletMap, layerSpec) => {
         const gridUrl = `https://${layerConfig.account}.carto.com/api/v1/map/${data.layergroupid}/0/{z}/{x}/{y}.grid.json`;
         const grid = L.utfGrid(gridUrl).addTo(leafletMap);
 
-        grid.on('mouseover', (e) => {
-          console.info(e.data);
-        });
-        grid.on('mousemove', (e) => {
-          console.info(e.data);
-        });
-        grid.on('mouseout', (e) => {
-          console.info(e.data);
+        grid.on('click', (e) => {
+          console.info(id, name, e.data);
         });
 
         layer.setZIndex(layerIndex);
