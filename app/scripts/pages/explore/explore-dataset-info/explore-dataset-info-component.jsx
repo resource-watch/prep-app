@@ -14,7 +14,6 @@ import { Link } from 'react-router';
 
 // data
 import TOPICS from 'pages/explore/explore-dataset-filters/data/topics.json';
-import GEOGRAPHIES from 'pages/explore/explore-dataset-filters/data/geographies.json';
 
 class DatasetInfo extends PureComponent {
   static getHeader(dataset) {
