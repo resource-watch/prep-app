@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
+import { VegaChart } from 'widget-editor';
 
 import { logEvent } from 'helpers/analytics';
 
 import Icon from 'components/ui/Icon';
 import Switch from 'components/Button/Switch';
-import VegaChart from 'components/Chart/VegaChart';
 import { getTitle, getInfo } from 'components/dataset-card/dataset-helper';
 import Tooltip from 'rc-tooltip/dist/rc-tooltip';
 import CollectionsPanel from 'components/collections-panel';
@@ -248,7 +248,7 @@ class DatasetInfo extends PureComponent {
               }
               return (
                 <div className="widget-container" key={w.id}>
-                  <VegaChart data={w.widgetConfig} />
+                  <VegaChart data={w.widgetConfig} reloadOnResize />
                 </div>
               );
             })}

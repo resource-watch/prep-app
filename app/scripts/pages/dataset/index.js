@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import URI from 'urijs';
 import { connect } from 'react-redux';
-import WidgetEditor, { modalActions, SaveWidgetModal } from 'widget-editor';
+import WidgetEditor, { modalActions, SaveWidgetModal, VegaChart } from 'widget-editor';
 
 import metadata from '../../metadata.json';
 import PartnersSlider from '../../containers/PartnersSlider';
@@ -14,7 +14,6 @@ import Banner from '../../components/Banner';
 
 import SectionIntro from '../SectionIntro';
 import MetadataInfo from '../Explore/MetadataInfo';
-import VegaChart from '../Chart/VegaChart';
 import SimpleMap from '../../containers/SimpleMap/SimpleMap';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
@@ -160,7 +159,7 @@ class DatasetDetail extends React.Component {
               widgetComponents.push(<div className="c-article" key={i} ><SimpleMap layerId={widget.widget_config.layer_id} /></div>);
               break;
             default:
-              widgetComponents.push(<div className="c-article" key={i} ><VegaChart data={widget.widget_config} /></div>);
+              widgetComponents.push(<div className="c-article" key={i} ><VegaChart data={widget.widget_config} reloadOnResize /></div>);
               break;
           }
         }
