@@ -1,5 +1,5 @@
 import React from 'react';
-import VegaChart from './VegaChart';
+import { VegaChart } from 'widget-editor';
 
 class WidgetChart extends React.Component {
   componentDidMount() {
@@ -11,7 +11,7 @@ class WidgetChart extends React.Component {
       const widget = this.props.data[this.props.slug];
       if (widget && widget.widget_config) {
         return (
-          <VegaChart small={this.props.small} data={widget.widget_config} />
+          <VegaChart data={widget.widget_config} reloadOnResize />
         );
       }
     }

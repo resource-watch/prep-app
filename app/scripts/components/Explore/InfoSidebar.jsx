@@ -9,7 +9,7 @@ import ReactMarkdown from 'react-markdown';
 
 // Components
 import { Link } from 'react-router';
-import VegaChart from '../Chart/VegaChart';
+import { VegaChart } from 'widget-editor';
 import SimpleMap from '../../containers/SimpleMap/SimpleMap';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 import Icon from '../ui/Icon';
@@ -160,7 +160,7 @@ class InfoSidebar extends React.Component {
             widgetComponents.push(<div className="widget-container" key={w.id} ><SimpleMap layerId={widget.widget_config.layer_id} /></div>);
             break;
           default:
-            widgetComponents.push(<div className="widget-container" key={w.id} ><VegaChart data={widget.widget_config} /></div>);
+            widgetComponents.push(<div className="widget-container" key={w.id} ><VegaChart data={widget.widget_config} reloadOnResize /></div>);
             break;
         }
       }

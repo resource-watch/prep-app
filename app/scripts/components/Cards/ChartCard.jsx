@@ -1,6 +1,6 @@
 import React from 'react';
+import { VegaChart } from 'widget-editor';
 import ContentCard from './ContentCard';
-import VegaChart from '../Chart/VegaChart';
 
 class ChartCard extends React.Component {
   setShareModal() {
@@ -30,7 +30,7 @@ class ChartCard extends React.Component {
         noMargin={this.props.noMargin}
       >
         {this.props.data && this.props.data.widget_config &&
-          <VegaChart data={this.props.data.widget_config} />
+          <VegaChart data={this.props.data.widget_config} reloadOnResize />
         }
       </ContentCard>
     );
