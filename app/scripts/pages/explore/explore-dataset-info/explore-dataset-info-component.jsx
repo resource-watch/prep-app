@@ -114,10 +114,6 @@ class DatasetInfo extends PureComponent {
           <span className="prop-label">Topics: </span>
           {this.getItemList(topicsList)}
         </div>}
-        {!!areasList.length && <div className="item-prop">
-          <span className="prop-label">Areas: </span>
-          {this.getItemList(areasList)}
-        </div>}
 
         {source && <div className="item-prop">
           <span className="prop-label">Data source: </span>
