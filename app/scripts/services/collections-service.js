@@ -1,11 +1,17 @@
+import * as queryString from 'query-string';
+
 class CollectionsService {
   /**
    * Retrieve all collections of the user
    * @param {*} token User's token
    */
   static getAllCollections(token) {
+    const queryParams = queryString.stringify({
+      application: [process.env.APPLICATIONS]
+    });
+
     return new Promise((resolve, reject) => {
-      fetch(`${process.env.RW_API_URL}/collection`, {
+      fetch(`${process.env.RW_API_URL}/collection?${queryParams}`, {
         method: 'GET',
         headers: {
           Authorization: token
@@ -73,6 +79,7 @@ class CollectionsService {
           Authorization: token
         },
         body: JSON.stringify({
+          application: process.env.APPLICATIONS,
           name,
           resources
         })

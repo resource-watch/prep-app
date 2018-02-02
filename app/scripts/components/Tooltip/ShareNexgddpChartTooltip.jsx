@@ -35,7 +35,7 @@ class ShareNexgddpChartTooltip extends React.Component {
 
   onClickSave() {
     this.props.toggleTooltip(false);
-    this.props.toggleEditorModal(true, {
+    this.props.toggleModal(true, {
       children: SaveWidgetModal,
       childrenProps: {
         datasetId: this.props.datasetId,
@@ -74,7 +74,7 @@ ShareNexgddpChartTooltip.propTypes = {
   toggleTooltip: PropTypes.func,
   getWidgetConfig: PropTypes.func,
   onClickCheckWidgets: PropTypes.func,
-  toggleEditorModal: PropTypes.func,
+  toggleModal: PropTypes.func,
   setOpen: PropTypes.func,
   setLinks: PropTypes.func
 };

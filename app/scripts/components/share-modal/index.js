@@ -11,7 +11,9 @@ const initialState = {
     link: '',
     embed: ''
   },
-  tab: 'link'
+  tab: 'link',
+  /** @type {{ category: string, action: string }} analytics */
+  analytics: null
 };
 
 export { initialState, actions, reducers };

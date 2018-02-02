@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Modal from './Modal';
 import ShareUrl from '../../containers/Modal/ShareUrl';
 
@@ -23,7 +24,7 @@ class ShareModal extends React.Component {
             'You may include this content on your webpage. To do this, copy the following html code and insert it into the source code of your page:' :
             'Click and paste link in email or IM'}
         </p>
-        <ShareUrl url={url} iframe={tab === 'embed'} />
+        <ShareUrl url={url} iframe={tab === 'embed'} analytics={this.props.analytics} />
         {tab === 'embed' ?
           openEmbed :
           (<div className="media">
@@ -82,19 +83,28 @@ ShareModal.propTypes = {
   /**
    * Define the share modal title
    */
-  title: React.PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   /**
    * Define the share modal status
    */
-  opened: React.PropTypes.bool.isRequired,
+  opened: PropTypes.bool.isRequired,
   /**
    * Define the url to share
    */
-  url: React.PropTypes.string,
+  url: PropTypes.string,
   /**
    * Define the share modal function to close the modal
    */
-  close: React.PropTypes.func.isRequired
+  close: PropTypes.func.isRequired,
+  widgetSlug: PropTypes.string,
+  /**
+   * Define the category and action for the analytics
+   * event
+   */
+  analytics: PropTypes.shape({
+    category: PropTypes.string,
+    action: PropTypes.string
+  })
 };
 
 export default ShareModal;

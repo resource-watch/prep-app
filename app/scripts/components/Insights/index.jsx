@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { logEvent } from 'helpers/analytics';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 import Card from '../Cards/Card';
 
@@ -31,7 +32,7 @@ class InsightsPage extends React.Component {
       items.push(
         <div
           className={`columns small-10 medium-5 align-stretch ${index % 2 === 0 ? 'small-offset-1' : ''}`}
-          key={`insight-item-${index}`}
+          key={`insight-item-${item.slug}`}
           style={{ display: 'flex' }}
         >
           <Card border="neutral">
@@ -44,7 +45,12 @@ class InsightsPage extends React.Component {
               {item.summary}
             </p>
             {item.partner &&
-            <a href={item.partner.url} target="_blank">
+            <a
+              href={item.partner.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => logEvent('Stories', 'Clicks on a partner logo', item.partner.name)}
+            >
               <img
                 src={config.assetsUrl + item.partner.logo}
                 className="logo"

@@ -9,7 +9,7 @@ function parseDate(dateString) {
 const MetadataInfo = ({ dataset }) => {
   const metadata = getMetadata(dataset);
   const info = getInfo(dataset);
-  console.log(dataset);
+
   return (
     <ul>
       {(info.published_date && info.published_date !== '') &&
@@ -87,7 +87,7 @@ const MetadataInfo = ({ dataset }) => {
       {(info.learn_more_link && info.learn_more_link !== '') &&
         <li>
           <span>Download from original source link: </span>
-          <a href={info.learn_more_link}><span>{info.learn_more_link}</span></a>
+          <a href={info.learn_more_link} target="_blank" rel="noopener noreferrer"><span>{info.learn_more_link}</span></a>
         </li>
       }
 

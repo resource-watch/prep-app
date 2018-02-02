@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { logEvent } from 'helpers/analytics';
+
 import ChartCard from '../../../Cards/ChartCard';
 import IFrame from '../../../IFrame';
 import EmbedMap from '../../../EmbedMap';
@@ -31,6 +34,8 @@ class EthiopiaInsight extends React.Component {
   }
 
   setShareModal(url, section, widgetSlug) {
+    logEvent('Stories', `Share a ${widgetSlug} widget`, 'Opens infowindow');
+
     this.setState({
       modalShare: true,
       shareUrl: url,
@@ -262,6 +267,10 @@ class EthiopiaInsight extends React.Component {
           opened={this.state.modalShare}
           close={() => this.setState({ modalShare: false })}
           widgetSlug={this.state.widgetSlug}
+          analytics={{
+            category: 'Stories',
+            action: `Share a ${this.state.widgetSlug} widget`
+          }}
         />
       </div>
     );

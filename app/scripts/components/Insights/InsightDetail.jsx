@@ -100,6 +100,8 @@ class InsightsDetail extends React.Component {
     if (!this.props.data) {
       return <LoadingSpinner />;
     }
+
+    const { title } = this.props.data;
     const contentUrl = this.props.data.content_url;
     const iframeUrl = contentUrl.indexOf('github.io') > -1
       ? `/proxy?url=${contentUrl}`
@@ -146,6 +148,10 @@ class InsightsDetail extends React.Component {
           insightSlug={this.props.insightSlug}
           insightUrl={this.props.data.content_url}
           currentSection={'stories'}
+          analytics={{
+            category: 'Stories',
+            action: `Shares ${title} story`
+          }}
         >
           <p> {this.props.data.summary} </p>
         </SectionIntro>
