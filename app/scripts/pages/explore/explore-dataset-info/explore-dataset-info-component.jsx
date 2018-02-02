@@ -14,7 +14,6 @@ import { Link } from 'react-router';
 
 // data
 import TOPICS from 'pages/explore/explore-dataset-filters/data/topics.json';
-import GEOGRAPHIES from 'pages/explore/explore-dataset-filters/data/geographies.json';
 
 class DatasetInfo extends PureComponent {
   static getHeader(dataset) {
@@ -97,37 +96,6 @@ class DatasetInfo extends PureComponent {
         return false;
       });
 
-    datasetTags.filter(tag =>
-      GEOGRAPHIES.find(topic => topic.value === tag || (topic.children || []).find(child => child.value === tag)))
-      .map(tagValue =>
-        GEOGRAPHIES.forEach((_topic) => {
-          if (_topic.value === tagValue) {
-            areasList.push({ label: _topic.label, value: tagValue, key: 'geographies' });
-            return false;
-          }
-
-          if ((_topic.children || []).find(child => child.value === tagValue)) {
-            (_topic.children || []).forEach((child) => {
-              if (child.value === tagValue) {
-                areasList.push({ label: child.label, value: tagValue, key: 'geographies' });
-                return false;
-              } else if ((child.children || []).length) {
-                child.children.find((subchild) => {
-                  if (subchild.value === tagValue) {
-                    areasList.push({ label: subchild.label, value: tagValue, key: 'geographies' });
-                    return false;
-                  }
-                  return false;
-                });
-              }
-              return false;
-            });
-          }
-
-          return false;
-        })
-      );
-
     const LinkComponent = embed ? 'a' : Link;
 
     return (
@@ -144,10 +112,6 @@ class DatasetInfo extends PureComponent {
         {!!topicsList.length && <div className="item-prop">
           <span className="prop-label">Topics: </span>
           {this.getItemList(topicsList)}
-        </div>}
-        {!!areasList.length && <div className="item-prop">
-          <span className="prop-label">Areas: </span>
-          {this.getItemList(areasList)}
         </div>}
 
         {source && <div className="item-prop">
