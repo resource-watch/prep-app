@@ -65,6 +65,10 @@ class ExploreMap extends PureComponent {
               }}
               setOpen={this.props.setOpen}
               setLinks={this.props.setLinks}
+              analytics={{
+                category: 'Explore data',
+                action: 'Share a map'
+              }}
             />
           }
         </Map>

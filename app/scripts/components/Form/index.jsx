@@ -1,5 +1,8 @@
 import 'whatwg-fetch';
 import React from 'react';
+import PropTypes from 'prop-types';
+import once from 'lodash/once';
+import { logEvent } from 'helpers/analytics';
 
 class Form extends React.Component {
   constructor(props) {
@@ -7,26 +10,37 @@ class Form extends React.Component {
     this.state = {
       success: false
     };
+
+    this.logStartTyping = once(this.logStartTyping);
   }
 
   handleSubmit(ev) {
-    this.checkFormFill().length === 0 &&
-    this.setState({ success: true });
+    if (this.checkFormFill().length === 0) {
+      this.setState({ success: true });
+    }
+
     if (ev) {
       ev.preventDefault();
       const data = new FormData(ev.currentTarget);
       fetch('/contact', { method: 'POST', body: data });
+      logEvent('Home', 'Using feedback form', 'Sends message');
     }
   }
 
   checkFormFill() {
     const fields = ['mce-FNAME', 'mce-EMAIL', 'mce-MMERGE4'];
-    !this.props.simple && fields.push('mce-LNAME');
+    if (!this.props.simple) {
+      fields.push('mce-LNAME');
+    }
 
     return fields.filter((field) => {
       const element = document.getElementById(field);
       return element && element.value === '';
     });
+  }
+
+  logStartTyping() { // eslint-disable-line class-methods-use-this
+    logEvent('Home', 'Using feedback form', 'Starts writing');
   }
 
   renderForm() {
@@ -76,7 +90,7 @@ class Form extends React.Component {
             </div>
             <div className="mc-field-group textarea">
               <label htmlFor="mce-MMERGE4">Message *<span className="asterisk" /></label>
-              <textarea name="MMERGE4" className="required" id="mce-MMERGE4" required />
+              <textarea name="MMERGE4" className="required" id="mce-MMERGE4" required onChange={() => this.logStartTyping()} />
             </div>
             <div id="mce-responses" className="clear">
               <div className="response" id="mce-error-response" style={{ display: 'none' }} />
@@ -105,13 +119,13 @@ class Form extends React.Component {
     );
   }
 
-  renderError() {
+  renderError() { // eslint-disable-line class-methods-use-this
     return (
       <p className="error-message">Please, fill out the hightlighted fields bellow</p>
     );
   }
 
-  renderSuccess() {
+  renderSuccess() { // eslint-disable-line class-methods-use-this
     return (
       <div className="success-message">
         <div className="check">
@@ -138,7 +152,8 @@ class Form extends React.Component {
 }
 
 Form.propTypes = {
-  type: React.PropTypes.string
+  type: PropTypes.string,
+  simple: PropTypes.bool
 };
 
 export default Form;

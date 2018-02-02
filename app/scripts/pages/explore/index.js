@@ -12,7 +12,8 @@ const mapStateToProps = state => ({
   datasets: state.explorePage.datasets.items,
   selectedDataset: getSelectedDataset(state),
   datasetsList: state.explorePage.datasets,
-  currentTab: state.explorePage.tab
+  currentTab: state.explorePage.tab,
+  currentLocation: state.explorePage.coreDatasets.location
 });
 
 export default connect(mapStateToProps, actions)(Component);

@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
+import { logEvent } from 'helpers/analytics';
 
 import ShareModal from '../Modal/ShareModal';
 import Button from '../Button/Button';
@@ -16,6 +18,10 @@ class ToolbarActions extends React.Component {
   }
 
   setShareModal(url, section) {
+    if (this.props.analytics) {
+      logEvent(this.props.analytics.category, this.props.analytics.action, 'Opens infowindow');
+    }
+
     this.setState({
       modalShare: true,
       shareUrl: url,
@@ -69,6 +75,7 @@ class ToolbarActions extends React.Component {
             url={this.state.shareUrl}
             opened={this.state.modalShare}
             close={() => this.setState({ modalShare: false })}
+            analytics={this.props.analytics}
           />
         </div>
       </div>
@@ -81,12 +88,20 @@ ToolbarActions.propTypes = {
    * Current section to use in the back button
    * Required
    */
-  currentSection: React.PropTypes.string.isRequired,
+  currentSection: PropTypes.string.isRequired,
   /**
    * Url to embed the insight
    */
   // insightUrl: React.PropTypes.string,
-  downloadUrl: React.PropTypes.string
+  downloadUrl: PropTypes.string,
+  /**
+   * Define the category and action for the analytics
+   * event of the share modal
+   */
+  analytics: PropTypes.shape({
+    category: PropTypes.string,
+    action: PropTypes.string
+  })
 };
 
 export default ToolbarActions;

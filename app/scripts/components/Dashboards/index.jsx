@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { logEvent } from 'helpers/analytics';
 import Card from '../Cards/Card';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
@@ -42,7 +43,12 @@ class DashboardsPage extends React.Component {
             {item.summary}
           </p>
           {item.partner &&
-            <a href={item.partner.url} target="_blank">
+            <a
+              href={item.partner.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => logEvent('Dashboards', 'Clicks on a partner logo', item.partner.name)}
+            >
               <img
                 src={config.assetsUrl + item.partner.logo}
                 className="logo"

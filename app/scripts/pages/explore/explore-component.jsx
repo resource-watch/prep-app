@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import debounce from 'lodash/debounce';
 import { Link } from 'react-router';
+
+import { logEvent } from 'helpers/analytics';
 
 import MainNav from 'components/Navigation/MainNav';
 import Tabs from 'components/ui/Tabs';
@@ -23,6 +26,10 @@ class ExplorePage extends PureComponent {
       isSidebarHidden: props.isSidebarHidden,
       filters: false
     };
+
+    this.onChangeTab = this.onChangeTab.bind(this);
+    this.onSearch = this.onSearch.bind(this);
+    this.logSearchEvent = debounce(this.logSearchEvent, 500);
   }
 
   componentWillMount() {
@@ -35,9 +42,53 @@ class ExplorePage extends PureComponent {
     this.props.fetchDatasets();
   }
 
+  /**
+   * Event handler executed when the user goes from
+   * one tab to another
+   * @param {string} tab Tab name
+   */
+  onChangeTab(tab) {
+    this.props.setTab(tab);
+
+    const label = (tab === 'all_datasets')
+      ? 'All datasets'
+      : `Core ${this.props.currentLocation}`;
+    logEvent('Explore menu', 'Changes dataset view', label);
+  }
+
+  /**
+   * Event handler executed when the user types some
+   * terms in the search field
+   * @param {string} query Search terms
+   */
+  onSearch(query) {
+    this.props.filterQuery(query);
+    this.logSearchEvent(query);
+  }
+
+  /**
+   * Event handler executed when the user toggles
+   * the sidebar
+   */
+  onToggleSidebar() {
+    this.setState({ isSidebarHidden: !this.state.isSidebarHidden });
+
+    if (!this.state.isSidebarHidden) {
+      logEvent('Explore menu', 'Close menu', 'Click');
+    }
+  }
+
+  /**
+   * Log the search events
+   * NOTE: this function is debounced in the constructor
+   * @param {string} query Search terms
+   */
+  logSearchEvent(query) { // eslint-disable-line class-methods-use-this
+    logEvent('Explore menu', 'Search datasets', query);
+  }
+
   render() {
-    const { selectedDataset,
-      currentTab, setTab, filterQuery, toggleInfo } = this.props;
+    const { selectedDataset, currentTab, toggleInfo } = this.props;
     const { filters, isSidebarHidden } = this.state;
 
     const sidebarExploreClass = classnames({
@@ -71,7 +122,7 @@ class ExplorePage extends PureComponent {
                 className="-center"
                 options={tabOptions}
                 selected={currentTab || tabOptions[0].value}
-                onChange={setTab}
+                onChange={this.onChangeTab}
               />
             </header>
 
@@ -90,7 +141,7 @@ class ExplorePage extends PureComponent {
                             <button
                               type="button"
                               className="c-new-button -light -transparent"
-                              onClick={() => setTab('all_datasets')}
+                              onClick={() => this.onChangeTab('all_datasets')}
                             >
                               Browse all datasets
                             </button>
@@ -119,7 +170,7 @@ class ExplorePage extends PureComponent {
                           }
                         </button>
                         {<Search
-                          onChange={filterQuery}
+                          onChange={this.onSearch}
                           label="Search dataset"
                         />}
                       </div>
@@ -145,7 +196,7 @@ class ExplorePage extends PureComponent {
               <div>
                 <button
                   className="toggle-status"
-                  onClick={() => this.setState({ isSidebarHidden: !isSidebarHidden })}
+                  onClick={() => this.onToggleSidebar()}
                 >
                   {isSidebarHidden ?
                     <Icon name="icon-arrow-right" className="-medium" /> :
@@ -187,6 +238,7 @@ ExplorePage.defaultProps = {
 ExplorePage.propTypes = {
   selectedDataset: PropTypes.object,
   currentTab: PropTypes.oneOf(['core_datasets', 'all_datasets']),
+  currentLocation: PropTypes.string,
   setTab: PropTypes.func,
   isSidebarHidden: PropTypes.bool,
   fetchDatasets: PropTypes.func,

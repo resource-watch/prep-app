@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { logEvent } from 'helpers/analytics';
 
 function Thumbnail(props) {
   const classes = ['c-thumbnail'];
@@ -8,7 +10,12 @@ function Thumbnail(props) {
   return (
     <div className={classes.join(' ')}>
       {props.url &&
-        <a href={props.url} target="_blank" rel="noopener noreferrer">
+        <a
+          href={props.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => props.analytics && logEvent(props.analytics.category, props.analytics.action, props.alt)}
+        >
           <img
             src={props.src}
             alt={props.alt}
@@ -33,19 +40,27 @@ Thumbnail.propTypes = {
    *  - "neutral": the color is grey
    * Default: no border (i.e. prop not defined)
    */
-  border: React.PropTypes.any,
+  border: PropTypes.any,
   /**
    * Define the link url
    */
-  url: React.PropTypes.string,
+  url: PropTypes.string,
   /**
    * Define the img src attribute
    */
-  src: React.PropTypes.string,
+  src: PropTypes.string,
   /**
    * Define the img alt attribute
    */
-  alt: React.PropTypes.string
+  alt: PropTypes.string,
+  /**
+   * Define the category and action for the analytics
+   * event
+   */
+  analytics: PropTypes.shape({
+    category: PropTypes.string,
+    action: PropTypes.string
+  })
 };
 
 export default Thumbnail;

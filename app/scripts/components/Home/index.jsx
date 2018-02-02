@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { logEvent } from 'helpers/analytics';
 import DemoSlider from '../demo-slider/demo-slider-component';
 import PartnersSlider from '../../containers/PartnersSlider';
 
@@ -19,7 +20,7 @@ const Home = () => (
               <p>Discover and interact with climate, physical and socioeconomic data. Filter
               by topic, geography and time period to create a custom map in seconds. Then
               share your findings to raise awareness in your community.</p>
-              <Link to="/explore" className="c-button -border" >
+              <Link to="/explore" className="c-button -border" onClick={() => logEvent('Home', 'Click carousel CTA', 'Start exploring')}>
                 Start exploring
               </Link>
             </div>
@@ -34,8 +35,8 @@ const Home = () => (
               to support their climate resilience and preparedness planning. View
               dashboards that others have created, or create your own to track
               key issues in your area.</p>
-              <Link to="/dashboards" className="c-button -border" >
-              Go to dashboards
+              <Link to="/dashboards" className="c-button -border" onClick={() => logEvent('Home', 'Click carousel CTA', 'Go to dashboards')}>
+                Go to dashboards
               </Link>
             </div>
           </article>
@@ -48,8 +49,8 @@ const Home = () => (
               <p>Find selected resources for understanding the impacts of climate
               change, tools for building resilience to climate change, and
               additional climate relevant data.</p>
-              <Link to="/resources" className="c-button -border" >
-              Go to resources
+              <Link to="/resources" className="c-button -border" onClick={() => logEvent('Home', 'Click carousel CTA', 'Go to resources')}>
+                Go to resources
               </Link>
             </div>
           </article>

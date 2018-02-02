@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { logEvent } from 'helpers/analytics';
 import Button from '../Button/Button';
-import LoadingSpinner from '../Loading/LoadingSpinner';
 
 class ShareUrl extends React.Component {
   constructor() {
@@ -11,14 +12,16 @@ class ShareUrl extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getShortLink(this.props.url);
+    if (!this.props.iframe) {
+      this.props.getShortLink(this.props.url);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     const { url: nextUrl } = nextProps;
     const { url: prevUrl } = this.props;
 
-    if (nextUrl !== prevUrl) {
+    if (nextUrl !== prevUrl && !nextProps.iframe) {
       this.props.getShortLink(nextUrl);
     }
   }
@@ -29,6 +32,10 @@ class ShareUrl extends React.Component {
     try {
       document.execCommand('copy');
       this.setState({ copied: true });
+
+      if (this.props.analytics) {
+        logEvent(this.props.analytics.category, this.props.analytics.action, `Clicks to copy ${this.props.iframe ? 'embed' : 'link'}`);
+      }
 
       setTimeout(() => {
         this.setState({ copied: false });
@@ -42,28 +49,20 @@ class ShareUrl extends React.Component {
   render() {
     const { copied } = this.state;
 
-    let shortUrl = this.props.links[this.props.url] || this.props.url;
+    let url = this.props.links[this.props.url] || this.props.url;
 
-    let content = <LoadingSpinner transparent inner />;
-
-    if (shortUrl || shortUrl === false) {
-      if (this.props.iframe && shortUrl) {
-        shortUrl = `<iframe src="${shortUrl}"></iframe>`;
-      }
-
-      content = shortUrl !== false ?
-        (<div className="url-container">
-          <input ref={(node) => { this.input = node; }} value={shortUrl} className="url" readOnly />
-          <Button click={() => this.onCopyClick()} fill border>
-            {copied ? 'Copied' : 'Copy'}
-          </Button>
-        </div>) :
-        <p>The url is not available.</p>;
+    if (this.props.iframe) {
+      url = `<iframe width="100%" height="600px" src="${url}"></iframe>`;
     }
 
     return (
       <div className="c-share-url">
-        {content}
+        <div className="url-container">
+          <input ref={(node) => { this.input = node; }} value={url} className="url" readOnly />
+          <Button click={() => this.onCopyClick()} fill border>
+            {copied ? 'Copied' : 'Copy'}
+          </Button>
+        </div>
       </div>
     );
   }
@@ -73,19 +72,27 @@ ShareUrl.propTypes = {
   /**
    * Function to get the short link url
    */
-  getShortLink: React.PropTypes.func.isRequired,
+  getShortLink: PropTypes.func.isRequired,
   /**
    * Urls to generate
    */
-  url: React.PropTypes.string,
+  url: PropTypes.string,
   /**
    * Set if the url will be inside a iframe
    */
-  iframe: React.PropTypes.bool,
+  iframe: PropTypes.bool,
   /**
    * Short urls generated
    */
-  links: React.PropTypes.object
+  links: PropTypes.object,
+  /**
+   * Define the category and action for the analytics
+   * event
+   */
+  analytics: PropTypes.shape({
+    category: PropTypes.string,
+    action: PropTypes.string
+  })
 };
 
 

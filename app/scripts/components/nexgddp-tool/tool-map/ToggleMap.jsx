@@ -145,6 +145,7 @@ class ToggleMap extends React.PureComponent {
               setBasemap={this.props.setBasemap}
               setLabels={this.props.setLabels}
               setBoundaries={this.props.setBoundaries}
+              setAnalytics={shareModalActions.setAnalytics}
             />
           </Control>
 
