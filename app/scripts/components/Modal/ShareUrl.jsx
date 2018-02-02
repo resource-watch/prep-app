@@ -21,7 +21,7 @@ class ShareUrl extends React.Component {
     const { url: nextUrl } = nextProps;
     const { url: prevUrl } = this.props;
 
-    if (nextUrl !== prevUrl && !this.props.iframe) {
+    if (nextUrl !== prevUrl && !nextProps.iframe) {
       this.props.getShortLink(nextUrl);
     }
   }
