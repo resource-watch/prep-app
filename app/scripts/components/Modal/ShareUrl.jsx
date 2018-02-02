@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { logEvent } from 'helpers/analytics';
 import Button from '../Button/Button';
-import LoadingSpinner from '../Loading/LoadingSpinner';
 
 class ShareUrl extends React.Component {
   constructor() {
@@ -13,14 +12,16 @@ class ShareUrl extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getShortLink(this.props.url);
+    if (!this.props.iframe) {
+      this.props.getShortLink(this.props.url);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     const { url: nextUrl } = nextProps;
     const { url: prevUrl } = this.props;
 
-    if (nextUrl !== prevUrl) {
+    if (nextUrl !== prevUrl && !this.props.iframe) {
       this.props.getShortLink(nextUrl);
     }
   }
@@ -48,28 +49,20 @@ class ShareUrl extends React.Component {
   render() {
     const { copied } = this.state;
 
-    let shortUrl = this.props.links[this.props.url] || this.props.url;
+    let url = this.props.links[this.props.url] || this.props.url;
 
-    let content = <LoadingSpinner transparent inner />;
-
-    if (shortUrl || shortUrl === false) {
-      if (this.props.iframe && shortUrl) {
-        shortUrl = `<iframe src="${shortUrl}"></iframe>`;
-      }
-
-      content = shortUrl !== false ?
-        (<div className="url-container">
-          <input ref={(node) => { this.input = node; }} value={shortUrl} className="url" readOnly />
-          <Button click={() => this.onCopyClick()} fill border>
-            {copied ? 'Copied' : 'Copy'}
-          </Button>
-        </div>) :
-        <p>The url is not available.</p>;
+    if (this.props.iframe) {
+      url = `<iframe width="100%" height="600px" src="${url}"></iframe>`;
     }
 
     return (
       <div className="c-share-url">
-        {content}
+        <div className="url-container">
+          <input ref={(node) => { this.input = node; }} value={url} className="url" readOnly />
+          <Button click={() => this.onCopyClick()} fill border>
+            {copied ? 'Copied' : 'Copy'}
+          </Button>
+        </div>
       </div>
     );
   }
