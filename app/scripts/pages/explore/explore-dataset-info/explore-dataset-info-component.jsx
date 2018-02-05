@@ -67,13 +67,13 @@ class DatasetInfo extends PureComponent {
     const contentList = list.map((item, index) =>
       (<li
         key={item.value}
-        className="item-list"
+        className="item-tag"
       >
         {!!(index && index < list.length) && ', ' }
         <span onClick={() => { this.onClickTag(item); }}>{item.label}</span>
       </li>));
 
-    return (<ul className="item-list">{contentList}</ul>);
+    return (<ul className="item-tag">{contentList}</ul>);
   }
 
   getContent(dataset) {
@@ -82,7 +82,6 @@ class DatasetInfo extends PureComponent {
     const description = info.function;
     const { source } = info;
     const datasetTags = (((dataset.vocabulary || [])[0] || {}).tags || []);
-    const areasList = [];
 
     const topicsList = datasetTags.filter(tag =>
       TOPICS.find(topic => topic.value === tag))
@@ -105,10 +104,31 @@ class DatasetInfo extends PureComponent {
           <ReactMarkdown source={description} className="c-markdown -inline" />
         </div>}
 
+        {!!dataset.layer &&
+          <div className="item-prop">
+            <span className="prop-label">Layers: </span>
+
+            <ul className="item-list">
+              {dataset.layer.map(l => (
+                <li
+                  key={l.id}
+                >
+                  <h4>{l.name}</h4>
+
+                  {l.description &&
+                    <ReactMarkdown source={l.description} className="c-markdown -inline" />
+                  }
+                </li>
+              ))}
+            </ul>
+          </div>
+        }
+
         {dataset.data_source && <div className="item-prop">
           <span className="prop-label">Data source: </span>
           <ReactMarkdown source={dataset.data_source} className="c-markdown" />
         </div>}
+
         {!!topicsList.length && <div className="item-prop">
           <span className="prop-label">Topics: </span>
           {this.getItemList(topicsList)}
@@ -193,7 +213,7 @@ class DatasetInfo extends PureComponent {
 
             {this.getContent(dataset)}
 
-            {hasWidget && dataset.widget.map((w) => {
+            {hasWidget && dataset.widget.filter(w => w.default).map((w) => {
               if (w.widgetConfig.type === 'map') {
                 return null;
               }
