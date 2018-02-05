@@ -24,10 +24,20 @@ class LegendActions extends React.Component {
   }
 
   render() {
-    const { layerSpec, onOpacity, onVisibility, onMultiLayer, onClose } = this.props;
+    const { layerSpec, onOpacity, onVisibility, onMultiLayer, onFitBounds, onClose } = this.props;
 
     return (
       <div className="c-legend-actions">
+        {layerSpec.layerConfig && layerSpec.layerConfig.bbox &&
+          <button
+            type="button"
+            onClick={() => onFitBounds(layerSpec)}
+          >
+            <Icon name="icon-hide" className="-normal" />
+          </button>
+        }
+
+
         <LegendOpacitySelector
           layerSpec={layerSpec}
           onOpacityChange={onOpacity}
@@ -73,7 +83,8 @@ LegendActions.propTypes = {
   onVisibility: PropTypes.func,
   onInfo: PropTypes.func,
   onClose: PropTypes.func,
-  onMultiLayer: PropTypes.func
+  onMultiLayer: PropTypes.func,
+  onFitBounds: PropTypes.func
 };
 
 LegendActions.defaultProps = {
@@ -81,7 +92,8 @@ LegendActions.defaultProps = {
   onVisibility: () => {},
   onInfo: () => {},
   onClose: () => {},
-  onMultiLayer: () => {}
+  onMultiLayer: () => {},
+  onFitBounds: () => {}
 };
 
 export default LegendActions;

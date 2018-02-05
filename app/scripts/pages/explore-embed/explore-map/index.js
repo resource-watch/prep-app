@@ -15,6 +15,7 @@ const mapStateToProps = state => ({
   lng: state.exploreEmbedPage.map.lng,
   zoom: state.exploreEmbedPage.map.zoom,
   basemap: state.exploreEmbedPage.map.basemap,
+  bbox: state.exploreEmbedPage.map.bbox,
   labels: state.exploreEmbedPage.map.labels,
   boundaries: state.exploreEmbedPage.map.boundaries
 });

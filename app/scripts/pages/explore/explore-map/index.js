@@ -17,6 +17,7 @@ const mapStateToProps = state => ({
   basemap: state.explorePage.map.basemap,
   labels: state.explorePage.map.labels,
   boundaries: state.explorePage.map.boundaries,
+  bbox: state.explorePage.map.bbox,
   open: state.shareModal.open
 });
 

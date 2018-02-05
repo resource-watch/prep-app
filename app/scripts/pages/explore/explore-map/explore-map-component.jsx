@@ -18,8 +18,10 @@ class ExploreMap extends PureComponent {
   }
 
   render() {
-    const { setMapParams, basemap, labels, boundaries, zoom, lat, lng, minZoom, setBasemap,
+    const { setMapParams, basemap, labels, boundaries, bbox, zoom, lat, lng, minZoom, setBasemap,
       setLabels, setBoundaries, activeLayers, embed } = this.props;
+
+    console.log(bbox);
     const currentBasemap = basemapsSpec[basemap];
     const currentLabels = labelsSpec[labels];
     const currentBoundaries = boundaries ? boundariesSpec.dark : {};
@@ -42,6 +44,7 @@ class ExploreMap extends PureComponent {
           labels={currentLabels}
           boundaries={currentBoundaries}
           layers={activeLayers}
+          bbox={bbox}
           onChange={setMapParams}
         >
           <BasemapControl
@@ -84,7 +87,15 @@ class ExploreMap extends PureComponent {
             onInfo={l => this.props.toggleInfo({ id: l.dataset })}
             onOpacity={this.props.updateOpacity}
             onClose={l => this.props.toggleDataset({ id: l.dataset })}
-            onMultiLayer={context => this.props.setMultiActiveLayer(context)}
+            onMultiLayer={l => this.props.setMultiActiveLayer(l)}
+            onFitBounds={(l) => {
+              this.props.setBBox(l.layerConfig.bbox);
+
+              // Reset the bounds inmediatly to have the possibility to click on it again
+              requestAnimationFrame(() => {
+                this.props.setBBox(null);
+              });
+            }}
           />}
       </div>
     );
@@ -106,6 +117,7 @@ ExploreMap.propTypes = {
   lng: PropTypes.number,
   embed: PropTypes.bool,
   open: PropTypes.bool,
+  bbox: PropTypes.any,
   setBasemap: PropTypes.func,
   setLabels: PropTypes.func,
   setBoundaries: PropTypes.func,
@@ -116,6 +128,7 @@ ExploreMap.propTypes = {
   toggleVisibility: PropTypes.func,
   updateOpacity: PropTypes.func,
   setMultiActiveLayer: PropTypes.func,
+  setBBox: PropTypes.func,
   setOpen: PropTypes.func,
   setLinks: PropTypes.func
 };

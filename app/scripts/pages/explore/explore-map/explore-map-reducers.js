@@ -31,3 +31,11 @@ export const setMapParams = (state, { payload }) => ({
     lng: payload.lng
   }
 });
+
+export const setBBox = (state, { payload }) => ({
+  ...state,
+  map: {
+    ...state.map,
+    bbox: payload
+  }
+});

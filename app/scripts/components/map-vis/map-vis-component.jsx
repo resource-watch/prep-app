@@ -45,6 +45,7 @@ class Map extends PureComponent {
     if (prevProps.basemap !== this.props.basemap) this.setBasemap();
     if (prevProps.labels !== this.props.labels) this.setLabels();
     if (prevProps.boundaries !== this.props.boundaries) this.setBoundaries();
+    if (prevProps.bbox !== this.props.bbox) this.setBounds();
     if (!isEqual(prevProps.layers, this.props.layers)) this.toggleLayers();
   }
 
@@ -84,6 +85,19 @@ class Map extends PureComponent {
     if (boundaries && Object.keys(boundaries).length) {
       this.boundaries = L.tileLayer(boundaries.value, { ...boundaries.options, zIndex: 10000 });
       this.map.addLayer(this.boundaries);
+    }
+  }
+
+  setBounds() {
+    const { bbox } = this.props;
+
+    if (bbox) {
+      const bounds = [
+        [bbox[1], bbox[0]],
+        [bbox[3], bbox[2]]
+      ];
+      // this.boundaries = L.tileLayer(boundaries.value, { ...boundaries.options, zIndex: 10000 });
+      this.map.fitBounds(bounds);
     }
   }
 
@@ -151,6 +165,7 @@ Map.propTypes = {
   basemap: PropTypes.object,
   labels: PropTypes.object,
   boundaries: PropTypes.object,
+  bbox: PropTypes.any,
   children: PropTypes.any,
   layers: PropTypes.array,
   onChange: PropTypes.func

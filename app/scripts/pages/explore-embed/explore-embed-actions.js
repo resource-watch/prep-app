@@ -240,3 +240,4 @@ export const getDatasetsByGraph = createThunkAction('explore-page/getDatasetsByG
 );
 
 export const setMultiActiveLayer = createAction('explore-dataset-list/setMultiActiveLayer');
+export const setBBox = createAction('explore-dataset-list/setBBox');
