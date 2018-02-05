@@ -16,4 +16,6 @@ const initialState = {
   coreDatasets: { ...locationInitialState, ...coreDatasetsInitialState }
 };
 
+console.log({ ...locationInitialState, ...coreDatasetsInitialState });
+
 export default initialState;

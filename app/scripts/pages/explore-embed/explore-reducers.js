@@ -30,5 +30,5 @@ export default {
   [actions.clearFilters]: datasetFiltersReducers.clearFilters,
   [actions.onClearFilters]: datasetFiltersReducers.onClearFilters,
   [actions.updateDataFilters]: datasetFiltersReducers.updateDataFilters,
-  [actions.setSidebar]: actions.setSidebar
+  [actions.setSidebar]: (state, { payload }) => ({ ...state, sidebar: payload })
 };

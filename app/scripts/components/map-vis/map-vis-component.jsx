@@ -100,7 +100,8 @@ class Map extends PureComponent {
       const left = (sidebar.open) ? 430 : 0;
 
       this.map.fitBounds(bounds, {
-        paddingTopLeft: [left, 0] // Padding Left Top... Leaflet? What the hell??
+        paddingTopLeft: [left + 32, 32], // Padding Left Top... Leaflet? What the hell??
+        paddingBottomRight: [32, 32]
       });
     }
   }
