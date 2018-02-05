@@ -23,7 +23,7 @@ class Legend extends PureComponent {
   }
 
   render() {
-    const { layerSpec, onOpacity, onVisibility, onClose, onMultiLayer, onInfo } = this.props;
+    const { layerSpec, onOpacity, onVisibility, onClose, onMultiLayer, onFitBounds, onInfo } = this.props;
     const { name, legendConfig } = layerSpec;
     const { type, unit } = legendConfig;
 
@@ -36,6 +36,7 @@ class Legend extends PureComponent {
               layerSpec={layerSpec}
               onOpacity={onOpacity}
               onVisibility={onVisibility}
+              onFitBounds={onFitBounds}
               onInfo={onInfo}
               onClose={onClose}
               onMultiLayer={onMultiLayer}
@@ -60,7 +61,8 @@ Legend.propTypes = {
   onVisibility: PropTypes.func,
   onInfo: PropTypes.func,
   onClose: PropTypes.func,
-  onMultiLayer: PropTypes.func
+  onMultiLayer: PropTypes.func,
+  onFitBounds: PropTypes.func
 };
 
 Legend.defaultProps = {
@@ -70,7 +72,8 @@ Legend.defaultProps = {
   onVisibility: () => {},
   onInfo: () => {},
   onClose: () => {},
-  onMultiLayer: () => {}
+  onMultiLayer: () => {},
+  onFitBounds: () => {}
 };
 
 export default Legend;

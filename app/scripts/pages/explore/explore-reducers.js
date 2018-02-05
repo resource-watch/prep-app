@@ -10,6 +10,7 @@ export default {
   [actions.setLabels]: mapReducers.setLabels,
   [actions.setBoundaries]: mapReducers.setBoundaries,
   [actions.setMapParams]: mapReducers.setMapParams,
+  [actions.setBBox]: mapReducers.setBBox,
   [actions.setLocation]: filterLocationReducers.setLocation,
   [actions.fetchDatasets]: datasetsListReducers.fetchDatasets,
   [actions.receiveDatasets]: datasetsListReducers.receiveDatasets,
@@ -28,5 +29,6 @@ export default {
   [actions.setMultiActiveLayer]: datasetsListReducers.setMultiActiveLayer,
   [actions.clearFilters]: datasetFiltersReducers.clearFilters,
   [actions.onClearFilters]: datasetFiltersReducers.onClearFilters,
-  [actions.updateDataFilters]: datasetFiltersReducers.updateDataFilters
+  [actions.updateDataFilters]: datasetFiltersReducers.updateDataFilters,
+  [actions.setSidebar]: (state, { payload }) => ({ ...state, sidebar: payload })
 };

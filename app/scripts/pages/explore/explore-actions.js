@@ -11,6 +11,8 @@ import GraphService from 'services/graph-service';
 // helpers
 import { getSelectedElements, selectElementsFromTree } from 'helpers/dropdown-tree';
 
+export const setSidebar = createAction('explore/setSidebar');
+
 // Update URL
 export const updateURLParams = createThunkAction('updateURLParams', () => (dispatch, getState) => {
   const { explorePage } = getState();
@@ -93,12 +95,6 @@ export const setInitialFilterStatus = createThunkAction('explore-dataset-filters
   });
 
   dispatch(updateDataFilters(newData));
-});
-
-export const onClearFilters = createThunkAction('explore-dataset-filters/onClearFilters', () => (dispatch) => {
-  dispatch(clearFilters());
-  dispatch(setInitialFilterStatus());
-  dispatch(updateURLParams());
 });
 
 export const fetchDatasets = createThunkAction('fetchDatasets', () => (dispatch) => {
@@ -208,6 +204,13 @@ export const getFiltersData = createThunkAction('explore-dataset-filters/getFilt
   }
 );
 
+export const onClearFilters = createThunkAction('explore-dataset-filters/onClearFilters', () => (dispatch) => {
+  dispatch(getFiltersData());
+  dispatch(clearFilters());
+  dispatch(setInitialFilterStatus());
+  dispatch(updateURLParams());
+});
+
 export const onSetDatasetFilter = createThunkAction('explore-dataset-filters/onSetDatasetFilter', (filter = {}) =>
   (dispatch) => {
     const key = Object.keys(filter)[0];
@@ -240,3 +243,4 @@ export const getDatasetsByGraph = createThunkAction('explore-page/getDatasetsByG
 );
 
 export const setMultiActiveLayer = createAction('explore-dataset-list/setMultiActiveLayer');
+export const setBBox = createAction('explore-dataset-list/setBBox');

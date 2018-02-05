@@ -6,6 +6,10 @@ import { initialState as mapInitialState } from './explore-map';
 
 const initialState = {
   tab: 'core_datasets',
+  sidebar: {
+    width: 0,
+    open: false
+  },
   map: mapInitialState,
   datasets: datasetsInitialState,
   datasetFilters: datasetFiltersInitialState,

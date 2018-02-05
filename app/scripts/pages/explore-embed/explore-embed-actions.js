@@ -11,6 +11,8 @@ import GraphService from 'services/graph-service';
 // helpers
 import { getSelectedElements, selectElementsFromTree } from 'helpers/dropdown-tree';
 
+export const setSidebar = createAction('explore/setSidebar');
+
 // Update URL
 export const updateURLParams = createThunkAction('updateURLParams', () => (dispatch, getState) => {
   const { exploreEmbedPage } = getState();
@@ -240,3 +242,4 @@ export const getDatasetsByGraph = createThunkAction('explore-page/getDatasetsByG
 );
 
 export const setMultiActiveLayer = createAction('explore-dataset-list/setMultiActiveLayer');
+export const setBBox = createAction('explore-dataset-list/setBBox');
