@@ -23,7 +23,6 @@ class ExplorePage extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      isSidebarHidden: props.isSidebarHidden,
       filters: false
     };
 
@@ -40,6 +39,11 @@ class ExplorePage extends PureComponent {
   componentDidMount() {
     this.props.updateURLParams();
     this.props.fetchDatasets();
+
+    this.props.setSidebar({
+      width: 430,
+      open: true
+    });
   }
 
   /**
@@ -71,9 +75,14 @@ class ExplorePage extends PureComponent {
    * the sidebar
    */
   onToggleSidebar() {
-    this.setState({ isSidebarHidden: !this.state.isSidebarHidden });
+    const { sidebar } = this.props;
 
-    if (!this.state.isSidebarHidden) {
+    this.props.setSidebar({
+      width: (sidebar.open) ? 0 : 430,
+      open: !sidebar.open
+    });
+
+    if (!sidebar.open) {
       logEvent('Explore menu', 'Close menu', 'Click');
     }
   }
@@ -88,12 +97,12 @@ class ExplorePage extends PureComponent {
   }
 
   render() {
-    const { selectedDataset, currentTab, toggleInfo } = this.props;
-    const { filters, isSidebarHidden } = this.state;
+    const { sidebar, selectedDataset, currentTab, toggleInfo } = this.props;
+    const { filters } = this.state;
 
     const sidebarExploreClass = classnames({
       'c-explore-sidebar': true,
-      '-open': !isSidebarHidden
+      '-open': sidebar.open
     });
 
     return (
@@ -198,7 +207,7 @@ class ExplorePage extends PureComponent {
                   className="toggle-status"
                   onClick={() => this.onToggleSidebar()}
                 >
-                  {isSidebarHidden ?
+                  {sidebar.open ?
                     <Icon name="icon-arrow-right" className="-medium" /> :
                     <Icon name="icon-arrow-left" className="-medium" />}
                 </button>
@@ -230,17 +239,17 @@ class ExplorePage extends PureComponent {
 
 ExplorePage.defaultProps = {
   currentTab: 'core_datasets',
-  isSidebarHidden: false,
   fetchDatasets: () => {},
   getDatasetsByGraph: () => {}
 };
 
 ExplorePage.propTypes = {
+  sidebar: PropTypes.object,
   selectedDataset: PropTypes.object,
   currentTab: PropTypes.oneOf(['core_datasets', 'all_datasets']),
   currentLocation: PropTypes.string,
   setTab: PropTypes.func,
-  isSidebarHidden: PropTypes.bool,
+  setSidebar: PropTypes.func,
   fetchDatasets: PropTypes.func,
   filterQuery: PropTypes.func,
   toggleInfo: PropTypes.func,

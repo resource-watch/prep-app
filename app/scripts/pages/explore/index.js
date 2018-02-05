@@ -9,6 +9,7 @@ export { initialState, actions, reducers };
 
 const mapStateToProps = state => ({
   routing: state.routing,
+  sidebar: state.explorePage.sidebar,
   datasets: state.explorePage.datasets.items,
   selectedDataset: getSelectedDataset(state),
   datasetsList: state.explorePage.datasets,
