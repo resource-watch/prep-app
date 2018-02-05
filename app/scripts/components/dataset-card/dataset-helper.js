@@ -19,28 +19,7 @@ export const getSummary = (dataset) => {
 
 export const getDescription = (dataset) => {
   const metadata = getMetadata(dataset);
-  return metadata.description;
-};
+  const info = getInfo(dataset);
 
-function getDownloadUrl(data) {
-  let url = null;
-  let metadataUrl = null;
-  if (data.metadata && data.metadata.length &&
-    data.metadata[0].attributes.info.dataDownload) {
-    metadataUrl = data.metadata[0].attributes.info.dataDownload;
-  }
-  switch (data.provider) {
-    case 'cartodb':
-      if (data && data.connectorUrl && data.connectorUrl.indexOf('tables') === -1) {
-        const uri = new URI(data.connectorUrl);
-        uri.search({ format: 'csv' });
-        url = uri.toString();
-      } else {
-        url = data.connectorUrl;
-      }
-      break;
-    default:
-      url = metadataUrl || data.connectorUrl;
-  }
-  return url;
-}
+  return metadata.description || info.description;
+};

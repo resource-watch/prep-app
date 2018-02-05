@@ -11,6 +11,7 @@ export { initialState, actions, reducers };
 
 const mapStateToProps = state => ({
   embed: true,
+  sidebar: state.exploreEmbedPage.sidebar,
   routing: state.routing,
   datasets: state.exploreEmbedPage.datasets.items,
   selectedDataset: getSelectedDataset(state),

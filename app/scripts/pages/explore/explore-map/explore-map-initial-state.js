@@ -5,5 +5,6 @@ export default {
   zoom: 3,
   minZoom: 3,
   lat: 48.46038,
-  lng: -123.889823
+  lng: -123.889823,
+  bbox: null
 };
