@@ -89,15 +89,19 @@ class Map extends PureComponent {
   }
 
   setBounds() {
-    const { bbox } = this.props;
+    const { bbox, sidebar } = this.props;
 
     if (bbox) {
       const bounds = [
         [bbox[1], bbox[0]],
         [bbox[3], bbox[2]]
       ];
-      // this.boundaries = L.tileLayer(boundaries.value, { ...boundaries.options, zIndex: 10000 });
-      this.map.fitBounds(bounds);
+
+      const left = (sidebar.open) ? 430 : 0;
+
+      this.map.fitBounds(bounds, {
+        paddingTopLeft: [left, 0] // Padding Left Top... Leaflet? What the hell??
+      });
     }
   }
 
@@ -166,6 +170,7 @@ Map.propTypes = {
   labels: PropTypes.object,
   boundaries: PropTypes.object,
   bbox: PropTypes.any,
+  sidebar: PropTypes.object,
   children: PropTypes.any,
   layers: PropTypes.array,
   onChange: PropTypes.func

@@ -33,7 +33,7 @@ class LegendActions extends React.Component {
             type="button"
             onClick={() => onFitBounds(layerSpec)}
           >
-            <Icon name="icon-hide" className="-normal" />
+            <Icon name="icon-bbox" className="-normal" />
           </button>
         }
 

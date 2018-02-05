@@ -18,10 +18,9 @@ class ExploreMap extends PureComponent {
   }
 
   render() {
-    const { setMapParams, basemap, labels, boundaries, bbox, zoom, lat, lng, minZoom, setBasemap,
+    const { setMapParams, basemap, labels, boundaries, bbox, sidebar, zoom, lat, lng, minZoom, setBasemap,
       setLabels, setBoundaries, activeLayers, embed } = this.props;
 
-    console.log(bbox);
     const currentBasemap = basemapsSpec[basemap];
     const currentLabels = labelsSpec[labels];
     const currentBoundaries = boundaries ? boundariesSpec.dark : {};
@@ -45,6 +44,7 @@ class ExploreMap extends PureComponent {
           boundaries={currentBoundaries}
           layers={activeLayers}
           bbox={bbox}
+          sidebar={sidebar}
           onChange={setMapParams}
         >
           <BasemapControl
@@ -118,6 +118,7 @@ ExploreMap.propTypes = {
   embed: PropTypes.bool,
   open: PropTypes.bool,
   bbox: PropTypes.any,
+  sidebar: PropTypes.object,
   setBasemap: PropTypes.func,
   setLabels: PropTypes.func,
   setBoundaries: PropTypes.func,

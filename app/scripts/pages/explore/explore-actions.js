@@ -11,6 +11,8 @@ import GraphService from 'services/graph-service';
 // helpers
 import { getSelectedElements, selectElementsFromTree } from 'helpers/dropdown-tree';
 
+export const setSidebar = createAction('explore/setSidebar');
+
 // Update URL
 export const updateURLParams = createThunkAction('updateURLParams', () => (dispatch, getState) => {
   const { explorePage } = getState();

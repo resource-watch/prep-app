@@ -29,5 +29,6 @@ export default {
   [actions.setMultiActiveLayer]: datasetsListReducers.setMultiActiveLayer,
   [actions.clearFilters]: datasetFiltersReducers.clearFilters,
   [actions.onClearFilters]: datasetFiltersReducers.onClearFilters,
-  [actions.updateDataFilters]: datasetFiltersReducers.updateDataFilters
+  [actions.updateDataFilters]: datasetFiltersReducers.updateDataFilters,
+  [actions.setSidebar]: actions.setSidebar
 };

@@ -7,13 +7,6 @@ import DatasetInfo from './explore-dataset-info';
 import ExploreMap from './explore-map';
 
 class ExplorePage extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isSidebarHidden: props.isSidebarHidden
-    };
-  }
-
   componentWillMount() {
     this.props.initialURLParams();
   }
@@ -60,14 +53,12 @@ class ExplorePage extends PureComponent {
 
 ExplorePage.defaultProps = {
   currentTab: 'core_datasets',
-  isSidebarHidden: false,
   fetchDatasets: () => {}
 };
 
 ExplorePage.propTypes = {
   embed: PropTypes.bool,
   selectedDataset: PropTypes.object,
-  isSidebarHidden: PropTypes.bool,
   fetchDatasets: PropTypes.func,
   toggleInfo: PropTypes.func,
   initialURLParams: PropTypes.func,
