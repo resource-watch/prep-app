@@ -7,7 +7,7 @@ import { logEvent } from 'helpers/analytics';
 
 import Icon from 'components/ui/Icon';
 import Switch from 'components/Button/Switch';
-import { getTitle, getInfo } from 'components/dataset-card/dataset-helper';
+import { getTitle, getInfo, getDescription } from 'components/dataset-card/dataset-helper';
 import Tooltip from 'rc-tooltip/dist/rc-tooltip';
 import CollectionsPanel from 'components/collections-panel';
 import { Link } from 'react-router';
@@ -79,7 +79,7 @@ class DatasetInfo extends PureComponent {
   getContent(dataset) {
     const { embed } = this.props;
     const info = getInfo(dataset);
-    const description = info.function;
+    const description = getDescription(dataset);
     const { source } = info;
     const datasetTags = (((dataset.vocabulary || [])[0] || {}).tags || []);
 
