@@ -213,7 +213,7 @@ class DatasetInfo extends PureComponent {
 
             {this.getContent(dataset)}
 
-            {hasWidget && dataset.widget.map((w) => {
+            {hasWidget && dataset.widget.filter(w => w.default).map((w) => {
               if (w.widgetConfig.type === 'map') {
                 return null;
               }
