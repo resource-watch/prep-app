@@ -11,6 +11,10 @@ import PLACEHOLDERS_DATASET_FILTERS from './explore-dataset-filters-constants';
 import './explore-dataset-filters-styles.scss';
 
 class ExploreDatasetFilters extends PureComponent {
+  componentWillUnmount() {
+    this.onClearFilters();
+  }
+
   onChange(values = [], key) {
     const filterValues = values.map(v => v.value);
     this.props.onSetDatasetFilter({ [key]: filterValues });
