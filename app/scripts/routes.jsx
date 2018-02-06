@@ -102,6 +102,12 @@ const requireAuth = (nextState, replace) => {
   }
 };
 
+const confirmLogOut = (routes) => {
+  const { logout } = routes.location.query;
+  if (!logout) return;
+  localStorage.removeItem('token');
+};
+
 function Routes(props) {
   return (
     <Router
@@ -109,7 +115,7 @@ function Routes(props) {
       render={applyRouterMiddleware(useScroll(shouldUpdateScroll))}
     >
       <Route path={''} component={Root}>
-        <Route path={'/'} component={App}>
+        <Route path={'/'} component={App} onEnter={confirmLogOut}>
           <IndexRoute component={Home} />
           <Route path={'about'} component={AboutPage} />
           <Route path={'faqs'} component={FAQ} />
