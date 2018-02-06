@@ -8,13 +8,14 @@ const slidesToShow = 5;
 const defaultSettings = {
   dots: false,
   arrows: true,
-  nextArrow: <ArrowButton full next slidesToShow={slidesToShow} />,
-  prevArrow: <ArrowButton full slidesToShow={slidesToShow} />,
+  nextArrow: <ArrowButton full infinite next slidesToShow={slidesToShow} />,
+  prevArrow: <ArrowButton full infinite slidesToShow={slidesToShow} />,
   autoplay: true,
   autoplaySpeed: 2000,
   infinite: true,
   speed: 500,
   slidesToShow,
+  initialSlide: 0,
   swipe: false
 };
 
