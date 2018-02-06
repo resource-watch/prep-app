@@ -1,9 +1,10 @@
 .c-legend-gradient {
   ul {
     display: flex;
-    margin: 0;
+    margin: 0 0 16px;
     padding: 0;
     list-style: none;
+    font-size: 12px;
   }
 
   li {
@@ -18,10 +19,12 @@
 
   .name {
     display: block;
-
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    font-size: 12px;
     text-align: center;
+  }
+
+  .legend-gradient-icon {
+    display: flex;
   }
 
   .icon-gradient {
@@ -29,5 +32,18 @@
     height: 5px;
     margin-top: 10px;
     margin-bottom: 5px;
+  }
+
+  .icon-gradient-transparent {
+    display: block;
+    height: 5px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    background-image:
+      linear-gradient(45deg, rgba(black, .4) 25%, transparent 25%, transparent 75%, rgba(black, .4) 75%, rgba(black, .4)),
+      linear-gradient(45deg, rgba(black, .4) 25%, transparent 25%, transparent 75%, rgba(black, .4) 75%, rgba(black, .4));
+
+    background-size: 6px 6px;
+    background-position: 0 0, 3px 3px
   }
 }
