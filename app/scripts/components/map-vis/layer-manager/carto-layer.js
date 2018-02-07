@@ -1,6 +1,8 @@
 import L from 'leaflet';
 import Promise from 'bluebird';
 
+import 'leaflet-utfgrid/L.UTFGrid-min';
+
 Promise.config({
   cancellation: true
 });
@@ -20,11 +22,15 @@ function makeCancellableRequest(url, bodyStringified) {
 
 export default (leafletMap, layerSpec) => {
   const {
+    id,
+    name,
     layerConfig,
     layerIndex,
     visibility,
     opacity
   } = layerSpec;
+
+  layerConfig.body.layers[0].options.interactivity = ['cartodb_id'];
 
   // Transforming layerSpec
   const bodyStringified = JSON.stringify(layerConfig.body || {})
@@ -44,7 +50,17 @@ export default (leafletMap, layerSpec) => {
       .then((data) => {
         const tileUrl = `${data.cdn_url.templates.https.url}/${layerConfig.account}/api/v1/map/${data.layergroupid}/{z}/{x}/{y}.png`;
         const layer = L.tileLayer(tileUrl);
+
+        // Grid
+        const gridUrl = `https://${layerConfig.account}.carto.com/api/v1/map/${data.layergroupid}/0/{z}/{x}/{y}.grid.json`;
+        const grid = L.utfGrid(gridUrl).addTo(leafletMap);
+
+        grid.on('click', (e) => {
+          console.info(id, name, e.data);
+        });
+
         layer.setZIndex(layerIndex);
+        grid.setZIndex(10000);
 
         // If visibility is enabled, set opacity to zero
         if (visibility) {
