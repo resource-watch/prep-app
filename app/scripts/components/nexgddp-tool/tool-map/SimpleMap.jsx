@@ -9,11 +9,11 @@ import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 
 import { getLayers, getRawLayers } from 'selectors/nexgddptool';
-import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setMarkerMode } from 'actions/nexgddptool';
+import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setWater, setMarkerMode } from 'actions/nexgddptool';
 import * as shareModalActions from 'components/share-modal/share-modal-actions';
 
 import BasemapControl from 'components/basemap-control';
-import { basemapsSpec, labelsSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
+import { basemapsSpec, labelsSpec, boundariesSpec, waterSpec } from 'components/basemap-control/basemap-control-constants';
 import ShareControl from 'components/share-control/share-control-component';
 import Legend from 'components/legend/index';
 
@@ -97,6 +97,7 @@ class SimpleMap extends React.PureComponent {
           {currentLayer && <TileLayer url={currentLayer.url} />}
           {map.boundaries && <TileLayer url={boundariesSpec.dark.value} zIndex={9} />}
           {map.labels !== 'none' && <TileLayer url={labelsSpec[map.labels].value} zIndex={10} />}
+          {map.water !== 'none' && <TileLayer url={waterSpec[map.water].value} zIndex={8} />}
 
           {marker && <Marker position={marker} icon={L.divIcon({ className: 'map-marker' })} /> }
 
@@ -123,8 +124,10 @@ class SimpleMap extends React.PureComponent {
               basemap={map.basemap}
               labels={map.labels}
               boundaries={map.boundaries}
+              water={map.water}
               setBasemap={this.props.setBasemap}
               setLabels={this.props.setLabels}
+              setWater={this.props.setWater}
               setBoundaries={this.props.setBoundaries}
             />
           </Control>
@@ -176,6 +179,7 @@ SimpleMap.propTypes = {
   setMapCenter: PropTypes.func,
   setBasemap: PropTypes.func,
   setLabels: PropTypes.func,
+  setWater: PropTypes.func,
   setBoundaries: PropTypes.func,
   setOpen: PropTypes.func,
   setLinks: PropTypes.func
@@ -199,6 +203,7 @@ const mapDispatchToProps = {
   setMapCenter,
   setBasemap,
   setLabels,
+  setWater,
   setBoundaries,
   ...shareModalActions
 };

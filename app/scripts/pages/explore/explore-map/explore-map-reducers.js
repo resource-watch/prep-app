@@ -14,6 +14,15 @@ export const setLabels = (state, { payload }) => ({
   }
 });
 
+export const setWater = (state, { payload }) => ({
+  ...state,
+  map: {
+    ...state.map,
+    water: payload
+  }
+});
+
+
 export const setBoundaries = (state, { payload }) => ({
   ...state,
   map: {

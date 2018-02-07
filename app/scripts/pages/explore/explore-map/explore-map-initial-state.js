@@ -1,6 +1,7 @@
 export default {
   basemap: 'default',
   labels: 'none',
+  water: 'none',
   boundaries: false,
   zoom: 3,
   minZoom: 3,

@@ -10,14 +10,14 @@ import Control from 'react-leaflet-control';
 
 // Redux
 import { getLayers, getRawLayers } from 'selectors/nexgddptool';
-import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setMarkerMode } from 'actions/nexgddptool';
+import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setWater, setMarkerMode } from 'actions/nexgddptool';
 import * as shareModalActions from 'components/share-modal/share-modal-actions';
 
 // Components
 import Legend from 'components/legend/index';
 import BasemapControl from 'components/basemap-control';
 import ShareControl from 'components/share-control/share-control-component';
-import { basemapsSpec, labelsSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
+import { basemapsSpec, labelsSpec, boundariesSpec, waterSpec } from 'components/basemap-control/basemap-control-constants';
 
 import Icon from 'components/ui/Icon';
 
@@ -115,6 +115,7 @@ class ToggleMap extends React.PureComponent {
         >
           <TileLayer url={basemapsSpec[map.basemap].value} />
           { currentLayer && <TileLayer url={currentLayer.url} /> }
+          { map.water !== 'none' && <TileLayer url={waterSpec[map.water].value} zIndex={8} /> }
           { map.boundaries && <TileLayer url={boundariesSpec.dark.value} zIndex={9} /> }
           { map.labels !== 'none' && <TileLayer url={labelsSpec[map.labels].value} zIndex={10} /> }
           { marker && <Marker position={marker} icon={L.divIcon({ className: 'map-marker' })} /> }
@@ -142,8 +143,10 @@ class ToggleMap extends React.PureComponent {
               basemap={map.basemap}
               labels={map.labels}
               boundaries={map.boundaries}
+              water={map.water}
               setBasemap={this.props.setBasemap}
               setLabels={this.props.setLabels}
+              setWater={this.props.setWater}
               setBoundaries={this.props.setBoundaries}
               setAnalytics={shareModalActions.setAnalytics}
             />
@@ -196,6 +199,7 @@ ToggleMap.propTypes = {
   setMapCenter: PropTypes.func,
   setBasemap: PropTypes.func,
   setLabels: PropTypes.func,
+  setWater: PropTypes.func,
   setBoundaries: PropTypes.func,
   setOpen: PropTypes.func,
   setLinks: PropTypes.func
@@ -220,6 +224,7 @@ const mapDispatchToProps = {
   setMapCenter,
   setBasemap,
   setLabels,
+  setWater,
   setBoundaries,
   ...shareModalActions
 };

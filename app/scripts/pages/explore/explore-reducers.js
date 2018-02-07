@@ -9,6 +9,7 @@ export default {
   [actions.setBasemap]: mapReducers.setBasemap,
   [actions.setLabels]: mapReducers.setLabels,
   [actions.setBoundaries]: mapReducers.setBoundaries,
+  [actions.setWater]: mapReducers.setWater,
   [actions.setMapParams]: mapReducers.setMapParams,
   [actions.setBBox]: mapReducers.setBBox,
   [actions.setLocation]: filterLocationReducers.setLocation,

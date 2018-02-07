@@ -66,3 +66,21 @@ export const boundariesSpec = {
     value: 'https://api.mapbox.com/styles/v1/prepdata/cjbfcn5o51al72so1u5avqcur/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicHJlcGRhdGEiLCJhIjoiY2piZmNrcTRjMXRsdzJxbm9uNm1nOXJtNSJ9.Jm14P-FBGvNxiaB-3mzSPw'
   }
 };
+
+export const waterSpec = {
+  none: {
+    id: 'none',
+    label: 'No water',
+    value: 'no_water'
+  },
+  dark: {
+    id: 'dark',
+    label: 'Dark',
+    value: 'https://api.mapbox.com/styles/v1/prepdata/cjda7qosvalqt2rlcxden3hfl/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicHJlcGRhdGEiLCJhIjoiY2piZmNrcTRjMXRsdzJxbm9uNm1nOXJtNSJ9.Jm14P-FBGvNxiaB-3mzSPw'
+  },
+  light: {
+    id: 'light',
+    label: 'Light',
+    value: 'https://api.mapbox.com/styles/v1/prepdata/cjda7ohj1al4l2so2vls8yyid/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicHJlcGRhdGEiLCJhIjoiY2piZmNrcTRjMXRsdzJxbm9uNm1nOXJtNSJ9.Jm14P-FBGvNxiaB-3mzSPw'
+  }
+};
