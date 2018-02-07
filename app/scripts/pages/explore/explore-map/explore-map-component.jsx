@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import BasemapControl from 'components/basemap-control';
 import LegendControl from 'components/legend/legend-control';
 import ShareControl from 'components/share-control';
-import { basemapsSpec, labelsSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
+import { basemapsSpec, labelsSpec, waterSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
 
 class ExploreMap extends PureComponent {
   constructor(props) {
@@ -18,12 +18,13 @@ class ExploreMap extends PureComponent {
   }
 
   render() {
-    const { setMapParams, basemap, labels, boundaries, bbox, sidebar, zoom, lat, lng, minZoom, setBasemap,
-      setLabels, setBoundaries, activeLayers, embed } = this.props;
+    const { setMapParams, basemap, labels, water, boundaries, bbox, sidebar, zoom, lat, lng, minZoom, setBasemap,
+      setLabels, setBoundaries, setWater, activeLayers, embed } = this.props;
 
     const currentBasemap = basemapsSpec[basemap];
     const currentLabels = labelsSpec[labels];
     const currentBoundaries = boundaries ? boundariesSpec.dark : {};
+    const currentWater = waterSpec[water];
 
     const classNames = classnames({
       '-embed': embed
@@ -42,6 +43,7 @@ class ExploreMap extends PureComponent {
           basemap={currentBasemap}
           labels={currentLabels}
           boundaries={currentBoundaries}
+          water={currentWater}
           layers={activeLayers}
           bbox={bbox}
           sidebar={sidebar}
@@ -50,10 +52,12 @@ class ExploreMap extends PureComponent {
           <BasemapControl
             className="-absolute" // pfff....
             basemap={basemap}
-            setBasemap={setBasemap}
+            water={water}
             labels={labels}
-            setLabels={setLabels}
             boundaries={boundaries}
+            setBasemap={setBasemap}
+            setLabels={setLabels}
+            setWater={setWater}
             setBoundaries={setBoundaries}
           />
 
@@ -109,6 +113,7 @@ ExploreMap.defaultProps = {
 ExploreMap.propTypes = {
   basemap: PropTypes.oneOf(['default', 'dark', 'light', 'satellite', 'terrain']),
   labels: PropTypes.oneOf(['none', 'dark', 'light']),
+  water: PropTypes.oneOf(['none', 'dark', 'light']),
   activeLayers: PropTypes.array,
   boundaries: PropTypes.bool,
   zoom: PropTypes.number,
@@ -122,6 +127,7 @@ ExploreMap.propTypes = {
   setBasemap: PropTypes.func,
   setLabels: PropTypes.func,
   setBoundaries: PropTypes.func,
+  setWater: PropTypes.func,
   setMapParams: PropTypes.func,
   updateZIndex: PropTypes.func,
   toggleInfo: PropTypes.func,

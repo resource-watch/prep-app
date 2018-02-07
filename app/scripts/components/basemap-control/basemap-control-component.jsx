@@ -10,7 +10,7 @@ import TetherComponent from 'react-tether';
 import Icon from 'components/ui/Icon';
 import Checkbox from 'components/Form/Checkbox';
 import RadioGroup from 'components/Form/RadioGroup';
-import { basemapsSpec, labelsSpec } from './basemap-control-constants';
+import { basemapsSpec, labelsSpec, waterSpec } from './basemap-control-constants';
 
 export default class BasemapControl extends React.Component {
   constructor(props) {
@@ -24,6 +24,7 @@ export default class BasemapControl extends React.Component {
     this.onScreenClick = this.onScreenClick.bind(this);
     this.onBasemapChange = this.onBasemapChange.bind(this);
     this.onLabelChange = this.onLabelChange.bind(this);
+    this.onWaterChange = this.onWaterChange.bind(this);
     this.onBoundariesChange = this.onBoundariesChange.bind(this);
   }
 
@@ -54,6 +55,14 @@ export default class BasemapControl extends React.Component {
 
   onBoundariesChange(boundaries) {
     this.props.setBoundaries(boundaries.checked);
+
+    logEvent('Explore data', 'Change boundaries', boundaries.checked);
+  }
+
+  onWaterChange(water) {
+    this.props.setWater(water);
+
+    logEvent('Explore data', 'Change water basemap', water);
   }
 
   toggleDropdown(to) {
@@ -73,11 +82,12 @@ export default class BasemapControl extends React.Component {
 
   // RENDER
   render() {
-    const { basemap, labels, boundaries, className } = this.props;
+    const { basemap, labels, water, boundaries } = this.props;
     const { active } = this.state;
 
     const currentBasemap = basemapsSpec[basemap];
     const currentLabels = labelsSpec[labels];
+    const currentWater = waterSpec[water];
 
     const classNames = classnames({
       [this.props.className]: !!this.props.className
@@ -139,6 +149,22 @@ export default class BasemapControl extends React.Component {
               />
 
               <div className="divisor" />
+              <RadioGroup
+                options={Object.keys(waterSpec).map((k) => {
+                  const ls = waterSpec[k];
+                  return {
+                    label: ls.label,
+                    value: ls.id
+                  };
+                })}
+                name="water"
+                properties={{
+                  default: currentWater.id
+                }}
+                onChange={this.onWaterChange}
+              />
+
+              <div className="divisor" />
               <Checkbox
                 properties={{
                   name: 'boundaries',
@@ -158,9 +184,11 @@ export default class BasemapControl extends React.Component {
 BasemapControl.propTypes = {
   basemap: PropTypes.oneOf(['default', 'dark', 'light', 'satellite', 'terrain']),
   labels: PropTypes.oneOf(['none', 'dark', 'light']),
+  water: PropTypes.oneOf(['none', 'dark', 'light']),
   boundaries: PropTypes.bool,
   className: PropTypes.string,
   setBasemap: PropTypes.func,
   setLabels: PropTypes.func,
+  setWater: PropTypes.func,
   setBoundaries: PropTypes.func
 };
