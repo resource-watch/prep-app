@@ -14,11 +14,13 @@ const mapStateToProps = state => ({
   lat: state.exploreEmbedPage.map.lat,
   lng: state.exploreEmbedPage.map.lng,
   zoom: state.exploreEmbedPage.map.zoom,
+  minZoom: state.exploreEmbedPage.map.minZoom,
   basemap: state.exploreEmbedPage.map.basemap,
-  bbox: state.exploreEmbedPage.map.bbox,
-  sidebar: state.exploreEmbedPage.sidebar,
   labels: state.exploreEmbedPage.map.labels,
-  boundaries: state.exploreEmbedPage.map.boundaries
+  boundaries: state.exploreEmbedPage.map.boundaries,
+  water: state.exploreEmbedPage.map.water,
+  bbox: state.exploreEmbedPage.map.bbox,
+  sidebar: state.exploreEmbedPage.sidebar
 });
 
 export { reducers, initialState };

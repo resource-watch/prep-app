@@ -230,6 +230,7 @@ class CompareMap extends React.PureComponent {
               basemap={map.basemap}
               labels={map.labels}
               boundaries={map.boundaries}
+              water={map.water}
               setBasemap={this.props.setBasemap}
               setLabels={this.props.setLabels}
               setBoundaries={this.props.setBoundaries}

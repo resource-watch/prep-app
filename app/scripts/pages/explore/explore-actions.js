@@ -145,12 +145,16 @@ export const setLabels = createThunkAction('setLabels', () => (dispatch) => {
 export const setBoundaries = createThunkAction('setBoundaries', () => (dispatch) => {
   dispatch(updateURLParams());
 });
+export const setWater = createThunkAction('setWater', () => (dispatch) => {
+  dispatch(updateURLParams());
+});
+
 
 // URL
 export const initialURLParams = createThunkAction('initialURLParams', () => (dispatch, getState) => {
   const { routing } = getState();
   const {
-    basemap, labels, boundaries,
+    basemap, labels, boundaries, water,
     zoom, lat, lng,
     location, tab,
     activeDatasets,
@@ -165,6 +169,7 @@ export const initialURLParams = createThunkAction('initialURLParams', () => (dis
   if (basemap) dispatch(setBasemap(basemap));
   if (labels) dispatch(setLabels(labels));
   if (boundaries) dispatch(setBoundaries(boundaries === 'true'));
+  if (water) dispatch(setWater(water));
   if (location) dispatch(setLocation(location));
   if (query) dispatch(filterQuery(query));
   if (tab) dispatch(setTab(tab));
