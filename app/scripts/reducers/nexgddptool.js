@@ -18,6 +18,7 @@ import {
   NEXGDDP_SET_CHART_LOADED,
   NEXGDDP_SET_BASEMAP,
   NEXGDDP_SET_LABELS,
+  NEXGDDP_SET_WATER,
   NEXGDDP_SET_BOUNDARIES,
   NEXGDDP_SET_RENDER,
   NEXGDDP_SET_DATASET,
@@ -34,6 +35,7 @@ const initialState = {
     basemap: 'default',
     /** @type {'none'|'dark'|'light'} labels */
     labels: 'none',
+    water: 'none',
     boundaries: true
   },
   // Dataset loaded in the dataset page
@@ -198,6 +200,12 @@ export default function (state = initialState, action) {
     case NEXGDDP_SET_LABELS: {
       return Object.assign({}, state, {
         map: Object.assign({}, state.map, { labels: action.payload })
+      });
+    }
+
+    case NEXGDDP_SET_WATER: {
+      return Object.assign({}, state, {
+        map: Object.assign({}, state.map, { water: action.payload })
       });
     }
 

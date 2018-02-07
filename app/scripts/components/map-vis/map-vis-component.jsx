@@ -38,6 +38,7 @@ class Map extends PureComponent {
     this.setBasemap();
     this.setLabels();
     this.setBoundaries();
+    this.setWater();
     this.toggleLayers();
   }
 
@@ -45,6 +46,7 @@ class Map extends PureComponent {
     if (prevProps.basemap !== this.props.basemap) this.setBasemap();
     if (prevProps.labels !== this.props.labels) this.setLabels();
     if (prevProps.boundaries !== this.props.boundaries) this.setBoundaries();
+    if (prevProps.water !== this.props.water) this.setWater();
     if (prevProps.bbox !== this.props.bbox) this.setBounds();
     if (!isEqual(prevProps.layers, this.props.layers)) this.toggleLayers();
   }
@@ -74,7 +76,7 @@ class Map extends PureComponent {
     if (this.labels) this.map.removeLayer(this.labels);
     const { labels } = this.props;
     if (labels) {
-      this.labels = L.tileLayer(labels.value, { ...labels.options, zIndex: 10001 });
+      this.labels = L.tileLayer(labels.value, { ...labels.options, zIndex: 10002 });
       this.map.addLayer(this.labels);
     }
   }
@@ -83,8 +85,17 @@ class Map extends PureComponent {
     if (this.boundaries) this.map.removeLayer(this.boundaries);
     const { boundaries } = this.props;
     if (boundaries && Object.keys(boundaries).length) {
-      this.boundaries = L.tileLayer(boundaries.value, { ...boundaries.options, zIndex: 10000 });
+      this.boundaries = L.tileLayer(boundaries.value, { ...boundaries.options, zIndex: 10001 });
       this.map.addLayer(this.boundaries);
+    }
+  }
+
+  setWater() {
+    if (this.water) this.map.removeLayer(this.water);
+    const { water } = this.props;
+    if (water) {
+      this.water = L.tileLayer(water.value, { ...water.options, zIndex: 10002 });
+      this.map.addLayer(this.water);
     }
   }
 
@@ -169,6 +180,7 @@ Map.propTypes = {
   mapOptions: PropTypes.object,
   basemap: PropTypes.object,
   labels: PropTypes.object,
+  water: PropTypes.object,
   boundaries: PropTypes.object,
   bbox: PropTypes.any,
   sidebar: PropTypes.object,

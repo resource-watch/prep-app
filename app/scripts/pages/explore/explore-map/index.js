@@ -17,6 +17,7 @@ const mapStateToProps = state => ({
   basemap: state.explorePage.map.basemap,
   labels: state.explorePage.map.labels,
   boundaries: state.explorePage.map.boundaries,
+  water: state.explorePage.map.water,
   bbox: state.explorePage.map.bbox,
   sidebar: state.explorePage.sidebar,
   open: state.shareModal.open
