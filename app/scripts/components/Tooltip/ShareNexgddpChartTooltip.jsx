@@ -48,7 +48,6 @@ class ShareNexgddpChartTooltip extends React.Component {
   onClickShare() {
     const { open, datasetSlug } = this.props;
     const { origin, search } = window.location;
-    event.preventDefault();
     this.props.setOpen(!open);
     this.props.setLinks({
       embed: `${origin}/embed/nexgddp/${datasetSlug}${search}&render=chart`
