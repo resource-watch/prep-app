@@ -11,14 +11,14 @@ import 'lib/leaflet-side-by-side/leaflet-side-by-side';
 
 // Redux
 import { getLayers, getRawLayers } from 'selectors/nexgddptool';
-import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setMarkerMode } from 'actions/nexgddptool';
+import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setWater, setMarkerMode } from 'actions/nexgddptool';
 import * as shareModalActions from 'components/share-modal/share-modal-actions';
 
 // Components
 import Legend from 'components/legend/index';
 import BasemapControl from 'components/basemap-control';
 import ShareControl from 'components/share-control/share-control-component';
-import { basemapsSpec, labelsSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
+import { basemapsSpec, labelsSpec, boundariesSpec, waterSpec } from 'components/basemap-control/basemap-control-constants';
 
 // Components
 import Icon from 'components/ui/Icon';
@@ -204,6 +204,9 @@ class CompareMap extends React.PureComponent {
           onViewportChanged={(...params) => this.onViewportChanged(...params)}
         >
           <TileLayer url={basemapsSpec[map.basemap].value} />
+          { map.boundaries && <TileLayer url={boundariesSpec.dark.value} zIndex={9} /> }
+          { map.labels !== 'none' && <TileLayer url={labelsSpec[map.labels].value} zIndex={10} /> }
+          {map.water !== 'none' && <TileLayer url={waterSpec[map.water].value} zIndex={8} />}
 
           { marker && <Marker position={marker} icon={L.divIcon({ className: 'map-marker' })} /> }
 
@@ -233,6 +236,7 @@ class CompareMap extends React.PureComponent {
               water={map.water}
               setBasemap={this.props.setBasemap}
               setLabels={this.props.setLabels}
+              setWater={this.props.setWater}
               setBoundaries={this.props.setBoundaries}
             />
           </Control>
@@ -269,7 +273,9 @@ CompareMap.propTypes = {
   map: PropTypes.shape({
     zoom: PropTypes.number,
     center: PropTypes.array,
+    basemap: PropTypes.string,
     labels: PropTypes.string,
+    water: PropTypes.string,
     boundaries: PropTypes.bool
   }),
   layers: PropTypes.array,
@@ -286,6 +292,7 @@ CompareMap.propTypes = {
   setMapCenter: PropTypes.func,
   setBasemap: PropTypes.func,
   setLabels: PropTypes.func,
+  setWater: PropTypes.func,
   setBoundaries: PropTypes.func,
   setOpen: PropTypes.func,
   setLinks: PropTypes.func
@@ -310,6 +317,7 @@ const mapDispatchToProps = {
   setMapCenter,
   setBasemap,
   setLabels,
+  setWater,
   setBoundaries,
   ...shareModalActions
 };

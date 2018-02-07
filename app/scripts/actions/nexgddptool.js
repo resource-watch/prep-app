@@ -20,6 +20,7 @@ import {
   NEXGDDP_SET_CHART_ERROR,
   NEXGDDP_SET_BASEMAP,
   NEXGDDP_SET_LABELS,
+  NEXGDDP_SET_WATER,
   NEXGDDP_SET_BOUNDARIES,
   NEXGDDP_SET_RENDER,
   NEXGDDP_SET_DATASET,
@@ -382,6 +383,17 @@ export function setLabels(labels, changeUrl = true) {
     dispatch({
       type: NEXGDDP_SET_LABELS,
       payload: labels
+    });
+
+    if (changeUrl) dispatch(updateUrl());
+  };
+}
+
+export function setWater(water, changeUrl = true) {
+  return (dispatch) => {
+    dispatch({
+      type: NEXGDDP_SET_WATER,
+      payload: water
     });
 
     if (changeUrl) dispatch(updateUrl());
