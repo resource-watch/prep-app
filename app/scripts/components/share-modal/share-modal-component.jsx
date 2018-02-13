@@ -3,24 +3,64 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 // Components
-import Modal from '../Modal/Modal';
-import ShareUrl from '../../containers/Modal/ShareUrl';
+import Modal from 'components/Modal/Modal';
+import ShareUrl from 'containers/Modal/ShareUrl';
+import CreateEmbedWidget from 'containers/Modal/CreateEmbedWidget';
 
 class ShareModalComponent extends PureComponent {
   componentWillMount() {
-    const { link, embed } = this.props.links;
-
-    if (!link && embed) {
-      this.props.setTab('embed');
+    const keys = Object.keys(this.props.links);
+    if (keys.length) {
+      this.props.setTab(keys[0]);
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { link, embed } = nextProps.links;
+  /**
+   * Return the content of the current tab
+   */
+  getContent() {
+    const { tab, links } = this.props;
+    let content = null;
 
-    if (!link && embed) {
-      this.props.setTab('embed');
+    if (tab === 'link') {
+      content = (
+        <div className="embed-content">
+          <h3>Share this page</h3>
+          <p>Click and paste link in email or IM</p>
+          <ShareUrl
+            url={links[tab]}
+            iframe={false}
+            analytics={this.props.analytics}
+          />
+        </div>
+      );
+    } else if (tab === 'embed') {
+      content = (
+        <div className="embed-content">
+          <h3>Share into my web</h3>
+          <p>You may include this content on your webpage. To do this, copy the following html code and insert it into the source code of your page:</p>
+          <ShareUrl
+            url={links[tab]}
+            iframe
+            analytics={this.props.analytics}
+          />
+        </div>
+      );
+    } else if (tab === 'widget') {
+      content = (
+        <div className="embed-content">
+          <h3>Create a widget</h3>
+          <p>{'Give your widget a name and description and you\'re ready.'}</p>
+          <CreateEmbedWidget
+            url={links[tab].url}
+            dataset={links[tab].dataset}
+            links={links[tab].widgetLinks || []}
+          />
+        </div>
+      );
     }
+
+    return content;
   }
 
   navbar() {
@@ -48,7 +88,7 @@ class ShareModalComponent extends PureComponent {
   }
 
   render() {
-    const { open, links, tab } = this.props;
+    const { open } = this.props;
 
     return (
       <Modal
@@ -58,28 +98,7 @@ class ShareModalComponent extends PureComponent {
         navbar={() => this.navbar()}
       >
         <div className="content">
-          <div className="embed-content">
-
-            <h3>
-              {tab === 'embed' ?
-                'Share into my web' :
-                'Share this page'
-              }
-            </h3>
-
-            <p>
-              {tab === 'embed' ?
-                'You may include this content on your webpage. To do this, copy the following html code and insert it into the source code of your page:' :
-                'Click and paste link in email or IM'
-              }
-            </p>
-
-            <ShareUrl
-              url={links[tab]}
-              iframe={tab === 'embed'}
-              analytics={this.props.analytics}
-            />
-          </div>
+          {this.getContent()}
         </div>
       </Modal>
     );

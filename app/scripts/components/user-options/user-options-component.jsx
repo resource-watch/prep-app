@@ -31,7 +31,7 @@ class UserOptions extends React.Component {
         { this.props.session && !isEmpty(this.props.data) ?
           <ul className="user-options-list">
             <li>
-              <a href={`/myprep/auth?token=${token}`} rel="noreferrer noopener" >Profile</a>
+              <a href={`/myprep?token=${token}`} rel="noreferrer noopener" >Profile</a>
             </li>
             <li>
               <Link to="/" onClick={this.props.handleLogOut}>Logout</Link>

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Map from 'components/map-vis';
 import classnames from 'classnames';
+import { getConfig } from 'widget-editor';
 import BasemapControl from 'components/basemap-control';
 import LegendControl from 'components/legend/legend-control';
 import ShareControl from 'components/share-control';
@@ -62,14 +63,28 @@ class ExploreMap extends PureComponent {
           />
 
           {!embed &&
-
             <ShareControl
               className="-absolute" // pfff....
               open={this.props.open}
-              links={{
-                link: window.location.href,
-                embed: `${origin}/embed/explore/${search}`
-              }}
+              links={Object.assign(
+                {
+                  link: window.location.href,
+                  embed: `${origin}/embed/explore/${search}`
+                },
+                activeLayers.length && getConfig().userToken
+                  ? {
+                    widget: {
+                      url: `${origin}/embed/explore/${search}`,
+                      dataset: activeLayers[0].dataset,
+                      widgetLinks: activeLayers.slice(1)
+                        .map(d => ({
+                          name: d.name,
+                          link: `${origin}/dataset/${d.dataset}`
+                        }))
+                    }
+                  }
+                  : {}
+              )}
               setOpen={this.props.setOpen}
               setLinks={this.props.setLinks}
               analytics={{
