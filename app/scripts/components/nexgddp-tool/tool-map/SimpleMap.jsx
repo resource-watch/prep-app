@@ -1,23 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-
 import { connect } from 'react-redux';
-
 import L from 'leaflet';
 import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 
+// Redux
 import { getLayers, getRawLayers } from 'selectors/nexgddptool';
 import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setWater, setMarkerMode } from 'actions/nexgddptool';
 import * as shareModalActions from 'components/share-modal/share-modal-actions';
+import { toggleTooltip } from 'actions/tooltip';
 
+// Components
 import BasemapControl from 'components/basemap-control';
 import { basemapsSpec, labelsSpec, boundariesSpec, waterSpec } from 'components/basemap-control/basemap-control-constants';
-import ShareControl from 'components/share-control/share-control-component';
 import Legend from 'components/legend/index';
-
 import Icon from 'components/ui/Icon';
+import ShareNexgddpTooltip from 'components/Tooltip/ShareNexgddpTooltip';
 
 const mapDefaultOptions = {
   center: [20, -30],
@@ -44,6 +44,37 @@ class SimpleMap extends React.PureComponent {
     }
   }
 
+  /**
+   * Event handler executed when the user clicks the share button
+   * @param {MouseEvent} e Event object
+   */
+  onClickShare(e) {
+    // Prevent the tooltip from auto-closing
+    e.stopPropagation();
+
+    const { dataset } = this.props;
+    const { origin, search } = window.location;
+
+    this.props.toggleTooltip(true, {
+      follow: false,
+      position: {
+        x: window.scrollX + e.clientX,
+        y: window.scrollY + e.clientY
+      },
+      direction: 'bottom',
+      children: ShareNexgddpTooltip,
+      childrenProps: {
+        render: 'map',
+        getWidgetConfig: () => new Promise((resolve) => {
+          resolve({
+            type: 'embed',
+            url: `${origin}/embed/nexgddp/${dataset.id}${search}&render=map`
+          });
+        })
+      }
+    });
+  }
+
   setMarkerMode() {
     const { markerMode } = this.props;
     this.props.setMarkerMode(!markerMode);
@@ -59,7 +90,7 @@ class SimpleMap extends React.PureComponent {
   }
 
   render() {
-    const { dataset, map, marker, markerMode, layers, range1Selection, rawLayers, embed } = this.props;
+    const { map, marker, markerMode, layers, range1Selection, rawLayers, embed } = this.props;
     const currentLayer = !!layers.length && layers[0];
 
     // It will change center of map on marker location
@@ -75,8 +106,6 @@ class SimpleMap extends React.PureComponent {
     const makerControlClassNames = classnames({
       '-active': markerMode
     });
-
-    const { origin, search } = window.location;
 
     return (
       <div className="c-tool-map">
@@ -134,15 +163,13 @@ class SimpleMap extends React.PureComponent {
 
           {!embed &&
             <Control position="bottomright">
-              <ShareControl
-                open={this.props.open}
-                links={{
-                  embed: `${origin}/embed/nexgddp/${(dataset || {}).slug}${search}&render=map`
-                }}
-                setOpen={this.props.setOpen}
-                setLinks={this.props.setLinks}
-                setAnalytics={shareModalActions.setAnalytics}
-              />
+              <button
+                type="button"
+                className="c-button-map"
+                onClick={e => this.onClickShare(e)}
+              >
+                <Icon name="icon-share" className="-small" />
+              </button>
             </Control>
           }
 
@@ -182,7 +209,8 @@ SimpleMap.propTypes = {
   setWater: PropTypes.func,
   setBoundaries: PropTypes.func,
   setOpen: PropTypes.func,
-  setLinks: PropTypes.func
+  setLinks: PropTypes.func,
+  toggleTooltip: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -205,7 +233,8 @@ const mapDispatchToProps = {
   setLabels,
   setWater,
   setBoundaries,
-  ...shareModalActions
+  ...shareModalActions,
+  toggleTooltip
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SimpleMap);
