@@ -9,7 +9,7 @@ import * as shareModalActions from 'components/share-modal/share-modal-actions';
 // Redux
 import { toggleTooltip } from 'actions/tooltip';
 
-class ShareNexgddpChartTooltip extends React.Component {
+class ShareNexgddpTooltip extends React.Component {
   constructor(props) {
     super(props);
     this.onClickOutside = this.onClickOutside.bind(this);
@@ -46,12 +46,11 @@ class ShareNexgddpChartTooltip extends React.Component {
   }
 
   onClickShare() {
-    const { open, datasetSlug } = this.props;
+    const { open, datasetSlug, render } = this.props;
     const { origin, search } = window.location;
-    event.preventDefault();
     this.props.setOpen(!open);
     this.props.setLinks({
-      embed: `${origin}/embed/nexgddp/${datasetSlug}${search}&render=chart`
+      embed: `${origin}/embed/nexgddp/${datasetSlug}${search}&render=${render}`
     });
   }
 
@@ -67,19 +66,23 @@ class ShareNexgddpChartTooltip extends React.Component {
   }
 }
 
-ShareNexgddpChartTooltip.propTypes = {
+ShareNexgddpTooltip.propTypes = {
   open: PropTypes.bool,
   datasetId: PropTypes.string,
   datasetSlug: PropTypes.string,
   toggleTooltip: PropTypes.func,
   getWidgetConfig: PropTypes.func,
+  /**
+   * Either to embed the chart or the map
+   */
+  render: PropTypes.oneOf(['chart', 'map']).isRequired,
   onClickCheckWidgets: PropTypes.func,
   toggleModal: PropTypes.func,
   setOpen: PropTypes.func,
   setLinks: PropTypes.func
 };
 
-ShareNexgddpChartTooltip.defaultProps = {
+ShareNexgddpTooltip.defaultProps = {
   onClickCheckWidgets: () => {
     window.location = '/myprep/widgets/my_widgets';
   }
@@ -96,4 +99,4 @@ const mapDispatchToProps = {
   ...shareModalActions
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShareNexgddpChartTooltip);
+export default connect(mapStateToProps, mapDispatchToProps)(ShareNexgddpTooltip);

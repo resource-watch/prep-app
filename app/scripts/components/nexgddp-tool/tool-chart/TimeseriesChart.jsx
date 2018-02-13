@@ -13,7 +13,7 @@ import { toggleTooltip } from 'actions/tooltip';
 // Component
 import Icon from 'components/ui/Icon';
 import Spinner from 'components/Loading/LoadingSpinner';
-import ShareNexgddpChartTooltip from 'components/Tooltip/ShareNexgddpChartTooltip';
+import ShareNexgddpTooltip from 'components/Tooltip/ShareNexgddpTooltip';
 
 import './style.scss';
 
@@ -488,8 +488,9 @@ class TimeseriesChart extends React.Component {
         y: window.scrollY + e.clientY
       },
       direction: 'bottom',
-      children: ShareNexgddpChartTooltip,
+      children: ShareNexgddpTooltip,
       childrenProps: {
+        render: 'chart',
         getWidgetConfig: () => TimeseriesChart.generateVegaSpec(this.props)
       }
     });
