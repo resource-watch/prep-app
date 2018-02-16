@@ -32,9 +32,14 @@
 
     .c-switch {
       border-color: $white;
-       &:after {
-         background-color: $white;
-       }
+
+      &:after {
+        background-color: $white;
+      }
+    }
+
+    &.-layer-active .c-switch {
+      background-color: transparent;
     }
   }
 

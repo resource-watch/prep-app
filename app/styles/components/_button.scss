@@ -133,7 +133,12 @@
   }
 
   &.-arrow {
-    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
     border-radius: 100%;
     position: absolute;
     top: 50%;
