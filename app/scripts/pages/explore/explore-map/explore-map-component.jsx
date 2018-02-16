@@ -20,7 +20,7 @@ class ExploreMap extends PureComponent {
 
   render() {
     const { setMapParams, basemap, labels, water, boundaries, bbox, sidebar, zoom, lat, lng, minZoom, setBasemap,
-      setLabels, setBoundaries, setWater, activeLayers, embed } = this.props;
+      setLabels, setBoundaries, setWater, activeLayers, activeLayersForMap, embed } = this.props;
 
     const currentBasemap = basemapsSpec[basemap];
     const currentLabels = labelsSpec[labels];
@@ -45,7 +45,7 @@ class ExploreMap extends PureComponent {
           labels={currentLabels}
           boundaries={currentBoundaries}
           water={currentWater}
-          layers={activeLayers}
+          layers={activeLayersForMap}
           bbox={bbox}
           sidebar={sidebar}
           onChange={setMapParams}
