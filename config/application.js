@@ -9,15 +9,50 @@ const rootPath = path.join(process.cwd());
 const app = express();
 
 // Security
-app.use(helmet());
+app.use(helmet({ noSniff: false }));
 app.use(helmet.contentSecurityPolicy({
   directives: {
-    defaultSrc: ["'self'", 'https://*'],
-    styleSrc: ["'self'", "'unsafe-inline'", 'https://*'],
-    scriptSrc: ["'self'", "'unsafe-eval'", "'unsafe-inline'", 'https://*'],
-    fontSrc: ["'self'", 'data:', 'https://*'],
-    imgSrc: ["'self'", 'data:', 'https://*'],
-    formAction: ["'self'", 'https://*']
+    defaultSrc: ["'none'"],
+    connectSrc: [
+      "'self'",
+      'https://production-api.globalforestwatch.org',
+      'https://api.resourcewatch.org',
+      'https://staging.prepdata.org',
+      'https://preproduction.prepdata.org',
+      'https://prepdata.org'
+    ],
+    styleSrc: [
+      "'self'",
+      "'unsafe-inline'",
+      'https://fonts.googleapis.com',
+      'https://unpkg.com',
+      'https://cdnjs.cloudflare.com'
+    ],
+    scriptSrc: [
+      "'self'",
+      "'unsafe-eval'",
+      "'unsafe-inline'",
+      'https://maps.googleapis.com',
+      'https://www.google-analytics.com',
+      'https://unpkg.com'
+    ],
+    fontSrc: [
+      "'self'",
+      'data:',
+      'https://cdnjs.cloudflare.com',
+      'https://fonts.gstatic.com'
+    ],
+    imgSrc: [
+      "'self'",
+      'data:',
+      'https://s3.amazonaws.com',
+      'https://csi.gstatic.com',
+      'https://*'
+    ],
+    formAction: ["'self'", 'https://*'],
+    objectSrc: ["'none'"],
+    frameSrc: ["'self'", 'https://*'],
+    frameAncestors: ["'self'", 'http://*', 'https://*']
   }
 }));
 // parse application/x-www-form-urlencoded
