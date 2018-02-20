@@ -10,6 +10,15 @@ const app = express();
 
 // Security
 app.use(helmet());
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'self'", 'https://*'],
+    styleSrc: ["'self'", "'unsafe-inline'", 'https://*'],
+    scriptSrc: ["'self'", "'unsafe-eval'", "'unsafe-inline'", 'https://*'],
+    imgSrc: ["'self'", 'data:', 'https://*'],
+    formAction: ["'self'", 'https://*']
+  }
+}));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
