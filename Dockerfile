@@ -37,12 +37,12 @@ WORKDIR /usr/src/app
 # Install app dependencies
 COPY package.json /usr/src/app/
 COPY package-lock.json /usr/src/app/
-RUN npm install --quiet --production --no-progress
+RUN yarn install --production=true --silent
 
 # Bundle app source
 COPY . /usr/src/app
-RUN npm run build
+RUN yarn run build
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
