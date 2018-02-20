@@ -10,6 +10,7 @@ ARG basemapUrl=https://api.mapbox.com/styles/v1/wri/cism5nsz4007t2wnrp5xslf7s/ti
 ARG nodeEnv=production
 ARG callbackUrl=https://prepdata.org/auth
 
+ENV DEBIAN_FRONTEND noninteractive
 ENV RW_API_LOGIN_URL https://production-api.globalforestwatch.org/auth
 ENV RW_API_IS_LOGGEDIN_URL https://api.resourcewatch.org/auth/check-logged
 ENV CALLBACK_URL $callbackUrl
@@ -25,9 +26,9 @@ ENV NODE_ENV $nodeEnv
 ENV GOOGLE_ANALYTICS UA-67196006-2
 
 RUN apt-get update && \
-    apt-get install -y bash git build-essential \
+    apt-get install -y --no-install-recommends \
+    bash git build-essential \
     automake autoconf make g++ libtool \
-    --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && npm install -g node-gyp --loglevel warn \
     && mkdir -p /usr/src/app
