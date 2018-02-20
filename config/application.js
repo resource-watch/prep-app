@@ -2,11 +2,14 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
+const helmet = require('helmet');
 
 const rootPath = path.join(process.cwd());
 
 const app = express();
 
+// Security
+app.use(helmet());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
