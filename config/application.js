@@ -15,6 +15,7 @@ app.use(helmet.contentSecurityPolicy({
     defaultSrc: ["'self'", 'https://*'],
     styleSrc: ["'self'", "'unsafe-inline'", 'https://*'],
     scriptSrc: ["'self'", "'unsafe-eval'", "'unsafe-inline'", 'https://*'],
+    fontSrc: ["'self'", 'data:', 'https://*'],
     imgSrc: ["'self'", 'data:', 'https://*'],
     formAction: ["'self'", 'https://*']
   }
