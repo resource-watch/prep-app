@@ -408,7 +408,7 @@ const chartSpec = {
       "from": {
         "data": "range1Data"
       },
-      "properties": {
+      "encode": {
         "enter": {
           "interpolate": {
             "value": "monotone"
