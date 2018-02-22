@@ -463,7 +463,7 @@ const chartSpec = {
             "value": "center"
           },
           "text": {
-            "signal": "'{{range1Label}}'"
+            "signal": "range1Label"
           },
           "font": {
             "value": "Open Sans"
@@ -541,7 +541,7 @@ const chartSpec = {
             "value": "center"
           },
           "text": {
-            "signal": "'{{range2Label}}'"
+            "signal": "range2Label"
           },
           "font": {
             "value": "Open Sans"
@@ -675,23 +675,27 @@ const chartSpec = {
       "config": {
         "fields": [
           {
-            "key": "q50",
-            "label": "Average",
+            "column": "datum.q50",
+            "property": "Average",
+            "type": "number",
             "format": ".2f"
           },
           {
-            "key": "q25",
-            "label": "25th percentile",
+            "column": "datum.q25",
+            "property": "25th percentile",
+            "type": "number",
             "format": ".2f"
           },
           {
-            "key": "q75",
-            "label": "75th percentile",
+            "column": "datum.q75",
+            "property": "75th percentile",
+            "type": "number",
             "format": ".2f"
           },
           {
-            "key": "range",
-            "label": "Date range",
+            "column": "datum.range",
+            "property": "Date range",
+            "type": "string",
             "format": null
           }
         ]
@@ -723,7 +727,7 @@ class TimeseriesChart extends React.Component {
       update: `{ start: utc(${range1[0]}, 0, 1), end: utc(${range1[1]}, 0, 1) }`
     };
 
-    const range2Signal = { name: 'range2', init: 'false' };
+    const range2Signal = { name: 'range2', update: 'false' };
     if (range2Selection) {
       const range2 = range2Selection.label.split('-')
         .map(v => +v);
@@ -757,10 +761,10 @@ class TimeseriesChart extends React.Component {
 
     // We add the unit to the y axis
     if (indicatorUnitSignal) {
-      const yAxis = Object.assign({}, spec.axes.find(axis => axis.type === 'y'), { title: indicatorUnitSignal.to });
+      const yAxis = Object.assign({}, spec.axes.find(axis => axis.scale === 'y'), { title: indicatorUnitSignal.to });
       spec.axes = [...spec.axes];
       for (let i = 0, j = spec.axes.length; i < j; i++) {
-        if (spec.axes[i].type === 'y') {
+        if (spec.axes[i].scale === 'y') {
           spec.axes[i] = yAxis;
           break;
         }
