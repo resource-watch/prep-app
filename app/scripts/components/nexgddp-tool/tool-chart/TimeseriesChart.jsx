@@ -771,14 +771,6 @@ class TimeseriesChart extends React.Component {
       }
     }
 
-    // For some indicators, we move the legend to the bottom
-    // of the chart
-    if (indicatorId === 'hdds' || indicatorId === 'cum_pr') {
-      spec.legends = spec.legends.slice(0);
-      spec.legends[0] = deepClone(spec.legends[0]);
-      spec.legends[0].properties.legend.y.mult = 0.8;
-    }
-
     return spec;
   }
 
