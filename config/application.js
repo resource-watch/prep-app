@@ -17,6 +17,7 @@ app.use(helmet.contentSecurityPolicy({
       "'self'",
       'https://production-api.globalforestwatch.org',
       'https://api.resourcewatch.org',
+      'https://staging-api.globalforestwatch.org',
       'https://staging.prepdata.org',
       'https://preproduction.prepdata.org',
       'https://prepdata.org'
