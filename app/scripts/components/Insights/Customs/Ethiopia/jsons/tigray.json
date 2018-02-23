@@ -1,44 +1,40 @@
 {
-  "padding": {"top": 30,"left": 35,"right": 5,"bottom": 50},
-  "data": [
+  "autosize": {"type": "pad", "resize": true, "contains":"padding"},
+  "signals": [
     {
-      "name": "hist",
-      "url": "https://prep-admin.carto.com/api/v2/sql?q=SELECT%20date::date,%20average%20FROM%20tigray_emodis_ndvi_eafr order by date::date asc",
-      "format": {
-        "type": "json",
-        "property": "rows",
-        "parse": {"date": "date"}
-      }
-    },
-    {
-      "name": "tooltip",
-      "source": "hist",
-      "transform": [
+      "name": "hover",
+      "value": null,
+      "on": [
         {
-          "test": "datum.date == indexDate.date",
-          "type": "filter"
+          "events": "@cell:mouseover",
+          "update": "datum"
         },
         {
-          "expr": "datum.date > utc(2015, 10, 1) ? indexDate.xRight : indexDate.xLeft",
-          "type": "formula",
-          "field": "xTooltip"
-        },
-        {
-          "expr": "indexDate.xLeft",
-          "type": "formula",
-          "field": "xData"
+          "events": "@cell:mouseout",
+          "update": "null"
         }
       ]
     }
   ],
-  "signals": [
+  "data": [
     {
-      "init": {"xval": 0,"yval": 0},
-      "name": "indexDate",
-      "streams": [
+      "name": "table",
+      "url": "https://prep-admin.carto.com/api/v2/sql?q=SELECT%20date::date as x,%20average as y%20FROM%20tigray_emodis_ndvi_eafr order by date::date asc",
+      "format": {
+        "type": "json",
+        "property": "rows",
+        "parse": {
+          "x": "date"
+        }
+      }
+    },
+    {
+      "name": "dots",
+      "source": "table",
+      "transform": [
         {
-          "type": "mousemove",
-          "expr": "{xLeft: +iscale('x', eventX()), xRight: +iscale('x', eventX() - 150), date: utc(utcyear(iscale('x', eventX())), utcmonth(iscale('x', eventX())), utcdate(iscale('x', eventX()))), yval: iscale('y', eventY())}"
+          "type": "filter",
+          "expr": "hover && hover.datum.x === datum.x"
         }
       ]
     }
@@ -46,169 +42,185 @@
   "scales": [
     {
       "name": "x",
-      "type": "time",
-      "domain": {"fields": [{"data": "hist","field": "date"}]},
-      "range": "width"
+      "type": "utc",
+      "range": "width",
+      "nice": {"interval": "month", "step": 2},
+      "zero": false,
+      "domain": {
+        "data": "table",
+        "field": "x"
+      }
     },
     {
       "name": "y",
       "type": "linear",
       "range": "height",
-      "domain": {"fields": [{"data": "hist","field": "average"}]}
+      "nice": true,
+      "zero": true,
+      "domain": {
+        "data": "table",
+        "field": "y"
+      }
     }
   ],
   "axes": [
     {
-      "type": "x",
+      "orient": "bottom",
       "scale": "x",
-      "ticks": 12,
-      "properties": {
-        "ticks": {"stroke": {"value": "#9BA2AA"}},
-        "labels": {
-          "font": {"value": "\"Montserrat\", sans-serif"},
-          "fill": {"value": "#9BA2AA"},
-          "fontSize": {"value": 10},
-          "align": {"value": "right"},
-          "baseline": {"value": "bottom"},
-          "angle": {"value": -45},
-          "dy": {"value": 5}
-        },
-        "axis": {
-          "stroke": {"value": "#E6E6E6"},
-          "opacity": {"value": 1},
-          "strokeWidth": {"value": 1.5}
-        }
-      }
+      "labelOverlap":"parity",
+      "tickCount": 20
     },
     {
-      "type": "y",
+      "orient": "left",
       "scale": "y",
+      "labelOverlap":"parity",
       "title": "Average",
-      "titleOffset": 15,
-      "grid": true,
-      "ticks": 3,
-      "properties": {
-        "axis": {
-          "stroke": {"value": "#E6E6E6"},
-          "opacity": {"value": 0},
-          "strokeWidth": {"value": 1.5}
-        },
-        "ticks": {"stroke": {"value": "#9BA2AA"}},
-        "labels": {
-          "font": {"value": "\"Montserrat\", sans-serif"},
-          "fill": {"value": "#9BA2AA"},
-          "fontSize": {"value": 10},
-          "align": {"value": "right"},
-          "baseline": {"value": "middle"}
-        },
+      "encode": {
         "title": {
-          "font": {"value": "\"Montserrat\", sans-serif"},
-          "fontSize": {"value": 12},
-          "opacity": {"value": 0.5},
-          "y": {"value": -20},
-          "dx":{"value": 5},
-          "angle": 90
+          "update": {
+            "dx": {
+              "value": 0
+            },
+            "dy": {
+              "value": 0
+            },
+            "x": {
+              "value": 0
+            },
+            "y": {
+              "value": -10
+            },
+            "align": {
+              "value": "right"
+            },
+            "baseline": {
+              "value": "bottom"
+            },
+            "angle": {
+              "value": 0
+            }
+          }
         }
       }
     }
   ],
   "marks": [
-    {
-      "name": "dataArea",
+    {"name":"area",
       "type": "area",
-      "from": {"data": "hist"},
-      "properties": {
+      "interactive":false,
+      "from": {
+        "data": "table"
+      },
+      "encode": {
         "enter": {
-          "x": {"scale": "x","field": "date"},
-          "y": {"scale": "y","field": "average"},
-          "y2": {"scale": "y","value": 0},
-          "fill": {"value": "#57C4D6"},
-          "fillOpacity": {"value": 0.8}
-        }
-      }
-    },
-    {
-      "name": "tooltip",
-      "type": "group",
-      "from": {"data": "tooltip"},
-      "marks": [
-        {
-          "type": "text",
-          "properties": {
-            "update": {
-              "x": {"value": 10},
-              "y": {"value": 17},
-              "fill": {"value": "#3B4F63"},
-              "font": {"value": "\"Montserrat\", sans-serif"},
-              "text": {
-                "template": "{{indexDate.xLeft|time:'%b - %d - %Y'}}"
-              },
-              "opacity": {"value": 0.8},
-              "fontSize": {"value": 11},
-              "fontWeight": {"value": "bold"}
-            }
-          }
-        },
-        {
-          "type": "text",
-          "properties": {
-            "update": {
-              "x": {"value": 11},
-              "y": {"value": 35},
-              "fill": {"value": "#3B4F63"},
-              "font": {"value": "\"Montserrat\", sans-serif"},
-              "text": {
-                "template": "{{parent.average|number:'.2f'}}"
-              },
-              "opacity": {"value": 0.8},
-              "fontSize": {"value": 11}
-            }
-          }
-        }
-      ],
-      "properties": {
-        "update": {
           "x": {
             "scale": "x",
-            "field": "xTooltip",
-            "offset": 0
+            "field": "x"
           },
-          "y": {"scale": "y","signal": "indexDate.yval", "offset": -10},
-          "fill": {"value": "#fff"},
-          "width": {"value": 150},
-          "height": {"value": 45},
-          "fillOpacity": {"value": 0.85}
-        }
-      }
-    },
-    {
-      "from": {"data": "tooltip"},
-      "size": 4,
-      "ease":"in-out",
-      "type": "rule",
-      "properties": {
+          "y": {
+            "scale": "y",
+            "field": "y"
+          },
+          "y2": {
+            "scale": "y",
+            "value": 0
+          },
+          "fill": {
+            "value": "#57C4D6"
+          }
+        },
         "update": {
-          "x": {"field": "date","scale": "x"},
-          "y": {"value": 0},
-          "y2":{"field": {"group": "height"}},
-          "stroke": {"value": "#000000"},
-          "strokeWidth": {"value": 2},
-          "opacity": {"value": 0.2}
+          "fillOpacity": {
+            "value": 1
+          }
         }
       }
     },
     {
-      "from": {"data": "tooltip"},
-      "size": 4,
-      "ease":"in-out",
+      "name": "points",
+      "interactive": false,
       "type": "symbol",
-      "properties": {
+      "from": {
+        "data": "dots"
+      },
+      "encode": {
+        "enter": {
+          "fill": {
+            "value": "#c34545"
+          },
+          "stroke": {
+            "value": "#fff"
+          },
+          "x": {
+            "scale": "x",
+            "field": "x"
+          },
+          "y": {
+            "scale": "y",
+            "field": "y"
+          }
+        },
         "update": {
-          "x": {"field": "date","scale": "x"},
-          "y": {"field": "average","scale": "y"},
-          "fill": {"value": "#c15467"},
-          "size": {"value": 20}
+          "opacity": {
+            "value": 1
+          }
         }
+      }
+    },
+    {
+      "name": "cell",
+      "type": "path",
+      "from": {
+        "data": "area"
+      },
+      "transform": [
+        {
+          "type": "voronoi",
+          "x": "datum.x",
+          "y": "datum.y",
+          "size": [
+            {
+              "signal": "width"
+            },
+            {
+              "signal": "height"
+            }
+          ]
+        }
+      ],
+      "encode": {
+        "update": {
+          "fill": {
+            "value": "red"
+          },
+          "path": {
+            "field": "path"
+          },
+          "opacity": {
+            "value": 0
+          }
+        }
+      }
+    }
+  ],
+  "interaction_config": [
+    {
+      "name": "tooltip",
+      "config": {
+        "fields": [
+          {
+            "column": "datum.x",
+            "property": "Date",
+            "type":"date",
+            "format": null
+          },
+          {
+            "column": "datum.y",
+            "property": "Value",
+            "type":"number",
+            "format": ".2f"
+          }
+        ]
       }
     }
   ]
