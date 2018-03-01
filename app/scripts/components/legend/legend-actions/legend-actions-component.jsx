@@ -4,12 +4,24 @@ import PropTypes from 'prop-types';
 import { logEvent } from 'helpers/analytics';
 
 import LegendOpacitySelector from 'components/legend/legend-opacity-selector';
+import LegendBoundingSelector from 'components/legend/legend-bounding-selector';
 import LegendMultiLayerSelector from 'components/legend/legend-multi-layer-selector';
 import Icon from 'components/ui/Icon';
 
 import './legend-actions-style.scss';
 
 class LegendActions extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isOpacityVisible: false
+    };
+
+    // BINDINGS //
+    this.onOpacityVisibleChange = this.onOpacityVisibleChange.bind(this);
+  }
+
   /**
    * Event handler executed when the user toggles the
    * info sidebar of a dataset
@@ -23,24 +35,31 @@ class LegendActions extends React.Component {
     }
   }
 
+  onOpacityVisibleChange(visibility) {
+    this.setState({
+      isOpacityVisible: visibility
+    });
+  }
+
   render() {
+    const { isOpacityVisible } = this.state;
     const { layerSpec, onOpacity, onVisibility, onMultiLayer, onFitBounds, onClose } = this.props;
 
     return (
       <div className="c-legend-actions">
         {layerSpec.layerConfig && layerSpec.layerConfig.bbox &&
-          <button
-            type="button"
-            onClick={() => onFitBounds(layerSpec)}
-          >
-            <Icon name="icon-bbox" className="-normal" />
-          </button>
+          <LegendBoundingSelector
+            layerSpec={layerSpec}
+            onFitBounds={onFitBounds}
+            tooltipsOpen={isOpacityVisible}
+          />
         }
-
 
         <LegendOpacitySelector
           layerSpec={layerSpec}
           onOpacityChange={onOpacity}
+          onVisibleChange={this.onOpacityVisibleChange}
+          visibility={isOpacityVisible}
         />
 
         {layerSpec.provider !== 'nexgddp' && layerSpec.layers.length > 1 &&
