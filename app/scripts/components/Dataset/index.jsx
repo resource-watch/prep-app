@@ -21,6 +21,7 @@ import SimpleMap from '../../containers/SimpleMap/SimpleMap';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
 import NexGDDPTool from '../nexgddp-tool/NexGDDPTool';
+import LOCATool from '../loca-tool';
 
 const logoImage = '/images/prep-logo.png';
 
@@ -153,6 +154,8 @@ class DatasetDetail extends React.Component {
             <ReactMarkdown source={data.description || metaData.description} className="c-markdown" />
           </div>
         </SectionIntro>
+
+        {(dataset.id && dataset.provider === 'nexgddp') && <LOCATool dataset={dataset} />}
 
         {(dataset.id && dataset.provider === 'nexgddp') ?
           <div className="row">
