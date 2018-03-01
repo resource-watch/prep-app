@@ -18,6 +18,7 @@ import Legend from 'components/legend/index';
 import BasemapControl from 'components/basemap-control';
 import { basemapsSpec, labelsSpec, boundariesSpec, waterSpec } from 'components/basemap-control/basemap-control-constants';
 import Icon from 'components/ui/Icon';
+import ShareNexgddpTooltip from 'components/Tooltip/ShareNexgddpTooltip';
 
 const mapDefaultOptions = {
   center: [20, -30],
