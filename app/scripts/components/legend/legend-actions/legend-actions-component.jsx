@@ -6,6 +6,9 @@ import { logEvent } from 'helpers/analytics';
 import LegendOpacitySelector from 'components/legend/legend-opacity-selector';
 import LegendBoundingSelector from 'components/legend/legend-bounding-selector';
 import LegendMultiLayerSelector from 'components/legend/legend-multi-layer-selector';
+import LegendCloseSelector from 'components/legend/legend-close-selector';
+import LegendInfoSelector from 'components/legend/legend-info-selector';
+import LegendVisibilitySelector from 'components/legend/legend-visibility-selector';
 import Icon from 'components/ui/Icon';
 
 import './legend-actions-style.scss';
@@ -15,11 +18,13 @@ class LegendActions extends React.Component {
     super(props);
 
     this.state = {
-      isOpacityVisible: false
+      isOpacityVisible: false,
+      isLayerVisible: false
     };
 
     // BINDINGS //
-    this.onOpacityVisibleChange = this.onOpacityVisibleChange.bind(this);
+    this.onVisibleChange = this.onVisibleChange.bind(this);
+    this.onClickInfo = this.onClickInfo.bind(this);
   }
 
   /**
@@ -35,15 +40,15 @@ class LegendActions extends React.Component {
     }
   }
 
-  onOpacityVisibleChange(visibility) {
-    this.setState({
-      isOpacityVisible: visibility
-    });
+  onVisibleChange(visibility) {
+    this.setState(visibility);
   }
 
   render() {
-    const { isOpacityVisible } = this.state;
+    const { isOpacityVisible, isLayerVisible } = this.state;
     const { layerSpec, onOpacity, onVisibility, onMultiLayer, onFitBounds, onClose } = this.props;
+
+    const isTooltipOpen = isOpacityVisible || isLayerVisible;
 
     return (
       <div className="c-legend-actions">
@@ -51,46 +56,47 @@ class LegendActions extends React.Component {
           <LegendBoundingSelector
             layerSpec={layerSpec}
             onFitBounds={onFitBounds}
-            tooltipsOpen={isOpacityVisible}
+            isTooltipOpen={isTooltipOpen}
           />
         }
 
         <LegendOpacitySelector
           layerSpec={layerSpec}
           onOpacityChange={onOpacity}
-          onVisibleChange={this.onOpacityVisibleChange}
-          visibility={isOpacityVisible}
+          onVisibleChange={this.onVisibleChange}
+          isOpacityVisible={isOpacityVisible}
+          isTooltipOpen={isTooltipOpen}
         />
 
         {layerSpec.provider !== 'nexgddp' && layerSpec.layers.length > 1 &&
           <LegendMultiLayerSelector
             layerSpec={layerSpec}
             onMultiLayer={onMultiLayer}
+            onVisibleChange={this.onVisibleChange}
+            isLayerVisible={isLayerVisible}
+            isTooltipOpen={isTooltipOpen}
           />
         }
 
-        <button
-          type="button"
-          className={layerSpec.visibility ? '' : '-active'}
-          onClick={() => onVisibility(layerSpec)}
-        >
-          {layerSpec.visibility ?
-            <Icon name="icon-hide" className="-normal" /> :
-            <Icon name="icon-show" className="-normal" />}
-        </button>
-        <button
-          type="button"
-          className={layerSpec.isSelected ? '-active' : ''}
-          onClick={() => this.onClickInfo(layerSpec)}
-        >
-          <Icon name="icon-info" className="-normal" />
-        </button>
-        <button
-          type="button"
-          onClick={() => onClose(layerSpec)}
-        >
-          <Icon name="icon-cross" className="-normal" />
-        </button>
+        <LegendVisibilitySelector
+          layerSpec={layerSpec}
+          onVisibility={onVisibility}
+          isTooltipOpen={isTooltipOpen}
+          isVisible={layerSpec.visibility}
+        />
+
+        <LegendInfoSelector
+          layerSpec={layerSpec}
+          onClickInfo={this.onClickInfo}
+          isTooltipOpen={isTooltipOpen}
+          isActive={layerSpec.isSelected}
+        />
+
+        <LegendCloseSelector
+          layerSpec={layerSpec}
+          onClose={onClose}
+          isTooltipOpen={isTooltipOpen}
+        />
       </div>
     );
   }
