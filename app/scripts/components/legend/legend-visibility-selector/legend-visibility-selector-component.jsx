@@ -6,17 +6,17 @@ import Icon from 'components/ui/Icon';
 
 import 'rc-tooltip/assets/bootstrap_white.css';
 
-const LegendBoundingSelector = (props) => {
-  const { onFitBounds, layerSpec, isTooltipOpen } = props;
+const LegendVisibilitySelector = (props) => {
+  const { onVisibility, layerSpec, isTooltipOpen, isVisible } = props;
 
   const tooltipContent = (
     <div className="tooltip-content">
-      <h5 className="title">Zoom to bounds</h5>
+      <h5 className="title">Toggle visibility</h5>
     </div>
   );
 
   return (
-    <div className="c-legend-bounding-selector">
+    <div className="c-legend-visibility-selector">
       <Tooltip
         overlay={tooltipContent}
         placement="bottom"
@@ -26,9 +26,12 @@ const LegendBoundingSelector = (props) => {
 
         <button
           type="button"
-          onClick={() => onFitBounds(layerSpec)}
+          className={isVisible ? '' : '-active'}
+          onClick={() => onVisibility(layerSpec)}
         >
-          <Icon name="icon-bbox" className="-normal" />
+          {isVisible ?
+            <Icon name="icon-hide" className="-normal" /> :
+            <Icon name="icon-show" className="-normal" />}
         </button>
 
       </Tooltip>
@@ -36,10 +39,10 @@ const LegendBoundingSelector = (props) => {
   );
 };
 
-LegendBoundingSelector.propTypes = {
+LegendVisibilitySelector.propTypes = {
   isTooltipOpen: PropTypes.bool,
   layerSpec: PropTypes.object,
-  onFitBounds: PropTypes.func
+  onVisibility: PropTypes.func
 };
 
-export default LegendBoundingSelector;
+export default LegendVisibilitySelector;
