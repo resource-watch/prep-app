@@ -3,7 +3,7 @@ import { setTempResolutionSelection } from 'actions/nexgddptool';
 import TempResolutionSelect from './TempResolutionSelect';
 
 const mapStateToProps = state => ({
-  tempResolution: state.nexgddptool.tempResolution
+  tempResolution: state.locatool.tempResolution
 });
 
 const mapDispatchToProps = dispatch => ({

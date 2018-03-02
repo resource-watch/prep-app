@@ -234,14 +234,14 @@ ToggleMap.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  map: state.nexgddptool.map,
-  marker: state.nexgddptool.marker,
-  markerMode: state.nexgddptool.markerMode,
+  map: state.locatool.map,
+  marker: state.locatool.marker,
+  markerMode: state.locatool.markerMode,
   layers: getLayers(state),
   rawLayers: getRawLayers(state),
-  range1Selection: state.nexgddptool.range1.selection,
-  range2Selection: state.nexgddptool.range2.selection,
-  dataset: state.nexgddptool.dataset,
+  range1Selection: state.locatool.range1.selection,
+  range2Selection: state.locatool.range2.selection,
+  dataset: state.locatool.dataset,
   open: state.shareModal.open
 });
 

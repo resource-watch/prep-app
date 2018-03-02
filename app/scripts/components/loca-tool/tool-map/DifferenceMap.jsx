@@ -208,12 +208,12 @@ DifferenceMap.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  map: state.nexgddptool.map,
-  marker: state.nexgddptool.marker,
-  markerMode: state.nexgddptool.markerMode,
+  map: state.locatool.map,
+  marker: state.locatool.marker,
+  markerMode: state.locatool.markerMode,
   layers: getLayers(state),
   rawLayers: getRawLayers(state),
-  dataset: state.nexgddptool.dataset,
+  dataset: state.locatool.dataset,
   open: state.shareModal.open
 });
 

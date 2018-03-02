@@ -3,7 +3,7 @@ import { setScenarioSelection } from 'actions/nexgddptool';
 import ScenarioSelect from './ScenarioSelect';
 
 const mapStateToProps = state => ({
-  scenario: state.nexgddptool.scenario
+  scenario: state.locatool.scenario
 });
 
 const mapDispatchToProps = dispatch => ({

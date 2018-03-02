@@ -881,15 +881,15 @@ TimeseriesChart.propTypes = {
 /* estlint-enable react/no-unused-prop-types */
 
 const mapStateToProps = state => ({
-  render: state.nexgddptool.render,
-  range1Selection: state.nexgddptool.range1.selection,
-  range2Selection: state.nexgddptool.range2.selection,
-  chartDataLoaded: state.nexgddptool.chart.loaded,
-  chartData: state.nexgddptool.chart.data,
-  chartDataError: state.nexgddptool.chart.error,
+  render: state.locatool.render,
+  range1Selection: state.locatool.range1.selection,
+  range2Selection: state.locatool.range2.selection,
+  chartDataLoaded: state.locatool.chart.loaded,
+  chartData: state.locatool.chart.data,
+  chartDataError: state.locatool.chart.error,
   indicatorId: getIndicatorId(state),
   indicatorUnitSignal: getIndicatorUnitSignal(state),
-  datasetId: state.nexgddptool.dataset ? state.nexgddptool.dataset.id : null
+  datasetId: state.locatool.dataset ? state.locatool.dataset.id : null
 });
 
 const mapDispatchToProps = dispatch => ({

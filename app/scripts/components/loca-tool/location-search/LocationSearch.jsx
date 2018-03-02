@@ -68,7 +68,7 @@ LocationSearch.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  marker: state.nexgddptool.marker
+  marker: state.locatool.marker
 });
 
 const mapDispatchToProps = {
