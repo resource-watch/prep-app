@@ -15,6 +15,14 @@ class ShareModalComponent extends PureComponent {
     }
   }
 
+  componentWillReceiveProps(newProps) {
+    // We make sure that there's always an active tab
+    const keys = Object.keys(newProps.links);
+    if (keys.length) {
+      newProps.setTab(keys[0]);
+    }
+  }
+
   /**
    * Return the content of the current tab
    */
