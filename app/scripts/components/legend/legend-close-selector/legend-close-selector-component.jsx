@@ -6,17 +6,17 @@ import Icon from 'components/ui/Icon';
 
 import 'rc-tooltip/assets/bootstrap_white.css';
 
-const LegendBoundingSelector = (props) => {
-  const { onFitBounds, layerSpec, isTooltipOpen } = props;
+const LegendCloseSelector = (props) => {
+  const { onClose, layerSpec, isTooltipOpen } = props;
 
   const tooltipContent = (
     <div className="tooltip-content">
-      <h5 className="title">Zoom to bounds</h5>
+      <h5 className="title">Close</h5>
     </div>
   );
 
   return (
-    <div className="c-legend-bounding-selector">
+    <div className="c-legend-close-selector">
       <Tooltip
         overlay={tooltipContent}
         placement="bottom"
@@ -26,9 +26,9 @@ const LegendBoundingSelector = (props) => {
 
         <button
           type="button"
-          onClick={() => onFitBounds(layerSpec)}
+          onClick={() => onClose(layerSpec)}
         >
-          <Icon name="icon-bbox" className="-normal" />
+          <Icon name="icon-cross" className="-normal" />
         </button>
 
       </Tooltip>
@@ -36,10 +36,10 @@ const LegendBoundingSelector = (props) => {
   );
 };
 
-LegendBoundingSelector.propTypes = {
+LegendCloseSelector.propTypes = {
   isTooltipOpen: PropTypes.bool,
   layerSpec: PropTypes.object,
-  onFitBounds: PropTypes.func
+  onClose: PropTypes.func
 };
 
-export default LegendBoundingSelector;
+export default LegendCloseSelector;
