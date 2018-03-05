@@ -18,9 +18,27 @@
   .c-we-columnbox {
     color: $base-font-color;
     background-color: $light-gold;
+    padding-right: 3px;
 
     .c-we-icon { fill: $base-font-color; }
-    .order-by { color: $base-font-color; }
+
+    .order-by {
+      color: $base-font-color;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 20px;
+      margin-left: 4px;
+    }
+
+    .aggregate-function {
+      color: $base-font-color;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 20px;
+      margin-left: 4px;
+    }
   }
 
   .c-we-column-container {
@@ -109,6 +127,7 @@
   .c-we-button,
   .c-we-btn {
     @extend .c-button;
+    flex-direction: column;
 
     &.-primary {
       color: $white;
