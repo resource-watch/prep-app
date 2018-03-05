@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setScenarioSelection } from 'actions/nexgddptool';
+import { setScenarioSelection } from 'actions/locatool';
 import ScenarioSelect from './ScenarioSelect';
 
 const mapStateToProps = state => ({

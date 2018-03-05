@@ -6,7 +6,7 @@ import 'react-select/dist/react-select.css';
 import './style.scss';
 
 // Redux
-import { setRange1Selection, setRange2Selection } from 'actions/nexgddptool';
+import { setRange1Selection, setRange2Selection } from 'actions/locatool';
 
 class DateRangeSelect extends React.PureComponent {
   render() {

@@ -10,7 +10,7 @@ import LocationSearch from './location-search/LocationSearch';
 import TimeseriesChart from './tool-chart/TimeseriesChart';
 
 // Redux
-import { getSelectorsInfo, getUrlState, setDefaultState, setMapMode, resetState, setDataset } from 'actions/nexgddptool';
+import { getSelectorsInfo, getUrlState, setDefaultState, setMapMode, resetState, setDataset } from 'actions/locatool';
 
 // Component
 import Spinner from 'components/Loading/LoadingSpinner';

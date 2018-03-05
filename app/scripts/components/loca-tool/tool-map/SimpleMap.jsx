@@ -7,8 +7,8 @@ import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 
 // Redux
-import { getLayers, getRawLayers } from 'selectors/nexgddptool';
-import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setWater, setMarkerMode } from 'actions/nexgddptool';
+import { getLayers, getRawLayers } from 'selectors/locatool';
+import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setWater, setMarkerMode } from 'actions/locatool';
 import * as shareModalActions from 'components/share-modal/share-modal-actions';
 import { toggleTooltip } from 'actions/tooltip';
 
@@ -75,7 +75,7 @@ class SimpleMap extends React.PureComponent {
         getWidgetConfig: () => new Promise((resolve) => {
           resolve({
             type: 'embed',
-            url: `${origin}/embed/nexgddp/${dataset.id}${search}&render=map`
+            url: `${origin}/embed/loca/${dataset.id}${search}&render=map`
           });
         })
       }

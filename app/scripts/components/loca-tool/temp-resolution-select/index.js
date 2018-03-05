@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setTempResolutionSelection } from 'actions/nexgddptool';
+import { setTempResolutionSelection } from 'actions/locatool';
 import TempResolutionSelect from './TempResolutionSelect';
 
 const mapStateToProps = state => ({

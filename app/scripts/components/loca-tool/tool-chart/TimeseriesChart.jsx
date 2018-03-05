@@ -6,8 +6,8 @@ import isEqual from 'lodash/isEqual';
 import { getConfig, VegaChart } from 'widget-editor';
 
 // Redux
-import { setMarkerPosition } from 'actions/nexgddptool';
-import { getIndicatorId, getIndicatorUnitSignal } from 'selectors/nexgddptool';
+import { setMarkerPosition } from 'actions/locatool';
+import { getIndicatorId, getIndicatorUnitSignal } from 'selectors/locatool';
 import { toggleTooltip } from 'actions/tooltip';
 
 // Component

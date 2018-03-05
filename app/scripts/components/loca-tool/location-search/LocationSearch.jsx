@@ -6,7 +6,7 @@ import isEqual from 'lodash/isEqual';
 import Icon from 'components/ui/Icon';
 
 // Redux
-import { setMapZoom, setMapCenter, setMarkerPosition } from 'actions/nexgddptool';
+import { setMapZoom, setMapCenter, setMarkerPosition } from 'actions/locatool';
 
 import './style.scss';
 
