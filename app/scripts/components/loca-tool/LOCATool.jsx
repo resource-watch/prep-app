@@ -10,7 +10,7 @@ import LocationSearch from './location-search/LocationSearch';
 import TimeseriesChart from './tool-chart/TimeseriesChart';
 
 // Redux
-import { getSelectorsInfo, getUrlState, setDefaultState, setMapMode, resetState, setDataset } from 'actions/nexgddptool';
+import { getSelectorsInfo, getUrlState, setDefaultState, setMapMode, resetState, setDataset } from 'actions/locatool';
 
 // Component
 import Spinner from 'components/Loading/LoadingSpinner';
@@ -172,11 +172,11 @@ LOCATool.propTypes = {
 
 const mapStateToProps = state => ({
   open: state.shareModal.open,
-  render: state.nexgddptool.render,
-  marker: state.nexgddptool.marker,
-  isComparing: !!state.nexgddptool.range2.selection,
-  mapMode: state.nexgddptool.mapMode,
-  indicatorDataset: state.nexgddptool.indicatorDataset
+  render: state.locatool.render,
+  marker: state.locatool.marker,
+  isComparing: !!state.locatool.range2.selection,
+  mapMode: state.locatool.mapMode,
+  indicatorDataset: state.locatool.indicatorDataset
 });
 
 const mapDispatchToProps = dispatch => ({

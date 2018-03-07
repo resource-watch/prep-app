@@ -10,6 +10,9 @@ export { default as auth } from '../components/auth/auth-reducer';
 // NexGDDP
 export { default as nexgddptool } from './nexgddptool';
 
+// LOCA
+export { default as locatool } from './locatool';
+
 // Explore
 // export { default as explorepage } from '../pages/explore/explore-reducer';
 // export { default as datasetsList } from '../components/datasets-list/datasets-list-reducer';

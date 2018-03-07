@@ -8,8 +8,8 @@ import Control from 'react-leaflet-control';
 import 'lib/leaflet-side-by-side/leaflet-side-by-side';
 
 // Redux
-import { getLayers, getRawLayers } from 'selectors/nexgddptool';
-import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setWater, setMarkerMode } from 'actions/nexgddptool';
+import { getLayers, getRawLayers } from 'selectors/locatool';
+import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setWater, setMarkerMode } from 'actions/locatool';
 import * as shareModalActions from 'components/share-modal/share-modal-actions';
 import { toggleTooltip } from 'actions/tooltip';
 
@@ -144,7 +144,7 @@ class CompareMap extends React.PureComponent {
         getWidgetConfig: () => new Promise((resolve) => {
           resolve({
             type: 'embed',
-            url: `${origin}/embed/nexgddp/${dataset.id}${search}&render=map`
+            url: `${origin}/embed/loca/${dataset.id}${search}&render=map`
           });
         })
       }
@@ -323,14 +323,14 @@ CompareMap.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  map: state.nexgddptool.map,
-  marker: state.nexgddptool.marker,
-  markerMode: state.nexgddptool.markerMode,
+  map: state.locatool.map,
+  marker: state.locatool.marker,
+  markerMode: state.locatool.markerMode,
   layers: getLayers(state),
   rawLayers: getRawLayers(state),
-  range1Selection: state.nexgddptool.range1.selection,
-  range2Selection: state.nexgddptool.range2.selection,
-  dataset: state.nexgddptool.dataset,
+  range1Selection: state.locatool.range1.selection,
+  range2Selection: state.locatool.range2.selection,
+  dataset: state.locatool.dataset,
   open: state.shareModal.open
 });
 

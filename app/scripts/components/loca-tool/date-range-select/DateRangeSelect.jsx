@@ -6,7 +6,7 @@ import 'react-select/dist/react-select.css';
 import './style.scss';
 
 // Redux
-import { setRange1Selection, setRange2Selection } from 'actions/nexgddptool';
+import { setRange1Selection, setRange2Selection } from 'actions/locatool';
 
 class DateRangeSelect extends React.PureComponent {
   render() {
@@ -72,9 +72,9 @@ DateRangeSelect.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  range1: state.nexgddptool.range1,
-  range2: state.nexgddptool.range2,
-  tempResolution: state.nexgddptool.tempResolution
+  range1: state.locatool.range1,
+  range2: state.locatool.range2,
+  tempResolution: state.locatool.tempResolution
 });
 
 const mapDispatchToProps = dispatch => ({

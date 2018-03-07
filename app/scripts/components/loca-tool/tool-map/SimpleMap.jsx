@@ -7,8 +7,8 @@ import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 
 // Redux
-import { getLayers, getRawLayers } from 'selectors/nexgddptool';
-import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setWater, setMarkerMode } from 'actions/nexgddptool';
+import { getLayers, getRawLayers } from 'selectors/locatool';
+import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setWater, setMarkerMode } from 'actions/locatool';
 import * as shareModalActions from 'components/share-modal/share-modal-actions';
 import { toggleTooltip } from 'actions/tooltip';
 
@@ -19,14 +19,21 @@ import Legend from 'components/legend/index';
 import Icon from 'components/ui/Icon';
 import ShareNexgddpTooltip from 'components/Tooltip/ShareNexgddpTooltip';
 
+// EEUU bounds
+const maxBounds = new L.LatLngBounds(
+  new L.LatLng(49.496674527470455, -66.357421875),
+  new L.LatLng(24.607069137709683, -131.66015625)
+);
+
 const mapDefaultOptions = {
-  center: [20, -30],
+  center: [-98.96484375, 39.30029918615029],
   zoom: 3,
   minZoom: 3,
   maxZoom: 7,
   scrollWheelZoom: false,
   attributionControl: false,
-  zoomControl: false
+  zoomControl: false,
+  maxBounds
 };
 
 class SimpleMap extends React.PureComponent {
@@ -68,7 +75,7 @@ class SimpleMap extends React.PureComponent {
         getWidgetConfig: () => new Promise((resolve) => {
           resolve({
             type: 'embed',
-            url: `${origin}/embed/nexgddp/${dataset.id}${search}&render=map`
+            url: `${origin}/embed/loca/${dataset.id}${search}&render=map`
           });
         })
       }
@@ -214,13 +221,13 @@ SimpleMap.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  dataset: state.nexgddptool.dataset,
-  map: state.nexgddptool.map,
-  marker: state.nexgddptool.marker,
-  markerMode: state.nexgddptool.markerMode,
+  dataset: state.locatool.dataset,
+  map: state.locatool.map,
+  marker: state.locatool.marker,
+  markerMode: state.locatool.markerMode,
   layers: getLayers(state),
   rawLayers: getRawLayers(state),
-  range1Selection: state.nexgddptool.range1.selection,
+  range1Selection: state.locatool.range1.selection,
   open: state.shareModal.open
 });
 

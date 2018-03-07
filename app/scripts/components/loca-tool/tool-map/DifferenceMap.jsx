@@ -7,8 +7,8 @@ import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 
 // Redux
-import { getLayers, getRawLayers } from 'selectors/nexgddptool';
-import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setWater, setMarkerMode } from 'actions/nexgddptool';
+import { getLayers, getRawLayers } from 'selectors/locatool';
+import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setWater, setMarkerMode } from 'actions/locatool';
 import * as shareModalActions from 'components/share-modal/share-modal-actions';
 import { toggleTooltip } from 'actions/tooltip';
 
@@ -69,7 +69,7 @@ class DifferenceMap extends React.PureComponent {
         getWidgetConfig: () => new Promise((resolve) => {
           resolve({
             type: 'embed',
-            url: `${origin}/embed/nexgddp/${dataset.id}${search}&render=map`
+            url: `${origin}/embed/loca/${dataset.id}${search}&render=map`
           });
         })
       }
@@ -208,12 +208,12 @@ DifferenceMap.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  map: state.nexgddptool.map,
-  marker: state.nexgddptool.marker,
-  markerMode: state.nexgddptool.markerMode,
+  map: state.locatool.map,
+  marker: state.locatool.marker,
+  markerMode: state.locatool.markerMode,
   layers: getLayers(state),
   rawLayers: getRawLayers(state),
-  dataset: state.nexgddptool.dataset,
+  dataset: state.locatool.dataset,
   open: state.shareModal.open
 });
 

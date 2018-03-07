@@ -147,6 +147,8 @@ class DatasetDetail extends React.Component {
       }))
     };
 
+    console.log(dataset);
+
     return (
       <div>
         <SectionIntro data={data} downloadUrl={DatasetDetail.getDownloadUrl(this.props.data)} currentSection={currentSection} >
@@ -155,14 +157,21 @@ class DatasetDetail extends React.Component {
           </div>
         </SectionIntro>
 
-        {(dataset.id && dataset.provider === 'nexgddp') && <LOCATool dataset={dataset} />}
+        {(dataset.id && dataset.provider === 'loca') &&
+          <div className="row">
+            <div className="columns small-12">
+              <LOCATool dataset={dataset} />
+            </div>
+          </div>}
 
-        {(dataset.id && dataset.provider === 'nexgddp') ?
+        {(dataset.id && dataset.provider === 'nexgddp') &&
           <div className="row">
             <div className="columns small-12">
               <NexGDDPTool dataset={dataset} />
             </div>
-          </div> :
+          </div>}
+
+        {(dataset.id && dataset.provider !== 'nexgddp' && dataset.provider !== 'loca') &&
           <WidgetEditor
             datasetId={dataset.id}
             embedButtonMode="never"
@@ -171,6 +180,7 @@ class DatasetDetail extends React.Component {
             onSave={() => this.onSaveWidget()}
           />
         }
+
         <div className="row align-center">
           <div className="columns small-12 medium-8">
             <div className="c-article">
