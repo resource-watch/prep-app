@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
@@ -9,34 +9,41 @@ import Icon from 'components/ui/Icon';
 import 'rc-tooltip/assets/bootstrap_white.css';
 import './legend-opacity-selector-styles.scss';
 
+
 class LegendOpacitySelector extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      visibility: false
-    };
-
-    // BINDINGS //
-    this.onVisibleChange = this.onVisibleChange.bind(this);
+      visibilityHover: false,
+      visibilityClick: false
+    }
   }
 
-  onVisibleChange(visibility) {
-    this.setState({
-      visibility
-    });
+  toggleVisibilityOnClick(visible) {
+    this.setState({visibilityHover: false});
+    this.setState({visibilityClick: visible});
+    this.props.onVisibleChange({isOpacityVisible: visible});
   }
 
   render() {
-    const { layerSpec, onOpacityChange } = this.props;
+    const {
+      layerSpec,
+      onOpacityChange,
+      onVisibleChange,
+      isOpacityVisible,
+      isTooltipOpen
+    } = this.props;
+
     const { opacity, dataset } = layerSpec;
-    const { visibility } = this.state;
+
+    const {visibilityClick, visibilityHover} = this.state;
 
     const buttonClass = classnames({
-      '-active': visibility
+      '-active': isOpacityVisible,
     });
 
-    const tooltipContent = (
+    const tooltipContentClick = (
       <div className="tooltip-content">
         <h5 className="title">Opacity</h5>
         <SliderTooltip
@@ -47,36 +54,52 @@ class LegendOpacitySelector extends Component {
             step: 1
           }}
           onChange={value => onOpacityChange({ id: dataset, opacity: value / 100 })}
-          onClose={() => this.setState({ visibility: false })}
+          onClose={() => onVisibleChange({isOpacityVisible: false})}
         />
+      </div>
+    );
+
+    const tooltipContentHover = (
+      <div className="tooltip-content">
+        <h5 className="title">Opacity</h5>
       </div>
     );
 
     return (
       <div className="c-legend-opacity-selector">
         <Tooltip
-          overlay={tooltipContent}
+          overlay={tooltipContentClick}
           placement="bottom"
-          trigger="click"
-          overlayClassName="c-legend-opacity-selector"
-          onVisibleChange={this.onVisibleChange}
+          trigger={'click'}
+          onVisibleChange={visible => this.toggleVisibilityOnClick(visible)}
         >
-          <button
-            type="button"
-            onClick={() => !visibility && this.setState({ visibility: true })}
-            className={buttonClass}
+          <Tooltip
+            visible={!visibilityClick && visibilityHover}
+            overlay={tooltipContentHover}
+            placement="bottom"
+            trigger={isTooltipOpen ? '' : 'hover'}
+            mouseEnterDelay={0.4}
+            onVisibleChange={visible=> this.setState({visibilityHover: visible})}
           >
-            <Icon name="icon-opacity" className="-normal" />
-          </button>
+            <button
+              type="button"
+              className={buttonClass}
+            >
+              <Icon name="icon-opacity" className="-normal" />
+            </button>
+          </Tooltip>
         </Tooltip>
       </div>
     );
   }
-}
+};
 
 LegendOpacitySelector.propTypes = {
+  isOpacityVisible: PropTypes.bool,
+  isTooltipOpen: PropTypes.bool,
   layerSpec: PropTypes.object,
-  onOpacityChange: PropTypes.func
+  onOpacityChange: PropTypes.func,
+  onVisibleChange: PropTypes.func
 };
 
 export default LegendOpacitySelector;

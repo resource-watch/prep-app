@@ -8,7 +8,8 @@ import ShareUrl from 'containers/Modal/ShareUrl';
 import CreateEmbedWidget from 'containers/Modal/CreateEmbedWidget';
 
 class ShareModalComponent extends PureComponent {
-  componentWillMount() {
+  componentDidMount() {
+    // We make sure that there's always an active tab
     const keys = Object.keys(this.props.links);
     if (keys.length) {
       this.props.setTab(keys[0]);

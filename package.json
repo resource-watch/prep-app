@@ -118,6 +118,6 @@
     "webpack-dev-middleware": "1.12.2",
     "webpack-merge": "4.1.0",
     "whatwg-fetch": "2.0.3",
-    "widget-editor": "1.0.0"
+    "widget-editor": "1.0.1"
   }
 }
