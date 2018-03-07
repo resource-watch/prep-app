@@ -3,6 +3,7 @@ import getEsriLayer from './esri-layer';
 import getCartoLayer from './carto-layer';
 import getGeeLayer from './gee-layer';
 import getNexGDDPLayer from './nexgddp-layer';
+import getLocaLayer from './loca-layer';
 
 const getLayer = (leafletMap, layerSpec) => {
   const method = {
@@ -30,7 +31,10 @@ const getLayer = (leafletMap, layerSpec) => {
     gee: getGeeLayer,
 
     // NexGDDP
-    nexgddp: getNexGDDPLayer
+    nexgddp: getNexGDDPLayer,
+
+    // LOCA
+    loca: getLocaLayer
   }[layerSpec.provider];
 
   if (method) {
