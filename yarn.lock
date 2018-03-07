@@ -9522,9 +9522,9 @@ wide-align@^1.1.0:
   dependencies:
     string-width "^1.0.2"
 
-widget-editor@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/widget-editor/-/widget-editor-1.0.0.tgz#c0296914634acc94249744292ba809a3e8a56e4b"
+widget-editor@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/widget-editor/-/widget-editor-1.0.1.tgz#d0ba08cab224cd55b4b4d4636992e72dbe953d24"
   dependencies:
     autobind-decorator "^2.1.0"
     babel-runtime "^6.26.0"
