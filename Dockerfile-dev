@@ -1,5 +1,6 @@
 FROM node:8.1.2
 
+ENV DEBIAN_FRONTEND noninteractive
 ENV NODE_ENV development
 
 RUN apt-get update && \
@@ -14,12 +15,12 @@ WORKDIR /usr/src/app
 
 # Install app dependencies
 COPY package.json /usr/src/app/
-COPY package-lock.json /usr/src/app/
-RUN npm install --loglevel warn
+COPY yarn.lock /usr/src/app/
+RUN yarn install --silent
 
 # Bundle app source
 COPY . /usr/src/app
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["yarn", "start"]

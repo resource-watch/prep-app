@@ -14,18 +14,17 @@ class LegendMultiLayerSelector extends Component {
     super(props);
 
     this.state = {
-      visibility: false
-    };
+      visibilityHover: false,
+      visibilityClick: false
+    }
 
-    // BINDINGS //
-    this.onVisibleChange = this.onVisibleChange.bind(this);
     this.onChangeLayer = this.onChangeLayer.bind(this);
   }
 
-  onVisibleChange(visibility) {
-    this.setState({
-      visibility
-    });
+  toggleVisibilityOnClick(visible) {
+    this.setState({visibilityHover: false});
+    this.setState({visibilityClick: visible});
+    this.props.onVisibleChange({isLayerVisible: visible});
   }
 
   onChangeLayer(layer) {
@@ -36,14 +35,19 @@ class LegendMultiLayerSelector extends Component {
   }
 
   render() {
-    const { layerSpec } = this.props;
-    const { visibility } = this.state;
+    const {
+      layerSpec,
+      isLayerVisible,
+      isTooltipOpen
+    } = this.props;
+
+    const {visibilityClick, visibilityHover} = this.state;
 
     const buttonClass = classnames({
-      '-active': visibility
+      '-active': isLayerVisible
     });
 
-    const tooltipContent = (
+    const tooltipContentClick = (
       <div className="tooltip-content">
         <h5 className="title">Layers</h5>
 
@@ -68,22 +72,36 @@ class LegendMultiLayerSelector extends Component {
       </div>
     );
 
+    const tooltipContentHover = (
+      <div className="tooltip-content">
+        <h5 className="title">Layers</h5>
+      </div>
+    );
+
     return (
       <div className="c-legend-multi-layer-selector">
         <Tooltip
-          overlay={tooltipContent}
+          overlay={tooltipContentClick}
           placement="bottom"
-          trigger="click"
+          trigger={'click'}
           overlayClassName="c-legend-multi-layer-selector"
-          onVisibleChange={this.onVisibleChange}
+          onVisibleChange={visible => this.toggleVisibilityOnClick(visible)}
         >
-          <button
-            type="button"
-            onClick={() => this.setState({ visibility: !visibility })}
-            className={buttonClass}
+          <Tooltip
+            visible={!visibilityClick && visibilityHover}
+            overlay={tooltipContentHover}
+            placement="bottom"
+            trigger={isTooltipOpen ? '' : 'hover'}
+            mouseEnterDelay={0.4}
+            onVisibleChange={visible=> this.setState({visibilityHover: visible})}
           >
-            <Icon name="icon-layers" className="-normal" />
-          </button>
+            <button
+              type="button"
+              className={buttonClass}
+            >
+              <Icon name="icon-layers" className="-normal" />
+            </button>
+          </Tooltip>
         </Tooltip>
       </div>
     );
