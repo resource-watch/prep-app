@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        - apiUrl=https://beta.prepdata.org
+        - rwApiUrl=https://staging-api.globalforestwatch.org/v1
     env_file: ./.env
     environment:
       - NODE_ENV=production
@@ -13,4 +13,4 @@ services:
     ports:
       - "4002:3000"
     restart: always
-    container_name: prep_legacy
+    container_name: prep-legacy

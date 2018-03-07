@@ -33,6 +33,7 @@ app.use(helmet.contentSecurityPolicy({
       "'self'",
       "'unsafe-eval'",
       "'unsafe-inline'",
+      'data:',
       'https://maps.googleapis.com',
       'https://www.google-analytics.com',
       'https://unpkg.com'
