@@ -27,8 +27,8 @@ const maxBounds = new L.LatLngBounds(
 
 const mapDefaultOptions = {
   center: [-98.96484375, 39.30029918615029],
-  zoom: 3,
-  minZoom: 3,
+  zoom: 4,
+  minZoom: 4,
   maxZoom: 7,
   scrollWheelZoom: false,
   attributionControl: false,

@@ -18,15 +18,23 @@ import Legend from 'components/legend/index';
 import BasemapControl from 'components/basemap-control';
 import { basemapsSpec, labelsSpec, boundariesSpec, waterSpec } from 'components/basemap-control/basemap-control-constants';
 import Icon from 'components/ui/Icon';
+import ShareNexgddpTooltip from 'components/Tooltip/ShareNexgddpTooltip';
+
+// EEUU bounds
+const maxBounds = new L.LatLngBounds(
+  new L.LatLng(49.496674527470455, -66.357421875),
+  new L.LatLng(24.607069137709683, -131.66015625)
+);
 
 const mapDefaultOptions = {
-  center: [20, -30],
-  zoom: 3,
-  minZoom: 3,
+  center: [-98.96484375, 39.30029918615029],
+  zoom: 4,
+  minZoom: 4,
   maxZoom: 7,
   scrollWheelZoom: false,
   attributionControl: false,
-  zoomControl: false
+  zoomControl: false,
+  maxBounds
 };
 
 class CompareMap extends React.PureComponent {

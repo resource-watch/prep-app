@@ -147,8 +147,6 @@ class DatasetDetail extends React.Component {
       }))
     };
 
-    console.log(dataset);
-
     return (
       <div>
         <SectionIntro data={data} downloadUrl={DatasetDetail.getDownloadUrl(this.props.data)} currentSection={currentSection} >

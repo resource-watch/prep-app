@@ -32,7 +32,9 @@
     }
   }
 
-  .c-we-chart {
-    height: 300px;
+  > .c-we-chart {
+    padding-bottom: 20px;
+    height: 400px;
+    box-sizing: content-box;
   }
 }

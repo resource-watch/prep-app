@@ -29,8 +29,8 @@ import {
 const initialState = {
   // State of the map
   map: {
-    zoom: 3,
-    center: [20, -30],
+    zoom: 4,
+    center: [-98.96484375, 39.30029918615029],
     /** @type {'default'|'dark'|'light'|'satellite'|'terrain'} basemap */
     basemap: 'default',
     /** @type {'none'|'dark'|'light'} labels */
