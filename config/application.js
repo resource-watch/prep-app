@@ -20,7 +20,9 @@ app.use(helmet.contentSecurityPolicy({
       'https://staging-api.globalforestwatch.org',
       'https://staging.prepdata.org',
       'https://preproduction.prepdata.org',
-      'https://prepdata.org'
+      'https://prepdata.org',
+      'https://wri-rw.carto.com',
+      'https://*'
     ],
     styleSrc: [
       "'self'",
