@@ -1,0 +1,25 @@
+@import 'settings';
+
+.c-date-range-select {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.c-date-range-select > .Select {
+  width: 50%;
+  min-width: 100px;
+
+  border: 0;
+  border-radius: 0;
+
+  &:last-of-type {
+    position: relative;
+    left: -2px;
+  }
+
+  .Select-control {
+    border: 2px solid $border-color;
+    border-radius: 0;
+  }
+}

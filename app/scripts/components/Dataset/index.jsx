@@ -21,6 +21,7 @@ import SimpleMap from '../../containers/SimpleMap/SimpleMap';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
 import NexGDDPTool from '../nexgddp-tool/NexGDDPTool';
+import LOCATool from '../loca-tool';
 
 const logoImage = '/images/prep-logo.png';
 
@@ -154,12 +155,21 @@ class DatasetDetail extends React.Component {
           </div>
         </SectionIntro>
 
-        {(dataset.id && dataset.provider === 'nexgddp') ?
+        {(dataset.id && dataset.provider === 'loca') &&
+          <div className="row">
+            <div className="columns small-12">
+              <LOCATool dataset={dataset} />
+            </div>
+          </div>}
+
+        {(dataset.id && dataset.provider === 'nexgddp') &&
           <div className="row">
             <div className="columns small-12">
               <NexGDDPTool dataset={dataset} />
             </div>
-          </div> :
+          </div>}
+
+        {(dataset.id && dataset.provider !== 'nexgddp' && dataset.provider !== 'loca') &&
           <WidgetEditor
             datasetId={dataset.id}
             embedButtonMode="never"
@@ -168,6 +178,7 @@ class DatasetDetail extends React.Component {
             onSave={() => this.onSaveWidget()}
           />
         }
+
         <div className="row align-center">
           <div className="columns small-12 medium-8">
             <div className="c-article">
