@@ -8,6 +8,11 @@ Promise.config({
   cancellation: true
 });
 
+const maxBounds = new L.LatLngBounds(
+  new L.LatLng(49.496674527470455, -66.357421875),
+  new L.LatLng(24.607069137709683, -131.66015625)
+);
+
 export default (leafletMap, layerSpec) => {
   const { id, layerIndex, opacity, visibility, period } = layerSpec;
 
@@ -15,7 +20,9 @@ export default (leafletMap, layerSpec) => {
 
   const tileUrl = `${config.apiUrlRW}/layer/${id}/tile/loca/{z}/{x}/{y}?year=${year}`;
 
-  const layer = L.tileLayer(tileUrl);
+  const layer = L.tileLayer(tileUrl, {
+    bounds: maxBounds // limiting the request of tiles
+  });
 
   layer.setZIndex(layerIndex);
 
