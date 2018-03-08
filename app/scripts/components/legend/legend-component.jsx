@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import LegendActions from './legend-actions';
 import LegendNexGDDPToolbar from './legend-nexgddp-toolbar';
+import LegendLOCAToolbar from './legend-loca-toolbar';
 import LegendBasic from './legend-types/legend-basic/LegendBasic';
 import LegendChoropleth from './legend-types/legend-choropleth/LegendChoropleth';
 import LegendGradient from './legend-types/legend-gradient/LegendGradient';
@@ -14,6 +15,13 @@ class Legend extends PureComponent {
     if (layerSpec.provider === 'nexgddp') {
       return (
         <LegendNexGDDPToolbar
+          layerSpec={layerSpec}
+          onMultiLayer={onMultiLayer}
+        />
+      );
+    } else if (layerSpec.provider === 'loca') {
+      return (
+        <LegendLOCAToolbar
           layerSpec={layerSpec}
           onMultiLayer={onMultiLayer}
         />
