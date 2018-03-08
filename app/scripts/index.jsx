@@ -2,8 +2,6 @@
 
 import React from 'react';
 import { render } from 'react-dom';
-import initOpbeat from 'opbeat-react';
-import { createOpbeatMiddleware } from 'opbeat-react/redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import { Provider } from 'react-redux';
@@ -52,16 +50,6 @@ if (!window.GA_INITIALIZED) {
 }
 
 /**
- * Monitoring with Opbeat
- */
-if (process.env.NODE_ENV === 'production') {
-  initOpbeat({
-    orgId: process.env.OPBEAT_ORG_ID,
-    appId: process.env.OPBEAT_APP_ID
-  });
-}
-
-/**
  * Reducers
  * @info(http://redux.js.org/docs/basics/Reducers.html)
  * @type {Object}
@@ -100,7 +88,7 @@ const store = createStore(
   composeEnhancers(
     /* The router middleware MUST be before thunk otherwise the URL changes
      * inside a thunk function won't work properly */
-    applyMiddleware(middlewareRouter, thunk, createOpbeatMiddleware())
+    applyMiddleware(middlewareRouter, thunk)
   )
 );
 

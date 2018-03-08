@@ -26,19 +26,19 @@ const chartSpec = {
       "values": [],
       "transform": [
         {
-          "type":"formula",
-           "field": "q25",
-          "expr":"units.type =='factor' ? round(units.value*datum.q25,2) : ( datum.q25-units.value)"
+          "type": "formula",
+          "as": "q25",
+          "expr": "units.type =='factor' ? round(units.value*datum.q25,2) : ( datum.q25-units.value)"
         },
         {
-          "type":"formula",
-           "field": "q50",
-          "expr":"units.type =='factor' ? round(units.value*datum.q50,2) : (datum.q50-units.value)"
+          "type": "formula",
+          "as": "q50",
+          "expr": "units.type =='factor' ? round(units.value*datum.q50,2) : (datum.q50-units.value)"
         },
         {
-          "type":"formula",
-           "field": "q75",
-          "expr":"units.type =='factor' ? round(units.value*datum.q75,2) : (datum.q75-units.value)"
+          "type": "formula",
+          "as": "q75",
+          "expr": "units.type =='factor' ? round(units.value*datum.q75,2) : (datum.q75-units.value)"
         }
       ]
     },
@@ -48,20 +48,40 @@ const chartSpec = {
       "transform": [
         {
           "type": "filter",
-          "test": "year(datum.x) >= utcyear(range1.start) && year(datum.x) <= utcyear(range1.end)"
+          "expr": "year(datum.x) >= utcyear(range1.start) && year(datum.x) <= utcyear(range1.end)"
         },
         {
-          "type":"formula",
-          "field": "date_end",
-          "expr":"range1.end"
+          "type": "formula",
+          "as": "date_end",
+          "expr": "range1.end"
+        },
+        {
+          "type": "formula",
+          "as": "date_start",
+          "expr": "range1.start"
         },
         {
           "type": "aggregate",
-          "summarize": [
-            {"field": "q25", "ops": ["min"], "as": ["q25"]},
-            {"field": "q75", "ops": ["max"], "as": ["q75"]},
-            {"field": "x", "ops": ["min"], "as": ["x"]},
-            {"field": "date_end", "ops": ["min"], "as": ["date_end"]}
+          "fields": [
+            "q25",
+            "q75",
+            "x",
+            "date_end",
+            "date_start"
+          ],
+          "ops": [
+            "min",
+            "max",
+            "min",
+            "min",
+            "min"
+          ],
+          "as": [
+            "q25",
+            "q75",
+            "x",
+            "date_end",
+            "date_start"
           ]
         }
       ]
@@ -72,20 +92,40 @@ const chartSpec = {
       "transform": [
         {
           "type": "filter",
-          "test": "year(datum.x) >= utcyear(range2.start) && year(datum.x) <= utcyear(range2.end)"
+          "expr": "year(datum.x) >= utcyear(range2.start) && year(datum.x) <= utcyear(range2.end)"
         },
         {
-          "type":"formula",
-          "field": "date_end",
-          "expr":"range2.end"
+          "type": "formula",
+          "as": "date_end",
+          "expr": "range2.end"
+        },
+        {
+          "type": "formula",
+          "as": "date_start",
+          "expr": "range2.start"
         },
         {
           "type": "aggregate",
-          "summarize": [
-            {"field": "q25", "ops": ["min"], "as": ["q25"]},
-            {"field": "q75", "ops": ["max"], "as": ["q75"]},
-            {"field": "x", "ops": ["min"], "as": ["x"]},
-            {"field": "date_end", "ops": ["min"], "as": ["date_end"]}
+          "fields": [
+            "q25",
+            "q75",
+            "x",
+            "date_end",
+            "date_start"
+          ],
+          "ops": [
+            "min",
+            "max",
+            "min",
+            "min",
+            "min"
+          ],
+          "as": [
+            "q25",
+            "q75",
+            "x",
+            "date_end",
+            "date_start"
           ]
         }
       ]
@@ -97,30 +137,48 @@ const chartSpec = {
         {"cat": "Models amplitude between 25th and 75th percentile"},
         {"cat": "Selected period(s)"}
       ]
+    },
+    {
+      "name": "dots",
+      "source": "table",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "hover && hover.datum.x === datum.x"
+        }
+      ]
     }
   ],
   "signals": [
     {
       "name": "range1Middle",
-      "init": {"expr": "(+range1.start + +range1.end) / 2"}
+      "update": "(+range1.start + +range1.end) / 2"
     },
     {
       "name": "range1Label",
-      "init": {
-        "expr": "utcyear(range1.start) + '-' + utcyear(range1.end)"
-      }
+      "update": "utcyear(range1.start) + '-' + utcyear(range1.end)"
     },
     {
       "name": "range2Middle",
-      "init": {
-        "expr": "range2 ? (+range2.start + +range2.end) / 2 : 0"
-      }
+      "update": "range2 ? (+range2.start + +range2.end) / 2 : 0"
     },
     {
       "name": "range2Label",
-      "init": {
-        "expr": "range2 ? utcyear(range2.start) + '-' + utcyear(range2.end) : ''"
-      }
+      "update": "range2 ? utcyear(range2.start) + '-' + utcyear(range2.end) : ''"
+    },
+    {
+      "name": "hover",
+      "value": null,
+      "on": [
+        {
+          "events": "@cell:mouseover",
+          "update": "datum"
+        },
+        {
+          "events": "@cell:mouseout",
+          "update": "null"
+        }
+      ]
     }
   ],
   "scales": [
@@ -129,7 +187,10 @@ const chartSpec = {
       "type": "utc",
       "range": "width",
       "zero": false,
-      "domain": {"data": "table","field": "x"}
+      "domain": {
+        "data": "table",
+        "field": "x"
+      }
     },
     {
       "name": "y",
@@ -139,8 +200,14 @@ const chartSpec = {
       "nice": true,
       "domain": {
         "fields": [
-          {"data": "table","field": "q75"},
-          {"data": "table","field": "q25"}
+          {
+            "data": "table",
+            "field": "q75"
+          },
+          {
+            "data": "table",
+            "field": "q25"
+          }
         ]
       }
     },
@@ -155,55 +222,117 @@ const chartSpec = {
         "#efa600"
       ],
       "domain": {
-        "fields": [{"data": "legend","field": "cat"}],
+        "fields": [
+          {
+            "data": "legend",
+            "field": "cat"
+          }
+        ],
         "sort": true
       }
     }
   ],
   "axes": [
     {
-      "type": "x",
       "scale": "x",
-      "properties": {
+      "labelOverlap": "parity",
+      "orient": "bottom",
+      "encode": {
         "labels": {
-          "font": {"value": "Open Sans"},
-          "fontSize": {"value": 10},
-          "fill": {"value": "#3B4F63"},
-          "opacity": {"value": 0.7}
+          "update": {
+            "font": {
+              "value": "Open Sans"
+            },
+            "fontSize": {
+              "value": 10
+            },
+            "fill": {
+              "value": "#3B4F63"
+            },
+            "opacity": {
+              "value": 0.7
+            }
+          }
         },
         "axis": {
-          "stroke": {"value": "#393F44"},
-          "opacity": {"value": 0.3}
+          "update": {
+            "stroke": {
+              "value": "#393F44"
+            },
+            "opacity": {
+              "value": 0.3
+            }
+          }
         },
         "ticks": {
-          "stroke": {"value": "#393F44"},
-          "opacity": {"value": 0.3}
+          "update": {
+            "stroke": {
+              "value": "#393F44"
+            },
+            "opacity": {
+              "value": 0.3
+            }
+          }
         }
       }
     },
     {
-      "type": "y",
       "scale": "y",
-      "properties": {
+      "zindex": 1,
+      "labelOverlap": "parity",
+      "orient": "left",
+      "encode": {
         "labels": {
-          "font": {"value": "Open Sans"},
-          "fontSize": {"value": 10},
-          "fill": {"value": "#3B4F63"},
-          "opacity": {"value": 0.7}
+          "update": {
+            "font": {
+              "value": "Open Sans"
+            },
+            "fontSize": {
+              "value": 10
+            },
+            "fill": {
+              "value": "#3B4F63"
+            },
+            "opacity": {
+              "value": 0.7
+            }
+          }
         },
         "axis": {
-          "stroke": {"value": "#393F44"},
-          "opacity": {"value": 0.3}
+          "update": {
+            "stroke": {
+              "value": "#393F44"
+            },
+            "opacity": {
+              "value": 0.3
+            }
+          }
         },
         "ticks": {
-          "stroke": {"value": "#393F44"},
-          "opacity": {"value": 0.3}
+          "update": {
+            "stroke": {
+              "value": "#393F44"
+            },
+            "opacity": {
+              "value": 0.3
+            }
+          }
         },
         "title": {
-          "font": {"value": "Open Sans"},
-          "fontSize": {"value": 10},
-          "fill": {"value": "#3B4F63"},
-          "opacity": {"value": 0.7}
+          "update": {
+            "font": {
+              "value": "Open Sans"
+            },
+            "fontSize": {
+              "value": 10
+            },
+            "fill": {
+              "value": "#3B4F63"
+            },
+            "opacity": {
+              "value": 0.7
+            }
+          }
         }
       }
     }
@@ -211,94 +340,290 @@ const chartSpec = {
   "marks": [
     {
       "type": "area",
-      "from": {"data": "table"},
-      "properties": {
+      "interactive": false,
+      "from": {
+        "data": "table"
+      },
+      "encode": {
         "enter": {
-          "interpolate": {"value": "monotone"},
-          "x": {"scale": "x","field": "x"},
-          "y": {"scale": "y","field": "q75"},
-          "y2": {"scale": "y","field": "q25"},
-          "fill": {"value": "#E9ECEE"}
+          "interpolate": {
+            "value": "monotone"
+          },
+          "x": {
+            "scale": "x",
+            "field": "x"
+          },
+          "y": {
+            "scale": "y",
+            "field": "q75"
+          },
+          "y2": {
+            "scale": "y",
+            "field": "q25"
+          },
+          "fill": {
+            "value": "#E9ECEE"
+          }
         }
       }
     },
     {
+      "name": "lines",
+      "interactive": false,
       "type": "line",
-      "from": {"data": "table"},
-      "properties": {
+      "from": {
+        "data": "table"
+      },
+      "encode": {
         "enter": {
-          "interpolate": {"value": "monotone"},
-          "x": {"scale": "x","field": "x"},
-          "y": {"scale": "y","field": "q50"},
-          "stroke": {"value": "#263e57"},
-          "strokeWidth": {"value": 2},
-          "strokeDash": {"value": [8,8]}
+          "interpolate": {
+            "value": "monotone"
+          },
+          "x": {
+            "scale": "x",
+            "field": "x"
+          },
+          "y": {
+            "scale": "y",
+            "field": "q50"
+          },
+          "stroke": {
+            "value": "#263e57"
+          },
+          "strokeWidth": {
+            "value": 2
+          },
+          "strokeDash": {
+            "value": [
+              8,
+              8
+            ]
+          }
         }
       }
     },
     {
       "type": "rect",
-      "from": {"data": "range1Data"},
-      "properties": {
+      "interactive": false,
+      "from": {
+        "data": "range1Data"
+      },
+      "encode": {
         "enter": {
-          "interpolate": {"value": "monotone"},
-          "x": {"scale": "x","field": "x"},
-          "y": {"scale": "y","field": "q75"},
-          "y2": {"scale": "y","field": "q25"},
-          "fillOpacity": {"value": 0},
-          "strokeOpacity": {"value": 1},
-          "stroke": {"value": "#EFA600"},
-          "strokeWidth": {"value": 2}
+          "interpolate": {
+            "value": "monotone"
+          },
+          "x": {
+            "scale": "x",
+            "field": "x"
+          },
+          "y": {
+            "scale": "y",
+            "field": "q75"
+          },
+          "y2": {
+            "scale": "y",
+            "field": "q25"
+          },
+          "fillOpacity": {
+            "value": 0
+          },
+          "strokeOpacity": {
+            "value": 1
+          },
+          "stroke": {
+            "value": "#EFA600"
+          },
+          "strokeWidth": {
+            "value": 2
+          }
         }
       }
     },
     {
       "type": "text",
-      "from": {"data": "range1Data","transform": []},
-      "properties": {
+      "interactive": false,
+      "from": {
+        "data": "range1Data"
+      },
+      "encode": {
         "enter": {
-          "x": {"scale": "x","signal": "range1Middle"},
-          "y": {"scale": "y","field": "q75"},
-          "dy": {"value": -10},
-          "align": {"value": "center"},
-          "text": {"template": "{{range1Label}}"},
-          "font": {"value": "Open Sans"},
-          "fontSize": {"value": 13},
-          "fontWeight": {"value": "bold"},
-          "fill": {"value": "#EFA600"}
+          "x": {
+            "scale": "x",
+            "signal": "range1Middle"
+          },
+          "y": {
+            "scale": "y",
+            "field": "q75"
+          },
+          "dy": {
+            "value": -10
+          },
+          "align": {
+            "value": "center"
+          },
+          "text": {
+            "signal": "range1Label"
+          },
+          "font": {
+            "value": "Open Sans"
+          },
+          "fontSize": {
+            "value": 13
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#EFA600"
+          }
         }
       }
     },
     {
       "type": "rect",
-      "from": {"data": "range2Data"},
-      "properties": {
+      "interactive": false,
+      "from": {
+        "data": "range2Data"
+      },
+      "encode": {
         "enter": {
-          "interpolate": {"value": "monotone"},
-          "x": {"scale": "x","field": "x"},
-          "y": {"scale": "y","field": "q75"},
-          "y2": {"scale": "y","field": "q25"},
-          "fillOpacity": {"value": 0},
-          "strokeOpacity": {"value": 1},
-          "stroke": {"value": "#EFA600"},
-          "strokeWidth": {"value": 2}
+          "interpolate": {
+            "value": "monotone"
+          },
+          "x": {
+            "scale": "x",
+            "field": "x"
+          },
+          "y": {
+            "scale": "y",
+            "field": "q75"
+          },
+          "y2": {
+            "scale": "y",
+            "field": "q25"
+          },
+          "fillOpacity": {
+            "value": 0
+          },
+          "strokeOpacity": {
+            "value": 1
+          },
+          "stroke": {
+            "value": "#EFA600"
+          },
+          "strokeWidth": {
+            "value": 2
+          }
         }
       }
     },
     {
       "type": "text",
-      "from": {"data": "range2Data","transform": []},
-      "properties": {
+      "interactive": false,
+      "from": {
+        "data": "range2Data"
+      },
+      "encode": {
         "enter": {
-          "x": {"scale": "x","signal": "range2Middle"},
-          "y": {"scale": "y","field": "q75"},
-          "dy": {"value": -10},
-          "align": {"value": "center"},
-          "text": {"template": "{{range2Label}}"},
-          "font": {"value": "Open Sans"},
-          "fontSize": {"value": 13},
-          "fontWeight": {"value": "bold"},
-          "fill": {"value": "#EFA600"}
+          "x": {
+            "scale": "x",
+            "signal": "range2Middle"
+          },
+          "y": {
+            "scale": "y",
+            "field": "q75"
+          },
+          "dy": {
+            "value": -10
+          },
+          "align": {
+            "value": "center"
+          },
+          "text": {
+            "signal": "range2Label"
+          },
+          "font": {
+            "value": "Open Sans"
+          },
+          "fontSize": {
+            "value": 13
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#EFA600"
+          }
+        }
+      }
+    },
+    {
+      "name": "points",
+      "interactive": false,
+      "type": "symbol",
+      "from": {
+        "data": "dots"
+      },
+      "encode": {
+        "enter": {
+          "fill": {
+            "value": "#263e57"
+          },
+          "stroke": {
+            "value": "#fff"
+          },
+          "x": {
+            "scale": "x",
+            "field": "x"
+          },
+          "y": {
+            "scale": "y",
+            "field": "q50"
+          }
+        },
+        "update": {
+          "zindex": {
+            "value": 10
+          },
+          "opacity": {
+            "value": 1
+          }
+        }
+      }
+    },
+    {
+      "name": "cell",
+      "type": "path",
+      "from": {
+        "data": "lines"
+      },
+      "transform": [
+        {
+          "type": "voronoi",
+          "x": "datum.x",
+          "y": "datum.y",
+          "size": [
+            {
+              "signal": "width"
+            },
+            {
+              "signal": "height"
+            }
+          ]
+        }
+      ],
+      "encode": {
+        "update": {
+          "fill": {
+            "value": "red"
+          },
+          "path": {
+            "field": "path"
+          },
+          "opacity": {
+            "value": 0
+          }
         }
       }
     }
@@ -306,35 +631,40 @@ const chartSpec = {
   "legends": [
     {
       "fill": "color",
-      "offset": 0,
-      "properties": {
-        "legend": {
-          "x": {
-            "field": {"group": "width"},
-            "mult": 0.02,
-            "offset": 0
-          },
-          "y": {
-            "field": {"group": "height"},
-            "mult": 0.01,
-            "offset": 0
+      "orient": "bottom",
+      "encode": {
+        "title": {
+          "enter": {
+            "fontSize": {
+              "value": 12
+            }
           }
         },
-        "title": {
-          "fontSize": {"value": 12},
-          "dy": {"value": -2},
-          "dx": {"value": 0}
-        },
         "labels": {
-          "fontSize": {"value": 12},
-          "fill": {"value": "#3B4F63"},
-          "opacity": {"value": 0.7},
-          "text": {"template": "{{datum.data}}"}
+          "enter": {
+            "limit": {
+              "signal": "(width*0.9)"
+            },
+            "fontSize": {
+              "value": 12
+            },
+            "fill": {
+              "value": "#3B4F63"
+            },
+            "opacity": {
+              "value": 0.7
+            }
+          }
         },
         "symbols": {
-          "shape": {"value": "square"},
-          "size": {"value": 30},
-          "strokeOpacity":{"value": 0}
+          "enter": {
+            "shape": {
+              "value": "square"
+            },
+            "size": {
+              "value": 50
+            }
+          }
         }
       }
     }
@@ -345,23 +675,27 @@ const chartSpec = {
       "config": {
         "fields": [
           {
-            "key": "q50",
-            "label": "Average",
+            "column": "datum.q50",
+            "property": "Average",
+            "type": "number",
             "format": ".2f"
           },
           {
-            "key": "q25",
-            "label": "25th percentile",
+            "column": "datum.q25",
+            "property": "25th percentile",
+            "type": "number",
             "format": ".2f"
           },
           {
-            "key": "q75",
-            "label": "75th percentile",
+            "column": "datum.q75",
+            "property": "75th percentile",
+            "type": "number",
             "format": ".2f"
           },
           {
-            "key": "range",
-            "label": "Date range",
+            "column": "datum.range",
+            "property": "Date range",
+            "type": "string",
             "format": null
           }
         ]
@@ -390,21 +724,19 @@ class TimeseriesChart extends React.Component {
 
     const range1Signal = {
       name: 'range1',
-      init: { expr: `{ start: utc(${range1[0]}, 0, 1), end: utc(${range1[1]}, 0, 1) }` }
+      update: `{ start: utc(${range1[0]}, 0, 1), end: utc(${range1[1]}, 0, 1) }`
     };
 
-    const range2Signal = { name: 'range2', init: 'false' };
+    const range2Signal = { name: 'range2', update: 'false' };
     if (range2Selection) {
       const range2 = range2Selection.label.split('-')
         .map(v => +v);
 
-      range2Signal.init = {
-        expr: `{ start: utc(${range2[0]}, 0, 1), end: utc(${range2[1]}, 0, 1) }`
-      };
+      range2Signal.update = `{ start: utc(${range2[0]}, 0, 1), end: utc(${range2[1]}, 0, 1) }`;
     }
 
     const unitsSignal = indicatorUnitSignal
-      ? { name: 'units', init: { expr: JSON.stringify(indicatorUnitSignal) } }
+      ? { name: 'units', update: JSON.stringify(indicatorUnitSignal) }
       : null;
 
     const signals = [range1Signal, range2Signal, unitsSignal, ...chartSpec.signals]
@@ -429,22 +761,14 @@ class TimeseriesChart extends React.Component {
 
     // We add the unit to the y axis
     if (indicatorUnitSignal) {
-      const yAxis = Object.assign({}, spec.axes.find(axis => axis.type === 'y'), { title: indicatorUnitSignal.to });
+      const yAxis = Object.assign({}, spec.axes.find(axis => axis.scale === 'y'), { title: indicatorUnitSignal.to });
       spec.axes = [...spec.axes];
       for (let i = 0, j = spec.axes.length; i < j; i++) {
-        if (spec.axes[i].type === 'y') {
+        if (spec.axes[i].scale === 'y') {
           spec.axes[i] = yAxis;
           break;
         }
       }
-    }
-
-    // For some indicators, we move the legend to the bottom
-    // of the chart
-    if (indicatorId === 'hdds' || indicatorId === 'cum_pr') {
-      spec.legends = spec.legends.slice(0);
-      spec.legends[0] = deepClone(spec.legends[0]);
-      spec.legends[0].properties.legend.y.mult = 0.8;
     }
 
     return spec;
