@@ -156,7 +156,7 @@ export const setMultiActiveLayer = (state, { payload }) => {
 
   const items = state.datasets.items.map((d) => {
 
-    if (d.id === id && d.provider === 'nexgddp') {
+    if (d.id === id && (d.provider === 'nexgddp' || d.provider === 'loca')) {
       const currentLayer = d.metadata[0].info.nexgddp.layers.find(l =>
         l.temp_resolution === temporalResolution.value &&
         l.scenario === scenario.value
@@ -180,7 +180,7 @@ export const setMultiActiveLayer = (state, { payload }) => {
       }];
     }
 
-    if (d.id === id && d.provider !== 'nexgddp') {
+    if (d.id === id && (d.provider !== 'nexgddp' || d.provider !== 'loca')) {
       d.layer = d.layer.map(l => ({
         ...l,
         isActive: l.id === layerId
