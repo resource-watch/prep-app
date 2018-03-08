@@ -29,7 +29,10 @@ app.use(helmet.contentSecurityPolicy({
       "'unsafe-inline'",
       'https://fonts.googleapis.com',
       'https://unpkg.com',
-      'https://cdnjs.cloudflare.com'
+      'https://cdnjs.cloudflare.com',
+      'https://staging.prepdata.org',
+      'https://preproduction.prepdata.org',
+      'https://prepdata.org'
     ],
     scriptSrc: [
       "'self'",
