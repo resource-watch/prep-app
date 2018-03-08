@@ -19,8 +19,7 @@ class Legend extends PureComponent {
           onMultiLayer={onMultiLayer}
         />
       );
-    }
-    if (layerSpec.provider === 'loca') {
+    } else if (layerSpec.provider === 'loca') {
       return (
         <LegendLOCAToolbar
           layerSpec={layerSpec}
