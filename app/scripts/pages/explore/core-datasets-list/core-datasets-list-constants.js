@@ -9,7 +9,7 @@ export const coreDatasets = [{
       'temperature',
       'sea_surface_temperature'
     ],
-    datasets: ['b61fca59-707c-47f8-875c-9ac19313d193', 'a37b7ce6-8d14-4e3d-a57b-963557ee9ef5', 'aaadd6c3-93ea-44bc-ba8b-7af3f40d39e1', '0a9501d7-e2f1-46ef-922d-c8f161cc8153', '4dbebe70-67a0-4bb5-ac63-88f325d8ca40']
+    datasets: ['4b54dc0a-ed24-453f-8cd9-c35b5d57c2ce','38bd1ce3-a756-4e03-bae5-e1a48e1a8419','b1929cc4-2da0-4ea6-a5f3-5e14ae64dcae','ab400650-fb37-41ef-a74c-c865c9853ec9','9aa7d8bf-5319-4d40-8370-edf85f240a65','b61fca59-707c-47f8-875c-9ac19313d193', 'a37b7ce6-8d14-4e3d-a57b-963557ee9ef5', 'aaadd6c3-93ea-44bc-ba8b-7af3f40d39e1', '0a9501d7-e2f1-46ef-922d-c8f161cc8153', '4dbebe70-67a0-4bb5-ac63-88f325d8ca40']
   }, {
     id: 11,
     title: 'Precipitation',
@@ -17,6 +17,8 @@ export const coreDatasets = [{
       'precipitation'
     ],
     datasets: [
+      '5addc140-14cb-4e42-a232-88cbafebd00f',
+      'd491077d-4be9-48ed-8ba9-93e0b0d75d46',
       'eadf93a6-58e7-4482-89d6-c9832d270a87',
       'f5152f7b-757b-4e09-98d2-e244f547fec8'
     ]
@@ -31,6 +33,8 @@ export const coreDatasets = [{
       'heat_wave'
     ],
     datasets: [
+      '9123b556-0020-42b4-93c2-a045dae1eff5',
+      'c61a1792-3530-4204-a7d6-0a4aea961810',
       '2b89fe50-6795-426d-b357-df952b04294b',
       'df0aabe8-0ef2-4a81-bdba-c6fc6767fde9',
       'c36c3108-2581-4b68-852a-c929fc758001',
@@ -81,6 +85,7 @@ export const coreDatasets = [{
       'land_cover'
     ],
     datasets: [
+      '7b144d42-dd27-4585-8dff-662942100a0b',
       'bbf2957f-55d2-4ed1-9f9d-d62de88005bb',
       '68009a7e-b81d-4fcb-bf90-a2cef3b6160a',
       'ddf88c85-3e2f-41fa-8ceb-a3633ffb0bfb',
