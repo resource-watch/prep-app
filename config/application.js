@@ -10,58 +10,6 @@ const app = express();
 
 // Security
 app.use(helmet({ noSniff: false }));
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    defaultSrc: ["'none'"],
-    connectSrc: [
-      "'self'",
-      'https://production-api.globalforestwatch.org',
-      'https://api.resourcewatch.org',
-      'https://staging-api.globalforestwatch.org',
-      'https://staging.prepdata.org',
-      'https://preproduction.prepdata.org',
-      'https://prepdata.org',
-      'https://wri-rw.carto.com',
-      'https://*'
-    ],
-    styleSrc: [
-      "'self'",
-      "'unsafe-inline'",
-      'https://fonts.googleapis.com',
-      'https://unpkg.com',
-      'https://cdnjs.cloudflare.com',
-      'https://staging.prepdata.org',
-      'https://preproduction.prepdata.org',
-      'https://prepdata.org'
-    ],
-    scriptSrc: [
-      "'self'",
-      "'unsafe-eval'",
-      "'unsafe-inline'",
-      'data:',
-      'https://maps.googleapis.com',
-      'https://www.google-analytics.com',
-      'https://unpkg.com'
-    ],
-    fontSrc: [
-      "'self'",
-      'data:',
-      'https://cdnjs.cloudflare.com',
-      'https://fonts.gstatic.com'
-    ],
-    imgSrc: [
-      "'self'",
-      'data:',
-      'https://s3.amazonaws.com',
-      'https://csi.gstatic.com',
-      'https://*'
-    ],
-    formAction: ["'self'", 'https://*'],
-    objectSrc: ["'none'"],
-    frameSrc: ["'self'", 'https://*'],
-    frameAncestors: ["'self'", 'http://*', 'https://*']
-  }
-}));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
