@@ -21,6 +21,7 @@ export default (leafletMap, layerSpec) => {
   const tileUrl = `${config.apiUrlRW}/layer/${id}/tile/loca/{z}/{x}/{y}?year=${year}`;
 
   const layer = L.tileLayer(tileUrl, {
+    minNativeZoom: 4,
     bounds: maxBounds // limiting the request of tiles
   });
 
