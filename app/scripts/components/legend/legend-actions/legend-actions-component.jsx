@@ -68,7 +68,7 @@ class LegendActions extends React.Component {
           isTooltipOpen={isTooltipOpen}
         />
 
-        {(layerSpec.provider !== 'nexgddp' || layerSpec.provider !== 'loca')
+        {(layerSpec.provider !== 'nexgddp' && layerSpec.provider !== 'loca')
           && layerSpec.layers.length > 1 &&
           <LegendMultiLayerSelector
             layerSpec={layerSpec}
