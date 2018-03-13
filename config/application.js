@@ -9,7 +9,7 @@ const rootPath = path.join(process.cwd());
 const app = express();
 
 // Security
-app.use(helmet({ noSniff: false }));
+app.use(helmet({ noSniff: false, frameguard: false }));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json

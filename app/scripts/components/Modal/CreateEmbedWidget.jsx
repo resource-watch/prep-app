@@ -79,7 +79,7 @@ class CreateEmbedWidget extends React.Component {
 
     return (
       <div className="c-create-embed-widget">
-        { loading && <LoadingSpinner inner /> }
+        { loading && <LoadingSpinner inner transparent /> }
         { !loading && error && (
           <p className="error">{'Sorry, the widget couldn\'t be created. Try again in a few minutes.'}</p>
         )}
