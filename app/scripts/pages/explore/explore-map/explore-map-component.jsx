@@ -6,7 +6,9 @@ import { getConfig } from 'widget-editor';
 import BasemapControl from 'components/basemap-control';
 import LegendControl from 'components/legend/legend-control';
 import ShareControl from 'components/share-control';
+import SearchControl from 'components/search-control';
 import { basemapsSpec, labelsSpec, waterSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
+
 
 class ExploreMap extends PureComponent {
   constructor(props) {
@@ -91,6 +93,14 @@ class ExploreMap extends PureComponent {
                 category: 'Explore data',
                 action: 'Share a map'
               }}
+            />
+          }
+
+          {!embed &&
+            <SearchControl
+              className="-absolute -explore"
+              onChange={setMapParams}
+              open
             />
           }
         </Map>
