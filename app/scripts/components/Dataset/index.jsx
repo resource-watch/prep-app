@@ -147,6 +147,8 @@ class DatasetDetail extends React.Component {
       }))
     };
 
+    console.log(dataset);
+
     return (
       <div>
         <SectionIntro data={data} downloadUrl={DatasetDetail.getDownloadUrl(this.props.data)} currentSection={currentSection} >
@@ -172,6 +174,7 @@ class DatasetDetail extends React.Component {
         {(dataset.id && dataset.provider !== 'nexgddp' && dataset.provider !== 'loca') &&
           <WidgetEditor
             datasetId={dataset.id}
+            widgetId={dataset.defaultEditableWidget && dataset.defaultEditableWidget.id}
             embedButtonMode="never"
             mapConfig={{ zoom: 3, lat: 40.65, lng: -98.21 }}
             provideWidgetConfig={(func) => { this.getWidgetConfig = func; }}
