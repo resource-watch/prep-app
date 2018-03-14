@@ -26,6 +26,12 @@
       color: $white;
     }
 
+    .item-tools {
+      .item-link {
+        svg { fill: $white; }
+      }
+    }
+
     .subtitle {
       color: rgba($white, .5);
     }
@@ -79,13 +85,13 @@
       font-size: $normal-font-size;
       line-height: 20px;
       word-break: break-word;
+      margin-right: 15px;
     }
   }
 
   .item-tools {
     display: flex;
     align-items: center;
-    margin-top: 3px;
 
     > * {
       margin-right: 5px;
@@ -94,7 +100,8 @@
     }
 
     .info,
-    .cancel {
+    .cancel,
+    .item-link {
       svg {
         width: 14px;
         height: 14px;
@@ -106,7 +113,6 @@
       svg { fill: $white; }
     }
   }
-
 
   .subtitle {
     margin: 5px 0 0;
