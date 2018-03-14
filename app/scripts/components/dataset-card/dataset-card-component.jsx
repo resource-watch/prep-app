@@ -61,11 +61,12 @@ class DatasetCard extends PureComponent {
                     checked={dataset.isLayerActive}
                   />
                 </div>}
-              <Link className="item-title-link" to={`/dataset/${dataset.slug}`} >
                 <h3 className="item-title">{title}</h3>
-              </Link>
             </div>
             <div className="item-tools">
+              <Link className="item-link" to={`/dataset/${dataset.slug}`}>
+                <Icon name="icon-share" />
+              </Link>
               {dataset.isSelected ?
                 <button key={'info-close'} onClick={() => this.onToggleInfo(dataset)} className="cancel">
                   <Icon name="icon-cancel" />
