@@ -137,7 +137,7 @@ class InfoSidebar extends React.Component {
       <nav className="info-actions">
         {downloadIcon}
         <Link to={`/dataset/${metadata.datasetSlug}`} className="info-tool more">
-          <Icon name="icon-share" className="-medium" />
+          <Icon name="icon-widgets" className="-medium" />
           Learn more
         </Link>
         {layerIcon}
