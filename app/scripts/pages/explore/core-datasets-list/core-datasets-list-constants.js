@@ -53,6 +53,7 @@ export const coreDatasets = [{
 
     ],
     datasets: [
+      'd1fd9ac1-b99f-4f5f-b9d8-d3f1f818321a',
       'b977ef21-8227-4248-84ca-e670fd8f75df',
       '8a1420eb-9c84-4be2-9f2d-559930bbe943',
       'b672af9f-a949-4398-b21f-6786315a5ab6',
@@ -72,6 +73,7 @@ export const coreDatasets = [{
       'displaced_people'
     ],
     datasets: [
+      '048b2140-9d4b-433e-a2dd-8d4122eb157b',
       '141ef6ab-eed9-4081-8066-7be364a48af0',
       '595bcf6f-0343-4146-ba0d-c54b1c928510',
       'ba760eda-7ab8-46cd-89c1-70d22da7413d'
@@ -127,6 +129,7 @@ export const coreDatasets = [{
       'vulnerability'
     ],
     datasets: [
+      'fa6443ff-eb95-4d0f-84d2-f0c91682efdf',
       'b6a3b58f-9620-45f6-80a2-1ad869ec107c',
       '4fa19d9c-8684-408e-9574-aafa86d1e179'
     ]
