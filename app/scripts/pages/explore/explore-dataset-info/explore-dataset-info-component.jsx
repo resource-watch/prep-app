@@ -198,7 +198,7 @@ class DatasetInfo extends PureComponent {
                 className="info-tool more"
                 onClick={() => logEvent('Explore menu', 'Click through to dataset page', getTitle(dataset))}
               >
-                <Icon name="icon-share" className="-medium" />
+                <Icon name="icon-widgets" className="-medium" />
                 Learn more
               </LinkComponent>
 

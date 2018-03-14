@@ -65,7 +65,7 @@ class DatasetCard extends PureComponent {
             </div>
             <div className="item-tools">
               <Link className="item-link" to={`/dataset/${dataset.slug}`}>
-                <Icon name="icon-share" />
+                <Icon name="icon-widgets" />
               </Link>
               {dataset.isSelected ?
                 <button key={'info-close'} onClick={() => this.onToggleInfo(dataset)} className="cancel">
