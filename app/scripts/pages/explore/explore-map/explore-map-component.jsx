@@ -28,6 +28,11 @@ class ExploreMap extends PureComponent {
     const currentLabels = labelsSpec[labels];
     const currentBoundaries = boundaries ? boundariesSpec.dark : {};
     const currentWater = waterSpec[water];
+    const currentMapOptions = Object.assign({}, {
+      zoom,
+      minZoom,
+      center: { lat, lng }
+    });
 
     const classNames = classnames({
       '-embed': embed
@@ -38,11 +43,7 @@ class ExploreMap extends PureComponent {
     return (
       <div className={`c-explore-map ${classNames}`}>
         <Map
-          mapOptions={{
-            zoom,
-            minZoom,
-            center: { lat, lng }
-          }}
+          mapOptions={currentMapOptions}
           basemap={currentBasemap}
           labels={currentLabels}
           boundaries={currentBoundaries}
