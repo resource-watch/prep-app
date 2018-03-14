@@ -70,11 +70,23 @@
       background-color: $white;
 
       &:hover { opacity: .6; }
+
+      &:first-child {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+
+      &:last-child {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
     }
+
     .leaflet-control-zoom-in {
       position: relative;
       border-radius: 0;
     }
+
     .leaflet-control-zoom-out {
       position: relative;
       border-radius: 0;
@@ -85,3 +97,4 @@
     color: $main-color;
   }
 }
+
