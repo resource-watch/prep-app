@@ -61,7 +61,7 @@ class DatasetCard extends PureComponent {
                     checked={dataset.isLayerActive}
                   />
                 </div>}
-                <h3 className="item-title">{title}</h3>
+                <h3 className="item-title"><Link className="item-title-link" to={`/dataset/${dataset.slug}`}>{title}</Link></h3>
             </div>
             <div className="item-tools">
               <Link className="item-link" to={`/dataset/${dataset.slug}`}>
