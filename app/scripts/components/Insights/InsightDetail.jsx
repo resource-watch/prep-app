@@ -103,9 +103,10 @@ class InsightsDetail extends React.Component {
 
     const { title } = this.props.data;
     const contentUrl = this.props.data.content_url;
-    const iframeUrl = contentUrl.indexOf('github.io') > -1
-      ? `/proxy?url=${contentUrl}`
-      : contentUrl;
+    // const iframeUrl = contentUrl.indexOf('github.io') > -1
+    //   ? `/proxy?url=${contentUrl}`
+    //   : contentUrl;
+    const iframeUrl = contentUrl;
 
     let contentComponent;
     if (this.props.data.template_type === 0) {
