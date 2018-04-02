@@ -6,7 +6,9 @@ import { getConfig } from 'widget-editor';
 import BasemapControl from 'components/basemap-control';
 import LegendControl from 'components/legend/legend-control';
 import ShareControl from 'components/share-control';
+import SearchControl from 'components/search-control';
 import { basemapsSpec, labelsSpec, waterSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
+
 
 class ExploreMap extends PureComponent {
   constructor(props) {
@@ -26,6 +28,11 @@ class ExploreMap extends PureComponent {
     const currentLabels = labelsSpec[labels];
     const currentBoundaries = boundaries ? boundariesSpec.dark : {};
     const currentWater = waterSpec[water];
+    const currentMapOptions = Object.assign({}, {
+      zoom,
+      minZoom,
+      center: { lat, lng }
+    });
 
     const classNames = classnames({
       '-embed': embed
@@ -36,11 +43,7 @@ class ExploreMap extends PureComponent {
     return (
       <div className={`c-explore-map ${classNames}`}>
         <Map
-          mapOptions={{
-            zoom,
-            minZoom,
-            center: { lat, lng }
-          }}
+          mapOptions={currentMapOptions}
           basemap={currentBasemap}
           labels={currentLabels}
           boundaries={currentBoundaries}
@@ -91,6 +94,14 @@ class ExploreMap extends PureComponent {
                 category: 'Explore data',
                 action: 'Share a map'
               }}
+            />
+          }
+
+          {!embed &&
+            <SearchControl
+              className="-absolute -explore"
+              onChange={setMapParams}
+              open
             />
           }
         </Map>

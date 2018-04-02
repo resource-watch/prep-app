@@ -43,6 +43,7 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
+    if (prevProps.mapOptions !== this.props.mapOptions) this.setView();
     if (prevProps.basemap !== this.props.basemap) this.setBasemap();
     if (prevProps.labels !== this.props.labels) this.setLabels();
     if (prevProps.boundaries !== this.props.boundaries) this.setBoundaries();
@@ -54,6 +55,17 @@ class Map extends PureComponent {
   componentWillUnmount() {
     this.map.off('zoomend');
     this.map.off('moveend');
+  }
+
+  setView() {
+    const { sidebar } = this.props;
+    const left = (sidebar.open) ? 430 : 0;
+    const {center , zoom} = this.props.mapOptions;
+
+    this.map.setView(
+      [center.lat, center.lng],
+      zoom
+    );
   }
 
   setEvents() {

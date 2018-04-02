@@ -34,7 +34,7 @@ const initialState = {
     /** @type {'default'|'dark'|'light'|'satellite'|'terrain'} basemap */
     basemap: 'default',
     /** @type {'none'|'dark'|'light'} labels */
-    labels: 'none',
+    labels: 'light',
     water: 'none',
     boundaries: true
   },
