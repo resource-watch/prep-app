@@ -13,6 +13,20 @@ spec:
       labels:
         name: {name}-preproduction
     spec:
+      tolerations:
+      - key: "type"
+        operator: "Equal"
+        value: "webapps"
+        effect: "NoSchedule"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: type
+                operator: In
+                values:
+                - webapps
       containers:
       - name: {name}-preproduction
         image: vizzuality/{name}
