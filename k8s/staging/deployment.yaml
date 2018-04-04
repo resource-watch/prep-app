@@ -27,6 +27,17 @@ spec:
                 operator: In
                 values:
                 - webapps
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: name
+                  operator: In
+                  values:
+                  - {name}-staging
+              topologyKey: kubernetes.io/hostname
       containers:
       - name: {name}-staging
         image: vizzuality/{name}
