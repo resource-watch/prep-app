@@ -52,6 +52,7 @@ class ShareNexgddpTooltip extends React.Component {
     this.props.setLinks({
       embed: `${origin}/embed/nexgddp/${datasetSlug}${search}&render=${render}`
     });
+    this.props.setTab('embed');
   }
 
   render() {
@@ -79,7 +80,8 @@ ShareNexgddpTooltip.propTypes = {
   onClickCheckWidgets: PropTypes.func,
   toggleModal: PropTypes.func,
   setOpen: PropTypes.func,
-  setLinks: PropTypes.func
+  setLinks: PropTypes.func,
+  setTab: PropTypes.func
 };
 
 ShareNexgddpTooltip.defaultProps = {
