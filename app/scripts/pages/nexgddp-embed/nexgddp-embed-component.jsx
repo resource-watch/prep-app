@@ -23,9 +23,13 @@ class NexGDDPEmbedPage extends PureComponent {
   render() {
     const { dataset, embed } = this.props;
 
+    const title = dataset.metadata && dataset.metadata.length && dataset.metadata[0].attributes.name
+      ? dataset.metadata[0].attributes.name
+      : dataset.name;
+
     return (
       <div className="-theme-2">
-        <h2>{dataset.name}</h2>
+        <h2>{title}</h2>
 
         {!isEmpty(dataset) &&
           <NexGDDPTool
