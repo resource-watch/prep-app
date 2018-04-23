@@ -13,6 +13,7 @@ class ShareControl extends Component {
     event.preventDefault();
     this.props.setOpen(!open);
     this.props.setLinks(this.props.links);
+    this.props.setTab(Object.keys(this.props.links)[0]);
 
     // Only for Explore
     if (this.props.analytics) {
@@ -50,6 +51,7 @@ ShareControl.propTypes = {
   links: PropTypes.object,
   setOpen: PropTypes.func,
   setLinks: PropTypes.func,
+  setTab: PropTypes.func,
   setAnalytics: PropTypes.func.isRequired,
   /**
    * Define the category and action for the analytics
