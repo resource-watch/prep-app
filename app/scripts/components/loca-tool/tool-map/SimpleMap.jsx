@@ -17,7 +17,7 @@ import BasemapControl from 'components/basemap-control';
 import { basemapsSpec, labelsSpec, boundariesSpec, waterSpec } from 'components/basemap-control/basemap-control-constants';
 import Legend from 'components/legend/index';
 import Icon from 'components/ui/Icon';
-import ShareNexgddpTooltip from 'components/Tooltip/ShareNexgddpTooltip';
+import ShareLocaTooltip from 'components/Tooltip/ShareLocaTooltip';
 
 // EEUU bounds
 const maxBounds = new L.LatLngBounds(
@@ -69,7 +69,7 @@ class SimpleMap extends React.PureComponent {
         y: window.scrollY + e.clientY
       },
       direction: 'bottom',
-      children: ShareNexgddpTooltip,
+      children: ShareLocaTooltip,
       childrenProps: {
         render: 'map',
         getWidgetConfig: () => new Promise((resolve) => {
