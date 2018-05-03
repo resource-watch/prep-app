@@ -1,0 +1,17 @@
+.c-terms-list {
+  > li {
+    margin: 1rem 0;
+    font-weight: 700;
+
+    > ol {
+      > li {
+        margin: 1rem 0;
+        font-weight: 400;
+      }
+    }
+
+    > p {
+      font-weight: 400;
+    }
+  }
+}
