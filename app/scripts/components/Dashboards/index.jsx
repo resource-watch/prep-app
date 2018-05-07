@@ -3,13 +3,12 @@ import { Link } from 'react-router';
 import { logEvent } from 'helpers/analytics';
 import Card from '../Cards/Card';
 import LoadingSpinner from '../Loading/LoadingSpinner';
+import Icon from '../ui/Icon';
 
 class DashboardsPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      createDashboardModalOpen: false
-    };
+    this.state = { createDashboardModalOpen: false };
   }
 
   componentDidMount() {
@@ -79,6 +78,15 @@ class DashboardsPage extends React.Component {
         <article className="c-article -no-border">
           <div className="row align-center">
             <div className="column small-12 medium-8">
+              <div className="c-toolbar-actions">
+                <div />
+                <div className="action">
+                  <Link to="/myprep/dashboards" className="c-button -alternative -action">
+                    <Icon name="icon-share" className="-medium" />
+                    Create Your Own Dashboard
+                  </Link>
+                </div>
+              </div>
               <h2>Collections of communities’ data, indicators, stories and tools for
                 climate resilience
               </h2>
