@@ -12,16 +12,16 @@ const mapStateToProps = state => ({
   embed: true,
   activeLayers: getActiveLayers(state),
   activeLayersForMap: getActiveLayersForMap(state),
-  lat: state.explorePage.map.lat,
-  lng: state.explorePage.map.lng,
-  zoom: state.explorePage.map.zoom,
-  minZoom: state.explorePage.map.minZoom,
-  basemap: state.explorePage.map.basemap,
-  labels: state.explorePage.map.labels,
-  boundaries: state.explorePage.map.boundaries,
-  water: state.explorePage.map.water,
-  bbox: state.explorePage.map.bbox,
-  sidebar: state.explorePage.sidebar
+  lat: state.exploreEmbedPage.map.lat,
+  lng: state.exploreEmbedPage.map.lng,
+  zoom: state.exploreEmbedPage.map.zoom,
+  minZoom: state.exploreEmbedPage.map.minZoom,
+  basemap: state.exploreEmbedPage.map.basemap,
+  labels: state.exploreEmbedPage.map.labels,
+  boundaries: state.exploreEmbedPage.map.boundaries,
+  water: state.exploreEmbedPage.map.water,
+  bbox: state.exploreEmbedPage.map.bbox,
+  sidebar: state.exploreEmbedPage.sidebar
 });
 
 export { reducers, initialState };
