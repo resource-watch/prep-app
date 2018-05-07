@@ -90,6 +90,7 @@ class ExploreMap extends PureComponent {
               )}
               setOpen={this.props.setOpen}
               setLinks={this.props.setLinks}
+              setTab={this.props.setTab}
               analytics={{
                 category: 'Explore data',
                 action: 'Share a map'
@@ -163,7 +164,8 @@ ExploreMap.propTypes = {
   setMultiActiveLayer: PropTypes.func,
   setBBox: PropTypes.func,
   setOpen: PropTypes.func,
-  setLinks: PropTypes.func
+  setLinks: PropTypes.func,
+  setTab: PropTypes.func
 };
 
 export default ExploreMap;

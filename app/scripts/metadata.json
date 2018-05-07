@@ -86,6 +86,24 @@
     "bannerBg": "faq"
   },
   {
+    "name": "privacy-policy",
+    "pathname": "/privacy-policy",
+    "metaTitle": "Privacy Policy",
+    "metaDescription": "",
+    "title": "Privacy Policy",
+    "bannerSize": "small",
+    "bannerBg": "faq"
+  },
+  {
+    "name": "terms-of-service",
+    "pathname": "/terms-of-service",
+    "metaTitle": "Terms of Service",
+    "metaDescription": "",
+    "title": "Terms of Service",
+    "bannerSize": "small",
+    "bannerBg": "faq"
+  },
+  {
     "name": "dashboards",
     "pathname": "/dashboards",
     "metaTitle": "Dashboards",

@@ -9,7 +9,7 @@ import * as shareModalActions from 'components/share-modal/share-modal-actions';
 // Redux
 import { toggleTooltip } from 'actions/tooltip';
 
-class ShareNexgddpTooltip extends React.Component {
+class ShareLocaTooltip extends React.Component {
   constructor(props) {
     super(props);
     this.onClickOutside = this.onClickOutside.bind(this);
@@ -49,9 +49,7 @@ class ShareNexgddpTooltip extends React.Component {
     const { open, datasetSlug, render } = this.props;
     const { origin, search } = window.location;
     this.props.setOpen(!open);
-    this.props.setLinks({
-      embed: `${origin}/embed/nexgddp/${datasetSlug}${search}&render=${render}`
-    });
+    this.props.setLinks({ embed: `${origin}/embed/nexgddp/${datasetSlug}${search}&render=${render}` });
     this.props.setTab('embed');
   }
 
@@ -67,7 +65,7 @@ class ShareNexgddpTooltip extends React.Component {
   }
 }
 
-ShareNexgddpTooltip.propTypes = {
+ShareLocaTooltip.propTypes = {
   open: PropTypes.bool,
   datasetId: PropTypes.string,
   datasetSlug: PropTypes.string,
@@ -84,15 +82,15 @@ ShareNexgddpTooltip.propTypes = {
   setTab: PropTypes.func
 };
 
-ShareNexgddpTooltip.defaultProps = {
+ShareLocaTooltip.defaultProps = {
   onClickCheckWidgets: () => {
     window.location = '/myprep/widgets/my_widgets';
   }
 };
 
 const mapStateToProps = state => ({
-  datasetId: state.nexgddptool.dataset ? state.nexgddptool.dataset.id : null,
-  datasetSlug: state.nexgddptool.dataset ? state.nexgddptool.dataset.slug : null
+  datasetId: state.locatool.dataset ? state.locatool.dataset.id : null,
+  datasetSlug: state.locatool.dataset ? state.locatool.dataset.slug : null
 });
 
 const mapDispatchToProps = {
@@ -101,4 +99,4 @@ const mapDispatchToProps = {
   ...shareModalActions
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShareNexgddpTooltip);
+export default connect(mapStateToProps, mapDispatchToProps)(ShareLocaTooltip);

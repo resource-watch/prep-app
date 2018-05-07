@@ -11,6 +11,8 @@ import PartnersPage from './pages/partners';
 import ResourcesPage from './pages/resources';
 import DatasetDetail from './containers/Dataset';
 import FAQ from './components/FAQ';
+import TermsOfService from './components/terms-of-service';
+import PrivacyPolicy from './components/privacy-policy';
 import Dashboards from './containers/Dashboards';
 import DashboardsDetail from './containers/Dashboards/DashboardDetail';
 import Insights from './containers/Insights';
@@ -114,19 +116,21 @@ function Routes(props) {
       history={props.history}
       render={applyRouterMiddleware(useScroll(shouldUpdateScroll))}
     >
-      <Route path={''} component={Root}>
-        <Route path={'/'} component={App} onEnter={confirmLogOut}>
+      <Route path="" component={Root}>
+        <Route path="/" component={App} onEnter={confirmLogOut}>
           <IndexRoute component={Home} />
-          <Route path={'about'} component={AboutPage} />
-          <Route path={'faqs'} component={FAQ} />
-          <Route path={'dashboards'} component={Dashboards} />
-          <Route path={'stories'} component={Insights} />
-          <Route path={'create'} component={Create} />
-          <Route path={'partners'} component={PartnersPage} />
-          <Route path={'resources'} component={ResourcesPage} />
-          <Route path={'contact'} component={Contact} />
-          <Route path={'auth'} component={Auth} />
-          <Route path={'myprep'} onEnter={requireAuth} component={Home} />
+          <Route path="about" component={AboutPage} />
+          <Route path="faqs" component={FAQ} />
+          <Route path="terms-of-service" component={TermsOfService} />
+          <Route path="privacy-policy" component={PrivacyPolicy} />
+          <Route path="dashboards" component={Dashboards} />
+          <Route path="stories" component={Insights} />
+          <Route path="create" component={Create} />
+          <Route path="partners" component={PartnersPage} />
+          <Route path="resources" component={ResourcesPage} />
+          <Route path="contact" component={Contact} />
+          <Route path="auth" component={Auth} />
+          <Route path="myprep" onEnter={requireAuth} component={Home} />
         </Route>
 
         <Route path="partners/:id" component={PartnerDetail} />
@@ -144,9 +148,7 @@ function Routes(props) {
   );
 }
 
-Routes.propTypes = {
-  history: React.PropTypes.object.isRequired
-};
+Routes.propTypes = { history: React.PropTypes.object.isRequired };
 
 const mapStateToProps = () => ({});
 const mapDispatchToProps = () => ({});
