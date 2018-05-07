@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import sortBy from 'lodash/sortBy';
 
 import { logEvent } from 'helpers/analytics';
 
@@ -40,14 +41,14 @@ class ExploreDatasetFilters extends PureComponent {
 
   renderFilters() {
     const { data } = this.props;
+
     const filters = Object.keys(data).map(key =>
       (<TreeSelector
         key={key}
-        data={data[key]}
+        data={sortBy(data[key], item => (item.value === 'global' ? 0 : 1))}
         placeholderText={PLACEHOLDERS_DATASET_FILTERS[key]}
         onChange={(currentNode, selectedNodes) => this.onChange(selectedNodes, key)}
-      />)
-    );
+      />));
 
     return (
       <div className="filters-container">
@@ -85,8 +86,6 @@ ExploreDatasetFilters.propTypes = {
   onClearFilters: PropTypes.func
 };
 
-ExploreDatasetFilters.defaultProps = {
-  data: {}
-};
+ExploreDatasetFilters.defaultProps = { data: {} };
 
 export default ExploreDatasetFilters;
