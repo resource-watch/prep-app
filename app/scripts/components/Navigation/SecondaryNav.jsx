@@ -17,6 +17,12 @@ function SecondaryNav() {
         <li>
           <Link to="/faqs">FAQS</Link>
         </li>
+        <li>
+          <Link to="/terms-of-service">Terms of Service</Link>
+        </li>
+        <li>
+          <Link to="/privacy-policy">Privacy Policy</Link>
+        </li>
       </ul>
     </nav>
   );

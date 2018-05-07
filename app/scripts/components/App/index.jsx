@@ -62,7 +62,7 @@ class App extends React.Component {
           <div className={`l-header-nav ${currentData.name === 'home' ? '-no-bg' : ''}`}>
             <div className="row align-middle">
               <div className="column small-10 medium-4">
-                <Link to={'/'} className="logo">
+                <Link to="/" className="logo">
                   <img src={logoImage} alt="Partnership for Resilience and Preparedness" />
                 </Link>
               </div>
@@ -118,10 +118,10 @@ class App extends React.Component {
           }
           <div className="l-footer-down">
             <div className="row">
-              <div className="column small-12 medium-12 large-6 align-middle">
+              <div className="column small-12 medium-12 large-5 align-middle">
                 <SocialNav />
               </div>
-              <div className="column small-6 medium-12 large-6 align-middle">
+              <div className="column small-6 medium-12 large-7 align-middle">
                 <SecondaryNav />
               </div>
             </div>
@@ -132,9 +132,7 @@ class App extends React.Component {
   }
 }
 
-App.childContextTypes = {
-  location: React.PropTypes.object
-};
+App.childContextTypes = { location: React.PropTypes.object };
 
 App.propTypes = {
   children: React.PropTypes.any.isRequired,
