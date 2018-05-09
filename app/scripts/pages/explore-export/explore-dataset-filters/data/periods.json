@@ -1,0 +1,11 @@
+[{
+  "tagClassName": "selected-item",
+  "checked": false,
+  "label": "Historical",
+  "value": "historical"
+}, {
+  "tagClassName": "selected-item",
+  "checked": false,
+  "label": "Future",
+  "value": "future"
+}]
