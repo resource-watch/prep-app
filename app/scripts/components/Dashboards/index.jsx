@@ -81,10 +81,10 @@ class DashboardsPage extends React.Component {
               <div className="c-toolbar-actions">
                 <div />
                 <div className="action">
-                  <Link to="/myprep/dashboards" className="c-button -alternative -action">
+                  <a href="/myprep/dashboards" className="c-button -alternative -action">
                     <Icon name="icon-share" className="-medium" />
                     Create Your Own Dashboard
-                  </Link>
+                  </a>
                 </div>
               </div>
               <h2>Collections of communities’ data, indicators, stories and tools for
