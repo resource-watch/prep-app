@@ -3,15 +3,22 @@
   margin: 0 auto;
 
   .customize-visualization {
-    .title {
-      @extend h2;
-      margin-bottom: 30px;
-      padding: 0;
-      text-align: left;
-      font-size: $h3-font-size;
-      font-weight: bold;
+    > .content {
+      > .title {
+        @extend h2;
+        margin-bottom: 30px;
+        padding: 0;
+        text-align: left;
+        font-size: $h3-font-size;
+        font-weight: bold;
 
-      &:after { content: none; }
+        &:after { content: none; }
+      }
+    }
+
+    .visualization-type-buttons button.-active {
+      border: 2px solid $light-gold;
+      color: $base-font-color;
     }
   }
 
