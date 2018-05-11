@@ -14,11 +14,11 @@
 
         &:after { content: none; }
       }
-    }
 
-    .visualization-type-buttons button.-active {
-      border: 2px solid $light-gold;
-      color: $base-font-color;
+      .visualization-type-buttons button.-active {
+        border: 2px solid $light-gold;
+        color: $base-font-color;
+      }
     }
   }
 
