@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2018-05-14
+
+### Fixed
+- Favourites datasets takes metadata title.
+- Fixed cache issue related with adding widgets in dashboards
+- 404 when saving widgets from LOCA detail page.
+- Global filter is not working. [WIP]
+- Map widget failing to load in dashboard creation tool.
+
+### Added
+- Added anaylitics events for favourites actions.
+- Added export router for PDF embeds
+- Added how to page [WIP]
+- Added support for environments in app entities.
+- Added call to action on dashboard page to create their own.
+- Added two datasets more in explore core datasets tab.
+
+### Updated
+- Updated knowledge graph.
+
 ## [1.2.0] - 2017-12-22
 
 ### Fixed
