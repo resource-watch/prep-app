@@ -2,6 +2,9 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { toastr } from 'react-redux-toastr';
 
+// Helpers
+import { logEvent } from 'helpers/analytics';
+
 import CollectionPanelItem from './collections-panel-item/collections-panel-item-component';
 
 // constants
@@ -34,6 +37,13 @@ class CollectionsPanel extends PureComponent {
   onToggleFavourite = () => {
     const { toggleFavourite, favourites, resource, resourceType } = this.props;
     const favourite = favourites.find(fav => fav.resourceId === resource.id) || {};
+
+    // If the user favourite a dataset, we send an
+    // analytics event
+    if (resourceType === 'dataset' && !favourite.id) {
+      logEvent('Explore Menu', 'User favourites a dataset', resource.name);
+    }
+
     toggleFavourite({
       favourite,
       resource: {
