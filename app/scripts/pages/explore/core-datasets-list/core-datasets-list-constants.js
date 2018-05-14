@@ -55,7 +55,9 @@ export const coreDatasets = [{
     datasets: [
       'd1fd9ac1-b99f-4f5f-b9d8-d3f1f818321a',
       '61c88110-9a94-40bf-891b-f037be4a73fd',
-      'a63c0b98-81b7-401a-a9e3-d370aa90660f'
+      'a63c0b98-81b7-401a-a9e3-d370aa90660f',
+      '894f43a8-ce8e-43a5-a4c7-fa80faa43d63',
+      '3624554e-b240-4edb-9110-1f010642c3f3'
     ]
   }]
 }, {
