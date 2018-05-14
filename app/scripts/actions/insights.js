@@ -9,7 +9,7 @@ export default function () {}
 
 export function getInsightsList() {
   return (dispatch) => {
-    fetch(`${config.apiUrl}/insights`)
+    fetch(`${config.apiUrl}/insights?env=${config.datasetEnv}`)
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
@@ -31,7 +31,7 @@ export function getInsightsList() {
 
 export function getInsightBySlug(slug) {
   return (dispatch) => {
-    fetch(`${config.apiUrl}/insights/${slug}`)
+    fetch(`${config.apiUrl}/insights/${slug}?env=${config.datasetEnv}`)
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
