@@ -7,7 +7,7 @@ export const setPartnersError = createAction('partners/setPartnersError');
 export const getPartners = createThunkAction('partners/getPartners', () =>
   (dispatch) => {
     dispatch(setPartnersLoading(true));
-    fetch(`${config.apiUrl}/partners`)
+    fetch(`${config.apiUrl}/partners?env=${config.datasetEnv}`)
       .then((response) => {
         dispatch(setPartnersLoading(false));
         const { status, statusText } = response;

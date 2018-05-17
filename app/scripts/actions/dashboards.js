@@ -9,7 +9,7 @@ export default function () {}
 
 export function getDashboardList() {
   return (dispatch) => {
-    fetch(`${config.apiUrl}/dashboards`)
+    fetch(`${config.apiUrl}/dashboards?env=${config.datasetEnv}`)
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
@@ -31,7 +31,7 @@ export function getDashboardList() {
 
 export function getDashboardBySlug(slug) {
   return (dispatch) => {
-    fetch(`${config.apiUrl}/dashboards/${slug}`)
+    fetch(`${config.apiUrl}/dashboards/${slug}?env=${config.datasetEnv}`)
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);

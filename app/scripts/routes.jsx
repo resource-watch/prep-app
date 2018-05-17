@@ -25,6 +25,7 @@ import Root from './components/Root';
 import PartnerDetail from './containers/PartnerDetail';
 import Auth from './components/auth/auth';
 import ExploreEmbedPage from './pages/explore-embed';
+import ExploreExportPage from './pages/explore-export';
 import NexGDDPEmbedPage from './pages/nexgddp-embed';
 
 function shouldUpdateScroll(prevRouterProps, { location }) {
@@ -142,6 +143,7 @@ function Routes(props) {
         <Route path="dataset/:slug" component={DatasetDetail} />
 
         {/* Embed */}
+        <Route path="export/explore" component={ExploreExportPage} />
         <Route path="embed/explore" component={ExploreEmbedPage} />
         <Route path="embed/nexgddp/:slug" component={NexGDDPEmbedPage} />
         <Route path="embed/:slug" component={Embed} />
