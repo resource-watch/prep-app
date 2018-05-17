@@ -36,7 +36,7 @@ node {
           sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production,preproduction --build-arg apiUrl=https://staging.prepdata.org/api --build-arg basemapUrl=https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png --build-arg rwApiUrl=https://staging-api.globalforestwatch.org/v1 --build-arg callbackUrl=https://staging.prepdata.org/auth .")
           break
         case "preproduction":
-          sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production,preproduction --build-arg apiUrl=https://preproduction.prepdata.org/api --build-arg callbackUrl=https://preproduction.prepdata.org/auth .")
+          sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production,preproduction --build-arg callbackUrl=https://preproduction.prepdata.org/auth .")
           break
         case "master":
           sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production --build-arg apiUrl=https://prepdata.org/api .")
