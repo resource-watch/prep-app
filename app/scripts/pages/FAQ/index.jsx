@@ -1,8 +1,8 @@
 import React from 'react';
-import Article from '../Content/Article';
+import Article from '../../components/Content/Article';
 import { Link } from 'react-router';
 
-class FAQ extends React.Component {
+class FAQ extends React.PureComponent {
   render() {
     return (
       <div className="c-faq">

@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Article extends React.Component {
+class Article extends React.PureComponent {
   render() {
     return (
       <article className={`c-article ${this.props['no-border'] ? '-no-border' : ''} ${this.props.floating ? '-floating' : ''}`}>

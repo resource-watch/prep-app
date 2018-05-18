@@ -1,5 +1,5 @@
 import React from 'react';
-import Article from '../Content/Article';
+import Article from '../../components/Content/Article';
 import { Link } from 'react-router';
 
 class TermsOfService extends React.Component {
