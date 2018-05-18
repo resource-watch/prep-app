@@ -6,8 +6,11 @@ import Article from '../../components/Content/Article';
 import Icon from '../../components/ui/Icon';
 import ContactForm from '../../components/ContactForm';
 
-const discoverData = '/images/how-to/discover-data.png';
-const personalisedDashboards = '/images/how-to/personalised-dashboards.png';
+const discoverImg = '/images/how-to/img-discover.png';
+const exploreImg = '/images/how-to/img-explore.png';
+const uploadImg = '/images/how-to/img-upload.png';
+const createImg = '/images/how-to/img-create.png';
+const shareImg = '/images/how-to/img-share.png';
 
 
 class HowTo extends React.PureComponent {
@@ -66,15 +69,15 @@ class HowTo extends React.PureComponent {
                 <Link to="/explore">See Data</Link>
               </div>
               <div className="column small-12 medium-6">
-                <div className="c-full-width">
-                  <img src={discoverData} alt="Discover data" />
-                </div>
+                <img src={discoverImg} alt="Discover data" />
               </div>
             </div>
           </div>
           <div className="how-to-wrapper">
             <div className="row align-center">
-              <div className="column small-12 medium-6" />
+              <div className="column small-12 medium-6">
+                <img src={exploreImg} alt="Discover data" />
+              </div>
               <div className="column small-12 medium-6">
                 <h3>Explore Climate Projections for Your Geography</h3>
                 <p>
@@ -105,15 +108,15 @@ class HowTo extends React.PureComponent {
                 </p>
                 <Link to="/myprep">See my prep</Link>
               </div>
-              <div className="column small-12 medium-6" />
+              <div className="column small-12 medium-6">
+                <img src={uploadImg} alt="Discover data" />
+              </div>
             </div>
           </div>
           <div className="how-to-wrapper">
             <div className="row align-center">
               <div className="column small-12 medium-6">
-                <div className="c-full-width">
-                  <img src={personalisedDashboards} alt="Personalised dashboards" />
-                </div>
+                <img src={createImg} alt="Personalised dashboards" />
               </div>
               <div className="column small-12 medium-6">
                 <h3>Create Personalized Dashboards</h3>
@@ -143,7 +146,9 @@ class HowTo extends React.PureComponent {
                 </p>
                 <Link to="/dashboards">Know more</Link>
               </div>
-              <div className="column small-12 medium-6" />
+              <div className="column small-12 medium-6">
+                <img src={shareImg} alt="Discover data" />
+              </div>
             </div>
           </div>
         </Article>
