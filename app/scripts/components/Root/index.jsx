@@ -6,9 +6,7 @@ import ShareModalComponent from '../share-modal';
 class Root extends React.Component {
   constructor() {
     super();
-    this.state = {
-      modalWelcomeOpen: false
-    };
+    this.state = { modalWelcomeOpen: false };
   }
 
   componentDidMount() {
@@ -17,7 +15,7 @@ class Root extends React.Component {
       this.setModalWelcome();
     }
 
-    if (this.props.location.pathname.indexOf('embed') === -1) {
+    if ((this.props.location.pathname.indexOf('embed') === -1) && (this.props.location.pathname.indexOf('export') === -1)) {
       const script = document.createElement('script');
       script.type = 'text/javascript';
       script.innerHTML = `window._urq = window._urq || [];
@@ -48,7 +46,7 @@ class Root extends React.Component {
 
         {this.state.modalWelcomeOpen &&
           <WelcomeModal
-            title={'Welcome to PREPdata'}
+            title="Welcome to PREPdata"
             opened={this.state.modalWelcomeOpen}
             close={() => {
               this.setState({ modalWelcomeOpen: false });

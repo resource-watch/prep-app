@@ -9,7 +9,12 @@ export default function () {}
 
 export function getLayerById(layerId) {
   return (dispatch) => {
-    fetch(`${config.apiUrlRW}/layer/${layerId}`)
+    fetch(`${config.apiUrlRW}/layer/${layerId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Upgrade-Insecure-Requests': 1
+      }
+    })
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);

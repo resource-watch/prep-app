@@ -104,6 +104,15 @@
     "bannerBg": "faq"
   },
   {
+    "name": "how-to",
+    "pathname": "/how-to",
+    "metaTitle": "How to",
+    "metaDescription": "",
+    "title": "How to",
+    "bannerSize": "small",
+    "bannerBg": "faq"
+  },
+  {
     "name": "dashboards",
     "pathname": "/dashboards",
     "metaTitle": "Dashboards",

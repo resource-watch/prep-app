@@ -15,7 +15,12 @@ class GraphService {
       ));
 
     return new Promise((resolve, reject) => {
-      fetch(`${process.env.RW_API_URL}/graph/query/search-datasets?${filtersString}&${queryParams}`)
+      fetch(`${process.env.RW_API_URL}/graph/query/search-datasets?${filtersString}&${queryParams}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Upgrade-Insecure-Requests': 1
+      }
+    })
         .then((response) => {
           const { status, statusText } = response;
           if (status === 200) return response.json();
