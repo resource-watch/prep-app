@@ -11,17 +11,14 @@
 .rc-tooltip {
   opacity: 1;
 
-  // arrow
-  .rc-tooltip-arrow {
-    border-bottom-color: $dark-slate-blue;
-  }
-
   .rc-tooltip-inner {
     background-color: $dark-slate-blue;
     border: none;
     border-radius: 4px;
+    padding: 0;
 
     .tooltip-content {
+      padding: 8px 10px;
 
       .title {
         margin: 0;
@@ -29,6 +26,11 @@
         font-size: $normal-font-size;
         font-weight: $font-weight-bold;
         color: $white;
+      }
+
+      // arrow
+      .rc-tooltip-arrow {
+        border-bottom-color: $dark-slate-blue;
       }
 
       .c-explore-slider-tooltip {
@@ -41,6 +43,13 @@
     .rc-tooltip-arrow {
       border-left-color: currentColor;
       border-bottom-color: transparent;
+    }
+  }
+
+
+  &.rc-tooltip-placement-bottom {
+    .rc-tooltip-arrow {
+      border-bottom-color: $dark-slate-blue;
     }
   }
 }
