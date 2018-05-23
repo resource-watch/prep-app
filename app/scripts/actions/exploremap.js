@@ -95,7 +95,12 @@ export function getGeoDataInfo(datasetId, geo) {
     }
     const geoString = JSON.stringify(geo);
 
-    fetch(`${config.apiUrlRW}/query/${datasetId}?sql=SELECT * FROM ${datasetTableName} WHERE ST_INTERSECTS(ST_SetSRID(ST_GeomFromGeoJSON('${geoString}'), 4326), the_geom)`)
+    fetch(`${config.apiUrlRW}/query/${datasetId}?sql=SELECT * FROM ${datasetTableName} WHERE ST_INTERSECTS(ST_SetSRID(ST_GeomFromGeoJSON('${geoString}'), 4326), the_geom)`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Upgrade-Insecure-Requests': 1
+      }
+    })
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
