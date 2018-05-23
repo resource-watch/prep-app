@@ -93,7 +93,7 @@ class App extends React.Component {
         />
         }
 
-        {pathname === '/' &&
+        {(pathname === '/' || pathname === '/how-to') &&
         <ContactForm />
         }
 

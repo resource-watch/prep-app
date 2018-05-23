@@ -107,7 +107,12 @@ export const fetchDatasets = createThunkAction('fetchDatasets', () => (dispatch)
     env: config.datasetEnv || 'production'
   };
   const url = `${config.apiUrlRW}/dataset?${qs.stringify(params)}`;
-  return fetch(url)
+  return fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Upgrade-Insecure-Requests': 1
+      }
+    })
     .then((response) => {
       if (response.ok) return response.json();
       throw Error(response);

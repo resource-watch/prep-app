@@ -14,7 +14,9 @@ class FavouritesService {
       fetch(`${process.env.RW_API_URL}/favourite?${queryParams}`, {
         method: 'GET',
         headers: {
-          Authorization: token
+          Authorization: token,
+          'Content-Type': 'application/json',
+        'Upgrade-Insecure-Requests': 1
         }
       })
         .then((response) => {

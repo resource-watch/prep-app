@@ -16,7 +16,22 @@
       left: 0;
       width: 100%;
     }
+  }
 
+  &.-embed-export {
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    .c-loading-spinner {
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    .leaflet-control-zoom {
+      display: none;
+    }
   }
 
   .map {

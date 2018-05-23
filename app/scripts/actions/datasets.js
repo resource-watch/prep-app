@@ -43,7 +43,12 @@ export function setDatasetActive(dataset) {
 
 export function getDatasetLayer(dataset) {
   return (dispatch) => {
-    fetch(`${config.apiUrlRW}/layer/${dataset.layer[0].id}`)
+    fetch(`${config.apiUrlRW}/layer/${dataset.layer[0].id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Upgrade-Insecure-Requests': 1
+      }
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error(response.statusText);
@@ -132,7 +137,12 @@ export function setDatasetsTagFilter(filter, tag) {
 export function getDatasets(defaultActiveLayers) {
   return (dispatch) => {
     const env = config.datasetEnv || 'production';
-    fetch(`${config.apiUrlRW}/dataset?application=prep&includes=metadata,layer,vocabulary&page[size]=999&status=saved&env=${env}&published=true`)
+    fetch(`${config.apiUrlRW}/dataset?application=prep&includes=metadata,layer,vocabulary&page[size]=999&status=saved&env=${env}&published=true`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Upgrade-Insecure-Requests': 1
+      }
+    })
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
@@ -191,7 +201,12 @@ export function getDatasetByIdOrSlug(datasetIdentifier, includesData) {
 
   return (dispatch) => {
     const env = config.datasetEnv || 'production';
-    fetch(`${config.apiUrlRW}/dataset/${datasetIdentifier}?application=prep${includeQuery}&status=saved&page[size]=999&env=${env}`)
+    fetch(`${config.apiUrlRW}/dataset/${datasetIdentifier}?application=prep${includeQuery}&status=saved&page[size]=999&env=${env}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Upgrade-Insecure-Requests': 1
+      }
+    })
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
@@ -229,7 +244,12 @@ export function getDatasetByIdOrSlug(datasetIdentifier, includesData) {
 
 export function getDatasetDefaultWidget(datasetId) {
   return (dispatch) => {
-    fetch(`${config.apiUrlRW}/widget?application=prep&default=true&dataset=${datasetId}`)
+    fetch(`${config.apiUrlRW}/widget?application=prep&default=true&dataset=${datasetId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Upgrade-Insecure-Requests': 1
+      }
+    })
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);
@@ -264,7 +284,12 @@ export function getDatasetDefaultWidget(datasetId) {
 
 export function getDatasetMetadata(datasetId) {
   return (dispatch) => {
-    fetch(`${config.apiUrlRW}/metadata/${datasetId}`)
+    fetch(`${config.apiUrlRW}/metadata/${datasetId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Upgrade-Insecure-Requests': 1
+      }
+    })
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error(response.statusText);

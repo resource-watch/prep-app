@@ -21,8 +21,10 @@ class ExploreMap extends PureComponent {
   }
 
   render() {
-    const { setMapParams, basemap, labels, water, boundaries, bbox, sidebar, zoom, lat, lng, minZoom, setBasemap,
-      setLabels, setBoundaries, setWater, activeLayers, activeLayersForMap, embed } = this.props;
+    const {
+      setMapParams, basemap, labels, water, boundaries, bbox, sidebar, zoom, lat, lng, minZoom, setBasemap,
+      setLabels, setBoundaries, setWater, activeLayers, activeLayersForMap, embed, embedExport
+    } = this.props;
 
     const currentBasemap = basemapsSpec[basemap];
     const currentLabels = labelsSpec[labels];
@@ -34,9 +36,7 @@ class ExploreMap extends PureComponent {
       center: { lat, lng }
     });
 
-    const classNames = classnames({
-      '-embed': embed
-    });
+    const classNames = classnames({ '-embed': embed, '-embed-export': embedExport });
 
     const { origin, search } = window.location;
 
@@ -53,19 +53,21 @@ class ExploreMap extends PureComponent {
           sidebar={sidebar}
           onChange={setMapParams}
         >
-          <BasemapControl
-            className="-absolute" // pfff....
-            basemap={basemap}
-            water={water}
-            labels={labels}
-            boundaries={boundaries}
-            setBasemap={setBasemap}
-            setLabels={setLabels}
-            setWater={setWater}
-            setBoundaries={setBoundaries}
-          />
+          { !embedExport &&
+            <BasemapControl
+              className="-absolute" // pfff....
+              basemap={basemap}
+              water={water}
+              labels={labels}
+              boundaries={boundaries}
+              setBasemap={setBasemap}
+              setLabels={setLabels}
+              setWater={setWater}
+              setBoundaries={setBoundaries}
+            />
+          }
 
-          {!embed &&
+          {!(embed || embedExport) &&
             <ShareControl
               className="-absolute" // pfff....
               open={this.props.open}
@@ -98,7 +100,7 @@ class ExploreMap extends PureComponent {
             />
           }
 
-          {!embed &&
+          {!(embed || embedExport) &&
             <SearchControl
               className="-absolute -explore"
               onChange={setMapParams}
@@ -110,6 +112,7 @@ class ExploreMap extends PureComponent {
         {!!activeLayers.length &&
           <LegendControl
             collapsed={embed}
+            embedExport={embedExport}
             layersSpec={activeLayers}
             position="topright"
             onSortChange={this.onSortChange}
@@ -133,9 +136,7 @@ class ExploreMap extends PureComponent {
   }
 }
 
-ExploreMap.defaultProps = {
-  activeLayers: []
-};
+ExploreMap.defaultProps = { activeLayers: [] };
 
 ExploreMap.propTypes = {
   basemap: PropTypes.oneOf(['default', 'dark', 'light', 'satellite', 'terrain']),
@@ -148,6 +149,7 @@ ExploreMap.propTypes = {
   lat: PropTypes.number,
   lng: PropTypes.number,
   embed: PropTypes.bool,
+  embedExport: PropTypes.bool,
   open: PropTypes.bool,
   bbox: PropTypes.any,
   sidebar: PropTypes.object,

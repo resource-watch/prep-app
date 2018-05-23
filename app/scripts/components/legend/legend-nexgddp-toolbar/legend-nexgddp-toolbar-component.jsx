@@ -29,7 +29,12 @@ class LegendNexGDDPToolbar extends PureComponent {
     const { indicator } = layerConfig;
     const url = `${config.apiUrlRW}/nexgddp/info/${indicator}`;
 
-    fetch(url)
+    fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Upgrade-Insecure-Requests': 1
+      }
+    })
       .then((response) => {
         if (response.ok) return response.json();
         throw Error(response);
