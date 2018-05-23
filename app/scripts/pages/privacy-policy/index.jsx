@@ -1,8 +1,8 @@
 import React from 'react';
-import Article from '../Content/Article';
+import Article from '../../components/Content/Article';
 import { Link } from 'react-router';
 
-class TermsOfService extends React.Component {
+class TermsOfService extends React.PureComponent {
   render() {
     return (
       <div className="c-privacy-policy">
