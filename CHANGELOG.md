@@ -10,15 +10,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - An error removing cache in backoffice.
 - Error creating widget after create a dataset.
+- Fixed user avatar icon when photo doesn`t exist.
 
 ### Added
 - Header to remove cache in all requests in the app.
 - Added link to how-to page.
 - Added a new sub-menu for about pages.
+- Added new styles for submenu.
 
 ### Updated
 - Updated wysiwyg to 1.1.14 version.
 - Changed height for some widgets in dashboard.
+- Removed background in headers.
+- Removed breacrumbs.
 
 ## [1.2.0] - 2018-05-14
 
