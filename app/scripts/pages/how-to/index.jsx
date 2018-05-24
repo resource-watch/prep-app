@@ -89,8 +89,8 @@ class HowTo extends React.PureComponent {
                   determine how each indicator is projected to change for any point
                   you’re interested in.
                 </p>
-                <Link to="/explore">EXPLORE THE NEX-GDDP DATA</Link>
-                <Link to="/explore">EXPLORE THE LOCA DATA</Link>
+                <Link to="/explore?basemap=default&bbox&boundaries=false&filterQuery=NEX&labels=none&lat=48.46038&lng=-123.889823&location=global&minZoom=3&tab=all_datasets&water=none&zoom=3">EXPLORE THE NEX-GDDP DATA</Link>
+                <Link to="/explore?basemap=default&bbox&boundaries=false&filterQuery=Pierce+et+al.&labels=none&lat=48.46038&lng=-123.889823&location=global&minZoom=3&tab=all_datasets&water=none&zoom=3">EXPLORE THE LOCA DATA</Link>
               </div>
             </div>
           </div>
@@ -128,7 +128,7 @@ class HowTo extends React.PureComponent {
                   see what data similar communities are using to build resilience
                   around the world.
                 </p>
-                <Link to="/dashboards">SEE A SAMPLE USER DASHBOARD</Link>
+                <Link to="/dashboards/sample-dashboard-landslides-in-western-south-america">SEE A SAMPLE USER DASHBOARD</Link>
               </div>
             </div>
           </div>
@@ -144,7 +144,7 @@ class HowTo extends React.PureComponent {
                   visualizations on your own website or add them to your custom
                   dashboard.
                 </p>
-                <Link to="/dashboards">Know more</Link>
+                <Link to="/myprep">See my prep</Link>
               </div>
               <div className="column small-12 medium-6">
                 <img src={shareImg} alt="Discover data" />
@@ -160,14 +160,14 @@ class HowTo extends React.PureComponent {
                 <div className="c-card -border -border-neutral">
                   <h3>Introduction to PREPdata</h3>
                   <p>Lorem ipsum dolor sit amet, conse etur adipiscing elit.Nullam id nibh tricies.</p>
-                  <a href="#">EXPLORE PREP’S DATA</a>
+                  <a href="https://youtu.be/AJzz9-76Bgk">INTRODUCTION TO PREPDATA</a>
                 </div>
               </div>
               <div className="column small-12 medium-4">
                 <div className="c-card -border -border-neutral">
                   <h3>Explore the Data</h3>
                   <p>Lorem ipsum dolor sit amet, conse etur adipiscing elit.Nullam id nibh tricies.</p>
-                  <a href="#">EXPLORE PREP’S DATA</a>
+                  <a href="https://youtu.be/7PmMh6DWCbA">EXPLORE PREP’S DATA</a>
                 </div>
               </div>
               <div className="column small-12 medium-4">

@@ -9,7 +9,7 @@ $header-bg-color: $dark-slate-blue-2;
 
 .l-header-nav {
   position: relative;
-  background-color: $dark-slate-blue;
+  background-color: transparent;
   height: $header-height;
   z-index: 1;
 
@@ -19,6 +19,7 @@ $header-bg-color: $dark-slate-blue-2;
 
   &.-short {
     height: $header-height-short;
+    background-color: $dark-slate-blue;
   }
 
   .logo {
@@ -32,11 +33,6 @@ $header-bg-color: $dark-slate-blue-2;
     &:after {
       font-size: 10px;
     }
-  }
-
-  &.-short .user-avatar {
-    width: 35px;
-    height: 35px;
   }
 }
 
@@ -77,7 +73,7 @@ $header-bg-color: $dark-slate-blue-2;
   .c-user-options {
     right: 0;
     left: auto;
-    transform: none;
+    transform: translate(-10px, 10px);
 
     &:before {
       transform: translate(-33px, -100%);

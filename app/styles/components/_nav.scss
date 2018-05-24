@@ -1,7 +1,70 @@
 .c-nav {
   &.-main, &.-secondary {
+    position: relative;
+
     & > ul {
       justify-content: flex-end;
+    }
+  }
+
+  .submenu {
+    position: absolute;
+    width: auto;
+    min-width: 160px;
+    margin-top: 22px;
+    left: 50%;
+    top: 50%;
+    padding-top: 10px;
+
+    z-index: 1000;
+    transform: translate(-50%, 7px);
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 10px;
+      pointer-events: none;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid $dark-slate-blue;
+      border-right: 8px solid transparent;
+      border-left: 8px solid transparent;
+      transform: translate(-50%, -100%)
+    }
+
+    .submenu-list {
+      padding: 7px 15px;
+
+      background-color: $dark-slate-blue;
+      border: 0;
+      border-radius: 4px;
+      box-shadow: 0 7px 15px 0 rgba(0, 0, 0, 0.15);
+
+      text-align: center;
+      list-style: none;
+
+      li {
+        margin: 1rem 0;
+
+        color: white;
+        list-style: none;
+        font-weight: 500;
+        text-transform: none;
+
+        a {
+          color: white;
+          text-decoration: none;
+
+          &:hover {
+            color: $light-gold;
+          }
+
+          &.-current {
+            font-weight: bold;
+            color: $light-gold;
+          }
+        }
+      }
     }
   }
 
@@ -18,7 +81,7 @@
 
       & > a {
         display: block;
-        padding: 38px 0;
+        padding: 30px 0;
         color: $inverse-font-color;
 
         border-top: 5px solid transparent;
