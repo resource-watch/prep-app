@@ -37,7 +37,7 @@
     font-size: 22px;
     font-weight: 500;
 
-    background-color: #263E57;
+    background-color: darken($dark-slate-blue, 10);
     border-radius: 100%;
   }
 }
@@ -49,10 +49,6 @@
     .icon-nav-user, .user-initials, .user-avatar {
       width: 35px;
       height: 35px;
-    }
-
-    .user-initials {
-      background-color: #263E57;
     }
   }
 }
