@@ -6,7 +6,6 @@ import PartnersSlider from '../../containers/PartnersSlider';
 import SecondaryNav from '../../components/Navigation/SecondaryNav';
 import SocialNav from '../../components/Navigation/SocialNav';
 import MainNav from '../../components/Navigation/MainNav';
-import Breadcrumbs from '../../components/Navigation/Breadcrumbs';
 import Banner from '../../components/Banner';
 import SummaryCards from '../../components/SummaryCards';
 import ContactForm from '../../components/ContactForm';
@@ -72,7 +71,6 @@ class App extends React.Component {
             </div>
           </div>
           <div className="l-header-banner">
-            <Breadcrumbs pathname={this.props.location.pathname} />
             <Banner
               bg={currentData.bannerBg}
               size={currentData.bannerSize}

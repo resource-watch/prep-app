@@ -10,6 +10,14 @@ function MainNav() {
       <ul>
         <li>
           <Link activeClassName="-current" to="/about">About</Link>
+          <div className="c-user-options">
+            <ul className="user-options-list">
+              <li><Link activeClassName="-current" to="/partners">Partners</Link></li>
+              <li><Link activeClassName="-current" to="/faqs">FAQs</Link></li>
+              <li><Link activeClassName="-current" to="/how-to">How to</Link></li>
+              <li><Link activeClassName="-current" to="/contact">Contact us</Link></li>
+            </ul>
+          </div>
         </li>
         <li>
           <Link activeClassName="-current" to="/explore">Explore</Link>
@@ -20,9 +28,6 @@ function MainNav() {
         <li>
           <Link activeClassName="-current" to="/stories">Stories</Link>
         </li>
-        {/* <li>
-          <Link activeClassName="-current" to="/create">Create</Link>
-        </li> */}
         <li>
           <Link activeClassName="-current" to="/resources">Resources</Link>
         </li>

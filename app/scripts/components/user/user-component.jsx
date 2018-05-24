@@ -12,6 +12,16 @@ import UserOptions from '../user-options/user-options-component';
 // styles
 import './user-style.scss';
 
+const Avatar = function({ user }) {
+  if (user.photo && user.photo !== '') return <div className="user-avatar" style={{ backgroundImage: `url(${user.photo})` }} />;
+
+  return (
+    <div className="user-initials">
+      {user.name[0]}
+    </div>
+  );
+};
+
 class User extends React.PureComponent {
   static handleLogOut(e) {
     if (e) e.preventDefault();
@@ -36,6 +46,7 @@ class User extends React.PureComponent {
       session,
       data
     } = this.props;
+
     return (
       <div
         className="c-user"
@@ -43,7 +54,7 @@ class User extends React.PureComponent {
         onMouseLeave={() => handleHover(false)}
       >
         { session && !isEmpty(data) ?
-          <div className="user-avatar" style={{ backgroundImage: `url(${data.photo})` }} />
+          <Avatar user={data} />
           :
           <div className="user-empty">
             <Icon name="icon-user" className="-extra-large" />

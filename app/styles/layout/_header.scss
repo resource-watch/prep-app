@@ -9,7 +9,7 @@ $header-bg-color: $dark-slate-blue-2;
 
 .l-header-nav {
   position: relative;
-  background-color: $dark-slate-blue;
+  background-color: transparent;
   height: $header-height;
   z-index: 1;
 
@@ -19,6 +19,7 @@ $header-bg-color: $dark-slate-blue-2;
 
   &.-short {
     height: $header-height-short;
+    background-color: $dark-slate-blue;
   }
 
   .logo {

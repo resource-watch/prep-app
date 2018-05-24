@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 - Header to remove cache in all requests in the app.
+- Added link to how-to page.
+- Added a new sub-menu for about pages.
 
 ### Updated
 - Updated wysiwyg to 1.1.14 version.
@@ -24,14 +26,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Favourites datasets takes metadata title.
 - Fixed cache issue related with adding widgets in dashboards
 - 404 when saving widgets from LOCA detail page.
-- Global filter is not working. [WIP]
+- Global filter is not working.
 - Map widget failing to load in dashboard creation tool.
 - Ensure only admin users can update metadata.
 
 ### Added
 - Added anaylitics events for favourites actions.
 - Added export router for PDF embeds
-- Added how to page [WIP]
+- Added how to page.
 - Added support for environments in app entities.
 - Added fields to manage environments in the admin.
 - Added call to action on dashboard page to create their own.
