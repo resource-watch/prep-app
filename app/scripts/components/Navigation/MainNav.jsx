@@ -28,8 +28,8 @@ class MainNav extends React.Component {
             onMouseLeave={() => this.handleHover({ aboutActive: false })}
           >
             <Link activeClassName="-current" to="/about">About</Link>
-            { aboutActive && <div className="c-user-options">
-              <ul className="user-options-list">
+            { aboutActive && <div className="submenu">
+              <ul className="submenu-list">
                 <li><Link activeClassName="-current" to="/partners">Partners</Link></li>
                 <li><Link activeClassName="-current" to="/faqs">FAQs</Link></li>
                 <li><Link activeClassName="-current" to="/how-to">How to</Link></li>

@@ -34,11 +34,6 @@ $header-bg-color: $dark-slate-blue-2;
       font-size: 10px;
     }
   }
-
-  &.-short .user-avatar {
-    width: 35px;
-    height: 35px;
-  }
 }
 
 .l-header-tools-map {
@@ -78,7 +73,7 @@ $header-bg-color: $dark-slate-blue-2;
   .c-user-options {
     right: 0;
     left: auto;
-    transform: none;
+    transform: translate(-10px, 10px);
 
     &:before {
       transform: translate(-33px, -100%);
