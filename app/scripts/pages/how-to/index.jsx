@@ -128,7 +128,7 @@ class HowTo extends React.PureComponent {
                   see what data similar communities are using to build resilience
                   around the world.
                 </p>
-                <Link to="/dashboards/sample-dashboard-landslides-in-western-south-america">SEE A SAMPLE USER DASHBOARD</Link>
+                <a href="/dashboards/sample-dashboard-landslides-in-western-south-america">SEE A SAMPLE USER DASHBOARD</a>
               </div>
             </div>
           </div>
@@ -144,7 +144,7 @@ class HowTo extends React.PureComponent {
                   visualizations on your own website or add them to your custom
                   dashboard.
                 </p>
-                <Link to="/myprep">See my prep</Link>
+                <a href="/myprep">See my prep</a>
               </div>
               <div className="column small-12 medium-6">
                 <img src={shareImg} alt="Discover data" />
