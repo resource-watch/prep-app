@@ -5,20 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 2018-05-21
+
+### Fixed
+- An error removing cache in backoffice.
+- Error creating widget after create a dataset.
+- Fixed user avatar icon when photo doesn`t exist.
+
+### Added
+- Header to remove cache in all requests in the app.
+- Added link to how-to page.
+- Added a new sub-menu for about pages.
+- Added new styles for submenu.
+
+### Updated
+- Updated wysiwyg to 1.1.14 version.
+- Changed height for some widgets in dashboard.
+- Removed background in headers.
+- Removed breacrumbs.
+
 ## [1.2.0] - 2018-05-14
 
 ### Fixed
 - Favourites datasets takes metadata title.
 - Fixed cache issue related with adding widgets in dashboards
 - 404 when saving widgets from LOCA detail page.
-- Global filter is not working. [WIP]
+- Global filter is not working.
 - Map widget failing to load in dashboard creation tool.
 - Ensure only admin users can update metadata.
 
 ### Added
 - Added anaylitics events for favourites actions.
 - Added export router for PDF embeds
-- Added how to page [WIP]
+- Added how to page.
 - Added support for environments in app entities.
 - Added fields to manage environments in the admin.
 - Added call to action on dashboard page to create their own.
