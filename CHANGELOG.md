@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Changed height for some widgets in dashboard.
 - Removed background in headers.
 - Removed breacrumbs.
+- Updated filters.
 
 ## [1.2.0] - 2018-05-14
 
