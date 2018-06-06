@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { coreDatasets } from './core-datasets-list-constants';
+import coreDatasets from './core-datasets-list-data.json';
 
 const getAllDatasets = state => state.explorePage.datasets.items;
 const getLocationFilter = state => state.explorePage.coreDatasets.location;
