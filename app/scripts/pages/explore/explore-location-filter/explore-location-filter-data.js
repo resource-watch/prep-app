@@ -6,12 +6,12 @@ export default [
   },
   {
     id: 1,
-    label: 'US-Specific',
+    label: 'US',
     value: 'usa'
   },
   {
     id: 2,
-    label: 'India-specific',
+    label: 'India',
     value: 'ind'
   }
 ];
