@@ -16,9 +16,7 @@ export default class BasemapControl extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      active: false
-    };
+    this.state = { active: false };
 
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.onScreenClick = this.onScreenClick.bind(this);
@@ -89,21 +87,15 @@ export default class BasemapControl extends React.Component {
     const currentLabels = labelsSpec[labels];
     const currentWater = waterSpec[water];
 
-    const classNames = classnames({
-      [this.props.className]: !!this.props.className
-    });
+    const classNames = classnames({ [this.props.className]: !!this.props.className });
 
     return (
       <div className={`c-basemap-control ${classNames}`}>
         <TetherComponent
           attachment="bottom right"
-          constraints={[{
-            to: 'window'
-          }]}
+          constraints={[{ to: 'window' }]}
           targetOffset="-2px 100%"
-          classes={{
-            element: 'c-tooltip -arrow-bottom-right basemap-tooltip'
-          }}
+          classes={{ element: 'c-tooltip -arrow-bottom-right basemap-tooltip' }}
         >
           {/* First child: This is what the item will be tethered to */}
           <button
@@ -126,9 +118,7 @@ export default class BasemapControl extends React.Component {
                   };
                 })}
                 name="basemap"
-                properties={{
-                  default: currentBasemap.id
-                }}
+                properties={{ default: currentBasemap.id }}
                 onChange={this.onBasemapChange}
               />
 
@@ -142,9 +132,7 @@ export default class BasemapControl extends React.Component {
                   };
                 })}
                 name="labels"
-                properties={{
-                  default: currentLabels.id
-                }}
+                properties={{ default: currentLabels.id }}
                 onChange={this.onLabelChange}
               />
 
@@ -158,9 +146,7 @@ export default class BasemapControl extends React.Component {
                   };
                 })}
                 name="water"
-                properties={{
-                  default: currentWater.id
-                }}
+                properties={{ default: currentWater.id }}
                 onChange={this.onWaterChange}
               />
 

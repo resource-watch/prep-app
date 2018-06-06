@@ -21,9 +21,7 @@ const initialState = {
   },
   zoomPosition: 'bottomright',
   basemap: BASEMAPS.default,
-  basemapControl: {
-    basemaps: BASEMAPS
-  },
+  basemapControl: { basemaps: BASEMAPS },
   labels: false,
   boundaries: false,
   basemapOptions: { maxZoom: 18 },
@@ -70,19 +68,13 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, { interactionData });
     }
     case SET_BASEMAP: {
-      return Object.assign({}, state, {
-        basemap: action.payload
-      });
+      return Object.assign({}, state, { basemap: action.payload });
     }
     case SET_LABELS: {
-      return Object.assign({}, state, {
-        labels: action.payload
-      });
+      return Object.assign({}, state, { labels: action.payload });
     }
     case SET_BOUNDARIES: {
-      return Object.assign({}, state, {
-        boundaries: action.payload
-      });
+      return Object.assign({}, state, { boundaries: action.payload });
     }
     default:
       return state;

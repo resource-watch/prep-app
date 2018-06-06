@@ -8,9 +8,7 @@ const rootPath = process.cwd();
 
 const config = {
 
-  entry: {
-    app: [path.join(rootPath, 'app/scripts/index.jsx')]
-  },
+  entry: { app: [path.join(rootPath, 'app/scripts/index.jsx')] },
 
   output: {
     path: path.join(rootPath, 'dist/'),

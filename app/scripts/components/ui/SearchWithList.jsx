@@ -17,9 +17,7 @@ export default class Search extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      open: false
-    };
+    this.state = { open: false };
 
     this.onToggle = this.onToggle.bind(this);
     this.onSearch = debounce(this.onSearch.bind(this), 150);
@@ -55,9 +53,7 @@ export default class Search extends React.Component {
     const { className, label, placeholder } = this.props;
     const classNames = classnames(
       'c-search',
-      {
-        [className]: !className
-      }
+      { [className]: !className }
     );
 
     return (

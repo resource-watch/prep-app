@@ -23,10 +23,13 @@ class FAQ extends React.PureComponent {
               href="http://www.ipcc.ch"
               target="_blank"
             >Intergovernmental
-              Panel on Climate Change (IPCC)</a> and in the United States in the <a
-                href="http://nca2014.globalchange.gov/" target="_blank"
-              >U.S. National Climate
-              Assessment</a>. For additional information please visit the <Link to="/resources">Resources</Link> page.
+              Panel on Climate Change (IPCC)
+            </a> and in the United States in the <a
+                                             href="http://nca2014.globalchange.gov/"
+                                             target="_blank"
+                                           >U.S. National Climate
+              Assessment
+                                                                                </a>. For additional information please visit the <Link to="/resources">Resources</Link> page.
           </p>
 
           <h3>How do I deal with uncertainty in planning for the future?</h3>
@@ -41,9 +44,11 @@ class FAQ extends React.PureComponent {
           <h3>How can I get involved?</h3>
           <p>We appreciate any feedback and suggestions. Please contact us at <a
             href="mailto:info@prepdata.org"
-          >info@prepdata.org</a> or fill out this <Link
-            to="/contact"
-          >form</Link>.
+          >info@prepdata.org
+          </a> or fill out this <Link
+                                                                                to="/contact"
+                                                                              >form
+                                                                                                    </Link>.
           </p>
           <p>If you would like to <Link to="/about">join</Link> PREP, please express your interest by filling out this <a href="https://docs.google.com/forms/d/e/1FAIpQLSeXe9mfEvFr-dIpj87-lCi6NlnWRKHP-5qBj3E46ISrdiwOHg/viewform?c=0&w=1&usp=send_form" target="_blank">form</a>, describing how your organization or company could contribute to the PREP mission, and how you meet the partner criteria. During the application process, partners self-select into one of three categories: Core Partner (high level of engagement), Contributing Partner (moderate level of engagement), or Resource Partner (low level of engagement). These categories and the roles corresponding to each will be explained in greater detail during an informational session.
           </p>
@@ -59,7 +64,8 @@ class FAQ extends React.PureComponent {
           <h3>How do I find data in PREPdata?</h3>
           <p>All data on PREPdata can be found in the <Link to="/explore">Explore</Link> section. You can also find a list of climate-related data portals on the <Link
             to="/resources"
-          >Resources</Link> page.
+          >Resources
+          </Link> page.
           </p>
 
           <h3>What if I have difficulty downloading data?</h3>
@@ -85,15 +91,20 @@ class FAQ extends React.PureComponent {
           <p>If you are interested in data storytelling, you may wish to try Esri <a
             href="https://storymaps.arcgis.com/en/"
             target="_blank"
-          >Story Maps</a>.</p>
+          >Story Maps
+          </a>.
+          </p>
 
           <h3>Which web browser should I use to explore this site?</h3>
           <p>For the best experience, we recommend using a modern web browser such as <a
             href="https://www.google.com/chrome/"
-          >Chrome</a> or <a
-            href="https://www.mozilla.org/en-US/firefox/"
-            target="_blank"
-          >Firefox</a>.</p>
+          >Chrome
+          </a> or <a
+                                                                                        href="https://www.mozilla.org/en-US/firefox/"
+                                                                                        target="_blank"
+                                                                                      >Firefox
+                                                                                              </a>.
+          </p>
 
           <h3>May I have permission to use the content in your site?</h3>
           <p>Most of the datasets on PREPdata carry their own licenses, which you can find

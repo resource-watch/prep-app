@@ -108,12 +108,8 @@ const MetadataInfo = ({ dataset }) => {
   );
 };
 
-MetadataInfo.propTypes = {
-  dataset: React.PropTypes.object.isRequired
-};
+MetadataInfo.propTypes = { dataset: React.PropTypes.object.isRequired };
 
-MetadataInfo.deafultProps = {
-  dataset: {}
-};
+MetadataInfo.deafultProps = { dataset: {} };
 
 export default MetadataInfo;

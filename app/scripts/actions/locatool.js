@@ -600,9 +600,7 @@ export function getSelectorsInfo() {
 }
 
 export function resetState() {
-  return dispatch => Promise.resolve(dispatch({
-    type: LOCA_RESET_STATE
-  }));
+  return dispatch => Promise.resolve(dispatch({ type: LOCA_RESET_STATE }));
 }
 
 export function setDataset(dataset) {

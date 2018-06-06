@@ -72,9 +72,7 @@ class Validator {
 
       return {
         valid,
-        error: (!valid) ? {
-          message
-        } : null
+        error: (!valid) ? { message } : null
       };
     });
   }

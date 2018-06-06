@@ -6,16 +6,12 @@ class CollectionsService {
    * @param {*} token User's token
    */
   static getAllCollections(token) {
-    const queryParams = queryString.stringify({
-      application: [process.env.APPLICATIONS]
-    });
+    const queryParams = queryString.stringify({ application: [process.env.APPLICATIONS] });
 
     return new Promise((resolve, reject) => {
       fetch(`${process.env.RW_API_URL}/collection?${queryParams}`, {
         method: 'GET',
-        headers: {
-          Authorization: token
-        }
+        headers: { Authorization: token }
       })
         .then((response) => {
           const { status, statusText } = response;
@@ -43,9 +39,7 @@ class CollectionsService {
     return new Promise((resolve, reject) => {
       fetch(`${process.env.RW_API_URL}/collection/${collectionId}`, {
         method: 'GET',
-        headers: {
-          Authorization: token
-        }
+        headers: { Authorization: token }
       })
         .then((response) => {
           const { status, statusText } = response;
@@ -111,9 +105,7 @@ class CollectionsService {
     return new Promise((resolve, reject) => {
       fetch(`${process.env.RW_API_URL}/collection/${collectionId}`, {
         method: 'DELETE',
-        headers: {
-          Authorization: token
-        }
+        headers: { Authorization: token }
       })
         .then((response) => {
           const { status, statusText } = response;
@@ -143,12 +135,8 @@ class CollectionsService {
     return new Promise((resolve, reject) => {
       fetch(`${process.env.RW_API_URL}/collection/${collectionId}`, {
         method: 'PATCH',
-        headers: {
-          Authorization: token
-        },
-        body: {
-          name
-        }
+        headers: { Authorization: token },
+        body: { name }
       })
         .then((response) => {
           const { status, statusText } = response;
@@ -215,9 +203,7 @@ class CollectionsService {
     return new Promise((resolve, reject) => {
       fetch(`${process.env.RW_API_URL}/collection/${collectionId}/resource/${type}/${id}`, {
         method: 'DELETE',
-        headers: {
-          Authorization: token
-        },
+        headers: { Authorization: token },
         body: {}
       })
         .then((response) => {

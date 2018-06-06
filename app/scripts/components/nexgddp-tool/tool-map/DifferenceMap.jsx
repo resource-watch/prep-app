@@ -101,13 +101,9 @@ class DifferenceMap extends React.PureComponent {
 
     const currentLayer = layers.length ? layers[0] : null;
 
-    const mapClassNames = classnames({
-      '-crosshair': markerMode
-    });
+    const mapClassNames = classnames({ '-crosshair': markerMode });
 
-    const makerControlClassNames = classnames({
-      '-active': markerMode
-    });
+    const makerControlClassNames = classnames({ '-active': markerMode });
 
     return (
       <div className="c-tool-map">

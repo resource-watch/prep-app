@@ -96,9 +96,11 @@ function Create() {
             <h2>Become a pilot user</h2>
             <p>Would you like to develop a dashboard? Or share stories from your community? Over
               the coming months we plan to work with communities around the globe to help them
-              develop their own dashboards.</p>
+              develop their own dashboards.
+            </p>
             <p>We can only work with a few groups at this time. Let us know why you think you would
-              be an ideal group to pilot the PREP Platform.</p>
+              be an ideal group to pilot the PREP Platform.
+            </p>
             <Form type="Request access" />
           </div>
         </div>

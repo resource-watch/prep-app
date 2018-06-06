@@ -8,9 +8,7 @@ class CollapsibleItem extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      hidden: props.hidden || false
-    };
+    this.state = { hidden: props.hidden || false };
 
     // Bindings
     this.onToggleList = this.onToggleList.bind(this);

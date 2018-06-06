@@ -16,8 +16,6 @@ export const LegendProportional = ({ legendSpec }) => (
   </ul>
 );
 
-LegendProportional.propTypes = {
-  legendSpec: PropTypes.object.isRequired
-};
+LegendProportional.propTypes = { legendSpec: PropTypes.object.isRequired };
 
 export default LegendProportional;

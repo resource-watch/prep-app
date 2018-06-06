@@ -8,9 +8,7 @@ import actions from './auth-actions';
 import initialState from './auth-reducer-initial-state';
 import * as reducers from './auth-reducer';
 
-const mapStateToProps = state => ({
-  session: state.auth.session
-});
+const mapStateToProps = state => ({ session: state.auth.session });
 
 class AuthContainer extends Component {
   componentWillMount() {

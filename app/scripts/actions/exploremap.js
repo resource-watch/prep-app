@@ -64,9 +64,7 @@ export function setDatasetSelected(datasetId) {
 }
 
 export function deselectDataset() {
-  return {
-    type: MAP_DESELECT_DATASET
-  };
+  return { type: MAP_DESELECT_DATASET };
 }
 
 export function setInteractionPosition(position) {

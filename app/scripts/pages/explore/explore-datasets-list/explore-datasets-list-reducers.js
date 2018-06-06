@@ -22,9 +22,7 @@ function addExploreAttributes(items, activeDatasets) {
       zIndex: 0,
       layerIndex: 0,
       isLayerActive: !!existingDataset
-    }, existingDataset || {}, dataset, {
-      layer: layers
-    });
+    }, existingDataset || {}, dataset, { layer: layers });
   });
 }
 
@@ -158,8 +156,7 @@ export const setMultiActiveLayer = (state, { payload }) => {
     if (d.id === id && (d.provider === 'nexgddp' || d.provider === 'loca')) {
       const currentLayer = d.metadata[0].info[d.provider].layers.find(l =>
         l.temp_resolution === temporalResolution.value &&
-        l.scenario === scenario.value
-      );
+        l.scenario === scenario.value);
 
       if (!currentLayer) {
         console.error('There is no layer with the params selected. Check that metadata has all the possibilities');

@@ -5,16 +5,14 @@ export const initialState = {
   graphs: [] // array of dataset ID matching the graph criteria
 };
 
-export const setDataFilters = (state, { payload }) => {
-  return ({
-    ...state,
-    datasetFilters: {
-      ...state.datasetFilters,
-      data: Object.assign({}, payload),
-      originalData: Object.assign({}, payload)
-    }
-  });
-};
+export const setDataFilters = (state, { payload }) => ({
+  ...state,
+  datasetFilters: {
+    ...state.datasetFilters,
+    data: Object.assign({}, payload),
+    originalData: Object.assign({}, payload)
+  }
+});
 
 export const updateDataFilters = (state, { payload }) => ({
   ...state,

@@ -8,9 +8,7 @@ class RadioGroup extends FormElement {
   constructor(props) {
     super(props);
 
-    this.state = {
-      value: props.properties.default
-    };
+    this.state = { value: props.properties.default };
   }
 
   /**
@@ -19,9 +17,7 @@ class RadioGroup extends FormElement {
   */
   triggerChange(e) {
     // Set state
-    this.setState({
-      value: e.currentTarget.value
-    }, () => {
+    this.setState({ value: e.currentTarget.value }, () => {
       // Trigger validation
       this.triggerValidate();
 

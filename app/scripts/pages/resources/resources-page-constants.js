@@ -12,6 +12,4 @@ export const RESOURCES_CATEGORIES = [{
   value: 'Multi-resource Platforms'
 }];
 
-export default {
-  RESOURCES_CATEGORIES
-};
+export default { RESOURCES_CATEGORIES };

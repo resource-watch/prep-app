@@ -1,6 +1,4 @@
-import {
-  SET_INFO_SIDEBAR_METADATA
-} from '../constants';
+import { SET_INFO_SIDEBAR_METADATA } from '../constants';
 
 export default function () {}
 

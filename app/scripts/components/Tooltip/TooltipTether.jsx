@@ -78,9 +78,7 @@ class Tooltip extends React.Component {
           // the cursor is at the top of the iframe
           to: 'scrollParent'
         }]}
-        classes={{
-          element: tooltipClasses
-        }}
+        classes={{ element: tooltipClasses }}
         offset="20px 0" // The offset is needed for the follow option
       >
         <div
@@ -100,12 +98,8 @@ Tooltip.propTypes = {
   setTooltipPosition: PropTypes.func
 };
 
-const mapStateToProps = ({ tooltip }) => ({
-  tooltip
-});
+const mapStateToProps = ({ tooltip }) => ({ tooltip });
 
-const mapDispatchToProps = dispatch => ({
-  setTooltipPosition: (pos) => { dispatch(setTooltipPosition(pos)); }
-});
+const mapDispatchToProps = dispatch => ({ setTooltipPosition: (pos) => { dispatch(setTooltipPosition(pos)); } });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tooltip);

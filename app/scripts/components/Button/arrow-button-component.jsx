@@ -12,7 +12,8 @@ const ArrowButton = (props) => {
       '-hidden': (!props.infinite && (props.next && Math.ceil(props.slideCount / props.slidesToShow)) === props.currentSlide + 1)
         || (!props.infinite && (!props.next && props.currentSlide === 0)),
       '-full': props.full
-    });
+    }
+  );
 
   return (
     <button

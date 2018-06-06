@@ -24,7 +24,8 @@ class AboutPage extends PureComponent {
                 and socioeconomic data should be accessible and usable for everyone. We are a partnership of leading research institutions,
                 government agencies, adaptation practitioners, and technology companies, working to empower communities and businesses around the
                 world to build resilience to climate change by improving access to data, creating best-in-class tools, and helping people navigate
-                the complicated resilience planning landscape.</p>
+                the complicated resilience planning landscape.
+              </p>
             </div>
             <div className="column small-12">
               <div className="cards">
@@ -62,17 +63,20 @@ class AboutPage extends PureComponent {
             Adaptation and resilience practitioners face a confusing and fragmented landscape of platforms and tools, and lack guidance on how to
             understand and manage climate risk using the data available. This problem is exacerbated by a lack of feedback mechanisms to help
             data providers understand user needs. PREP addresses these challenges by opening the lines of communication between data providers
-            and users–and by providing easy access to a curated set of data and tools, which is driven by user input.</p>
+            and users–and by providing easy access to a curated set of data and tools, which is driven by user input.
+          </p>
         </Article>
 
         <Article ref={(ref) => { this.approach = ref; }}>
           <h2>Our Approach</h2>
           <p>Our Approach PREP is tackling the climate preparedness challenge by applying the knowledge and networks of a unique
             cross-sectoral partnership, and by building an online platform designed to meet the evolving needs of the climate adaptation
-            planning community.</p>
+            planning community.
+          </p>
           <h3>The Partnership</h3>
           <p>The PREP Partnership brings together stakeholders from the public, private and nonprofit sectors, including government agencies,
-                leading technology companies and networks of climate preparedness practitioners. The Partnership supports the adaptation planning community by:</p>
+                leading technology companies and networks of climate preparedness practitioners. The Partnership supports the adaptation planning community by:
+          </p>
           <ul>
             <li>Promoting dialogue between climate data providers and users;</li>
             <li>Soliciting input on user needs and data priorities to streamline and curate data for resilience planning;</li>
@@ -87,7 +91,8 @@ class AboutPage extends PureComponent {
           <p>PREPdata is a map-based, open data online platform that allows users to access and visualize spatial data reflecting past and future climate,
             as well as the physical and socioeconomic landscape for climate adaptation and resilience planning. The platform is continuing to evolve
             through the input of PREP partners and PREPdata users. It is a flexible tool for climate adaptation planning, designed to address many
-            of the gaps and challenges adaptation practitioners face.</p>
+            of the gaps and challenges adaptation practitioners face.
+          </p>
           <p>Distinguishing elements of PREPdata:</p>
 
           <ul>
@@ -105,7 +110,8 @@ class AboutPage extends PureComponent {
             could affect the wine-growing and tourism-dependent region. In India, PREPdata is being used to support climate adaptation plans in
             two Indian states – Uttarakhand and Madhya Pradesh – through the development of state-level dashboards to track key indicators of
             climate hazard, vulnerability and adaptation.  In Africa, PREP partners are exploring the use of PREPdata as a platform for regional-scale
-            analysis of vulnerability to climate change.</p>
+            analysis of vulnerability to climate change.
+          </p>
 
           <p>Stay tuned for outputs from ongoing PREP-supported applications as they unfold.</p>
         </Article>
@@ -115,17 +121,20 @@ class AboutPage extends PureComponent {
           <p>To become a partner, please express your interest by filling out this <a href={PARTNERS_APPLICATION_FORM_URL} target="_blank" rel="noopener noreferrer">form</a>,
             describing how your organization or company could contribute to the PREP mission, and how you meet the partner criteria. During the application
             process, partners self-select into one of three categories: Core Partner (high level of engagement), Contributing Partner (moderate level of engagement),
-            or Resource Partner (low level of engagement). These categories and the roles corresponding to each will be explained in greater detail during an informational session.</p>
+            or Resource Partner (low level of engagement). These categories and the roles corresponding to each will be explained in greater detail during an informational session.
+          </p>
 
           <p>Partner criteria are:</p>
 
           <ul>
             <li>A commitment to support the PREP mission through in-kind or direct contributions, for example: sharing resources, tools, or expertise; contributing
-              to PREPdata or facilitation of the partnership; or raising awareness of the partnership through your networks;</li>
+              to PREPdata or facilitation of the partnership; or raising awareness of the partnership through your networks;
+            </li>
             <li>A designated point of contact who will be actively involved in PREP as needed; and</li>
             <li>Core and Contributing partners join at least one of two working groups (WG) – <b>Engagement WG</b> (members collaborate with user communities to
               understand the information needs of those seeking to build preparedness and resilience, and help them advance solutions) and <b>Technical WG</b> (members work to reduce the barriers to accessing, contributing and using data for climate resilience, both through PREPdata
-              and through promoting interoperability).</li>
+              and through promoting interoperability).
+            </li>
           </ul>
 
           <p>

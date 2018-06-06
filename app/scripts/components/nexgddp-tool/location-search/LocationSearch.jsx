@@ -13,9 +13,7 @@ import './style.scss';
 class LocationSearch extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      marker: undefined
-    };
+    this.state = { marker: undefined };
     this.onSuggestSelect = this.onSuggestSelect.bind(this);
   }
 
@@ -67,9 +65,7 @@ LocationSearch.propTypes = {
   setMapZoom: PropTypes.func
 };
 
-const mapStateToProps = state => ({
-  marker: state.nexgddptool.marker
-});
+const mapStateToProps = state => ({ marker: state.nexgddptool.marker });
 
 const mapDispatchToProps = {
   setMarkerPosition,

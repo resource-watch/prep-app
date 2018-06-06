@@ -40,9 +40,7 @@ const SortableLegendList = SortableContainer(({ items, onOpacity, onVisibility, 
 class LegendList extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      items: props.items
-    };
+    this.state = { items: props.items };
     this.onSortEnd = this.onSortEnd.bind(this);
   }
 
@@ -51,9 +49,7 @@ class LegendList extends React.PureComponent {
   }
 
   onSortEnd({ oldIndex, newIndex }) {
-    this.setState({
-      items: arrayMove(this.state.items, oldIndex, newIndex)
-    }, () => this.props.onSortChange(this.state.items));
+    this.setState({ items: arrayMove(this.state.items, oldIndex, newIndex) }, () => this.props.onSortChange(this.state.items));
   }
 
   render() {

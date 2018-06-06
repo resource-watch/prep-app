@@ -69,9 +69,7 @@ class ShareModalComponent extends PureComponent {
       <div className="c-nav-tab">
         <ul>
           {Object.keys(this.props.links).map((t) => {
-            const classNames = classnames({
-              '-active': this.props.tab === t
-            });
+            const classNames = classnames({ '-active': this.props.tab === t });
 
             return (
               <li

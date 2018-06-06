@@ -7,9 +7,7 @@ import reducers, { initialState } from 'pages/explore/explore-dataset-filters/ex
 
 import ExploreDatasetFiltersComponent from 'pages/explore/explore-dataset-filters/explore-dataset-filters-component';
 
-const mapStateToProps = state => ({
-  data: state.explorePage.datasetFilters.data
-});
+const mapStateToProps = state => ({ data: state.explorePage.datasetFilters.data });
 
 class ExploreDatasetFiltersContainer extends Component {
   componentWillMount() {
@@ -17,9 +15,7 @@ class ExploreDatasetFiltersContainer extends Component {
   }
 
   render() {
-    return createElement(ExploreDatasetFiltersComponent, {
-      ...this.props
-    });
+    return createElement(ExploreDatasetFiltersComponent, { ...this.props });
   }
 }
 

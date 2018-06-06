@@ -7,8 +7,6 @@ const mapStateToProps = (state, location) => ({
   currentPage: location.route.path,
   data: state.insights.list
 });
-const mapDispatchToProps = dispatch => ({
-  getInsightsList: () => dispatch(getInsightsList())
-});
+const mapDispatchToProps = dispatch => ({ getInsightsList: () => dispatch(getInsightsList()) });
 
 export default connect(mapStateToProps, mapDispatchToProps)(InsightsPage);

@@ -18,9 +18,7 @@ class ExploreSidebar extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      sidebarOpen: true
-    };
+    this.state = { sidebarOpen: true };
 
     this.switchChange = this.switchChange.bind(this);
   }
@@ -81,9 +79,7 @@ class ExploreSidebar extends React.Component {
   }
 
   toggleToolbarStatus() {
-    this.setState({
-      sidebarOpen: !this.state.sidebarOpen
-    });
+    this.setState({ sidebarOpen: !this.state.sidebarOpen });
   }
 
   render() {
@@ -159,9 +155,7 @@ class ExploreSidebar extends React.Component {
   }
 }
 
-ExploreSidebar.defaultProps = {
-  activeDatasets: []
-};
+ExploreSidebar.defaultProps = { activeDatasets: [] };
 
 ExploreSidebar.propTypes = {
   /**

@@ -45,8 +45,6 @@ function RelatedDasboards(props) {
   );
 }
 
-RelatedDasboards.propTypes = {
-  data: React.PropTypes.array
-};
+RelatedDasboards.propTypes = { data: React.PropTypes.array };
 
 export default RelatedDasboards;

@@ -1,9 +1,7 @@
 import L from 'leaflet';
 import Promise from 'bluebird';
 
-Promise.config({
-  cancellation: true
-});
+Promise.config({ cancellation: true });
 
 function makeCancellableRequest(url, bodyStringified) {
   // Don't use fetch here because xhr have abort, very useful to make a cancelable request

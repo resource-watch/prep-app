@@ -4,7 +4,7 @@ import ToolbarActions from '../ToolbarActions';
 
 function SectionIntro(props) {
   return (
-    <div className={'c-section-intro'}>
+    <div className="c-section-intro">
       <div className="top-bar">
         {props.data.partner &&
           <div className="row">
