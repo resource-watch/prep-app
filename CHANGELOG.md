@@ -7,8 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 2018-06-04
 
+### Fixed
+- Title for widget editor.
+
 ### Added
 - New India's tab in core datasets.
+- Added owner column for datasets, widgets and layers in Backoffice.
 
 ## 2018-05-21
 
