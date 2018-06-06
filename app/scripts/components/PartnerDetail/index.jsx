@@ -17,7 +17,7 @@ function getHeader() {
         <div className="l-header-nav -dark">
           <div className="row align-middle">
             <div className="column small-10 medium-4">
-              <Link to={'/'} className="logo">
+              <Link to="/" className="logo">
                 <img src={logoImage} alt="Partnership for Resilience and Preparedness" />
               </Link>
             </div>
@@ -98,7 +98,8 @@ export default function PartnerDetail(props) {
                       d="M9.4,5.2L5.2,9.4c-0.4,0.4-0.4,1,0,1.4c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3l4.2-4.2
                       c0.4-0.4,0.4-1,0-1.4C10.4,4.8,9.8,4.8,9.4,5.2z"
                     />
-                  </g></svg>
+                  </g>
+                  </svg>
                   <span>go to partner website</span>
                 </Link>
               </div>

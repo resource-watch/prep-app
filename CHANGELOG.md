@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 2018-06-04
+
+### Fixed
+- Color for input titles in widget editor.
+
+### Added
+- New India's tab in core datasets.
+- Added owner column for datasets, widgets and layers in Backoffice.
+
+### Updated
+- Updated widget editor to version 1.3.0
+
 ## 2018-05-21
 
 ### Fixed

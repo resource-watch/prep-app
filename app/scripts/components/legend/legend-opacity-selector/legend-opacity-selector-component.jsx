@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
@@ -17,13 +17,13 @@ class LegendOpacitySelector extends Component {
     this.state = {
       visibilityHover: false,
       visibilityClick: false
-    }
+    };
   }
 
   toggleVisibilityOnClick(visible) {
-    this.setState({visibilityHover: false});
-    this.setState({visibilityClick: visible});
-    this.props.onVisibleChange({isOpacityVisible: visible});
+    this.setState({ visibilityHover: false });
+    this.setState({ visibilityClick: visible });
+    this.props.onVisibleChange({ isOpacityVisible: visible });
   }
 
   render() {
@@ -37,11 +37,9 @@ class LegendOpacitySelector extends Component {
 
     const { opacity, dataset } = layerSpec;
 
-    const {visibilityClick, visibilityHover} = this.state;
+    const { visibilityClick, visibilityHover } = this.state;
 
-    const buttonClass = classnames({
-      '-active': isOpacityVisible,
-    });
+    const buttonClass = classnames({ '-active': isOpacityVisible });
 
     const tooltipContentClick = (
       <div className="tooltip-content">
@@ -54,7 +52,7 @@ class LegendOpacitySelector extends Component {
             step: 1
           }}
           onChange={value => onOpacityChange({ id: dataset, opacity: value / 100 })}
-          onClose={() => onVisibleChange({isOpacityVisible: false})}
+          onClose={() => onVisibleChange({ isOpacityVisible: false })}
         />
       </div>
     );
@@ -70,7 +68,7 @@ class LegendOpacitySelector extends Component {
         <Tooltip
           overlay={tooltipContentClick}
           placement="bottom"
-          trigger={'click'}
+          trigger="click"
           onVisibleChange={visible => this.toggleVisibilityOnClick(visible)}
         >
           <Tooltip
@@ -79,7 +77,7 @@ class LegendOpacitySelector extends Component {
             placement="bottom"
             trigger={isTooltipOpen ? '' : 'hover'}
             mouseEnterDelay={0.4}
-            onVisibleChange={visible=> this.setState({visibilityHover: visible})}
+            onVisibleChange={visible => this.setState({ visibilityHover: visible })}
           >
             <button
               type="button"
@@ -92,7 +90,7 @@ class LegendOpacitySelector extends Component {
       </div>
     );
   }
-};
+}
 
 LegendOpacitySelector.propTypes = {
   isOpacityVisible: PropTypes.bool,

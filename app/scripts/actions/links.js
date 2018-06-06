@@ -25,8 +25,8 @@ export function updateURL() {
         {
           activeDatasets: activeDatasets.map(d => d.id).join(','),
           coreDatasetsLocation: location
-        }
-      ));
+        })
+    );
 
     dispatch(replace(`/explore/${url}?${queryParams}`));
   };

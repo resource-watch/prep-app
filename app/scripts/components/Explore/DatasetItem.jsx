@@ -37,10 +37,10 @@ class DatasetItem extends React.Component {
     const { infoActive } = this.props;
 
     return infoActive ?
-      (<button key={'info-close'} onClick={this.onCloseInfo} className="cancel">
+      (<button key="info-close" onClick={this.onCloseInfo} className="cancel">
         <Icon name="icon-cancel" />
       </button>) :
-      (<button key={'info-open'} onClick={this.onInfoClick} className="info">
+      (<button key="info-open" onClick={this.onInfoClick} className="info">
         <Icon name="icon-info" />
       </button>);
   }
@@ -134,8 +134,6 @@ DatasetItem.propTypes = {
   onSwitchChange: PropTypes.func
 };
 
-DatasetItem.defaultProps = {
-  metadata: {}
-};
+DatasetItem.defaultProps = { metadata: {} };
 
 export default DatasetItem;

@@ -2,6 +2,10 @@
   max-width: rem($max-width);
   margin: 0 auto;
 
+  .visualization .chart-title input {
+    color: $base-font-color;
+  }
+
   .customize-visualization {
     > .content {
       > .title {

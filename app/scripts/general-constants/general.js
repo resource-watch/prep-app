@@ -6,6 +6,4 @@ export const SELECT_SEARCH_OPTIONS = {
   keys: ['name', 'label']
 };
 
-export default {
-  SELECT_SEARCH_OPTIONS
-};
+export default { SELECT_SEARCH_OPTIONS };

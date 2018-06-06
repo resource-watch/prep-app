@@ -53,7 +53,7 @@ class InsightsDetail extends React.Component {
           <div className="l-header-nav -dark">
             <div className="row align-middle">
               <div className="column small-10 medium-4">
-                <Link to={'/'} className="logo">
+                <Link to="/" className="logo">
                   <img src={logoImage} alt="Partnership for Resilience and Preparedness" />
                 </Link>
               </div>
@@ -75,7 +75,7 @@ class InsightsDetail extends React.Component {
       <div className={`l-header-nav ${currentData.name === 'home' ? '-no-bg' : ''}`}>
         <div className="row align-middle">
           <div className="column small-10 medium-4">
-            <Link to={'/'} className="logo">
+            <Link to="/" className="logo">
               <img src={logoImage} alt="Partnership for Resilience and Preparedness" />
             </Link>
           </div>
@@ -148,7 +148,7 @@ class InsightsDetail extends React.Component {
           data={this.props.data}
           insightSlug={this.props.insightSlug}
           insightUrl={this.props.data.content_url}
-          currentSection={'stories'}
+          currentSection="stories"
           analytics={{
             category: 'Stories',
             action: `Shares ${title} story`

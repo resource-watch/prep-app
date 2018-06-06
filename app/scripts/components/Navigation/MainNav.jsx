@@ -8,9 +8,7 @@ class MainNav extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      aboutActive: false
-    };
+    this.state = { aboutActive: false };
   }
 
   handleHover(newState) {

@@ -167,9 +167,7 @@ export function getDatasets(defaultActiveLayers) {
           }
           dispatch({
             type: DATASET_LIST_RECEIVED,
-            payload: {
-              data: datasets
-            }
+            payload: { data: datasets }
           });
           dispatch(getActiveDatasetLayers(datasets));
           dispatch({
@@ -188,9 +186,7 @@ export function getDatasets(defaultActiveLayers) {
   };
 }
 export function resetDatasetList() {
-  return {
-    type: DATASET_LIST_RESET
-  };
+  return { type: DATASET_LIST_RESET };
 }
 
 export function getDatasetByIdOrSlug(datasetIdentifier, includesData) {
@@ -225,9 +221,7 @@ export function getDatasetByIdOrSlug(datasetIdentifier, includesData) {
             if (datasetData.widget && datasetData.widget.length) {
               dispatch({
                 type: DATASET_WIDGET_RECEIVED,
-                payload: {
-                  data: datasetData.widget[0]
-                }
+                payload: { data: datasetData.widget[0] }
               });
             }
           }
@@ -265,9 +259,7 @@ export function getDatasetDefaultWidget(datasetId) {
               .then((widget) => {
                 dispatch({
                   type: DATASET_WIDGET_RECEIVED,
-                  payload: {
-                    data: widget.data
-                  }
+                  payload: { data: widget.data }
                 });
               });
           }

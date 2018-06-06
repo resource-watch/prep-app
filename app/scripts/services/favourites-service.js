@@ -6,9 +6,7 @@ class FavouritesService {
    * @param {*} token User's token
    */
   static getFavourites(token) {
-    const queryParams = queryString.stringify({
-      application: process.env.APPLICATIONS
-    });
+    const queryParams = queryString.stringify({ application: process.env.APPLICATIONS });
 
     return new Promise((resolve, reject) => {
       fetch(`${process.env.RW_API_URL}/favourite?${queryParams}`, {
@@ -16,7 +14,7 @@ class FavouritesService {
         headers: {
           Authorization: token,
           'Content-Type': 'application/json',
-        'Upgrade-Insecure-Requests': 1
+          'Upgrade-Insecure-Requests': 1
         }
       })
         .then((response) => {
@@ -85,9 +83,7 @@ class FavouritesService {
     return new Promise((resolve, reject) => {
       fetch(`${process.env.RW_API_URL}/favourite/${resourceId}`, {
         method: 'DELETE',
-        headers: {
-          Authorization: token
-        }
+        headers: { Authorization: token }
       })
         .then((response) => {
           const { status, statusText } = response;

@@ -4,6 +4,4 @@ export const FAVOURITES_COLLECTION = {
   resources: []
 };
 
-export default {
-  FAVOURITES_COLLECTION
-};
+export default { FAVOURITES_COLLECTION };

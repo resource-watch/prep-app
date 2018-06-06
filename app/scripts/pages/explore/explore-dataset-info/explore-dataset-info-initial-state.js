@@ -1,3 +1,1 @@
-export default {
-  dataset: null
-};
+export default { dataset: null };

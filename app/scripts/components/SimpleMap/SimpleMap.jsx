@@ -10,9 +10,7 @@ if (L) L.esri = esri;
 class SimpleMap extends React.Component {
   constructor() {
     super();
-    this.state = {
-      loading: false
-    };
+    this.state = { loading: false };
   }
 
   componentWillMount() {
@@ -63,9 +61,7 @@ class SimpleMap extends React.Component {
 
   addMapLayer(layer) {
     if (!this.state.loading) {
-      this.setState({
-        loading: true
-      });
+      this.setState({ loading: true });
     }
 
     switch (layer.attributes.provider) {
@@ -174,9 +170,7 @@ class SimpleMap extends React.Component {
 
     const request = new Request(`https://${layer.account}.carto.com/api/v1/map`, {
       method: 'POST',
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      }),
+      headers: new Headers({ 'Content-Type': 'application/json' }),
       body: bodyStringified
     });
 
@@ -209,9 +203,7 @@ class SimpleMap extends React.Component {
   }
 
   handleTileLoaded() {
-    this.setState({
-      loading: false
-    });
+    this.setState({ loading: false });
   }
 
   handleTileError(layer) {

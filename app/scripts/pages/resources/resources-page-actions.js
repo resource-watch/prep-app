@@ -8,9 +8,7 @@ export const setResourcesError = createAction('resources-page/setResourcesError'
 export const getResources = createThunkAction('resources-page/getResources', () =>
   (dispatch) => {
     dispatch(setResourcesLoading(true));
-    const queryParams = queryString.stringify({
-      published: true
-    });
+    const queryParams = queryString.stringify({ published: true });
 
     fetch(`${config.apiUrl}/resources?${queryParams}`)
       .then((response) => {
@@ -35,6 +33,4 @@ export const getResources = createThunkAction('resources-page/getResources', () 
       });
   });
 
-export default {
-  getResources
-};
+export default { getResources };

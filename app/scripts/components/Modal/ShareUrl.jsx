@@ -6,9 +6,7 @@ import Button from '../Button/Button';
 class ShareUrl extends React.Component {
   constructor() {
     super();
-    this.state = {
-      copied: false
-    };
+    this.state = { copied: false };
   }
 
   componentDidMount() {

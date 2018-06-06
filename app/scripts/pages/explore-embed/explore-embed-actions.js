@@ -114,11 +114,11 @@ export const fetchDatasets = createThunkAction('fetchDatasets', () => (dispatch)
   };
   const url = `${config.apiUrlRW}/dataset?${qs.stringify(params)}`;
   return fetch(url, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Upgrade-Insecure-Requests': 1
-      }
-    })
+    headers: {
+      'Content-Type': 'application/json',
+      'Upgrade-Insecure-Requests': 1
+    }
+  })
     .then((response) => {
       if (response.ok) return response.json();
       throw Error(response);
@@ -209,15 +209,13 @@ export const getFiltersData = createThunkAction('explore-dataset-filters/getFilt
       DatasetFilterService.getGeographies(),
       DatasetFilterService.getDataTypes(),
       DatasetFilterService.getPeriods()
-    ]
-    ).then((values = []) => {
+    ]).then((values = []) => {
       const data = {};
       values.forEach(val => Object.assign(data, val));
       dispatch(setDataFilters(data));
       dispatch(setInitialFilterStatus());
     });
-  }
-);
+  });
 
 export const onSetDatasetFilter = createThunkAction('explore-dataset-filters/onSetDatasetFilter', (filter = {}) =>
   (dispatch) => {
@@ -226,8 +224,7 @@ export const onSetDatasetFilter = createThunkAction('explore-dataset-filters/onS
     // dispatch(updateDataFilters());
     dispatch(setDatasetsTagFilter(key, filter[key])); // this is bullshit, but need it to keep consistency. Remove ASAP
     dispatch(updateURLParams());
-  }
-);
+  });
 
 export const getDatasetsByGraph = createThunkAction('explore-page/getDatasetsByGraph', () =>
   (dispatch, getState) => {
@@ -247,8 +244,7 @@ export const getDatasetsByGraph = createThunkAction('explore-page/getDatasetsByG
         const { status, details } = errors;
         console.error(status, details);
       });
-  }
-);
+  });
 
 export const setMultiActiveLayer = createAction('explore-dataset-list/setMultiActiveLayer');
 export const setBBox = createAction('explore-dataset-list/setBBox');

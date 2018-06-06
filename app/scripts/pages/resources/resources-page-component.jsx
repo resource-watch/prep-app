@@ -22,7 +22,8 @@ class Resources extends React.PureComponent {
         {resourcesLoading && <LoadingSpinner />}
         <Article no-border>
           <p>This is a selection of resources to understand the impacts of climate change, learn how to build resilience,
-            and locate additional climate relevant data. We welcome receiving suggestions for additional resources to include.</p>
+            and locate additional climate relevant data. We welcome receiving suggestions for additional resources to include.
+          </p>
         </Article>
 
         {RESOURCES_CATEGORIES.map(resourceCategory => (
@@ -40,9 +41,7 @@ class Resources extends React.PureComponent {
   }
 }
 
-Resources.defaultProps = {
-  resources: {}
-};
+Resources.defaultProps = { resources: {} };
 
 Resources.propTypes = {
   resources: PropTypes.object,

@@ -53,9 +53,7 @@ class PartnersSlider extends React.Component {
   }
 }
 
-PartnersSlider.defaultProps = {
-  data: []
-};
+PartnersSlider.defaultProps = { data: [] };
 
 PartnersSlider.propTypes = {
   // Define the partners list

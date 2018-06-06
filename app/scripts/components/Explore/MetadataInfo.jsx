@@ -168,8 +168,6 @@ MetadataInfo.propTypes = {
   data: React.PropTypes.object.isRequired
 };
 
-MetadataInfo.deafultProps = {
-  data: {}
-};
+MetadataInfo.deafultProps = { data: {} };
 
 export default MetadataInfo;

@@ -4,9 +4,7 @@ import Promise from 'bluebird';
 import { wriAPISerializer } from 'helpers/wri-api-serializer';
 import { getInfo } from 'components/dataset-card/dataset-helper';
 
-Promise.config({
-  cancellation: true
-});
+Promise.config({ cancellation: true });
 
 const maxBounds = new L.LatLngBounds(
   new L.LatLng(49.496674527470455, -66.357421875),

@@ -2,15 +2,13 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CompressionPlugin = require('compression-webpack-plugin');
 const sharedConfig = require('./shared.js');
 
 module.exports = merge(sharedConfig, {
 
-  output: {
-    filename: '[name].[chunkhash].js'
-  },
+  output: { filename: '[name].[chunkhash].js' },
 
   module: {
     rules: [{
@@ -20,15 +18,9 @@ module.exports = merge(sharedConfig, {
         {
           loader: 'image-webpack-loader',
           query: {
-            mozjpeg: {
-              progressive: true
-            },
-            gifsicle: {
-              interlaced: false
-            },
-            optipng: {
-              optimizationLevel: 7
-            },
+            mozjpeg: { progressive: true },
+            gifsicle: { interlaced: false },
+            optipng: { optimizationLevel: 7 },
             pngquant: {
               quality: '75-90',
               speed: 4
@@ -48,16 +40,10 @@ module.exports = merge(sharedConfig, {
         fallback: 'style-loader',
         use: [{
           loader: 'css-loader',
-          options: {
-            importLoaders: 1
-          }
+          options: { importLoaders: 1 }
         }, {
           loader: 'postcss-loader',
-          options: {
-            config: {
-              path: path.resolve(__dirname, '../../postcss.config.js')
-            }
-          }
+          options: { config: { path: path.resolve(__dirname, '../../postcss.config.js') } }
         }, {
           loader: 'sass-loader',
           options: {
@@ -92,9 +78,7 @@ module.exports = merge(sharedConfig, {
         if_return: true,
         join_vars: true
       },
-      output: {
-        comments: false
-      }
+      output: { comments: false }
     }),
     new webpack.HashedModuleIdsPlugin(),
     new ExtractTextPlugin({
@@ -108,9 +92,7 @@ module.exports = merge(sharedConfig, {
       threshold: 10240,
       minRatio: 0.8
     }),
-    process.env.BUNDLE_ANALIZE ? new BundleAnalyzerPlugin({
-      analyzerMode: 'static'
-    }) : () => {}
+    process.env.BUNDLE_ANALIZE ? new BundleAnalyzerPlugin({ analyzerMode: 'static' }) : () => {}
   ],
 
   externals: {

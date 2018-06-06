@@ -9,6 +9,4 @@ export const PARTNER_TYPES = [{
   value: 'Resource partners'
 }];
 
-export default {
-  PARTNER_TYPES
-};
+export default { PARTNER_TYPES };

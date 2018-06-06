@@ -7,12 +7,8 @@ const defaultTheme = {
   padding: 'auto', // Do not set something different than 'auto'
   // because it will break several graphs
   // (primarly the bar and pie ones)
-  render: {
-    retina: true
-  },
-  marks: {
-    color: '#1f77b4'
-  },
+  render: { retina: true },
+  marks: { color: '#1f77b4' },
   axis_x: {
     axisColor: '#A9ABAD',
     tickSize: 8,

@@ -15,9 +15,7 @@ export default function Tabs({ options, className, selected, onChange }) {
     <header className={classNames}>
       <div className="row l-row">
         {options.map((option) => {
-          const btnClasses = classnames({
-            '-active': option.value === selected
-          });
+          const btnClasses = classnames({ '-active': option.value === selected });
 
           return (
             <div

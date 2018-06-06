@@ -4,9 +4,7 @@ import Promise from 'bluebird';
 import { wriAPISerializer } from 'helpers/wri-api-serializer';
 import { getInfo } from 'components/dataset-card/dataset-helper';
 
-Promise.config({
-  cancellation: true
-});
+Promise.config({ cancellation: true });
 
 // let fetchRequest;
 

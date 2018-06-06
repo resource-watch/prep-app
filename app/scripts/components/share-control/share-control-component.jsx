@@ -27,9 +27,7 @@ class ShareControl extends Component {
   }
 
   render() {
-    const classNames = classnames({
-      [this.props.className]: !!this.props.className
-    });
+    const classNames = classnames({ [this.props.className]: !!this.props.className });
 
     return (
       <div className={`c-share-control ${classNames}`}>

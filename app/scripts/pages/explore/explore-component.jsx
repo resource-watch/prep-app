@@ -22,9 +22,7 @@ import { tabOptions } from './explore-constants';
 class ExplorePage extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      filters: false
-    };
+    this.state = { filters: false };
 
     this.onChangeTab = this.onChangeTab.bind(this);
     this.onSearch = this.onSearch.bind(this);
@@ -111,7 +109,7 @@ class ExplorePage extends PureComponent {
           <div className="l-header-nav -short">
             <div className="row align-middle">
               <div className="column small-10 medium-4">
-                <Link to={'/'} className="logo">
+                <Link to="/" className="logo">
                   <img src="/images/prep-logo.png" alt="Partnership for Resilience and Preparedness" />
                 </Link>
               </div>

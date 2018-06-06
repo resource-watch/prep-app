@@ -57,9 +57,7 @@ export const getLayers = createSelector(
       if (currentLayer && range1Selection && range2Selection) {
         const range1Date = `${range1Selection.value}`;
         const range2Date = `${range2Selection.value}`;
-        activeLayers.push({
-          url: `${config.apiUrlRW}/layer/${currentLayer.id}/tile/loca/{z}/{x}/{y}?year=${range1Date}&compareYear=${range2Date}`
-        });
+        activeLayers.push({ url: `${config.apiUrlRW}/layer/${currentLayer.id}/tile/loca/{z}/{x}/{y}?year=${range1Date}&compareYear=${range2Date}` });
       }
     }
 

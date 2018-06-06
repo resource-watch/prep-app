@@ -34,9 +34,7 @@ class InfoSidebar extends React.Component {
 
   constructor() {
     super();
-    this.state = {
-      sidebarOpen: true
-    };
+    this.state = { sidebarOpen: true };
   }
 
   getHeader() {
@@ -170,9 +168,7 @@ class InfoSidebar extends React.Component {
   }
 
   toggleToolbarStatus() {
-    this.setState({
-      sidebarOpen: !this.state.sidebarOpen
-    });
+    this.setState({ sidebarOpen: !this.state.sidebarOpen });
   }
 
   switchChange(dataset) {
@@ -259,7 +255,6 @@ InfoSidebar.propTypes = {
   selectedDatasetId: PropTypes.string
 };
 
-InfoSidebar.defaultProps = {
-};
+InfoSidebar.defaultProps = {};
 
 export default InfoSidebar;

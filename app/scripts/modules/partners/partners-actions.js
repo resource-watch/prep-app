@@ -28,8 +28,7 @@ export const getPartners = createThunkAction('partners/getPartners', () =>
         console.error(errors); // for debugging porposes
         dispatch(setPartnersError(true));
       });
-  }
-);
+  });
 
 export default {
   getPartners,

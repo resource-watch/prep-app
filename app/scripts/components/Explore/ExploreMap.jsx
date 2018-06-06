@@ -412,9 +412,7 @@ class ExploreMap extends React.PureComponent {
 
   addMapLayer(dataset, layer, datasetsLength) {
     if (!this.state.loading) {
-      this.setState({
-        loading: true
-      });
+      this.setState({ loading: true });
     }
 
     const method = {
@@ -596,9 +594,7 @@ class ExploreMap extends React.PureComponent {
 
     const request = new Request(`https://${layer.account}.carto.com/api/v1/map`, {
       method: 'POST',
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      }),
+      headers: new Headers({ 'Content-Type': 'application/json' }),
       body: bodyStringified
     });
 
@@ -680,9 +676,7 @@ class ExploreMap extends React.PureComponent {
   }
 
   handleTileLoaded() {
-    this.setState({
-      loading: false
-    });
+    this.setState({ loading: false });
   }
 
   handleTileError(layer) {
@@ -707,9 +701,7 @@ class ExploreMap extends React.PureComponent {
   }
 }
 
-ExploreMap.contextTypes = {
-  location: PropTypes.object
-};
+ExploreMap.contextTypes = { location: PropTypes.object };
 
 ExploreMap.propTypes = {
   enabledLayers: PropTypes.array,

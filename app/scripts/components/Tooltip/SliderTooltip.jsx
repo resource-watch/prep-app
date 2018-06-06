@@ -8,9 +8,7 @@ import Slider from 'rc-slider';
 class SliderTooltip extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      value: null
-    };
+    this.state = { value: null };
 
     // Bindings
     this.onMouseDown = this.onMouseDown.bind(this);

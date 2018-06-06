@@ -1,3 +1,1 @@
-export default {
-  location: 'global'
-};
+export default { location: 'global' };

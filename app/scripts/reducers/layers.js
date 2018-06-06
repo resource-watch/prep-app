@@ -1,6 +1,4 @@
-import {
-  LAYER_DATA_RECEIVED
-} from '../constants';
+import { LAYER_DATA_RECEIVED } from '../constants';
 
 export default function (state = {}, action) {
   switch (action.type) {

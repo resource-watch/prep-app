@@ -68,7 +68,8 @@ function getCloroplethLegend(layer) {
       <div className="column" key={index}>
         <span className="-color" style={{ backgroundColor: item.color }} />
         <span>{item.value || item.name}</span>
-      </div>);
+      </div>
+    );
   });
 
   return (<div className="legend -cloropleth column small-12 ">
@@ -104,8 +105,7 @@ const SortableItem = SortableElement(({ value }) => value);
 const SortableList = SortableContainer(({ items }) => (
   <div className="content">
     {items.map((value, index) =>
-      <SortableItem key={value.key} index={index} value={value} />
-    )}
+      <SortableItem key={value.key} index={index} value={value} />)}
   </div>
 ));
 
@@ -176,9 +176,7 @@ class DataMapLegend extends React.Component {
       childrenProps: {
         className: '',
         title: 'Opacity',
-        options: {
-          min: 0, max: 1, step: 0.01, defaultValue: opacity
-        },
+        options: { min: 0, max: 1, step: 0.01, defaultValue: opacity },
         onChange: value => this.onChangeOpacity(value, layerGroup),
         onClose: () => {
           this.setState({ opacityTooltipOpen: false });
@@ -227,9 +225,7 @@ class DataMapLegend extends React.Component {
   }
 
   toggleToolbarStatus() {
-    this.setState({
-      legendOpen: !this.state.legendOpen
-    });
+    this.setState({ legendOpen: !this.state.legendOpen });
   }
 
   handleSelectedDataset(datasetId) {

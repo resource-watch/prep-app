@@ -32,9 +32,7 @@ const mapDefaultOptions = {
 class ToggleMap extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      index: 0
-    };
+    this.state = { index: 0 };
     this.toggleLayer = this.toggleLayer.bind(this);
 
     this.addMarker = this.addMarker.bind(this);
@@ -107,13 +105,9 @@ class ToggleMap extends React.PureComponent {
       zoom: map.zoom || mapDefaultOptions.zoom
     });
 
-    const mapClassNames = classnames({
-      '-crosshair': markerMode
-    });
+    const mapClassNames = classnames({ '-crosshair': markerMode });
 
-    const makerControlClassNames = classnames({
-      '-active': markerMode
-    });
+    const makerControlClassNames = classnames({ '-active': markerMode });
 
     const currentLayer = !!layers.length && layers[this.state.index];
 

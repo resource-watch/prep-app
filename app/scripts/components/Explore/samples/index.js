@@ -1,5 +1,3 @@
 import { DATASET_ITEM_SAMPLE } from './datasetItem';
 
-export {
-  DATASET_ITEM_SAMPLE
-};
+export { DATASET_ITEM_SAMPLE };

@@ -33,14 +33,12 @@ class LocationSearchComponent extends React.Component {
       <Geosuggest
         ref={(node) => { this.geoSuggest = node; }}
         onSuggestSelect={this.onSuggestSelect}
-        className='-explore'
+        className="-explore"
       />
     );
   }
 }
 
-LocationSearchComponent.propTypes = {
-  setMapParams: PropTypes.func
-};
+LocationSearchComponent.propTypes = { setMapParams: PropTypes.func };
 
 export default LocationSearchComponent;

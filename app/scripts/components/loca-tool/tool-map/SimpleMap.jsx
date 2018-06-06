@@ -106,13 +106,9 @@ class SimpleMap extends React.PureComponent {
       zoom: map.zoom || mapDefaultOptions.zoom
     });
 
-    const mapClassNames = classnames({
-      '-crosshair': markerMode
-    });
+    const mapClassNames = classnames({ '-crosshair': markerMode });
 
-    const makerControlClassNames = classnames({
-      '-active': markerMode
-    });
+    const makerControlClassNames = classnames({ '-active': markerMode });
 
     return (
       <div className="c-tool-map">

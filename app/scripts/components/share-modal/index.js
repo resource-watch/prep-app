@@ -18,12 +18,8 @@ const initialState = {
 
 export { initialState, actions, reducers };
 
-const mapStateToProps = state => ({
-  ...state.shareModal
-});
+const mapStateToProps = state => ({ ...state.shareModal });
 
-const mapDispatchToProps = {
-  ...actions
-};
+const mapDispatchToProps = { ...actions };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShareModalComponent);
