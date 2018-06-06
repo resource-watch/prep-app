@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import LoadingSpinner from 'components/Loading/LoadingSpinner';
 import CollapsibleItem from 'components/ui/CollapsibleItem';
 import DatasetsList from '../explore-datasets-list/explore-datasets-list-component';
-import { coreDatasets } from './core-datasets-list-constants';
+import coreDatasets from './core-datasets-list-data.json';
 
 const CoreDatasetsList = (props) => {
   const { datasets, toggleDataset, toggleInfo, error, isFetching } = props;
@@ -83,7 +83,11 @@ CoreDatasetsList.propTypes = {
 };
 
 CoreDatasetsList.defaultProps = {
-  datasets: []
+  datasets: [],
+  error: null,
+  isFetching: () => {},
+  toggleDataset: () => {},
+  toggleInfo: () => {}
 };
 
 export default CoreDatasetsList;

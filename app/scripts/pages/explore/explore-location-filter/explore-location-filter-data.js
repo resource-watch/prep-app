@@ -8,10 +8,10 @@ export default [
     id: 1,
     label: 'US-Specific',
     value: 'usa'
+  },
+  {
+    id: 2,
+    label: 'India-specific',
+    value: 'india'
   }
-  // {
-  //   id: 2,
-  //   name: 'india-specific',
-  //   value: 'india'
-  // }
 ];
