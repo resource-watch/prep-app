@@ -12,6 +12,6 @@ export default [
   {
     id: 2,
     label: 'India-specific',
-    value: 'india'
+    value: 'ind'
   }
 ];
