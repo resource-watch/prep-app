@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - Removed specific from location filters in Explore page for core datasets.
+- Only top level in the filters in Explore.
 
 ## 2018-06-04
 
