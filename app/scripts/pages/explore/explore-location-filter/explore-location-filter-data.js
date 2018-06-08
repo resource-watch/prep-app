@@ -6,7 +6,7 @@ export default [
   },
   {
     id: 1,
-    label: 'US',
+    label: 'United States',
     value: 'usa'
   },
   {
