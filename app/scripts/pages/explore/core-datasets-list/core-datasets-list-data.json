@@ -80,6 +80,20 @@
           "894f43a8-ce8e-43a5-a4c7-fa80faa43d63",
           "3624554e-b240-4edb-9110-1f010642c3f3"
         ]
+      },
+      {
+        "id": 14,
+        "title": "Water risk",
+        "slug": [
+          "water"
+        ],
+        "datasets": [
+          "9948b8b8-2aaa-4146-be1e-91da5a1aaa88",
+          "cf5a1730-a2d1-4faa-8564-ef0c658acd33",
+          "ef560883-0611-405d-ab7b-ccbe0d36262f",
+          "d5a716ae-1a3e-44ff-95b1-175ae9d61560",
+          "21904a87-fd18-41cf-8826-e2036e731af1"
+        ]
       }
     ]
   },
@@ -184,6 +198,57 @@
           "5001f631-97ea-4687-8fa9-2142c1f59c44",
           "520cf2d8-9ab3-472b-9b49-b83a779c7c2b",
           "59f90147-536d-4386-81e6-ad28a44cec4e"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Physical Features",
+    "description": "What physical characteristics can provide context?",
+    "subgroups": [
+      {
+        "id": 40,
+        "title": "Administrative Boundaries",
+        "slug": [
+          "administrative_boundaries"
+        ],
+        "datasets": [
+          "098b33df-6871-4e53-a5ff-b56a7d989f9a",
+          "cc193aa6-dc96-4200-a354-9fd8ae9def4b",
+          "7ed07a99-bed3-444b-95b5-1af168b1c9e1"
+        ]
+      },
+      {
+        "id": 41,
+        "title": "Land",
+        "slug": [
+          "land",
+          "land_use",
+          "land_cover",
+          "elevation",
+          "soil",
+          "slope"
+        ],
+        "datasets": [
+          "d982d86b-4b66-4443-8941-339cc4a650ca",
+          "8bbfaa85-2271-45a3-af81-5eeca62e8e08",
+          "4f6f23f4-5591-473c-b527-5ec1b6cd3cd9",
+          "8769ccbc-71fa-4389-b416-90c446b2c827"
+        ]
+      },
+      {
+        "id": 42,
+        "title": "Water",
+        "slug": [
+          "water",
+          "surface_water",
+          "groundwater"
+        ],
+        "datasets": [
+          "60be01b0-99fb-459c-8a08-b934270f8c4b",
+          "c7249f3c-0437-4ad2-bb2b-a6a1f135fb99",
+          "4ced47dc-b4e1-4826-bbee-2abb143e4258"
         ]
       }
     ]
