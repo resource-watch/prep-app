@@ -56,8 +56,6 @@ class Map extends PureComponent {
   }
 
   setView() {
-    const { sidebar } = this.props;
-    const left = (sidebar.open) ? 430 : 0;
     const { center, zoom } = this.props.mapOptions;
 
     this.map.setView(
@@ -112,6 +110,15 @@ class Map extends PureComponent {
   setBounds() {
     const { bbox, sidebar } = this.props;
 
+    if (bbox && bbox instanceof L.LatLngBounds) {
+      const left = (sidebar.open) ? 430 : 0;
+
+      return this.map.fitBounds(bbox, {
+        paddingTopLeft: [left + 32, 32], // Padding Left Top... Leaflet? What the hell??
+        paddingBottomRight: [32, 32]
+      });
+    }
+
     if (bbox) {
       const bounds = [
         [bbox[1], bbox[0]],
@@ -120,11 +127,13 @@ class Map extends PureComponent {
 
       const left = (sidebar.open) ? 430 : 0;
 
-      this.map.fitBounds(bounds, {
+      return this.map.fitBounds(bounds, {
         paddingTopLeft: [left + 32, 32], // Padding Left Top... Leaflet? What the hell??
         paddingBottomRight: [32, 32]
       });
     }
+
+    return null;
   }
 
   triggerChange() {
