@@ -20,9 +20,7 @@ import './style.scss';
 class LOCATool extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      loading: true
-    };
+    this.state = { loading: true };
   }
 
   componentWillMount() {

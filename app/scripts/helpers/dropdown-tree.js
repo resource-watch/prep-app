@@ -31,7 +31,7 @@ export const getSelectedElements = (tree = {}, filters) => {
   });
 
   return newTree;
-}
+};
 
 export default {
   selectElementsFromTree,

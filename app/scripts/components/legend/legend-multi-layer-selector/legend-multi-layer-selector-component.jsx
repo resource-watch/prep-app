@@ -16,15 +16,15 @@ class LegendMultiLayerSelector extends Component {
     this.state = {
       visibilityHover: false,
       visibilityClick: false
-    }
+    };
 
     this.onChangeLayer = this.onChangeLayer.bind(this);
   }
 
   toggleVisibilityOnClick(visible) {
-    this.setState({visibilityHover: false});
-    this.setState({visibilityClick: visible});
-    this.props.onVisibleChange({isLayerVisible: visible});
+    this.setState({ visibilityHover: false });
+    this.setState({ visibilityClick: visible });
+    this.props.onVisibleChange({ isLayerVisible: visible });
   }
 
   onChangeLayer(layer) {
@@ -41,11 +41,9 @@ class LegendMultiLayerSelector extends Component {
       isTooltipOpen
     } = this.props;
 
-    const {visibilityClick, visibilityHover} = this.state;
+    const { visibilityClick, visibilityHover } = this.state;
 
-    const buttonClass = classnames({
-      '-active': isLayerVisible
-    });
+    const buttonClass = classnames({ '-active': isLayerVisible });
 
     const tooltipContentClick = (
       <div className="tooltip-content">
@@ -53,9 +51,7 @@ class LegendMultiLayerSelector extends Component {
 
         <ul className="layer-list">
           {sortBy(layerSpec.layers, 'name').map((l) => {
-            const liClass = classnames({
-              '-active': layerSpec.id === l.id
-            });
+            const liClass = classnames({ '-active': layerSpec.id === l.id });
 
             return (
               <li
@@ -83,7 +79,7 @@ class LegendMultiLayerSelector extends Component {
         <Tooltip
           overlay={tooltipContentClick}
           placement="bottom"
-          trigger={'click'}
+          trigger="click"
           overlayClassName="c-legend-multi-layer-selector"
           onVisibleChange={visible => this.toggleVisibilityOnClick(visible)}
         >
@@ -93,7 +89,7 @@ class LegendMultiLayerSelector extends Component {
             placement="bottom"
             trigger={isTooltipOpen ? '' : 'hover'}
             mouseEnterDelay={0.4}
-            onVisibleChange={visible=> this.setState({visibilityHover: visible})}
+            onVisibleChange={visible => this.setState({ visibilityHover: visible })}
           >
             <button
               type="button"

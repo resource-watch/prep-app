@@ -40,6 +40,4 @@ export const concatenateFilters = (filters = {}) => {
   return querySt;
 };
 
-export default {
-  concatenateFilters
-};
+export default { concatenateFilters };

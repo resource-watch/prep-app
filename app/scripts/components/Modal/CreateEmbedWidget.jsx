@@ -122,8 +122,6 @@ CreateEmbedWidget.propTypes = {
   }))
 };
 
-CreateEmbedWidget.defaultProps = {
-  links: []
-};
+CreateEmbedWidget.defaultProps = { links: [] };
 
 export default CreateEmbedWidget;

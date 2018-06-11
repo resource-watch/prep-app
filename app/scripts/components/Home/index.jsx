@@ -19,7 +19,8 @@ const Home = () => (
               <h2 className="-left">Explore the data</h2>
               <p>Discover and interact with climate, physical and socioeconomic data. Filter
               by topic, geography and time period to create a custom map in seconds. Then
-              share your findings to raise awareness in your community.</p>
+              share your findings to raise awareness in your community.
+              </p>
               <Link to="/explore" className="c-button -border" onClick={() => logEvent('Home', 'Click carousel CTA', 'Start exploring')}>
                 Start exploring
               </Link>
@@ -34,7 +35,8 @@ const Home = () => (
               <p>Dashboards are a collection of data and tools that users compile
               to support their climate resilience and preparedness planning. View
               dashboards that others have created, or create your own to track
-              key issues in your area.</p>
+              key issues in your area.
+              </p>
               <Link to="/dashboards" className="c-button -border" onClick={() => logEvent('Home', 'Click carousel CTA', 'Go to dashboards')}>
                 Go to dashboards
               </Link>
@@ -48,7 +50,8 @@ const Home = () => (
               <h2 className="-left">Finding resources</h2>
               <p>Find selected resources for understanding the impacts of climate
               change, tools for building resilience to climate change, and
-              additional climate relevant data.</p>
+              additional climate relevant data.
+              </p>
               <Link to="/resources" className="c-button -border" onClick={() => logEvent('Home', 'Click carousel CTA', 'Go to resources')}>
                 Go to resources
               </Link>
@@ -66,7 +69,8 @@ const Home = () => (
           seeks to improve access to useful data and empower communities
           and businesses to better plan for and build climate resilience.
           There are two key elements to PREP: the partnership itself and
-          the online platform it supports (PREPdata).</p>
+          the online platform it supports (PREPdata).
+          </p>
           <div className="article-footer">
             <Link to="/about" className="c-button -border" >
                 Learn more

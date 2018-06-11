@@ -28,7 +28,7 @@ class TwitterFeed extends React.Component {
         </div>
       ));
     } else {
-      tweets = (<div className="tweet-item" key={'no-tweets'} />);
+      tweets = (<div className="tweet-item" key="no-tweets" />);
     }
     return (
       <div className={`c-twitter-feed ${this.props.sliced && '-sliced'}`}>

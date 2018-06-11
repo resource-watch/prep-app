@@ -12,9 +12,7 @@ module.exports = (app) => {
   const middleware = webpackMiddleware(compiler, {
     publicPath: config.output.publicPath,
     contentBase: 'app',
-    stats: {
-      colors: true
-    }
+    stats: { colors: true }
   });
 
   app.use(middleware);

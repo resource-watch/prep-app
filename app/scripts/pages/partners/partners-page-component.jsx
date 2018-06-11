@@ -14,7 +14,7 @@ const partnerItem = partner => (
       <Thumbnail
         src={config.assetsUrl + partner.thumbnail}
         alt={partner.name}
-        border={'neutral'}
+        border="neutral"
       />
       <h3 className="partner-name">{partner.name}</h3>
       <Link to={`/partners/${partner.id}`} className="partner-link">Read more</Link>
@@ -44,9 +44,7 @@ class Partners extends PureComponent {
   }
 }
 
-Partners.defaultProps = {
-  partners: {}
-};
+Partners.defaultProps = { partners: {} };
 
 Partners.propTypes = {
   partners: PropTypes.object,

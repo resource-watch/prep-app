@@ -13,8 +13,6 @@ export const LegendChoropleth = ({ legendSpec }) => (
   </ul>
 );
 
-LegendChoropleth.propTypes = {
-  legendSpec: PropTypes.object.isRequired
-};
+LegendChoropleth.propTypes = { legendSpec: PropTypes.object.isRequired };
 
 export default LegendChoropleth;

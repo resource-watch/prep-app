@@ -7,9 +7,7 @@ import { logEvent } from 'helpers/analytics';
 class Form extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      success: false
-    };
+    this.state = { success: false };
 
     this.logStartTyping = once(this.logStartTyping);
   }
@@ -58,7 +56,8 @@ class Form extends React.Component {
             <div className="mc-field-group -hidden">
               <label htmlFor="mce-MMERGE3">Who would you like to contact? *<span
                 className="asterisk"
-              /></label>
+              />
+              </label>
               <select
                 name="MMERGE3"
                 className="required"

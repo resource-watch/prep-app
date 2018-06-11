@@ -49,9 +49,7 @@ class ShareNexgddpTooltip extends React.Component {
     const { open, datasetSlug, render } = this.props;
     const { origin, search } = window.location;
     this.props.setOpen(!open);
-    this.props.setLinks({
-      embed: `${origin}/embed/nexgddp/${datasetSlug}${search}&render=${render}`
-    });
+    this.props.setLinks({ embed: `${origin}/embed/nexgddp/${datasetSlug}${search}&render=${render}` });
     this.props.setTab('embed');
   }
 

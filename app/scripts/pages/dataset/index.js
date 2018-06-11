@@ -207,7 +207,7 @@ class DatasetDetail extends React.Component {
           <div className={`l-header-nav ${currentData.name === 'home' ? '-no-bg' : ''}`}>
             <div className="row align-middle">
               <div className="column small-10 medium-4">
-                <Link to={'/'} className="logo">
+                <Link to="/" className="logo">
                   <img src={logoImage} alt="Partnership for Resilience and Preparedness" />
                 </Link>
               </div>
@@ -304,12 +304,8 @@ DatasetDetail.propTypes = {
   toggleModal: PropTypes.func
 };
 
-DatasetDetail.defaultProps = {
-  data: {}
-};
+DatasetDetail.defaultProps = { data: {} };
 
-const mapDispatchToProps = dispatch => ({
-  toggleModal: (...params) => dispatch(modalActions.toggleModal(...params))
-});
+const mapDispatchToProps = dispatch => ({ toggleModal: (...params) => dispatch(modalActions.toggleModal(...params)) });
 
 export default connect(null, mapDispatchToProps)(DatasetDetail);

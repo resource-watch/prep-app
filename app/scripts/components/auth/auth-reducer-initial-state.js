@@ -1,3 +1,1 @@
-export default {
-  session: !!localStorage.getItem('token')
-};
+export default { session: !!localStorage.getItem('token') };

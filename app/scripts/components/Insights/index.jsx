@@ -7,9 +7,7 @@ import Card from '../Cards/Card';
 class InsightsPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      createInsightModalOpen: false
-    };
+    this.state = { createInsightModalOpen: false };
   }
 
   componentDidMount() {

@@ -1,8 +1,6 @@
 import { TWITTER_FEED_LIST_RECEIVED } from '../constants';
 
-const initialState = {
-  list: []
-};
+const initialState = { list: [] };
 
 export default function twitterFeed(state = initialState, action) {
   switch (action.type) {

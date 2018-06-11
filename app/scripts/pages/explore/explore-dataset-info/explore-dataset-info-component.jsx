@@ -181,9 +181,7 @@ class DatasetInfo extends PureComponent {
                   resourceType="dataset"
                 />}
                 overlayClassName="c-rc-tooltip -blue-arrow"
-                overlayStyle={{
-                  color: '#1a3e62'
-                }}
+                overlayStyle={{ color: '#1a3e62' }}
                 placement="bottom"
                 trigger="click"
               >
@@ -268,8 +266,6 @@ DatasetInfo.propTypes = {
   getDatasetsByGraph: PropTypes.func
 };
 
-DatasetInfo.defaultProps = {
-  dataset: {}
-};
+DatasetInfo.defaultProps = { dataset: {} };
 
 export default DatasetInfo;

@@ -8,8 +8,6 @@ const mapStateToProps = (state, { params }) => ({
   data: state.widgets[params.slug]
 });
 
-const mapDispatchToProps = dispatch => ({
-  getWidgetBySlug: (slug) => { dispatch(getWidgetBySlug(slug)); }
-});
+const mapDispatchToProps = dispatch => ({ getWidgetBySlug: (slug) => { dispatch(getWidgetBySlug(slug)); } });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmbedDetail);

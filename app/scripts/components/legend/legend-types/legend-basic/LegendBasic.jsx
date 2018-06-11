@@ -20,8 +20,6 @@ LegendBasic.propTypes = {
   mode: PropTypes.oneOf(['horizontal', 'vertical', 'columns'])
 };
 
-LegendBasic.defaultProps = {
-  mode: 'columns'
-};
+LegendBasic.defaultProps = { mode: 'columns' };
 
 export default LegendBasic;

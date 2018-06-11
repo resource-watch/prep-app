@@ -3,9 +3,7 @@ import 'esri-leaflet';
 import Promise from 'bluebird';
 import leafletLayer from './leaflet-layer';
 
-Promise.config({
-  cancellation: true
-});
+Promise.config({ cancellation: true });
 
 export default (leafletMap, layerSpec) => {
   const { layerConfig, layerIndex, visibility, opacity } = layerSpec;

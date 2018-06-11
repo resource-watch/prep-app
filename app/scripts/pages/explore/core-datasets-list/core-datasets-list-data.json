@@ -1,0 +1,191 @@
+[
+  {
+    "id": 0,
+    "title": "Climate",
+    "description": "How is climate changing?",
+    "subgroups": [
+      {
+        "id": 10,
+        "title": "Temperature",
+        "slug": [
+          "temperature",
+          "sea_surface_temperature"
+        ],
+        "datasets": [
+          "4b54dc0a-ed24-453f-8cd9-c35b5d57c2ce",
+          "38bd1ce3-a756-4e03-bae5-e1a48e1a8419",
+          "b1929cc4-2da0-4ea6-a5f3-5e14ae64dcae",
+          "ab400650-fb37-41ef-a74c-c865c9853ec9",
+          "9aa7d8bf-5319-4d40-8370-edf85f240a65",
+          "b61fca59-707c-47f8-875c-9ac19313d193",
+          "a37b7ce6-8d14-4e3d-a57b-963557ee9ef5",
+          "aaadd6c3-93ea-44bc-ba8b-7af3f40d39e1",
+          "0a9501d7-e2f1-46ef-922d-c8f161cc8153",
+          "4dbebe70-67a0-4bb5-ac63-88f325d8ca40"
+        ]
+      },
+      {
+        "id": 11,
+        "title": "Precipitation",
+        "slug": [
+          "precipitation"
+        ],
+        "datasets": [
+          "5addc140-14cb-4e42-a232-88cbafebd00f",
+          "d491077d-4be9-48ed-8ba9-93e0b0d75d46",
+          "eadf93a6-58e7-4482-89d6-c9832d270a87",
+          "f5152f7b-757b-4e09-98d2-e244f547fec8",
+          "d7aaa502-ef85-4182-ac62-e512bbb46ca3",
+          "07bef16f-6b7b-40ff-99b5-5d9e7b1dd3ea"
+        ]
+      },
+      {
+        "id": 12,
+        "title": "Extreme events",
+        "slug": [
+          "flood",
+          "landslide",
+          "storm_surge",
+          "wildfire",
+          "heat_wave"
+        ],
+        "datasets": [
+          "9123b556-0020-42b4-93c2-a045dae1eff5",
+          "c61a1792-3530-4204-a7d6-0a4aea961810",
+          "2b89fe50-6795-426d-b357-df952b04294b",
+          "df0aabe8-0ef2-4a81-bdba-c6fc6767fde9",
+          "c36c3108-2581-4b68-852a-c929fc758001",
+          "c53a195f-d5f0-4acc-b1be-b773420a6606",
+          "ab160fb1-0590-4630-b815-5212ac1065e4",
+          "ff97b9ed-d3b3-45a0-bb64-2b8b74cad26f",
+          "08ff8183-48dc-457a-8924-bb4e7a87b8a8",
+          "7bac1b3e-08b5-40ce-a917-5445b63ab66f",
+          "e3ec1b3c-526b-4db3-ac2c-135e40672a33",
+          "73cb62cf-9659-4be9-87e8-56cdfc25ea67",
+          "ef9bf339-97ad-44f2-88ef-a034bf3feaf4"
+        ]
+      },
+      {
+        "id": 13,
+        "title": "Coastal risk",
+        "slug": [
+          "coastal_erosion",
+          "coastal_flooding",
+          "sea_level"
+        ],
+        "datasets": [
+          "d1fd9ac1-b99f-4f5f-b9d8-d3f1f818321a",
+          "61c88110-9a94-40bf-891b-f037be4a73fd",
+          "a63c0b98-81b7-401a-a9e3-d370aa90660f",
+          "894f43a8-ce8e-43a5-a4c7-fa80faa43d63",
+          "3624554e-b240-4edb-9110-1f010642c3f3"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "title": "Exposure",
+    "description": "What could be affected?",
+    "subgroups": [
+      {
+        "id": 20,
+        "title": "People",
+        "slug": [
+          "population",
+          "displaced_people"
+        ],
+        "datasets": [
+          "048b2140-9d4b-433e-a2dd-8d4122eb157b",
+          "141ef6ab-eed9-4081-8066-7be364a48af0",
+          "595bcf6f-0343-4146-ba0d-c54b1c928510",
+          "ba760eda-7ab8-46cd-89c1-70d22da7413d",
+          "8dacc306-fc32-4c10-b17b-ccae8a7f231e"
+        ]
+      },
+      {
+        "id": 21,
+        "title": "Agriculture",
+        "slug": [
+          "food_and_agriculture",
+          "agriculture",
+          "land_cover"
+        ],
+        "datasets": [
+          "7b144d42-dd27-4585-8dff-662942100a0b",
+          "bbf2957f-55d2-4ed1-9f9d-d62de88005bb",
+          "68009a7e-b81d-4fcb-bf90-a2cef3b6160a",
+          "ddf88c85-3e2f-41fa-8ceb-a3633ffb0bfb",
+          "9cb2c3bc-18af-413c-9f7e-95767b56430d",
+          "49e16339-f2ad-4c99-9587-0cc18d70eba3",
+          "960bf394-0c50-46c2-8d02-74df80324624",
+          "3a02a4d5-f84e-4649-bfdf-f852cff8f6b4",
+          "f61ba11d-000a-4189-ad74-bddcd5ee72ea",
+          "8f593d65-d963-4a1b-be9f-4e6cd3eed6ef",
+          "d597c392-086d-4e4f-b33b-4d8f520bb547",
+          "414532af-8e8c-46c5-868b-a586266afc76"
+        ]
+      },
+      {
+        "id": 22,
+        "title": "Infrastructure",
+        "slug": [
+          "infrastructure"
+        ],
+        "datasets": [
+          "943f3702-421f-47a4-9b99-e2d5a9f544a7",
+          "e63bb157-4b98-4ecb-81d6-c1b15e79895a",
+          "e0b94aef-4a3c-4fe3-8a58-7b713a4234a2",
+          "c9287777-90f1-4563-aabd-44cd3ac3675a",
+          "54736d3a-7602-4eab-8b6f-be6250885d65",
+          "a5f7b8a5-4506-4e73-8d82-527cb4e483de",
+          "8c21d4b3-dba7-4935-8e3b-2db8dfa4e6d6",
+          "c188cfb1-9156-41f1-a163-b05354ca9138",
+          "740c1922-fb49-4e6f-954d-ab80fe141012",
+          "aff82497-07f2-4329-a4f9-034e4e121d3c",
+          "b8af12fd-4363-4dcd-9438-6566b03ba954",
+          "8e1a25fd-abdb-4553-a817-0243b5211dc9",
+          "7c3debc9-9c7d-4f5b-957e-246f3c4e697c"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Vulnerability",
+    "description": "What makes us more or less vulnerable?",
+    "subgroups": [
+      {
+        "id": 30,
+        "title": "Socioeconomic",
+        "slug": [
+          "economic"
+        ],
+        "datasets": [
+          "bb831262-98dd-4015-879e-1a00dbe76e61",
+          "8774ae17-16ff-44ae-8188-ae798e407af5",
+          "ff362443-8b3e-477c-afdd-21271731395d",
+          "f6e94ce9-ffe2-4b36-b8d9-0988fc15e1e1",
+          "23be09bc-89bd-4c41-8e51-92b46057507c"
+        ]
+      },
+      {
+        "id": 31,
+        "title": "Indices of vulnerability",
+        "slug": [
+          "vulnerability"
+        ],
+        "datasets": [
+          "fa6443ff-eb95-4d0f-84d2-f0c91682efdf",
+          "b6a3b58f-9620-45f6-80a2-1ad869ec107c",
+          "4fa19d9c-8684-408e-9574-aafa86d1e179",
+          "28c4e7e4-690f-4efd-884b-f95c05a3b04c",
+          "a9ca92e6-c58c-4527-af45-d698ccb7780f",
+          "5001f631-97ea-4687-8fa9-2142c1f59c44",
+          "520cf2d8-9ab3-472b-9b49-b83a779c7c2b",
+          "59f90147-536d-4386-81e6-ad28a44cec4e"
+        ]
+      }
+    ]
+  }
+]

@@ -148,7 +148,7 @@ class DashboardDetail extends React.Component {
           <div className={`l-header-nav ${currentData.name === 'home' ? '-no-bg' : ''}`}>
             <div className="row align-middle">
               <div className="column small-10 medium-4">
-                <Link to={'/'} className="logo">
+                <Link to="/" className="logo">
                   <img src={logoImage} alt="Partnership for Resilience and Preparedness" />
                 </Link>
               </div>

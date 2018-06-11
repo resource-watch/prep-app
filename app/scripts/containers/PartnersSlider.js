@@ -7,8 +7,6 @@ const mapStateToProps = state => ({
   featured: state.partners.list.filter(d => d.featured)
 });
 
-const mapDispatchToProps = dispatch => ({
-  getPartners: () => dispatch(getPartners())
-});
+const mapDispatchToProps = dispatch => ({ getPartners: () => dispatch(getPartners()) });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PartnersSlider);

@@ -98,15 +98,11 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case LOCA_SET_MAP_ZOOM: {
-      return Object.assign({}, state, {
-        map: Object.assign({}, state.map, { zoom: action.payload })
-      });
+      return Object.assign({}, state, { map: Object.assign({}, state.map, { zoom: action.payload }) });
     }
 
     case LOCA_SET_MAP_CENTER: {
-      return Object.assign({}, state, {
-        map: Object.assign({}, state.map, { center: action.payload })
-      });
+      return Object.assign({}, state, { map: Object.assign({}, state.map, { center: action.payload }) });
     }
 
     case LOCA_SET_MARKER_MODE: {
@@ -126,93 +122,63 @@ export default function (state = initialState, action) {
     }
 
     case LOCA_SET_SCENARIO_OPTIONS: {
-      return Object.assign({}, state, {
-        scenario: Object.assign({}, state.scenario, { options: action.payload })
-      });
+      return Object.assign({}, state, { scenario: Object.assign({}, state.scenario, { options: action.payload }) });
     }
 
     case LOCA_SET_SCENARIO_SELECTION: {
-      return Object.assign({}, state, {
-        scenario: Object.assign({}, state.scenario, { selection: action.payload })
-      });
+      return Object.assign({}, state, { scenario: Object.assign({}, state.scenario, { selection: action.payload }) });
     }
 
     case LOCA_SET_TEMP_RESOLUTION_OPTIONS: {
-      return Object.assign({}, state, {
-        tempResolution: Object.assign({}, state.tempResolution, { options: action.payload })
-      });
+      return Object.assign({}, state, { tempResolution: Object.assign({}, state.tempResolution, { options: action.payload }) });
     }
 
     case LOCA_SET_TEMP_RESOLUTION_SELECTION: {
-      return Object.assign({}, state, {
-        tempResolution: Object.assign({}, state.tempResolution, { selection: action.payload })
-      });
+      return Object.assign({}, state, { tempResolution: Object.assign({}, state.tempResolution, { selection: action.payload }) });
     }
 
     case LOCA_SET_RANGE1_OPTIONS: {
-      return Object.assign({}, state, {
-        range1: Object.assign({}, state.range1, { options: action.payload })
-      });
+      return Object.assign({}, state, { range1: Object.assign({}, state.range1, { options: action.payload }) });
     }
 
     case LOCA_SET_RANGE1_SELECTION: {
-      return Object.assign({}, state, {
-        range1: Object.assign({}, state.range1, { selection: action.payload })
-      });
+      return Object.assign({}, state, { range1: Object.assign({}, state.range1, { selection: action.payload }) });
     }
 
     case LOCA_SET_RANGE2_OPTIONS: {
-      return Object.assign({}, state, {
-        range2: Object.assign({}, state.range2, { options: action.payload })
-      });
+      return Object.assign({}, state, { range2: Object.assign({}, state.range2, { options: action.payload }) });
     }
 
     case LOCA_SET_RANGE2_SELECTION: {
-      return Object.assign({}, state, {
-        range2: Object.assign({}, state.range2, { selection: action.payload })
-      });
+      return Object.assign({}, state, { range2: Object.assign({}, state.range2, { selection: action.payload }) });
     }
 
-    case LOCA_SET_CHART_DATA : {
-      return Object.assign({}, state, {
-        chart: Object.assign({}, state.chart, { data: action.payload })
-      });
+    case LOCA_SET_CHART_DATA: {
+      return Object.assign({}, state, { chart: Object.assign({}, state.chart, { data: action.payload }) });
     }
 
-    case LOCA_SET_CHART_ERROR : {
-      return Object.assign({}, state, {
-        chart: Object.assign({}, state.chart, { error: action.payload })
-      });
+    case LOCA_SET_CHART_ERROR: {
+      return Object.assign({}, state, { chart: Object.assign({}, state.chart, { error: action.payload }) });
     }
 
-    case LOCA_SET_CHART_LOADED : {
-      return Object.assign({}, state, {
-        chart: Object.assign({}, state.chart, { loaded: action.payload })
-      });
+    case LOCA_SET_CHART_LOADED: {
+      return Object.assign({}, state, { chart: Object.assign({}, state.chart, { loaded: action.payload }) });
     }
 
     case LOCA_SET_BASEMAP: {
-      return Object.assign({}, state, {
-        map: Object.assign({}, state.map, { basemap: action.payload })
-      });
+      return Object.assign({}, state, { map: Object.assign({}, state.map, { basemap: action.payload }) });
     }
 
     case LOCA_SET_LABELS: {
-      return Object.assign({}, state, {
-        map: Object.assign({}, state.map, { labels: action.payload })
-      });
+      return Object.assign({}, state, { map: Object.assign({}, state.map, { labels: action.payload }) });
     }
 
     case LOCA_SET_WATER: {
-      return Object.assign({}, state, {
-        map: Object.assign({}, state.map, { water: action.payload })
-      });
+      return Object.assign({}, state, { map: Object.assign({}, state.map, { water: action.payload }) });
     }
 
     case LOCA_SET_BOUNDARIES: {
-      return Object.assign({}, state, {
-        map: Object.assign({}, state.map, { boundaries: action.payload })
-      });
+      return Object.assign({}, state, { map: Object.assign({}, state.map, { boundaries: action.payload }) });
     }
 
     case LOCA_SET_RENDER: {

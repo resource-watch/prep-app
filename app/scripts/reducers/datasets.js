@@ -1,3 +1,4 @@
+/* eslint prefer-destructuring: 0 */
 import find from 'lodash/find';
 
 import {
@@ -26,9 +27,7 @@ const initialState = {
   widgets: {},
   layers: {},
   metadatas: {},
-  filters: {
-    geography: ['global', 'national']
-  },
+  filters: { geography: ['global', 'national'] },
   tab: 'core_datasets'
 };
 

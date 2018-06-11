@@ -35,8 +35,6 @@ function Breadcrumbs(props) {
   );
 }
 
-Breadcrumbs.propTypes = {
-  pathname: React.PropTypes.any.isRequired
-};
+Breadcrumbs.propTypes = { pathname: React.PropTypes.any.isRequired };
 
 export default Breadcrumbs;

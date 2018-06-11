@@ -8,13 +8,9 @@ module.exports = merge(sharedConfig, {
 
   devtool: 'cheap-module-source-map',
 
-  stats: {
-    errorDetails: true
-  },
+  stats: { errorDetails: true },
 
-  output: {
-    pathinfo: true
-  },
+  output: { pathinfo: true },
 
   module: {
     rules: [
@@ -25,26 +21,16 @@ module.exports = merge(sharedConfig, {
         test: /\.css$/,
         use: ['style-loader', {
           loader: 'css-loader',
-          options: {
-            importLoaders: 1
-          }
+          options: { importLoaders: 1 }
         }]
       }, {
         test: /\.(scss|sass)$/,
-        use: [{
-          loader: 'style-loader'
-        }, {
+        use: [{ loader: 'style-loader' }, {
           loader: 'css-loader',
-          options: {
-            importLoaders: 1
-          }
+          options: { importLoaders: 1 }
         }, {
           loader: 'postcss-loader',
-          options: {
-            config: {
-              path: path.resolve(__dirname, '../../postcss.config.js')
-            }
-          }
+          options: { config: { path: path.resolve(__dirname, '../../postcss.config.js') } }
         }, {
           loader: 'sass-loader',
           options: {
@@ -58,9 +44,7 @@ module.exports = merge(sharedConfig, {
   },
 
   plugins: [
-    new webpack.LoaderOptionsPlugin({
-      debug: true
-    })
+    new webpack.LoaderOptionsPlugin({ debug: true })
   ]
 
 });

@@ -44,9 +44,7 @@ class Banner extends React.Component {
   }
 
   render() {
-    const styles = {
-      backgroundImage: `url(${this.props.imageUrl || bg[this.props.bg || 'defaults']})`
-    };
+    const styles = { backgroundImage: `url(${this.props.imageUrl || bg[this.props.bg || 'defaults']})` };
 
     return (
       <div

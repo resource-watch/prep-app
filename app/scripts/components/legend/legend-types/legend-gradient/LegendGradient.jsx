@@ -12,9 +12,7 @@ export const LegendGradient = ({ legendSpec }) => {
       <div className="legend-gradient-icon">
         {itemTransparent &&
           <div
-            style={{
-              width: `${(1 / legendSpec.items.length) * 100}%`
-            }}
+            style={{ width: `${(1 / legendSpec.items.length) * 100}%` }}
             className="icon-gradient-transparent"
           />
         }
@@ -37,8 +35,6 @@ export const LegendGradient = ({ legendSpec }) => {
   );
 };
 
-LegendGradient.propTypes = {
-  legendSpec: PropTypes.object.isRequired
-};
+LegendGradient.propTypes = { legendSpec: PropTypes.object.isRequired };
 
 export default LegendGradient;

@@ -7,9 +7,7 @@ import RadioGroup from '../Form/RadioGroup';
 class LayersTooltip extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      value: null
-    };
+    this.state = { value: null };
 
     // Bindings
     this.onMouseDown = this.onMouseDown.bind(this);

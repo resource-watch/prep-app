@@ -1,5 +1,3 @@
-const initialState = {
-  location: 'global'
-};
+const initialState = { location: 'global' };
 
 export default initialState;

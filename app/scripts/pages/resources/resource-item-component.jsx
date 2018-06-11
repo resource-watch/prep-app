@@ -13,7 +13,7 @@ export default function ResourceItem(props) {
           url={data.url}
           src={data.photo.original}
           alt={data.title}
-          border={'neutral'}
+          border="neutral"
           analytics={{
             category: 'Resources',
             action: 'Clicks on an external tool'
@@ -37,6 +37,4 @@ export default function ResourceItem(props) {
   );
 }
 
-ResourceItem.propTypes = {
-  data: PropTypes.object
-};
+ResourceItem.propTypes = { data: PropTypes.object };

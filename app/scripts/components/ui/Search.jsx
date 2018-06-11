@@ -51,9 +51,7 @@ export default class Search extends PureComponent {
     const { className, label, placeholder } = this.props;
     const classNames = classnames(
       'c-search',
-      {
-        [className]: !className
-      }
+      { [className]: !className }
     );
 
     return (

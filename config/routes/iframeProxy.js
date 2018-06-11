@@ -2,7 +2,7 @@ const request = require('request');
 
 module.exports = (app) => {
   app.get('/proxy', (req, res) => {
-    const url = req.query.url;
+    const { url } = req.query;
     if (url) {
       request(req.query.url, (error, response, body) => {
         if (!error && response.statusCode === 200) {

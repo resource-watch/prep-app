@@ -43,19 +43,22 @@ class UserOptions extends React.Component {
               <a
                 href={`${process.env.RW_API_LOGIN_URL}/facebook?callbackUrl=${process.env.CALLBACK_URL}&origin=${process.env.APPLICATIONS}&token=true&applications=prep`}
                 onClick={this.onClickLink}
-              >Facebook</a>
+              >Facebook
+              </a>
             </li>
             <li>
               <a
                 href={`${process.env.RW_API_LOGIN_URL}/google?callbackUrl=${process.env.CALLBACK_URL}&origin=${process.env.APPLICATIONS}&token=true&applications=prep`}
                 onClick={this.onClickLink}
-              >Google</a>
+              >Google
+              </a>
             </li>
             <li>
               <a
                 href={`${process.env.RW_API_LOGIN_URL}/twitter?callbackUrl=${process.env.CALLBACK_URL}&origin=${process.env.APPLICATIONS}&token=true&applications=prep`}
                 onClick={this.onClickLink}
-              >Twitter</a>
+              >Twitter
+              </a>
             </li>
           </ul>
         }

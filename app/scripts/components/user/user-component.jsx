@@ -12,7 +12,7 @@ import UserOptions from '../user-options/user-options-component';
 // styles
 import './user-style.scss';
 
-const Avatar = function({ user }) {
+const Avatar = function ({ user }) {
   if (user.photo && user.photo !== '') return <div className="user-avatar" style={{ backgroundImage: `url(${user.photo})` }} />;
 
   return (
@@ -75,8 +75,6 @@ User.propTypes = {
   data: PropTypes.object.isRequired
 };
 
-User.defaultProps = {
-  data: {}
-};
+User.defaultProps = { data: {} };
 
 export default User;

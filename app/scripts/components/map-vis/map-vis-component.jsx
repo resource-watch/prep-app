@@ -23,9 +23,7 @@ const defaultMapOptions = {
 class Map extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      loading: false
-    };
+    this.state = { loading: false };
 
     this.addedLayers = []; // cached layers
     this.triggerChange = this.triggerChange.bind(this);
@@ -60,7 +58,7 @@ class Map extends PureComponent {
   setView() {
     const { sidebar } = this.props;
     const left = (sidebar.open) ? 430 : 0;
-    const {center , zoom} = this.props.mapOptions;
+    const { center, zoom } = this.props.mapOptions;
 
     this.map.setView(
       [center.lat, center.lng],
