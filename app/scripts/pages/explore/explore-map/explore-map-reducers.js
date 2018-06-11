@@ -41,10 +41,19 @@ export const setMapParams = (state, { payload }) => ({
   }
 });
 
-export const setBBox = (state, { payload }) => ({
-  ...state,
-  map: {
-    ...state.map,
-    bbox: payload
+export const setBBox = (state, { payload }) => {
+  let bbox = payload;
+
+  // Transforming L.bounds to array
+  if (bbox instanceof L.LatLngBounds) {
+    bbox = bbox.toBBoxString().split(',').map(n => Number(n));
   }
-});
+
+  return {
+    ...state,
+    map: {
+      ...state.map,
+      bbox
+    }
+  };
+};
