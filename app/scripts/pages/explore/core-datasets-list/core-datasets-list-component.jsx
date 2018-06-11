@@ -30,6 +30,9 @@ const CoreDatasetsList = (props) => {
         datasets={list}
       />
     );
+
+    if (list.length === 0) return null;
+
     const datasetNames = list.map((dataset) => {
       const metadata = dataset.metadata && dataset.metadata.length ? dataset.metadata[0] || {} : {};
       const info = metadata ? metadata.info || {} : {};
