@@ -5,17 +5,18 @@ import { concatenateFilters } from 'helpers/graph-service';
 
 class GraphService {
   static searchDatasetsByConcepts(filters = {}) {
+    console.log(filters)
     const filtersString = concatenateFilters(filters);
-    const queryParams = queryString.stringify(
-      Object.assign({},
-        { published: true },
-        { env: process.env.DATASET_ENV },
-        { application: process.env.APPLICATIONS },
-        { 'page[size]': 999999 })
-    );
+    const queryParams = {
+      published: true,
+      env: process.env.DATASET_ENV,
+      application: process.env.APPLICATIONS,
+      'page[size]': 999999,
+      depth: 0
+    };
 
     return new Promise((resolve, reject) => {
-      fetch(`${process.env.RW_API_URL}/graph/query/search-datasets?${filtersString}&${queryParams}`, {
+      fetch(`${process.env.RW_API_URL}/graph/query/search-datasets?${filtersString}&${queryString.stringify(queryParams)}`, {
         headers: {
           'Content-Type': 'application/json',
           'Upgrade-Insecure-Requests': 1
