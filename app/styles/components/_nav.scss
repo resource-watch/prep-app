@@ -126,6 +126,12 @@
           display: flex;
           justify-content: center;
           width: 50px;
+
+          .c-user {
+            display: flex;
+            align-items: center;
+            height: 100%;
+          }
         }
       }
     }
