@@ -212,12 +212,15 @@ export const getFiltersData = createThunkAction('explore-dataset-filters/getFilt
     });
   });
 
-export const onClearFilters = createThunkAction('explore-dataset-filters/onClearFilters', () => (dispatch) => {
-  dispatch(getFiltersData());
-  dispatch(clearFilters());
-  dispatch(setInitialFilterStatus());
-  dispatch(updateURLParams());
-});
+export const onClearFilters = createThunkAction('explore-dataset-filters/onClearFilters', (updateURL = true) =>
+  (dispatch) => {
+    dispatch(getFiltersData());
+    dispatch(clearFilters());
+    dispatch(setInitialFilterStatus());
+    if (updateURL) {
+      dispatch(updateURLParams());
+    }
+  });
 
 export const onSetDatasetFilter = createThunkAction('explore-dataset-filters/onSetDatasetFilter', (filter = {}) =>
   (dispatch) => {
