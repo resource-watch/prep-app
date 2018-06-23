@@ -7,25 +7,25 @@ export const basemapsSpec = {
   },
   dark: {
     id: 'dark',
-    value: 'https://api.mapbox.com/styles/v1/jcawri/cj0mhglox00a92slahe3obtpq/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamNhd3JpIiwiYSI6ImNqMDd6N2NybzAwMHcyd29iZWlsems0enEifQ.eIqQeyQn5oCLkyivGtiVLg',
+    value: 'https://api.mapbox.com/styles/v1/resourcewatch/cjhqgjq1908ar2smep2wd7wf7/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmVzb3VyY2V3YXRjaCIsImEiOiJjajFlcXZhNzcwMDBqMzNzMTQ0bDN6Y3U4In0.FRcIP_yusVaAy0mwAX1B8w',
     label: 'Dark',
     options: { attribution: '<a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox</a> <a href="http://www.openstreetmap.org/about/" target="_blank">© OpenStreetMap</a>' }
   },
   light: {
     id: 'light',
-    value: 'https://api.mapbox.com/styles/v1/jcawri/cj0mhlipx00aa2slaxd738db2/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamNhd3JpIiwiYSI6ImNqMDd6N2NybzAwMHcyd29iZWlsems0enEifQ.eIqQeyQn5oCLkyivGtiVLg',
+    value: 'https://api.mapbox.com/styles/v1/resourcewatch/cjhqgk77j0r7h2sqw220p7imy/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmVzb3VyY2V3YXRjaCIsImEiOiJjajFlcXZhNzcwMDBqMzNzMTQ0bDN6Y3U4In0.FRcIP_yusVaAy0mwAX1B8w',
     label: 'Light',
     options: { attribution: '<a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox</a> <a href="http://www.openstreetmap.org/about/" target="_blank">© OpenStreetMap</a>' }
   },
   satellite: {
     id: 'satellite',
-    value: 'https://api.mapbox.com/styles/v1/jcawri/cj0cl6k8h00bu2sobqze86bcm/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamNhd3JpIiwiYSI6ImNqMDd6N2NybzAwMHcyd29iZWlsems0enEifQ.eIqQeyQn5oCLkyivGtiVLg',
+    value: 'https://api.mapbox.com/styles/v1/resourcewatch/cjhqiecof53wv2rl9gw4cehmy/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmVzb3VyY2V3YXRjaCIsImEiOiJjajFlcXZhNzcwMDBqMzNzMTQ0bDN6Y3U4In0.FRcIP_yusVaAy0mwAX1B8w',
     label: 'Satellite',
     options: { attribution: '<a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox</a> <a href="http://www.openstreetmap.org/about/" target="_blank">© OpenStreetMap</a>' }
   },
   terrain: {
     id: 'terrain',
-    value: 'https://api.mapbox.com/styles/v1/jcawri/cj8emql45a7g92suc538h2shw/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamNhd3JpIiwiYSI6ImNqMDd6N2NybzAwMHcyd29iZWlsems0enEifQ.eIqQeyQn5oCLkyivGtiVLg',
+    value: 'https://api.mapbox.com/styles/v1/resourcewatch/cjhqi456h02pg2rp6w2mwp61c/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmVzb3VyY2V3YXRjaCIsImEiOiJjajFlcXZhNzcwMDBqMzNzMTQ0bDN6Y3U4In0.FRcIP_yusVaAy0mwAX1B8w',
     label: 'Terrain',
     options: { attribution: '<a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox</a> <a href="http://www.openstreetmap.org/about/" target="_blank">© OpenStreetMap</a>' }
   }
@@ -40,12 +40,12 @@ export const labelsSpec = {
   light: {
     id: 'light',
     label: 'Labels light',
-    value: 'https://api.mapbox.com/styles/v1/prepdata/cjc6dank251222rnm74g4qmin/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicHJlcGRhdGEiLCJhIjoiY2piZmNrcTRjMXRsdzJxbm9uNm1nOXJtNSJ9.Jm14P-FBGvNxiaB-3mzSPw'
+    value: 'https://api.mapbox.com/styles/v1/resourcewatch/cjgcf9rs05qnu2rrpp4qzucox/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmVzb3VyY2V3YXRjaCIsImEiOiJjajFlcXZhNzcwMDBqMzNzMTQ0bDN6Y3U4In0.FRcIP_yusVaAy0mwAX1B8w'
   },
   dark: {
     id: 'dark',
     label: 'Labels dark',
-    value: 'https://api.mapbox.com/styles/v1/prepdata/cjc6c1e9o4wa42slf54h8ccix/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicHJlcGRhdGEiLCJhIjoiY2piZmNrcTRjMXRsdzJxbm9uNm1nOXJtNSJ9.Jm14P-FBGvNxiaB-3mzSPw'
+    value: 'https://api.mapbox.com/styles/v1/resourcewatch/cjgcf9gqk9tmm2spd9zr0tml3/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmVzb3VyY2V3YXRjaCIsImEiOiJjajFlcXZhNzcwMDBqMzNzMTQ0bDN6Y3U4In0.FRcIP_yusVaAy0mwAX1B8w'
   }
 };
 
@@ -53,7 +53,7 @@ export const boundariesSpec = {
   dark: {
     id: 'dark',
     label: 'Boundaries',
-    value: 'https://api.mapbox.com/styles/v1/prepdata/cjbfcn5o51al72so1u5avqcur/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicHJlcGRhdGEiLCJhIjoiY2piZmNrcTRjMXRsdzJxbm9uNm1nOXJtNSJ9.Jm14P-FBGvNxiaB-3mzSPw'
+    value: 'https://api.mapbox.com/styles/v1/resourcewatch/cjgcf8qdaai1x2rn6w3j4q805/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmVzb3VyY2V3YXRjaCIsImEiOiJjajFlcXZhNzcwMDBqMzNzMTQ0bDN6Y3U4In0.FRcIP_yusVaAy0mwAX1B8w'
   }
 };
 
@@ -66,11 +66,11 @@ export const waterSpec = {
   dark: {
     id: 'dark',
     label: 'Dark',
-    value: 'https://api.mapbox.com/styles/v1/prepdata/cjda7qosvalqt2rlcxden3hfl/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicHJlcGRhdGEiLCJhIjoiY2piZmNrcTRjMXRsdzJxbm9uNm1nOXJtNSJ9.Jm14P-FBGvNxiaB-3mzSPw'
+    value: 'https://api.mapbox.com/styles/v1/resourcewatch/cjiopfb302cbk2snzezwe1o6s/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmVzb3VyY2V3YXRjaCIsImEiOiJjajFlcXZhNzcwMDBqMzNzMTQ0bDN6Y3U4In0.FRcIP_yusVaAy0mwAX1B8w'
   },
   light: {
     id: 'light',
     label: 'Light',
-    value: 'https://api.mapbox.com/styles/v1/prepdata/cjda7ohj1al4l2so2vls8yyid/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicHJlcGRhdGEiLCJhIjoiY2piZmNrcTRjMXRsdzJxbm9uNm1nOXJtNSJ9.Jm14P-FBGvNxiaB-3mzSPw'
+    value: 'https://api.mapbox.com/styles/v1/resourcewatch/cjiopfnca1bdu2rqocirdb3qv/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmVzb3VyY2V3YXRjaCIsImEiOiJjajFlcXZhNzcwMDBqMzNzMTQ0bDN6Y3U4In0.FRcIP_yusVaAy0mwAX1B8w'
   }
 };
