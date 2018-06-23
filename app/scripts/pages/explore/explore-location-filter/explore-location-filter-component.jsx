@@ -16,10 +16,6 @@ class DatasetLocationFilter extends PureComponent {
     this.onChangeLocation = this.onChangeLocation.bind(this);
   }
 
-  componentDidMount() {
-    this.setBoundsByLocation(this.props.location);
-  }
-
   onChangeLocation(location) {
     this.props.setLocation(location);
     this.setBoundsByLocation(location);
