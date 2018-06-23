@@ -13,7 +13,11 @@ import './explore-dataset-filters-styles.scss';
 
 class ExploreDatasetFilters extends PureComponent {
   componentWillUnmount() {
-    this.onClearFilters();
+    // We don't update the URL because if the user is
+    // navigating away from Explore, we don't want to be
+    // redirected right away to it (consequence of
+    // updating the URL after the navigation)
+    this.onClearFilters(false);
   }
 
   onChange(values = [], key) {
@@ -33,9 +37,10 @@ class ExploreDatasetFilters extends PureComponent {
   /**
    * Event handler executed when the user clicks the
    * "clear filters" button
+   * @param {boolean} [updateURL = true] Whether to update the URL or not
    */
-  onClearFilters() {
-    this.props.onClearFilters();
+  onClearFilters(updateURL = true) {
+    this.props.onClearFilters(updateURL);
     logEvent('Explore menu', 'Clear filter', 'Click');
   }
 
