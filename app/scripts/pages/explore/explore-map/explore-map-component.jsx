@@ -22,7 +22,7 @@ class ExploreMap extends PureComponent {
 
   render() {
     const {
-      setMapParams, basemap, labels, water, boundaries, bbox, sidebar, zoom, lat, lng, minZoom, setBasemap,
+      setMapParams, setBBox, basemap, labels, water, boundaries, bbox, sidebar, zoom, lat, lng, minZoom, setBasemap,
       setLabels, setBoundaries, setWater, activeLayers, activeLayersForMap, embed, embedExport
     } = this.props;
 
@@ -103,7 +103,14 @@ class ExploreMap extends PureComponent {
           {!(embed || embedExport) &&
             <SearchControl
               className="-absolute -explore"
-              onChange={setMapParams}
+              onChange={(bbox) => {
+                this.props.setBBox(bbox);
+
+                // Reset the bounds inmediatly to have the possibility to click on it again
+                requestAnimationFrame(() => {
+                  this.props.setBBox(null);
+                });
+              }}
               open
             />
           }

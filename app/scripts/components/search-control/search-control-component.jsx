@@ -42,7 +42,7 @@ class SearchControl extends Component {
 
   render() {
     const { search, visible } = this.state;
-    const { setMapParams } = this.props;
+    const { onChange } = this.props;
 
     const classNames = classnames({
       [this.props.className]: !!this.props.className
@@ -58,7 +58,7 @@ class SearchControl extends Component {
       <div className={`c-search-control ${classNames}`}>
           <div className="search-container">
             { search &&
-              <LocationSearch onChange={setMapParams} onSearch={this.closeSearch} />
+              <LocationSearch onChange={onChange} onSearch={this.closeSearch} />
             }
             <Tooltip
               overlay={tooltipContent}
