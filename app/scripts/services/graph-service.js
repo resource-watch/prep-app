@@ -5,7 +5,6 @@ import { concatenateFilters } from 'helpers/graph-service';
 
 class GraphService {
   static searchDatasetsByConcepts(filters = {}) {
-    console.log(filters)
     const filtersString = concatenateFilters(filters);
     const queryParams = {
       published: true,
