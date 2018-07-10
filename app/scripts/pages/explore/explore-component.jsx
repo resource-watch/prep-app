@@ -37,6 +37,7 @@ class ExplorePage extends PureComponent {
   componentDidMount() {
     this.props.updateURLParams();
     this.props.fetchDatasets();
+    this.props.fetchCoreDatasets();
 
     this.props.setSidebar({
       width: 430,
@@ -238,6 +239,7 @@ class ExplorePage extends PureComponent {
 ExplorePage.defaultProps = {
   currentTab: 'core_datasets',
   fetchDatasets: () => {},
+  fetchCoreDatasets: () => {},
   getDatasetsByGraph: () => {}
 };
 
@@ -249,6 +251,7 @@ ExplorePage.propTypes = {
   setTab: PropTypes.func,
   setSidebar: PropTypes.func,
   fetchDatasets: PropTypes.func,
+  fetchCoreDatasets: PropTypes.func,
   filterQuery: PropTypes.func,
   toggleInfo: PropTypes.func,
   initialURLParams: PropTypes.func,

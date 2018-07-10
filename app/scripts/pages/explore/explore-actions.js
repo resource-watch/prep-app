@@ -124,6 +124,30 @@ export const fetchDatasets = createThunkAction('fetchDatasets', () => (dispatch)
     })
     .catch(error => dispatch(failureDatasets(error)));
 });
+
+export const receiveCoreDatasets = createAction('receiveCoreDatasets');
+export const failureCoreDatasets = createAction('failureCoreDatasets');
+export const fetchCoreDatasets = createThunkAction('fetchCoreDatasets', () => (dispatch) => {
+  const params = {
+    published: true,
+    env: config.datasetEnv || 'production'
+  };
+  const url = `${config.apiUrl}/core_datasets?${qs.stringify(params)}`;
+  return fetch(url, {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then((response) => {
+      if (response.ok) return response.json();
+      throw Error(response);
+    })
+    .then((json) => {
+      dispatch(receiveCoreDatasets(json));
+    })
+    .catch(error => dispatch(failureCoreDatasets(error)));
+});
+
 export const toggleInfo = createAction('toggleInfo');
 export const toggleDataset = createThunkAction('toggleDataset', () => (dispatch) => {
   dispatch(updateActiveDatasets());
