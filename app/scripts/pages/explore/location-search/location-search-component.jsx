@@ -13,17 +13,24 @@ class LocationSearchComponent extends React.Component {
   }
 
   onSuggestSelect(e) {
-    if (!e || !e.location) return;
+    const { gmaps, location } = e;
 
-    const { lat, lng } = e.location;
+    const viewport = gmaps.geometry && gmaps.geometry.viewport;
 
-    setTimeout(() => {
+    if (viewport) {
+      this.props.setBBox([
+        viewport.b.b, viewport.f.b,
+        viewport.b.f, viewport.f.f
+      ]);
+    }
+
+    if (!viewport && location) {
       this.props.setMapParams({
-        zoom: 7,
-        lat,
-        lng
+        lat: location.lat,
+        lng: location.lng,
+        zoom: 7
       });
-    }, 500);
+    }    
 
     this.props.onSearch(false);
   }
@@ -39,6 +46,6 @@ class LocationSearchComponent extends React.Component {
   }
 }
 
-LocationSearchComponent.propTypes = { setMapParams: PropTypes.func };
+LocationSearchComponent.propTypes = { setMapParams: PropTypes.func, setBBox: PropTypes.func };
 
 export default LocationSearchComponent;
