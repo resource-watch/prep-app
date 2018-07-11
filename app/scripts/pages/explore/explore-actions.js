@@ -48,6 +48,25 @@ export const setTab = createThunkAction('setTab', () => (dispatch) => {
 export const setLocation = createThunkAction('setLocation', () => (dispatch) => {
   dispatch(updateURLParams());
 });
+export const receiveLocations = createAction('receiveLocations');
+export const failureLocations = createAction('failureLocations');
+export const fetchLocations = createThunkAction('fetchLocations', () => (dispatch) => {
+  const params = {};
+  const url = `${config.apiUrlRW}/geostore/admin/list`;
+  return fetch(url, {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then((response) => {
+      if (response.ok) return response.json();
+      throw Error(response);
+    })
+    .then((json) => {
+      dispatch(receiveLocations(json.data));
+    })
+    .catch(error => dispatch(failureLocations(error)));
+});
 
 // Datasets list
 export const setActiveDatasets = createAction('setActiveDatasets');

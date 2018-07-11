@@ -36,6 +36,7 @@ class ExplorePage extends PureComponent {
 
   componentDidMount() {
     this.props.updateURLParams();
+    this.props.fetchLocations();
     this.props.fetchDatasets();
     this.props.fetchCoreDatasets();
 

@@ -5,45 +5,49 @@ import { logEvent } from 'helpers/analytics';
 
 import Tabs from 'components/ui/Tabs';
 
-// data
-import datasetLocations from './explore-location-filter-data';
-import countryBoundingBoxes from './country-bounding-boxes.json';
-
 class DatasetLocationFilter extends PureComponent {
   constructor(props) {
     super(props);
-
     this.onChangeLocation = this.onChangeLocation.bind(this);
   }
 
-  onChangeLocation(location) {
+  async componentDidMount() {
+    await this.setBoundsByLocation(this.props.location);
+  }
+
+  setBoundsByLocation(location) {
+    return new Promise(resolve => {
+      if (!location || location === 'global') {
+        this.props.setMapParams({ lat: 24.44714958973082, lng: -66.97265625000001, zoom: 3 });
+        return resolve();
+      }
+
+      fetch(`${config.apiUrlRW}/geostore/admin/${location}`)
+        .then(response => response.json())
+        .then(json => {
+          const { bbox } = json.data.attributes;
+          // const bounds = L.geoJSON(geojson).getBounds();
+          this.props.setBBox(bbox);
+          resolve();
+        });
+    });
+  }
+
+  async onChangeLocation(location) {
     this.props.setLocation(location);
-    this.setBoundsByLocation(location);
+    await this.setBoundsByLocation(location);
     // GA event
     const label = `Core ${location}`;
     logEvent('Explore menu', 'Changes dataset view', label);
   }
 
-  setBoundsByLocation(location) {
-    // Setting bounds after change depending on country
-    const { iso } = datasetLocations.find(l => (l.value === location));
-    if (iso) {
-      const geojson = countryBoundingBoxes.features.find(c => (c.properties.iso3166 === iso));
-      const bounds = L.geoJSON(geojson).getBounds();
-      this.props.setBBox(bounds);
-    } else {
-      // default bounds
-      this.props.setMapParams({ lat: 24.44714958973082, lng: -66.97265625000001, zoom: 3 });
-    }
-  }
-
   render() {
-    const { location } = this.props;
+    const { location, countries } = this.props;
 
     return (
       <div className="c-dataset-location-filter">
         <Tabs
-          options={datasetLocations}
+          options={countries}
           className="-center -light"
           onChange={this.onChangeLocation}
           selected={location}

@@ -15,5 +15,5 @@ export const receiveCoreDatasets = (state, { payload }) => ({
 
 export const failureCoreDatasets = (state, { payload }) => ({
   ...state,
-  datasets: { ...state.datasets, isFetching: false, status: 'error', message: payload }
+  coreDatasets: { ...state.coreDatasets, isFetching: false, status: 'error', message: payload }
 });

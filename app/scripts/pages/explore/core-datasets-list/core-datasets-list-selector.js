@@ -25,7 +25,6 @@ export const getCoreDatasets = createSelector(
     return allDatasets.filter((dataset) => {
       const { vocabulary } = dataset;
       const tags = vocabulary && vocabulary.length ? vocabulary[0].tags || [] : [];
-      // return coreDatasetsResult.includes(dataset.id) && tags.includes(location);
       return coreDatasetsResult.includes(dataset.id);
     });
   }
@@ -39,7 +38,7 @@ export const getParsedCoreDatasets = createSelector(
       id: i + 1,
       title: c.name,
       subgroups: compact(c.subcategories.map((s, j) => {
-        const subgroup = coreDatasets.find(d => d.subcategory === s.value && d.country_iso.toLowerCase() === location);
+        const subgroup = coreDatasets.find(d => d.subcategory === s.value && d.country_iso === location);
         if (subgroup) {
           return {
             id: (j + 1) + ((i + 1) * 10),

@@ -18,8 +18,6 @@ const CoreDatasetsList = (props) => {
     );
   }
 
-  console.log(coreDatasets)
-
   if (!coreDatasets || coreDatasets.length === 0) return null;
 
   const subGroups = (subgroup) => {
