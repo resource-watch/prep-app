@@ -8,6 +8,7 @@ import Tabs from 'components/ui/Tabs';
 class DatasetLocationFilter extends PureComponent {
   constructor(props) {
     super(props);
+    this.state = { countryisActive: false };
     this.onChangeLocation = this.onChangeLocation.bind(this);
   }
 
@@ -41,17 +42,35 @@ class DatasetLocationFilter extends PureComponent {
     logEvent('Explore menu', 'Changes dataset view', label);
   }
 
+  handleHover(newState) {
+    this.setState(newState);
+  }
+
   render() {
     const { location, countries } = this.props;
+    const { countryisActive } = this.state;
+    const onlyCountries = countries.filter(c => c.value !== 'global');
+    const currentLocation = countries.find(c => c.value === location);
 
     return (
       <div className="c-dataset-location-filter">
-        <Tabs
-          options={countries}
-          className="-center -light"
-          onChange={this.onChangeLocation}
-          selected={location}
-        />
+        <ul className="c-dataset-location-filter-tabs">
+          <li><button type="button" className={location === 'global' && '-active'} onClick={() => this.onChangeLocation('global')}>Global</button></li>
+          <li
+            onMouseEnter={() => this.handleHover({ countryisActive: true })}
+            onMouseLeave={() => this.handleHover({ countryisActive: false })}
+          >
+            <span className={location !== 'global' && '-active'}>{(location === 'global' || !currentLocation) ? 'Select a country' : currentLocation.label}</span>
+            {countryisActive &&
+              <div className="submenu">
+                <ul className="submenu-list">
+                  {onlyCountries.map((c) => (<li>
+                    <button key={c.id} type="button" onClick={() => this.onChangeLocation(c.value)}>{c.label}</button>
+                  </li>))}
+                </ul>
+              </div>}
+          </li>
+        </ul>
       </div>
     );
   }
