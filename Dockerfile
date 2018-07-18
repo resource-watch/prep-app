@@ -6,7 +6,7 @@ ARG twitterUser=worldresources
 ARG apiUrl=https://prepdata.org/api
 ARG assetsUrl=
 ARG rwApiUrl=https://api.resourcewatch.org/v1
-ARG basemapUrl=https://api.mapbox.com/styles/v1/wri/cism5nsz4007t2wnrp5xslf7s/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoid3JpIiwiYSI6Ik9TY2w5RTQifQ.0HV7dQTjK40mk7GpNNA64g
+ARG basemapUrl=https://api.mapbox.com/styles/v1/resourcewatch/cjjr8d2qw19y92smuuzydlpdv/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmVzb3VyY2V3YXRjaCIsImEiOiJjajFlcXZhNzcwMDBqMzNzMTQ0bDN6Y3U4In0.FRcIP_yusVaAy0mwAX1B8w
 ARG nodeEnv=production
 ARG callbackUrl=https://prepdata.org/auth
 
