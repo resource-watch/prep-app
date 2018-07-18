@@ -2,9 +2,9 @@ import compact from 'lodash/compact';
 import { createSelector } from 'reselect';
 import { CATEGORIES } from 'pages/explore/core-datasets-list/core-datasets-list-constants.js';
 
-const getAllDatasets = state => state.explorePage.datasets.items;
-const getAllCoreDatasets = state => state.explorePage.coreDatasets.items;
-const getLocationFilter = state => state.explorePage.coreDatasets.location;
+const getAllDatasets = state => state.exploreEmbedPage.datasets.items;
+const getAllCoreDatasets = state => state.exploreEmbedPage.coreDatasets.items;
+const getLocationFilter = state => state.exploreEmbedPage.coreDatasets.location;
 
 export const getCoreDatasets = createSelector(
   [getAllDatasets, getAllCoreDatasets, getLocationFilter],

@@ -64,9 +64,9 @@ class DatasetLocationFilter extends PureComponent {
             {countryisActive &&
               <div className="submenu">
                 <ul className="submenu-list">
-                  {onlyCountries.map((c) => (<li>
-                    <button key={c.id} type="button" onClick={() => this.onChangeLocation(c.value)}>{c.label}</button>
-                  </li>))}
+                  {onlyCountries.map(c => <li key={c.id}>
+                    <button type="button" onClick={() => this.onChangeLocation(c.value)}>{c.label}</button>
+                  </li>)}
                 </ul>
               </div>}
           </li>

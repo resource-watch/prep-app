@@ -7,7 +7,7 @@ import App from './components/App';
 import Home from './components/Home';
 import AboutPage from './pages/about';
 import ExplorePage from './pages/explore';
-import ExplorePageCountry from './pages/explore-country';
+import ExplorePageCountry from './pages/explore/country';
 import PartnersPage from './pages/partners';
 import ResourcesPage from './pages/resources';
 import DatasetDetail from './containers/Dataset';
