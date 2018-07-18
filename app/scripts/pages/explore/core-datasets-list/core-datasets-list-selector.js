@@ -1,7 +1,6 @@
 import compact from 'lodash/compact';
 import { createSelector } from 'reselect';
 import { CATEGORIES } from './core-datasets-list-constants.js';
-import oldCoreDatasets from './core-datasets-list-data.json';
 
 const getAllDatasets = state => state.explorePage.datasets.items;
 const getAllCoreDatasets = state => state.explorePage.coreDatasets.items;

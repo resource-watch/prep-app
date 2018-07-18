@@ -13,7 +13,9 @@ class ExplorePage extends PureComponent {
 
   componentDidMount() {
     this.props.updateURLParams();
+    this.props.fetchLocations();
     this.props.fetchDatasets();
+    this.props.fetchCoreDatasets();
   }
 
   render() {
@@ -53,7 +55,10 @@ class ExplorePage extends PureComponent {
 
 ExplorePage.defaultProps = {
   currentTab: 'core_datasets',
-  fetchDatasets: () => {}
+  fetchLocations: () => {},
+  fetchDatasets: () => {},
+  fetchCoreDatasets: () => {},
+  getDatasetsByGraph: () => {}
 };
 
 ExplorePage.propTypes = {

@@ -1,31 +1,57 @@
+import compact from 'lodash/compact';
 import { createSelector } from 'reselect';
-import coreDatasets from 'pages/explore/core-datasets-list/core-datasets-list-data.json';
+import { CATEGORIES } from 'pages/explore/core-datasets-list/core-datasets-list-constants.js';
 
 const getAllDatasets = state => state.exploreEmbedPage.datasets.items;
+const getAllCoreDatasets = state => state.exploreEmbedPage.coreDatasets.items;
 const getLocationFilter = state => state.exploreEmbedPage.coreDatasets.location;
 
 export const getCoreDatasets = createSelector(
-  [getAllDatasets, getLocationFilter],
-  (allDatasets, location) => {
+  [getAllDatasets, getAllCoreDatasets, getLocationFilter],
+  (allDatasets, coreDatasets, location) => {
     const coreDatasetsResult = [];
-    const searchDatasetsRecursive = (items) => {
-      if (items && items.length) {
-        items.forEach((item) => {
-          const { subgroups, datasets } = item;
-          if (datasets && datasets.length) datasets.forEach(d => coreDatasetsResult.push(d));
-          if (subgroups && subgroups.length) searchDatasetsRecursive(subgroups);
-        });
-      }
+    const searchDatasetsRecursive = (categories, items) => {
+      items.forEach((item) => {
+        const { subcategories } = categories;
+        const { dataset_ids } = item;
+        if (dataset_ids && dataset_ids.length) dataset_ids.forEach(d => coreDatasetsResult.push(d));
+        if (subcategories && subcategories.length) searchDatasetsRecursive(subcategories);
+      });
     };
 
-    searchDatasetsRecursive(coreDatasets);
+    searchDatasetsRecursive(CATEGORIES, coreDatasets);
 
     return allDatasets.filter((dataset) => {
       const { vocabulary } = dataset;
       const tags = vocabulary && vocabulary.length ? vocabulary[0].tags || [] : [];
-      return coreDatasetsResult.includes(dataset.id) && tags.includes(location);
+      return coreDatasetsResult.includes(dataset.id);
     });
   }
 );
 
+export const getParsedCoreDatasets = createSelector(
+  [getAllCoreDatasets, getLocationFilter],
+  (coreDatasets, location) => {
+    const result = CATEGORIES.map((c, i) => ({
+      ...c,
+      id: i + 1,
+      title: c.name,
+      subgroups: compact(c.subcategories.map((s, j) => {
+        const subgroup = coreDatasets.find(d => d.subcategory === s.value && d.country_iso === location);
+        if (subgroup) {
+          return {
+            id: (j + 1) + ((i + 1) * 10),
+            datasets: subgroup.dataset_ids,
+            slug: subgroup.tags,
+            title: subgroup.subcategory
+          };
+        }
+        return null;
+      }))
+    }));
+    return result;
+  }
+);
+
 export default { getCoreDatasets };
+

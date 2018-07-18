@@ -15,7 +15,7 @@ export const setSidebar = createAction('explore/setSidebar');
 
 // Update URL
 export const updateURLParams = createThunkAction('updateURLParams', () => (dispatch, getState) => {
-  const { explorePage } = getState();
+  const { explorePage, routing } = getState();
   const { tab, datasets, coreDatasets, datasetFilters, map } = explorePage;
   const { location } = coreDatasets;
   const { filters } = datasetFilters;
@@ -37,7 +37,7 @@ export const updateURLParams = createThunkAction('updateURLParams', () => (dispa
     activeDatasets: activeDatasetsResult
   };
 
-  dispatch(replace({ pathname: '/explore', query }));
+  dispatch(replace({ pathname: routing.locationBeforeTransitions.pathname, query }));
 });
 
 export const setTab = createThunkAction('setTab', () => (dispatch) => {

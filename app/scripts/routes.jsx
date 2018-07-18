@@ -7,6 +7,7 @@ import App from './components/App';
 import Home from './components/Home';
 import AboutPage from './pages/about';
 import ExplorePage from './pages/explore';
+import ExplorePageCountry from './pages/explore/country';
 import PartnersPage from './pages/partners';
 import ResourcesPage from './pages/resources';
 import DatasetDetail from './containers/Dataset';
@@ -138,6 +139,7 @@ function Routes(props) {
 
         <Route path="partners/:id" component={PartnerDetail} />
         <Route path="explore" component={ExplorePage} />
+        <Route path="explore/:iso" component={ExplorePageCountry} />
         <Route path="dashboard/:slug(/:tab)" component={DashboardsDetail} />
         <Route path="stories/:slug" component={InsightsDetail} />
         <Route path="dataset/:slug" component={DatasetDetail} />

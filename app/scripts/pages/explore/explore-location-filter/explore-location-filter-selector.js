@@ -17,7 +17,9 @@ export const getCoreDatasetLocations = createSelector(
       iso: 'global'
     });
 
-    locations.filter(l => countriesISO.includes(l.iso)).forEach(l => result.push(l));
+    locations
+      .filter(l => countriesISO.includes(l.iso))
+      .forEach(l => result.push(l));
 
     return result.map(r => ({
       id: r.geostoreId,
