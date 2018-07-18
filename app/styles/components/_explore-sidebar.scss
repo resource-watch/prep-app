@@ -17,6 +17,11 @@ $sidebar-padding-content: 20px;
     background-color: $base-bg-color;
   }
 
+  &.-embed {
+    top: 0;
+    height: 100vh;
+  }
+
   > .actions {
     position: absolute;
     top: 15px;

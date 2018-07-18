@@ -98,18 +98,19 @@ class ExplorePage extends PureComponent {
   }
 
   render() {
-    const { sidebar, selectedDataset, currentTab, toggleInfo, countries, countryISO } = this.props;
+    const { sidebar, selectedDataset, currentTab, toggleInfo, countries, countryISO, embed } = this.props;
     const { filters } = this.state;
     const currentCountry = countries.find(c => c.iso === countryISO);
 
     const sidebarExploreClass = classnames({
       'c-explore-sidebar': true,
-      '-open': sidebar.open
+      '-open': sidebar.open,
+      '-embed': embed
     });
 
     return (
       <div className="l-explore">
-        <header className="l-header -expanded">
+        {!embed && <header className="l-header -expanded">
           <div className="l-header-nav -short">
             <div className="row align-middle">
               <div className="column small-10 medium-4">
@@ -122,7 +123,7 @@ class ExplorePage extends PureComponent {
               </div>
             </div>
           </div>
-        </header>
+        </header>}
 
         {/* Datasets list */}
         <div className={sidebarExploreClass}>
@@ -218,7 +219,7 @@ class ExplorePage extends PureComponent {
         </div>
 
         {/* Datasets panel info */}
-        <div className={`c-info-sidebar ${selectedDataset ? '-open' : ''}`}>
+        <div className={`c-info-sidebar ${selectedDataset && '-open'} ${embed && '-embed-with-sidebar'}`}>
           <div className="actions">
             <div>
               <button
@@ -229,11 +230,11 @@ class ExplorePage extends PureComponent {
               </button>
             </div>
           </div>
-          <DatasetInfo />
+          <DatasetInfo embed={embed} />
         </div>
 
         {/* Map */}
-        <ExploreMap />
+        <ExploreMap embed={embed} />
       </div>
     );
   }
