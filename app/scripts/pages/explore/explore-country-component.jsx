@@ -11,7 +11,7 @@ import Tabs from 'components/ui/Tabs';
 import Search from 'components/ui/Search';
 import Icon from 'components/ui/Icon';
 
-import DatasetLocationFilter from './explore-location-filter';
+// import DatasetLocationFilter from './explore-location-filter';
 import ExploreDatasetFilters from './explore-dataset-filters/explore-dataset-filters';
 import CoreDatasetsList from './core-datasets-list';
 import DatasetsList from './explore-datasets-list';
@@ -32,7 +32,7 @@ class ExplorePage extends PureComponent {
   componentWillMount() {
     this.props.initialURLParams();
     this.props.getDatasetsByGraph();
-    if (this.props.countryISO) this.props.setLocation(this.props.countryISO.toUpperCase());
+    if (this.props.countryISO) this.props.setLocation(this.props.countryISO);
   }
 
   componentDidMount() {
@@ -98,8 +98,9 @@ class ExplorePage extends PureComponent {
   }
 
   render() {
-    const { sidebar, selectedDataset, currentTab, toggleInfo } = this.props;
+    const { sidebar, selectedDataset, currentTab, toggleInfo, countries, countryISO } = this.props;
     const { filters } = this.state;
+    const currentCountry = countries.find(c => c.iso === countryISO);
 
     const sidebarExploreClass = classnames({
       'c-explore-sidebar': true,
@@ -127,7 +128,7 @@ class ExplorePage extends PureComponent {
         <div className={sidebarExploreClass}>
           <div className="sidebar-container">
             <header className="sidebar-header">
-              <h1 className="sidebar-title">Explore</h1>
+              <h1 className="sidebar-title">{currentCountry && currentCountry.name}</h1>
               <Tabs
                 className="-center"
                 options={tabOptions}
@@ -140,7 +141,7 @@ class ExplorePage extends PureComponent {
               <div className="c-datasets-list">
                 {currentTab === 'core_datasets' &&
                   <div className="datasets-list-content">
-                    <DatasetLocationFilter />
+                    {/* <DatasetLocationFilter /> */}
                     <div className="list-container">
                       <CoreDatasetsList />
                       <footer className="sidebar-footer">

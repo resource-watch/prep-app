@@ -8,7 +8,8 @@ import * as reducers from './explore-reducers';
 export { initialState, actions, reducers };
 
 const mapStateToProps = (state, { params }) => ({
-  countryISO: params.iso,
+  countries: state.explorePage.locations.items,
+  countryISO: params.iso.toUpperCase(),
   routing: state.routing,
   sidebar: state.explorePage.sidebar,
   datasets: state.explorePage.datasets.items,
