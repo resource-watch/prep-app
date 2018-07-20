@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Components
 import { SortableContainer, SortableElement, SortableHandle, arrayMove } from 'react-sortable-hoc';
@@ -427,34 +428,34 @@ DataMapLegend.propTypes = {
   /**
   * Define the layers data of the map
   */
-  data: React.PropTypes.array,
+  data: PropTypes.array,
   /**
   * Define the layers data of the map
   */
-  infoMetadata: React.PropTypes.object,
+  infoMetadata: PropTypes.object,
   /**
   * Define the function to handle the detail info click
   */
-  onInfoClick: React.PropTypes.func.isRequired,
+  onInfoClick: PropTypes.func.isRequired,
   /**
   * Define the function to close info click
   */
-  onCloseInfo: React.PropTypes.func.isRequired,
+  onCloseInfo: PropTypes.func.isRequired,
   /**
   * Define the function to the toggle the layer opacity
   */
-  toggleLayerOpacity: React.PropTypes.func.isRequired,
+  toggleLayerOpacity: PropTypes.func.isRequired,
   /**
   * Define the function to the update the layers index
   */
-  selectedDatasetId: React.PropTypes.string,
-  activeDatasets: React.PropTypes.array,
-  setLayersOrder: React.PropTypes.func.isRequired,
-  setDatasetSelected: React.PropTypes.func.isRequired,
-  deselectDataset: React.PropTypes.func,
-  switchChange: React.PropTypes.func,
-  toggleTooltip: React.PropTypes.func,
-  setLayerGroupActiveLayer: React.PropTypes.func
+  selectedDatasetId: PropTypes.string,
+  activeDatasets: PropTypes.array,
+  setLayersOrder: PropTypes.func.isRequired,
+  setDatasetSelected: PropTypes.func.isRequired,
+  deselectDataset: PropTypes.func,
+  switchChange: PropTypes.func,
+  toggleTooltip: PropTypes.func,
+  setLayerGroupActiveLayer: PropTypes.func
 };
 
 export default DataMapLegend;

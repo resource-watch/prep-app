@@ -1,6 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import IFrame from '../IFrame';
-
 
 function EmbedMap(props) {
   return (
@@ -16,15 +16,15 @@ EmbedMap.propTypes = {
   /**
    * Define map title
    */
-  title: React.PropTypes.string,
+  title: PropTypes.string,
   /**
    * Define map subtitle
    */
-  legend: React.PropTypes.string,
+  legend: PropTypes.string,
   /**
    * Define embed map url
    */
-  url: React.PropTypes.string.isRequired
+  url: PropTypes.string.isRequired
 };
 
 export default EmbedMap;

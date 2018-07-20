@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
 class IFrame extends React.Component {
@@ -48,7 +49,7 @@ IFrame.propTypes = {
   /**
    * The source url to load iframe
    */
-  src: React.PropTypes.string.isRequired
+  src: PropTypes.string.isRequired
 };
 
 export default IFrame;

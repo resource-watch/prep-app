@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Icon from 'components/ui/Icon';
 import classnames from 'classnames';
 
@@ -27,13 +28,13 @@ const ArrowButton = (props) => {
 };
 
 ArrowButton.propTypes = {
-  next: React.PropTypes.bool,
-  full: React.PropTypes.bool,
-  infinite: React.PropTypes.bool,
-  onClick: React.PropTypes.func,
-  currentSlide: React.PropTypes.number,
-  slidesToShow: React.PropTypes.number,
-  slideCount: React.PropTypes.number
+  next: PropTypes.bool,
+  full: PropTypes.bool,
+  infinite: PropTypes.bool,
+  onClick: PropTypes.func,
+  currentSlide: PropTypes.number,
+  slidesToShow: PropTypes.number,
+  slideCount: PropTypes.number
 };
 
 export default ArrowButton;

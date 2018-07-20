@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getMetadata, getInfo } from 'components/dataset-card/dataset-helper';
 
 function parseDate(dateString) {
@@ -108,7 +109,7 @@ const MetadataInfo = ({ dataset }) => {
   );
 };
 
-MetadataInfo.propTypes = { dataset: React.PropTypes.object.isRequired };
+MetadataInfo.propTypes = { dataset: PropTypes.object.isRequired };
 
 MetadataInfo.deafultProps = { dataset: {} };
 

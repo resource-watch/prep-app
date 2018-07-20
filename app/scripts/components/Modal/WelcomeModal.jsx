@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Modal from './Modal';
 import Button from '../Button/Button';
 
@@ -45,19 +46,19 @@ WelcomeModal.propTypes = {
   /**
    * Define the welcome modal title
    */
-  title: React.PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   /**
    * Define the welcome modal status
    */
-  opened: React.PropTypes.bool.isRequired,
+  opened: PropTypes.bool.isRequired,
   /**
    * Define whether the modal has a close button or not
    */
-  hideCloseButton: React.PropTypes.bool,
+  hideCloseButton: PropTypes.bool,
   /**
    * Define the welcome modal function to close the modal
    */
-  close: React.PropTypes.func.isRequired
+  close: PropTypes.func.isRequired
 };
 
 export default WelcomeModal;

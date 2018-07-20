@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { VegaChart } from 'widget-editor';
 import ContentCard from './ContentCard';
 
@@ -41,35 +42,35 @@ ChartCard.propTypes = {
   /**
    * Define the card legend
    */
-  legend: React.PropTypes.string,
+  legend: PropTypes.string,
   /**
    * Define the card size
    */
-  size: React.PropTypes.string,
+  size: PropTypes.string,
   /**
    * Define it the card has tooltip
    */
-  tooltip: React.PropTypes.bool,
+  tooltip: PropTypes.bool,
   /**
    * Define it the card has default background color
    */
-  background: React.PropTypes.bool,
+  background: PropTypes.bool,
   /**
    * Define it the card has border
    */
-  noBorder: React.PropTypes.bool,
+  noBorder: PropTypes.bool,
   /**
    * Define it the card has link
    */
-  link: React.PropTypes.string,
+  link: PropTypes.string,
   /**
    * Define layers data to the map
    */
-  data: React.PropTypes.any.isRequired,
+  data: PropTypes.any.isRequired,
   /**
    * Set share modal state
    */
-  setShareModal: React.PropTypes.func
+  setShareModal: PropTypes.func
 };
 
 export default ChartCard;

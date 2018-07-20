@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Modal extends React.Component {
@@ -66,29 +67,29 @@ Modal.propTypes = {
   /**
    * The callback method when closing the modal
    */
-  close: React.PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
   /**
    * Define whether the modal is opened or not
    */
-  opened: React.PropTypes.bool.isRequired,
+  opened: PropTypes.bool.isRequired,
   /**
    * Define whether to hide the modal close button or not
    */
-  hideCloseButton: React.PropTypes.bool,
+  hideCloseButton: PropTypes.bool,
   /**
    * Define the modal custom className
    * Required
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * Define the content of the modal
    * Required
    */
-  children: React.PropTypes.any,
+  children: PropTypes.any,
   /**
    * Define modal navbar
    */
-  navbar: React.PropTypes.func
+  navbar: PropTypes.func
 };
 
 

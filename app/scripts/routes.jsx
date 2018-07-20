@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import useScroll from 'react-router-scroll';
+import { useScroll } from 'react-router-scroll';
 import { IndexRoute, Router, Route, applyRouterMiddleware } from 'react-router';
 
 import App from './components/App';
@@ -154,7 +155,7 @@ function Routes(props) {
   );
 }
 
-Routes.propTypes = { history: React.PropTypes.object.isRequired };
+Routes.propTypes = { history: PropTypes.object.isRequired };
 
 const mapStateToProps = () => ({});
 const mapDispatchToProps = () => ({});

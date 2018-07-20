@@ -105,8 +105,8 @@ class ShareModalComponent extends PureComponent {
 }
 
 ShareModalComponent.contextTypes = {
-  router: React.PropTypes.object,
-  location: React.PropTypes.object
+  router: PropTypes.object,
+  location: PropTypes.object
 };
 
 ShareModalComponent.propTypes = {

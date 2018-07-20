@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { logEvent } from 'helpers/analytics';
 import LoadingSpinner from '../Loading/LoadingSpinner';
@@ -97,15 +98,15 @@ InsightsPage.propTypes = {
   /**
    * Define the route path (from the router)
    */
-  currentPage: React.PropTypes.string,
+  currentPage: PropTypes.string,
   /**
    * Define function to get the insights list
    */
-  getInsightsList: React.PropTypes.func.isRequired,
+  getInsightsList: PropTypes.func.isRequired,
   /**
    * Define insights list data
    */
-  data: React.PropTypes.array
+  data: PropTypes.array
 };
 
 export default InsightsPage;

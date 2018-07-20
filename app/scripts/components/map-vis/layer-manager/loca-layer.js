@@ -1,8 +1,6 @@
-import L from 'leaflet';
-import qs from 'query-string';
 import Promise from 'bluebird';
-import { wriAPISerializer } from 'helpers/wri-api-serializer';
-import { getInfo } from 'components/dataset-card/dataset-helper';
+// import { wriAPISerializer } from 'helpers/wri-api-serializer';
+// import { getInfo } from 'components/dataset-card/dataset-helper';
 
 Promise.config({ cancellation: true });
 

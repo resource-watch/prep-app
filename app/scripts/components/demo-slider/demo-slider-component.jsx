@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import ArrowButton from '../Button/arrow-button-component';
 
@@ -32,9 +33,9 @@ const DemoSlider = props => (
 );
 
 DemoSlider.propTypes = {
-  children: React.PropTypes.array,
-  offset: React.PropTypes.bool,
-  slidesToShow: React.PropTypes.func
+  children: PropTypes.array,
+  offset: PropTypes.bool,
+  slidesToShow: PropTypes.func
 };
 
 export default DemoSlider;
