@@ -53,6 +53,8 @@ const config = {
     ]
   },
 
+  externals: { leaflet: 'L' },
+
   plugins: [
     new HtmlWebpackPlugin({
       template: 'app/index.hbs',
