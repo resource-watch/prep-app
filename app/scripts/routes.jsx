@@ -11,7 +11,7 @@ import ExplorePage from './pages/explore';
 import ExplorePageCountry from './pages/explore/country';
 import PartnersPage from './pages/partners';
 import ResourcesPage from './pages/resources';
-import DatasetDetail from './containers/Dataset';
+import DatasetDetail from './pages/dataset';
 import FAQ from './pages/FAQ';
 import TermsOfService from './pages/terms-of-service';
 import PrivacyPolicy from './pages/privacy-policy';
