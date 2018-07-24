@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Tooltip = (props) => {
   const visibility = props.hidden ? '-hidden' : '-visible';
@@ -26,23 +27,23 @@ Tooltip.propTypes = {
   /**
    * Define whether the tooltip is hidden or not
    */
-  hidden: React.PropTypes.bool,
+  hidden: PropTypes.bool,
   /**
    * Define the position of the target element on the viewport
    */
-  position: React.PropTypes.object,
+  position: PropTypes.object,
   /**
    * Define the width of the tooltip
    */
-  width: React.PropTypes.string,
+  width: PropTypes.string,
   /**
    * Define if want scroll in the tooltip
    */
-  scroll: React.PropTypes.bool,
+  scroll: PropTypes.bool,
   /**
    * Define padding
    */
-  padding: React.PropTypes.any
+  padding: PropTypes.any
 };
 
 export default Tooltip;

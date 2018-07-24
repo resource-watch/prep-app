@@ -2,7 +2,7 @@ import qs from 'query-string';
 import { createAction, createThunkAction } from 'redux-tools';
 import { replace } from 'react-router-redux';
 import { setDatasetsTagFilter } from 'actions/datasets';
-import { wriAPISerializer } from 'helpers/wri-api-serializer';
+import { wriAPISerializer } from 'wri-json-api-serializer';
 
 // services
 import DatasetFilterService from 'services/dataset-filter-service';

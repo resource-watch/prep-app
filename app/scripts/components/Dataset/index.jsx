@@ -5,7 +5,6 @@ import URI from 'urijs';
 import { connect } from 'react-redux';
 import WidgetEditor, { modalActions, SaveWidgetModal, VegaChart } from 'widget-editor';
 import ReactMarkdown from 'react-markdown';
-import { wriAPISerializer } from 'helpers/wri-api-serializer';
 
 import TooltipTether from 'components/Tooltip/TooltipTether';
 import metadata from '../../metadata.json';
@@ -25,7 +24,7 @@ import LOCATool from '../loca-tool';
 
 const logoImage = '/images/prep-logo.png';
 
-class DatasetDetail extends React.Component {
+class DatasetDetail extends React.PureComponent {
   static getData(key, value) {
     let data = null;
     for (let i = metadata.length - 1; i >= 0; i--) {
@@ -66,9 +65,9 @@ class DatasetDetail extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    if (this.props.data) this.setState({ data: {} });
-  }
+  // componentWillUnmount() {
+  //   if (this.props.data) this.setState({ data: {} });
+  // }
 
   /**
    * Callback executed when the user clicks the save button of
@@ -90,7 +89,7 @@ class DatasetDetail extends React.Component {
   }
 
   getCurrentData() {
-    const pathname = this.props.location.pathname;
+    const { pathname } = this.props.location;
     const currentData = DatasetDetail.getData('pathname', pathname);
     return currentData;
   }
@@ -136,7 +135,7 @@ class DatasetDetail extends React.Component {
       }
     }
 
-    const currentSection = this.props.location.state && this.props.location.state.prevPath || 'explore';
+    const currentSection = (this.props.location.state && this.props.location.state.prevPath) || 'explore';
 
     const dataset = this.props.data;
     const datasetSpec = {

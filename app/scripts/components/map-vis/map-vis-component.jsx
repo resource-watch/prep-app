@@ -26,7 +26,7 @@ if (typeof window !== 'undefined') {
    * and resulting anti-aliasing.
    * https://github.com/Leaflet/Leaflet/issues/3575
    */
-  (function(){
+  (function() {
     const originalInitTile = L.GridLayer.prototype._initTile;
     L.GridLayer.include({
       _initTile: function (tile) {
@@ -36,7 +36,7 @@ if (typeof window !== 'undefined') {
         tile.style.height = tileSize.y + 1 + 'px';
       }
     });
-  })()
+  })();
 }
 
 class Map extends PureComponent {

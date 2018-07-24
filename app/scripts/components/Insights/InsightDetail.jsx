@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
 import metadata from '../../metadata.json';
@@ -213,24 +214,24 @@ InsightsDetail.propTypes = {
   /**
    * Define the route path (from the router)
    */
-  currentPage: React.PropTypes.string,
+  currentPage: PropTypes.string,
   /**
    * Define the slug of the insight
    */
-  insightSlug: React.PropTypes.string.isRequired,
+  insightSlug: PropTypes.string.isRequired,
   /**
    * Define the selected tab of the insight
    * Default: "indicators"
    */
-  insightTab: React.PropTypes.string.isRequired,
+  insightTab: PropTypes.string.isRequired,
   /**
    * Define detail insights data
    */
-  data: React.PropTypes.object,
+  data: PropTypes.object,
   /**
    * Define the function to get the insight detail data
    */
-  getInsightBySlug: React.PropTypes.func.isRequired
+  getInsightBySlug: PropTypes.func.isRequired
 };
 
 export default InsightsDetail;

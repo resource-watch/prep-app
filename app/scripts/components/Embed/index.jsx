@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ChartCard from '../Cards/ChartCard';
 import EmbedCard from '../Cards/EmbedCard';
 import MapCard from '../Cards/MapCard';
@@ -65,15 +66,15 @@ EmbedDetail.propTypes = {
   /**
    * Define the slug of the widget
    */
-  slug: React.PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
   /**
    * Define the function to get the widget detail data
    */
-  getWidgetBySlug: React.PropTypes.func.isRequired,
+  getWidgetBySlug: PropTypes.func.isRequired,
   /**
    * Define the dataset data
    */
-  data: React.PropTypes.any
+  data: PropTypes.any
 };
 
 export default EmbedDetail;

@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import useScroll from 'react-router-scroll';
+import { useScroll } from 'react-router-scroll';
 import { IndexRoute, Router, Route, applyRouterMiddleware } from 'react-router';
 
 import App from './components/App';
@@ -10,7 +11,7 @@ import ExplorePage from './pages/explore';
 import ExplorePageCountry from './pages/explore/country';
 import PartnersPage from './pages/partners';
 import ResourcesPage from './pages/resources';
-import DatasetDetail from './containers/Dataset';
+import DatasetDetail from './pages/dataset';
 import FAQ from './pages/FAQ';
 import TermsOfService from './pages/terms-of-service';
 import PrivacyPolicy from './pages/privacy-policy';
@@ -154,7 +155,7 @@ function Routes(props) {
   );
 }
 
-Routes.propTypes = { history: React.PropTypes.object.isRequired };
+Routes.propTypes = { history: PropTypes.object.isRequired };
 
 const mapStateToProps = () => ({});
 const mapDispatchToProps = () => ({});

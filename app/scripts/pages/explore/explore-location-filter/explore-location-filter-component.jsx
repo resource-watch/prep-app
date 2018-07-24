@@ -18,7 +18,7 @@ class DatasetLocationFilter extends PureComponent {
 
   setBoundsByLocation(location) {
     return new Promise(resolve => {
-      if (!location || location === 'global') {
+      if (!location || location.toLowerCase() === 'global') {
         this.props.setMapParams({ lat: 24.44714958973082, lng: -66.97265625000001, zoom: 3 });
         return resolve();
       }
@@ -49,18 +49,18 @@ class DatasetLocationFilter extends PureComponent {
   render() {
     const { location, countries } = this.props;
     const { countryisActive } = this.state;
-    const onlyCountries = countries.filter(c => c.value !== 'global');
+    const onlyCountries = countries.filter(c => c.value.toLowerCase() !== 'global');
     const currentLocation = countries.find(c => c.value === location);
 
     return (
       <div className="c-dataset-location-filter">
         <ul className="c-dataset-location-filter-tabs">
-          <li><button type="button" className={location === 'global' && '-active'} onClick={() => this.onChangeLocation('global')}>Global</button></li>
+          <li><button type="button" className={location.toLowerCase() === 'global' ? '-active' : ''} onClick={() => this.onChangeLocation('global')}>Global</button></li>
           <li
             onMouseEnter={() => this.handleHover({ countryisActive: true })}
             onMouseLeave={() => this.handleHover({ countryisActive: false })}
           >
-            <span className={location !== 'global' && '-active'}>{(location === 'global' || !currentLocation) ? 'Select a country' : currentLocation.label}</span>
+            <span className={location !== 'global' ? '-active' : ''}>{(location.toLowerCase() === 'global' || !currentLocation) ? 'Select a country' : currentLocation.label}</span>
             {countryisActive &&
               <div className="submenu">
                 <ul className="submenu-list">

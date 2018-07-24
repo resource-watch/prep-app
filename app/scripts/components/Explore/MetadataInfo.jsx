@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import URI from 'urijs';
 import ReactMarkdown from 'react-markdown';
 
@@ -157,15 +158,15 @@ MetadataInfo.propTypes = {
   /**
    * Switch between short and long description
    */
-  short: React.PropTypes.bool,
+  short: PropTypes.bool,
   /**
    * Include the download link if exists
    */
-  download: React.PropTypes.bool,
+  download: PropTypes.bool,
   /**
    * Define the metadata info
    */
-  data: React.PropTypes.object.isRequired
+  data: PropTypes.object.isRequired
 };
 
 MetadataInfo.deafultProps = { data: {} };

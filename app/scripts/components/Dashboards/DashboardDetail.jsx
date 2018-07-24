@@ -1,6 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-
 
 // Components
 import PartnersSlider from '../../containers/PartnersSlider';
@@ -213,28 +213,28 @@ class DashboardDetail extends React.Component {
 }
 
 DashboardDetail.propTypes = {
-  location: React.PropTypes.object,
+  location: PropTypes.object,
   /**
    * Define the route path (from the router)
    */
-  currentPage: React.PropTypes.string,
+  currentPage: PropTypes.string,
   /**
    * Define the slug of the dashboard
    */
-  dashboardSlug: React.PropTypes.string.isRequired,
+  dashboardSlug: PropTypes.string.isRequired,
   /**
    * Define the selected tab of the dashboard
    * Default: "Data"
    */
-  dashboardTab: React.PropTypes.string.isRequired,
+  dashboardTab: PropTypes.string.isRequired,
   /**
    * Define detail dashboards data
    */
-  data: React.PropTypes.object,
+  data: PropTypes.object,
   /**
    * Define the function to get the dashboard detail data
    */
-  getDashboardBySlug: React.PropTypes.func.isRequired
+  getDashboardBySlug: PropTypes.func.isRequired
 };
 
 export default DashboardDetail;

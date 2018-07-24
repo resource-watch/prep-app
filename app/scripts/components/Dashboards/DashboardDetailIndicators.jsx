@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import MapCard from '../Cards/MapCard';
 import ChartCard from '../Cards/ChartCard';
 import EmbedCard from '../Cards/EmbedCard';
@@ -102,11 +103,11 @@ DashboardDetailIndicators.propTypes = {
   /**
    * Define dashboard indicators data
    */
-  data: React.PropTypes.any.isRequired,
+  data: PropTypes.any.isRequired,
   /**
    * Set share modal state
    */
-  setShareModal: React.PropTypes.func
+  setShareModal: PropTypes.func
 };
 
 export default DashboardDetailIndicators;
