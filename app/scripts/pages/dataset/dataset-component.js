@@ -90,8 +90,6 @@ class DatasetPage extends PureComponent {
     // Widgets
     const defaultEditableWidget = dataset.widget.find(w => w.defaultEditableWidget === true);
 
-    console.log(dataset, metadata, defaultEditableWidget)
-
     // Render
     return (
       <div>
