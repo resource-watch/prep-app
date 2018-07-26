@@ -4793,9 +4793,9 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
 
-layer-manager@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/layer-manager/-/layer-manager-1.0.0.tgz#3efdc598191bc1e20bcd16cec34bc20b5acedf04"
+layer-manager@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/layer-manager/-/layer-manager-1.0.1.tgz#db956768f1542748d0b3eac62c12b7cf3bc9300d"
   dependencies:
     bluebird "^3.5.1"
     wri-json-api-serializer "^1.0.1"
@@ -9026,9 +9026,9 @@ wri-api-components@2.0.0:
     react-sortable-hoc "^0.6.8"
     wri-json-api-serializer "^1.0.1"
 
-wri-api-components@^2.0.3:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/wri-api-components/-/wri-api-components-2.0.4.tgz#c2b9c09a53adad68e83a0674b2a4bb0a92bfd190"
+wri-api-components@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/wri-api-components/-/wri-api-components-2.0.8.tgz#d76e3a3bfab4563b67239aeb5ea5f39437bb7bc3"
   dependencies:
     prop-types "^15.6.2"
     rc-tooltip "3.7.0"
