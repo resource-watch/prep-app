@@ -1,4 +1,4 @@
-FROM node:8.9.4
+FROM node:8.11.2
 
 ARG datasetEnv=production
 ARG facebookUser=worldresources
