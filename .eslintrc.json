@@ -2,7 +2,6 @@
   "env": {
     "browser": true,
     "node": true,
-    "mocha": true,
     "es6": true
   },
   "globals": {
@@ -13,20 +12,14 @@
     "vizzuality"
   ],
   "rules": {
-    "jsx-a11y/href-no-hash": "off",
-    "jsx-a11y/anchor-is-valid": "off",
-    "max-len": ["error", {
+    "max-len": [1, {
       "code": 200,
       "tabWidth": 2,
       "ignoreComments": true,
       "ignoreUrls": true,
       "ignoreStrings": true,
       "ignoreTemplateLiterals": true
-    }],
-    "no-plusplus": ["error", {
-      "allowForLoopAfterthoughts": true
-    }],
-    "react/require-default-props": false
+    }]
   },
   "settings": {
     "import/resolver": {
@@ -35,10 +28,13 @@
       }
     }
   },
+  "plugins": ["babel"],
+  "parser": "babel",
   "parserOptions": {
     "ecmaVersion": 6,
+    "sourceType": "module",
     "ecmaFeatures": {
-      "experimentalObjectRestSpread": true
+        "jsx": true
     }
   }
 }
