@@ -52,8 +52,9 @@ export const filterQuery = (state, { payload }) => ({
 });
 
 export const toggleDataset = (state, { payload }) => {
-  const activeDatasets = state.datasets.activeDatasets;
+  const { activeDatasets } = state.datasets;
   const { length } = activeDatasets;
+  console.log(state.datasets.items, payload)
   return {
     ...state,
     datasets: {

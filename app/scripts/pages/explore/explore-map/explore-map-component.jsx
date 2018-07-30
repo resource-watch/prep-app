@@ -8,9 +8,14 @@ import LegendLOCAToolbar from 'components/legend/legend-loca-toolbar';
 import ShareControl from 'components/share-control';
 import SearchControl from 'components/search-control';
 import { basemapsSpec, labelsSpec, waterSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
-import { Map, Legend, LegendListItem, LegendItemToolbar, LegendItemTypes, MapControls, ZoomControl } from 'wri-api-components';
+import {
+  Map, Legend, LegendListItem, LegendItemToolbar, LegendItemTypes, MapControls, ZoomControl,
+  LegendItemButtonBBox, LegendItemButtonInfo, LegendItemButtonLayers, LegendItemButtonOpacity,
+  LegendItemButtonVisibility, LegendItemButtonRemove
+} from 'wri-api-components';
 import { LayerManager, Layer } from 'layer-manager/dist/react';
 import { PluginLeaflet } from 'layer-manager';
+import { updateActiveDatasets } from '../explore-datasets-list/explore-datasets-list-reducers';
 
 class ExploreMap extends PureComponent {
 
@@ -58,26 +63,30 @@ class ExploreMap extends PureComponent {
   onSortChange(layers) {
     console.log(layers);
     const { updateZIndex } = this.props;
-     updateZIndex(layers);
+    updateZIndex(layers);
   }
 
-  setBoundaries() {
-    if (this.boundaries) this.map.removeLayer(this.boundaries);
-    const { boundaries } = this.props;
-    if (boundaries && Object.keys(boundaries).length) {
-      this.boundaries = L.tileLayer(boundaries.value, { ...boundaries.options, zIndex: 10001 });
-      this.map.addLayer(this.boundaries);
-    }
+  setNexGDDPLayer(layerParams) {
+    console.log(layerParams)
   }
 
-  setWater() {
-    if (this.water) this.map.removeLayer(this.water);
-    const { water } = this.props;
-    if (water) {
-      this.water = L.tileLayer(water.value, { ...water.options, zIndex: 10002 });
-      this.map.addLayer(this.water);
-    }
-  }
+  // setBoundaries() {
+  //   if (this.boundaries) this.map.removeLayer(this.boundaries);
+  //   const { boundaries } = this.props;
+  //   if (boundaries && Object.keys(boundaries).length) {
+  //     this.boundaries = L.tileLayer(boundaries.value, { ...boundaries.options, zIndex: 10001 });
+  //     this.map.addLayer(this.boundaries);
+  //   }
+  // }
+
+  // setWater() {
+  //   if (this.water) this.map.removeLayer(this.water);
+  //   const { water } = this.props;
+  //   if (water) {
+  //     this.water = L.tileLayer(water.value, { ...water.options, zIndex: 10002 });
+  //     this.map.addLayer(this.water);
+  //   }
+  // }
 
   getMapParams() {
     const center = this.map.getCenter();
@@ -128,21 +137,34 @@ class ExploreMap extends PureComponent {
     // Search control
     const { origin, search } = window.location;
 
-    const Toolbar = () => (
-      <LegendItemToolbar
-        onChangeVisibility={l => toggleVisibility({ id: l.dataset })}
-        onChangeInfo={l => toggleInfo({ id: l.dataset })}
-        onChangeOpacity={(l, opacity) => updateOpacity({ id: l.dataset, opacity })}
-        onRemoveLayer={l => toggleDataset({ id: l.dataset })}
-        onChangeBBox={(l) => {
-          setBBox(l.layerConfig.bbox);
-          // Reset the bounds inmediatly to have the possibility to click on it again
-          requestAnimationFrame(() => {
-            setBBox(null);
-          });
-        }}
-      />
-    );
+    const Toolbar = (props) => {
+      const { lg } = props;
+      const layerActive = lg.layers.find(l => (l.active || l.isActive)) || lg.layers[0];
+      console.log(props);
+      return (
+        <LegendItemToolbar
+          onChangeVisibility={l => toggleVisibility({ id: l.dataset })}
+          onChangeInfo={l => toggleInfo({ id: l.dataset })}
+          onChangeOpacity={(l, opacity) => updateOpacity({ id: l.dataset, opacity })}
+          onRemoveLayer={l => console.log(l) || toggleDataset({ id: l.dataset })}
+          onChangeBBox={(l) => {
+            setBBox(l.layerConfig.bbox);
+            // Reset the bounds inmediatly to have the possibility to click on it again
+            requestAnimationFrame(() => {
+              setBBox(null);
+            });
+          }}
+          onChangeLayer={l => setMultiActiveLayer(l)}
+        >
+          <LegendItemButtonBBox />
+          {(layerActive.provider !== 'nexgddp' && layerActive.provider !== 'loca') && <LegendItemButtonLayers />}
+          <LegendItemButtonOpacity />
+          <LegendItemButtonVisibility />
+          <LegendItemButtonInfo />
+          <LegendItemButtonRemove />
+        </LegendItemToolbar>
+      );
+    };
 
     return (
       <div className={`c-explore-map ${classNames}`}>
@@ -167,20 +189,23 @@ class ExploreMap extends PureComponent {
           maxHeight={300}
           onChangeOrder={layers => this.onSortChange(layers)}
         >
-          {layersGroups.map((lg, i) => (
-            <LegendListItem
-              index={i}
-              key={lg.dataset}
-              layerGroup={lg}
-              toolbar={<Toolbar />}
-            >
-              {lg.layers[0].provider === 'nexgddp' &&
-                <LegendNexGDDPToolbar layerSpec={lg.layers[0]} onMultiLayer={l => setMultiActiveLayer(l)} />}
-              {lg.layers[0].provider === 'loca' &&
-                <LegendLOCAToolbar layerSpec={lg.layers[0]} onMultiLayer={l => setMultiActiveLayer(l)} />}
-              <LegendItemTypes />
-            </LegendListItem>
-          ))}
+          {layersGroups.map((lg, i) => {
+            const layerActive = lg.layers.find(l => l.isLayerActive) || lg.layers[0];
+            return (
+              <LegendListItem
+                index={i}
+                key={lg.dataset}
+                layerGroup={lg}
+                toolbar={<Toolbar lg={lg} />}
+              >
+                {layerActive.provider === 'nexgddp' &&
+                  <LegendNexGDDPToolbar layerSpec={layerActive} onMultiLayer={layerParams => this.setNexGDDPLayer(layerParams)} />}
+                {layerActive.provider === 'loca' &&
+                  <LegendLOCAToolbar layerSpec={layerActive} onMultiLayer={layerParams => this.setLocaLayer(layerParams)} />}
+                <LegendItemTypes />
+              </LegendListItem>
+            );
+          })}
         </Legend>
 
         { !embedExport && (
