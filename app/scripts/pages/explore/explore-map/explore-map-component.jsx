@@ -9,13 +9,14 @@ import ShareControl from 'components/share-control';
 import SearchControl from 'components/search-control';
 import { basemapsSpec, labelsSpec, waterSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
 import {
-  Map, Legend, LegendListItem, LegendItemToolbar, LegendItemTypes, MapControls, ZoomControl,
-  LegendItemButtonBBox, LegendItemButtonInfo, LegendItemButtonLayers, LegendItemButtonOpacity,
-  LegendItemButtonVisibility, LegendItemButtonRemove
+  Map, MapControls, ZoomControl,
+  Legend, LegendListItem, LegendItemToolbar, LegendItemTypes,
+  LegendItemButtonBBox, LegendItemButtonInfo,
+  LegendItemButtonLayers, LegendItemButtonOpacity, LegendItemButtonVisibility, LegendItemButtonRemove
 } from 'wri-api-components';
 import { LayerManager, Layer } from 'layer-manager/dist/react';
 import { PluginLeaflet } from 'layer-manager';
-import { updateActiveDatasets } from '../explore-datasets-list/explore-datasets-list-reducers';
+// import { updateActiveDatasets } from '../explore-datasets-list/explore-datasets-list-reducers';
 
 class ExploreMap extends PureComponent {
 
@@ -23,14 +24,17 @@ class ExploreMap extends PureComponent {
     basemap: PropTypes.oneOf(['default', 'dark', 'light', 'satellite', 'terrain']),
     labels: PropTypes.oneOf(['none', 'dark', 'light']),
     water: PropTypes.oneOf(['none', 'dark', 'light']),
-    activeLayers: PropTypes.arr,
-    activeLayersForMap: PropTypes.arr,
-    layersGroups: PropTypes.arr,
     boundaries: PropTypes.bool,
+
+    activeLayers: PropTypes.array,
+    activeLayersForMap: PropTypes.array,
+    layersGroups: PropTypes.array,
+
     zoom: PropTypes.number,
     minZoom: PropTypes.number,
     lat: PropTypes.number,
     lng: PropTypes.number,
+
     embed: PropTypes.bool,
     embedExport: PropTypes.bool,
     open: PropTypes.bool,
@@ -53,44 +57,119 @@ class ExploreMap extends PureComponent {
     setTab: PropTypes.func
   }
 
-  static defaultProps = { activeLayers: [] }
+  static defaultProps = {
+    basemap: 'default',
+    labels: 'none',
+    water: 'none',
+
+    boundaries: false,
+    activeLayers: [],
+    activeLayersForMap: [],
+    layersGroups: [],
+
+    zoom: 2,
+    minZoom: 2,
+    lat: 0,
+    lng: 0,
+
+    embed: false,
+    embedExport: false,
+    open: false,
+    bbox: [],
+    sidebar: {},
+
+    setBasemap: () => {},
+    setLabels: () => {},
+    setBoundaries: () => {},
+    setWater: () => {},
+    setMapParams: () => {},
+    updateZIndex: () => {},
+    toggleInfo: () => {},
+    toggleDataset: () => {},
+    toggleVisibility: () => {},
+    updateOpacity: () => {},
+    setMultiActiveLayer: () => {},
+    setBBox: () => {},
+    setOpen: () => {},
+    setLinks: () => {},
+    setTab: () => {}
+  }
 
   constructor(props) {
     super(props);
     this.onSortChange = this.onSortChange.bind(this);
   }
 
-  onSortChange(layers) {
-    console.log(layers);
-    const { updateZIndex } = this.props;
-    updateZIndex(layers);
+  componentDidUpdate() {
+    if (this.map) {
+      this.setBoundaries();
+      this.setWater();
+    }
   }
 
-  setNexGDDPLayer(layerParams) {
+  onSortChange(layerIDs) {
+    const { activeLayers, updateZIndex } = this.props;
+    const sortedLayers = layerIDs.map((layerID, index) => {
+      const layer = activeLayers.find(a => a.dataset === layerID);
+      return {
+        dataset: layer.dataset,
+        zIndex: index
+      };
+    });
+    updateZIndex(sortedLayers);
+  }
+
+  setNexGDDPLayer(layerActive, layerParams) {
+    // const { onMultiLayer } = this.props;
+    // onMultiLayer({ ...layerParams, id: layerActive.dataset });
+  }
+
+  setLocaLayer(layerActive, layerParams) {
     console.log(layerParams)
   }
 
-  // setBoundaries() {
-  //   if (this.boundaries) this.map.removeLayer(this.boundaries);
-  //   const { boundaries } = this.props;
-  //   if (boundaries && Object.keys(boundaries).length) {
-  //     this.boundaries = L.tileLayer(boundaries.value, { ...boundaries.options, zIndex: 10001 });
-  //     this.map.addLayer(this.boundaries);
-  //   }
-  // }
+  setBoundaries() {
+    if (this.boundaries) this.map.removeLayer(this.boundaries);
+    const { boundaries } = this.props;
+    if (boundaries) {
+      this.boundaries = L.tileLayer(boundariesSpec.dark.value, { ...boundariesSpec.dark.options, zIndex: 10001 });
+      this.map.addLayer(this.boundaries);
+    }
+  }
 
-  // setWater() {
-  //   if (this.water) this.map.removeLayer(this.water);
-  //   const { water } = this.props;
-  //   if (water) {
-  //     this.water = L.tileLayer(water.value, { ...water.options, zIndex: 10002 });
-  //     this.map.addLayer(this.water);
-  //   }
-  // }
+  setWater() {
+    if (this.water) this.map.removeLayer(this.water);
+    const { water } = this.props;
+    if (water) {
+      this.water = L.tileLayer(waterSpec[water].value, { ...waterSpec[water].options, zIndex: 10002 });
+      this.map.addLayer(this.water);
+    }
+  }
 
   getMapParams() {
     const center = this.map.getCenter();
     return { zoom: this.map.getZoom(), lat: center.lat, lng: center.lng };
+  }
+
+  getLegendToolbar(layerActive) {
+    const { setMultiActiveLayer } = this.props;
+    if (layerActive.provider === 'nexgddp') {
+      return (
+        <LegendNexGDDPToolbar
+          layerSpec={layerActive}
+          // onMultiLayer={l => setTimeout(() => setMultiActiveLayer({ ...l, layerId: layerActive.id }), 250)}
+        />
+      );
+    }
+    if (layerActive.provider === 'loca') {
+      return (
+        <LegendLOCAToolbar
+          layerSpec={layerActive}
+          // onMultiLayer={l => setMultiActiveLayer({ ...l, layerId: layerActive.id })}
+        />
+      );
+    }
+    return null;
   }
 
   render() {
@@ -138,15 +217,15 @@ class ExploreMap extends PureComponent {
     const { origin, search } = window.location;
 
     const Toolbar = (props) => {
-      const { lg } = props;
+      const { lg } = props; // eslint-disable-line
       const layerActive = lg.layers.find(l => (l.active || l.isActive)) || lg.layers[0];
-      console.log(props);
       return (
         <LegendItemToolbar
+          {...props}
           onChangeVisibility={l => toggleVisibility({ id: l.dataset })}
           onChangeInfo={l => toggleInfo({ id: l.dataset })}
           onChangeOpacity={(l, opacity) => updateOpacity({ id: l.dataset, opacity })}
-          onRemoveLayer={l => console.log(l) || toggleDataset({ id: l.dataset })}
+          onRemoveLayer={l => toggleDataset({ id: l.dataset })}
           onChangeBBox={(l) => {
             setBBox(l.layerConfig.bbox);
             // Reset the bounds inmediatly to have the possibility to click on it again
@@ -198,10 +277,7 @@ class ExploreMap extends PureComponent {
                 layerGroup={lg}
                 toolbar={<Toolbar lg={lg} />}
               >
-                {layerActive.provider === 'nexgddp' &&
-                  <LegendNexGDDPToolbar layerSpec={layerActive} onMultiLayer={layerParams => this.setNexGDDPLayer(layerParams)} />}
-                {layerActive.provider === 'loca' &&
-                  <LegendLOCAToolbar layerSpec={layerActive} onMultiLayer={layerParams => this.setLocaLayer(layerParams)} />}
+                {this.getLegendToolbar(layerActive)}
                 <LegendItemTypes />
               </LegendListItem>
             );

@@ -2808,9 +2808,9 @@ eslint-config-prettier@2.9.0:
   dependencies:
     get-stdin "^5.0.1"
 
-eslint-config-vizzuality@^1.1.6:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/eslint-config-vizzuality/-/eslint-config-vizzuality-1.1.6.tgz#8e9bf1cdb24dcc9b1559809d6c6245ab43a48a98"
+eslint-config-vizzuality@1.1.7:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/eslint-config-vizzuality/-/eslint-config-vizzuality-1.1.7.tgz#859e698f6b2bfcea7e831986776dc6f5892399bb"
 
 eslint-import-resolver-node@^0.3.1:
   version "0.3.2"
@@ -6701,20 +6701,13 @@ rc@^1.1.2, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-addons-css-transition-group@15.6.2:
+react-addons-css-transition-group@^15.6.0:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/react-addons-css-transition-group/-/react-addons-css-transition-group-15.6.2.tgz#9e4376bcf40b5217d14ec68553081cee4b08a6d6"
   dependencies:
     react-transition-group "^1.2.0"
 
-react-addons-shallow-compare@15.6.0:
-  version "15.6.0"
-  resolved "https://registry.yarnpkg.com/react-addons-shallow-compare/-/react-addons-shallow-compare-15.6.0.tgz#b7a4e5ff9f2704c20cf686dd8a05dd08b26de252"
-  dependencies:
-    fbjs "^0.8.4"
-    object-assign "^4.1.0"
-
-react-addons-shallow-compare@^15.6.2:
+react-addons-shallow-compare@^15.6.0, react-addons-shallow-compare@^15.6.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/react-addons-shallow-compare/-/react-addons-shallow-compare-15.6.2.tgz#198a00b91fc37623db64a28fd17b596ba362702f"
   dependencies:
@@ -6927,7 +6920,7 @@ react-select@^1.0.0-rc.10:
     prop-types "^15.5.8"
     react-input-autosize "^2.1.2"
 
-react-selectize@3.0.1:
+react-selectize@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/react-selectize/-/react-selectize-3.0.1.tgz#92efefd26ac68ba9caca971bc1cffd5851217f89"
   dependencies:
@@ -6961,7 +6954,7 @@ react-tether@0.6.1, react-tether@^0.6.0:
     prop-types "^15.5.8"
     tether "^1.4.3"
 
-react-transition-group@1.2.1, react-transition-group@^1.2.0:
+react-transition-group@^1.1.2, react-transition-group@^1.2.0:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-1.2.1.tgz#e11f72b257f921b213229a774df46612346c7ca6"
   dependencies:
@@ -9152,9 +9145,9 @@ wri-api-components@2.0.0:
     react-sortable-hoc "^0.6.8"
     wri-json-api-serializer "^1.0.1"
 
-wri-api-components@^2.0.8:
-  version "2.0.8"
-  resolved "https://registry.yarnpkg.com/wri-api-components/-/wri-api-components-2.0.8.tgz#d76e3a3bfab4563b67239aeb5ea5f39437bb7bc3"
+wri-api-components@^2.0.9:
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/wri-api-components/-/wri-api-components-2.0.9.tgz#83e8fa9915bef49a112c639427239d607c2ad96e"
   dependencies:
     prop-types "^15.6.2"
     rc-tooltip "3.7.0"

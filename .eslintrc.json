@@ -19,7 +19,8 @@
       "ignoreUrls": true,
       "ignoreStrings": true,
       "ignoreTemplateLiterals": true
-    }]
+    }],
+    "import/extensions": [2, "always", { "js": "never"}]
   },
   "settings": {
     "import/resolver": {

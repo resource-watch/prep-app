@@ -5,6 +5,16 @@ import 'react-selectize/themes/index.css';
 import './legend-nexgddp-toolbar-style.scss';
 
 class LegendNexGDDPToolbar extends PureComponent {
+  static propTypes = {
+    layerSpec: PropTypes.object,
+    onMultiLayer: PropTypes.func
+  }
+
+  static defaultProps = {
+    layerSpec: {},
+    onMultiLayer: () => {}
+  }
+
   constructor(props) {
     super(props);
 
@@ -108,41 +118,42 @@ class LegendNexGDDPToolbar extends PureComponent {
 
     return (
       <div className="c-legend-nexgddp-toolbar">
-        {temporalResolutionOptions && <SimpleSelect
-          name="temporal_resolution"
-          value={temporalResolution}
-          options={temporalResolutionOptions}
-          onValueChange={this.onResolutionChange}
-          theme="material"
-          hideResetButton
-          tether
-        />}
-        {periodsOptions && <SimpleSelect
-          name="periods"
-          value={period}
-          options={periodsOptions}
-          onValueChange={this.onPeriodChange}
-          theme="material"
-          hideResetButton
-          tether
-        />}
-        {scenariosOptions && <SimpleSelect
-          name="scenario"
-          value={scenario}
-          options={scenariosOptions}
-          onValueChange={this.onScenarioChange}
-          theme="material"
-          hideResetButton
-          tether
-        />}
+        {temporalResolutionOptions && (
+          <SimpleSelect
+            name="temporal_resolution"
+            value={temporalResolution}
+            options={temporalResolutionOptions}
+            onValueChange={this.onResolutionChange}
+            theme="material"
+            hideResetButton
+            tether
+          />
+        )}
+        {periodsOptions && (
+          <SimpleSelect
+            name="periods"
+            value={period}
+            options={periodsOptions}
+            onValueChange={this.onPeriodChange}
+            theme="material"
+            hideResetButton
+            tether
+          />
+        )}
+        {scenariosOptions && (
+          <SimpleSelect
+            name="scenario"
+            value={scenario}
+            options={scenariosOptions}
+            onValueChange={this.onScenarioChange}
+            theme="material"
+            hideResetButton
+            tether
+          />
+        )}
       </div>
     );
   }
 }
-
-LegendNexGDDPToolbar.propTypes = {
-  layerSpec: PropTypes.object,
-  onMultiLayer: PropTypes.func
-};
 
 export default LegendNexGDDPToolbar;
