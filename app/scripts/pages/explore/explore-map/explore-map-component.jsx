@@ -14,7 +14,7 @@ import {
   LegendItemButtonBBox, LegendItemButtonInfo,
   LegendItemButtonLayers, LegendItemButtonOpacity, LegendItemButtonVisibility, LegendItemButtonRemove
 } from 'wri-api-components';
-import { LayerManager, Layer } from 'layer-manager/dist/react';
+import { LayerManager } from 'layer-manager/dist/react';
 import { PluginLeaflet } from 'layer-manager';
 // import { updateActiveDatasets } from '../explore-datasets-list/explore-datasets-list-reducers';
 
@@ -119,14 +119,14 @@ class ExploreMap extends PureComponent {
     updateZIndex(sortedLayers);
   }
 
-  setNexGDDPLayer(layerActive, layerParams) {
-    // const { onMultiLayer } = this.props;
-    // onMultiLayer({ ...layerParams, id: layerActive.dataset });
-  }
+  // setNexGDDPLayer(layerActive, layerParams) {
+  //   // const { onMultiLayer } = this.props;
+  //   // onMultiLayer({ ...layerParams, id: layerActive.dataset });
+  // }
 
-  setLocaLayer(layerActive, layerParams) {
-    console.log(layerParams)
-  }
+  // setLocaLayer(layerActive, layerParams) {
+  //   console.log(layerParams)
+  // }
 
   setBoundaries() {
     if (this.boundaries) this.map.removeLayer(this.boundaries);
@@ -157,7 +157,7 @@ class ExploreMap extends PureComponent {
       return (
         <LegendNexGDDPToolbar
           layerSpec={layerActive}
-          // onMultiLayer={l => setTimeout(() => setMultiActiveLayer({ ...l, layerId: layerActive.id }), 250)}
+          onMultiLayer={l => () => console.log('jsjsjsjsj') || setMultiActiveLayer({ ...l, layerId: layerActive.id })}
         />
       );
     }
@@ -165,7 +165,7 @@ class ExploreMap extends PureComponent {
       return (
         <LegendLOCAToolbar
           layerSpec={layerActive}
-          // onMultiLayer={l => setMultiActiveLayer({ ...l, layerId: layerActive.id })}
+          onMultiLayer={l => setMultiActiveLayer({ ...l, layerId: layerActive.id })}
         />
       );
     }
@@ -252,9 +252,7 @@ class ExploreMap extends PureComponent {
             this.map = map;
             return (
               <Fragment>
-                <LayerManager map={map} plugin={PluginLeaflet}>
-                  {activeLayersForMap && activeLayersForMap.map(l => <Layer key={l.id} {...l} />)}
-                </LayerManager>
+                <LayerManager map={map} plugin={PluginLeaflet} layersSpec={activeLayersForMap} />
                 <MapControls customClass="map-controls">
                   <ZoomControl map={map} customClass="zoom-control" />
                 </MapControls>
