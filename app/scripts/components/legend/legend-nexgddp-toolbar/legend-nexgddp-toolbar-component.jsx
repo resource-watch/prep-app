@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { SimpleSelect } from 'react-selectize';
-import 'react-selectize/themes/index.css';
+import Select from 'react-select';
 import './legend-nexgddp-toolbar-style.scss';
 
 class LegendNexGDDPToolbar extends PureComponent {
@@ -119,36 +118,30 @@ class LegendNexGDDPToolbar extends PureComponent {
     return (
       <div className="c-legend-nexgddp-toolbar">
         {temporalResolutionOptions && (
-          <SimpleSelect
+          <Select
             name="temporal_resolution"
             value={temporalResolution}
             options={temporalResolutionOptions}
-            onValueChange={this.onResolutionChange}
-            theme="material"
-            hideResetButton
-            tether
+            onChange={this.onResolutionChange}
+            menuPosition="fixed"
           />
         )}
         {periodsOptions && (
-          <SimpleSelect
+          <Select
             name="periods"
             value={period}
             options={periodsOptions}
-            onValueChange={this.onPeriodChange}
-            theme="material"
-            hideResetButton
-            tether
+            onChange={this.onPeriodChange}
+            menuPosition="fixed"
           />
         )}
         {scenariosOptions && (
-          <SimpleSelect
+          <Select
             name="scenario"
             value={scenario}
             options={scenariosOptions}
-            onValueChange={this.onScenarioChange}
-            theme="material"
-            hideResetButton
-            tether
+            onChange={this.onScenarioChange}
+            menuPosition="fixed"
           />
         )}
       </div>

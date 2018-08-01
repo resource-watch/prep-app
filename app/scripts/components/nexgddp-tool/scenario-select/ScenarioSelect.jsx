@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
-import 'react-select/dist/react-select.css';
 import './style.scss';
 
 class ScenarioSelect extends React.PureComponent {
   render() {
-    // eslint-disable-next-line no-shadow
     const { scenario, setScenarioSelection } = this.props;
 
     return (

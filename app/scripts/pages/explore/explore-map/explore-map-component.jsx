@@ -119,15 +119,6 @@ class ExploreMap extends PureComponent {
     updateZIndex(sortedLayers);
   }
 
-  // setNexGDDPLayer(layerActive, layerParams) {
-  //   // const { onMultiLayer } = this.props;
-  //   // onMultiLayer({ ...layerParams, id: layerActive.dataset });
-  // }
-
-  // setLocaLayer(layerActive, layerParams) {
-  //   console.log(layerParams)
-  // }
-
   setBoundaries() {
     if (this.boundaries) this.map.removeLayer(this.boundaries);
     const { boundaries } = this.props;
@@ -153,11 +144,11 @@ class ExploreMap extends PureComponent {
 
   getLegendToolbar(layerActive) {
     const { setMultiActiveLayer } = this.props;
-    if (layerActive.provider === 'nexgddp') {
+    if (layerActive.provider === 'nexgddp') {)
       return (
         <LegendNexGDDPToolbar
           layerSpec={layerActive}
-          onMultiLayer={l => () => console.log('jsjsjsjsj') || setMultiActiveLayer({ ...l, layerId: layerActive.id })}
+          onMultiLayer={l => setMultiActiveLayer({ ...l, layerId: layerActive.id })}
         />
       );
     }
