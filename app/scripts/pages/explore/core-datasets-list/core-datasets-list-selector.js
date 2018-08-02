@@ -1,6 +1,6 @@
 import compact from 'lodash/compact';
 import { createSelector } from 'reselect';
-import { CATEGORIES } from './core-datasets-list-constants.js';
+import { CATEGORIES } from './core-datasets-list-constants';
 
 const getAllDatasets = state => state.explorePage.datasets.items;
 const getAllCoreDatasets = state => state.explorePage.coreDatasets.items;
@@ -22,8 +22,8 @@ export const getCoreDatasets = createSelector(
     searchDatasetsRecursive(CATEGORIES, coreDatasets);
 
     return allDatasets.filter((dataset) => {
-      const { vocabulary } = dataset;
-      const tags = vocabulary && vocabulary.length ? vocabulary[0].tags || [] : [];
+      // const { vocabulary } = dataset;
+      // const tags = vocabulary && vocabulary.length ? vocabulary[0].tags || [] : [];
       return coreDatasetsResult.includes(dataset.id);
     });
   }

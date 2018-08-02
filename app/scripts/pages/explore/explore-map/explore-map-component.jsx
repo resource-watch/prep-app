@@ -144,7 +144,7 @@ class ExploreMap extends PureComponent {
 
   getLegendToolbar(layerActive) {
     const { setMultiActiveLayer } = this.props;
-    if (layerActive.provider === 'nexgddp') {)
+    if (layerActive.provider === 'nexgddp') {
       return (
         <LegendNexGDDPToolbar
           layerSpec={layerActive}

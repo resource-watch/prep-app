@@ -20,7 +20,7 @@
       "ignoreStrings": true,
       "ignoreTemplateLiterals": true
     }],
-    "import/extensions": [2, "always", { "js": "never"}]
+    "import/extensions": [2, "always", { "js": "never", "jsx": "never" }]
   },
   "settings": {
     "import/resolver": {

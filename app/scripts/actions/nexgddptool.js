@@ -532,6 +532,7 @@ export function setDefaultState() {
         const currentYear = (new Date()).getUTCFullYear();
         const selectedOption = options.find(option => currentYear >= option.label.split('-')[0]
           && currentYear <= option.label.split('-')[1]);
+        console.log(selectedOption)
         const range1Promise = dispatch(setRange1Selection(selectedOption || options[0]));
         promises.push(range1Promise);
       }
