@@ -153,8 +153,9 @@ export const setMultiActiveLayer = (state, { payload }) => {
   const { temporalResolution, period, scenario, id, layerId } = payload;
 
   const items = state.datasets.items.map((d) => {
-    if (d.id === id && (d.provider === 'nexgddp' || d.provider === 'loca')) {
-      const currentLayer = d.metadata[0].info[d.provider].layers.find(l =>
+    const newDataset = {...d};
+    if (newDataset.id === id && (newDataset.provider === 'nexgddp' || newDataset.provider === 'loca')) {
+      const currentLayer = newDataset.metadata[0].info[d.provider].layers.find(l =>
         l.temp_resolution === temporalResolution.value &&
         l.scenario === scenario.value);
 
@@ -163,12 +164,12 @@ export const setMultiActiveLayer = (state, { payload }) => {
         return d;
       }
 
-      d.layer = [{
-        ...d.layer[0],
+      newDataset.layer = [{
+        ...newDataset.layer[0],
         ...currentLayer,
-        opacity: d.opacity,
-        visibility: d.visibility,
-        layerIndex: d.layerIndex,
+        opacity: newDataset.opacity,
+        visibility: newDataset.visibility,
+        layerIndex: newDataset.layerIndex,
         dataset: id,
         id: currentLayer.layerId,
         isActive: true,
@@ -176,14 +177,14 @@ export const setMultiActiveLayer = (state, { payload }) => {
       }];
     }
 
-    if (d.id === id && (d.provider !== 'nexgddp' && d.provider !== 'loca')) {
-      d.layer = d.layer.map(l => ({
+    if (newDataset.id === id && (newDataset.provider !== 'nexgddp' && newDataset.provider !== 'loca')) {
+      newDataset.layer = newDataset.layer.map(l => ({
         ...l,
         isActive: l.id === layerId
       }));
     }
 
-    return d;
+    return newDataset;
   });
 
   return {
