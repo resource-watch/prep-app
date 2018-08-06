@@ -155,13 +155,9 @@ export const setMultiActiveLayer = (state, { payload }) => {
   const items = state.datasets.items.map((d) => {
     const newDataset = {...d};
     if (newDataset.id === id && (newDataset.provider === 'nexgddp' || newDataset.provider === 'loca')) {
-
-      console.log(period);
       const currentLayer = newDataset.metadata[0].info[d.provider].layers.find(l =>
         l.temp_resolution === temporalResolution.value &&
         l.scenario === scenario.value);
-
-      console.log(currentLayer)
 
       if (!currentLayer) {
         console.error('There is no layer with the params selected. Check that metadata has all the possibilities');
