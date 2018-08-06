@@ -4,13 +4,439 @@
   margin-top: 10px;
   position: relative;
 
-  .react-selectize {
-    width: auto;
+  .react-selectize,
+  .c-toolbar-select {
+    width: 120px;
     margin-right: 10px;
     font-size: 12px;
 
     &:last-child {
       margin-right: 0;
+    }
+  }
+}
+
+.c-toolbar-select {
+  @function palette($palette, $tone: 'primary') {
+    @return map-get(map-get($palettes, $palette), $tone);
+  }
+
+  @mixin arrow($size, $border-width, $color, $direction) {
+    display: inline-block;
+    width: $size;
+    height: $size;
+    border: $border-width solid $color;
+    content: '';
+
+    @if($direction == 'up') {
+      transform: rotate(45deg);
+      border-right: 0;
+      border-bottom: 0;
+    }
+
+    @if($direction == 'right') {
+      transform: rotate(45deg);
+      border-bottom: 0;
+      border-left: 0;
+    }
+
+    @if($direction == 'down') {
+      transform: rotate(45deg);
+      border-top: 0;
+      border-left: 0;
+    }
+
+    @if($direction == 'left') {
+      transform: rotate(45deg);
+      border-top: 0;
+      border-right: 0;
+    }
+  }
+
+  // https://davidwalsh.name/css-triangles
+  @mixin triangle($size, $color, $direction) {
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+
+    @if($direction == 'up') {
+      border-left: $size solid transparent;  /* left arrow slant */
+      border-right: $size solid transparent; /* right arrow slant */
+      border-bottom: $size solid $color; /* bottom, add background color here */
+    }
+
+    @if($direction == 'right') {
+      border-bottom: $size solid transparent;  /* left arrow slant */
+      border-top: $size solid transparent; /* right arrow slant */
+      border-left: $size solid $color; /* bottom, add background color here */
+    }
+
+    @if($direction == 'down') {
+      border-left: $size solid transparent;
+      border-right: $size solid transparent;
+      border-top: $size solid $color;
+    }
+
+    @if($direction == 'left') {
+      border-bottom: $size solid transparent;  /* left arrow slant */
+      border-top: $size solid transparent; /* right arrow slant */
+      border-right: $size solid $color; /* bottom, add background color here */
+    }
+  }
+
+  // colours
+  $palettes: (
+    blue: (
+      primary : #2E57B8,
+      secondary: #00A0E1,
+      dark: #2146A5,
+      darkest: #223E76,
+      light: #AFC7FF,
+      lighter: #DBE3F7,
+      lightest: rgba(#DBE3F7, .5)
+    ),
+    white: (
+      primary: #fff
+    ),
+    black: (
+      primary: #000
+    ),
+    feedback: (
+      success: #1c801c,
+      error: #de2239
+    ),
+    sand: (
+      primary: #f5f4f0
+    ),
+    gray: (
+      primary: #8a9da6,
+      dark: #4a596a,
+      light: lighten(rgb(151, 151, 151), 20%),
+      lightest: #f5f4f0
+    )
+  );
+
+  $color-primary: #03a1de;
+  $color-tertiary: #294d94;
+  $color-white: white;
+  $color-soft: #8CACEE;
+
+  $color-text-1: #4a596a;
+
+  // typography – families
+  $font-family-1: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  // typography – sizing
+  $font-size-extra-small:   10px;
+  $font-size-small:         12px;
+  $font-size-default:       14px;
+  $font-size-big:           16px;
+  $font-size-extrabig:      18px;
+  $font-size-huge:          22px;
+  $font-size-extrahuge:     32px;
+
+  // typography – weights
+  $font-weight-light: 300;
+  $font-weight-regular: 400;
+  $font-weight-semi-bold: 500;
+  $font-weight-bold: 700;
+
+  // dimensions
+  $size-header: 60px;
+
+  // spacing
+  $space-1: 8px;
+
+  // miscellaneous
+  $max-z-index: 9999;
+
+  // animation – timings
+  $animation-time: .16s;
+  $animation-time-2: .24s;
+  $animation-time-3: .5s;
+  $animation-time-4: .75s;
+
+  // animation – functions
+  $ease-in-cubic: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+  $ease-out-cubic: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  $ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1.000);
+
+  $ease-in-sine: cubic-bezier(0.470, 0.000, 0.745, 0.715);
+  $ease-out-sine: cubic-bezier(0.390, 0.575, 0.565, 1.000);
+  $ease-in-out-sine: cubic-bezier(0.445, 0.050, 0.550, 0.950);
+
+  // keyframes
+  @-webkit-keyframes rotate {
+    from { transform: rotate(0deg);}
+    to { transform: rotate(360deg);}
+  }
+  @-moz-keyframes rotate {
+    from { transform: rotate(0deg);}
+    to { transform: rotate(360deg);}
+  }
+  @-ms-keyframes rotate {
+    from { transform: rotate(0deg);}
+    to { transform: rotate(360deg);}
+  }
+  @keyframes rotate {
+    from { transform: rotate(0deg);}
+    to { transform: rotate(360deg);}
+  }
+
+  -webkit-font-smoothing: antialiased;
+  font-family: $font-family-1;
+  font-size: $font-size-big;
+
+  .react-select__control {
+    min-width: 200px;
+    min-height: 30px;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid currentColor;
+    box-shadow: none;
+    cursor: pointer;
+
+    &:hover {
+      border-color: inherit;
+    }
+
+    > .react-select__value-container {
+      padding: 0 $space-1 * 2 0 0;
+
+      &.react-select__value-container--has-value {
+
+        > .react-select__single-value {
+          position: relative;
+          top: 0;
+          transform: translate(0, 0);
+          margin: 0;
+          color: currentColor;
+          font-weight: 500;
+        }
+
+        & + .react-select__indicators {
+
+          &::after {
+            display: none;
+          }
+
+          > .react-select__clear-indicator {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            padding: 0;
+            transform: translate(0, -50%);
+            color: currentColor;
+
+            &:hover {
+              color: currentColor;
+            }
+
+            > svg {
+              width: 15px;
+              height: 15px;
+
+              &:hover {
+                fill: currentColor;
+              }
+            }
+          }
+        }
+      }
+
+      > .react-select__placeholder {
+        max-width: calc(100% - #{$space-1 * 2});
+        margin: 0;
+        color: currentColor;
+        white-space: nowrap;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .react-select__input {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translate(0, -50%);
+        color: currentColor;
+
+        > input {
+          color: currentColor;
+        }
+      }
+    }
+
+    > .react-select__indicators {
+      position: relative;
+
+      &:after {
+        @include triangle(5px, currentColor, 'down');
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: calc(50% - #{$space-1});
+        transform: translate(-50%, -50%)
+      }
+
+      .react-select__indicator-separator,
+      .react-select__dropdown-indicator {
+        display: none;
+      }
+    }
+
+    &.react-select__control--is-focused {
+
+      > .react-select__indicators {
+        &:after {
+          border: 0;
+          @include triangle(5px, currentColor, 'up');
+        }
+
+        > .react-select__clear-indicator {
+          padding: 0;
+        }
+      }
+
+    }
+  }
+
+  .react-select__menu {
+    top: calc(100% - 1px);
+    margin: 0;
+    border-radius: 0;
+    background: palette(white);
+    box-shadow: 0 -2px 4px 0 rgba(palette(black), .09), 0 2px 4px 0 rgba(palette(black), .09);
+    z-index: 9999;
+
+    > .react-select__menu-list {
+      padding: 0;
+
+      > .react-select__option {
+        cursor: pointer;
+        font-weight: 500;
+
+        &.react-select__option--is-selected {
+          background-color: currentColor;
+        }
+      }
+    }
+  }
+
+
+  // themes
+  &.-light {
+    color: palette(white);
+
+    .react-select__control {
+      border-bottom: 1px solid palette(blue, 'light');
+
+      > .react-select__value-container {
+
+        .react-select__input {
+          color: palette(white);
+        }
+
+        > .react-select__indicators {
+
+          &:after {
+            @include triangle(5px, palette(blue, 'light'), 'down');
+          }
+        }
+      }
+    }
+
+    .react-select__menu {
+      > .react-select__menu-list {
+        > .react-select__option {
+          color: palette(blue, 'dark');
+
+          &.react-select__option--is-selected,
+          &.react-select__option--is-focused {
+            background-color: palette(blue, 'lighter');
+          }
+        }
+      }
+    }
+
+    &.-disabled {
+      color: rgba(palette(white), .4);
+
+      .react-select__control {
+        border-bottom: 1px solid rgba(palette(blue, 'light'), .4);
+
+        > .react-select__value-container {
+
+          .react-select__input {
+            color: currentColor;
+          }
+
+          > .react-select__indicators {
+
+            &:after {
+              @include triangle(5px, currentColor, 'down');
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.-dark {
+    color: palette(gray, 'dark');
+
+    .react-select__control {
+      border-bottom: 1px solid palette(gray, 'dark');
+
+      > .react-select__value-container {
+
+        .react-select__input {
+          color: palette(gray, 'dark');
+        }
+
+        > .react-select__indicators {
+
+          &:after {
+            @include triangle(5px, palette(gray, 'dark'), 'down');
+          }
+        }
+      }
+    }
+
+    .react-select__menu {
+      > .react-select__menu-list {
+        > .react-select__option {
+          color: palette(gray, 'dark');
+
+          &.react-select__option--is-selected,
+          &.react-select__option--is-focused {
+            background-color: palette(gray, 'lightest');
+          }
+        }
+      }
+    }
+
+    &.-disabled {
+      color: rgba(palette(gray, 'dark'), .4);
+
+      .react-select__control {
+        border-bottom: 1px solid currentColor;
+
+        > .react-select__value-container {
+
+          .react-select__input {
+            color: currentColor;
+          }
+
+          > .react-select__indicators {
+
+            &:after {
+              @include triangle(5px, currentColor, 'down');
+            }
+          }
+        }
+      }
     }
   }
 }

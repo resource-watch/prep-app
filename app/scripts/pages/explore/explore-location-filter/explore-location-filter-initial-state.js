@@ -1,5 +1,5 @@
 export default {
-  location: 'global',
+  location: 'GLOBAL',
   items: [],
   isFetching: false,
   status: '',

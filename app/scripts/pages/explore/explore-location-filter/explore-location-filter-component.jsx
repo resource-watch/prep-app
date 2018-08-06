@@ -1,9 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-
 import { logEvent } from 'helpers/analytics';
-
-import Tabs from 'components/ui/Tabs';
+import initialState from './explore-location-filter-initial-state';
 
 class DatasetLocationFilter extends PureComponent {
   constructor(props) {
@@ -13,33 +11,36 @@ class DatasetLocationFilter extends PureComponent {
   }
 
   async componentDidMount() {
-    await this.setBoundsByLocation(this.props.location);
-  }
-
-  setBoundsByLocation(location) {
-    return new Promise(resolve => {
-      if (!location || location.toLowerCase() === 'global') {
-        this.props.setMapParams({ lat: 24.44714958973082, lng: -66.97265625000001, zoom: 3 });
-        return resolve();
-      }
-
-      fetch(`${config.apiUrlRW}/geostore/admin/${location}`)
-        .then(response => response.json())
-        .then(json => {
-          const { bbox } = json.data.attributes;
-          // const bounds = L.geoJSON(geojson).getBounds();
-          this.props.setBBox(bbox);
-          resolve();
-        });
-    });
+    const { location } = this.props;
+    await this.setBoundsByLocation(location);
   }
 
   async onChangeLocation(location) {
-    this.props.setLocation(location);
+    const { setLocation } = this.props;
+    setLocation(location);
     await this.setBoundsByLocation(location);
     // GA event
     const label = `Core ${location}`;
     logEvent('Explore menu', 'Changes dataset view', label);
+  }
+
+  setBoundsByLocation(location) {
+    const { setMapParams, setBBox } = this.props;
+    return new Promise(resolve => {
+      if (!location || location === initialState.location) {
+        setMapParams({ lat: 24.44714958973082, lng: -66.97265625000001, zoom: 3 });
+        resolve();
+      } else {
+        fetch(`${config.apiUrlRW}/geostore/admin/${location.toUpperCase()}`)
+          .then(response => response.json())
+          .then(json => {
+            const { bbox } = json.data.attributes;
+            // const bounds = L.geoJSON(geojson).getBounds();
+            setBBox(bbox);
+            resolve();
+          });
+      }
+    });
   }
 
   handleHover(newState) {
@@ -49,26 +50,43 @@ class DatasetLocationFilter extends PureComponent {
   render() {
     const { location, countries } = this.props;
     const { countryisActive } = this.state;
-    const onlyCountries = countries.filter(c => c.value.toLowerCase() !== 'global');
+    const onlyCountries = countries.filter(c => c.value !== initialState.location);
     const currentLocation = countries.find(c => c.value === location);
 
     return (
       <div className="c-dataset-location-filter">
         <ul className="c-dataset-location-filter-tabs">
-          <li><button type="button" className={location.toLowerCase() === 'global' ? '-active' : ''} onClick={() => this.onChangeLocation('global')}>Global</button></li>
+          <li>
+            <button
+              type="button"
+              className={location === initialState.location ? '-active' : ''}
+              onClick={() => this.onChangeLocation(initialState.location)}
+            >
+              Global
+            </button>
+          </li>
           <li
             onMouseEnter={() => this.handleHover({ countryisActive: true })}
             onMouseLeave={() => this.handleHover({ countryisActive: false })}
           >
-            <span className={location !== 'global' ? '-active' : ''}>{(location.toLowerCase() === 'global' || !currentLocation) ? 'Select a country' : currentLocation.label}</span>
-            {countryisActive &&
+            <span className={location !== initialState.location ? '-active' : ''}>
+              {(location === initialState.location || !currentLocation) ? 'Select a country' : currentLocation.label}
+            </span>
+            {countryisActive && (
               <div className="submenu">
                 <ul className="submenu-list">
-                  {onlyCountries.map(c => <li key={c.id}>
-                    <button type="button" onClick={() => this.onChangeLocation(c.value)}>{c.label}</button>
-                  </li>)}
+                  {(
+                    onlyCountries.map(c => (
+                      <li key={c.id}>
+                        <button type="button" onClick={() => this.onChangeLocation(c.value)}>
+                          {c.label}
+                        </button>
+                      </li>
+                    ))
+                  )}
                 </ul>
-              </div>}
+              </div>
+            )}
           </li>
         </ul>
       </div>
@@ -77,14 +95,16 @@ class DatasetLocationFilter extends PureComponent {
 }
 
 DatasetLocationFilter.propTypes = {
-  location: PropTypes.string.isRequired,
-  setLocation: PropTypes.func.isRequired,
+  countries: PropTypes.array,
+  location: PropTypes.string,
+  setLocation: PropTypes.func,
   setBBox: PropTypes.func,
   setMapParams: PropTypes.func
 };
 
 DatasetLocationFilter.defaultProps = {
-  location: 'global',
+  location: initialState.location,
+  countries: [],
   setLocation: () => {},
   setBBox: () => {},
   setMapParams: () => {}

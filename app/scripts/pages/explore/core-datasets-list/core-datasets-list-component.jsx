@@ -63,8 +63,12 @@ const CoreDatasetsList = (props) => {
 
   const content = coreDatasets.map(g => (
     <article className="dataset-group" key={g.id}>
-      <h1 className="group-title">{g.title}</h1>
-      <h2 className="group-description">{g.description}</h2>
+      <h1 className="group-title">
+        {g.title}
+      </h1>
+      <h2 className="group-description">
+        {g.description}
+      </h2>
       <div className="subgroups-list">
         {subGroupsTree(g)}
       </div>

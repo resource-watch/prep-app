@@ -1,5 +1,5 @@
 const initialState = {
-  location: 'global',
+  location: 'GLOBAL',
   items: [],
   isFetching: false,
   status: '',

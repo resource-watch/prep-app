@@ -14,7 +14,7 @@ export const getCoreDatasetLocations = createSelector(
     result.push({
       geostoreId: 0,
       name: 'Global',
-      iso: 'global'
+      iso: 'GLOBAL'
     });
 
     locations
