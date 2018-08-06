@@ -5040,9 +5040,9 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
 
-layer-manager@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/layer-manager/-/layer-manager-1.0.8.tgz#7c86b389446f62297c89a156eff5393683637255"
+layer-manager@^1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/layer-manager/-/layer-manager-1.0.11.tgz#c7e0f01540b085127e7fa41b9ae149560102ea08"
   dependencies:
     bluebird "^3.5.1"
     immutable "^3.8.2"

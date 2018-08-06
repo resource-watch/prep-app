@@ -167,6 +167,10 @@ export const setMultiActiveLayer = (state, { payload }) => {
       newDataset.layer = [{
         ...newDataset.layer[0],
         ...currentLayer,
+        layerConfig: {
+          ...newDataset.layer[0].layerConfig,
+          period
+        },
         opacity: newDataset.opacity,
         visibility: newDataset.visibility,
         layerIndex: newDataset.layerIndex,

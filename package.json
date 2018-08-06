@@ -59,7 +59,7 @@
     "html-webpack-plugin": "2.29.0",
     "image-webpack-loader": "3.3.0",
     "jsonapi-serializer": "3.5.3",
-    "layer-manager": "^1.0.8",
+    "layer-manager": "^1.0.11",
     "leaflet": "1.2.0",
     "lodash": "4.17.4",
     "morgan": "1.8.1",
