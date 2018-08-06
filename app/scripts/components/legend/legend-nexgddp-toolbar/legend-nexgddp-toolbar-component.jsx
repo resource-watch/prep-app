@@ -75,7 +75,7 @@ class LegendNexGDDPToolbar extends PureComponent {
   }
 
   updatingPeriods() {
-    const { layerSpec } = this.props;
+    const { layerSpec, onMultiLayer } = this.props;
     const { period: propPeriod } = layerSpec;
     const { temporalResolutionOptions, temporalResolution } = this.state;
     const temporalResolutionResult = temporalResolutionOptions.find(t => t.value === temporalResolution.value);
@@ -85,6 +85,8 @@ class LegendNexGDDPToolbar extends PureComponent {
     this.setState({
       period,
       periodsOptions
+    }, () => {
+      onMultiLayer({ ...this.state, id: layerSpec.dataset });
     });
   }
 
