@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
-import './legend-loca-toolbar-style.scss';
+import '../legend-nexgddp-toolbar/legend-nexgddp-toolbar-style.scss';
 
 class LegendLOCAToolbar extends PureComponent {
   constructor(props) {
@@ -107,27 +107,39 @@ class LegendLOCAToolbar extends PureComponent {
 
     return (
       <div className="c-legend-nexgddp-toolbar">
-        {temporalResolutionOptions && <Select
-          name="temporal_resolution"
-          value={temporalResolution}
-          options={temporalResolutionOptions}
-          onChange={this.onResolutionChange}
-          menuPosition="fixed"
-        />}
-        {periodsOptions && <Select
-          name="periods"
-          value={period}
-          options={periodsOptions}
-          onChange={this.onPeriodChange}
-          menuPosition="fixed"
-        />}
-        {scenariosOptions && <Select
-          name="scenario"
-          value={scenario}
-          options={scenariosOptions}
-          onChange={this.onScenarioChange}
-          menuPosition="fixed"
-        />}
+        {temporalResolutionOptions && (
+          <Select
+            name="temporal_resolution"
+            value={temporalResolution}
+            options={temporalResolutionOptions}
+            onChange={this.onResolutionChange}
+            menuPosition="fixed"
+            className="c-toolbar-select"
+            classNamePrefix="react-select"
+          />
+        )}
+        {periodsOptions && (
+          <Select
+            name="periods"
+            value={period}
+            options={periodsOptions}
+            onChange={this.onPeriodChange}
+            menuPosition="fixed"
+            className="c-toolbar-select"
+            classNamePrefix="react-select"
+          />
+        )}
+        {scenariosOptions && (
+          <Select
+            name="scenario"
+            value={scenario}
+            options={scenariosOptions}
+            onChange={this.onScenarioChange}
+            menuPosition="fixed"
+            className="c-toolbar-select"
+            classNamePrefix="react-select"
+          />
+        )}
       </div>
     );
   }
