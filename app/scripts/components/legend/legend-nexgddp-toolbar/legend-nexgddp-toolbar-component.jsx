@@ -133,6 +133,7 @@ class LegendNexGDDPToolbar extends PureComponent {
             onChange={this.onResolutionChange}
             menuPosition="fixed"
             className="c-toolbar-select"
+            classNamePrefix="react-select"
           />
         )}
         {periodsOptions && (
@@ -143,6 +144,7 @@ class LegendNexGDDPToolbar extends PureComponent {
             onChange={this.onPeriodChange}
             menuPosition="fixed"
             className="c-toolbar-select"
+            classNamePrefix="react-select"
           />
         )}
         {scenariosOptions && (
@@ -153,6 +155,7 @@ class LegendNexGDDPToolbar extends PureComponent {
             onChange={this.onScenarioChange}
             menuPosition="fixed"
             className="c-toolbar-select"
+            classNamePrefix="react-select"
           />
         )}
       </div>
