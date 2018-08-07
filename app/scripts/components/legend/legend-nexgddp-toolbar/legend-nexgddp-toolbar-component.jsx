@@ -132,6 +132,7 @@ class LegendNexGDDPToolbar extends PureComponent {
             options={temporalResolutionOptions}
             onChange={this.onResolutionChange}
             menuPosition="fixed"
+            menuShouldBlockScroll
             className="c-toolbar-select"
             classNamePrefix="react-select"
           />
@@ -143,6 +144,7 @@ class LegendNexGDDPToolbar extends PureComponent {
             options={periodsOptions}
             onChange={this.onPeriodChange}
             menuPosition="fixed"
+            menuShouldBlockScroll
             className="c-toolbar-select"
             classNamePrefix="react-select"
           />
@@ -154,6 +156,7 @@ class LegendNexGDDPToolbar extends PureComponent {
             options={scenariosOptions}
             onChange={this.onScenarioChange}
             menuPosition="fixed"
+            menuShouldBlockScroll
             className="c-toolbar-select"
             classNamePrefix="react-select"
           />
