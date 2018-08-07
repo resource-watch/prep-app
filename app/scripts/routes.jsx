@@ -28,8 +28,6 @@ import Embed from './containers/Embed';
 import Root from './components/Root';
 import PartnerDetail from './containers/PartnerDetail';
 import Auth from './components/auth/auth';
-// import ExploreEmbedPage from './pages/explore-embed';
-// import ExploreExportPage from './pages/explore-export';
 import NexGDDPEmbedPage from './pages/nexgddp-embed';
 
 function shouldUpdateScroll(prevRouterProps, { location }) {
@@ -117,9 +115,10 @@ const confirmLogOut = (routes) => {
 };
 
 function Routes(props) {
+  const { history } = props;
   return (
     <Router
-      history={props.history}
+      history={history}
       render={applyRouterMiddleware(useScroll(shouldUpdateScroll))}
     >
       <Route path="" component={Root}>
