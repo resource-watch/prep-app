@@ -212,11 +212,12 @@ export const initialURLParams = createThunkAction('initialURLParams', () => (dis
     periods
   } = routing.locationBeforeTransitions.query;
   const query = routing.locationBeforeTransitions.query.filterQuery;
+  const isEmbed = routing.locationBeforeTransitions.pathname.search('embed') > 0;
 
   if (zoom && lat && lng) dispatch(setMapParams({ zoom: parseInt(zoom, 10), lat: parseFloat(lat), lng: parseFloat(lng) }));
   if (basemap) dispatch(setBasemap(basemap));
-  if (labels) dispatch(setLabels(labels));
-  if (boundaries) dispatch(setBoundaries(boundaries === 'true'));
+  if (labels) dispatch(setLabels(isEmbed ? 'dark' : labels));
+  if (boundaries) dispatch(setBoundaries(isEmbed && boundaries === 'true'));
   if (water) dispatch(setWater(water));
   if (location) dispatch(setLocation(location));
   if (query) dispatch(filterQuery(query));
