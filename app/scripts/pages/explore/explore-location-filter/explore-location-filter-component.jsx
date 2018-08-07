@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { logEvent } from 'helpers/analytics';
 import initialState from './explore-location-filter-initial-state';
+import boundingBoxCountries from './country-bounding-boxes.json';
 
 class DatasetLocationFilter extends PureComponent {
   constructor(props) {
@@ -31,14 +32,10 @@ class DatasetLocationFilter extends PureComponent {
         setMapParams({ lat: 24.44714958973082, lng: -66.97265625000001, zoom: 3 });
         resolve();
       } else {
-        fetch(`${config.apiUrlRW}/geostore/admin/${location.toUpperCase()}`)
-          .then(response => response.json())
-          .then(json => {
-            const { bbox } = json.data.attributes;
-            // const bounds = L.geoJSON(geojson).getBounds();
-            setBBox(bbox);
-            resolve();
-          });
+        const geojson = boundingBoxCountries.features.find(({ properties }) => properties.iso3 === location);
+        const bounds = L.geoJSON(geojson).getBounds();
+        setBBox(bounds);
+        resolve();
       }
     });
   }
