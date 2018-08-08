@@ -1,13 +1,14 @@
 {
   "name": "prep-app",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Partnership for Resilience and Preparedness",
   "main": "server.js",
   "scripts": {
     "build": "rm -rf dist/ && webpack --config ./config/webpack/production.js --progress --env.production --color",
     "lint": "eslint --ext .js --ext .jsx .",
     "test": "npm run lint && ./node_modules/mocha/bin/mocha --compilers js:babel-core/register --recursive",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "changelog": "yarn auto-changelog"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "auto-changelog": "^1.8.0",
     "babel-eslint": "^8.2.6",
     "eslint": "4.19.1",
     "eslint-config-airbnb": "17.0.0",
