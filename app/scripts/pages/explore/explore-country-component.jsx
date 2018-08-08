@@ -148,7 +148,7 @@ class ExplorePage extends PureComponent {
                   <div className="datasets-list-content">
                     {/* <DatasetLocationFilter /> */}
                     <div className="list-container">
-                      <CoreDatasetsList />
+                      <CoreDatasetsList embed={embed} />
                       <footer className="sidebar-footer">
                         <div className="footer-section">
                           <p>
@@ -201,7 +201,7 @@ class ExplorePage extends PureComponent {
                       </div>
                     </div>
                     {filters && <ExploreDatasetFilters />}
-                    <DatasetsList />
+                    <DatasetsList embed={embed} />
                     <footer className="sidebar-footer -border">
                       <div className="footer-section">
                         <p>
