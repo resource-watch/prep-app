@@ -110,26 +110,30 @@ class ExplorePage extends PureComponent {
 
     return (
       <div className="l-explore">
-        {!embed && <header className="l-header -expanded">
-          <div className="l-header-nav -short">
-            <div className="row align-middle">
-              <div className="column small-10 medium-4">
-                <Link to="/" className="logo">
-                  <img src="/images/prep-logo.png" alt="Partnership for Resilience and Preparedness" />
-                </Link>
-              </div>
-              <div className="column small-2 medium-8">
-                <MainNav />
+        {!embed && (
+          <header className="l-header -expanded">
+            <div className="l-header-nav -short">
+              <div className="row align-middle">
+                <div className="column small-10 medium-4">
+                  <Link to="/" className="logo">
+                    <img src="/images/prep-logo.png" alt="Partnership for Resilience and Preparedness" />
+                  </Link>
+                </div>
+                <div className="column small-2 medium-8">
+                  <MainNav />
+                </div>
               </div>
             </div>
-          </div>
-        </header>}
+          </header>
+        )}
 
         {/* Datasets list */}
         <div className={sidebarExploreClass}>
           <div className="sidebar-container">
             <header className="sidebar-header">
-              <h1 className="sidebar-title">{currentCountry && currentCountry.name}</h1>
+              <h1 className="sidebar-title">
+                {currentCountry && currentCountry.name}
+              </h1>
               <Tabs
                 className="-center"
                 options={tabOptions}
@@ -140,14 +144,16 @@ class ExplorePage extends PureComponent {
 
             <div className="content">
               <div className="c-datasets-list">
-                {currentTab === 'core_datasets' &&
+                {currentTab === 'core_datasets' && (
                   <div className="datasets-list-content">
                     {/* <DatasetLocationFilter /> */}
                     <div className="list-container">
                       <CoreDatasetsList />
                       <footer className="sidebar-footer">
                         <div className="footer-section">
-                          <p>These datasets are a curated collection. If you don&apos;t find what you are interested in, you can explore all the data:</p>
+                          <p>
+                            These datasets are a curated collection. If you don&apos;t find what you are interested in, you can explore all the data:
+                          </p>
 
                           <div className="footer-actions">
                             <button
@@ -160,22 +166,29 @@ class ExplorePage extends PureComponent {
                           </div>
                         </div>
                         <div className="footer-section">
-                          <p>We’re actively adding new datasets to PREP. If you can’t find what you’re looking for, you can suggest a dataset for us to consider:</p>
+                          <p>
+                            We’re actively adding new datasets to PREP. If you can’t find what you’re looking for, you can suggest a dataset for us to consider:
+                          </p>
                           <div className="footer-actions">
                             <a href="https://docs.google.com/forms/d/1wZzQno3De7Ul6vlOkkdHhWK_9csErSrOlo6pOAZHIds/viewform?edit_requested=true" target="_blank" rel="noopener noreferrer">
-                              <button type="button" className="c-new-button -light -transparent">Suggest dataset</button>
+                              <button type="button" className="c-new-button -light -transparent">
+                                Suggest dataset
+                              </button>
                             </a>
                           </div>
                         </div>
                       </footer>
                     </div>
-                  </div>}
-                {currentTab === 'all_datasets' &&
+                  </div>
+                )}
+                {currentTab === 'all_datasets' && (
                   <div className="datasets-list-content">
                     <div className="list-filters">
                       <div className="list-filters-container">
-                        <button className="btn-filters" onClick={() => this.setState({ filters: !filters })}>
-                          <span>Filter results</span>
+                        <button type="button" className="btn-filters" onClick={() => this.setState({ filters: !filters })}>
+                          <span>
+                            Filter results
+                          </span>
                           {filters ?
                             <Icon name="icon-arrow-up" /> :
                             <Icon name="icon-arrow-down" />
@@ -191,22 +204,28 @@ class ExplorePage extends PureComponent {
                     <DatasetsList />
                     <footer className="sidebar-footer -border">
                       <div className="footer-section">
-                        <p>We’re actively adding new datasets to PREP. If you can’t find what you’re looking for, you can suggest a dataset for us to consider:</p>
+                        <p>
+                          We’re actively adding new datasets to PREP. If you can’t find what you’re looking for, you can suggest a dataset for us to consider:
+                        </p>
                         <div className="footer-actions">
                           <a href="https://docs.google.com/forms/d/1wZzQno3De7Ul6vlOkkdHhWK_9csErSrOlo6pOAZHIds/viewform?edit_requested=true" target="_blank" rel="noopener noreferrer">
-                            <button type="button" className="c-new-button -light -transparent">Suggest dataset</button>
+                            <button type="button" className="c-new-button -light -transparent">
+                              Suggest dataset
+                            </button>
                           </a>
                         </div>
                       </div>
                     </footer>
-                  </div>}
+                  </div>
+                )}
               </div>
             </div>
           </div>
-          {!selectedDataset &&
+          {!selectedDataset && (
             <div className="actions">
               <div>
                 <button
+                  type="button"
                   className="toggle-status"
                   onClick={() => this.onToggleSidebar()}
                 >
@@ -215,7 +234,8 @@ class ExplorePage extends PureComponent {
                     <Icon name="icon-arrow-left" className="-medium" />}
                 </button>
               </div>
-            </div>}
+            </div>
+          )}
         </div>
 
         {/* Datasets panel info */}
@@ -223,6 +243,7 @@ class ExplorePage extends PureComponent {
           <div className="actions">
             <div>
               <button
+                type="button"
                 className="toggle-status"
                 onClick={() => toggleInfo(selectedDataset)}
               >
