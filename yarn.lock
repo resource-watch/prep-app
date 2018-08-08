@@ -4390,10 +4390,6 @@ imagemin@^5.2.2:
     pify "^2.3.0"
     replace-ext "^1.0.0"
 
-immutable@^3.8.2:
-  version "3.8.2"
-  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
-
 imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
@@ -5040,12 +5036,11 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
 
-layer-manager@^1.0.11:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/layer-manager/-/layer-manager-1.0.11.tgz#c7e0f01540b085127e7fa41b9ae149560102ea08"
+layer-manager@^1.0.15:
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/layer-manager/-/layer-manager-1.0.15.tgz#e19c1413206d4d2d745378a277d085a8fca7fc64"
   dependencies:
     bluebird "^3.5.1"
-    immutable "^3.8.2"
     lodash "^4.17.10"
     wri-json-api-serializer "^1.0.1"
 
