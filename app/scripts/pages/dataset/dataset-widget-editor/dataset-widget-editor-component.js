@@ -9,7 +9,7 @@ import { breakpoints } from 'helpers/responsive';
 import MediaQuery from 'react-responsive';
 
 // Widget editor
-import WidgetEditor, { VegaChart, getVegaTheme, Modal, SaveWidgetModal } from 'widget-editor';
+import WidgetEditor, { VegaChart, getVegaTheme, SaveWidgetModal } from 'widget-editor';
 
 // Modal
 // import Modal from 'components/Modal/Modal';
@@ -19,15 +19,20 @@ import WidgetEditor, { VegaChart, getVegaTheme, Modal, SaveWidgetModal } from 'w
 class DatasetWidgetEditor extends PureComponent {
   static propTypes = {
     dataset: PropTypes.object,
-    responsive: PropTypes.object
+    responsive: PropTypes.object,
+    toggleModal: PropTypes.func.isRequired
   }
 
-  state = {
-    showSaveModal: false
-  }
-
-  handleToggleSaveWidget = (bool) => {
-    this.setState({ showSaveModal: bool });
+  handleToggleSaveWidget = () => {
+    if (this.getWidgetConfig) {
+      this.props.toggleModal(true, {
+        children: SaveWidgetModal,
+        childrenProps: {
+          datasetId: this.props.dataset.id,
+          getWidgetConfig: this.getWidgetConfig
+        }
+      });
+    }
   }
 
   render() {
@@ -46,21 +51,9 @@ class DatasetWidgetEditor extends PureComponent {
             saveButtonMode="auto"
             embedButtonMode="auto"
             titleMode="auto"
-            provideWidgetConfig={(func) => { this.onGetWidgetConfig = func; }}
+            provideWidgetConfig={(func) => { this.getWidgetConfig = func; }}
             onSave={() => this.handleToggleSaveWidget(true)}
           />
-
-          <Modal
-            isOpen={this.state.showSaveModal}
-            className="-medium"
-            onRequestClose={() => this.handleToggleSaveWidget(false)}
-          >
-            <SaveWidgetModal
-              dataset={dataset.id}
-              getWidgetConfig={this.onGetWidgetConfig}
-              onRequestClose={() => this.handleToggleSaveWidget(false)}
-            />
-          </Modal>
         </MediaQuery>
 
         {defaultEditableWidget &&
