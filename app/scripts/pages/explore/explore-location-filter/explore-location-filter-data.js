@@ -7,13 +7,13 @@ export default [
   {
     id: 1,
     label: 'United States',
-    value: 'usa',
+    value: 'us',
     iso: 'US'
   },
   {
     id: 2,
     label: 'India',
-    value: 'india',
+    value: 'in',
     iso: 'IN'
   }
 ];

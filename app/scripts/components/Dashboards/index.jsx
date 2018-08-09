@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { logEvent } from 'helpers/analytics';
 import Card from '../Cards/Card';
@@ -106,15 +107,15 @@ DashboardsPage.propTypes = {
   /**
    * Define the route path (from the router)
    */
-  currentPage: React.PropTypes.string,
+  currentPage: PropTypes.string,
   /**
    * Define function to get the dashboard list
    */
-  getDashboardList: React.PropTypes.func.isRequired,
+  getDashboardList: PropTypes.func.isRequired,
   /**
    * Define dashboards list data
    */
-  data: React.PropTypes.array
+  data: PropTypes.array
 };
 
 export default DashboardsPage;

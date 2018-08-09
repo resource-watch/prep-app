@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Components
 import { Link } from 'react-router';
@@ -130,11 +131,11 @@ class App extends React.Component {
   }
 }
 
-App.childContextTypes = { location: React.PropTypes.object };
+App.childContextTypes = { location: PropTypes.object };
 
 App.propTypes = {
-  children: React.PropTypes.any.isRequired,
-  location: React.PropTypes.any.isRequired
+  children: PropTypes.any.isRequired,
+  location: PropTypes.any.isRequired
 };
 
 export default App;

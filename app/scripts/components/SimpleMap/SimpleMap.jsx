@@ -1,11 +1,10 @@
 import React from 'react';
-import L from 'leaflet';
-import { default as esri } from 'esri-leaflet';
+import PropTypes from 'prop-types';
 
 import LoadingSpinner from '../Loading/LoadingSpinner';
 import SimpleLegend from './SimpleLegend';
 
-if (L) L.esri = esri;
+// if (L) L.esri = esri;
 
 class SimpleMap extends React.Component {
   constructor() {
@@ -231,15 +230,15 @@ SimpleMap.propTypes = {
   /**
    * Define the layers data
    */
-  data: React.PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
   /**
    * Define the id of the layer desired
    */
-  layerId: React.PropTypes.string.isRequired,
+  layerId: PropTypes.string.isRequired,
   /**
    * Define the function to get the desired layer
    */
-  getLayerData: React.PropTypes.func.isRequired
+  getLayerData: PropTypes.func.isRequired
 };
 
 export default SimpleMap;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Card from '../Cards/Card';
 
 function DashboardDetailTools(props) {
@@ -51,7 +52,7 @@ DashboardDetailTools.propTypes = {
   /**
    * Define dashboard indicators data
    */
-  data: React.PropTypes.any.isRequired
+  data: PropTypes.any.isRequired
 };
 
 export default DashboardDetailTools;

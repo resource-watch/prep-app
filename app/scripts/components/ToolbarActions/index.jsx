@@ -92,7 +92,7 @@ ToolbarActions.propTypes = {
   /**
    * Url to embed the insight
    */
-  // insightUrl: React.PropTypes.string,
+  // insightUrl: PropTypes.string,
   downloadUrl: PropTypes.string,
   /**
    * Define the category and action for the analytics

@@ -1,5 +1,6 @@
 import { reducers as filterLocationReducers } from './explore-location-filter';
 import { reducers as datasetsListReducers } from './explore-datasets-list';
+import { reducers as coreDatasetsListReducers } from './core-datasets-list';
 import { reducers as datasetFiltersReducers } from './explore-dataset-filters/explore-dataset-filters';
 import { reducers as mapReducers } from './explore-map';
 import * as actions from './explore-actions';
@@ -13,9 +14,15 @@ export default {
   [actions.setMapParams]: mapReducers.setMapParams,
   [actions.setBBox]: mapReducers.setBBox,
   [actions.setLocation]: filterLocationReducers.setLocation,
+  [actions.fetchLocations]: filterLocationReducers.fetchLocations,
+  [actions.receiveLocations]: filterLocationReducers.receiveLocations,
+  [actions.failureLocations]: filterLocationReducers.failureLocations,
   [actions.fetchDatasets]: datasetsListReducers.fetchDatasets,
   [actions.receiveDatasets]: datasetsListReducers.receiveDatasets,
   [actions.failureDatasets]: datasetsListReducers.failureDatasets,
+  [actions.fetchCoreDatasets]: coreDatasetsListReducers.fetchCoreDatasets,
+  [actions.receiveCoreDatasets]: coreDatasetsListReducers.receiveCoreDatasets,
+  [actions.failureCoreDatasets]: coreDatasetsListReducers.failureCoreDatasets,
   [actions.filterQuery]: datasetsListReducers.filterQuery,
   [actions.toggleDataset]: datasetsListReducers.toggleDataset,
   [actions.toggleInfo]: datasetsListReducers.toggleInfo,

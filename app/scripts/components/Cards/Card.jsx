@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function Card(props) {
   const classes = ['c-card'];
@@ -22,7 +23,7 @@ Card.propTypes = {
    * 	- false: the content color is adapted for lighter background
    * Default: false
    */
-  inverse: React.PropTypes.bool,
+  inverse: PropTypes.bool,
   /**
    * Define the color of the border
    * Accepted values:
@@ -30,12 +31,12 @@ Card.propTypes = {
    * 	- "neutral": the color is grey
    * Default: no border (i.e. prop not defined)
    */
-  border: React.PropTypes.any,
+  border: PropTypes.any,
   /**
    * Define the text content of the button
    * Required
    */
-  children: React.PropTypes.array.isRequired
+  children: PropTypes.array.isRequired
 };
 
 export default Card;

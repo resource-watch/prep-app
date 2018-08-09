@@ -159,21 +159,21 @@ class HowTo extends React.PureComponent {
               <div className="column small-12 medium-4">
                 <div className="c-card -border -border-neutral">
                   <h3>Introduction to PREPdata</h3>
-                  <p>Lorem ipsum dolor sit amet, conse etur adipiscing elit.Nullam id nibh tricies.</p>
+                  <p>Learn how PREPdata can help with climate adaptation and resilience planning.</p>
                   <a href="https://youtu.be/AJzz9-76Bgk">INTRODUCTION TO PREPDATA</a>
                 </div>
               </div>
               <div className="column small-12 medium-4">
                 <div className="c-card -border -border-neutral">
                   <h3>Explore the Data</h3>
-                  <p>Lorem ipsum dolor sit amet, conse etur adipiscing elit.Nullam id nibh tricies.</p>
+                  <p>Discover climate, physical, and socioeconomic data.</p>
                   <a href="https://youtu.be/7PmMh6DWCbA">EXPLORE PREP’S DATA</a>
                 </div>
               </div>
               <div className="column small-12 medium-4">
                 <div className="c-card -border -border-neutral">
                   <h3>Make a PREPdata account</h3>
-                  <p>Lorem ipsum dolor sit amet, conse etur adipiscing elit.Nullam id nibh tricies.</p>
+                  <p>Login with your Facebook, Google, or Twitter account.</p>
                   <span className="link-placeholder">COMING SOON!</span>
                 </div>
               </div>

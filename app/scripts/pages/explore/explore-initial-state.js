@@ -13,7 +13,8 @@ const initialState = {
   map: mapInitialState,
   datasets: datasetsInitialState,
   datasetFilters: datasetFiltersInitialState,
-  coreDatasets: { ...locationInitialState, ...coreDatasetsInitialState }
+  coreDatasets: { ...locationInitialState, ...coreDatasetsInitialState },
+  locations: locationInitialState
 };
 
 export default initialState;

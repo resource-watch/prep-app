@@ -12,6 +12,9 @@
 # Logs
 *.log*
 
+# NPM
+package-lock.json
+
 # ENV variables
 .env
 

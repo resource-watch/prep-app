@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import Article from '../Content/Article';
 import Thumbnail from '../Thumbnails/Thumbnail';
@@ -45,8 +46,8 @@ function Partners(props) {
 }
 
 Partners.propTypes = {
-  partners: React.PropTypes.array,
-  foundingPartners: React.PropTypes.array
+  partners: PropTypes.array,
+  foundingPartners: PropTypes.array
 };
 
 export default Partners;

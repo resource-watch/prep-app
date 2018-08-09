@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Libraries
 import Scroll from 'react-scroll';
@@ -48,13 +49,13 @@ NavBar.propTypes = {
    * Define the active tab
    * Values: "data", "insights" or "tools"
    */
-  activeTab: React.PropTypes.string.isRequired,
+  activeTab: PropTypes.string.isRequired,
   /**
    * Define the base URL to which the tab's name will be added to
    */
-  baseUrl: React.PropTypes.string.isRequired,
-  list: React.PropTypes.array,
-  anchor: React.PropTypes.bool
+  baseUrl: PropTypes.string.isRequired,
+  list: PropTypes.array,
+  anchor: PropTypes.bool
 };
 
 NavBar.defaultProps = {

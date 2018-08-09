@@ -48,7 +48,8 @@
   "components/markdown",
   "components/create-embed-widget",
   "components/terms-list",
-  "components/rc-tooltip";
+  "components/rc-tooltip",
+  "components/dataset-location-filter";
 
   // Ui
   @import "components/ui/collapsible-item";
@@ -59,3 +60,4 @@
 
   // toastr
   @import '../../node_modules/react-redux-toastr/src/styles/index';
+  @import '../../node_modules/wri-api-components/dist/components.css';

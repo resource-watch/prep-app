@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { VegaChart } from 'widget-editor';
 
 class WidgetChart extends React.Component {
@@ -23,19 +24,19 @@ WidgetChart.propTypes = {
   /**
    * Define the slug of the widget
    */
-  slug: React.PropTypes.any.isRequired,
+  slug: PropTypes.any.isRequired,
   /**
    * Define the function to get the widget slug data
    */
-  getWidgetBySlug: React.PropTypes.func.isRequired,
+  getWidgetBySlug: PropTypes.func.isRequired,
   /**
    * Define the function to get the widget slug data
    */
-  data: React.PropTypes.object,
+  data: PropTypes.object,
   /**
    * Remove the min-height in component
    */
-  small: React.PropTypes.bool
+  small: PropTypes.bool
 };
 
 export default WidgetChart;

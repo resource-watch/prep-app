@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class DataMapLegend extends React.Component {
   constructor(props) {
@@ -146,7 +147,7 @@ DataMapLegend.propTypes = {
   /**
    * Define the layer legend data
    */
-  layer: React.PropTypes.object
+  layer: PropTypes.object
 };
 
 export default DataMapLegend;

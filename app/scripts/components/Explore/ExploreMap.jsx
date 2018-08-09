@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import L from 'leaflet';
-import 'esri-leaflet';
 
 // Libraries
 import isEqual from 'lodash/isEqual';

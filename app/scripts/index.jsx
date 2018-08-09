@@ -28,9 +28,7 @@ import * as ShareModalModule from 'components/share-modal';
 // Pages
 import * as ExploreModule from './pages/explore';
 import * as ResourcesModule from './pages/resources';
-import * as ExploreEmbedModule from './pages/explore-embed';
-import * as ExploreExportModule from './pages/explore-export';
-
+import * as DatasetModule from './pages/dataset';
 
 import '../styles/lib/custom-foundation.css';
 import '../styles/index.scss';
@@ -65,9 +63,8 @@ const componentReducers = {
 
 const pagesReducers = {
   explorePage: handleModule(ExploreModule),
-  exploreEmbedPage: handleModule(ExploreEmbedModule),
-  exploreExportPage: handleModule(ExploreExportModule),
-  resourcePage: handleModule(ResourcesModule)
+  resourcePage: handleModule(ResourcesModule),
+  datasetPage: handleModule(DatasetModule)
 };
 
 const reducer = combineReducers({
