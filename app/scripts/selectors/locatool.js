@@ -84,9 +84,9 @@ export const getIndicatorId = createSelector(
   (dataset) => { // eslint-disable-line no-shadow
     const metadata = dataset && dataset.metadata.length ? dataset.metadata[0] : null;
     const indicatorId = metadata
-      && metadata.attributes.info
-      && metadata.attributes.info.loca
-      && metadata.attributes.info.loca.indicator_id;
+      && metadata.info
+      && metadata.info.loca
+      && metadata.info.loca.indicator_id;
     return indicatorId || null;
   }
 );
@@ -106,9 +106,9 @@ export const getTempResolution = createSelector(
   (dataset) => { // eslint-disable-line no-shadow
     const metadata = dataset && dataset.metadata.length ? dataset.metadata[0] : null;
     const tempResolution = metadata
-      && metadata.attributes.info
-      && metadata.attributes.info.loca
-      && metadata.attributes.info.loca.temp_resolution;
+      && metadata.info
+      && metadata.info.loca
+      && metadata.info.loca.temp_resolution;
     return tempResolution || null;
   }
 );
