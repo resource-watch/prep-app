@@ -4,17 +4,13 @@
   position: relative;
   z-index: 1;
 
-  .Select {
+  > div {
     border: 0;
     border-radius: 0;
 
-    .Select-control {
+    > div {
       border: 2px solid $border-color;
       border-radius: 0;
-    }
-
-    .Select-menu-outer {
-      z-index: 10000;
     }
   }
 }
