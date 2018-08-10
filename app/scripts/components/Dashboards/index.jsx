@@ -5,6 +5,7 @@ import { logEvent } from 'helpers/analytics';
 import Card from '../Cards/Card';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 import Icon from '../ui/Icon';
+import DashboardsFilters from 'components/dashboards-filters';
 
 class DashboardsPage extends React.Component {
   constructor(props) {
@@ -13,16 +14,24 @@ class DashboardsPage extends React.Component {
   }
 
   componentDidMount() {
-    if (!this.props.data.length) {
+    if (!this.props.loaded) {
       this.props.getDashboardList();
     }
   }
 
   getContent() {
-    if (!this.props.data || this.props.data.length === 0) {
+    if (!this.props.loaded) {
       return (
         <div>
           <LoadingSpinner />
+        </div>
+      );
+    }
+
+    if (!this.props.data.length) {
+      return (
+        <div className="columns small-12 medium-12 no-results">
+          No results
         </div>
       );
     }
@@ -76,7 +85,7 @@ class DashboardsPage extends React.Component {
     return (
       <div className="l-dashboards">
         <div className="sliced" />
-        <article className="c-article -no-border">
+        <article className="c-article">
           <div className="row align-center">
             <div className="column small-12 medium-8">
               <div className="c-toolbar-actions">
@@ -95,6 +104,8 @@ class DashboardsPage extends React.Component {
             </div>
           </div>
         </article>
+
+        <DashboardsFilters />
 
         {content}
 
@@ -115,7 +126,11 @@ DashboardsPage.propTypes = {
   /**
    * Define dashboards list data
    */
-  data: PropTypes.array
+  data: PropTypes.array,
+  /**
+   * Whether the list of dashboards has loaded
+   */
+  loaded: PropTypes.bool.isRequired
 };
 
 export default DashboardsPage;
