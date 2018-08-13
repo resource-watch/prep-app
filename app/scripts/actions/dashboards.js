@@ -2,7 +2,9 @@ import 'whatwg-fetch';
 import {
   DASHBOARD_FETCH_ERROR,
   DASHBOARD_LIST_RECEIVED,
-  DASHBOARD_DETAIL_RECEIVED
+  DASHBOARD_DETAIL_RECEIVED,
+  DASHBOARD_TOPICS_FILTER,
+  DASHBOARD_GEOGRAPHIES_FILTER
 } from '../constants';
 
 export default function () {}
@@ -48,5 +50,19 @@ export function getDashboardBySlug(slug) {
           payload: err.message
         });
       });
+  };
+}
+
+export function setTopicsFilter(selected) {
+  return {
+    type: DASHBOARD_TOPICS_FILTER,
+    payload: selected
+  };
+}
+
+export function setGeographiesFilter(selected) {
+  return {
+    type: DASHBOARD_GEOGRAPHIES_FILTER,
+    payload: selected
   };
 }
