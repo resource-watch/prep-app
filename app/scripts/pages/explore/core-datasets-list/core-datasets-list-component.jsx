@@ -6,7 +6,7 @@ import CollapsibleItem from 'components/ui/CollapsibleItem';
 import DatasetsList from '../explore-datasets-list/explore-datasets-list-component';
 
 const CoreDatasetsList = (props) => {
-  const { datasets, coreDatasets, toggleDataset, toggleInfo, error, isFetching } = props;
+  const { datasets, coreDatasets, toggleDataset, toggleInfo, error, isFetching, embed } = props;
 
   if (isFetching) return (<LoadingSpinner />);
 
@@ -29,6 +29,7 @@ const CoreDatasetsList = (props) => {
         toggleDataset={toggleDataset}
         toggleInfo={toggleInfo}
         datasets={list}
+        embed={embed}
       />
     );
 
@@ -87,6 +88,7 @@ CoreDatasetsList.propTypes = {
   coreDatasets: PropTypes.array,
   error: PropTypes.object,
   isFetching: PropTypes.bool,
+  embed: PropTypes.bool,
   toggleDataset: PropTypes.func,
   toggleInfo: PropTypes.func
 };
@@ -95,6 +97,7 @@ CoreDatasetsList.defaultProps = {
   datasets: [],
   coreDatasets: [],
   error: null,
+  embed: false,
   isFetching: () => {},
   toggleDataset: () => {},
   toggleInfo: () => {}
