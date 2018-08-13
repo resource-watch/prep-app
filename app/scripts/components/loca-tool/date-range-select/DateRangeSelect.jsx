@@ -23,7 +23,7 @@ class DateRangeSelect extends React.PureComponent {
 
     range2Options = range2Options.map(o => ({
       ...o,
-      disabled: range1.selection && o.value === range1.selection.value
+      isDisabled: range1.selection && o.value === range1.selection.value
     }));
 
     return (
