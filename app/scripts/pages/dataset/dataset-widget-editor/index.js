@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { modalActions } from 'widget-editor';
 
 import DatasetWidgetEditorComponent from './dataset-widget-editor-component';
 
@@ -9,5 +10,7 @@ export default connect(
       fakeWidth: 1024
     }
   }),
-  null
+  dispatch => ({
+    toggleModal: (...params) => dispatch(modalActions.toggleModal(...params))
+  })
 )(DatasetWidgetEditorComponent);
