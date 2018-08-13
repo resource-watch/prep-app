@@ -150,7 +150,7 @@ export const updateOpacity = (state, { payload }) => {
 };
 
 export const setMultiActiveLayer = (state, { payload }) => {
-  const { temporalResolution, period, scenario, id, layerId } = payload;
+  const { temporalResolution, period, scenario, id, dataset } = payload;
 
   const items = state.datasets.items.map((d) => {
     const newDataset = {...d};
@@ -174,17 +174,19 @@ export const setMultiActiveLayer = (state, { payload }) => {
         opacity: newDataset.opacity,
         visibility: newDataset.visibility,
         layerIndex: newDataset.layerIndex,
-        dataset: id,
-        id: currentLayer.layerId,
         isActive: true,
+        isLayerActive: true,
+        active: true,
         period
       }];
     }
 
-    if (newDataset.id === id && (newDataset.provider !== 'nexgddp' && newDataset.provider !== 'loca')) {
+    if (newDataset.id === dataset && (newDataset.provider !== 'nexgddp' && newDataset.provider !== 'loca')) {
       newDataset.layer = newDataset.layer.map(l => ({
         ...l,
-        isActive: l.id === layerId
+        isActive: l.id === id,
+        isLayerActive: l.id === id,
+        active: l.id === id
       }));
     }
 

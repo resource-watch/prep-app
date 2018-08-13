@@ -101,10 +101,20 @@ class DatasetInfo extends PureComponent {
       <div className="content-container">
         {description && <div className="item-prop">
           <span className="prop-label">Description: </span>
-          <ReactMarkdown source={description} className="c-markdown -inline" />
+          <ReactMarkdown
+            source={description}
+            className="c-markdown -inline"
+            renderers={{
+              link: props => (
+                <a href={props.href} {...(embed ? { target: '_blank', rel: 'noopener noreferrer' } : {} )}>
+                  {props.children}
+                </a>
+              )
+            }}
+          />
         </div>}
 
-        {!!dataset.layer &&
+        {!!dataset.layer && (
           <div className="item-prop">
             <span className="prop-label">Layers: </span>
 
@@ -115,29 +125,71 @@ class DatasetInfo extends PureComponent {
                 >
                   <h4>{l.name}</h4>
 
-                  {l.description &&
-                    <ReactMarkdown source={l.description} className="c-markdown -inline" />
-                  }
+                  {l.description && (
+                    <ReactMarkdown
+                      source={l.description}
+                      className="c-markdown -inline"
+                      renderers={{
+                        link: props => (
+                          <a href={props.href} {...(embed ? { target: '_blank', rel: 'noopener noreferrer' } : {} )}>
+                            {props.children}
+                          </a>
+                        )
+                      }}
+                    />
+                  )}
                 </li>
               ))}
             </ul>
           </div>
-        }
+        )}
 
-        {dataset.data_source && <div className="item-prop">
-          <span className="prop-label">Data source: </span>
-          <ReactMarkdown source={dataset.data_source} className="c-markdown" />
-        </div>}
+        {dataset.data_source && (
+          <div className="item-prop">
+            <span className="prop-label">
+              Data source:
+            </span>
+            <ReactMarkdown
+              source={dataset.data_source}
+              className="c-markdown"
+              renderers={{
+                link: props => (
+                  <a href={props.href} {...(embed ? { target: '_blank', rel: 'noopener noreferrer' } : {} )}>
+                    {props.children}
+                  </a>
+                )
+              }}
+            />
+          </div>
+        )}
 
-        {!!topicsList.length && <div className="item-prop">
-          <span className="prop-label">Topics: </span>
-          {this.getItemList(topicsList)}
-        </div>}
+        {!!topicsList.length && (
+          <div className="item-prop">
+            <span className="prop-label">
+              Topics:
+            </span>
+            {this.getItemList(topicsList)}
+          </div>
+        )}
 
-        {source && <div className="item-prop">
-          <span className="prop-label">Data source: </span>
-          <ReactMarkdown source={source} className="c-markdown" />
-        </div>}
+        {source && (
+          <div className="item-prop">
+            <span className="prop-label">
+              Data source:
+            </span>
+            <ReactMarkdown
+              source={source}
+              className="c-markdown"
+              renderers={{
+                link: props => (
+                  <a href={props.href} {...(embed ? { target: '_blank', rel: 'noopener noreferrer' } : {} )}>
+                    {props.children}
+                  </a>
+                )
+              }}
+            />
+          </div>
+        )}
 
         <div className="button-container">
           <LinkComponent

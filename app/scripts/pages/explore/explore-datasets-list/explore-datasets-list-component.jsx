@@ -5,7 +5,7 @@ import DatasetCard from 'components/dataset-card/dataset-card-component';
 
 class ExploreDatasetsList extends PureComponent {
   render() {
-    const { datasets, status, isFetching, error } = this.props;
+    const { datasets, status, isFetching, error, embed } = this.props;
 
     if (isFetching) return (<LoadingSpinner />);
     if (status === 'error') return (<p>{error}</p>);
@@ -18,6 +18,7 @@ class ExploreDatasetsList extends PureComponent {
             dataset={dataset}
             onToggleDataset={this.props.toggleDataset}
             onToggleInfo={this.props.toggleInfo}
+            embed={embed}
           />)) : <p className="no-data">There are not datasets with these filters.</p>}
       </div>
     );
@@ -27,7 +28,8 @@ class ExploreDatasetsList extends PureComponent {
 ExploreDatasetsList.defaultProps = {
   datasets: {},
   toggleInfo: () => {},
-  toggleDataset: () => {}
+  toggleDataset: () => {},
+  embed: false
 };
 
 ExploreDatasetsList.propTypes = {
@@ -35,6 +37,7 @@ ExploreDatasetsList.propTypes = {
   status: PropTypes.oneOf(['success', 'error']),
   error: PropTypes.object,
   isFetching: PropTypes.bool,
+  embed: PropTypes.bool,
   toggleDataset: PropTypes.func,
   toggleInfo: PropTypes.func
 };

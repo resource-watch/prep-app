@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 2018-08-13
+
+### Added
+- Filters by topics and locations in dashboards
+
+### Updated
+- Migrated core datasets to production
+
+### Fixed
+- Update widgets list after delete any widget 
+- Saving widgets from explore
+- Showing a modal creating a widget from explore
+- Connection with API in preproduction
+
+
 ## 2018-08-10
 
 ### Added

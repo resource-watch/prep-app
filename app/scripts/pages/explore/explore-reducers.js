@@ -3,6 +3,7 @@ import { reducers as datasetsListReducers } from './explore-datasets-list';
 import { reducers as coreDatasetsListReducers } from './core-datasets-list';
 import { reducers as datasetFiltersReducers } from './explore-dataset-filters/explore-dataset-filters';
 import { reducers as mapReducers } from './explore-map';
+import { reducers as popupReducers } from './explore-map/explore-map-popup';
 import * as actions from './explore-actions';
 
 export default {
@@ -13,6 +14,7 @@ export default {
   [actions.setWater]: mapReducers.setWater,
   [actions.setMapParams]: mapReducers.setMapParams,
   [actions.setBBox]: mapReducers.setBBox,
+  [actions.setInteractions]: popupReducers.setInteractions,
   [actions.setLocation]: filterLocationReducers.setLocation,
   [actions.fetchLocations]: filterLocationReducers.fetchLocations,
   [actions.receiveLocations]: filterLocationReducers.receiveLocations,
