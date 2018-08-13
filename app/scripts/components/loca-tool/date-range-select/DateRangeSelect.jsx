@@ -34,13 +34,13 @@ class DateRangeSelect extends React.PureComponent {
           value={range1.selection}
           onChange={setRange1Selection}
           options={range1Options}
-          clearable={false}
         />
         <Select
           name="enddate"
           value={range2.selection}
           onChange={setRange2Selection}
           options={range2Options}
+          isClearable
         />
       </div>
     );
