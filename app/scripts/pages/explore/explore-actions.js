@@ -51,7 +51,6 @@ export const setLocation = createThunkAction('setLocation', () => (dispatch) => 
 export const receiveLocations = createAction('receiveLocations');
 export const failureLocations = createAction('failureLocations');
 export const fetchLocations = createThunkAction('fetchLocations', () => (dispatch) => {
-  const params = {};
   const url = `${config.apiUrlRW}/geostore/admin/list`;
   return fetch(url, {
     headers: {
@@ -297,3 +296,5 @@ export const getDatasetsByGraph = createThunkAction('explore-page/getDatasetsByG
 
 export const setMultiActiveLayer = createAction('explore-dataset-list/setMultiActiveLayer');
 export const setBBox = createAction('explore-dataset-list/setBBox');
+
+export const setInteractions = createAction('explore-page/setInteractions');

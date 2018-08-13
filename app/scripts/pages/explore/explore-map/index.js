@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import * as shareModalActions from 'components/share-modal/share-modal-actions';
-
 import * as exploreActions from '../explore-actions';
 import * as reducers from './explore-map-reducers';
 import initialState from './explore-map-initial-state';

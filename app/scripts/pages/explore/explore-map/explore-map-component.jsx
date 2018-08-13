@@ -1,6 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import debounce from 'lodash/debounce';
 import { getConfig } from 'widget-editor';
 import BasemapControl from 'components/basemap-control';
 import LegendNexGDDPToolbar from 'components/legend/legend-nexgddp-toolbar';
@@ -14,8 +15,9 @@ import {
   LegendItemButtonBBox, LegendItemButtonInfo,
   LegendItemButtonLayers, LegendItemButtonOpacity, LegendItemButtonVisibility, LegendItemButtonRemove
 } from 'wri-api-components';
-import { LayerManager } from 'layer-manager/dist/react';
+import { LayerManager, Layer } from 'layer-manager/dist/react';
 import { PluginLeaflet } from 'layer-manager';
+import Popup from './explore-map-popup';
 // import { updateActiveDatasets } from '../explore-datasets-list/explore-datasets-list-reducers';
 
 class ExploreMap extends PureComponent {
@@ -54,7 +56,8 @@ class ExploreMap extends PureComponent {
     setBBox: PropTypes.func,
     setOpen: PropTypes.func,
     setLinks: PropTypes.func,
-    setTab: PropTypes.func
+    setTab: PropTypes.func,
+    setInteractions: PropTypes.func
   }
 
   static defaultProps = {
@@ -92,7 +95,8 @@ class ExploreMap extends PureComponent {
     setBBox: () => {},
     setOpen: () => {},
     setLinks: () => {},
-    setTab: () => {}
+    setTab: () => {},
+    setInteractions: () => {}
   }
 
   constructor(props) {
@@ -167,7 +171,8 @@ class ExploreMap extends PureComponent {
     const {
       setMapParams, setBBox, basemap, labels, water, boundaries, bbox, sidebar, zoom, lat, lng, minZoom, setBasemap,
       setLabels, setBoundaries, setWater, embed, embedExport, layersGroups, activeLayersForMap, activeLayers,
-      toggleVisibility, toggleInfo, updateOpacity, toggleDataset, setOpen, setLinks, setTab, setMultiActiveLayer
+      toggleVisibility, toggleInfo, updateOpacity, toggleDataset, setOpen, setLinks, setTab, setMultiActiveLayer,
+      setInteractions
     } = this.props;
     const classNames = classnames({ '-embed': embed, '-embed-export': embedExport });
     const { open } = sidebar;
@@ -190,8 +195,8 @@ class ExploreMap extends PureComponent {
         zoomControl: false
       }),
       events: {
-        zoomend: () => setMapParams(this.getMapParams()),
-        moveend: () => setMapParams(this.getMapParams())
+        zoomend: () => debounce(() => setMapParams(this.getMapParams()), 50),
+        moveend: () => debounce(() => setMapParams(this.getMapParams()), 50)
       },
       ...bbox && {
         bounds: {
@@ -251,10 +256,39 @@ class ExploreMap extends PureComponent {
             this.map = map;
             return (
               <Fragment>
-                <LayerManager map={map} plugin={PluginLeaflet} layersSpec={activeLayersForMap} />
+                <LayerManager map={map} plugin={PluginLeaflet} layersSpec={activeLayersForMap}>
+                  {(layerManager) => (
+                    activeLayersForMap.map((l, i) => (
+                      <Layer
+                        key={l.id}
+                        {...l}
+                        zIndex={1000 - i}
+                        layerManager={layerManager}
+                        {...!!l.interactionConfig && l.interactionConfig.output && l.interactionConfig.output.length && {
+                          ...(l.provider === 'carto' || l.provider === 'cartodb') && { interactivity: l.interactionConfig.output.map(o => o.column) },
+                          events: {
+                            click: (e) => {
+                              const { data, latlng } = e;
+                              if (data) {
+                                setInteractions({
+                                  [l.id]: {
+                                    id: l.id,
+                                    latlng,
+                                    data
+                                  }
+                                });
+                              }
+                            }
+                          }
+                        }}
+                      />
+                    ))
+                  )}
+                </LayerManager>
                 <MapControls customClass="map-controls">
                   <ZoomControl map={map} customClass="zoom-control" />
                 </MapControls>
+                <Popup map={map} />
               </Fragment>
             );
           }}

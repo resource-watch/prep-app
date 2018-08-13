@@ -8,3 +8,11 @@
     margin-bottom: rem(25);
   }
 }
+
+.leaflet-popup-content {
+  table {
+    th {
+      padding-right: 15px;
+    }
+  }
+}
