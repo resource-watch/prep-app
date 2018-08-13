@@ -6,7 +6,7 @@
   position: relative;
 }
 
-.c-date-range-select > .Select {
+.c-date-range-select > div {
   width: 50%;
   min-width: 100px;
 
@@ -18,7 +18,7 @@
     left: -2px;
   }
 
-  .Select-control {
+  > div {
     border: 2px solid $border-color;
     border-radius: 0;
   }
