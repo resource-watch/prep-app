@@ -38,7 +38,7 @@ class DatasetCard extends PureComponent {
   }
 
   render() {
-    const { dataset } = this.props;
+    const { dataset, embed } = this.props;
     const metadata = getMetadata(dataset);
     const info = getInfo(dataset);
     const title = getTitle(dataset);
@@ -61,12 +61,30 @@ class DatasetCard extends PureComponent {
                     checked={dataset.isLayerActive}
                   />
                 </div>}
-              <h3 className="item-title"><Link className="item-title-link" to={`/dataset/${dataset.slug}`}>{title}</Link></h3>
+              <h3 className="item-title">
+                { embed && (
+                  <a className="item-title-link" href={`/dataset/${dataset.slug}`} target="_blank">
+                    {title}
+                  </a>
+                )}
+                { !embed && (
+                  <Link className="item-title-link" to={`/dataset/${dataset.slug}`}>
+                    {title}
+                  </Link>
+                )}
+              </h3>
             </div>
             <div className="item-tools">
-              <Link className="item-link" to={`/dataset/${dataset.slug}`}>
-                <Icon name="icon-widgets" />
-              </Link>
+              { embed && (
+                <a className="item-link" href={`/dataset/${dataset.slug}`} target="_blank">
+                  <Icon name="icon-widgets" />
+                </a>
+              )}
+              { !embed && (
+                <Link className="item-link" to={`/dataset/${dataset.slug}`}>
+                  <Icon name="icon-widgets" />
+                </Link>
+              )}
               {dataset.isSelected ?
                 <button key="info-close" onClick={() => this.onToggleInfo(dataset)} className="cancel">
                   <Icon name="icon-cancel" />
@@ -92,11 +110,13 @@ class DatasetCard extends PureComponent {
 DatasetCard.defaultProps = {
   dataset: {},
   onToggleInfo: () => {},
-  onToggleDataset: () => {}
+  onToggleDataset: () => {},
+  embed: false
 };
 
 DatasetCard.propTypes = {
   dataset: PropTypes.object,
+  embed: PropTypes.bool,
   onToggleInfo: PropTypes.func,
   onToggleDataset: PropTypes.func
 };
