@@ -244,7 +244,7 @@ class ExploreMap extends PureComponent {
           <LegendItemButtonOpacity />
           <LegendItemButtonVisibility />
           <LegendItemButtonInfo />
-          <LegendItemButtonRemove />
+          {!(embed || embedExport) && <LegendItemButtonRemove />}
         </LegendItemToolbar>
       );
     };
