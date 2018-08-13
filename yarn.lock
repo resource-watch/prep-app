@@ -9758,9 +9758,9 @@ wri-api-components@2.0.0:
     react-sortable-hoc "^0.6.8"
     wri-json-api-serializer "^1.0.1"
 
-wri-api-components@^2.0.14:
-  version "2.0.14"
-  resolved "https://registry.yarnpkg.com/wri-api-components/-/wri-api-components-2.0.14.tgz#a03de220a8509b088c6b9d93cbabf7f70237be56"
+wri-api-components@^2.0.16:
+  version "2.0.16"
+  resolved "https://registry.yarnpkg.com/wri-api-components/-/wri-api-components-2.0.16.tgz#c7cac6923da1062c7715247e160dea4398347adf"
   dependencies:
     layer-manager "^1.0.4"
     prop-types "^15.6.2"

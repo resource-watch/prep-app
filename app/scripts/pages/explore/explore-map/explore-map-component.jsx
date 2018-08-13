@@ -225,6 +225,12 @@ class ExploreMap extends PureComponent {
             });
           }}
           onChangeLayer={l => setMultiActiveLayer(l)}
+          enabledStyle={{
+            fill: '#ffc94e'
+          }}
+          focusStyle={{
+            fill: '#ffc94e'
+          }}
         >
           <LegendItemButtonBBox />
           {(layerActive.provider !== 'nexgddp' && layerActive.provider !== 'loca') && (
