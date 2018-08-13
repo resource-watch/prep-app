@@ -41,26 +41,17 @@ export const getLayersGroups = createSelector(
   getAllDatasets,
   (datasets) => {
     const activeDatasets = sortBy(filter(datasets, { isLayerActive: true }), l => l.zIndex);
-    const { length } = activeDatasets;
-    const layers = filter(flatten(
-      activeDatasets.map(({ layer, opacity, visibility, zIndex }) => layer.map((l) => {
-        const layerIndex = calcZIndex(length, zIndex);
-        // NOTE: Forcing isSelected TRUE to don't render map when info panel changes.
-        return { ...l, active: l.isActive, zIndex, layerIndex, opacity, visibility, isSelected: true, layers: layer };
-      }))
-    ), { isActive: true });
-
-    const groups = [];
-
-    layers.forEach((l) => {
-      const existingDataset = groups.find((g) => l.dataset === g.dataset);
-      if (!existingDataset) {
-        groups.push({ dataset: l.dataset, layers: [l] });
-      } else {
-        existingDataset.layers.push(l);
-      }
+    const groups = activeDatasets.map((d) => {
+      const layerActive = d.layer.find((ly) => ly.isLayerActive === true ) || d.layer[0];
+      console.log(layerActive)
+      return {
+        dataset: d.id,
+        layers: d.layer.map((l, i) => {
+          const { opacity, visibility, zIndex } = d;
+          return { ...l, opacity, visibility, zIndex, active: (layerActive.id === l.id) };
+        })
+      };
     });
-
     return groups;
   }
 );

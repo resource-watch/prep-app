@@ -227,7 +227,9 @@ class ExploreMap extends PureComponent {
           onChangeLayer={l => setMultiActiveLayer(l)}
         >
           <LegendItemButtonBBox />
-          {(layerActive.provider !== 'nexgddp' && layerActive.provider !== 'loca') && <LegendItemButtonLayers />}
+          {(layerActive.provider !== 'nexgddp' && layerActive.provider !== 'loca') && (
+            <LegendItemButtonLayers />
+          )}
           <LegendItemButtonOpacity />
           <LegendItemButtonVisibility />
           <LegendItemButtonInfo />
