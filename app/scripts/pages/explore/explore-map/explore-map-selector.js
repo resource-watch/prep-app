@@ -43,7 +43,6 @@ export const getLayersGroups = createSelector(
     const activeDatasets = sortBy(filter(datasets, { isLayerActive: true }), l => l.zIndex);
     const groups = activeDatasets.map((d) => {
       const layerActive = d.layer.find((ly) => ly.isLayerActive === true ) || d.layer[0];
-      console.log(layerActive)
       return {
         dataset: d.id,
         layers: d.layer.map((l, i) => {
