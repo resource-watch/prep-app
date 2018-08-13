@@ -4,8 +4,6 @@ import classnames from 'classnames';
 import debounce from 'lodash/debounce';
 import { getConfig } from 'widget-editor';
 import BasemapControl from 'components/basemap-control';
-import LegendNexGDDPToolbar from 'components/legend/legend-nexgddp-toolbar';
-import LegendLOCAToolbar from 'components/legend/legend-loca-toolbar';
 import ShareControl from 'components/share-control';
 import SearchControl from 'components/search-control';
 import { basemapsSpec, labelsSpec, waterSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
@@ -17,6 +15,8 @@ import {
 } from 'wri-api-components';
 import { LayerManager, Layer } from 'layer-manager/dist/react';
 import { PluginLeaflet } from 'layer-manager';
+import LegendNexGDDPToolbar from './legend-nexgddp-toolbar';
+import LegendLOCAToolbar from './legend-loca-toolbar';
 import Popup from './explore-map-popup';
 // import { updateActiveDatasets } from '../explore-datasets-list/explore-datasets-list-reducers';
 
