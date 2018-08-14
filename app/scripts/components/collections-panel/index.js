@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addCollection, toggleFavourite, toggleCollection } from 'components/user/user-actions';
+import { addCollection, toggleFavourite, toggleCollection } from 'modules/user/user-actions';
 import Component from './collections-panel-component';
 import { parseCollections, parseFavourites } from './collections-panel-selectors';
 

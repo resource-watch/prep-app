@@ -6,21 +6,12 @@ import { toastr } from 'react-redux-toastr';
 // services
 import UserService from 'services/user-service';
 
-import Icon from '../ui/Icon';
-import UserOptions from '../user-options/user-options-component';
+import Avatar from 'components/avatar';
+import Icon from 'components/ui/Icon';
+import UserOptions from 'components/user-options/user-options-component';
 
 // styles
 import './user-style.scss';
-
-const Avatar = function ({ user }) {
-  if (user.photo && user.photo !== '') return <div className="user-avatar" style={{ backgroundImage: `url(${user.photo})` }} />;
-
-  return (
-    <div className="user-initials">
-      {user.name[0]}
-    </div>
-  );
-};
 
 class User extends React.PureComponent {
   static handleLogOut(e) {
@@ -54,11 +45,12 @@ class User extends React.PureComponent {
         onMouseLeave={() => handleHover(false)}
       >
         { session && !isEmpty(data) ?
-          <Avatar user={data} />
-          :
-          <div className="user-empty">
-            <Icon name="icon-user" className="-extra-large" />
-          </div>
+          <Avatar user={data} /> :
+          (
+            <div className="user-empty">
+              <Icon name="icon-user" className="-extra-large" />
+            </div>
+          )
         }
         { active &&
           <UserOptions handleLogOut={e => User.handleLogOut(e)} session={session} data={data} />
@@ -74,7 +66,5 @@ User.propTypes = {
   session: PropTypes.bool.isRequired,
   data: PropTypes.object.isRequired
 };
-
-User.defaultProps = { data: {} };
 
 export default User;

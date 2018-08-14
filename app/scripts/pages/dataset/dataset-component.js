@@ -6,14 +6,14 @@ import WidgetEditor from './dataset-widget-editor';
 import ReactMarkdown from 'react-markdown';
 
 import TooltipTether from 'components/Tooltip/TooltipTether';
-import { getData, getDownloadUrl } from './dataset-helpers';
-import PartnersSlider from '../../containers/PartnersSlider';
-import SecondaryNav from '../../components/Navigation/SecondaryNav';
-import SocialNav from '../../components/Navigation/SocialNav';
-import MainNav from '../../components/Navigation/MainNav';
-import Banner from '../../components/Banner';
+import SecondaryNav from 'layout/navigation/SecondaryNav';
+import SocialNav from 'layout/navigation/SocialNav';
+import MainNav from 'layout/navigation/MainNav';
+import Banner from 'components/Banner';
 
 import SectionIntro from 'components/SectionIntro';
+import { getData, getDownloadUrl } from './dataset-helpers';
+import PartnersSlider from '../../containers/PartnersSlider';
 import MetadataInfo from './dataset-metadata-component';
 import SimpleMap from 'containers/SimpleMap/SimpleMap';
 import LoadingSpinner from 'components/Loading/LoadingSpinner';

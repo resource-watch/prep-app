@@ -9,7 +9,10 @@
     background-color: #fafafa;
 
     .mc-field-group {
-      label { display: none; }
+      label {
+        display: none;
+        font-weight: bold;
+      }
 
       input {
         border-bottom: rem(1) solid rgba(59, 79, 99, .3);

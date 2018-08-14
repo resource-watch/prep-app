@@ -45,9 +45,9 @@ export const getLayersGroups = createSelector(
       const layerActive = d.layer.find((ly) => ly.isLayerActive === true ) || d.layer[0];
       return {
         dataset: d.id,
-        layers: d.layer.map((l, i) => {
-          const { opacity, visibility, zIndex } = d;
-          return { ...l, opacity, visibility, zIndex, active: (layerActive.id === l.id) };
+        layers: d.layer.map(l => {
+          const { opacity, visibility, zIndex, isSelected } = d;
+          return { ...l, opacity, visibility, zIndex, isSelected, active: (layerActive.id === l.id) };
         })
       };
     });
