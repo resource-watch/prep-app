@@ -23,11 +23,11 @@ import DashboardsDetail from './containers/Dashboards/DashboardDetail';
 import Insights from './containers/Insights';
 import InsightsDetail from './containers/Insights/InsightDetail';
 import Create from './components/Create';
-import Contact from './components/Contact';
+import Contact from './pages/contact';
 import Embed from './containers/Embed';
 import Root from './components/Root';
 import PartnerDetail from './containers/PartnerDetail';
-import Auth from 'modules/auth';
+import Auth from './modules/auth';
 import NexGDDPEmbedPage from './pages/nexgddp-embed';
 
 function shouldUpdateScroll(prevRouterProps, { location }) {
