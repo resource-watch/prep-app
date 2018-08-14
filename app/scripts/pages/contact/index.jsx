@@ -10,11 +10,7 @@ const Contact = () => (
             Submit your comments and suggestions
           </h2>
           <p>
-            Have questions, feedback, or suggestions? Send us a note at
-            <a href="mailto:info@prepdata.org">
-              info@prepdata.org
-            </a>
-            or fill out the form below.
+            Have questions, feedback, or suggestions? Send us a note at <a href="mailto:info@prepdata.org">info@prepdata.org</a> or fill out the form below.
           </p>
           <Form type="Contact" />
         </div>
