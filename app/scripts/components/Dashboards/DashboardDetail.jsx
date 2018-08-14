@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
 // Components
+import SecondaryNav from 'layout/navigation/SecondaryNav';
+import SocialNav from 'layout/navigation/SocialNav';
+import MainNav from 'layout/navigation/MainNav';
+import Breadcrumbs from 'layout/navigation/Breadcrumbs';
+import Banner from 'components/Banner';
 import PartnersSlider from '../../containers/PartnersSlider';
-import SecondaryNav from '../../components/Navigation/SecondaryNav';
-import SocialNav from '../../components/Navigation/SocialNav';
-import MainNav from '../../components/Navigation/MainNav';
-import Breadcrumbs from '../../components/Navigation/Breadcrumbs';
-import Banner from '../../components/Banner';
 
 import SectionIntro from '../SectionIntro';
 import DashboardDetailIndicators from './DashboardDetailIndicators';

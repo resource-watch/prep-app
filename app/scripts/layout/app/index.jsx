@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 // Components
 import { Link } from 'react-router';
 import PartnersSlider from '../../containers/PartnersSlider';
-import SecondaryNav from '../../components/Navigation/SecondaryNav';
-import SocialNav from '../../components/Navigation/SocialNav';
-import MainNav from '../../components/Navigation/MainNav';
+import SecondaryNav from '../navigation/SecondaryNav';
+import SocialNav from '../navigation/SocialNav';
+import MainNav from '../navigation/MainNav';
 import Banner from '../../components/Banner';
 import SummaryCards from '../../components/SummaryCards';
 import ContactForm from '../../components/ContactForm';
@@ -43,15 +43,18 @@ class App extends React.Component {
   }
 
   getCurrentData() {
-    const pathname = this.props.location.pathname;
+    const { location } = this.props;
+    const { pathname } = location;
     const currentData = App.getData('pathname', pathname);
     return currentData;
   }
 
   render() {
+    const { children } = this.props;
     const currentData = this.getCurrentData();
     const isHomepage = (currentData.name === 'home');
-    const pathname = window.location.pathname;
+    const { location } = window;
+    const { pathname } = location;
     const summaryCardsPages = ['/contact', '/stories', '/dashboards'];
 
     document.title = currentData.title;
@@ -77,27 +80,27 @@ class App extends React.Component {
               size={currentData.bannerSize}
               landing={isHomepage}
             >
-              <h1>{currentData.title}</h1>
+              <h1>
+                {currentData.title}
+              </h1>
             </Banner>
           </div>
         </header>
 
         <div className="l-main">
-          {this.props.children}
+          {children}
         </div>
 
-        {summaryCardsPages.indexOf(pathname) !== -1 &&
-        <SummaryCards
-          extraCard={pathname === '/stories' ? 'dashboards' : 'stories'}
-        />
-        }
+        {summaryCardsPages.indexOf(pathname) !== -1 && (
+          <SummaryCards
+            extraCard={pathname === '/stories' ? 'dashboards' : 'stories'}
+          />
+        )}
 
-        {(pathname === '/' || pathname === '/how-to') &&
-        <ContactForm />
-        }
+        {(pathname === '/' || pathname === '/how-to') && <ContactForm />}
 
         <footer className="l-footer">
-          {pathname !== '/' &&
+          {pathname !== '/' && (
             <div>
               <div className="l-footer-top -inverse">
                 <div className="row">
@@ -114,7 +117,7 @@ class App extends React.Component {
                 </div>
               </div>
             </div>
-          }
+          )}
           <div className="l-footer-down">
             <div className="row">
               <div className="column small-12 medium-12 large-5 align-middle">

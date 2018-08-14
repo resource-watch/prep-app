@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { useScroll } from 'react-router-scroll';
 import { IndexRoute, Router, Route, applyRouterMiddleware } from 'react-router';
 
-import App from './components/App';
-import Home from './components/Home';
+import App from './layout/app';
+import Home from './pages/home';
 import AboutPage from './pages/about';
 import ExplorePage from './pages/explore';
 import ExplorePageCountry from './pages/explore/country';
@@ -27,7 +27,7 @@ import Contact from './components/Contact';
 import Embed from './containers/Embed';
 import Root from './components/Root';
 import PartnerDetail from './containers/PartnerDetail';
-import Auth from './components/auth/auth';
+import Auth from 'modules/auth';
 import NexGDDPEmbedPage from './pages/nexgddp-embed';
 
 function shouldUpdateScroll(prevRouterProps, { location }) {

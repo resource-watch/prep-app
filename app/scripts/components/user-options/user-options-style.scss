@@ -9,7 +9,7 @@
   margin-top: 11px;
   left: 50%;
   top: 50%;
-  padding-top: 10px;
+  padding-top: 22px;
 
   z-index: 1000;
   transform: translate(-50%, 7px);
@@ -18,13 +18,20 @@
     content: '';
     position: absolute;
     left: 50%;
-    top: 10px;
+    top: 22px;
     pointer-events: none;
     border-top: 8px solid transparent;
     border-bottom: 8px solid $dark-slate-blue;
     border-right: 8px solid transparent;
     border-left: 8px solid transparent;
     transform: translate(-50%, -100%)
+  }
+
+  .l-header.-expanded & {
+    padding-top: 10px;
+    &:before {
+      top: 10px;
+    }
   }
 
   .user-options-list {
