@@ -7,8 +7,8 @@ const getAllCoreDatasets = state => state.explorePage.coreDatasets.items;
 const getLocationFilter = state => state.explorePage.coreDatasets.location;
 
 export const getCoreDatasets = createSelector(
-  [getAllDatasets, getAllCoreDatasets, getLocationFilter],
-  (allDatasets, coreDatasets, location) => {
+  [getAllDatasets, getAllCoreDatasets],
+  (allDatasets, coreDatasets) => {
     const coreDatasetsResult = [];
     const searchDatasetsRecursive = (categories, items) => {
       items.forEach((item) => {
