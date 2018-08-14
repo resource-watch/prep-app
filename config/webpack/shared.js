@@ -43,7 +43,8 @@ const config = {
       lib: path.resolve('app/scripts/lib'),
       actions: path.resolve('app/scripts/actions'),
       selectors: path.resolve('app/scripts/selectors'),
-      services: path.resolve('app/scripts/services')
+      services: path.resolve('app/scripts/services'),
+      layout: path.resolve('app/scripts/layout')
     }
   },
 
@@ -52,6 +53,8 @@ const config = {
       path.join(rootPath, 'node_modules')
     ]
   },
+
+  externals: { leaflet: 'L' },
 
   plugins: [
     new HtmlWebpackPlugin({

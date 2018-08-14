@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { logEvent } from 'helpers/analytics';
 import Card from '../Cards/Card';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 import Icon from '../ui/Icon';
+import DashboardsFilters from 'components/dashboards-filters';
 
 class DashboardsPage extends React.Component {
   constructor(props) {
@@ -12,16 +14,24 @@ class DashboardsPage extends React.Component {
   }
 
   componentDidMount() {
-    if (!this.props.data.length) {
+    if (!this.props.loaded) {
       this.props.getDashboardList();
     }
   }
 
   getContent() {
-    if (!this.props.data || this.props.data.length === 0) {
+    if (!this.props.loaded) {
       return (
         <div>
           <LoadingSpinner />
+        </div>
+      );
+    }
+
+    if (!this.props.data.length) {
+      return (
+        <div className="columns small-12 medium-12 no-results">
+          No results
         </div>
       );
     }
@@ -75,7 +85,7 @@ class DashboardsPage extends React.Component {
     return (
       <div className="l-dashboards">
         <div className="sliced" />
-        <article className="c-article -no-border">
+        <article className="c-article">
           <div className="row align-center">
             <div className="column small-12 medium-8">
               <div className="c-toolbar-actions">
@@ -95,6 +105,8 @@ class DashboardsPage extends React.Component {
           </div>
         </article>
 
+        <DashboardsFilters />
+
         {content}
 
       </div>
@@ -106,15 +118,19 @@ DashboardsPage.propTypes = {
   /**
    * Define the route path (from the router)
    */
-  currentPage: React.PropTypes.string,
+  currentPage: PropTypes.string,
   /**
    * Define function to get the dashboard list
    */
-  getDashboardList: React.PropTypes.func.isRequired,
+  getDashboardList: PropTypes.func.isRequired,
   /**
    * Define dashboards list data
    */
-  data: React.PropTypes.array
+  data: PropTypes.array,
+  /**
+   * Whether the list of dashboards has loaded
+   */
+  loaded: PropTypes.bool.isRequired
 };
 
 export default DashboardsPage;

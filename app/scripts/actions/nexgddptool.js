@@ -319,7 +319,7 @@ export function setTempResolutionSelection(selection, changeUrl = true) {
 
     dispatch({
       type: NEXGDDP_SET_RANGE2_SELECTION,
-      payload: undefined
+      payload: null
     });
 
     if (changeUrl) dispatch(updateUrl());
@@ -349,7 +349,7 @@ export function setRange1Selection(selection, changeUrl = true) {
     if (range2Selection && selection.value === range2Selection.value) {
       dispatch({
         type: NEXGDDP_SET_RANGE2_SELECTION,
-        payload: undefined
+        payload: null
       });
     }
 

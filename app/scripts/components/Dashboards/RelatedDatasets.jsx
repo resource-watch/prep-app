@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
 class RelatedDatasets extends React.Component {
@@ -61,10 +62,10 @@ class RelatedDatasets extends React.Component {
 }
 
 RelatedDatasets.propTypes = {
-  slugs: React.PropTypes.array.isRequired,
-  data: React.PropTypes.object,
-  metadata: React.PropTypes.object,
-  getDatasetByIdOrSlug: React.PropTypes.func.isRequired
+  slugs: PropTypes.array.isRequired,
+  data: PropTypes.object,
+  metadata: PropTypes.object,
+  getDatasetByIdOrSlug: PropTypes.func.isRequired
 };
 
 export default RelatedDatasets;

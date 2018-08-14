@@ -4,10 +4,9 @@ import PropTypes from 'prop-types';
 import LoadingSpinner from 'components/Loading/LoadingSpinner';
 import CollapsibleItem from 'components/ui/CollapsibleItem';
 import DatasetsList from '../explore-datasets-list/explore-datasets-list-component';
-import coreDatasets from './core-datasets-list-data.json';
 
 const CoreDatasetsList = (props) => {
-  const { datasets, toggleDataset, toggleInfo, error, isFetching } = props;
+  const { datasets, coreDatasets, toggleDataset, toggleInfo, error, isFetching, embed } = props;
 
   if (isFetching) return (<LoadingSpinner />);
 
@@ -19,6 +18,8 @@ const CoreDatasetsList = (props) => {
     );
   }
 
+  if (!coreDatasets || coreDatasets.length === 0) return null;
+
   const subGroups = (subgroup) => {
     const list = datasets.filter(d => subgroup.datasets.includes(d.id));
     const isActive = !find(list, { isLayerActive: true });
@@ -28,6 +29,7 @@ const CoreDatasetsList = (props) => {
         toggleDataset={toggleDataset}
         toggleInfo={toggleInfo}
         datasets={list}
+        embed={embed}
       />
     );
 
@@ -62,8 +64,12 @@ const CoreDatasetsList = (props) => {
 
   const content = coreDatasets.map(g => (
     <article className="dataset-group" key={g.id}>
-      <h1 className="group-title">{g.title}</h1>
-      <h2 className="group-description">{g.description}</h2>
+      <h1 className="group-title">
+        {g.title}
+      </h1>
+      <h2 className="group-description">
+        {g.description}
+      </h2>
       <div className="subgroups-list">
         {subGroupsTree(g)}
       </div>
@@ -79,15 +85,19 @@ const CoreDatasetsList = (props) => {
 
 CoreDatasetsList.propTypes = {
   datasets: PropTypes.array,
+  coreDatasets: PropTypes.array,
   error: PropTypes.object,
   isFetching: PropTypes.bool,
+  embed: PropTypes.bool,
   toggleDataset: PropTypes.func,
   toggleInfo: PropTypes.func
 };
 
 CoreDatasetsList.defaultProps = {
   datasets: [],
+  coreDatasets: [],
   error: null,
+  embed: false,
   isFetching: () => {},
   toggleDataset: () => {},
   toggleInfo: () => {}

@@ -1,15 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import useScroll from 'react-router-scroll';
+import { useScroll } from 'react-router-scroll';
 import { IndexRoute, Router, Route, applyRouterMiddleware } from 'react-router';
 
-import App from './components/App';
-import Home from './components/Home';
+import App from './layout/app';
+import Home from './pages/home';
 import AboutPage from './pages/about';
 import ExplorePage from './pages/explore';
+import ExplorePageCountry from './pages/explore/country';
+import ExplorePageEmbed from './pages/explore/embed';
+import ExploreExportPage from './pages/explore/export';
 import PartnersPage from './pages/partners';
 import ResourcesPage from './pages/resources';
-import DatasetDetail from './containers/Dataset';
+import DatasetDetail from './pages/dataset';
 import FAQ from './pages/FAQ';
 import TermsOfService from './pages/terms-of-service';
 import PrivacyPolicy from './pages/privacy-policy';
@@ -19,13 +23,11 @@ import DashboardsDetail from './containers/Dashboards/DashboardDetail';
 import Insights from './containers/Insights';
 import InsightsDetail from './containers/Insights/InsightDetail';
 import Create from './components/Create';
-import Contact from './components/Contact';
+import Contact from './pages/contact';
 import Embed from './containers/Embed';
 import Root from './components/Root';
 import PartnerDetail from './containers/PartnerDetail';
-import Auth from './components/auth/auth';
-import ExploreEmbedPage from './pages/explore-embed';
-import ExploreExportPage from './pages/explore-export';
+import Auth from './modules/auth';
 import NexGDDPEmbedPage from './pages/nexgddp-embed';
 
 function shouldUpdateScroll(prevRouterProps, { location }) {
@@ -113,9 +115,10 @@ const confirmLogOut = (routes) => {
 };
 
 function Routes(props) {
+  const { history } = props;
   return (
     <Router
-      history={props.history}
+      history={history}
       render={applyRouterMiddleware(useScroll(shouldUpdateScroll))}
     >
       <Route path="" component={Root}>
@@ -138,13 +141,14 @@ function Routes(props) {
 
         <Route path="partners/:id" component={PartnerDetail} />
         <Route path="explore" component={ExplorePage} />
+        <Route path="explore/:iso" component={ExplorePageCountry} />
         <Route path="dashboard/:slug(/:tab)" component={DashboardsDetail} />
         <Route path="stories/:slug" component={InsightsDetail} />
         <Route path="dataset/:slug" component={DatasetDetail} />
 
         {/* Embed */}
         <Route path="export/explore" component={ExploreExportPage} />
-        <Route path="embed/explore" component={ExploreEmbedPage} />
+        <Route path="embed/explore" component={ExplorePageEmbed} />
         <Route path="embed/nexgddp/:slug" component={NexGDDPEmbedPage} />
         <Route path="embed/:slug" component={Embed} />
       </Route>
@@ -152,7 +156,7 @@ function Routes(props) {
   );
 }
 
-Routes.propTypes = { history: React.PropTypes.object.isRequired };
+Routes.propTypes = { history: PropTypes.object.isRequired };
 
 const mapStateToProps = () => ({});
 const mapDispatchToProps = () => ({});

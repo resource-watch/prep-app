@@ -1,5 +1,3 @@
-import L from 'leaflet';
-import 'esri-leaflet';
 import Promise from 'bluebird';
 import leafletLayer from './leaflet-layer';
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
 const exploreBg = '/images/bg/bg-explore.jpg';
@@ -51,7 +52,7 @@ SummaryCards.propTypes = {
   /**
    * Define the extra card apart from the explore one
    */
-  extraCard: React.PropTypes.string.isRequired
+  extraCard: PropTypes.string.isRequired
 };
 
 export default SummaryCards;

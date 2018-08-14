@@ -2,7 +2,7 @@ import qs from 'query-string';
 import { createAction, createThunkAction } from 'redux-tools';
 import { replace } from 'react-router-redux';
 import { setDatasetsTagFilter } from 'actions/datasets';
-import { wriAPISerializer } from 'helpers/wri-api-serializer';
+import { wriAPISerializer } from 'wri-json-api-serializer';
 
 // services
 import DatasetFilterService from 'services/dataset-filter-service';
@@ -15,7 +15,7 @@ export const setSidebar = createAction('explore/setSidebar');
 
 // Update URL
 export const updateURLParams = createThunkAction('updateURLParams', () => (dispatch, getState) => {
-  const { explorePage } = getState();
+  const { explorePage, routing } = getState();
   const { tab, datasets, coreDatasets, datasetFilters, map } = explorePage;
   const { location } = coreDatasets;
   const { filters } = datasetFilters;
@@ -37,7 +37,7 @@ export const updateURLParams = createThunkAction('updateURLParams', () => (dispa
     activeDatasets: activeDatasetsResult
   };
 
-  dispatch(replace({ pathname: '/explore', query }));
+  dispatch(replace({ pathname: routing.locationBeforeTransitions.pathname, query }));
 });
 
 export const setTab = createThunkAction('setTab', () => (dispatch) => {
@@ -47,6 +47,24 @@ export const setTab = createThunkAction('setTab', () => (dispatch) => {
 // Location filter
 export const setLocation = createThunkAction('setLocation', () => (dispatch) => {
   dispatch(updateURLParams());
+});
+export const receiveLocations = createAction('receiveLocations');
+export const failureLocations = createAction('failureLocations');
+export const fetchLocations = createThunkAction('fetchLocations', () => (dispatch) => {
+  const url = `${config.apiUrlRW}/geostore/admin/list`;
+  return fetch(url, {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then((response) => {
+      if (response.ok) return response.json();
+      throw Error(response);
+    })
+    .then((json) => {
+      dispatch(receiveLocations(json.data));
+    })
+    .catch(error => dispatch(failureLocations(error)));
 });
 
 // Datasets list
@@ -124,6 +142,30 @@ export const fetchDatasets = createThunkAction('fetchDatasets', () => (dispatch)
     })
     .catch(error => dispatch(failureDatasets(error)));
 });
+
+export const receiveCoreDatasets = createAction('receiveCoreDatasets');
+export const failureCoreDatasets = createAction('failureCoreDatasets');
+export const fetchCoreDatasets = createThunkAction('fetchCoreDatasets', () => (dispatch) => {
+  const params = {
+    published: true,
+    env: config.datasetEnv || 'production'
+  };
+  const url = `${config.apiUrl}/core_datasets?${qs.stringify(params)}`;
+  return fetch(url, {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then((response) => {
+      if (response.ok) return response.json();
+      throw Error(response);
+    })
+    .then((json) => {
+      dispatch(receiveCoreDatasets(json));
+    })
+    .catch(error => dispatch(failureCoreDatasets(error)));
+});
+
 export const toggleInfo = createAction('toggleInfo');
 export const toggleDataset = createThunkAction('toggleDataset', () => (dispatch) => {
   dispatch(updateActiveDatasets());
@@ -169,11 +211,12 @@ export const initialURLParams = createThunkAction('initialURLParams', () => (dis
     periods
   } = routing.locationBeforeTransitions.query;
   const query = routing.locationBeforeTransitions.query.filterQuery;
+  const isEmbed = routing.locationBeforeTransitions.pathname.search('embed') > 0;
 
   if (zoom && lat && lng) dispatch(setMapParams({ zoom: parseInt(zoom, 10), lat: parseFloat(lat), lng: parseFloat(lng) }));
   if (basemap) dispatch(setBasemap(basemap));
-  if (labels) dispatch(setLabels(labels));
-  if (boundaries) dispatch(setBoundaries(boundaries === 'true'));
+  if (labels) dispatch(setLabels(isEmbed ? 'dark' : labels));
+  if (boundaries) dispatch(setBoundaries(isEmbed && boundaries === 'true'));
   if (water) dispatch(setWater(water));
   if (location) dispatch(setLocation(location));
   if (query) dispatch(filterQuery(query));
@@ -253,3 +296,5 @@ export const getDatasetsByGraph = createThunkAction('explore-page/getDatasetsByG
 
 export const setMultiActiveLayer = createAction('explore-dataset-list/setMultiActiveLayer');
 export const setBBox = createAction('explore-dataset-list/setBBox');
+
+export const setInteractions = createAction('explore-page/setInteractions');

@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 
 import { logEvent } from 'helpers/analytics';
 
-import MainNav from 'components/Navigation/MainNav';
+import MainNav from 'layout/navigation/MainNav';
 import Tabs from 'components/ui/Tabs';
 import Search from 'components/ui/Search';
 import Icon from 'components/ui/Icon';
@@ -36,7 +36,9 @@ class ExplorePage extends PureComponent {
 
   componentDidMount() {
     this.props.updateURLParams();
+    this.props.fetchLocations();
     this.props.fetchDatasets();
+    this.props.fetchCoreDatasets();
 
     this.props.setSidebar({
       width: 430,
@@ -238,6 +240,7 @@ class ExplorePage extends PureComponent {
 ExplorePage.defaultProps = {
   currentTab: 'core_datasets',
   fetchDatasets: () => {},
+  fetchCoreDatasets: () => {},
   getDatasetsByGraph: () => {}
 };
 
@@ -249,6 +252,7 @@ ExplorePage.propTypes = {
   setTab: PropTypes.func,
   setSidebar: PropTypes.func,
   fetchDatasets: PropTypes.func,
+  fetchCoreDatasets: PropTypes.func,
   filterQuery: PropTypes.func,
   toggleInfo: PropTypes.func,
   initialURLParams: PropTypes.func,

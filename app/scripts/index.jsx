@@ -1,5 +1,4 @@
 /* eslint-disable import/first */
-
 import React from 'react';
 import { render } from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
@@ -8,8 +7,6 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux';
-import * as reducers from './reducers';
-import Routes from './routes';
 import { reducers as widgetEditorReducers, setConfig } from 'widget-editor';
 import 'widget-editor/dist/styles.min.css';
 
@@ -18,19 +15,19 @@ import { handleModule } from 'redux-tools';
 import { initGA } from 'helpers/analytics';
 
 // Modules
-// import * as ExploreDatasetFilterModule from 'components/explore-dataset-filters/explore-dataset-filters';
-import * as AuthModule from 'components/auth/auth';
-import * as UserModule from 'components/user/user';
+import * as AuthModule from 'modules/auth';
+import * as UserModule from 'modules/user';
 import * as PartnersModule from 'modules/partners';
 import * as ShareModalModule from 'components/share-modal';
-// import * as DatasetLocationModule from 'components/dataset-location-filter/dataset-location-filter';
+
+// Reducers and routes
+import * as reducers from './reducers';
+import Routes from './routes';
 
 // Pages
 import * as ExploreModule from './pages/explore';
 import * as ResourcesModule from './pages/resources';
-import * as ExploreEmbedModule from './pages/explore-embed';
-import * as ExploreExportModule from './pages/explore-export';
-
+import * as DatasetModule from './pages/dataset';
 
 import '../styles/lib/custom-foundation.css';
 import '../styles/index.scss';
@@ -65,9 +62,8 @@ const componentReducers = {
 
 const pagesReducers = {
   explorePage: handleModule(ExploreModule),
-  exploreEmbedPage: handleModule(ExploreEmbedModule),
-  exploreExportPage: handleModule(ExploreExportModule),
-  resourcePage: handleModule(ResourcesModule)
+  resourcePage: handleModule(ResourcesModule),
+  datasetPage: handleModule(DatasetModule)
 };
 
 const reducer = combineReducers({

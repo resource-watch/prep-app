@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router';
-import MainNav from '../../components/Navigation/MainNav';
-import SecondaryNav from '../../components/Navigation/SecondaryNav';
-import SocialNav from '../../components/Navigation/SocialNav';
-import PartnersSlider from '../../containers/PartnersSlider';
-import SummaryCards from '../../components/SummaryCards';
-import Banner from '../../components/Banner';
-import Breadcrumbs from '../../components/Navigation/Breadcrumbs';
+import MainNav from 'layout/navigation/MainNav';
+import SecondaryNav from 'layout/navigation/SecondaryNav';
+import SocialNav from 'layout/navigation/SocialNav';
+import Breadcrumbs from 'layout/navigation/Breadcrumbs';
+import PartnersSlider from 'containers/PartnersSlider';
+import SummaryCards from 'components/SummaryCards';
+import Banner from 'components/Banner';
 
 const logoImage = '/images/prep-logo.png';
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function LoadingSpinner(props) {
   const classNames = ['c-loading-spinner'];
@@ -23,9 +24,9 @@ function LoadingSpinner(props) {
 
 LoadingSpinner.propTypes = {
   // Set the loading background transparent
-  transparent: React.PropTypes.bool,
+  transparent: PropTypes.bool,
   // Set the loading spinner inside a box
-  inner: React.PropTypes.bool
+  inner: PropTypes.bool
 };
 
 export default LoadingSpinner;

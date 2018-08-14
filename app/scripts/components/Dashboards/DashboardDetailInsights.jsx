@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import Card from '../Cards/Card';
 
@@ -48,7 +49,7 @@ DashboardDetailInsights.propTypes = {
   /**
    * Define dashboard indicators data
    */
-  data: React.PropTypes.array.isRequired
+  data: PropTypes.array.isRequired
 };
 
 export default DashboardDetailInsights;

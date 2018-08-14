@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 
 const settings = {
@@ -48,9 +49,9 @@ class TwitterFeed extends React.Component {
 }
 
 TwitterFeed.propTypes = {
-  sliced: React.PropTypes.bool,
-  data: React.PropTypes.array,
-  getTwitterFeed: React.PropTypes.func.isRequired
+  sliced: PropTypes.bool,
+  data: PropTypes.array,
+  getTwitterFeed: PropTypes.func.isRequired
 };
 
 export default TwitterFeed;

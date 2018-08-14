@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Select from 'react-select';
-import 'react-select/dist/react-select.css';
 import './style.scss';
 
 // Redux
@@ -10,7 +9,6 @@ import { setRange1Selection, setRange2Selection } from 'actions/nexgddptool';
 
 class DateRangeSelect extends React.PureComponent {
   render() {
-    // eslint-disable-next-line no-shadow
     const { range1, range2, tempResolution, setRange1Selection, setRange2Selection } = this.props;
 
     let range1Options = [];
@@ -25,7 +23,7 @@ class DateRangeSelect extends React.PureComponent {
 
     range2Options = range2Options.map(o => ({
       ...o,
-      disabled: range1.selection && o.value === range1.selection.value
+      isDisabled: range1.selection && o.value === range1.selection.value
     }));
 
     return (
@@ -36,13 +34,13 @@ class DateRangeSelect extends React.PureComponent {
           value={range1.selection}
           onChange={setRange1Selection}
           options={range1Options}
-          clearable={false}
         />
         <Select
           name="enddate"
           value={range2.selection}
           onChange={setRange2Selection}
           options={range2Options}
+          isClearable
         />
       </div>
     );

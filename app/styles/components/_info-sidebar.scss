@@ -20,6 +20,11 @@
     height: 100%;
   }
 
+  &.-embed-with-sidebar {
+    top: 0;
+    height: 100vh;
+  }
+
   @media #{$mq-medium} {
     width: $sidebar-width;
     background-color: $base-bg-color;

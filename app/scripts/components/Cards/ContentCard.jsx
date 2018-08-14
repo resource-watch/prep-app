@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import { Link } from 'react-router';
 
@@ -102,45 +103,45 @@ ContentCard.propTypes = {
    *    subtitle: [String, optional]
    *  }
    */
-  header: React.PropTypes.object.isRequired,
+  header: PropTypes.object.isRequired,
   /**
    * Define the text below the card
    */
-  attribution: React.PropTypes.string,
+  attribution: PropTypes.string,
   /**
    * Define it the card size
    * accepted: short or large
    */
-  size: React.PropTypes.string,
+  size: PropTypes.string,
   /**
    * Define it the card has background
    */
-  background: React.PropTypes.bool,
+  background: PropTypes.bool,
   /**
    * Define it the card has border
    */
-  noBorder: React.PropTypes.bool,
+  noBorder: PropTypes.bool,
   /**
    * Define it the card has no padding
    */
-  inner: React.PropTypes.bool,
+  inner: PropTypes.bool,
   /**
    * Define it the attribution is outside the card
    */
-  floatAttribution: React.PropTypes.bool,
+  floatAttribution: PropTypes.bool,
   /**
    * Define tooltip content data
    */
-  dataTooltip: React.PropTypes.any,
+  dataTooltip: PropTypes.any,
   /**
    * Define the content of the card
    * Required
    */
-  children: React.PropTypes.object,
+  children: PropTypes.object,
   /**
    * Set share modal state
    */
-  setShareModal: React.PropTypes.func
+  setShareModal: PropTypes.func
 };
 
 export default ContentCard;

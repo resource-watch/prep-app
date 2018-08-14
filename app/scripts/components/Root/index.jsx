@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Modal, Tooltip, Icons } from 'widget-editor';
 import WelcomeModal from '../Modal/WelcomeModal';
 import ShareModalComponent from '../share-modal';
@@ -62,8 +63,8 @@ class Root extends React.Component {
 }
 
 Root.propTypes = {
-  location: React.PropTypes.object,
-  children: React.PropTypes.any
+  location: PropTypes.object,
+  children: PropTypes.any
 };
 
 export default Root;

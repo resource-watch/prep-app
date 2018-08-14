@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ContentCard from './ContentCard';
 import IFrame from '../IFrame';
 
@@ -41,23 +42,23 @@ EmbedCard.propTypes = {
   /**
    * Define it the card has border
    */
-  noBorder: React.PropTypes.bool,
+  noBorder: PropTypes.bool,
   /**
    * Define widget data details
    */
-  data: React.PropTypes.any.isRequired,
+  data: PropTypes.any.isRequired,
   /**
    * Define url to embed
    */
-  url: React.PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
   /**
    * Define it the card has link
    */
-  link: React.PropTypes.string,
+  link: PropTypes.string,
   /**
    * Set share modal state
    */
-  setShareModal: React.PropTypes.func
+  setShareModal: PropTypes.func
 };
 
 export default EmbedCard;

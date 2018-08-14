@@ -6,7 +6,7 @@ const sharedConfig = require('./shared.js');
 
 module.exports = merge(sharedConfig, {
 
-  devtool: 'cheap-module-source-map',
+  devtool: 'inline-source-map',
 
   stats: { errorDetails: true },
 

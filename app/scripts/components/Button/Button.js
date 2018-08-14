@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function Button(props) {
   const classes = ['c-button'];
@@ -31,7 +32,7 @@ Button.propTypes = {
    *  - false: use a dark blue color
    * Default: false
    */
-  themeColor: React.PropTypes.bool,
+  themeColor: PropTypes.bool,
   /**
    * Define the color of the button's content
    * Accepted values:
@@ -39,7 +40,7 @@ Button.propTypes = {
    * 	- false: the button uses the color previously defined
    * Default: false
    */
-  inverse: React.PropTypes.bool,
+  inverse: PropTypes.bool,
   /**
    * Define the color of the button's content
    * Accepted values:
@@ -47,7 +48,7 @@ Button.propTypes = {
    * 	- false: the button uses the color previously defined
    * Default: false
    */
-  alternative: React.PropTypes.bool,
+  alternative: PropTypes.bool,
   /**
    * Define the color of the border of the button
    * Accepted values:
@@ -56,15 +57,15 @@ Button.propTypes = {
    * 	- "alternative": button secondary yellow
    * Default: no border (i.e. prop not defined)
    */
-  border: React.PropTypes.any,
+  border: PropTypes.any,
   /**
    * TODO: write doc for that
    */
-  action: React.PropTypes.any,
+  action: PropTypes.any,
   /**
    * Set styles for circle icon button
    */
-  icon: React.PropTypes.bool,
+  icon: PropTypes.bool,
   /**
    * Define the filling of the button
    * Accepted values:
@@ -73,16 +74,16 @@ Button.propTypes = {
    * 	- false: the button has a transparent background
    * Default: false
    */
-  fill: React.PropTypes.bool,
+  fill: PropTypes.bool,
   /**
    * Define the text content of the button
    * Required
    */
-  children: React.PropTypes.any.isRequired,
+  children: PropTypes.any.isRequired,
   /**
    * Define click handler function
    */
-  click: React.PropTypes.func
+  click: PropTypes.func
 };
 
 export default Button;

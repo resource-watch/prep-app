@@ -1,14 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
-
 // Components
+import SecondaryNav from 'layout/navigation/SecondaryNav';
+import SocialNav from 'layout/navigation/SocialNav';
+import MainNav from 'layout/navigation/MainNav';
+import Breadcrumbs from 'layout/navigation/Breadcrumbs';
+import Banner from 'components/Banner';
 import PartnersSlider from '../../containers/PartnersSlider';
-import SecondaryNav from '../../components/Navigation/SecondaryNav';
-import SocialNav from '../../components/Navigation/SocialNav';
-import MainNav from '../../components/Navigation/MainNav';
-import Breadcrumbs from '../../components/Navigation/Breadcrumbs';
-import Banner from '../../components/Banner';
 
 import SectionIntro from '../SectionIntro';
 import DashboardDetailIndicators from './DashboardDetailIndicators';
@@ -213,28 +213,28 @@ class DashboardDetail extends React.Component {
 }
 
 DashboardDetail.propTypes = {
-  location: React.PropTypes.object,
+  location: PropTypes.object,
   /**
    * Define the route path (from the router)
    */
-  currentPage: React.PropTypes.string,
+  currentPage: PropTypes.string,
   /**
    * Define the slug of the dashboard
    */
-  dashboardSlug: React.PropTypes.string.isRequired,
+  dashboardSlug: PropTypes.string.isRequired,
   /**
    * Define the selected tab of the dashboard
    * Default: "Data"
    */
-  dashboardTab: React.PropTypes.string.isRequired,
+  dashboardTab: PropTypes.string.isRequired,
   /**
    * Define detail dashboards data
    */
-  data: React.PropTypes.object,
+  data: PropTypes.object,
   /**
    * Define the function to get the dashboard detail data
    */
-  getDashboardBySlug: React.PropTypes.func.isRequired
+  getDashboardBySlug: PropTypes.func.isRequired
 };
 
 export default DashboardDetail;

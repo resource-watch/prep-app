@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ContentCard from './ContentCard';
 import SimpleMap from '../../containers/SimpleMap/SimpleMap';
 
@@ -40,23 +41,23 @@ MapCard.propTypes = {
   /**
   * Define it the card has border
   */
-  noBorder: React.PropTypes.bool,
+  noBorder: PropTypes.bool,
   /**
    * Define the card data
    */
-  data: React.PropTypes.any.isRequired,
+  data: PropTypes.any.isRequired,
   /**
    * Define layer id to add in map
    */
-  layerId: React.PropTypes.string.isRequired,
+  layerId: PropTypes.string.isRequired,
   /**
    * Define it the card has link
    */
-  link: React.PropTypes.string,
+  link: PropTypes.string,
   /**
    * Set share modal state
    */
-  setShareModal: React.PropTypes.func
+  setShareModal: PropTypes.func
 };
 
 export default MapCard;
