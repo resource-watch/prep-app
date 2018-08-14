@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { SaveWidgetModal, modalActions } from 'widget-editor';
+import { SaveWidgetModal, modalActions, getConfig } from 'widget-editor';
 import * as shareModalActions from 'components/share-modal/share-modal-actions';
 
 
@@ -57,7 +57,7 @@ class ShareNexgddpTooltip extends React.Component {
     return (
       <div className="c-share-nexgddp-chart-tooltip">
         <ul>
-          <li><button type="button" onClick={this.onClickSave}>Save widget</button></li>
+          { getConfig().userToken && <li><button type="button" onClick={this.onClickSave}>Save widget</button></li> }
           <li><button type="button" onClick={this.onClickShare}>Embed</button></li>
         </ul>
       </div>
