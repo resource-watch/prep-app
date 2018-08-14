@@ -8,6 +8,7 @@ export const getCoreDatasetLocations = createSelector(
   [getAllCoreDatasets, getAllLocations],
   (coreDatasets, locations) => {
     const countriesISO = compact(coreDatasets.map(c => c.country_iso));
+    const uniqCountries = Array.from(new Set(countriesISO));
     const result = [];
 
     // Adding global ISO
@@ -18,7 +19,7 @@ export const getCoreDatasetLocations = createSelector(
     });
 
     locations
-      .filter(l => countriesISO.includes(l.iso))
+      .filter(l => l.name && uniqCountries.includes(l.iso))
       .forEach(l => result.push(l));
 
     return result.map(r => ({
