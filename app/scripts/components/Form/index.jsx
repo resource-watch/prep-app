@@ -26,8 +26,9 @@ class Form extends React.Component {
   }
 
   checkFormFill() {
+    const { simple } = this.props;
     const fields = ['mce-FNAME', 'mce-EMAIL', 'mce-MMERGE4'];
-    if (!this.props.simple) {
+    if (!simple) {
       fields.push('mce-LNAME');
     }
 
@@ -42,6 +43,7 @@ class Form extends React.Component {
   }
 
   renderForm() {
+    const { type } = this.props;
     return (
       <div id="mc_embed_signup" className="c-form-container">
         <form
@@ -54,16 +56,16 @@ class Form extends React.Component {
         >
           <div id="mc_embed_signup_scroll">
             <div className="mc-field-group -hidden">
-              <label htmlFor="mce-MMERGE3">Who would you like to contact? *<span
-                className="asterisk"
-              />
+              <label htmlFor="mce-MMERGE3">
+                Who would you like to contact? *
+                <span className="asterisk" />
               </label>
               <select
                 name="MMERGE3"
                 className="required"
                 id="mce-MMERGE3"
                 required
-                defaultValue={this.props.type}
+                defaultValue={type}
               >
                 <option value="Contact">Contact</option>
                 <option value="Request data">Request data</option>

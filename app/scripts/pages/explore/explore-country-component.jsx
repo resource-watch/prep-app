@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 
 import { logEvent } from 'helpers/analytics';
 
-import MainNav from 'components/Navigation/MainNav';
+import MainNav from 'layout/navigation/MainNav';
 import Tabs from 'components/ui/Tabs';
 import Search from 'components/ui/Search';
 import Icon from 'components/ui/Icon';

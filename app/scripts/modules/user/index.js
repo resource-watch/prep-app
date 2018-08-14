@@ -24,20 +24,24 @@ const mapStateToProps = state => ({
 
 class UserContainer extends Component {
   componentDidMount() {
-    if (!isEmpty(this.props.data)) return;
+    const { data } = this.props;
+    if (!isEmpty(data)) return;
     this.handleUserData();
   }
 
   handleUserData() {
-    const token = localStorage.token;
-    if (!(this.props.session || token)) return;
+    const {
+      session, setUserToken, updateUserData,
+      getUserFavourites, getUserCollections
+    } = this.props;
+    const { token } = localStorage;
+    if (!(session || token)) return;
 
     const userDataPromise = UserService.getSessionUserData(token);
-    this.props.setUserToken(`Bearer ${token}`);
+    setUserToken(`Bearer ${token}`);
 
     userDataPromise
       .then((data) => {
-        const { updateUserData, getUserFavourites, getUserCollections } = this.props;
         updateUserData(data);
         getUserFavourites();
         getUserCollections();
@@ -45,22 +49,23 @@ class UserContainer extends Component {
       .catch(({ errors }) => {
         const { status, details } = errors;
         console.error(status, details);
-
         this.handleLogOut();
       });
   }
 
   handleLogOut(e) {
+    const { updateUserData, logOutSuccess } = this.props;
     if (e) e.preventDefault();
     localStorage.removeItem('token');
-    this.props.updateUserData({});
-    this.props.logOutSuccess(false);
+    updateUserData({});
+    logOutSuccess(false);
     setConfig({ userToken: null });
     browserHistory.push('/');
   }
 
   handleHover(state) {
-    this.props.toggleActive(state);
+    const { toggleActive } = this.props;
+    toggleActive(state);
   }
 
   render() {
