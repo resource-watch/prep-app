@@ -215,9 +215,25 @@ class ExploreMap extends PureComponent {
     const Toolbar = (props) => {
       const { lg } = props; // eslint-disable-line
       const layerActive = lg.layers.find(l => (l.active || l.isActive)) || lg.layers[0];
+      const legendStyles = {
+        defaultStyle: {
+          fill: '#263E57'
+        },
+        enabledStyle: {
+          fill: '#ffc94e'
+        },
+        disabledStyle: {
+          fill: '#CACCD0'
+        },
+        focusStyle: {
+          fill: '#ffc94e'
+        }
+      };
+
       return (
         <LegendItemToolbar
           {...props}
+          {...legendStyles}
           onChangeVisibility={l => toggleVisibility({ id: l.dataset })}
           onChangeInfo={l => toggleInfo({ id: l.dataset })}
           onChangeOpacity={(l, opacity) => updateOpacity({ id: l.dataset, opacity })}
@@ -230,19 +246,13 @@ class ExploreMap extends PureComponent {
             });
           }}
           onChangeLayer={l => setMultiActiveLayer(l)}
-          enabledStyle={{
-            fill: '#ffc94e'
-          }}
-          focusStyle={{
-            fill: '#ffc94e'
-          }}
         >
           <LegendItemButtonBBox />
           {(layerActive.provider !== 'nexgddp' && layerActive.provider !== 'loca') && (
             <LegendItemButtonLayers />
           )}
           <LegendItemButtonOpacity />
-          <LegendItemButtonVisibility />
+          <LegendItemButtonVisibility visibility={layerActive.visibility} />
           <LegendItemButtonInfo />
           {!(embed || embedExport) && <LegendItemButtonRemove />}
         </LegendItemToolbar>
