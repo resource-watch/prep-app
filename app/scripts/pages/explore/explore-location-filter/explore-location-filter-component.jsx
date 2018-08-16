@@ -50,8 +50,6 @@ class DatasetLocationFilter extends PureComponent {
     const onlyCountries = countries.filter(c => c.value !== initialState.location);
     const currentLocation = countries.find(c => c.value === location);
 
-    console.log(onlyCountries)
-
     return (
       <div className="c-dataset-location-filter">
         <ul className="c-dataset-location-filter-tabs">

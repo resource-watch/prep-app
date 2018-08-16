@@ -63,7 +63,7 @@ class ExplorePage extends PureComponent {
             </div>
           )}
 
-          <DatasetInfo />
+          <DatasetInfo embed={embed} />
         </div>
 
         {/* Map */}
