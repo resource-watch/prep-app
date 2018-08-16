@@ -51,7 +51,7 @@ class DashboardsPage extends React.Component {
           <p>
             {item.summary}
           </p>
-          { !item.partner && item.author && item.author.logo && (
+          { !item.partner && item.author && item.author.logo && item.author.logo !== '/logos/original/missing.png' && (
             <a
               href={item.author.url}
               target="_blank"
