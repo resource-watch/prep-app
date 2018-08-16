@@ -51,7 +51,21 @@ class DashboardsPage extends React.Component {
           <p>
             {item.summary}
           </p>
-          {item.partner &&
+          { !item.partner && item.author && item.author.logo && (
+            <a
+              href={item.author.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={config.assetsUrl + item.author.logo}
+                className="logo"
+                alt={item.author.name}
+              />
+            </a>
+          )}
+
+          {item.partner && (
             <a
               href={item.partner.url}
               target="_blank"
@@ -64,10 +78,19 @@ class DashboardsPage extends React.Component {
                 alt={item.partner.name}
               />
             </a>
-          }
-          {item.attribution &&
-            <span className="attribution">{item.attribution}</span>
-          }
+          )}
+
+          {!item.attribution && item.author && item.author.name && (
+            <span className="attribution">
+              {item.author.name}
+            </span>
+          )}
+
+          {item.attribution && (
+            <span className="attribution">
+              {item.attribution}
+            </span>
+          ) }
         </Card>
       </div>
     ));
