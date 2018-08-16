@@ -10,7 +10,6 @@ import AboutPage from './pages/about';
 import ExplorePage from './pages/explore';
 import ExplorePageCountry from './pages/explore/country';
 import ExplorePageEmbed from './pages/explore/embed';
-import ExploreExportPage from './pages/explore/export';
 import PartnersPage from './pages/partners';
 import ResourcesPage from './pages/resources';
 import DatasetDetail from './pages/dataset';
@@ -147,7 +146,7 @@ function Routes(props) {
         <Route path="dataset/:slug" component={DatasetDetail} />
 
         {/* Embed */}
-        <Route path="export/explore" component={ExploreExportPage} />
+        <Route path="export/explore" component={ExplorePageEmbed} />
         <Route path="embed/explore" component={ExplorePageEmbed} />
         <Route path="embed/nexgddp/:slug" component={NexGDDPEmbedPage} />
         <Route path="embed/:slug" component={Embed} />
