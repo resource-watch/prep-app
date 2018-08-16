@@ -13,7 +13,8 @@ const mapStateToProps = state => ({ session: state.auth.session });
 class AuthContainer extends Component {
   componentWillMount() {
     const { location } = this.props;
-    const { token } = location;
+    const { query } = location;
+    const { token } = query;
 
     if (token) {
       this.handleAuthenticationAction();
