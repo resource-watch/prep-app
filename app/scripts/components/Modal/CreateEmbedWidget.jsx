@@ -50,7 +50,7 @@ class CreateEmbedWidget extends React.Component {
       widgetConfig
     };
 
-    WidgetService.saveUserWidget(widget, dataset, getConfig().userToken)
+    WidgetService.saveUserWidget(dataset, getConfig().userToken, widget)
       .then((res) => {
         if (!links.length) return null;
 
