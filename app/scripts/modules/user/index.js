@@ -23,6 +23,13 @@ const mapStateToProps = state => ({
 });
 
 class UserContainer extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleHover = this.handleHover.bind(this);
+    this.handleLogOut = this.handleLogOut.bind(this);
+  }
+
   componentDidMount() {
     const { data } = this.props;
     if (!isEmpty(data)) return;
@@ -71,8 +78,8 @@ class UserContainer extends Component {
   render() {
     return createElement(UserComponent, {
       ...this.props,
-      handleHover: this.handleHover.bind(this),
-      handleLogOut: this.handleLogOut.bind(this)
+      handleHover: this.handleHover,
+      handleLogOut: this.handleLogOut
     });
   }
 }

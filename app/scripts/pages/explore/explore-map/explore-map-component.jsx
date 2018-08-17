@@ -245,7 +245,7 @@ class ExploreMap extends PureComponent {
               setBBox(null);
             });
           }}
-          onChangeLayer={l => setMultiActiveLayer(l)}
+          onChangeLayer={l => setMultiActiveLayer({ id: l.dataset, layerId: l.id })}
         >
           <LegendItemButtonBBox />
           {(layerActive.provider !== 'nexgddp' && layerActive.provider !== 'loca') && (

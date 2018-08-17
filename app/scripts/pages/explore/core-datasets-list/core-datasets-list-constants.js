@@ -4,7 +4,7 @@ export const CATEGORIES = [{
   description: 'How is climate changing?',
   subcategories: [
     { label: 'Temperature', value: 'Temperature' },
-    { label: 'Precipitations', value: 'Precipitations' },
+    { label: 'Precipitation', value: 'Precipitations' },
     { label: 'Extreme events', value: 'Extreme events'},
     { label: 'Coastal risk', value: 'Coastal risk'},
     { label: 'Water risk', value: 'Water risk'}
