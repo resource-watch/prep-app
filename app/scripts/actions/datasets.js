@@ -1,5 +1,5 @@
 import 'whatwg-fetch';
-import { Deserializer } from 'jsonapi-serializer';
+import { wriAPISerializer } from 'wri-json-api-serializer';
 import {
   DATASET_LIST_RECEIVED,
   DATASET_LIST_RESET,
@@ -15,8 +15,6 @@ import {
   TOGGLE_DATASET_ACTIVE
 } from '../constants';
 import { updateURL } from './links';
-
-const deserializer = new Deserializer({ keyForAttribute: 'underscore_case' });
 
 export default function () { }
 
@@ -56,11 +54,10 @@ export function getDatasetLayer(dataset) {
         return response.json();
       })
       .then((data) => {
-        deserializer.deserialize(data, (error, layerData) => {
-          dispatch({
-            type: DATASET_LAYER_RECEIVED,
-            payload: layerData
-          });
+        const layerData = wriAPISerializer(data);
+        dispatch({
+          type: DATASET_LAYER_RECEIVED,
+          payload: layerData
         });
       });
     /**
@@ -148,34 +145,37 @@ export function getDatasets(defaultActiveLayers) {
         throw new Error(response.statusText);
       })
       .then((data) => {
-        deserializer.deserialize(data, (err, datasetData) => {
-          if (err) throw new Error('Error deserializing json api');
-          // Ñapa: We have to conservate layer config
-          const datasets = (datasetData || []).map((d, i) => Object.assign(d, { layer: data.data[i].attributes.layer }));
+        const datasetData = wriAPISerializer(data);
 
-          if (datasets.length) {
-            for (let i = datasets.length - 1; i >= 0; i--) {
-              if (defaultActiveLayers) {
-                const index = defaultActiveLayers.indexOf(datasets[i].id);
-                if (index > -1) {
-                  datasets[i].active = true;
-                  datasets[i].index = index + 1;
-                  datasets[i].opacity = 1;
-                }
+        // Ñapa: We have to conservate layer config
+        const datasets = (datasetData || []).map((d, i) => Object.assign(d, { layer: data.data[i].attributes.layer }));
+
+        if (datasets.length) {
+          for (let i = datasets.length - 1; i >= 0; i--) {
+            if (defaultActiveLayers) {
+              const index = defaultActiveLayers.indexOf(datasets[i].id);
+              if (index > -1) {
+                datasets[i].active = true;
+                datasets[i].index = index + 1;
+                datasets[i].opacity = 1;
               }
             }
           }
-          dispatch({
-            type: DATASET_LIST_RECEIVED,
-            payload: { data: datasets }
-          });
-          dispatch(getActiveDatasetLayers(datasets));
-          dispatch({
-            type: DATASET_SET_FILTER,
-            payload: {}
-          });
-          dispatch(updateURL());
+        }
+
+        dispatch({
+          type: DATASET_LIST_RECEIVED,
+          payload: { data: datasets }
         });
+
+        dispatch(getActiveDatasetLayers(datasets));
+
+        dispatch({
+          type: DATASET_SET_FILTER,
+          payload: {}
+        });
+
+        dispatch(updateURL());
       })
       .catch((err) => {
         dispatch({
@@ -208,24 +208,22 @@ export function getDatasetByIdOrSlug(datasetIdentifier, includesData) {
         throw new Error(response.statusText);
       })
       .then((data) => {
-        deserializer.deserialize(data, (err, datasetData) => {
-          if (err) throw new Error('Error deserializing json api');
-          if (datasetData) {
-            dispatch({
-              type: DATASET_DETAIL_RECEIVED,
-              payload: {
-                data: datasetData,
-                identifier: datasetIdentifier
-              }
-            });
-            if (datasetData.widget && datasetData.widget.length) {
-              dispatch({
-                type: DATASET_WIDGET_RECEIVED,
-                payload: { data: datasetData.widget[0] }
-              });
+        const datasetData = wriAPISerializer(data);
+        if (datasetData) {
+          dispatch({
+            type: DATASET_DETAIL_RECEIVED,
+            payload: {
+              data: datasetData,
+              identifier: datasetIdentifier
             }
+          });
+          if (datasetData.widget && datasetData.widget.length) {
+            dispatch({
+              type: DATASET_WIDGET_RECEIVED,
+              payload: { data: datasetData.widget[0] }
+            });
           }
-        });
+        }
       })
       .catch((err) => {
         dispatch({
