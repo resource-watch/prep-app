@@ -7,14 +7,14 @@ import BasemapControl from 'components/basemap-control';
 import ShareControl from 'components/share-control';
 import SearchControl from 'components/search-control';
 import { basemapsSpec, labelsSpec, waterSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
-import {
-  Map, MapControls, ZoomControl,
-  Legend, LegendListItem, LegendItemToolbar, LegendItemTypes,
-  LegendItemButtonBBox, LegendItemButtonInfo,
-  LegendItemButtonLayers, LegendItemButtonOpacity, LegendItemButtonVisibility, LegendItemButtonRemove
-} from 'wri-api-components';
 import { LayerManager, Layer } from 'layer-manager/dist/react';
 import { PluginLeaflet } from 'layer-manager';
+import { default as Map, MapControls, ZoomControl } from 'wri-api-components/dist/map';
+import {
+  default as Legend, LegendListItem, LegendItemToolbar, LegendItemTypes,
+  LegendItemButtonBBox, LegendItemButtonInfo,
+  LegendItemButtonLayers, LegendItemButtonOpacity, LegendItemButtonVisibility, LegendItemButtonRemove
+} from 'wri-api-components/dist/legend';
 import LegendNexGDDPToolbar from './legend-nexgddp-toolbar';
 import LegendLOCAToolbar from './legend-loca-toolbar';
 import Popup from './explore-map-popup';

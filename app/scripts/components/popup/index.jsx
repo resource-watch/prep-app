@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import { MapPopup } from 'wri-api-components';
+import { MapPopup } from 'wri-api-components/dist/map';
 
 class PopupComponent extends PureComponent {
   static propTypes = {
