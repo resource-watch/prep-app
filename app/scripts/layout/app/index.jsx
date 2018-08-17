@@ -15,11 +15,6 @@ import metadata from '../../metadata.json';
 
 const logoImage = '/images/prep-logo.png';
 
-const theme = {
-  '/resources': '-theme-2',
-  '/stories': '-theme-3'
-};
-
 class App extends React.Component {
   static getData(key, value) {
     let data = null;
@@ -60,7 +55,7 @@ class App extends React.Component {
     document.title = currentData.title;
 
     return (
-      <div className={theme[pathname]}>
+      <div>
         <header className="l-header">
           <div className={`l-header-nav ${currentData.name === 'home' ? '-no-bg' : ''}`}>
             <div className="row align-middle">

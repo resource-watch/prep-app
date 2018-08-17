@@ -72,7 +72,7 @@
         fill: $dark-blue;
 
         & :hover {
-          fill: $fourth-color;
+          fill: $secondary-color;
         }
       }
     }
@@ -89,12 +89,7 @@
 
         > svg {
           fill: $secondary-color;
-          .-theme-2 & {
-            fill: $thirth-color;
-          }
-          .-theme-3 & {
-            fill: $fourth-color;
-          }
+
           &:hover {
             cursor: pointer;
           }
@@ -111,14 +106,9 @@
       cursor: pointer;
       fill: $base-bg-color;
       transition: fill .3s;
+
       &:hover {
         fill: $secondary-color;
-        .-theme-2 & {
-          fill: $thirth-color;
-        }
-        .-theme-3 & {
-          fill: $fourth-color;
-        }
       }
     }
   }

@@ -30,9 +30,6 @@
       animation: dash 1.5s ease-in-out infinite;
       stroke-linecap: round;
       stroke: $secondary-color;
-
-      .-theme-2 & { stroke: $thirth-color; }
-      .-theme-3 & { stroke: $fourth-color; }
     }
   }
 }

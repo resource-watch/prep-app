@@ -33,9 +33,6 @@ $section-intro-height: 50px;
       > span {
         display: block;
         color: $secondary-color;
-
-        .-theme-2 & { color: $thirth-color; }
-        .-theme-3 & { color: $fourth-color; }
       }
     }
   }

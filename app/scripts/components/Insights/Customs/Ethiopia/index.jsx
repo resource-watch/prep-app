@@ -82,7 +82,7 @@ class EthiopiaInsight extends React.Component {
           <div className="c-article-module -no-top">
             <div className="row">
               <div className="column small-12 medium-12 flex align-right align-middle">
-                <button className="c-button -action highlighted -theme-3" onClick={() => this.setShareModal('https://climateserv.servirglobal.net', 'map')}>
+                <button className="c-button -action highlighted" onClick={() => this.setShareModal('https://climateserv.servirglobal.net', 'map')}>
                   <span>Share</span>
                 </button>
                 <div className="c-button -icon flex" onClick={() => this.setShareModal('https://climateserv.servirglobal.net', 'map')}>
@@ -117,8 +117,8 @@ class EthiopiaInsight extends React.Component {
                 <p>The goal of these case studies is to show how climate data provided by NASA SERVIR’s ClimateServ system (<a href="https://climateserv.servirglobal.net">https://climateserv.servirglobal.net</a>) can be used by end-users to understand historical and near-term seasonal forecasts as related to agricultural productivity. </p>
                 <p>Potential end-users include the following</p>
                 <ul>
-                  <li><strong className="highlighted -theme-3">The Ethiopia Ministry of Agriculture and Natural Resources</strong>, which seeks to create an agricultural system that uses advanced technology to prevent poverty in its society</li>
-                  <li><strong className="highlighted -theme-3">The Ethiopia National Meteorology Agency</strong>, which analyzes and reports weather and climate conditions in Ethiopia for the benefit of Ethiopian economic and social development.</li>
+                  <li><strong className="highlighted">The Ethiopia Ministry of Agriculture and Natural Resources</strong>, which seeks to create an agricultural system that uses advanced technology to prevent poverty in its society</li>
+                  <li><strong className="highlighted">The Ethiopia National Meteorology Agency</strong>, which analyzes and reports weather and climate conditions in Ethiopia for the benefit of Ethiopian economic and social development.</li>
                 </ul>
               </div>
             </div>

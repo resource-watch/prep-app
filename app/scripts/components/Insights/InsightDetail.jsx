@@ -170,7 +170,7 @@ class InsightsDetail extends React.Component {
     const content = this.getContent();
 
     return (
-      <div className="-theme-3">
+      <div>
 
         {header}
 

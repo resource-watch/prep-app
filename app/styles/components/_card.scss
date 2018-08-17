@@ -38,9 +38,6 @@
       height: 1px;
 
       background-color: $secondary-color;
-
-      .-theme-2 & { background-color: $thirth-color; }
-      .-theme-3 & { background-color: $fourth-color; }
     }
   }
 
@@ -49,16 +46,10 @@
     margin-bottom: 1rem;
     font-weight: 700;
     color: $link-font-color;
-
-    .-theme-2 & { color: $thirth-color; }
-    .-theme-3 & { color: $fourth-color; }
   }
 
   &.-border {
     border: 2px solid $secondary-color;
-
-    .-theme-2 & { border-color: $thirth-color; }
-    .-theme-3 & { border-color: $fourth-color; }
 
     &.-border-neutral { border-color: $pale-grey; }
   }
