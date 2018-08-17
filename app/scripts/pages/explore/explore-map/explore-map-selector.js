@@ -30,7 +30,7 @@ export const getActiveLayersForMap = createSelector(
       activeDatasets.map(({ layer, opacity, visibility, zIndex }) => layer.map((l) => {
         const layerIndex = calcZIndex(length, zIndex);
         // NOTE: Forcing isSelected TRUE to don't render map when info panel changes.
-        return { ...l, zIndex, layerIndex, opacity, visibility, isSelected: true, layers: layer };
+        return { ...l, zIndex: layerIndex, opacity, visibility, isSelected: true, layers: layer };
       }))
     ), { isActive: true });
     return layers;
