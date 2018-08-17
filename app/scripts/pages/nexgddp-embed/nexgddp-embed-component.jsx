@@ -23,8 +23,8 @@ class NexGDDPEmbedPage extends PureComponent {
   render() {
     const { dataset, embed } = this.props;
 
-    const title = dataset.metadata && dataset.metadata.length && dataset.metadata[0].attributes.name
-      ? dataset.metadata[0].attributes.name
+    const title = dataset.metadata && dataset.metadata.length && dataset.metadata[0].name
+      ? dataset.metadata[0].name
       : dataset.name;
 
     return (
