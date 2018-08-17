@@ -150,14 +150,15 @@ export const updateOpacity = (state, { payload }) => {
 };
 
 export const setMultiActiveLayer = (state, { payload }) => {
-  const { temporalResolution, period, scenario, id, dataset } = payload;
+  const { temporalResolution, period, scenario, id, layerId } = payload;
 
   const items = state.datasets.items.map((d) => {
     const newDataset = {...d};
+
+    // Switch layer for NEXGDDP and LOCA
     if (newDataset.id === id && (newDataset.provider === 'nexgddp' || newDataset.provider === 'loca')) {
       const currentLayer = newDataset.metadata[0].info[d.provider].layers.find(l =>
-        l.temp_resolution === temporalResolution.value &&
-        l.scenario === scenario.value);
+        l.temp_resolution === temporalResolution.value && l.scenario === scenario.value);
 
       if (!currentLayer) {
         console.error('There is no layer with the params selected. Check that metadata has all the possibilities');
@@ -167,26 +168,29 @@ export const setMultiActiveLayer = (state, { payload }) => {
       newDataset.layer = [{
         ...newDataset.layer[0],
         ...currentLayer,
+        id: currentLayer.layerId,
+        period,
         layerConfig: {
           ...newDataset.layer[0].layerConfig,
-          period
+          period,
+          scenario,
+          temporalResolution
         },
-        opacity: newDataset.opacity,
-        visibility: newDataset.visibility,
-        layerIndex: newDataset.layerIndex,
         isActive: true,
         isLayerActive: true,
         active: true,
-        period
+        isSelected: newDataset.isSelected
       }];
     }
 
-    if (newDataset.id === dataset && (newDataset.provider !== 'nexgddp' && newDataset.provider !== 'loca')) {
+    // Switch layer for rest of datasets
+    else if (newDataset.id === id && (newDataset.provider !== 'nexgddp' && newDataset.provider !== 'loca')) {
       newDataset.layer = newDataset.layer.map(l => ({
         ...l,
-        isActive: l.id === id,
-        isLayerActive: l.id === id,
-        active: l.id === id
+        isActive: l.id === layerId,
+        isLayerActive: l.id === layerId,
+        active: l.id === layerId,
+        isSelected: newDataset.isSelected
       }));
     }
 
