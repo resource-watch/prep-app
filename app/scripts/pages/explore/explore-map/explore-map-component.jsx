@@ -192,7 +192,8 @@ class ExploreMap extends PureComponent {
         zoom,
         minZoom,
         center: { lat, lng },
-        zoomControl: false
+        zoomControl: false,
+        scrollWheelZoom: !(embed || embedExport)
       }),
       events: {
         zoomend: () => debounce(() => setMapParams(this.getMapParams()), 50),
@@ -266,13 +267,13 @@ class ExploreMap extends PureComponent {
             this.map = map;
             return (
               <Fragment>
-                <LayerManager map={map} plugin={PluginLeaflet} layersSpec={activeLayersForMap}>
+                <LayerManager map={map} plugin={PluginLeaflet}>
                   {(layerManager) => (
                     activeLayersForMap.map((l, i) => (
                       <Layer
                         key={l.id}
                         {...l}
-                        zIndex={1000 - i}
+                        // zIndex={l.layerIndex}
                         layerManager={layerManager}
                         {...!!l.interactionConfig && l.interactionConfig.output && l.interactionConfig.output.length && {
                           ...(l.provider === 'carto' || l.provider === 'cartodb') && { interactivity: l.interactionConfig.output.map(o => o.column) },
