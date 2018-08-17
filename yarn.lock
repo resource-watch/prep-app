@@ -9740,19 +9740,17 @@ wri-api-components@2.0.17:
     vega-lib "^4.2.0"
     wri-json-api-serializer "^1.0.1"
 
-wri-api-components@^2.0.16:
-  version "2.0.16"
-  resolved "https://registry.yarnpkg.com/wri-api-components/-/wri-api-components-2.0.16.tgz#c7cac6923da1062c7715247e160dea4398347adf"
+wri-api-components@^2.0.21:
+  version "2.0.21"
+  resolved "https://registry.yarnpkg.com/wri-api-components/-/wri-api-components-2.0.21.tgz#715afc1179603fab3bf527f90c7f195042651fc2"
   dependencies:
     layer-manager "^1.0.4"
     prop-types "^15.6.2"
     rc-slider "^8.6.1"
     rc-tooltip "3.7.0"
     react-css-modules "^4.7.1"
-    react-lib "^0.1.3"
     react-sortable-hoc "^0.6.8"
     react-vega "^4.0.2"
-    vega-lib "^4.2.0"
     wri-json-api-serializer "^1.0.1"
 
 wri-json-api-serializer@^1.0.1:
