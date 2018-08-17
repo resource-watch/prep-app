@@ -60,7 +60,7 @@
     "history": "^2.0.0",
     "html-webpack-plugin": "2.29.0",
     "image-webpack-loader": "3.3.0",
-    "layer-manager": "^1.0.16",
+    "layer-manager": "^1.0.18",
     "leaflet": "1.2.0",
     "lodash": "4.17.4",
     "morgan": "1.8.1",

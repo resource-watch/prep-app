@@ -230,12 +230,14 @@ export const initialURLParams = createThunkAction('initialURLParams', () => (dis
     const activeDatasetsResult = typeof activeDatasets === 'string' ? [activeDatasets] : activeDatasets;
     dispatch(setActiveDatasets(activeDatasetsResult.map((s) => {
       const parsedSt = s.split('|');
-      return {
-        id: parsedSt[0],
-        opacity: parseFloat(parsedSt[1]),
-        visibility: parsedSt[2] === 'true',
-        zIndex: parseInt(parsedSt[3], 10)
-      };
+      const params = {};
+      if (parsedSt.length) {
+        if (parsedSt[0]) params.id = parsedSt[0];
+        params.opacity = !parsedSt[1] && parsedSt[1] !== 0 ? 1 : parseFloat(parsedSt[1]);
+        params.visibility = !parsedSt[2] && parsedSt[2] !== 'false' ? true : parsedSt[2] === 'true';
+        params.zIndex = !parsedSt[3] && parsedSt[3] !== 0 ? 1 : parseInt(parsedSt[3]);
+      }
+      return params;
     })));
   }
 });
