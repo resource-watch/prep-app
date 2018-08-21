@@ -237,7 +237,7 @@ export const initialURLParams = createThunkAction('initialURLParams', () => (dis
         params.opacity = typeof parsedSt[1] === 'undefined' ? 1 : parseFloat(parsedSt[1]);
         params.visibility = typeof parsedSt[2] === 'undefined' || parsedSt[2] !== 'true' || parsedSt[2] !== 'false' ?
           true : parsedSt[2] === 'true';
-        params.zIndex = typeof parsedSt[3] === 'undefined' ? i : parseInt(parsedSt[3]);
+        params.zIndex = typeof parsedSt[3] === 'undefined' ? i : parseInt(parsedSt[3], 10);
         params.layerIndex = calcZIndex(activeDatasetsResult.length, params.zIndex);
       }
       return params;

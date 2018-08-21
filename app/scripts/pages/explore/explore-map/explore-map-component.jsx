@@ -9,9 +9,9 @@ import SearchControl from 'components/search-control';
 import { basemapsSpec, labelsSpec, waterSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
 import { LayerManager, Layer } from 'layer-manager/dist/react';
 import { PluginLeaflet } from 'layer-manager';
-import { default as Map, MapControls, ZoomControl } from 'wri-api-components/dist/map';
-import {
-  default as Legend, LegendListItem, LegendItemToolbar, LegendItemTypes,
+import Map, { MapControls, ZoomControl } from 'wri-api-components/dist/map';
+import Legend, {
+  LegendListItem, LegendItemToolbar, LegendItemTypes,
   LegendItemButtonBBox, LegendItemButtonInfo,
   LegendItemButtonLayers, LegendItemButtonOpacity, LegendItemButtonVisibility, LegendItemButtonRemove
 } from 'wri-api-components/dist/legend';
@@ -215,7 +215,7 @@ class ExploreMap extends PureComponent {
 
     const Toolbar = (props) => {
       const { lg } = props; // eslint-disable-line
-      const layerActive = lg.layers.find(l => (l.active || l.isActive)) || lg.layers[0];
+      const layerActive = lg.layers.find(l => l.isLayerActive);
       const legendStyles = {
         defaultStyle: {
           fill: '#263E57'
