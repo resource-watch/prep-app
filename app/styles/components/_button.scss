@@ -23,8 +23,6 @@
 
   &.-theme-color {
     color: $secondary-color;
-    .-theme-2 & { color: $thirth-color; }
-    .-theme-3 & { color: $fourth-color; }
   }
 
   &.-inverse { color: $button-font-color-inverse; }
@@ -59,8 +57,6 @@
 
       path {
         fill: $secondary-color;
-        .-theme-2 & { fill: $thirth-color; }
-        .-theme-3 & { fill: $fourth-color; }
       }
 
     }
@@ -68,16 +64,12 @@
 
   &.-alternative {
     color: $link-font-color;
-    .-theme-2 & { color: $thirth-color; }
-    .-theme-3 & { color: $fourth-color; }
 
     > .icon {
       margin-right: 5px;
 
       path {
         fill: $link-font-color;
-        .-theme-2 & { fill: $thirth-color; }
-        .-theme-3 & { fill: $fourth-color; }
       }
 
     }
@@ -110,15 +102,6 @@
     &.-border-alternative {
       border-color: $link-font-color;
       &.-fill { background-color: $link-font-color; }
-    }
-    .-theme-2 & {
-      border-color: $thirth-color;
-      &.-fill { background-color: $thirth-color; }
-    }
-
-    .-theme-3 & {
-      border-color: $fourth-color;
-      &.-fill { background-color: $fourth-color; }
     }
 
     &.-border-neutral {

@@ -24,7 +24,7 @@ class NexGDDPEmbedPage extends PureComponent {
     const { dataset, embed } = this.props;
 
     return (
-      <div className="-theme-2">
+      <div>
         <h2>{dataset.name}</h2>
 
         {!isEmpty(dataset) &&
