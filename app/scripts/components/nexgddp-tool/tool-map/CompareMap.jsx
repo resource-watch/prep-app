@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 import Control from 'react-leaflet-control';
-import 'lib/leaflet-side-by-side/leaflet-side-by-side';
+// import 'lib/leaflet-side-by-side/leaflet-side-by-side';
 
 // Redux
 import { getLayers, getRawLayers } from 'selectors/nexgddptool';
