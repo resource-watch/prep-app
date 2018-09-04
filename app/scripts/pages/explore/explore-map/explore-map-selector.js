@@ -28,20 +28,20 @@ export const getActiveLayersForMap = createSelector(
     const { length } = activeDatasets;
     const layers = filter(flatten(
       activeDatasets.map(({ layer, opacity, visibility, isLayerActive, zIndex }) => {
-        const layersResult = layer.map((l, i) => {
-          const layerIndex = calcZIndex(length, zIndex);
-          // NOTE: Forcing isSelected TRUE to don't render map when info panel changes.
-          return { ...l, zIndex: layerIndex, opacity, isLayerActive, visibility, isSelected: true, layers: layer };
-        });
-        const checkActiveLayer = layersResult.find((l) => l.isLayerActive || l.default);
-        if (!checkActiveLayer && layersResult.length) {
-          layersResult[0] = {
-            ...layersResult[0],
-            isActive: true,
-            isLayerActive: true,
-            active: true
-          };
-        }
+        const layerActive = layer.find((ly) => ly.isLayerActive === true) ||
+          layer.find((ly) => ly.default === true) || layer[0];
+        const layerIndex = calcZIndex(length, zIndex);
+        const layersResult = layer.map(l => ({
+          ...l,
+          zIndex: layerIndex,
+          opacity,
+          visibility,
+          active: layerActive.id === l.id,
+          isActive: layerActive.id === l.id,
+          isLayerActive: layerActive.id === l.id,
+          isSelected: true, // NOTE: Forcing isSelected TRUE to don't render map when info panel changes.
+          layers: layer
+        }));
         return layersResult;
       })
     ), { isActive: true });
@@ -51,16 +51,22 @@ export const getActiveLayersForMap = createSelector(
 
 export const getLayersGroups = createSelector(
   getAllDatasets,
-  (datasets) => {
+  getActiveLayersForMap,
+  (datasets, activeLayers) => {
     const activeDatasets = sortBy(filter(datasets, { isLayerActive: true }), l => l.zIndex);
     const groups = activeDatasets.map((d) => {
-      const layerActive = d.layer.find((ly) => ly.isLayerActive === true || ly.default === true) || d.layer[0];
+      const { id, opacity, zIndex, visibility } = activeLayers.find((l) => l.dataset === d.id);
       return {
         dataset: d.id,
-        layers: d.layer.map(l => {
-          const { opacity, visibility, zIndex, isSelected } = d;
-          return { ...l, opacity, visibility, zIndex, isSelected, active: (layerActive.id === l.id) };
-        })
+        layers: d.layer.map(ly => ({
+          ...ly,
+          opacity,
+          zIndex,
+          visibility,
+          active: id === ly.id,
+          isActive: id === ly.id,
+          isLayerActive: id === ly.id
+        }))
       };
     });
     return groups;

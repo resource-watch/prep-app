@@ -9,21 +9,21 @@
 
   .success-message {
     display: flex;
-    color: $thirth-color;
+    color: $secondary-color;
     padding: $medium-margin;
     border: 1px solid $border-color;
 
-    .check{
+    .check {
       display: flex;
       align-items: center;
       justify-content: center;
       width: rem(25);
       height: rem(25);
       border-radius: 50%;
-      border: 1px solid $thirth-color;
+      border: 1px solid $secondary-color;
       margin-right: rem(10);
 
-      svg { fill: $thirth-color; }
+      svg { fill: $secondary-color; }
     }
 
     p { margin: 0; }

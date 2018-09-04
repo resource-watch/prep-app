@@ -68,17 +68,7 @@ $shadow-size: 150px;
         top: 0.57rem;
         left: -1.5rem;
         font-size: rem(14);
-
         background-color: $secondary-color;
-
-        .-theme-2 & {
-          background-color: $thirth-color;
-        }
-
-        .-theme-3 & {
-          background-color: $fourth-color;
-        }
-
       }
     }
   }

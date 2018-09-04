@@ -110,9 +110,6 @@ $content-header-height: 80px;
       letter-spacing: 0.3px;
       text-transform: uppercase;
       color: $secondary-color;
-
-      .-theme-2 & { color: $thirth-color; }
-      .-theme-3 & { color: $fourth-color; }
     }
   }
 
@@ -139,12 +136,7 @@ $content-header-height: 80px;
       left: 0;
       width: 50px;
       height: 1px;
-
       background-color: $secondary-color;
-
-      .-theme-2 & { background-color: $thirth-color; }
-      .-theme-3 & { background-color: $fourth-color; }
-
     }
   }
 

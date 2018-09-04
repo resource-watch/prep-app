@@ -46,7 +46,7 @@ class ExplorePage extends PureComponent {
     });
 
     return (
-      <div className="l-explore -theme-2">
+      <div className="l-explore">
         {/* Datasets panel info */}
         <div className={`c-info-sidebar ${infoClassNames}`}>
           {selectedDataset && (
