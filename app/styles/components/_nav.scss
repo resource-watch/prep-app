@@ -102,23 +102,9 @@
       & > a:hover {
         text-decoration: none;
         cursor: pointer;
+        border-top-color: $secondary-color;
       }
 
-      &:nth-of-type(1), &:nth-of-type(5) {
-        > a:hover, > a.-current {
-          border-top-color: $secondary-color;
-        }
-      }
-     &:nth-of-type(3), &:nth-of-type(6) {
-        > a:hover, > a.-current {
-          border-top-color: $thirth-color;
-        }
-      }
-      &:nth-of-type(4),  &:nth-of-type(2) {
-        > a:hover, > a.-current {
-          border-top-color: $fourth-color;
-        }
-      }
       &:last-child {
         margin-right: 0;
 
@@ -162,12 +148,7 @@
         margin-left: .5rem;
         width: 1px;
         height: 100%;
-
         background-color: $bay-of-many;
-
-        .-theme-2 & { background-color: $thirth-color; }
-        .-theme-3 & { background-color: $fourth-color; }
-
         content: "";
       }
 

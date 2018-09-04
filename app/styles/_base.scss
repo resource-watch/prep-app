@@ -39,12 +39,7 @@ h1, h2 {
     height: 3px;
     left: 50%;
     margin-left: -74px;
-
     background-color: $secondary-color;
-
-    .-theme-2 & { background-color: $thirth-color; }
-    .-theme-3 & { background-color: $fourth-color; }
-
     content: "";
   }
 
@@ -94,14 +89,6 @@ a {
   &:hover {
     text-decoration: underline;
   }
-
-  .-theme-2 & {
-    color: $thirth-color;
-  }
-
-  .-theme-3 & {
-    color: $fourth-color;
-  }
 }
 
 input, textarea, select, a, button {
@@ -150,12 +137,4 @@ p {
 
 .highlighted {
   color: $link-font-color;
-
-  &.-theme-2 {
-    color: $thirth-color;
-  }
-
-  &.-theme-3 {
-    color: $fourth-color;
-  }
 }

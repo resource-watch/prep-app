@@ -269,7 +269,7 @@ class ExploreMap extends PureComponent {
               <Fragment>
                 <LayerManager map={map} plugin={PluginLeaflet}>
                   {(layerManager) => (
-                    activeLayersForMap.map((l, i) => (
+                    activeLayersForMap.map((l) => (
                       <Layer
                         key={l.id}
                         {...l}
@@ -281,11 +281,18 @@ class ExploreMap extends PureComponent {
                             click: (e) => {
                               const { data, latlng } = e;
                               if (data) {
+                                const result = {};
+                                Object.keys(data).forEach((key) => {
+                                  if (Object.prototype.hasOwnProperty.call(data, key)) {
+                                    const output = l.interactionConfig.output.find((o) => o.column === key);
+                                    result[output.property || output.column] = data[key];
+                                  }
+                                });
                                 setInteractions({
                                   [l.id]: {
                                     id: l.id,
                                     latlng,
-                                    data
+                                    data: result
                                   }
                                 });
                               }

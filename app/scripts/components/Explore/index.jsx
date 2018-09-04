@@ -103,7 +103,7 @@ class Explore extends React.Component {
     document.title = currentData.title;
 
     return (
-      <div className="l-explore -theme-2">
+      <div className="l-explore">
         <header className="l-header -expanded">
           <div className={`l-header-nav -short ${currentData.name === 'home' ? '-no-bg' : ''}`}>
             <div className="row align-middle">
