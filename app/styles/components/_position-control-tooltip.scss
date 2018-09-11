@@ -1,0 +1,40 @@
+.c-position-control-tooltip {
+  max-width: 200px;
+
+  h3 {
+    margin: 0 0 10px;
+    color: $pale-white;
+  }
+
+  label {
+    display: flex;
+    font-size: $small-font-size;
+    font-family: $base-font-family;
+    color: $pale-white;
+    border-bottom: 1px solid $pale-grey;
+
+    &:not(:last-of-type) {
+      margin-bottom: 12px;
+    }
+
+    input {
+      display: inline-block;
+      margin-left: 5px;
+      box-sizing: border-box !important;
+      padding: 0;
+      border: 0;
+      font-family: $base-font-family;
+      font-size: $small-font-size;
+      background: transparent;
+      flex-shrink: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
