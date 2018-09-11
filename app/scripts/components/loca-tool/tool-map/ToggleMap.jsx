@@ -17,6 +17,7 @@ import BasemapControl from 'components/basemap-control';
 import { basemapsSpec, labelsSpec, boundariesSpec, waterSpec } from 'components/basemap-control/basemap-control-constants';
 import Icon from 'components/ui/Icon';
 import ShareNexgddpTooltip from 'components/Tooltip/ShareNexgddpTooltip';
+import PositionControlTooltip from 'components/loca-tool/position-control-tooltip';
 
 // EEUU bounds
 const maxBounds = new L.LatLngBounds(
@@ -81,6 +82,27 @@ class ToggleMap extends React.PureComponent {
           });
         })
       }
+    });
+  }
+
+  /**
+   * Event handler executed when the user clicks the position button
+   * @param {MouseEvent} e Event object
+   */
+  onClickPosition(e) {
+    // Prevent the tooltip from auto-closing
+    e.stopPropagation();
+
+    const { toggleTooltip } = this.props;
+
+    toggleTooltip(true, {
+      follow: false,
+      position: {
+        x: window.scrollX + e.clientX,
+        y: window.scrollY + e.clientY
+      },
+      direction: 'bottom',
+      children: PositionControlTooltip
     });
   }
 
@@ -178,6 +200,14 @@ class ToggleMap extends React.PureComponent {
               setAnalytics={shareModalActions.setAnalytics}
             />
           </Control>
+
+          { !embed && (
+            <Control position="bottomright">
+              <button type="button" className="c-button-map" onClick={e => this.onClickPosition(e)}>
+                <Icon name="icon-position" className="-small" />
+              </button>
+            </Control>
+          )}
 
           {!embed &&
             <Control position="bottomright">
