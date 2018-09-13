@@ -196,8 +196,8 @@ class ExploreMap extends PureComponent {
         scrollWheelZoom: !(embed || embedExport)
       }),
       events: {
-        zoomend: () => debounce(() => setMapParams(this.getMapParams()), 50),
-        moveend: () => debounce(() => setMapParams(this.getMapParams()), 50)
+        zoomend: debounce(() => setMapParams(this.getMapParams()), 50),
+        moveend: debounce(() => setMapParams(this.getMapParams()), 50)
       },
       ...bbox && {
         bounds: {
