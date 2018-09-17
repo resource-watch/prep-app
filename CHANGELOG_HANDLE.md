@@ -7,7 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 2018-09-17
 
+### Added
 - Display author in dashboards
+
+### Fixed
+- Metadata date in datasets
+- Error interacting with widgets
+- Retain map extend un URL
+- PREP login button for tablet
+- Layer interaction only work for layer default
+- NEXGDDP layers don't load in India dashboard
+
 
 ## 2018-08-13
 
