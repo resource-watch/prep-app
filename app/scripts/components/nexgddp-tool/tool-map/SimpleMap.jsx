@@ -17,6 +17,7 @@ import { basemapsSpec, labelsSpec, boundariesSpec, waterSpec } from 'components/
 import Legend from 'components/legend/index';
 import Icon from 'components/ui/Icon';
 import ShareNexgddpTooltip from 'components/Tooltip/ShareNexgddpTooltip';
+import PositionControlTooltip from 'components/nexgddp-tool/position-control-tooltip';
 
 const mapDefaultOptions = {
   center: [20, -30],
@@ -41,6 +42,27 @@ class SimpleMap extends React.PureComponent {
       || center[1] !== this.props.map.center[1]) {
       this.props.setMapCenter(center);
     }
+  }
+
+  /**
+   * Event handler executed when the user clicks the position button
+   * @param {MouseEvent} e Event object
+   */
+  onClickPosition(e) {
+    // Prevent the tooltip from auto-closing
+    e.stopPropagation();
+
+    const { toggleTooltip } = this.props;
+
+    toggleTooltip(true, {
+      follow: false,
+      position: {
+        x: window.scrollX + e.clientX,
+        y: window.scrollY + e.clientY
+      },
+      direction: 'bottom',
+      children: PositionControlTooltip
+    });
   }
 
   /**
@@ -155,6 +177,14 @@ class SimpleMap extends React.PureComponent {
               setBoundaries={this.props.setBoundaries}
             />
           </Control>
+
+          {!embed && (
+            <Control position="bottomright">
+              <button type="button" className="c-button-map" onClick={e => this.onClickPosition(e)}>
+                <Icon name="icon-position" className="-small" />
+              </button>
+            </Control>
+          )}
 
           {!embed &&
             <Control position="bottomright">
