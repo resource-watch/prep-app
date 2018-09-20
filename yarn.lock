@@ -5329,6 +5329,14 @@ layer-manager@^1.1.5:
     lodash "^4.17.10"
     wri-json-api-serializer "^1.0.1"
 
+layer-manager@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/layer-manager/-/layer-manager-1.1.6.tgz#802313b04d0e005551ee14ddbc6bcf4dabc5e8d4"
+  dependencies:
+    bluebird "^3.5.1"
+    lodash "^4.17.10"
+    wri-json-api-serializer "^1.0.1"
+
 lazy-cache@^0.2.3:
   version "0.2.7"
   resolved "https://registry.yarnpkg.com/lazy-cache/-/lazy-cache-0.2.7.tgz#7feddf2dcb6edb77d11ef1d117ab5ffdf0ab1b65"
@@ -9941,15 +9949,16 @@ wri-api-components@2.0.17:
     vega-lib "^4.2.0"
     wri-json-api-serializer "^1.0.1"
 
-wri-api-components@2.0.21:
-  version "2.0.21"
-  resolved "https://registry.yarnpkg.com/wri-api-components/-/wri-api-components-2.0.21.tgz#715afc1179603fab3bf527f90c7f195042651fc2"
+wri-api-components@^2.2.4:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/wri-api-components/-/wri-api-components-2.2.4.tgz#7b38117ba09a62ee3beaa7ab4dd54d27e9042018"
   dependencies:
-    layer-manager "^1.0.4"
+    classnames "^2.2.6"
+    layer-manager "^1.1.5"
+    lodash "^4.17.10"
     prop-types "^15.6.2"
     rc-slider "^8.6.1"
     rc-tooltip "3.7.0"
-    react-css-modules "^4.7.1"
     react-sortable-hoc "^0.6.8"
     react-vega "^4.0.2"
     wri-json-api-serializer "^1.0.1"
