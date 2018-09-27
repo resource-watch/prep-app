@@ -2833,9 +2833,9 @@ dont-sniff-mimetype@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/dont-sniff-mimetype/-/dont-sniff-mimetype-1.0.0.tgz#5932890dc9f4e2f19e5eb02a20026e5e5efc8f58"
 
-dotenv@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-2.0.0.tgz#bd759c357aaa70365e01c96b7b0bec08a6e0d949"
+dotenv@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.0.0.tgz#24e37c041741c5f4b25324958ebbc34bca965935"
 
 download@^4.0.0, download@^4.1.2:
   version "4.4.3"
@@ -5313,15 +5313,7 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
 
-layer-manager@^1.0.4:
-  version "1.0.19"
-  resolved "https://registry.yarnpkg.com/layer-manager/-/layer-manager-1.0.19.tgz#c3a57183ab90984639c16ec885da4ff64e6ff86d"
-  dependencies:
-    bluebird "^3.5.1"
-    lodash "^4.17.10"
-    wri-json-api-serializer "^1.0.1"
-
-layer-manager@^1.1.5:
+layer-manager@1.1.5:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/layer-manager/-/layer-manager-1.1.5.tgz#7b12a5ec233b05423cb49ada651a4f07a2a64585"
   dependencies:
@@ -5329,9 +5321,17 @@ layer-manager@^1.1.5:
     lodash "^4.17.10"
     wri-json-api-serializer "^1.0.1"
 
-layer-manager@^1.1.6:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/layer-manager/-/layer-manager-1.1.6.tgz#802313b04d0e005551ee14ddbc6bcf4dabc5e8d4"
+layer-manager@1.1.7:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/layer-manager/-/layer-manager-1.1.7.tgz#e9d91d4e5cfbe8f9ba4e8f7b4af6cdb79d096723"
+  dependencies:
+    bluebird "^3.5.1"
+    lodash "^4.17.10"
+    wri-json-api-serializer "^1.0.1"
+
+layer-manager@^1.0.4:
+  version "1.0.19"
+  resolved "https://registry.yarnpkg.com/layer-manager/-/layer-manager-1.0.19.tgz#c3a57183ab90984639c16ec885da4ff64e6ff86d"
   dependencies:
     bluebird "^3.5.1"
     lodash "^4.17.10"
@@ -9949,12 +9949,12 @@ wri-api-components@2.0.17:
     vega-lib "^4.2.0"
     wri-json-api-serializer "^1.0.1"
 
-wri-api-components@^2.2.4:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/wri-api-components/-/wri-api-components-2.2.4.tgz#7b38117ba09a62ee3beaa7ab4dd54d27e9042018"
+wri-api-components@2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/wri-api-components/-/wri-api-components-2.2.5.tgz#ecbf6417c81133d503e44a81c9bef31c5cf01aa8"
   dependencies:
     classnames "^2.2.6"
-    layer-manager "^1.1.5"
+    layer-manager "1.1.7"
     lodash "^4.17.10"
     prop-types "^15.6.2"
     rc-slider "^8.6.1"
