@@ -1,50 +1,40 @@
-const webpack = require('webpack');
 const path = require('path');
 const merge = require('webpack-merge');
-
 const sharedConfig = require('./shared.js');
 
+const rootPath = path.resolve(process.cwd());
+
 module.exports = merge(sharedConfig, {
-
-  devtool: 'inline-source-map',
-
-  stats: { errorDetails: true },
-
-  output: { pathinfo: true },
-
+  devtool: 'eval',
+  mode: 'development',
   module: {
     rules: [
+      { test: /\.(jpe?g|png|gif|svg)$/i, use: [ 'file-loader' ] },
       {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        use: ['file-loader']
-      }, {
         test: /\.css$/,
-        use: ['style-loader', {
-          loader: 'css-loader',
-          options: { importLoaders: 1 }
-        }]
-      }, {
+        use: [
+          'style-loader',
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+        ],
+      },
+      {
         test: /\.(scss|sass)$/,
-        use: [{ loader: 'style-loader' }, {
-          loader: 'css-loader',
-          options: { importLoaders: 1 }
-        }, {
-          loader: 'postcss-loader',
-          options: { config: { path: path.resolve(__dirname, '../../postcss.config.js') } }
-        }, {
-          loader: 'sass-loader',
-          options: {
-            includePaths: [
-              path.resolve(__dirname, '../../app/styles')
-            ]
-          }
-        }]
-      }
-    ]
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: { sourceMap: true, importLoaders: 1 },
+          },
+          { loader: 'postcss-loader', options: { sourceMap: true } },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+              includePaths: [ path.resolve(rootPath, './app/styles') ],
+            },
+          },
+        ],
+      },
+    ],
   },
-
-  plugins: [
-    new webpack.LoaderOptionsPlugin({ debug: true })
-  ]
-
 });
