@@ -4,7 +4,9 @@
   .error-message {
     display: none;
     color: red;
-    &.-active { display: inherit; }
+    &.-active {
+      display: inherit;
+    }
   }
 
   .success-message {
@@ -23,10 +25,14 @@
       border: 1px solid $secondary-color;
       margin-right: rem(10);
 
-      svg { fill: $secondary-color; }
+      svg {
+        fill: $secondary-color;
+      }
     }
 
-    p { margin: 0; }
+    p {
+      margin: 0;
+    }
   }
 }
 
@@ -41,7 +47,7 @@
 
     @media #{$mq-medium} {
       // width: 46%;
-      flex: 1;
+      flex: 1 1 auto;
       text-align: right;
     }
   }
@@ -103,7 +109,8 @@
         margin-bottom: 1rem;
       }
 
-      label, textarea {
+      label,
+      textarea {
         width: 100%;
       }
     }

@@ -9,7 +9,7 @@
     box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.15);
     margin: 20px;
     background-color: #ffffff;
-    flex: 1;
+    flex: 1 1 auto;
     flex-direction: column;
     display: flex;
 
@@ -21,7 +21,7 @@
     }
 
     .slide-content {
-      flex: 1;
+      flex: 1 1 auto;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -34,7 +34,7 @@
     }
   }
 
-  .slick-track{
+  .slick-track {
     display: flex;
   }
 
@@ -50,13 +50,13 @@
     }
 
     .slide-content {
-      opacity: .15;
-      transition: opacity .5s ease-in-out;
+      opacity: 0.15;
+      transition: opacity 0.5s ease-in-out;
     }
 
     img {
-      opacity: .15;
-      transition: opacity .5s ease-in-out;
+      opacity: 0.15;
+      transition: opacity 0.5s ease-in-out;
     }
 
     &.slick-active {
