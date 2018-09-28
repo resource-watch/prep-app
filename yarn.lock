@@ -6563,15 +6563,6 @@ last-call-webpack-plugin@^3.0.0:
     lodash "^4.17.5"
     webpack-sources "^1.1.0"
 
-layer-manager@1.1.7:
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/layer-manager/-/layer-manager-1.1.7.tgz#e9d91d4e5cfbe8f9ba4e8f7b4af6cdb79d096723"
-  integrity sha512-xJfXtPYg8lVTp50aUWYJK7cTGUpocxBveGKiNMeUk/uU0C2d6AdfYjW21nJhM19/79hx2yAh2IIF0VowqBwwrQ==
-  dependencies:
-    bluebird "^3.5.1"
-    lodash "^4.17.10"
-    wri-json-api-serializer "^1.0.1"
-
 layer-manager@^1.0.4:
   version "1.0.19"
   resolved "https://registry.yarnpkg.com/layer-manager/-/layer-manager-1.0.19.tgz#c3a57183ab90984639c16ec885da4ff64e6ff86d"
@@ -12249,13 +12240,13 @@ wri-api-components@2.0.17:
     vega-lib "^4.2.0"
     wri-json-api-serializer "^1.0.1"
 
-wri-api-components@2.2.5:
-  version "2.2.5"
-  resolved "https://registry.yarnpkg.com/wri-api-components/-/wri-api-components-2.2.5.tgz#ecbf6417c81133d503e44a81c9bef31c5cf01aa8"
-  integrity sha512-9iYfqveiPGq126fdKuWIvZzWcVjwDZJ3ZftgM85MSnkJZWJqq7fT8xT/EZ1Rkit5qq3y2bTyRwYLgD5+3ev9Gw==
+wri-api-components@^2.2.7-alpha.2:
+  version "2.2.7-alpha.2"
+  resolved "https://registry.yarnpkg.com/wri-api-components/-/wri-api-components-2.2.7-alpha.2.tgz#09d65598cf5466452c284ee36e602fb32f77082c"
+  integrity sha512-hnrVSWZtXZnyPn5tz7Rex5Kj/DnNZ1egV02p2ZcAPfySKJtZZpfoj7QG9BjOcEUXgL9Wjg3c9rEQYz4ejx0MSA==
   dependencies:
     classnames "^2.2.6"
-    layer-manager "1.1.7"
+    layer-manager "^1.10.0"
     lodash "^4.17.10"
     prop-types "^15.6.2"
     rc-slider "^8.6.1"
