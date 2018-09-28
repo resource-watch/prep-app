@@ -1,10 +1,10 @@
 .c-card {
-  flex: 1;
+  flex: 1 1 auto;
   width: 100%;
   padding: $small-margin;
   margin: $small-margin 0 0 0;
 
-  transition: all .3s ease-out;
+  transition: all 0.3s ease-out;
 
   &:hover {
     box-shadow: 0 7px 15px 0 rgba(0, 0, 0, 0.15);
@@ -29,10 +29,10 @@
     line-height: 1.6;
 
     &:before {
-      content: "";
+      content: '';
       position: absolute;
       display: block;
-      top: -.5rem;
+      top: -0.5rem;
       left: 0;
       width: 50px;
       height: 1px;
@@ -51,9 +51,12 @@
   &.-border {
     border: 2px solid $secondary-color;
 
-    &.-border-neutral { border-color: $pale-grey; }
+    &.-border-neutral {
+      border-color: $pale-grey;
+    }
   }
 
-  &.-inverse { color: $inverse-font-color; }
-
+  &.-inverse {
+    color: $inverse-font-color;
+  }
 }
