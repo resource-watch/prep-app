@@ -9215,7 +9215,7 @@ react-scroll@1.6.1:
     object-assign "^4.1.1"
     prop-types "^15.5.8"
 
-react-select@^1.0.0-rc.10:
+react-select@1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/react-select/-/react-select-1.3.0.tgz#1828ad5bf7f3e42a835c7e2d8cb13b5c20714876"
   integrity sha512-g/QAU1HZrzSfxkwMAo/wzi6/ezdWye302RGZevsATec07hI/iSxcpB1hejFIp7V63DJ8mwuign6KmB3VjdlinQ==
@@ -12144,10 +12144,10 @@ wide-align@^1.1.0:
   dependencies:
     string-width "^1.0.2 || 2"
 
-widget-editor@1.3.6:
-  version "1.3.6"
-  resolved "https://registry.yarnpkg.com/widget-editor/-/widget-editor-1.3.6.tgz#dc6894d23505f8b58254e3329d568a84aa4efcbc"
-  integrity sha512-cowB4csIWKFZNP6dw6somfrcLP8zI5ou5hrskv4fqVaUy4tuMice4C9Sd3xIXh5lBkV4TYGrnwIlB6EIpwvjVA==
+widget-editor@1.3.7:
+  version "1.3.7"
+  resolved "https://registry.yarnpkg.com/widget-editor/-/widget-editor-1.3.7.tgz#659d44f5134fb482963cc57e7b172cf0d3056ec2"
+  integrity sha512-FYrj1fHL0La5s+iis1Fv/llOj3dV89r1JxxOHiU8bJbiogys3fYvF9jKm7OIttzBqx5OsJfrEzx4+fwTFAWbMQ==
   dependencies:
     autobind-decorator "^2.1.0"
     babel-runtime "^6.26.0"
@@ -12165,7 +12165,7 @@ widget-editor@1.3.6:
     react-input-autosize "^2.0.1"
     react-redux "^5.0.6"
     react-redux-toastr "^7.1.6"
-    react-select "^1.0.0-rc.10"
+    react-select "1.3.0"
     react-sortable-hoc "^0.6.8"
     react-tether "^0.6.0"
     toastr "^2.1.2"
