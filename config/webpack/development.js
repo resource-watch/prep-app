@@ -5,7 +5,7 @@ const sharedConfig = require('./shared.js');
 const rootPath = path.resolve(process.cwd());
 
 module.exports = merge(sharedConfig, {
-  devtool: 'eval',
+  devtool: 'eval-cheap-source-map',
   mode: 'development',
   module: {
     rules: [
