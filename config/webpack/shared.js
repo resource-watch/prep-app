@@ -43,6 +43,9 @@ const config = {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.RW_API_URL': JSON.stringify(process.env.RW_API_URL),
       'process.env.API_URL': JSON.stringify(process.env.API_URL),
+      'process.env.CALLBACK_URL': JSON.stringify(process.env.CALLBACK_URL),
+      'process.env.RW_API_LOGIN_URL': JSON.stringify(process.env.RW_API_LOGIN_URL),
+      'process.env.RW_API_IS_LOGGEDIN_URL': JSON.stringify(process.env.RW_API_IS_LOGGEDIN_URL),
       config: {
         facebookUser: JSON.stringify(process.env.FACEBOOK_USER),
         twitterUser: JSON.stringify(process.env.TWITTER_USER),
