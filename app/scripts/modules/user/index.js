@@ -53,9 +53,8 @@ class UserContainer extends Component {
         getUserFavourites();
         getUserCollections();
       })
-      .catch(({ errors }) => {
-        const { status, details } = errors;
-        console.error(status, details);
+      .catch((errors) => {
+        console.error(errors);
         this.handleLogOut();
       });
   }

@@ -8,9 +8,9 @@
   .dropdown-content {
     display: none;
     position: absolute;
-    border-top: rgba($black, .05) 1px solid;
+    border-top: rgba($black, 0.05) 1px solid;
     background: $white;
-    box-shadow: 0 5px 8px rgba($black, .15);
+    box-shadow: 0 5px 8px rgba($black, 0.15);
 
     .node {
       display: flex;
@@ -53,7 +53,7 @@
         }
       }
 
-      input[type="checkbox"] {
+      input[type='checkbox'] {
         position: absolute;
         top: 50%;
         transform: translate(0, -50%);
@@ -67,7 +67,7 @@
           color: $white;
           background: $dark-blue;
           border: 1px solid transparent;
-          line-height: .9;
+          line-height: 0.9;
         }
       }
 
@@ -79,7 +79,8 @@
 
   .dropdown {
     .tag-list {
-      li::before { // Prevent style issue on the dashboards page
+      li::before {
+        // Prevent style issue on the dashboards page
         content: none;
       }
 
@@ -133,7 +134,7 @@
     display: flex;
     align-items: center;
     padding: 10px 15px 0;
-    border-bottom: 2px solid #EEEEEE;
+    border-bottom: 2px solid #eeeeee;
     // border: 1px solid $dark-blue;
     // border-radius: 4px;
     overflow: auto;
@@ -219,25 +220,24 @@
         background-color: transparent;
 
         &::-webkit-input-placeholder {
-          font-family: "Open Sans";
+          font-family: 'Open Sans';
           font-size: 15px;
           font-weight: bold;
           color: $header-font-color;
         }
         &::-moz-placeholder {
-          font-family: "Open Sans";
+          font-family: 'Open Sans';
           font-size: 15px;
           font-weight: bold;
           color: $header-font-color;
         }
         &:-ms-input-placeholder {
-          font-family: "Open Sans";
+          font-family: 'Open Sans';
           font-size: 15px;
           font-weight: bold;
           color: $header-font-color;
         }
       }
-
 
       &:not(:last-child) {
         margin-right: 10px;
@@ -247,9 +247,9 @@
       &:last-child {
         margin-top: 0;
         display: flex;
-        flex: 1;
+        flex: 1 1 auto;
 
-        > input[type="text"] {
+        > input[type='text'] {
           width: calc(100% - 16px);
         }
       }
@@ -275,7 +275,7 @@
       }
 
       // selector placeholder
-      > input[type="text"] {
+      > input[type='text'] {
         margin-bottom: 10px;
         font-family: $base-font-family;
         font-size: $small-font-size;

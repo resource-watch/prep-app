@@ -17,6 +17,7 @@ import { basemapsSpec, labelsSpec, boundariesSpec, waterSpec } from 'components/
 import Legend from 'components/legend/index';
 import Icon from 'components/ui/Icon';
 import ShareLocaTooltip from 'components/Tooltip/ShareLocaTooltip';
+import PositionControlTooltip from 'components/loca-tool/position-control-tooltip';
 
 // EEUU bounds
 const maxBounds = new L.LatLngBounds(
@@ -78,6 +79,27 @@ class SimpleMap extends React.PureComponent {
           });
         })
       }
+    });
+  }
+
+  /**
+   * Event handler executed when the user clicks the position button
+   * @param {MouseEvent} e Event object
+   */
+  onClickPosition(e) {
+    // Prevent the tooltip from auto-closing
+    e.stopPropagation();
+
+    const { toggleTooltip } = this.props;
+
+    toggleTooltip(true, {
+      follow: false,
+      position: {
+        x: window.scrollX + e.clientX,
+        y: window.scrollY + e.clientY
+      },
+      direction: 'bottom',
+      children: PositionControlTooltip
     });
   }
 
@@ -162,6 +184,14 @@ class SimpleMap extends React.PureComponent {
               setBoundaries={this.props.setBoundaries}
             />
           </Control>
+
+          { !embed && (
+            <Control position="bottomright">
+              <button type="button" className="c-button-map" onClick={e => this.onClickPosition(e)}>
+                <Icon name="icon-position" className="-small" />
+              </button>
+            </Control>
+          )}
 
           {!embed &&
             <Control position="bottomright">
