@@ -10,7 +10,7 @@
   li {
     padding: 0;
     margin: 0;
-    flex: 1;
+    flex: 1 1 auto;
 
     &:before {
       content: none !important; // For the NexGDDP tool
@@ -39,11 +39,24 @@
     height: 5px;
     margin-top: 10px;
     margin-bottom: 5px;
-    background-image:
-      linear-gradient(45deg, rgba(black, .4) 25%, transparent 25%, transparent 75%, rgba(black, .4) 75%, rgba(black, .4)),
-      linear-gradient(45deg, rgba(black, .4) 25%, transparent 25%, transparent 75%, rgba(black, .4) 75%, rgba(black, .4));
+    background-image: linear-gradient(
+        45deg,
+        rgba(black, 0.4) 25%,
+        transparent 25%,
+        transparent 75%,
+        rgba(black, 0.4) 75%,
+        rgba(black, 0.4)
+      ),
+      linear-gradient(
+        45deg,
+        rgba(black, 0.4) 25%,
+        transparent 25%,
+        transparent 75%,
+        rgba(black, 0.4) 75%,
+        rgba(black, 0.4)
+      );
 
     background-size: 4px 4px;
-    background-position: 0 0, 2px 2px
+    background-position: 0 0, 2px 2px;
   }
 }

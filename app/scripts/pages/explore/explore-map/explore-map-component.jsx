@@ -7,7 +7,7 @@ import BasemapControl from 'components/basemap-control';
 import ShareControl from 'components/share-control';
 import SearchControl from 'components/search-control';
 import { basemapsSpec, labelsSpec, waterSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
-import { LayerManager, Layer } from 'layer-manager/dist/react';
+import { LayerManager, Layer } from 'layer-manager/lib/react';
 import { PluginLeaflet } from 'layer-manager';
 import Map, { MapControls, ZoomControl } from 'wri-api-components/dist/map';
 import Legend, {
@@ -196,8 +196,8 @@ class ExploreMap extends PureComponent {
         scrollWheelZoom: !(embed || embedExport)
       }),
       events: {
-        zoomend: () => debounce(() => setMapParams(this.getMapParams()), 50),
-        moveend: () => debounce(() => setMapParams(this.getMapParams()), 50)
+        zoomend: debounce(() => setMapParams(this.getMapParams()), 50),
+        moveend: debounce(() => setMapParams(this.getMapParams()), 50)
       },
       ...bbox && {
         bounds: {

@@ -103,7 +103,7 @@ const MetadataInfo = ({ dataset }) => {
       {/* /Metadata date creation */ }
       <li>
         <span>Date of creation: </span>
-        <span>{parseDate(dataset.updated_at)}</span>
+        <span>{parseDate(metadata.createdAt)}</span>
       </li>
     </ul>
   );

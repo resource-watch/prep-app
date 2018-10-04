@@ -16,10 +16,12 @@ export const getLayerIds = createSelector(
 
 export const getInteraction = createSelector(
   [getLayerIds, getInteractions],
-  (layerIds, _interactions) => {
-    if (isEmpty(_interactions) || isEmpty(layerIds)) return null;
-    const interactions = Object.values(_interactions).filter(i => i.data);
-    return interactions[0] || {};
+  (layerIds, interactions) => {
+    if (isEmpty(interactions) || !layerIds || !layerIds.length || !interactions[layerIds[0].id]) {
+      return null;
+    }
+
+    return interactions[layerIds[0].id];
   }
 );
 
