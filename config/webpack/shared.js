@@ -46,6 +46,10 @@ const config = {
       'process.env.CALLBACK_URL': JSON.stringify(process.env.CALLBACK_URL),
       'process.env.RW_API_LOGIN_URL': JSON.stringify(process.env.RW_API_LOGIN_URL),
       'process.env.RW_API_IS_LOGGEDIN_URL': JSON.stringify(process.env.RW_API_IS_LOGGEDIN_URL),
+      'process.env.APPLICATIONS': JSON.stringify(process.env.APPLICATIONS),
+      'process.env.DATASET_ENV': JSON.stringify(process.env.DATASET_ENV),
+      'process.env.CONTROL_TOWER_URL': JSON.stringify(process.env.CONTROL_TOWER_URL),
+      'process.env.GOOGLE_ANALYTICS': JSON.stringify(process.env.GOOGLE_ANALYTICS),
       config: {
         facebookUser: JSON.stringify(process.env.FACEBOOK_USER),
         twitterUser: JSON.stringify(process.env.TWITTER_USER),
