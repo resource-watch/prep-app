@@ -1,4 +1,5 @@
 import qs from 'query-string';
+import omit from 'lodash/omit';
 import { createAction, createThunkAction } from 'redux-tools';
 import { replace } from 'react-router-redux';
 import { setDatasetsTagFilter } from 'actions/datasets';
@@ -30,7 +31,7 @@ export const updateURLParams = createThunkAction('updateURLParams', () => (dispa
   });
 
   const query = {
-    ...map,
+    ...omit(map, 'bbox'),
     tab,
     filterQuery,
     ...filtersParams,
