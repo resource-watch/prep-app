@@ -28,7 +28,7 @@
     {{> ../static/icons/symbol-defs}}
     <div id="app"></div>
     {{#if htmlWebpackPlugin.options.prod}}
-      <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyBErDLm_DDD3EJLOU__SVsbr8Mj3grzMGQ"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?v=3.35&amp;libraries=places&amp;key=AIzaSyBErDLm_DDD3EJLOU__SVsbr8Mj3grzMGQ"></script>
       <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
       <script>
         window.ga = function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
@@ -37,7 +37,7 @@
       </script>
       <script src="https://www.google-analytics.com/analytics.js" async defer></script>
     {{else}}
-      <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyBG0SybP0EKWH3Jvwki7IR5AMyO_cUeeQc"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?v=3.35&amp;libraries=places&amp;key=AIzaSyBG0SybP0EKWH3Jvwki7IR5AMyO_cUeeQc"></script>
     {{/if}}
   </body>
 </html>
