@@ -1,38 +1,43 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Geosuggest from 'react-geosuggest';
-import isEqual from 'lodash/isEqual';
 
+// styles
 import './location-search-styles.scss';
 
-class LocationSearchComponent extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.onSuggestSelect = this.onSuggestSelect.bind(this);
+class LocationSearchComponent extends PureComponent {
+  propTypes = {
+    setMapParams: PropTypes.func.isRequired,
+    setBBox: PropTypes.func.isRequired,
+    onSearch: PropTypes.func.isRequired
   }
 
-  onSuggestSelect(e) {
+  onSuggestSelect = (e) => {
+    const {
+      setBBox,
+      setMapParams,
+      onSearch
+    } = this.props;
     const { gmaps, location } = e;
 
     const viewport = gmaps.geometry && gmaps.geometry.viewport;
 
     if (viewport) {
-      this.props.setBBox([
-        viewport.b.b, viewport.f.b,
-        viewport.b.f, viewport.f.f
+      setBBox([
+        viewport.j.j, viewport.l.j,
+        viewport.j.l, viewport.l.l
       ]);
     }
 
     if (!viewport && location) {
-      this.props.setMapParams({
+      setMapParams({
         lat: location.lat,
         lng: location.lng,
         zoom: 7
       });
-    }    
+    }
 
-    this.props.onSearch(false);
+    onSearch(false);
   }
 
   render() {
@@ -45,7 +50,5 @@ class LocationSearchComponent extends React.Component {
     );
   }
 }
-
-LocationSearchComponent.propTypes = { setMapParams: PropTypes.func, setBBox: PropTypes.func };
 
 export default LocationSearchComponent;
