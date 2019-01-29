@@ -115,6 +115,13 @@ class FAQ extends React.PureComponent {
           <h3>I see an error or have a suggestion for the site. Where do I report it?</h3>
           <p>We are eager for feedback and suggestions. Please <Link to="/contact">contact us</Link> at info@prepdata.org.
           </p>
+          
+          <h3>Disclaimer</h3>
+          <p>The maps shown on this platform do not imply the expression of any opinion on the part of PREP or WRI concerning 
+            the legal status of any country or territory or concerning the delimitation of frontiers or boundaries.
+          </p>
+
+
         </Article>
       </div>
     );
