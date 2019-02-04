@@ -13,6 +13,7 @@ class TidalStations extends Component {
     return (
       <div className="c-tidal-stations">
         <button
+          className="c-new-button -light -transparent"
           type="button"
           onClick={onModal}
         >

@@ -6,13 +6,15 @@
   <title>High tide flooding</title>
 
   <link rel="stylesheet" href="index.css" />
-  
+
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    
+
+  <script src="https://unpkg.com/@ungap/url-search-params"></script>
+
   <script src="stations.js"></script>
   <script src="widget.js"></script>
 </head>
@@ -24,11 +26,16 @@
 </body>
 <script>
   $(document).ready(function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var station = urlParams.get('station');
+
     $.each(STATIONS, function (i, item) {
-      $('#stations').append($('<option>', { 
-        value: item.id,
-        text : item.station
-      }));
+      $('#stations')
+        .append($('<option>', {
+          value: item.id,
+          text : item.station
+        }))
+        .val(station);
     });
 
     $("#widget").tidalstationwidget({
@@ -40,7 +47,7 @@
 
     $('#stations').change(() => {
       $("#widget").tidalstationwidget({ station: $('#stations').val() });
-    });    
+    });
   })
 </script>
 

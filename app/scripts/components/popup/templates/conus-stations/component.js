@@ -13,6 +13,7 @@ class ConusStations extends Component {
     return (
       <div className="c-conus-stations">
         <button
+          className="c-new-button -light -transparent"
           type="button"
           onClick={onModal}
         >
