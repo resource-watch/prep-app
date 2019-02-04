@@ -30,7 +30,8 @@
         "js": "never",
         "jsx": "never"
       }
-    ]
+    ],
+    "react/prefer-stateless-function": 0
   },
   "settings": {
     "import/resolver": {

@@ -2,18 +2,23 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import { MapPopup } from 'wri-api-components/dist/map';
+import { TidalStations, ConusStations } from './templates';
 
 class PopupComponent extends PureComponent {
   static propTypes = {
     map: PropTypes.object.isRequired,
-    interaction: PropTypes.object
+    interaction: PropTypes.object,
+    onModal: PropTypes.func
   }
 
-  static defaultProps = { interaction: null }
+  static defaultProps = {
+    interaction: null,
+    onModal: (data) => { console.log(data) }
+  }
 
   render() {
-    const { map, interaction } = this.props;
-    const { data, latlng } = interaction || {};
+    const { map, interaction, onModal } = this.props;
+    const { id, data, latlng } = interaction || {};
 
     if (!data || !latlng) return null;
 
@@ -38,6 +43,14 @@ class PopupComponent extends PureComponent {
               ))}
             </tbody>
           </table>
+
+          {id === '3c88ecba-54ce-4add-91d4-7581a1b9ab1a' &&
+            <TidalStations onModal={() => onModal(data)} />
+          }
+
+          {id === 'dfda6a1f-77d4-4ba6-8514-0b567d049b34' &&
+            <ConusStations onModal={() => onModal(data)} />
+          }
         </MapPopup>
       </div>
     );
