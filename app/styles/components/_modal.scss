@@ -59,6 +59,18 @@
       }
     }
 
+    &.embed {
+      width: auto;
+      min-width: auto;
+
+      @media #{$mq-medium} {
+        width: rem(620);
+        & .m-content {
+          padding: $medium-margin $large-margin;
+        }
+      }
+    }
+
     &.presentation {
       width: 100%;
       height: 100%;

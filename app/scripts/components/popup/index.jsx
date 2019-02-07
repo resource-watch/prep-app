@@ -2,18 +2,22 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import { MapPopup } from 'wri-api-components/dist/map';
+import { TidalStations, ConusStations } from './templates';
 
 class PopupComponent extends PureComponent {
   static propTypes = {
     map: PropTypes.object.isRequired,
-    interaction: PropTypes.object
+    interaction: PropTypes.object,
+    setModal: PropTypes.func.isRequired
   }
 
-  static defaultProps = { interaction: null }
+  static defaultProps = {
+    interaction: null
+  }
 
   render() {
-    const { map, interaction } = this.props;
-    const { data, latlng } = interaction || {};
+    const { map, interaction, setModal } = this.props;
+    const { id, data, latlng } = interaction || {};
 
     if (!data || !latlng) return null;
 
@@ -38,6 +42,36 @@ class PopupComponent extends PureComponent {
               ))}
             </tbody>
           </table>
+
+          {id === '3c88ecba-54ce-4add-91d4-7581a1b9ab1a' && (
+            <TidalStations
+              onModal={() =>
+                setModal({
+                  open: true,
+                  config: {
+                    id,
+                    title: 'High tide flooding',
+                    src: `/embeds/high-tide-flooding/?station=${data.id}`
+                  }
+                })
+              }
+            />
+          )}
+
+          {id === 'dfda6a1f-77d4-4ba6-8514-0b567d049b34' && (
+            <ConusStations
+              onModal={() =>
+                setModal({
+                  open: true,
+                  config: {
+                    id,
+                    title: 'Timeline exceedance',
+                    src: `/embeds/timeline-exceedance/?station=${data.id}`
+                  }
+                })
+              }
+            />
+          )}
         </MapPopup>
       </div>
     );
