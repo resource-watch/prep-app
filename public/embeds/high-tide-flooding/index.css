@@ -4,9 +4,9 @@ body {
   border: none;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
+*:before { box-sizing: border-box; }
+*:after { box-sizing: border-box; }
 
 .stations-select {
   position: relative;

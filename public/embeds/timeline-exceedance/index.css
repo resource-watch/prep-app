@@ -5,9 +5,9 @@ body {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
+*:before { box-sizing: border-box; }
+*:after { box-sizing: border-box; }
 
 .stations-select {
   position: relative;
