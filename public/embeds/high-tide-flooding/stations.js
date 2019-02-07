@@ -1,4 +1,4 @@
-var STATIONS = [
+const STATIONS = [
   {
     id: "1611400",
     station: "Nawiliwili, HI",
@@ -692,4 +692,8 @@ var STATIONS = [
     lat: "17.97",
     derived: "0.51",
   },
-];
+].sort(function (a, b) {
+  if (a.station < b.station) return -1;
+  if (a.station > b.station) return 1;
+  return 0;
+});

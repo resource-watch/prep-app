@@ -20,23 +20,31 @@
 </head>
 <body>
   <div class="widget-container">
-    <select id="stations"></select>
+    <h4 class="stations-select">
+      <span id="stations-val"></span>
+      <select id="stations"></select>
+    </h4>
+
     <div id="widget"></div>
   </div>
 </body>
 <script>
   $(document).ready(function() {
     var urlParams = new URLSearchParams(window.location.search);
-    var station = urlParams.get('station');
+
+    var id = urlParams.get('station') || STATIONS[0].id;
+    var station = STATIONS.find(s => s.id === id);
 
     $.each(STATIONS, function (i, item) {
       $('#stations')
         .append($('<option>', {
           value: item.id,
           text : item.name
-        }))
-        .val(station)
+        }));
     });
+
+    $('#stations').val(station.id);
+    $('#stations-val').text(station.name);
 
     $("#widget").item({
       station: $('#stations').val(), // GHCN-D Station id (required)
@@ -53,6 +61,10 @@
     });
 
     $('#stations').change(() => {
+      var station = STATIONS.find(s => s.id === $('#stations').val());
+
+      $('#stations-val').text(station.name);
+
       $("#widget").item('option', 'station', $('#stations').val()).item('update');
     });
   })

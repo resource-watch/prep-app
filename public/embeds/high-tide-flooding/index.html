@@ -20,23 +20,31 @@
 </head>
 <body>
   <div class="widget-container">
-    <select id="stations"></select>
-    <div id="widget" style="position: relative; height:100%; width: 100%;"></div>
+    <h4 class="stations-select">
+      <span id="stations-val"></span>
+      <select id="stations"></select>
+    </h4>
+    <div id="widget" style="position: relative; height: calc(100% - 75px); width: 100%;"></div>
   </div>
 </body>
 <script>
   $(document).ready(function() {
     var urlParams = new URLSearchParams(window.location.search);
-    var station = urlParams.get('station');
+
+    var id = urlParams.get('station') || STATIONS[0].id;
+    var station = STATIONS.find(s => s.id === id);
+
 
     $.each(STATIONS, function (i, item) {
       $('#stations')
         .append($('<option>', {
           value: item.id,
           text : item.station
-        }))
-        .val(station);
+        }));
     });
+
+    $('#stations').val(station.id);
+    $('#stations-val').text(station.station);
 
     $("#widget").tidalstationwidget({
       station: $('#stations').val(),
@@ -44,8 +52,10 @@
       responsive: true // set to false to disable ChartJS responsive sizing.
     });
 
-
     $('#stations').change(() => {
+      var station = STATIONS.find(s => s.id === $('#stations').val());
+
+      $('#stations-val').text(station.station);
       $("#widget").tidalstationwidget({ station: $('#stations').val() });
     });
   })

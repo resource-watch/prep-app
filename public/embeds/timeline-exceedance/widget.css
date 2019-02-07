@@ -1,18 +1,11 @@
 .fl-item {
-  height: 100%;
+  height: calc(100% - 77px);
   width: 100%;
-  display: -ms-flexbox;
-  display: flex;
   position: relative;
   background: #ffffff;
-  -ms-flex-direction: column;
-      flex-direction: column;
-  -ms-flex-align: center;
-      align-items: center;
-  -ms-flex-pack: center;
-      justify-content: center;
   font-size: 2rem;
-  padding: 1rem; }
+  padding: 1rem;
+}
   .fl-item > .top-buttons {
     position: absolute;
     top: 0;
