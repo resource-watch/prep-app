@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import { MapPopup } from 'wri-api-components/dist/map';
-import { TidalStations, ConusStations } from './templates';
+import { TidalStations, ConusStations, ClimateByLocation } from './templates';
 
 class PopupComponent extends PureComponent {
   static propTypes = {
@@ -67,6 +67,21 @@ class PopupComponent extends PureComponent {
                     id,
                     title: 'Timeline exceedance',
                     src: `/embeds/timeline-exceedance/?station=${data.id}`
+                  }
+                })
+              }
+            />
+          )}
+
+          {id === '0323e372-f9c5-41ca-9d9e-502572634512' && (
+            <ClimateByLocation
+              onModal={() =>
+                setModal({
+                  open: true,
+                  config: {
+                    id,
+                    title: 'Climate by location',
+                    src: `/embeds/climate-by-location/?county=${data.geo_id2}`
                   }
                 })
               }
