@@ -35,19 +35,54 @@
       }
 
       return county;
-    }
+    };
+
+    var groupBy = function(xs, key) {
+      return xs.reduce(function(rv, x) {
+        (rv[x[key]] = rv[x[key]] || []).push(x);
+        return rv;
+      }, {});
+    };
+
+    const COUNTY_BY_STATE = groupBy(COUNTIES, 'name_1');
+    const STATES = Object.keys(COUNTY_BY_STATE).sort(function (a, b) {
+      if (a < b) return -1;
+      if (a > b) return 1;
+      return 0;
+    });
 
     var urlParams = new URLSearchParams(window.location.search);
 
-    var id = Number(urlParams.get('county') || COUNTIES[0].geo_id2);
+    var id = Number(urlParams.get('county') || COUNTY_BY_STATE[STATES[0]][0].geo_id2);
     var county = COUNTIES.find(s => s.geo_id2 === id);
 
-    $.each(COUNTIES, function (i, item) {
+
+    $.each(STATES, function (i, state) {
+      var $optgroup = $("<optgroup label="+ state+ ">");
       $('#counties')
-        .append($('<option>', {
-          value: item.geo_id2,
-          text: item.name_2
+        .append($('<optgroup>', {
+          label: state
         }));
+
+      $.each(COUNTY_BY_STATE[state], function(i, item) {
+        $('#counties')
+          .append(
+            $('<option>', {
+              value: item.geo_id2,
+              text: item.name_2
+            })
+          );
+      })
+
+      $('#counties')
+          .append(
+            $('<option>', {
+              disabled: true,
+              value: null,
+              text: ''
+            })
+          );
+
     });
 
     $('#counties').val(county.geo_id2);
