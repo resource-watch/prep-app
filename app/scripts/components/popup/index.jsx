@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { MapPopup } from 'wri-api-components/dist/map';
 import { TidalStations, ConusStations, ClimateByLocation } from './templates';
 
+import './styles.scss';
+
 class PopupComponent extends PureComponent {
   static propTypes = {
     map: PropTypes.object.isRequired,
@@ -22,13 +24,13 @@ class PopupComponent extends PureComponent {
     if (!data || !latlng) return null;
 
     return (
-      <div className="c-map-popup">
-        <MapPopup
-          map={map}
-          latlng={latlng}
-          data={{ data }}
-        >
-          <table>
+      <MapPopup
+        map={map}
+        latlng={latlng}
+        data={{ data }}
+      >
+        <div className="c-map-popup">
+          <table className="map-popup--table">
             <tbody>
               {Object.keys(data || {}).map(k => (
                 <tr key={k}>
@@ -87,8 +89,8 @@ class PopupComponent extends PureComponent {
               }
             />
           )}
-        </MapPopup>
-      </div>
+        </div>
+      </MapPopup>
     );
   }
 }
