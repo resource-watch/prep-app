@@ -53,8 +53,6 @@
     $('#counties').val(county.geo_id2);
     $('#counties-val').text(county.name_2);
 
-    console.log(convertCounty(county.geo_id2));
-
     $("#widget").climate_by_location({
       'county': convertCounty(county.geo_id2), // A 5-character fips code of a US county, as a string.  Required if `state` not specified.
       'state': null, // A 2-character state abbreviation code of a US state, as a string.  Required if `county` not specified.
