@@ -7,7 +7,7 @@ import BasemapControl from 'components/basemap-control';
 import ShareControl from 'components/share-control';
 import SearchControl from 'components/search-control';
 import { basemapsSpec, labelsSpec, waterSpec, boundariesSpec } from 'components/basemap-control/basemap-control-constants';
-import { LayerManager, Layer } from 'layer-manager/lib/react';
+import { LayerManager, Layer } from 'layer-manager/dist/components';
 import { PluginLeaflet } from 'layer-manager';
 import Map, { MapControls, ZoomControl } from 'wri-api-components/dist/map';
 import Legend, {
@@ -268,40 +268,36 @@ class ExploreMap extends PureComponent {
             return (
               <Fragment>
                 <LayerManager map={map} plugin={PluginLeaflet}>
-                  {(layerManager) => (
-                    activeLayersForMap.map((l) => (
-                      <Layer
-                        key={l.id}
-                        {...l}
-                        // zIndex={l.layerIndex}
-                        layerManager={layerManager}
-                        {...!!l.interactionConfig && l.interactionConfig.output && l.interactionConfig.output.length && {
-                          ...(l.provider === 'carto' || l.provider === 'cartodb') && { interactivity: l.interactionConfig.output.map(o => o.column) },
-                          events: {
-                            click: (e) => {
-                              const { data, latlng } = e;
-                              if (data) {
-                                const result = {};
-                                Object.keys(data).forEach((key) => {
-                                  if (Object.prototype.hasOwnProperty.call(data, key)) {
-                                    const output = l.interactionConfig.output.find((o) => o.column === key);
-                                    result[output.property || output.column] = data[key];
-                                  }
-                                });
-                                setInteractions({
-                                  [l.id]: {
-                                    id: l.id,
-                                    latlng,
-                                    data: result
-                                  }
-                                });
-                              }
+                  {activeLayersForMap.map((l) => (
+                    <Layer
+                      key={l.id}
+                      {...l}
+                      {...!!l.interactionConfig && l.interactionConfig.output && l.interactionConfig.output.length && {
+                        ...(l.provider === 'carto' || l.provider === 'cartodb') && { interactivity: l.interactionConfig.output.map(o => o.column) },
+                        events: {
+                          click: (e) => {
+                            const { data, latlng } = e;
+                            if (data) {
+                              const result = {};
+                              Object.keys(data).forEach((key) => {
+                                if (Object.prototype.hasOwnProperty.call(data, key)) {
+                                  const output = l.interactionConfig.output.find((o) => o.column === key);
+                                  result[output.property || output.column] = data[key];
+                                }
+                              });
+                              setInteractions({
+                                [l.id]: {
+                                  id: l.id,
+                                  latlng,
+                                  data: result
+                                }
+                              });
                             }
                           }
-                        }}
-                      />
-                    ))
-                  )}
+                        }
+                      }}
+                    />
+                  ))}
                 </LayerManager>
                 <MapControls customClass="map-controls">
                   <ZoomControl map={map} customClass="zoom-control" />
