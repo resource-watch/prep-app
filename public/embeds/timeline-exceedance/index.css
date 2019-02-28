@@ -9,6 +9,10 @@ body {
 *:before { box-sizing: border-box; }
 *:after { box-sizing: border-box; }
 
+.widget-container {
+  height: calc(100% - 130px);
+}
+
 .stations-select {
   position: relative;
   display: inline-block;

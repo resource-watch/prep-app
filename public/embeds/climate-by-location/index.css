@@ -8,6 +8,10 @@ body {
   box-sizing: border-box;
 }
 
+.widget-container {
+  height: calc(100% - 130px);
+}
+
 .counties-select {
   position: relative;
   display: inline-block;
