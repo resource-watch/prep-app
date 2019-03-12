@@ -12,14 +12,27 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
 
   <script src="counties.js"></script>
+  <script src="constants.js"></script>
   <script src="widget.js"></script>
 
 </head>
 <body>
-  <h4 class="counties-select">
-    <span id="counties-val"></span>
-    <select id="counties"></select>
-  </h4>
+  <div class="widget-header">
+    <h4 class="widget-select">
+      <span id="counties-val"></span>
+      <select id="counties"></select>
+    </h4>
+
+    <h4 class="widget-select">
+      <span id="variables-val"></span>
+      <select id="variables"></select>
+    </h4>
+
+    <h4 class="widget-select">
+      <span id="frequencies-val"></span>
+      <select id="frequencies"></select>
+    </h4>
+  </div>
 
   <div class="widget-container">
     <div id="widget"></div>
@@ -53,10 +66,18 @@
 
     var urlParams = new URLSearchParams(window.location.search);
 
-    var id = Number(urlParams.get('county') || COUNTY_BY_STATE[STATES[0]][0].geo_id2);
-    var county = COUNTIES.find(s => s.geo_id2 === id);
+    var county_id = Number(urlParams.get('county') || COUNTY_BY_STATE[STATES[0]][0].geo_id2);
+    var county = COUNTIES.find(s => s.geo_id2 === county_id);
 
+    var variable_id = urlParams.get('variable') || VARIABLES[0].id;
+    var variable = VARIABLES.find(v => v.id === variable_id);
 
+    var frequency_id = urlParams.get('frequency') || FREQUENCIES[0].id;
+    var frequency = FREQUENCIES.find(v => v.id === frequency_id);
+
+    var collapsed = urlParams.get('collapsed');
+
+    // COUNTIES
     $.each(STATES, function (i, state) {
       var $optgroup = $("<optgroup label="+ state+ ">");
       $('#counties')
@@ -88,12 +109,47 @@
     $('#counties').val(county.geo_id2);
     $('#counties-val').text(county.name_2);
 
+    // VARIABLES
+    $.each(VARIABLES, function (i, variable) {
+      $('#variables')
+        .append(
+          $('<option>', {
+            value: variable.id,
+            text: variable.name
+          })
+        );
+    });
+
+    $('#variables').val(variable.id);
+    $('#variables-val').text(variable.name);
+
+
+    // FREQUENCIES
+    $.each(FREQUENCIES, function (i, frequency) {
+      $('#frequencies')
+        .append(
+          $('<option>', {
+            value: frequency.id,
+            text: frequency.name
+          })
+        );
+    });
+
+    $('#frequencies').val(frequency.id);
+    $('#frequencies-val').text(frequency.name);
+
+    if(collapsed) {
+      $('#variables').parent().css({ display: 'none' });
+      $('#frequencies').parent().css({ display: 'none' })
+    }
+
+    // WIDGET
     $("#widget").climate_by_location({
       'county': convertCounty(county.geo_id2), // A 5-character fips code of a US county, as a string.  Required if `state` not specified.
       'state': null, // A 2-character state abbreviation code of a US state, as a string.  Required if `county` not specified.
-      'variable': 'tmax', // The id of the variable to display; see climate_widget.variables() below for a way to get a list of variable ids.  Optional; defaults to "tmax".
+      'variable': variable.id, // The id of the variable to display; see climate_widget.variables() below for a way to get a list of variable ids.  Optional; defaults to "tmax".
       'scenario': 'both', //  One of the strings "rcp45", "rcp85", or "both", indicating which scenario(s) to display for projection data.  Optional; defaults to "both".
-      'frequency': 'annual', // One of the strings "annual", "monthly", or "seasonal", indicating which type of data to display.  Optional; defaults to "annual".
+      'frequency': frequency.id, // One of the strings "annual", "monthly", or "seasonal", indicating which type of data to display.  Optional; defaults to "annual".
       'timeperiod': '2025', //One of the strings "2025", "2050", or "2075" (strings not numbers!), indicating which 30-year period of projection data to show for monthly or seasonal data.  Ignored for annual data.
       'pmedian': true, // true or false, indicating whether to show the median line(s) for model projection data
       'hmedian': true, // true or false, indicating whether to show the median line(s) for annual historical model data (applies to annual data only; there is no historical model data for monthly or seasonal data)
@@ -107,11 +163,27 @@
     });
 
     $('#counties').change(() => {
-      var id = Number($('#counties').val());
-      var county = COUNTIES.find(s => s.geo_id2 === id);
+      var county_id = Number($('#counties').val());
+      var county = COUNTIES.find(s => s.geo_id2 === county_id);
 
       $('#counties-val').text(county.name_2);
       $("#widget").climate_by_location({ county: convertCounty(county.geo_id2) });
+    });
+
+    $('#variables').change(() => {
+      var variable_id = $('#variables').val();
+      var variable = VARIABLES.find(v => v.id === variable_id);
+
+      $('#variables-val').text(variable.name);
+      $("#widget").climate_by_location({ variable: variable.id });
+    });
+
+    $('#frequencies').change(() => {
+      var frequency_id = $('#frequencies').val();
+      var frequency = FREQUENCIES.find(v => v.id === frequency_id);
+
+      $('#frequencies-val').text(frequency.name);
+      $("#widget").climate_by_location({ frequency: frequency.id });
     });
 
   })

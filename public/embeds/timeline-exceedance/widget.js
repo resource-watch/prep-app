@@ -200,7 +200,7 @@ $.widget("fernleaf.item", {
                         y: e[1].valid ? e[1].exceedance : Number.NaN
                     }
                 }).sortBy("x").value();
-            this.exceedanceByYear = n, console.log("Valid years: " + t), this._views.$yearlyExceedanceGraph = $("<canvas></canvas>").uniqueId().appendTo(this.element), Chart.plugins.register({
+            this.exceedanceByYear = n, console.log("Valid years: " + t), this._views.$yearlyExceedanceGraph = $("<canvas height='40vh' width='80vw'></canvas>").uniqueId().appendTo(this.element), Chart.plugins.register({
                 beforeDraw: function(e) {
                     var t = e.chart.ctx;
                     t.fillStyle = "white", t.fillRect(0, 0, e.chart.width, e.chart.height)
@@ -218,6 +218,7 @@ $.widget("fernleaf.item", {
                     }]
                 },
                 options: {
+                    maintainAspectRatio: false,
                     animation: {
                         duration: 0
                     },
