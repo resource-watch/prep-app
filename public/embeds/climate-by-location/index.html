@@ -75,6 +75,8 @@
     var frequency_id = urlParams.get('frequency') || FREQUENCIES[0].id;
     var frequency = FREQUENCIES.find(v => v.id === frequency_id);
 
+    var collapsed = urlParams.get('collapsed');
+
     // COUNTIES
     $.each(STATES, function (i, state) {
       var $optgroup = $("<optgroup label="+ state+ ">");
@@ -135,6 +137,11 @@
 
     $('#frequencies').val(frequency.id);
     $('#frequencies-val').text(frequency.name);
+
+    if(collapsed) {
+      $('#variables').parent().css({ display: 'none' });
+      $('#frequencies').parent().css({ display: 'none' })
+    }
 
     // WIDGET
     $("#widget").climate_by_location({

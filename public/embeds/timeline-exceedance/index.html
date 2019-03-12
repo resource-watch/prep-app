@@ -15,14 +15,22 @@
 
   <script src="https://unpkg.com/@ungap/url-search-params"></script>
 
+  <script src="constants.js"></script>
   <script src="stations.js"></script>
   <script src="widget.js"></script>
 </head>
 <body>
-  <h4 class="stations-select">
-    <span id="stations-val"></span>
-    <select id="stations"></select>
-  </h4>
+  <div class="widget-header">
+    <h4 class="widget-select">
+      <span id="stations-val"></span>
+      <select id="stations"></select>
+    </h4>
+
+    <h4 class="widget-select">
+      <span id="variables-val"></span>
+      <select id="variables"></select>
+    </h4>
+  </div>
   <div class="widget-container">
     <div id="widget"></div>
   </div>
@@ -31,9 +39,15 @@
   $(document).ready(function() {
     var urlParams = new URLSearchParams(window.location.search);
 
-    var id = urlParams.get('station') || STATIONS[0].id;
-    var station = STATIONS.find(s => s.id === id);
+    var station_id = urlParams.get('station') || STATIONS[0].id;
+    var station = STATIONS.find(s => s.id === station_id);
 
+    var variable_id = urlParams.get('variable') || VARIABLES[0].id;
+    var variable = VARIABLES.find(v => v.id === variable_id);
+
+    var collapsed = urlParams.get('collapsed');
+
+    // STATIONS
     $.each(STATIONS, function (i, item) {
       $('#stations')
         .append($('<option>', {
@@ -44,6 +58,27 @@
 
     $('#stations').val(station.id);
     $('#stations-val').text(station.name);
+
+    // VARIABLES
+    $.each(VARIABLES, function (i, variable) {
+      $('#variables')
+        .append(
+          $('<option>', {
+            value: variable.id,
+            text: variable.name
+          })
+        );
+    });
+
+    $('#variables').val(variable.id);
+    $('#variables-val').text(variable.name);
+
+
+    if(collapsed) {
+      $('#variables').parent().css({ display: 'none' });
+      $('#frequencies').parent().css({ display: 'none' })
+    }
+
 
     $("#widget").item({
       station: $('#stations').val(), // GHCN-D Station id (required)
@@ -64,8 +99,17 @@
 
       $('#stations-val').text(station.name);
 
-      $("#widget").item('option', 'station', $('#stations').val()).item('update');
+      $("#widget").item('option', 'station', station.id).item('update');
     });
+
+    $('#variables').change(() => {
+      var variable_id = $('#variables').val();
+      var variable = VARIABLES.find(v => v.id === variable_id);
+
+      $('#variables-val').text(variable.name);
+      $("#widget").item('option', 'variable', variable.id).item('update');
+    });
+
   })
 </script>
 

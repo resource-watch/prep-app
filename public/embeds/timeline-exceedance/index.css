@@ -9,11 +9,23 @@ body {
 *:before { box-sizing: border-box; }
 *:after { box-sizing: border-box; }
 
+.widget-header {
+  display: flex;
+}
+
+.widget-header > * {
+  margin-left: 30px;
+}
+
+.widget-header > *:first-child {
+  margin-left: 0px;
+}
+
 .widget-container {
   height: calc(100% - 130px);
 }
 
-.stations-select {
+.widget-select {
   position: relative;
   display: inline-block;
   padding: 30px;
@@ -23,7 +35,7 @@ body {
   font-weight: bold;
 }
 
-.stations-select::after {
+.widget-select::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -37,7 +49,7 @@ body {
   transform-origin: 100% 50%;
 }
 
-.stations-select select {
+.widget-select select {
   position: absolute;
   top: 0;
   left: 0;
