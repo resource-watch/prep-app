@@ -67,7 +67,7 @@ class PopupComponent extends PureComponent {
                   open: true,
                   config: {
                     id,
-                    title: 'Timeline exceedance',
+                    title: 'Temperature and Precipitation Thresholds',
                     src: `/embeds/timeline-exceedance/?station=${data.id}`
                   }
                 })

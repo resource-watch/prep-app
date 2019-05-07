@@ -3,7 +3,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Timeline Exceendance</title>
+  <title>Temperature and Precipitation Thresholds</title>
 
   <link rel="stylesheet" href="index.css" />
   <link rel="stylesheet" href="widget.css" />
@@ -21,14 +21,26 @@
 </head>
 <body>
   <div class="widget-header">
-    <h4 class="widget-select">
+    <h4 class="widget-field -select">
+      <label>Station</label>
       <span id="stations-val"></span>
       <select id="stations"></select>
     </h4>
 
-    <h4 class="widget-select">
+    <h4 class="widget-field -select">
+      <label>Variable</label>
       <span id="variables-val"></span>
       <select id="variables"></select>
+    </h4>
+
+    <h4 class="widget-field">
+      <label>Threshold</label>
+      <input type="number" name="threshold" id="threshold" value="1" step="0.1">
+    </h4>
+
+    <h4 class="widget-field">
+      <label>Window</label>
+      <input type="number" id="window" name="window" value="1">
     </h4>
   </div>
   <div class="widget-container">
@@ -110,6 +122,15 @@
       $("#widget").item('option', 'variable', variable.id).item('update');
     });
 
+    $('#threshold').change(() => {
+      var threshold_val = $('#threshold').val();
+      $("#widget").item('option', 'threshold', threshold_val).item('update');
+    });
+
+    $('#window').change(() => {
+      var window_val = $('#window').val();
+      $("#widget").item('option', 'window', window_val).item('update');
+    });
   })
 </script>
 
