@@ -299,10 +299,15 @@ class ExploreMap extends PureComponent {
                     />
                   ))}
                 </LayerManager>
+
                 <MapControls customClass="map-controls">
                   <ZoomControl map={map} customClass="zoom-control" />
                 </MapControls>
-                <Popup map={map} />
+
+                <Popup
+                  map={map}
+                  layers={activeLayersForMap}
+                />
               </Fragment>
             );
           }}

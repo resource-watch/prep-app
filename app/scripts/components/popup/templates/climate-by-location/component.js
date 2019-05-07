@@ -17,7 +17,7 @@ class ClimateByLocation extends Component {
           type="button"
           onClick={onModal}
         >
-          More info
+          View climate variables
         </button>
       </div>
     );
