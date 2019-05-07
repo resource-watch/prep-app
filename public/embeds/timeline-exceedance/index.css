@@ -42,7 +42,12 @@ body {
   margin: 0 0 5px;
 }
 
-.widget-field input {
+.widget-input {
+  display: flex;
+  align-items: center;
+}
+
+.widget-input input {
   -webkit-appearance: none;
   appearance: none;
   display: block;
@@ -50,8 +55,16 @@ body {
   border: 1px solid #CCC;
   background: #FFF;
   outline: none;
-  width: 50px;
-  padding: 2px 0 2px 5px;
+  width: 40px;
+  padding: 3px 0 3px 5px;
+}
+
+.widget-input .suffix {
+  text-transform: none;
+  font-weight: 400;
+  padding: 4px 4px 5px;
+  background: #CCC;
+  font-size: 10px;
 }
 
 /* SELECT */
