@@ -10,18 +10,24 @@ class PopupComponent extends PureComponent {
   static propTypes = {
     map: PropTypes.object.isRequired,
     interaction: PropTypes.object,
+    layers: PropTypes.array,
     setModal: PropTypes.func.isRequired
   }
 
   static defaultProps = {
+    layers: [],
     interaction: null
   }
 
   render() {
-    const { map, interaction, setModal } = this.props;
+    const { map, interaction, layers, setModal } = this.props;
     const { id, data, latlng } = interaction || {};
 
     if (!data || !latlng) return null;
+
+    const layer = layers.find(l => l.id === id);
+    const { interactionConfig } = layer;
+    const { output } = interactionConfig;
 
     return (
       <MapPopup
@@ -32,13 +38,13 @@ class PopupComponent extends PureComponent {
         <div className="c-map-popup">
           <table className="map-popup--table">
             <tbody>
-              {Object.keys(data || {}).map(k => (
-                <tr key={k}>
+              {output.map(o => (
+                <tr key={o.column}>
                   <th>
-                    {k}
+                    {o.label || o.column}
                   </th>
                   <td>
-                    {data[k]}
+                    {data[o.column]}
                   </td>
                 </tr>
               ))}
@@ -67,7 +73,7 @@ class PopupComponent extends PureComponent {
                   open: true,
                   config: {
                     id,
-                    title: 'Timeline exceedance',
+                    title: 'Temperature and Precipitation Thresholds',
                     src: `/embeds/timeline-exceedance/?station=${data.id}`
                   }
                 })

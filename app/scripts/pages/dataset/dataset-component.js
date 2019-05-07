@@ -95,7 +95,8 @@ class DatasetPage extends PureComponent {
 
     // Metadata
     const metadata = dataset.metadata && dataset.metadata.length ? dataset.metadata[0] : {};
-    const { name, description } = metadata;
+    const { name, description, info = {} } = metadata;
+    const { description: infoDescription } = info;
 
     // Widget editor
     const isWidgetEditor = (dataset.id && dataset.provider !== 'nexgddp' && dataset.provider !== 'loca' && !EXCEPTIONS[dataset.slug]);
@@ -145,7 +146,7 @@ class DatasetPage extends PureComponent {
                   currentSection={currentSection}
                 >
                   <div className="c-article">
-                    <ReactMarkdown source={description} className="c-markdown" />
+                    <ReactMarkdown source={description || infoDescription} className="c-markdown" />
                   </div>
                 </SectionIntro>
 

@@ -26,31 +26,37 @@ body {
 }
 
 
-.widget-select {
+.widget-field {
   position: relative;
   display: inline-block;
-  padding: 30px;
+  padding: 25px;
   margin: 0;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
 }
 
-.widget-select::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: 5px;
-  width: 10px;
-  height: 10px;
-  border-bottom: 2px solid #000;
-  border-right: 2px solid #000;
-  border-radius: 1px;
-  transform: translate(0, -50%) rotate(45deg);
-  transform-origin: 100% 50%;
+.widget-field label {
+  display: block;
+  text-transform: none;
+  font-weight: 400;
+  margin: 0 0 5px;
 }
 
-.widget-select select {
+.widget-field input {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  box-shadow: none;
+  border: 1px solid #CCC;
+  background: #FFF;
+  outline: none;
+  width: 50px;
+  padding: 2px 0 2px 5px;
+}
+
+/* SELECT */
+.widget-field select {
   position: absolute;
   top: 0;
   left: 0;
@@ -58,4 +64,18 @@ body {
   height: 100%;
   z-index: 1;
   opacity: 0;
+}
+
+.widget-field.-select::after {
+  content: "";
+  position: absolute;
+  top: calc(50% + 8px);
+  right: 5px;
+  width: 8px;
+  height: 8px;
+  border-bottom: 2px solid #000;
+  border-right: 2px solid #000;
+  border-radius: 1px;
+  transform: translate(0, -50%) rotate(45deg);
+  transform-origin: 100% 50%;
 }

@@ -17,7 +17,7 @@ class ConusStations extends Component {
           type="button"
           onClick={onModal}
         >
-          More info
+          View threshold exceedance
         </button>
       </div>
     );
