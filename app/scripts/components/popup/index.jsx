@@ -22,11 +22,12 @@ class PopupComponent extends PureComponent {
   render() {
     const { map, interaction, layers, setModal } = this.props;
     const { id, data, latlng } = interaction || {};
+    console.log(id);
 
     if (!data || !latlng) return null;
 
     const layer = layers.find(l => l.id === id);
-    const { interactionConfig } = layer;
+    const { dataset, interactionConfig } = layer;
     const { output } = interactionConfig;
 
     return (
@@ -51,7 +52,7 @@ class PopupComponent extends PureComponent {
             </tbody>
           </table>
 
-          {(id === '3c88ecba-54ce-4add-91d4-7581a1b9ab1a' || id === '8f8e5d8d-a783-434b-b4fe-db4f10ced148') && (
+          {(dataset === '3c88ecba-54ce-4add-91d4-7581a1b9ab1a' || dataset === '8f8e5d8d-a783-434b-b4fe-db4f10ced148') && (
             <TidalStations
               onModal={() =>
                 setModal({
@@ -66,7 +67,7 @@ class PopupComponent extends PureComponent {
             />
           )}
 
-          {id === 'dfda6a1f-77d4-4ba6-8514-0b567d049b34' || id === '038ff32e-9002-433b-bfaf-0db3be9294b4' && (
+          {(dataset === 'dfda6a1f-77d4-4ba6-8514-0b567d049b34' || dataset === '038ff32e-9002-433b-bfaf-0db3be9294b4') && (
             <ConusStations
               onModal={() =>
                 setModal({
@@ -81,7 +82,7 @@ class PopupComponent extends PureComponent {
             />
           )}
 
-          {(id === '0323e372-f9c5-41ca-9d9e-502572634512' || id === 'f559c72b-81b0-466f-9ba5-977332860897') && (
+          {(dataset === '0323e372-f9c5-41ca-9d9e-502572634512' || dataset === 'f559c72b-81b0-466f-9ba5-977332860897') && (
             <ClimateByLocation
               onModal={() =>
                 setModal({
