@@ -25,12 +25,20 @@ const logoImage = '/images/prep-logo.png';
 
 const EXCEPTIONS = {
   // Tidal stations
-  'Tidal-Stations': {
+  '8f8e5d8d-a783-434b-b4fe-db4f10ced148': {
+    src: '/embeds/high-tide-flooding'
+  },
+
+  '409b13ad-eee5-458b-8a26-ba0a17f2d226': {
     src: '/embeds/high-tide-flooding'
   },
 
   // Conus stations
-  'Conus-Stations': {
+  '038ff32e-9002-433b-bfaf-0db3be9294b4': {
+    src: '/embeds/timeline-exceedance'
+  },
+
+  'dfda6a1f-77d4-4ba6-8514-0b567d049b34': {
     src: '/embeds/timeline-exceedance'
   },
 
