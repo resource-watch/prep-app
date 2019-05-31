@@ -1,0 +1,145 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Temperature and Precipitation Thresholds</title>
+
+  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="widget.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha256-KM512VNnjElC30ehFwehXjx1YCHPiQkOPmqnrWtpccM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js" integrity="sha256-N4u5BjTLNwmGul6RgLoESPNqDFVUibVuOYhP4gJgrew=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js" integrity="sha256-8E6QUcFg1KTnpEU8TFGhpTGHw5fJqB9vCms3OhAYLqw=" crossorigin="anonymous"></script>
+
+  <script src="https://unpkg.com/@ungap/url-search-params"></script>
+
+  <script src="constants.js"></script>
+  <script src="stations.js"></script>
+  <script src="widget.js"></script>
+</head>
+<body>
+  <div class="widget-header">
+    <h4 class="widget-field -select">
+      <label>Station</label>
+      <span id="stations-val"></span>
+      <select id="stations"></select>
+    </h4>
+
+    <h4 class="widget-field -select">
+      <label>Variable</label>
+      <span id="variables-val"></span>
+      <select id="variables"></select>
+    </h4>
+
+    <h4 class="widget-field">
+      <label>Threshold</label>
+
+      <div class="widget-input">
+        <input type="number" name="threshold" id="threshold" value="1" step="0.1">
+        <span class="suffix">inches</span>
+      </div>
+    </h4>
+
+    <h4 class="widget-field">
+      <label>Window</label>
+
+      <div class="widget-input">
+        <input type="number" id="window" name="window" value="1">
+        <span class="suffix">days</span>
+      </div>
+    </h4>
+  </div>
+  <div class="widget-container">
+    <div id="widget"></div>
+  </div>
+</body>
+<script>
+  $(document).ready(function() {
+    var urlParams = new URLSearchParams(window.location.search);
+
+    var station_id = urlParams.get('station') || STATIONS[0].id;
+    var station = STATIONS.find(s => s.id === station_id);
+
+    var variable_id = urlParams.get('variable') || VARIABLES[0].id;
+    var variable = VARIABLES.find(v => v.id === variable_id);
+
+    var collapsed = urlParams.get('collapsed');
+
+    // STATIONS
+    $.each(STATIONS, function (i, item) {
+      $('#stations')
+        .append($('<option>', {
+          value: item.id,
+          text : item.name
+        }));
+    });
+
+    $('#stations').val(station.id);
+    $('#stations-val').text(station.name);
+
+    // VARIABLES
+    $.each(VARIABLES, function (i, variable) {
+      $('#variables')
+        .append(
+          $('<option>', {
+            value: variable.id,
+            text: variable.name
+          })
+        );
+    });
+
+    $('#variables').val(variable.id);
+    $('#variables-val').text(variable.name);
+
+
+    if(collapsed) {
+      $('#variables').parent().css({ display: 'none' });
+      $('#frequencies').parent().css({ display: 'none' })
+    }
+
+
+    $("#widget").item({
+      station: $('#stations').val(), // GHCN-D Station id (required)
+      variable: 'precipitation', // Valid values: 'precipitation', 'tmax', 'tmin', 'tavg'
+      threshold: 1.0,
+      thresholdOperator: '>', // Valid values: '==', '>=', '>', '<=', '<'
+      thresholdFilter: '', // Transformations/Filters to support additional units. Valid Values: 'KtoC','CtoK','FtoC','CtoF','InchToCM','CMtoInch'
+      thresholdFunction: undefined, //Pass in a custom function: function(this, values){ return _.sum(values) > v2; }
+      window: 1, // Rolling window size in days.
+      dailyValueValidator: undefined, // Pass in a custom validator predicate function(value, date){return date.slice(0, 4) > 1960 && value > 5 }
+      yearValidator: undefined, // Similar to dailyValueValidator
+      dataAPIEndpoint: "https://data.rcc-acis.org/",
+      barColor: '#307bda' // Color for bars.
+    });
+
+    $('#stations').change(() => {
+      var station = STATIONS.find(s => s.id === $('#stations').val());
+
+      $('#stations-val').text(station.name);
+
+      $("#widget").item('option', 'station', station.id).item('update');
+    });
+
+    $('#variables').change(() => {
+      var variable_id = $('#variables').val();
+      var variable = VARIABLES.find(v => v.id === variable_id);
+
+      $('#variables-val').text(variable.name);
+      $("#widget").item('option', 'variable', variable.id).item('update');
+    });
+
+    $('#threshold').change(() => {
+      var threshold_val = $('#threshold').val();
+      $("#widget").item('option', 'threshold', threshold_val).item('update');
+    });
+
+    $('#window').change(() => {
+      var window_val = $('#window').val();
+      $("#widget").item('option', 'window', window_val).item('update');
+    });
+  })
+</script>
+
+</html>

@@ -19,6 +19,7 @@ import * as AuthModule from 'modules/auth';
 import * as UserModule from 'modules/user';
 import * as PartnersModule from 'modules/partners';
 import * as ShareModalModule from 'components/share-modal';
+import * as EmbedModalModule from 'components/embed-modal';
 
 // Reducers and routes
 import * as reducers from './reducers';
@@ -57,7 +58,8 @@ const componentReducers = {
   auth: handleModule(AuthModule),
   user: handleModule(UserModule),
   partners: handleModule(PartnersModule),
-  shareModal: handleModule(ShareModalModule)
+  shareModal: handleModule(ShareModalModule),
+  embedModal: handleModule(EmbedModalModule)
 };
 
 const pagesReducers = {

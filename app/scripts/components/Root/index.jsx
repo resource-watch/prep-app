@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Modal, Tooltip, Icons } from 'widget-editor';
 import WelcomeModal from '../Modal/WelcomeModal';
 import ShareModalComponent from '../share-modal';
+import EmbedModalComponent from '../embed-modal';
 
 class Root extends React.Component {
   constructor() {
@@ -42,11 +43,12 @@ class Root extends React.Component {
         <Tooltip />
         <Icons />
         <ShareModalComponent />
+        <EmbedModalComponent />
 
         {this.props.children}
 
-        {this.state.modalWelcomeOpen &&
-          <WelcomeModal
+        {this.state.modalWelcomeOpen && (
+<WelcomeModal
             title="Welcome to PREPdata"
             opened={this.state.modalWelcomeOpen}
             close={() => {
@@ -56,7 +58,7 @@ class Root extends React.Component {
             }
             hideCloseButton
           />
-        }
+)}
       </div>
     );
   }
