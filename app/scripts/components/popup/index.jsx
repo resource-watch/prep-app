@@ -81,7 +81,7 @@ class PopupComponent extends PureComponent {
             />
           )}
 
-          {id === '0323e372-f9c5-41ca-9d9e-502572634512' && (
+          {(id === '0323e372-f9c5-41ca-9d9e-502572634512' || 'f559c72b-81b0-466f-9ba5-977332860897') && (
             <ClimateByLocation
               onModal={() =>
                 setModal({

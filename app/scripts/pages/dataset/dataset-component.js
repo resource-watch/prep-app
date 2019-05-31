@@ -24,13 +24,21 @@ import LOCATool from 'components/loca-tool';
 const logoImage = '/images/prep-logo.png';
 
 const EXCEPTIONS = {
+  // Tidal stations
   'Tidal-Stations': {
     src: '/embeds/high-tide-flooding'
   },
+
+  // Conus stations
   'Conus-Stations': {
     src: '/embeds/timeline-exceedance'
   },
-  'United-States-Counties': {
+
+  // Climate by location
+  'f559c72b-81b0-466f-9ba5-977332860897': {
+    src: '/embeds/climate-by-location'
+  },
+  '0323e372-f9c5-41ca-9d9e-502572634512': {
     src: '/embeds/climate-by-location'
   }
 };
@@ -99,7 +107,7 @@ class DatasetPage extends PureComponent {
     const { description: infoDescription } = info;
 
     // Widget editor
-    const isWidgetEditor = (dataset.id && dataset.provider !== 'nexgddp' && dataset.provider !== 'loca' && !EXCEPTIONS[dataset.slug]);
+    const isWidgetEditor = (dataset.id && dataset.provider !== 'nexgddp' && dataset.provider !== 'loca' && !EXCEPTIONS[dataset.id]);
 
     // Page title
     document.title = name;
@@ -170,7 +178,7 @@ class DatasetPage extends PureComponent {
                   <WidgetEditor />
                 }
 
-                {!!EXCEPTIONS[dataset.slug] && (
+                {!!EXCEPTIONS[dataset.id] && (
                   <div className="row">
                     <div className="columns small-12">
                       <iframe
@@ -178,7 +186,7 @@ class DatasetPage extends PureComponent {
                           width: '100%',
                           height: 400
                         }}
-                        src={EXCEPTIONS[dataset.slug].src}
+                        src={EXCEPTIONS[dataset.id].src}
                         title="embed-modal"
                         frameBorder="0"
                       />
