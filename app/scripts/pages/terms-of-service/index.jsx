@@ -17,150 +17,205 @@ class TermsOfService extends React.Component {
           </p>
 
           <p>
-            The World Resources Institute ("WRI") and its suppliers (together
-            with WRI, sometimes referred to as "We") make this PREPdata website,
-            prepdata.org, and the services and content accessible through it
-            (collectively the “Services”) available to You. By using the
-            Services, you agree to be bound by these Terms of Service and any
-            future updates (collectively, the "Terms").
+            Welcome to the WRI family of environmental data platforms. This
+            document lets the user of these Services ("You", "Your") know what
+            you get when you use our websites, and what We expect in return.
+          </p>
+
+          <p>
+            The Services available through Resource Watch, Global Forest Watch,
+            Forest Watcher, and The Partnership for Resilience and Preparedness,
+            and their associated websites, resourcewatch.org,
+            globalforestwatch.org, and prepdata.org, (collectively referred to
+            as the “Services”) are owned and operated by the World Resources
+            Institute (“WRI,” “We,” "Our" or “Us”). By using the Services, You
+            agree to be bound by these Terms of Service and any future updates
+            (collectively, the "Terms").
           </p>
 
           <ol className="c-terms-list">
             <li>
-              <strong>USEAGE</strong>
+              <strong>USAGE</strong>
+
+              <p>
+                We provide You with access to these Services in order to
+                promote better management of natural resources for the
+                betterment of all people.
+              </p>
+
               <ol type="A">
                 <li>
-                  Your use of the Services does not give You any ownership rights
-                  in the intellectual property of the Services or in its
-                  contents.
+                  Please don’t misuse Our Services. You agree to use the
+                  Services and their contents only for lawful purposes and not
+                  to defame, harass or threaten any one or to make available
+                  any obscene, pornographic or offensive material. You may not
+                  use the Services in any manner that could damage or overburden
+                  the Services or interfere with any other party’s use of the
+                  Services.
                 </li>
                 <li>
-                  In order to use most Services, you must register for a PREPdata
-                  account. When you use our application program interfaces
-                  (APIs), each request to an API must include one of your
-                  account's unique API keys.
+                  Your use of the Services does not give You any ownership
+                  rights in the intellectual property in the Services or in its
+                  contents. Some of the software used to provide the Services
+                  may be made available separately under open source licenses.
                 </li>
                 <li>
-                  You agree to attribute the Services.
-                </li>
-                <li>
-                  You are solely responsible for Your use of the Services and all
-                  activity that occurs under Your Account, including any use of
-                  your API keys. You agree to indemnify, hold harmless and, at
-                  our request, defend WRI and our related persons from all
-                  liability arising from Your use of the Services, Your Content
-                  (as defined below), or Your violation of these Terms.
-                </li>
-                <li>
-                  You agree to use the Services and its contents only for lawful
-                  purposes and not to defame, harass or threaten any one or to
-                  make available any obscene, pornographic or offensive material.
-                  You may not use the Services in any manner that could damage or
-                  overburden the Services or interfere with any other party’s use
-                  of the Services.
-                </li>
-                <li>
-                  WRI may change the features and functions of the Services,
-                  including APIs, over time. It is your responsibility to ensure
-                  that your use of the Services is compatible with the
-                  then-current APIs.
-                </li>
-                <li>
-                  WRI may cancel or suspend your access to the Services at any
-                  time and for any reason, without notice. Upon cancellation or
-                  suspension, your right to use the Services will end
-                  immediately. You may not have access to your Content stored on
-                  the Services.
+                  We are constantly trying to improve Our Services. We may
+                  change the features and functions of the Services, including
+                  APIs, over time. It is Your responsibility to ensure that
+                  Your use of the Services is compatible with the current
+                  version.
                 </li>
               </ol>
             </li>
+
+
             <li>
-              <strong>WRI CONTENT AND THIRD-PARTY CONTENT</strong>
+              <strong>ACCOUNTS AND API USAGE</strong>
+
+              <ol type="A">
+                <li>
+                  In order to use many of the Services, You must register for
+                  an account.
+                </li>
+                <li>
+                  When You use Our application program interfaces (“API(s)”),
+                  each request to an API must include one of Your Account's
+                  unique API keys.
+                </li>
+                <li>
+                  Please protect the security of Your Account. You are
+                  responsible for Your use of the Services and all activity
+                  that occurs under Your Account, including any use of Your
+                  Account’s API keys.
+                </li>
+                <li>
+                  If You use Our APIs in Your own products, please credit Us.
+                  You agree to attribute our APIs in line with our Attribution
+                  Requirements, available at
+                  [https://resourcewatch.org/api-attribution-requirements].
+                </li>
+                <li>
+                  We may cancel or suspend Your access to the Services at any
+                  time and for any reason, without notice. Upon cancellation or
+                  suspension, Your right to use the Services will end. You will
+                  have the right to access to Your Content stored on the
+                  Services for a period of fifteen days following cancellation
+                  or suspension; thereafter you may not have access to Your
+                  Content stored on the Services.
+                </li>
+              </ol>
+            </li>
+
+
+            <li>
+              <strong>THIRD-PARTY CONTENT</strong>
+
               <ol type="A">
                 <li>
                   The Services incorporate content, data, and information from
-                  others, including You. While WRI may review any content, and
-                  remove it if it violates the law, these Terms or our policies,
-                  WRI does not commit to review all content, and You should not
-                  rely on WRI to do so.
+                  others, including You. While We may review any content, and
+                  remove it if We determine it violates the law or Our policies,
+                  We do not commit to review all content, and You should not
+                  rely on Us to do so.
                 </li>
                 <li>
-                  All content displayed on or accessible through the Services are
-                  protected by United States copyright laws. Many datasets are
-                  made available under open licenses. Nonetheless, each dataset
-                  carries its own license, which is listed in the dataset
-                  metadata, and on the dataset’s page on the PREPdata website.
-                  You must comply with the licenses of our dataset sources.
+                  Open data is important to Us and we make considerable effort
+                  to make many of the datasets available without restriction
+                  through the Services. Nonetheless, each dataset carries its
+                  own license and restrictions. You should review the dataset’s
+                  metadata to understand these restrictions.
+                </li>
+                <li>
+                  You must comply with the licenses of Our datasets. All content
+                  displayed on or accessible through the Services is protected
+                  by United States copyright laws or their equivalents in other
+                  countries.
                 </li>
               </ol>
             </li>
+
+
             <li>
               <strong>YOUR CONTENT</strong>
               <ol type="A">
                 <li>
-                  Your Content means content owned by or licensed to you that you
-                  submit to WRI or store in the Services. You retain ownership of
-                  Your Content.
+                  Most of Our Services are designed to help You share or publish
+                  Your content. In using Resource Watch, Global Forest Watch,
+                  and The Partnership for Resilience and Preparedness, and
+                  their associated websites, resourcewatch.org,
+                  globalforestwatch.org, and prepdata.org, You may submit data,
+                  information, or other content to the Services (“Your
+                  Content”). You retain ownership of Your Content.
                 </li>
                 <li>
-                  You hereby grant WRI a non-exclusive, worldwide, royalty-free,
-                  transferable right and license (with the right to sublicense),
-                  to use, copy, publish, display, distribute, modify, create
-                  derivative works, and store Your Content and to allow others to
-                  do so, without any obligation to You, even if You stop using
-                  the Services.
+                  Except where expressly prohibited, You understand that We may
+                  use, display, or distribute Your Content even if You stop
+                  using the Services. For the sole purpose of enabling Your
+                  use of the Services, You grant Us a non-exclusive, worldwide,
+                  royalty-free, transferable right and license (with right to
+                  sublicense), to use, copy, display, distribute, modify,
+                  create derivative works, and store Your Content and to allow
+                  others to do so.
                 </li>
               </ol>
             </li>
+
+
             <li>
               <strong>DISCLAIMERS AND LIMITATIONS</strong>
               <ol type="A">
                 <li>
                   YOU AGREE THAT YOUR USE OF THE SERVICES AND ITS CONTENT IS AT
-                  YOUR SOLE RISK. WRI MAKES NO PROMISES OR COMMITMENTS ABOUT THE
-                  SERVICES OR THEIR CONTENT, AND THE SERVICES AND CONTENT ARE
-                  PROVIDED ON AN “AS IS” BASIS AND WITHOUT WARRANTIES OR
-                  REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED. TO THE
-                  FULLEST EXTENT PERMITTED BY LAW, WRI DISCLAIMS ALL WARRANTIES,
-                  STATUTORY, EXPRESS OR IMPLIED, INCLUDING IMPLIED WARRANTIES OF
-                  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND
-                  NON-INFRINGEMENT.
+                  YOUR SOLE RISK. THE SERVICES AND CONTENT ARE PROVIDED ON AN
+                  “AS IS” BASIS AND WITHOUT WARRANTIES OR REPRESENTATIONS OF
+                  ANY KIND, EITHER EXPRESS OR IMPLIED. TO THE FULLEST EXTENT
+                  PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, STATUTORY,
+                  EXPRESS OR IMPLIED, INCLUDING IMPLIED WARRANTIES OF
+                  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE,
+                  AND NON-INFRINGEMENT. ACTUAL CONDITIONS MAY DIFFER FROM MAPS
+                  AND INFORMATION PROVIDED BY THE SERVICES. WE DO NOT WARRANT
+                  THAT THE CONTENT OR SERVICES WILL BE ERROR FREE, ACCURATE OR
+                  WITHOUT INTERRUPTION.
                 </li>
                 <li>
                   WHEN USING THE SERVICES YOU MAY BE EXPOSED TO USER SUBMISSIONS
                   AND OTHER THIRD PARTY CONTENT ("NON-WRI CONTENT"), AND SOME OF
                   THIS CONTENT MAY BE INACCURATE, OFFENSIVE, INDECENT, OR
-                  OTHERWISE OBJECTIONABLE. WE DO NOT ENDORSE ANY NON-WRI CONTENT.
-                  UNDER NO CIRCUMSTANCES WILL WRI BE LIABLE FOR OR IN CONNECTION
-                  WITH THE NON-WRI CONTENT, INCLUDING FOR ANY INACCURACIES,
-                  ERRORS, OR OMISSIONS IN ANY NON-WRI CONTENT, ANY INTELLECTUAL
-                  PROPERTY INFRINGEMENT WITH REGARD TO ANY NON-WRI CONTENT, OR
-                  FOR ANY LOSS OR DAMAGE OF ANY KIND INCURRED AS A RESULT OF THE
-                  USE OF ANY NON-WRI CONTENT.
+                  OTHERWISE OBJECTIONABLE. WE DO NOT ENDORSE ANY NON-WRI
+                  CONTENT. UNDER NO CIRCUMSTANCES WILL WRI BE LIABLE FOR OR IN
+                  CONNECTION WITH THE NON-WRI CONTENT, INCLUDING FOR ANY
+                  INACCURACIES, ERRORS, OR OMISSIONS IN ANY NON-WRI CONTENT, ANY
+                  INTELLECTUAL PROPERTY INFRINGEMENT WITH REGARD TO ANY NON-WRI
+                  CONTENT, OR FOR ANY LOSS OR DAMAGE OF ANY KIND INCURRED AS A
+                  RESULT OF THE USE OF ANY NON-WRI CONTENT.
                 </li>
                 <li>
-                  UNDER NO CIRCUMSTANCES WILL WRI BE LIABLE FOR ANY SPECIAL,
+                  UNDER NO CIRCUMSTANCES WILL WE BE LIABLE FOR ANY SPECIAL,
                   INDIRECT, INCIDENTAL, CONSEQUENTIAL, OR EXEMPLARY DAMAGES
-                  (INCLUDING WITHOUT LIMITATION, LOSS OF PROFITS, DATA, OR USE OR
-                  COST OF COVER) RESULTING FROM YOUR USE OR THE INABILITY TO USE
-                  THE SERVICES OR THEIR CONTENTS, EVEN IF WRI WAS AWARE OF THE
-                  POSSIBILITY OF SUCH DAMAGES. IN NO EVENT WILL WRI HAVE ANY
+                  (INCLUDING WITHOUT LIMITATION, LOSS OF PROFITS, DATA, OR USE
+                  OR COST OF COVER) RESULTING FROM YOUR USE OR THE INABILITY TO
+                  USE THE SERVICES OR THEIR CONTENTS, EVEN IF WE WERE AWARE OF
+                  THE POSSIBILITY OF SUCH DAMAGES. IN NO EVENT WILL WE HAVE ANY
                   LIABILITY TO YOU FOR ALL CLAIMS OR DAMAGES FOR ANY REASON IN
-                  EXCESS OF ONE HUNDRED DOLLARS ($100 USD). CERTAIN JURISDICTIONS
-                  DO NOT ALLOW EXCLUSIONS OR LIMITATIONS ON IMPLIED WARRANTIES OR
-                  LIMITATIONS ON LIABILITY, AND THEREFORE SOME OR ALL OF THE
-                  DISCLAIMERS, EXCLUSIONS, OR LIMITATIONS MAY NOT APPLY TO YOU,
-                  AND YOU MAY HAVE ADDITIONAL RIGHTS.
+                  EXCESS OF ONE HUNDRED DOLLARS ($100 USD). CERTAIN
+                  JURISDICTIONS DO NOT ALLOW EXCLUSIONS OR LIMITATIONS ON
+                  IMPLIED WARRANTIES OR LIMITATIONS ON LIABILITY, AND THEREFORE
+                  SOME OR ALL OF THE DISCLAIMERS, EXCLUSIONS, OR LIMITATIONS MAY
+                   NOT APPLY TO YOU, AND YOU MAY HAVE ADDITIONAL RIGHTS.
                 </li>
               </ol>
             </li>
+
+
             <li>
               <strong>DMCA COMPLIANCE</strong>
               <p>
                 If You are a copyright owner or an agent thereof, and believe
-                that any content on the Services infringes Your copyrights, You
-                may send a notice in writing to World Resources Institute Tel:
-                + 1 (202) 729-7600 E-mail: <a href="mailto:info@prepdata.org">info@prepdata.org</a> with the following information:
+                that any content on the Services infringes Your copyrights,
+                You may send a notice in writing to World Resources Institute
+                Tel: + 1 (202) 729-7600 E-mail: wri-tools@wri.org with the
+                following information:
               </p>
               <ol type="A">
                 <li>
@@ -175,7 +230,8 @@ class TermsOfService extends React.Component {
                   located on the Services;
                 </li>
                 <li>
-                  The address, telephone number, and e-mail address of the complaining party;
+                  The address, telephone number, and e-mail address of the
+                  complaining party;
                 </li>
                 <li>
                   A statement that the complaining party has a good faith belief
@@ -190,29 +246,52 @@ class TermsOfService extends React.Component {
                 </li>
               </ol>
             </li>
+
+
             <li>
               <strong>ADDITIONAL TERMS</strong>
               <ol type="A">
                 <li>
-                  WRI reserves the right to modify these Terms at any time. All
-                  changes are effective immediately upon posting on the PREPdata
-                  website. You should review these terms regularly for changes.
-                  Your continued use of the Services constitutes Your binding
-                  acceptance of the active Terms.
+                  We reserve the right to modify these Terms at any time. All
+                  changes are effective immediately upon posting on the Resource
+                  Watch website. You should review these terms regularly for
+                  changes. Your continued use of the Services after any such
+                  changes constitutes Your binding acceptance of the updated
+                  Terms.
                 </li>
                 <li>
-                  The laws of the State of New York, U.S.A., excluding New York's
-                  conflict of laws provisions, apply to any dispute about the
-                  Services, their content or these Terms. The U.N. Convention on
-                  Contracts for the International Sale of Goods doesn't apply.
-                  All claims arising out of or relating to these Terms will be
-                  litigated exclusively in the courts in and for New York City,
-                  New York, USA, and You consent to the personal jurisdiction of
-                  those courts.
+                  The laws of the State of Delaware, U.S.A., excluding New
+                  York's conflict of laws provisions, apply to any dispute
+                  about the Services, their content or these Terms. The U.N.
+                  Convention on Contracts for the International Sale of Goods
+                  doesn't apply. If we have a disagreement related to these
+                  Terms, or Your or Our performance under them that we cannot
+                  resolve between us, then we agree to have them finally
+                  resolved in arbitration using either (i) the International
+                  Arbitration Rules of the International Dispute Resolution
+                  Centre of the American Arbitration Association, if You are
+                  located outside of the United States, or (ii) the Commercial
+                  Arbitration Rules of the American Arbitration Association, if
+                  You are located in the United States.  We agree to follow this
+                  paragraph if it differs from those rules.  There will be only
+                  one arbitrator if our disagreement involves less than
+                  $250,000.  If our disagreement involves more than $250,000,
+                  then we each appoint one arbitrator, and those two
+                  arbitrators choose a third.  We agree that the arbitrators
+                  will not have the power to award either of us any damages
+                  that are not consistent with Section 5 (Disclaimers and
+                  Limitations) of these Terms. The arbitration will be in
+                  Washington, DC, USA, and will be conducted in English.
+                  Unless we agree or one of us shows its essential, there will
+                  not be any formal discovery in our arbitration.  The
+                  arbitrators can award costs and attorney’s fees against one
+                  of us, or divide them between us.  We understand that any
+                  court with jurisdiction will enforce the decisions from
+                  the arbitration and enter judgment on them.
                 </li>
                 <li>
-                  If WRI does not promptly enforce the Terms, WRI has not given
-                  up any other rights or the right to enforce them or other Terms
+                  If We do not promptly enforce the Terms, We have not given up
+                  any other rights or the right to enforce them or other Terms
                   in the future.
                 </li>
                 <li>
@@ -221,12 +300,12 @@ class TermsOfService extends React.Component {
                   of the Terms.
                 </li>
                 <li>
-                  These Terms are between You and WRI, and no one else can
+                  These Terms are between You and Us, and no one else can
                   enforce them.
                 </li>
                 <li>
                   These Terms are the entire statement of the agreement between
-                  You and WRI regarding the Services and their contents.
+                  You and Us regarding the Services and their contents.
                 </li>
               </ol>
             </li>

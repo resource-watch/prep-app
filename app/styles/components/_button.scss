@@ -247,4 +247,12 @@
   &.-compressed {
     padding: 7px 20px;
   }
+
+  &.-fullwidth {
+    width: 100%;
+  }
+
+  &.-fullheight {
+    height: 100%;
+  }
 }

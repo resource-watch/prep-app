@@ -1,4 +1,4 @@
-FROM node:8.11.2
+FROM node:8.14.0-alpine
 
 ARG datasetEnv=production
 ARG facebookUser=worldresources
@@ -25,13 +25,9 @@ ENV BASEMAP_TILE_URL $basemapUrl
 ENV NODE_ENV $nodeEnv
 ENV GOOGLE_ANALYTICS UA-67196006-2
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    bash git build-essential \
-    automake autoconf make g++ libtool \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    && npm install -g node-gyp --loglevel warn \
-    && mkdir -p /usr/src/app
+RUN apk update && apk add --no-cache \
+    build-base gcc bash git \
+    cairo-dev pango-dev jpeg-dev
 
 WORKDIR /usr/src/app
 
