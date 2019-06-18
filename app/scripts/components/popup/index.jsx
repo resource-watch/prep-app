@@ -22,9 +22,8 @@ class PopupComponent extends PureComponent {
   render() {
     const { map, interaction, layers, setModal } = this.props;
     const { id, data, latlng } = interaction || {};
-    console.log(id);
 
-    if (!data || !latlng) return null;
+    if (!data) return null;
 
     const layer = layers.find(l => l.id === id);
     const { dataset, interactionConfig } = layer;
@@ -42,7 +41,7 @@ class PopupComponent extends PureComponent {
               {output.map(o => (
                 <tr key={o.column}>
                   <th>
-                    {o.label || o.column}
+                    {o.label || o.property || o.column}
                   </th>
                   <td>
                     {data[o.column]}

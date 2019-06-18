@@ -278,18 +278,11 @@ class ExploreMap extends PureComponent {
                           click: (e) => {
                             const { data, latlng } = e;
                             if (data) {
-                              const result = {};
-                              Object.keys(data).forEach((key) => {
-                                if (Object.prototype.hasOwnProperty.call(data, key)) {
-                                  const output = l.interactionConfig.output.find((o) => o.column === key);
-                                  result[output.property || output.column] = data[key];
-                                }
-                              });
                               setInteractions({
                                 [l.id]: {
                                   id: l.id,
                                   latlng,
-                                  data: result
+                                  data
                                 }
                               });
                             }
