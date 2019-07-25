@@ -1,3 +1,7 @@
+import 'babel-polyfill';
+import finallyShim from 'promise.prototype.finally';
+finallyShim.shim();
+
 /* eslint-disable import/first */
 import React from 'react';
 import { render } from 'react-dom';
