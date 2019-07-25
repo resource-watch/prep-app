@@ -1,6 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
+  namespace: prep
   labels:
     name: {name}-preproduction
   name: {name}-preproduction
