@@ -115,6 +115,7 @@ const confirmLogOut = (routes) => {
 
 function Routes(props) {
   const { history } = props;
+
   return (
     <Router
       history={history}
