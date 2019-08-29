@@ -43,7 +43,7 @@ export const getParsedCoreDatasets = createSelector(
             id: (j + 1) + ((i + 1) * 10),
             datasets: subgroup.dataset_ids,
             slug: subgroup.tags,
-            title: subgroup.subcategory
+            title: subgroup.subcategory === 'Precipitations' ? 'Precipitation' : subgroup.subcategory // I can't change it from API
           };
         }
         return null;
