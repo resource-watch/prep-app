@@ -1,0 +1,16 @@
+.c-gdpr-banner {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  background-color: $white;
+  color: $black;
+
+  @media screen and (min-width: $bp-large) {
+    max-height: 70px;
+  }
+
+  a {
+    color: $black;
+    text-decoration: underline;
+  }
+}
