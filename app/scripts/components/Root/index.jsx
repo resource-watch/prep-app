@@ -4,6 +4,7 @@ import { Modal, Tooltip, Icons } from 'widget-editor';
 import WelcomeModal from '../Modal/WelcomeModal';
 import ShareModalComponent from '../share-modal';
 import EmbedModalComponent from '../embed-modal';
+import GDPRBanner from '../gdpr-banner';
 
 class Root extends React.Component {
   constructor() {
@@ -39,11 +40,13 @@ class Root extends React.Component {
   render() {
     return (
       <div style={{ height: '100%' }}>
+
         <Modal />
         <Tooltip />
         <Icons />
         <ShareModalComponent />
         <EmbedModalComponent />
+        <GDPRBanner />
 
         {this.props.children}
 

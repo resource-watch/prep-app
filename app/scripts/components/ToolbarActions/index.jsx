@@ -49,7 +49,7 @@ class ToolbarActions extends React.Component {
           </Link>
         </div>
         <div className="right">
-          {this.props.currentSection === 'explore' && this.props.downloadUrl &&
+          {/* {this.props.currentSection === 'explore' && this.props.downloadUrl &&
             <a
               href={this.props.downloadUrl}
               target="_blank"
@@ -59,7 +59,7 @@ class ToolbarActions extends React.Component {
               <Icon name="icon-download" className="-medium" />
               Download
             </a>
-          }
+          } */}
 
           <Button
             click={() => this.setShareModal(window.location.href, 'page')}
