@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
 import { toastr } from 'react-redux-toastr';
+import { Link } from 'react-router';
 
 // services
 import UserService from 'services/user-service';
@@ -48,13 +49,19 @@ class User extends React.PureComponent {
           <Avatar user={data} /> :
           (
             <div className="user-empty">
-              <Icon name="icon-user" className="-extra-large" />
+              <Link to="/sign-in">
+                <Icon name="icon-user" className="-extra-large" />
+              </Link>
             </div>
           )
         }
-        { active &&
-          <UserOptions handleLogOut={e => User.handleLogOut(e)} session={session} data={data} />
-        }
+        {(active && session) && (
+          <UserOptions
+            handleLogOut={e => User.handleLogOut(e)}
+            session={session}
+            data={data}
+          />
+        )}
       </div>
     );
   }
