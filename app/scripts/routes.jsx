@@ -17,6 +17,7 @@ import FAQ from './pages/FAQ';
 import TermsOfService from './pages/terms-of-service';
 import PrivacyPolicy from './pages/privacy-policy';
 import HowTo from './pages/how-to';
+import SignInPage from './pages/sign-in';
 import Dashboards from './containers/Dashboards';
 import DashboardsDetail from './containers/Dashboards/DashboardDetail';
 import Insights from './containers/Insights';
@@ -107,6 +108,10 @@ const requireAuth = (nextState, replace) => {
   }
 };
 
+const checkLogin = (nextState, replace) => {
+  if (window.localStorage.token) replace(`/myprep?token=${window.localStorage.token}`)
+}
+
 const confirmLogOut = (routes) => {
   const { logout } = routes.location.query;
   if (!logout) return;
@@ -138,6 +143,8 @@ function Routes(props) {
           <Route path="auth" component={Auth} />
           <Route path="myprep" onEnter={requireAuth} component={Home} />
         </Route>
+
+        <Route path="sign-in" onEnter={checkLogin} component={SignInPage} />
 
         <Route path="partners/:id" component={PartnerDetail} />
         <Route path="explore" component={ExplorePage} />
