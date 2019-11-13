@@ -16,6 +16,10 @@ $banner-small-height: 400px;
   background-size: cover;
   background-repeat: no-repeat;
 
+  &.-fullscreen {
+    height: 100vh;
+  }
+
   &.-big,
   &.-small {
     padding-bottom: 0;
