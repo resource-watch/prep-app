@@ -3,8 +3,8 @@ kind: Service
 metadata:
   namespace: prep
   labels:
-    name: {name}
-  name: {name}
+    name: prep-app
+  name: prep-app
 spec:
   ports:
   - name: http
@@ -12,4 +12,4 @@ spec:
     port: 80
     targetPort: 3000
   selector:
-    name: {name}
+    name: prep-app
