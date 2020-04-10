@@ -12,11 +12,6 @@ spec:
       labels:
         name: prep-app
     spec:
-      tolerations:
-      - key: "type"
-        operator: "Equal"
-        value: "webapps"
-        effect: "NoSchedule"
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
