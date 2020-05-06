@@ -3,7 +3,7 @@ FROM node:8.14.0-alpine
 ARG datasetEnv=production
 ARG facebookUser=worldresources
 ARG twitterUser=worldresources
-ARG apiUrl=https://prepdata.org/api
+ARG apiUrl=https://www.prepdata.org/api
 ARG assetsUrl=
 ARG rwApiUrl=https://api.resourcewatch.org/v1
 ARG basemapUrl=https://api.mapbox.com/styles/v1/resourcewatch/cjjr8d2qw19y92smuuzydlpdv/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmVzb3VyY2V3YXRjaCIsImEiOiJjajFlcXZhNzcwMDBqMzNzMTQ0bDN6Y3U4In0.FRcIP_yusVaAy0mwAX1B8w
