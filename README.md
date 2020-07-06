@@ -8,6 +8,16 @@ The Climate Partnership for Resilience and Preparedness (C-PREP) is a public-pri
 
 Today, with growing demand to manage climate risks, assessments need to move beyond making the case for action through words and pictures, to enabling action by guiding users to relevant data and tools. To meet this need, C-PREP will leverage innovations in information and communication technology to enable climate assessment and planning teams to easily develop on-line reports with direct access to useable, continuously updated information, through customizable modern web and mobile apps. It will also provide the building blocks for countries, states, and communities to develop their own climate-risk dashboards: customized online sites containing data, information, tools, and other dynamic resources needed to mainstream climate-risk information into planning and investment decisions.
 
+## Dependencies
+
+Dependencies on other Microservices:
+- [Control Tower](https://github.com/resource-watch/control-tower)
+- [Dataset](https://github.com/resource-watch/dataset/)
+- [Geostore](https://github.com/gfw-api/gfw-geostore-api)
+- [Graph Client](https://github.com/resource-watch/graph-client/)
+- [Layer](https://github.com/resource-watch/layer)
+- [Vocabulary](https://github.com/resource-watch/vocabulary-tag/)
+- [Widget](https://github.com/resource-watch/widget)
 
 ## Install
 
