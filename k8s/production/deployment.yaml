@@ -1,12 +1,21 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: prep
   labels:
     name: prep-app
   name: prep-app
+  namespace: prep
 spec:
+  progressDeadlineSeconds: 2147483647
   revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      name: prep-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -23,8 +32,7 @@ spec:
                 - webapps
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
+          - podAffinityTerm:
               labelSelector:
                 matchExpressions:
                 - key: name
@@ -32,63 +40,71 @@ spec:
                   values:
                   - prep-app
               topologyKey: kubernetes.io/hostname
+            weight: 100
       containers:
-      - name: prep-app
+      - env:
+        - name: PORT
+          value: "3000"
+        - name: NODE_ENV
+          value: production
+        - name: SHORT_URL_API_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: PREP_SHORT_URL_API_TOKEN
+              name: appsecrets
+        - name: SPARKPOST_API_KEY
+          valueFrom:
+            secretKeyRef:
+              key: PREP_SPARKPOST_API_KEY
+              name: appsecrets
+        - name: MAIL_RECIPIENTS
+          valueFrom:
+            secretKeyRef:
+              key: PREP_MAIL_RECIPIENTS
+              name: appsecrets
+        - name: MAIL_FROM
+          valueFrom:
+            secretKeyRef:
+              key: PREP_MAIL_FROM
+              name: appsecrets
+        - name: TWITTER_CONSUMER_KEY
+          valueFrom:
+            secretKeyRef:
+              key: PREP_TWITTER_CONSUMER_KEY
+              name: appsecrets
+        - name: TWITTER_CONSUMER_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: PREP_TWITTER_CONSUMER_SECRET
+              name: appsecrets
+        - name: TWITTER_ACCESS_TOKEN_KEY
+          valueFrom:
+            secretKeyRef:
+              key: PREP_TWITTER_ACCESS_TOKEN_KEY
+              name: appsecrets
+        - name: TWITTER_ACCESS_TOKEN_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: PREP_TWITTER_ACCESS_TOKEN_SECRET
+              name: appsecrets
         image: vizzuality/prep-app
         imagePullPolicy: Always
+        name: prep-app
+        ports:
+        - containerPort: 3000
+          protocol: TCP
         resources:
-          requests:
-            cpu: "0.5"
-            memory: "256M"
           limits:
             cpu: "1"
-            memory: "512M"
-        env:
-          - name: PORT
-            value: "3000"
-          - name: NODE_ENV
-            value: production
-          - name: SHORT_URL_API_TOKEN
-            valueFrom:
-                secretKeyRef:
-                  name: appsecrets
-                  key: PREP_SHORT_URL_API_TOKEN
-          - name: SPARKPOST_API_KEY
-            valueFrom:
-                secretKeyRef:
-                  name: appsecrets
-                  key: PREP_SPARKPOST_API_KEY
-          - name: MAIL_RECIPIENTS
-            valueFrom:
-                secretKeyRef:
-                  name: appsecrets
-                  key: PREP_MAIL_RECIPIENTS
-          - name: MAIL_FROM
-            valueFrom:
-                secretKeyRef:
-                  name: appsecrets
-                  key: PREP_MAIL_FROM
-          - name: TWITTER_CONSUMER_KEY
-            valueFrom:
-                secretKeyRef:
-                  name: appsecrets
-                  key: PREP_TWITTER_CONSUMER_KEY
-          - name: TWITTER_CONSUMER_SECRET
-            valueFrom:
-                secretKeyRef:
-                  name: appsecrets
-                  key: PREP_TWITTER_CONSUMER_SECRET
-          - name: TWITTER_ACCESS_TOKEN_KEY
-            valueFrom:
-                secretKeyRef:
-                  name: appsecrets
-                  key: PREP_TWITTER_ACCESS_TOKEN_KEY
-          - name: TWITTER_ACCESS_TOKEN_SECRET
-            valueFrom:
-                secretKeyRef:
-                  name: appsecrets
-                  key: PREP_TWITTER_ACCESS_TOKEN_SECRET
-        ports:
-          - containerPort: 3000
-
+            memory: 512M
+          requests:
+            cpu: 500m
+            memory: 256M
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
       restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status: {}
