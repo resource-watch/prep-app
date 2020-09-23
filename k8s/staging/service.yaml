@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: prep
+  labels:
+    name: prep-app-staging
+  name: prep-app-staging
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 3000
+  selector:
+    name: prep-app-staging

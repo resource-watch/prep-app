@@ -55,7 +55,6 @@ node {
         case "develop":
           sh("echo Deploying to PROD cluster")
           sh("kubectl config use-context gke_${GCLOUD_PROJECT}_${GCLOUD_GCE_ZONE}_${KUBE_PROD_CLUSTER}")
-          sh("sed -i -e 's/{name}/${appName}/g' k8s/staging/*.yaml")
           sh("kubectl apply -f k8s/staging/")
           sh("kubectl set image deployment ${appName}-staging ${appName}-staging=${imageTag} --namespace=prep --record")
           break
