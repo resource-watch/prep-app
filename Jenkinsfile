@@ -21,9 +21,6 @@ node {
         case "develop":
           sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production,preproduction --build-arg apiUrl=https://staging.prepdata.org/api --build-arg basemapUrl=https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png --build-arg rwApiUrl=https://staging-api.globalforestwatch.org/v1 --build-arg callbackUrl=https://staging.prepdata.org/auth .")
           break
-        case "preproduction":
-          sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production,preproduction --build-arg apiUrl=https://preproduction.prepdata.org/api --build-arg callbackUrl=https://preproduction.prepdata.org/auth .")
-          break
         case "master":
           sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production --build-arg apiUrl=https://www.prepdata.org/api .")
           sh("docker -H :2375 build -t ${dockerUsername}/${appName}:latest --build-arg datasetEnv=production --build-arg apiUrl=https://www.prepdata.org/api .")
@@ -53,6 +50,15 @@ node {
 
     stage ("Deploy Application") {
       switch ("${env.BRANCH_NAME}") {
+
+        // Roll out to staging
+        case "develop":
+          sh("echo Deploying to PROD cluster")
+          sh("kubectl config use-context gke_${GCLOUD_PROJECT}_${GCLOUD_GCE_ZONE}_${KUBE_PROD_CLUSTER}")
+          sh("sed -i -e 's/{name}/${appName}/g' k8s/staging/*.yaml")
+          sh("kubectl apply -f k8s/staging/")
+          sh("kubectl set image deployment ${appName}-staging ${appName}-staging=${imageTag} --namespace=prep --record")
+          break
 
         // Roll out to production
         case "master":
