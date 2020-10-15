@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import LegendActions from './legend-actions';
 import LegendNexGDDPToolbar from './legend-nexgddp-toolbar';
+import LegendNexGDDPGeeToolbar from './legend-nexgddp-gee-toolbar';
 import LegendLOCAToolbar from './legend-loca-toolbar';
 import LegendBasic from './legend-types/legend-basic/LegendBasic';
 import LegendChoropleth from './legend-types/legend-choropleth/LegendChoropleth';
@@ -12,6 +13,7 @@ import './legend-style.scss';
 class Legend extends PureComponent {
   getLegendToolbar() {
     const { layerSpec, onMultiLayer } = this.props;
+    /* TO DO change 3 conditions when datasets get ready */
     if (layerSpec.provider === 'nexgddp') {
       return (
         <LegendNexGDDPToolbar
@@ -27,6 +29,15 @@ class Legend extends PureComponent {
         />
       );
     }
+    else if (layerSpec.provider === 'new') {
+      return (
+        <LegendNexGDDPGeeToolbar
+          layerSpec={layerSpec}
+          onMultiLayer={onMultiLayer}
+        />
+      );
+    }
+
     return null;
   }
 

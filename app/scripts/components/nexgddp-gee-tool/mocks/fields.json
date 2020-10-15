@@ -1,0 +1,44 @@
+{
+  "tableName": "nex_tasavg_decadal",
+  "bands": {
+    "q25": {
+      "swe:Quantity": {
+        "swe:uom": {
+          "code": "10^0"
+        }
+      }
+    },
+    "q50": {
+      "swe:Quantity": {
+        "swe:uom": {
+          "code": "10^0"
+        }
+      }
+    },
+    "q75": {
+      "swe:Quantity": {
+        "swe:uom": {
+          "code": "10^0"
+        }
+      }
+    }
+  },
+  "fields": [
+    "Lat",
+    "Long",
+    "Date",
+    "Scenarios"
+  ],
+  "meta": {
+    "srs": {
+      "srsDimension": "3",
+      "srs": "crs-compound?1=http://localhost:8080/def/crs/EPSG/0/4326&2=http://localhost:8080/def/crs/OGC/0/AnsiDate"
+    },
+    "coverageBounds": {
+      "Lat": [-90, 90],
+      "Long": [-180, 180],
+      "Date": ["1950-01-01T00:00:00.000Z", "2100-01-01T00:00:00.000Z"],
+      "Scenarios": ["rcp45", "rcp85"]
+    }
+  }
+}

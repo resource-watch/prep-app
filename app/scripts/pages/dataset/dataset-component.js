@@ -19,6 +19,7 @@ import SimpleMap from 'containers/SimpleMap/SimpleMap';
 import LoadingSpinner from 'components/Loading/LoadingSpinner';
 
 import NexGDDPTool from 'components/nexgddp-tool/NexGDDPTool';
+import NexGDDPGeeTool from 'components/nexgddp-gee-tool/NexGDDPGeeTool';
 import LOCATool from 'components/loca-tool';
 
 const logoImage = '/images/prep-logo.png';
@@ -165,19 +166,29 @@ class DatasetPage extends PureComponent {
                     <ReactMarkdown source={description || infoDescription} className="c-markdown" />
                   </div>
                 </SectionIntro>
-
-                {(dataset.id && dataset.provider === 'loca') && (
-                  <div className="row">
-                    <div className="columns small-12">
-                      <LOCATool dataset={dataset} />
+                {/* TO DO change condition when datasets get ready */}
+                {(dataset.id && dataset.provider !== 'loca'
+                  && dataset.id !== 'ea6a5948-c0e1-4312-aada-7e2f4e9b9f23') && (
+                    <div className="row">
+                      <div className="columns small-12">
+                        <LOCATool dataset={dataset} />
+                      </div>
                     </div>
-                  </div>
-                )}
-
-                {(dataset.id && dataset.provider === 'nexgddp') &&(
+                  )}
+                {/* TO DO change condition when datasets get ready */}
+                {(dataset.id && dataset.provider === 'nexgddp'
+                  && dataset.id !== 'ea6a5948-c0e1-4312-aada-7e2f4e9b9f23') && (
+                    <div className="row">
+                      <div className="columns small-12">
+                        <NexGDDPTool dataset={dataset} />
+                      </div>
+                    </div>
+                  )}
+                {/* TO DO change condition when datasets get ready */}
+                {(dataset.id !== 'ea6a5948-c0e1-4312-aada-7e2f4e9b9f23') && (
                   <div className="row">
                     <div className="columns small-12">
-                      <NexGDDPTool dataset={dataset} />
+                      <NexGDDPGeeTool dataset={dataset} />
                     </div>
                   </div>
                 )}

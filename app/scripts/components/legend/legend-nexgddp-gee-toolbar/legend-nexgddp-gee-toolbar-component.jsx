@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
-import './legend-nexgddp-toolbar-style.scss';
+import './legend-nexgddp-gee-toolbar-style.scss';
 
-class LegendNexGDDPToolbar extends PureComponent {
+class LegendNexGDDPGeeToolbar extends PureComponent {
   static propTypes = {
     layerSpec: PropTypes.object,
     onMultiLayer: PropTypes.func
@@ -37,6 +37,7 @@ class LegendNexGDDPToolbar extends PureComponent {
     const { layerConfig } = layerSpec;
     const { indicator } = layerConfig;
     const url = `${config.apiUrlRW}/nexgddp/info/${indicator}`;
+
     fetch(url, {
       headers: {
         'Content-Type': 'application/json',
@@ -114,8 +115,6 @@ class LegendNexGDDPToolbar extends PureComponent {
 
   render() {
     const {
-      temporalResolution,
-      temporalResolutionOptions,
       period,
       periodsOptions,
       scenario,
@@ -123,19 +122,7 @@ class LegendNexGDDPToolbar extends PureComponent {
     } = this.state;
 
     return (
-      <div className="c-legend-nexgddp-toolbar">
-        {temporalResolutionOptions && (
-          <Select
-            name="temporal_resolution"
-            value={temporalResolution}
-            options={temporalResolutionOptions}
-            onChange={this.onResolutionChange}
-            menuPosition="fixed"
-            menuShouldBlockScroll
-            className="c-toolbar-select"
-            classNamePrefix="react-select"
-          />
-        )}
+      <div className="c-legend-nexgddp-gee-toolbar">
         {periodsOptions && (
           <Select
             name="periods"
@@ -165,4 +152,4 @@ class LegendNexGDDPToolbar extends PureComponent {
   }
 }
 
-export default LegendNexGDDPToolbar;
+export default LegendNexGDDPGeeToolbar;

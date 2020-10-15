@@ -4,20 +4,19 @@ import { connect } from 'react-redux';
 import Icon from 'components/ui/Icon';
 import ScenarioSelect from './scenario-select';
 import DateRangeSelect from './date-range-select/DateRangeSelect';
-import TempResolutionSelect from './temp-resolution-select';
 import { CompareMap, ToggleMap, DifferenceMap, SimpleMap } from './tool-map';
 import LocationSearch from './location-search/LocationSearch';
 import TimeseriesChart from './tool-chart/TimeseriesChart';
 
 // Redux
-import { getSelectorsInfo, getUrlState, setDefaultState, setMapMode, resetState, setDataset } from 'actions/locatool';
+import { getSelectorsInfo, getUrlState, setDefaultState, setMapMode, resetState, setDataset } from 'actions/nexgddptool';
 
 // Component
 import Spinner from 'components/Loading/LoadingSpinner';
 
 import './style.scss';
 
-class LOCATool extends React.PureComponent {
+class NexGDDPGeeTool extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = { loading: true };
@@ -49,21 +48,16 @@ class LOCATool extends React.PureComponent {
     const { loading } = this.state;
 
     return (
-      <div className="c-nexgddp-tool">
+      <div className="c-nexgddp-gee-tool">
         { loading && <Spinner inner /> }
-
         <div className="filters">
           <div className="row">
             <div className="columns small-12 medium-4">
-              <label htmlFor="nexgddp-temp-resolution-select">Temporal resolution</label>
-              <TempResolutionSelect />
-            </div>
-            <div className="columns small-12 medium-4">
-              <label htmlFor="nexgddp-date-range-select">Date(s)</label>
+              <label htmlFor="nexgddp-gee-date-range-select">Date(s)</label>
               <DateRangeSelect />
             </div>
             <div className="columns small-12 medium-4">
-              <label htmlFor="nexgddp-scenario-select">Scenario</label>
+              <label htmlFor="nexgddp-gee-scenario-select">Scenario</label>
               <ScenarioSelect />
             </div>
           </div>
@@ -153,7 +147,7 @@ class LOCATool extends React.PureComponent {
   }
 }
 
-LOCATool.propTypes = {
+NexGDDPGeeTool.propTypes = {
   embed: PropTypes.bool,
   getSelectorsInfo: PropTypes.func,
   restoreState: PropTypes.func,
@@ -171,11 +165,11 @@ LOCATool.propTypes = {
 
 const mapStateToProps = state => ({
   open: state.shareModal.open,
-  render: state.locatool.render,
-  marker: state.locatool.marker,
-  isComparing: !!state.locatool.range2.selection,
-  mapMode: state.locatool.mapMode,
-  indicatorDataset: state.locatool.indicatorDataset
+  render: state.nexgddptool.render,
+  marker: state.nexgddptool.marker,
+  isComparing: !!state.nexgddptool.range2.selection,
+  mapMode: state.nexgddptool.mapMode,
+  indicatorDataset: state.nexgddptool.indicatorDataset
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -187,4 +181,4 @@ const mapDispatchToProps = dispatch => ({
   setDataset: (...params) => dispatch(setDataset(...params))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LOCATool);
+export default connect(mapStateToProps, mapDispatchToProps)(NexGDDPGeeTool);
