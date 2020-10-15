@@ -17,7 +17,10 @@ import Legend, {
 } from 'wri-api-components/dist/legend';
 import LegendNexGDDPToolbar from './legend-nexgddp-toolbar';
 import LegendLOCAToolbar from './legend-loca-toolbar';
+import LegendNexGDDPGeeToolbar from './legend-nexgddp-gee-toolbar';
 import Popup from './explore-map-popup';
+
+import { NEXGDDPDatasetsGeeProvider } from '../core-datasets-list/core-datasets-list-constants';
 // import { updateActiveDatasets } from '../explore-datasets-list/explore-datasets-list-reducers';
 
 class ExploreMap extends PureComponent {
@@ -148,7 +151,10 @@ class ExploreMap extends PureComponent {
 
   getLegendToolbar(layerActive) {
     const { setMultiActiveLayer } = this.props;
-    if (layerActive.provider === 'nexgddp') {
+    const NEXGDDP_GeeProvider = NEXGDDPDatasetsGeeProvider.filter(l => l === layerActive.id);
+
+    // To DO: change conditions when new datasets get ready
+    if (layerActive.provider === 'gee' && !NEXGDDP_GeeProvider.length) {
       return (
         <LegendNexGDDPToolbar
           layerSpec={layerActive}
@@ -156,9 +162,17 @@ class ExploreMap extends PureComponent {
         />
       );
     }
-    if (layerActive.provider === 'loca') {
+    if (layerActive.provider === 'loca' && !NEXGDDP_GeeProvider.length) {
       return (
         <LegendLOCAToolbar
+          layerSpec={layerActive}
+          onMultiLayer={l => setMultiActiveLayer({ ...l, layerId: layerActive.id })}
+        />
+      );
+    }
+    if (NEXGDDP_GeeProvider.length) {
+      return (
+        <LegendNexGDDPGeeToolbar
           layerSpec={layerActive}
           onMultiLayer={l => setMultiActiveLayer({ ...l, layerId: layerActive.id })}
         />

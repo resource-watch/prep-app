@@ -20,6 +20,7 @@ import SimpleMap from '../../containers/SimpleMap/SimpleMap';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 
 import NexGDDPTool from '../nexgddp-tool/NexGDDPTool';
+import NexGDDPGeeTool from '../nexgddp-tool/NexGDDPGeeTool';
 import LOCATool from '../loca-tool';
 
 const logoImage = '/images/prep-logo.png';
@@ -40,7 +41,7 @@ class DatasetDetail extends React.PureComponent {
     let url = null;
     let metadataUrl = null;
     if (data.metadata && data.metadata.length &&
-        data.metadata[0].attributes.info.data_download) {
+      data.metadata[0].attributes.info.data_download) {
       metadataUrl = data.metadata[0].attributes.info.data_download;
     }
     switch (data.provider) {
@@ -149,8 +150,6 @@ class DatasetDetail extends React.PureComponent {
     const widget = dataset.widget || [];
     const defaultEditableWidget = widget.find(w => w.defaultEditableWidget === true);
 
-    console.log(data, metaData);
-
     return (
       <div>
         <SectionIntro data={data} downloadUrl={DatasetDetail.getDownloadUrl(this.props.data)} currentSection={currentSection} >
@@ -159,17 +158,26 @@ class DatasetDetail extends React.PureComponent {
           </div>
         </SectionIntro>
 
-        {(dataset.id && dataset.provider === 'loca') &&
+        {/* TO DO change conditions when new datasets get ready */}
+
+        {(dataset.id && dataset.provider === 'loca' && dataset.id !== 'ea6a5948-c0e1-4312-aada-7e2f4e9b9f23') &&
           <div className="row">
             <div className="columns small-12">
               <LOCATool dataset={dataset} />
             </div>
           </div>}
 
-        {(dataset.id && dataset.provider === 'nexgddp') &&
+        {(dataset.id && dataset.provider === 'nexgddp' && dataset.id !== 'ea6a5948-c0e1-4312-aada-7e2f4e9b9f23') &&
           <div className="row">
             <div className="columns small-12">
               <NexGDDPTool dataset={dataset} />
+            </div>
+          </div>}
+
+        {(dataset.id === 'ea6a5948-c0e1-4312-aada-7e2f4e9b9f23') &&
+          <div className="row">
+            <div className="columns small-12">
+              <NexGDDPGeeTool dataset={dataset} />
             </div>
           </div>}
 
