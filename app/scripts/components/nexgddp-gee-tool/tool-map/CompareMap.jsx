@@ -6,7 +6,7 @@ import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 
 // Redux
-import { getLayers, getRawLayers } from 'selectors/nexgddptool';
+import { getLayers, getRawLayers } from 'selectors/nexgddpgeetool';
 import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setWater, setMarkerMode } from 'actions/nexgddptool';
 import * as shareModalActions from 'components/share-modal/share-modal-actions';
 import { toggleTooltip } from 'actions/tooltip';
@@ -16,8 +16,8 @@ import Legend from 'components/legend';
 import BasemapControl from 'components/basemap-control';
 import { basemapsSpec, labelsSpec, boundariesSpec, waterSpec } from 'components/basemap-control/basemap-control-constants';
 import Icon from 'components/ui/Icon';
-import ShareNexgddpTooltip from 'components/Tooltip/ShareNexgddpTooltip';
-import PositionControlTooltip from 'components/nexgddp-tool/position-control-tooltip';
+import ShareNexgddpgeeTooltip from 'components/Tooltip/ShareNexgddpgeeTooltip';
+import PositionControlTooltip from 'components/nexgddp-gee-tool/position-control-tooltip';
 
 const mapDefaultOptions = {
   center: [20, -30],
@@ -138,7 +138,7 @@ class CompareMap extends React.PureComponent {
         y: window.scrollY + e.clientY
       },
       direction: 'bottom',
-      children: ShareNexgddpTooltip,
+      children: ShareNexgddpgeeTooltip,
       childrenProps: {
         render: 'map',
         getWidgetConfig: () => new Promise((resolve) => {
@@ -348,14 +348,14 @@ CompareMap.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  map: state.nexgddptool.map,
-  marker: state.nexgddptool.marker,
-  markerMode: state.nexgddptool.markerMode,
+  map: state.nexgddptoolgee.map,
+  marker: state.nexgddptoolgee.marker,
+  markerMode: state.nexgddptoolgee.markerMode,
   layers: getLayers(state),
   rawLayers: getRawLayers(state),
-  range1Selection: state.nexgddptool.range1.selection,
-  range2Selection: state.nexgddptool.range2.selection,
-  dataset: state.nexgddptool.dataset,
+  range1Selection: state.nexgddptoolgee.range1.selection,
+  range2Selection: state.nexgddptoolgee.range2.selection,
+  dataset: state.nexgddptoolgee.dataset,
   open: state.shareModal.open
 });
 

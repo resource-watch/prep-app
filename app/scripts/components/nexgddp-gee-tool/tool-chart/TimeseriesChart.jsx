@@ -6,14 +6,14 @@ import isEqual from 'lodash/isEqual';
 import { getConfig, VegaChart } from 'widget-editor';
 
 // Redux
-import { setMarkerPosition } from 'actions/nexgddptool';
-import { getIndicatorId, getIndicatorUnitSignal } from 'selectors/nexgddptool';
+import { setMarkerPosition } from 'actions/nexgddpgeetool';
+import { getIndicatorId, getIndicatorUnitSignal } from 'selectors/nexgddpgeetool';
 import { toggleTooltip } from 'actions/tooltip';
 
 // Component
 import Icon from 'components/ui/Icon';
 import Spinner from 'components/Loading/LoadingSpinner';
-import ShareNexgddpTooltip from 'components/Tooltip/ShareNexgddpTooltip';
+import ShareNexgddpTooltip from 'components/Tooltip/ShareNexgddpgeeTooltip';
 
 import './style.scss';
 
@@ -881,15 +881,15 @@ TimeseriesChart.propTypes = {
 /* estlint-enable react/no-unused-prop-types */
 
 const mapStateToProps = state => ({
-  render: state.nexgddptool.render,
-  range1Selection: state.nexgddptool.range1.selection,
-  range2Selection: state.nexgddptool.range2.selection,
-  chartDataLoaded: state.nexgddptool.chart.loaded,
-  chartData: state.nexgddptool.chart.data,
-  chartDataError: state.nexgddptool.chart.error,
+  render: state.nexgddptoolgee.render,
+  range1Selection: state.nexgddptoolgee.range1.selection,
+  range2Selection: state.nexgddptoolgee.range2.selection,
+  chartDataLoaded: state.nexgddptoolgee.chart.loaded,
+  chartData: state.nexgddptoolgee.chart.data,
+  chartDataError: state.nexgddptoolgee.chart.error,
   indicatorId: getIndicatorId(state),
   indicatorUnitSignal: getIndicatorUnitSignal(state),
-  datasetId: state.nexgddptool.dataset ? state.nexgddptool.dataset.id : null
+  datasetId: state.nexgddptoolgee.dataset ? state.nexgddptoolgee.dataset.id : null
 });
 
 const mapDispatchToProps = dispatch => ({

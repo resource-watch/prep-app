@@ -5,7 +5,7 @@ import Select from 'react-select';
 import './style.scss';
 
 // Redux
-import { setRange1Selection, setRange2Selection } from 'actions/nexgddptool';
+import { setRange1Selection, setRange2Selection } from 'actions/nexgddpgeetool';
 
 class DateRangeSelect extends React.PureComponent {
   render() {
@@ -70,9 +70,9 @@ DateRangeSelect.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  range1: state.nexgddptool.range1,
-  range2: state.nexgddptool.range2,
-  tempResolution: state.nexgddptool.tempResolution
+  range1: state.nexgddptoolgee.range1,
+  range2: state.nexgddptoolgee.range2,
+  tempResolution: state.nexgddptoolgee.tempResolution
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -9,7 +9,7 @@ import LocationSearch from './location-search/LocationSearch';
 import TimeseriesChart from './tool-chart/TimeseriesChart';
 
 // Redux
-import { getSelectorsInfo, getUrlState, setDefaultState, setMapMode, resetState, setDataset } from 'actions/nexgddptool';
+import { getSelectorsInfo, getUrlState, setDefaultState, setMapMode, resetState, setDataset } from 'actions/nexgddpgeetool';
 
 // Component
 import Spinner from 'components/Loading/LoadingSpinner';
@@ -165,11 +165,11 @@ NexGDDPGeeTool.propTypes = {
 
 const mapStateToProps = state => ({
   open: state.shareModal.open,
-  render: state.nexgddptool.render,
-  marker: state.nexgddptool.marker,
-  isComparing: !!state.nexgddptool.range2.selection,
-  mapMode: state.nexgddptool.mapMode,
-  indicatorDataset: state.nexgddptool.indicatorDataset
+  render: state.nexgddptoolgee.render,
+  marker: state.nexgddptoolgee.marker,
+  isComparing: !!state.nexgddptoolgee.range2.selection,
+  mapMode: state.nexgddptoolgee.mapMode,
+  indicatorDataset: state.nexgddptoolgee.indicatorDataset
 });
 
 const mapDispatchToProps = dispatch => ({

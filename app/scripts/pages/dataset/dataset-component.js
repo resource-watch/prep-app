@@ -22,6 +22,8 @@ import NexGDDPTool from 'components/nexgddp-tool/NexGDDPTool';
 import NexGDDPGeeTool from 'components/nexgddp-gee-tool/NexGDDPGeeTool';
 import LOCATool from 'components/loca-tool';
 
+import NEXGDDPDatasetsGeeProvider from '../explore/core-datasets-list/core-datasets-list-constants';
+
 const logoImage = '/images/prep-logo.png';
 
 const EXCEPTIONS = {
@@ -185,7 +187,7 @@ class DatasetPage extends PureComponent {
                     </div>
                   )}
                 {/* TO DO change condition when datasets get ready */}
-                {(dataset.id !== 'ea6a5948-c0e1-4312-aada-7e2f4e9b9f23') && (
+                {(dataset.id === 'ea6a5948-c0e1-4312-aada-7e2f4e9b9f23') && (
                   <div className="row">
                     <div className="columns small-12">
                       <NexGDDPGeeTool dataset={dataset} />

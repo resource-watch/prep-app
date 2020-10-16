@@ -50,6 +50,7 @@ export const NEXGDDPDatasetsGeeProvider = [
   '6acdb91d-d5e0-4130-9a4e-e38f74147f79',
   '26e19edf-220c-404a-8cfb-365cbc1776a6',
   'bf7f2533-9ca0-428e-99da-d895e1c6ce5d',
+  'ea6a5948-c0e1-4312-aada-7e2f4e9b9f23' // this one doesn't belogn to the list, remove when data is ready
 ];
 
 export default { CATEGORIES, NEXGDDPDatasetsGeeProvider };

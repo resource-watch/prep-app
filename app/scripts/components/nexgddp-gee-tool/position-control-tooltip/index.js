@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 // Redux
 import { toggleTooltip } from 'actions/tooltip';
-import { setMapZoom, setMapCenter } from 'actions/nexgddptool';
+import { setMapZoom, setMapCenter } from 'actions/nexgddpgeetool';
 
 const COPY_MSG = {
   default: 'Copy all',
@@ -222,8 +222,8 @@ PositionControlTooltip.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  zoom: state.nexgddptool.map.zoom,
-  latLng: state.nexgddptool.map.center
+  zoom: state.nexgddptoolgee.map.zoom,
+  latLng: state.nexgddptoolgee.map.center
 });
 
 const mapDispatchToProps = {

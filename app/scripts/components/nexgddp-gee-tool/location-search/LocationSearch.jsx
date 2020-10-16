@@ -6,7 +6,7 @@ import isEqual from 'lodash/isEqual';
 import Icon from 'components/ui/Icon';
 
 // Redux
-import { setMapZoom, setMapCenter, setMarkerPosition } from 'actions/nexgddptool';
+import { setMapZoom, setMapCenter, setMarkerPosition } from 'actions/nexgddpgeetool';
 
 import './style.scss';
 
@@ -65,7 +65,7 @@ LocationSearch.propTypes = {
   setMapZoom: PropTypes.func
 };
 
-const mapStateToProps = state => ({ marker: state.nexgddptool.marker });
+const mapStateToProps = state => ({ marker: state.nexgddptoolgee.marker });
 
 const mapDispatchToProps = {
   setMarkerPosition,
