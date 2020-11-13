@@ -6618,6 +6618,17 @@ last-call-webpack-plugin@^3.0.0:
     lodash "^4.17.5"
     webpack-sources "^1.1.0"
 
+layer-manager@1.16.0:
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/layer-manager/-/layer-manager-1.16.0.tgz#647f4e1305cf96806ca887dd8ada249a0fb2413c"
+  integrity sha512-W3aduKBzOzZau1G31WEqcN60/tMb0XNJz35nMgPMoa0Vf1PCXUsi0WFo2hU0LMajnZ1tOIyV5wxYpuKdqVktaw==
+  dependencies:
+    axios "^0.18.0"
+    lodash "^4.17.11"
+    prop-types "^15.6.2"
+    supercluster "^4.1.1"
+    wri-json-api-serializer "^1.0.1"
+
 layer-manager@^1.0.4:
   version "1.0.19"
   resolved "https://registry.yarnpkg.com/layer-manager/-/layer-manager-1.0.19.tgz#c3a57183ab90984639c16ec885da4ff64e6ff86d"
@@ -6635,17 +6646,6 @@ layer-manager@^1.10.0:
     bluebird "^3.5.2"
     lodash "^4.17.10"
     prop-types "^15.6.2"
-    wri-json-api-serializer "^1.0.1"
-
-layer-manager@^1.15.2:
-  version "1.15.2"
-  resolved "https://registry.yarnpkg.com/layer-manager/-/layer-manager-1.15.2.tgz#45f3003cd4dc60420d8ff37c035722f5fc8d6eb2"
-  integrity sha512-cmm/3CTy9stXIUI8OjOh5Fbi2PuDv+Hi3jh8v8ejnQHdn6uo40821+scHSBcJmeOA1Hf4Bz3GY6RGTqOTs0OYQ==
-  dependencies:
-    axios "^0.18.0"
-    lodash "^4.17.11"
-    prop-types "^15.6.2"
-    supercluster "^4.1.1"
     wri-json-api-serializer "^1.0.1"
 
 lazy-cache@^1.0.3:
