@@ -1,5 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+
+import { NEXGDDPDatasetsGeeProvider } from 'pages/explore/core-datasets-list/core-datasets-list-constants';
+
 import LegendActions from './legend-actions';
 import LegendNexGDDPToolbar from './legend-nexgddp-toolbar';
 import LegendNexGDDPGeeToolbar from './legend-nexgddp-gee-toolbar';
@@ -11,6 +14,7 @@ import LegendGradient from './legend-types/legend-gradient/LegendGradient';
 import './legend-style.scss';
 
 class Legend extends PureComponent {
+
   getLegendToolbar() {
     const { layerSpec, onMultiLayer } = this.props;
     /* TO DO change 3 conditions when datasets get ready */
@@ -29,7 +33,7 @@ class Legend extends PureComponent {
         />
       );
     }
-    else if (layerSpec.provider === 'new') {
+    else {
       return (
         <LegendNexGDDPGeeToolbar
           layerSpec={layerSpec}

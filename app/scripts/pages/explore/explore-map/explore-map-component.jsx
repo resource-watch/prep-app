@@ -2,6 +2,9 @@ import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import debounce from 'lodash/debounce';
+
+import { NEXGDDPDatasetsGeeProvider } from 'pages/explore/core-datasets-list/core-datasets-list-constants';
+
 import { getConfig } from 'widget-editor';
 import BasemapControl from 'components/basemap-control';
 import ShareControl from 'components/share-control';
@@ -20,7 +23,6 @@ import LegendLOCAToolbar from './legend-loca-toolbar';
 import LegendNexGDDPGeeToolbar from './legend-nexgddp-gee-toolbar';
 import Popup from './explore-map-popup';
 
-import { NEXGDDPDatasetsGeeProvider } from '../core-datasets-list/core-datasets-list-constants';
 // import { updateActiveDatasets } from '../explore-datasets-list/explore-datasets-list-reducers';
 
 class ExploreMap extends PureComponent {
@@ -152,7 +154,7 @@ class ExploreMap extends PureComponent {
   getLegendToolbar(layerActive) {
     const { setMultiActiveLayer } = this.props;
     const NEXGDDP_GeeProvider = NEXGDDPDatasetsGeeProvider.filter(l => l === layerActive.dataset);
-    // To DO: change conditions when new datasets get ready
+
     if (layerActive.provider === 'gee' && !NEXGDDP_GeeProvider.length) {
       return (
         <LegendNexGDDPToolbar

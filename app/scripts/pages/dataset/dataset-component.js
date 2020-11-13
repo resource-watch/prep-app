@@ -11,6 +11,8 @@ import SocialNav from 'layout/navigation/SocialNav';
 import MainNav from 'layout/navigation/MainNav';
 import Banner from 'components/Banner';
 
+import { NEXGDDPDatasetsGeeProvider } from 'pages/explore/core-datasets-list/core-datasets-list-constants';
+
 import SectionIntro from 'components/SectionIntro';
 import { getData, getDownloadUrl } from './dataset-helpers';
 import PartnersSlider from '../../containers/PartnersSlider';
@@ -124,6 +126,9 @@ class DatasetPage extends PureComponent {
     // Widgets
     const defaultEditableWidget = dataset.widget.find(w => w.defaultEditableWidget === true);
 
+    // Datasets types
+    const NEXGDDP_GeeProvider = NEXGDDPDatasetsGeeProvider.filter(l => l === dataset.id);
+
     // Render
     return (
       <div>
@@ -166,26 +171,26 @@ class DatasetPage extends PureComponent {
                     <ReactMarkdown source={description || infoDescription} className="c-markdown" />
                   </div>
                 </SectionIntro>
-                {/* TO DO change condition when datasets get ready */}
+
                 {(dataset.id && dataset.provider !== 'loca'
-                  && dataset.id !== 'ea6a5948-c0e1-4312-aada-7e2f4e9b9f23') && (
+                  && !NEXGDDP_GeeProvider.length) && (
                     <div className="row">
                       <div className="columns small-12">
                         <LOCATool dataset={dataset} />
                       </div>
                     </div>
                   )}
-                {/* TO DO change condition when datasets get ready */}
+
                 {(dataset.id && dataset.provider === 'nexgddp'
-                  && dataset.id !== 'ea6a5948-c0e1-4312-aada-7e2f4e9b9f23') && (
+                  && !NEXGDDP_GeeProvider.length) && (
                     <div className="row">
                       <div className="columns small-12">
                         <NexGDDPTool dataset={dataset} />
                       </div>
                     </div>
                   )}
-                {/* TO DO change condition when datasets get ready */}
-                {(dataset.id !== 'ea6a5948-c0e1-4312-aada-7e2f4e9b9f23') && (
+
+                {(NEXGDDP_GeeProvider.length) && (
                   <div className="row">
                     <div className="columns small-12">
                       <NexGDDPGeeTool dataset={dataset} />

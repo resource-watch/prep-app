@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import WidgetEditor, { modalActions, SaveWidgetModal, VegaChart } from 'widget-editor';
 import ReactMarkdown from 'react-markdown';
 
+import { NEXGDDPDatasetsGeeProvider } from 'pages/explore/core-datasets-list/core-datasets-list-constants';
+
 import TooltipTether from 'components/Tooltip/TooltipTether';
 import metadata from '../../metadata.json';
 import PartnersSlider from '../../containers/PartnersSlider';
@@ -149,6 +151,8 @@ class DatasetDetail extends React.PureComponent {
 
     const widget = dataset.widget || [];
     const defaultEditableWidget = widget.find(w => w.defaultEditableWidget === true);
+    const NEXGDDP_GeeProvider = NEXGDDPDatasetsGeeProvider.filter(l => l === dataset.id);
+
 
     return (
       <div>
@@ -158,29 +162,31 @@ class DatasetDetail extends React.PureComponent {
           </div>
         </SectionIntro>
 
-        {/* TO DO change conditions when new datasets get ready */}
-        {(dataset.id && dataset.provider === 'loca' && dataset.id !== 'ea6a5948-c0e1-4312-aada-7e2f4e9b9f23') &&
+        {(dataset.id && dataset.provider === 'loca' && !NEXGDDP_GeeProvider.length) && (
           <div className="row">
             <div className="columns small-12">
               <LOCATool dataset={dataset} />
             </div>
-          </div>}
+          </div>
+        )}
 
-        {(dataset.id && dataset.provider === 'nexgddp' && dataset.id !== 'ea6a5948-c0e1-4312-aada-7e2f4e9b9f23') &&
+        {(dataset.id && dataset.provider === 'nexgddp' && !NEXGDDP_GeeProvider.length) && (
           <div className="row">
             <div className="columns small-12">
               <NexGDDPTool dataset={dataset} />
             </div>
-          </div>}
+          </div>
+        )}
 
-        {(dataset.id === 'ea6a5948-c0e1-4312-aada-7e2f4e9b9f23') &&
+        {(NEXGDDP_GeeProvider.length) && (
           <div className="row">
             <div className="columns small-12">
               <NexGDDPGeeTool dataset={dataset} />
             </div>
-          </div>}
+          </div>
+        )}
 
-        {(dataset.id && dataset.provider !== 'nexgddp' && dataset.provider !== 'loca') &&
+        {(dataset.id && dataset.provider !== 'nexgddp' && dataset.provider !== 'loca') && (
           <WidgetEditor
             datasetId={dataset.id}
             widgetId={defaultEditableWidget && defaultEditableWidget.id}
@@ -189,7 +195,7 @@ class DatasetDetail extends React.PureComponent {
             provideWidgetConfig={(func) => { this.getWidgetConfig = func; }}
             onSave={() => this.onSaveWidget()}
           />
-        }
+        )}
 
         <div className="row align-center">
           <div className="columns small-12 medium-8">
@@ -199,22 +205,12 @@ class DatasetDetail extends React.PureComponent {
             </div>
           </div>
         </div>
-
-        {/*
-          (widgetComponents && widgetComponents.length) ?
-            <div className="row">
-              <div className="columns small-12">
-                {widgetComponents}
-              </div>
-            </div>
-          : null
-        */}
       </div>
     );
   }
 
   render() {
-    const data = this.props.data ? this.props.data : {};
+    const { data } = this.props;
 
     if (!data || !data.id) return null;
 
@@ -294,7 +290,7 @@ DatasetDetail.propTypes = {
   /**
    * Define the route path (from the router)
    */
-  location: PropTypes.object,
+  location: PropTypes.shape({}),
   /**
    * Define the slug of the dataset
    */
@@ -316,7 +312,9 @@ DatasetDetail.propTypes = {
   toggleModal: PropTypes.func
 };
 
-DatasetDetail.defaultProps = { data: {} };
+DatasetDetail.defaultProps = {
+  data: {},
+  location: {} };
 
 const mapDispatchToProps = dispatch => ({ toggleModal: (...params) => dispatch(modalActions.toggleModal(...params)) });
 
