@@ -159,7 +159,6 @@ class DatasetDetail extends React.PureComponent {
         </SectionIntro>
 
         {/* TO DO change conditions when new datasets get ready */}
-
         {(dataset.id && dataset.provider === 'loca' && dataset.id !== 'ea6a5948-c0e1-4312-aada-7e2f4e9b9f23') &&
           <div className="row">
             <div className="columns small-12">

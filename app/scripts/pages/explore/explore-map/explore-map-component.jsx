@@ -151,8 +151,7 @@ class ExploreMap extends PureComponent {
 
   getLegendToolbar(layerActive) {
     const { setMultiActiveLayer } = this.props;
-    const NEXGDDP_GeeProvider = NEXGDDPDatasetsGeeProvider.filter(l => l === layerActive.id);
-
+    const NEXGDDP_GeeProvider = NEXGDDPDatasetsGeeProvider.filter(l => l === layerActive.dataset);
     // To DO: change conditions when new datasets get ready
     if (layerActive.provider === 'gee' && !NEXGDDP_GeeProvider.length) {
       return (
