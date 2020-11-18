@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-// import WidgetEditor, { modalActions, SaveWidgetModal, VegaChart } from 'widget-editor';
-import WidgetEditor from './dataset-widget-editor';
+
 import ReactMarkdown from 'react-markdown';
 
 import TooltipTether from 'components/Tooltip/TooltipTether';
@@ -14,15 +13,16 @@ import Banner from 'components/Banner';
 import { NEXGDDPDatasetsGeeProvider } from 'pages/explore/core-datasets-list/core-datasets-list-constants';
 
 import SectionIntro from 'components/SectionIntro';
-import { getData, getDownloadUrl } from './dataset-helpers';
-import PartnersSlider from '../../containers/PartnersSlider';
-import MetadataInfo from './dataset-metadata-component';
-import SimpleMap from 'containers/SimpleMap/SimpleMap';
 import LoadingSpinner from 'components/Loading/LoadingSpinner';
 
 import NexGDDPTool from 'components/nexgddp-tool/NexGDDPTool';
 import NexGDDPGeeTool from 'components/nexgddp-gee-tool/NexGDDPGeeTool';
 import LOCATool from 'components/loca-tool';
+
+import { getData, getDownloadUrl } from './dataset-helpers';
+import PartnersSlider from '../../containers/PartnersSlider';
+import MetadataInfo from './dataset-metadata-component';
+import WidgetEditor from './dataset-widget-editor';
 
 const logoImage = '/images/prep-logo.png';
 
@@ -56,23 +56,6 @@ const EXCEPTIONS = {
 
 
 class DatasetPage extends PureComponent {
-  static propTypes = {
-    /**
-     * Define the function to get the datataset detail data
-     */
-    fetchDataset: PropTypes.func.isRequired,
-    /**
-     * Define the dataset data
-     */
-    data: PropTypes.any,
-    /**
-     * Define the dataset widget
-     */
-    widgets: PropTypes.array,
-
-    // REDUX
-    toggleModal: PropTypes.func
-  }
 
   componentDidMount() {
     const { routeParams } = this.props;
@@ -117,17 +100,14 @@ class DatasetPage extends PureComponent {
     const { name, description, info = {} } = metadata;
     const { description: infoDescription } = info;
 
+    // Datasets types
+    const NEXGDDPGeeProvider = NEXGDDPDatasetsGeeProvider.find(l => l === dataset.id);
+
     // Widget editor
-    const isWidgetEditor = (dataset.id && dataset.provider !== 'nexgddp' && dataset.provider !== 'loca' && !EXCEPTIONS[dataset.id]);
+    const isWidgetEditor = (dataset.id && dataset.provider !== 'nexgddp' && dataset.provider !== 'loca' && !EXCEPTIONS[dataset.id] && !NEXGDDPGeeProvider);
 
     // Page title
     document.title = name;
-
-    // Widgets
-    const defaultEditableWidget = dataset.widget.find(w => w.defaultEditableWidget === true);
-
-    // Datasets types
-    const NEXGDDP_GeeProvider = NEXGDDPDatasetsGeeProvider.filter(l => l === dataset.id);
 
     // Render
     return (
@@ -173,7 +153,7 @@ class DatasetPage extends PureComponent {
                 </SectionIntro>
 
                 {(dataset.id && dataset.provider !== 'loca'
-                  && !NEXGDDP_GeeProvider.length) && (
+                  && !NEXGDDPGeeProvider) && (
                     <div className="row">
                       <div className="columns small-12">
                         <LOCATool dataset={dataset} />
@@ -182,7 +162,7 @@ class DatasetPage extends PureComponent {
                   )}
 
                 {(dataset.id && dataset.provider === 'nexgddp'
-                  && !NEXGDDP_GeeProvider.length) && (
+                  && !NEXGDDPGeeProvider) && (
                     <div className="row">
                       <div className="columns small-12">
                         <NexGDDPTool dataset={dataset} />
@@ -190,7 +170,7 @@ class DatasetPage extends PureComponent {
                     </div>
                   )}
 
-                {(NEXGDDP_GeeProvider.length) && (
+                {(NEXGDDPGeeProvider) && (
                   <div className="row">
                     <div className="columns small-12">
                       <NexGDDPGeeTool dataset={dataset} />
@@ -198,9 +178,9 @@ class DatasetPage extends PureComponent {
                   </div>
                 )}
 
-                {isWidgetEditor &&
+                {isWidgetEditor && (
                   <WidgetEditor />
-                }
+                )}
 
                 {!!EXCEPTIONS[dataset.id] && (
                   <div className="row">
@@ -265,5 +245,24 @@ class DatasetPage extends PureComponent {
     );
   }
 }
+
+DatasetPage.propTypes = {
+  /**
+   * Define the function to get the datataset detail data
+   */
+  fetchDataset: PropTypes.func.isRequired,
+  /**
+   * Define the dataset data
+   */
+  data: PropTypes.arrayOf([]),
+
+  // REDUX
+  toggleModal: PropTypes.func
+};
+
+DatasetPage.defaultProps = {
+  data: [],
+  toggleModal: () => {}
+};
 
 export default DatasetPage;

@@ -56,7 +56,7 @@ class DatasetWidgetEditor extends PureComponent {
           />
         </MediaQuery>
 
-        {defaultEditableWidget &&
+        {defaultEditableWidget && (
           <MediaQuery
             maxDeviceWidth={breakpoints.large - 1}
             values={{ deviceWidth: responsive.fakeWidth }}
@@ -73,7 +73,7 @@ class DatasetWidgetEditor extends PureComponent {
               </div>
             </div>
           </MediaQuery>
-        }
+        )}
 
       </div>
     );
