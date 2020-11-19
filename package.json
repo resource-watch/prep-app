@@ -4,7 +4,7 @@
   "description": "Partnership for Resilience and Preparedness",
   "main": "server.js",
   "scripts": {
-    "dev": "webpack-dashboard -- node server.js",
+    "dev": "node server.js",
     "build": "better-npm-run build:prod",
     "lint": "eslint --ext .js --ext .jsx .",
     "test": "npm run lint && ./node_modules/mocha/bin/mocha --compilers js:babel-core/register --recursive",
@@ -123,7 +123,6 @@
     "vega-lib": "^4.2.0",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.1",
-    "webpack-dashboard": "^2.0.0",
     "webpack-dev-middleware": "^3.4.0",
     "webpack-manifest-plugin": "^2.0.4",
     "webpack-merge": "4.1.0",
