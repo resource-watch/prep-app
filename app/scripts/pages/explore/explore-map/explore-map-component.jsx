@@ -17,7 +17,9 @@ import Legend, {
 } from 'wri-api-components/dist/legend';
 import LegendNexGDDPToolbar from './legend-nexgddp-toolbar';
 import LegendLOCAToolbar from './legend-loca-toolbar';
+import LegendNexLocaGeeToolbar from './legend-nexlocagee-toolbar';
 import Popup from './explore-map-popup';
+import { NexLocaGEEDatasetIds } from '../core-datasets-list/core-datasets-list-constants';
 // import { updateActiveDatasets } from '../explore-datasets-list/explore-datasets-list-reducers';
 
 class ExploreMap extends PureComponent {
@@ -28,9 +30,9 @@ class ExploreMap extends PureComponent {
     water: PropTypes.oneOf(['none', 'dark', 'light']),
     boundaries: PropTypes.bool,
 
-    activeLayers: PropTypes.array,
-    activeLayersForMap: PropTypes.array,
-    layersGroups: PropTypes.array,
+    activeLayers: PropTypes.arrayOf(PropTypes.shape({})),
+    activeLayersForMap: PropTypes.arrayOf(PropTypes.shape({})),
+    layersGroups: PropTypes.arrayOf(PropTypes.shape({})),
 
     zoom: PropTypes.number,
     minZoom: PropTypes.number,
@@ -40,8 +42,8 @@ class ExploreMap extends PureComponent {
     embed: PropTypes.bool,
     embedExport: PropTypes.bool,
     open: PropTypes.bool,
-    bbox: PropTypes.any,
-    sidebar: PropTypes.object,
+    bbox: PropTypes.arrayOf(PropTypes.number),
+    sidebar: PropTypes.shape({}),
     setBasemap: PropTypes.func,
     setLabels: PropTypes.func,
     setBoundaries: PropTypes.func,
@@ -148,6 +150,16 @@ class ExploreMap extends PureComponent {
 
   getLegendToolbar(layerActive) {
     const { setMultiActiveLayer } = this.props;
+    const isNexLocaGeeDataset = NexLocaGEEDatasetIds.includes(layerActive.dataset);
+
+    if (isNexLocaGeeDataset) {
+      return (
+        <LegendNexLocaGeeToolbar
+          layerSpec={layerActive}
+          onMultiLayer={l => setMultiActiveLayer({ ...l, layerId: layerActive.id })}
+        />
+      );
+    }
     if (layerActive.provider === 'nexgddp') {
       return (
         <LegendNexGDDPToolbar
