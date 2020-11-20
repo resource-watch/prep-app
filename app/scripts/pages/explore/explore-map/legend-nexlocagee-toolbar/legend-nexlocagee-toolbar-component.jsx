@@ -34,7 +34,6 @@ class LegendNexLocaGeeToolbar extends PureComponent {
 
   componentDidMount() {
     const { layers } = this.props;
-    console.log(layers);
     this.updatingCombos(layers);
   }
 
