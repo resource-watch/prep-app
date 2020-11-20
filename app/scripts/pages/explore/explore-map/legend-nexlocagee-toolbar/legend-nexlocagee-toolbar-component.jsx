@@ -5,12 +5,12 @@ import './legend-nexlocagee-toolbar-style.scss';
 
 class LegendNexLocaGeeToolbar extends PureComponent {
   static propTypes = {
-    layerSpec: PropTypes.object,
+    layers: PropTypes.arrayOf(PropTypes.shape({})),
     onMultiLayer: PropTypes.func
   }
 
   static defaultProps = {
-    layerSpec: {},
+    layers: null,
     onMultiLayer: () => {}
   }
 
@@ -18,6 +18,7 @@ class LegendNexLocaGeeToolbar extends PureComponent {
     super(props);
 
     this.state = {
+      activeLayer: null,
       temporalResolution: null,
       temporalResolutionOptions: null,
       period: null,
@@ -27,43 +28,23 @@ class LegendNexLocaGeeToolbar extends PureComponent {
     };
 
     this.updatingPeriods = this.updatingPeriods.bind(this);
-    this.onResolutionChange = this.onResolutionChange.bind(this);
     this.onPeriodChange = this.onPeriodChange.bind(this);
     this.onScenarioChange = this.onScenarioChange.bind(this);
   }
 
   componentDidMount() {
-    const { layerSpec } = this.props;
-    const { layerConfig } = layerSpec;
-    const { indicator } = layerConfig;
-    const url = `${config.apiUrlRW}/nexgddp/info/${indicator}`;
-
-    fetch(url, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Upgrade-Insecure-Requests': 1
-      }
-    })
-      .then((response) => {
-        if (response.ok) return response.json();
-        throw Error(response);
-      })
-      .then(json => this.updatingCombos(json))
-      .catch(error => console.error(error));
-  }
-
-  onResolutionChange(temporalResolution) {
-    const { onMultiLayer, layerSpec } = this.props;
-    this.setState({ temporalResolution }, () => {
-      this.updatingPeriods();
-      onMultiLayer({ ...this.state, id: layerSpec.dataset });
-    });
+    const { layers } = this.props;
+    console.log(layers);
+    this.updatingCombos(layers);
   }
 
   onPeriodChange(period) {
-    const { onMultiLayer, layerSpec } = this.props;
-    this.setState({ period }, () => {
-      onMultiLayer({ ...this.state, id: layerSpec.dataset });
+    const { value } = period;
+    const { onMultiLayer, layers } = this.props;
+    const activeLayer = layers.find(({ layerConfig }) => layerConfig.order === value);
+
+    this.setState({ period, activeLayer }, () => {
+      onMultiLayer({ ...this.state, id: activeLayer.dataset, layerId: activeLayer.id });
     });
   }
 
@@ -90,33 +71,39 @@ class LegendNexLocaGeeToolbar extends PureComponent {
     });
   }
 
-  updatingCombos(data) {
-    const { layerSpec } = this.props;
-    const {
-      temp_resolution: propTemporalSolution,
-      scenario: propScenarioSolution
-    } = layerSpec;
-
-    // Temporal resolution (decadal, 30 years)
-    const temporalResolutionOptions = data.temporalResolution.map(t => ({ label: t.label, value: t.id, periods: t.periods }));
-    const temporalResolution = temporalResolutionOptions.find(t => t.value === propTemporalSolution) || temporalResolutionOptions[0];
-
-    // Scenarios
-    const scenariosOptions = data.scenarios.map(s => ({ label: s.label, value: s.id }));
-    const scenario = scenariosOptions.find(s => s.value === propScenarioSolution) || scenariosOptions[0];
+  updatingCombos(layers) {
+    const periodsOptions = layers.map(({ layerConfig }) => ({ label: layerConfig.order, value: layerConfig.order }))
+      .sort((a, b) => (a.value - b.value));
+    const period = periodsOptions[0];
 
     this.setState({
-      temporalResolution,
-      temporalResolutionOptions,
-      scenario,
-      scenariosOptions
-    }, this.updatingPeriods);
+      period,
+      periodsOptions,
+    })
+    // const { layerSpec } = this.props;
+    // const {
+    //   temp_resolution: propTemporalSolution,
+    //   scenario: propScenarioSolution
+    // } = layerSpec;
+
+    // // Temporal resolution (decadal, 30 years)
+    // const temporalResolutionOptions = data.temporalResolution.map(t => ({ label: t.label, value: t.id, periods: t.periods }));
+    // const temporalResolution = temporalResolutionOptions.find(t => t.value === propTemporalSolution) || temporalResolutionOptions[0];
+
+    // // Scenarios
+    // const scenariosOptions = data.scenarios.map(s => ({ label: s.label, value: s.id }));
+    // const scenario = scenariosOptions.find(s => s.value === propScenarioSolution) || scenariosOptions[0];
+
+    // this.setState({
+    //   temporalResolution,
+    //   temporalResolutionOptions,
+    //   scenario,
+    //   scenariosOptions
+    // }, this.updatingPeriods);
   }
 
   render() {
     const {
-      temporalResolution,
-      temporalResolutionOptions,
       period,
       periodsOptions,
       scenario,
@@ -125,18 +112,6 @@ class LegendNexLocaGeeToolbar extends PureComponent {
 
     return (
       <div className="c-legend-nexgddp-toolbar">
-        {temporalResolutionOptions && (
-          <Select
-            name="temporal_resolution"
-            value={temporalResolution}
-            options={temporalResolutionOptions}
-            onChange={this.onResolutionChange}
-            menuPosition="fixed"
-            menuShouldBlockScroll
-            className="c-toolbar-select"
-            classNamePrefix="react-select"
-          />
-        )}
         {periodsOptions && (
           <Select
             name="periods"

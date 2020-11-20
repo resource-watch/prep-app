@@ -148,18 +148,22 @@ class ExploreMap extends PureComponent {
     return { zoom: this.map.getZoom(), lat: center.lat, lng: center.lng };
   }
 
-  getLegendToolbar(layerActive) {
+  getLegendToolbar(layerGroups) {
     const { setMultiActiveLayer } = this.props;
-    const isNexLocaGeeDataset = NexLocaGEEDatasetIds.includes(layerActive.dataset);
+    const { dataset, layers } = layerGroups;
+    const isNexLocaGeeDataset = NexLocaGEEDatasetIds.includes(dataset);
 
     if (isNexLocaGeeDataset) {
       return (
         <LegendNexLocaGeeToolbar
-          layerSpec={layerActive}
-          onMultiLayer={l => setMultiActiveLayer({ ...l, layerId: layerActive.id })}
+          layers={layers}
+          onMultiLayer={l => setMultiActiveLayer(l)}
         />
       );
     }
+
+    const layerActive = layers.find(l => l.isLayerActive) || layers[0];
+
     if (layerActive.provider === 'nexgddp') {
       return (
         <LegendNexGDDPToolbar
@@ -168,6 +172,7 @@ class ExploreMap extends PureComponent {
         />
       );
     }
+
     if (layerActive.provider === 'loca') {
       return (
         <LegendLOCAToolbar
@@ -176,6 +181,7 @@ class ExploreMap extends PureComponent {
         />
       );
     }
+
     return null;
   }
 
@@ -323,20 +329,17 @@ class ExploreMap extends PureComponent {
           maxHeight={300}
           onChangeOrder={layers => this.onSortChange(layers)}
         >
-          {layersGroups.map((lg, i) => {
-            const layerActive = lg.layers.find(l => l.isLayerActive) || lg.layers[0];
-            return (
-              <LegendListItem
-                index={i}
-                key={lg.dataset}
-                layerGroup={lg}
-                toolbar={<Toolbar lg={lg} />}
-              >
-                {this.getLegendToolbar(layerActive)}
-                <LegendItemTypes />
-              </LegendListItem>
-            );
-          })}
+          {layersGroups.map((lg, i) => (
+            <LegendListItem
+              index={i}
+              key={lg.dataset}
+              layerGroup={lg}
+              toolbar={<Toolbar lg={lg} />}
+            >
+              {this.getLegendToolbar(lg)}
+              <LegendItemTypes />
+            </LegendListItem>
+          ))}
         </Legend>
 
         { !embedExport && (
