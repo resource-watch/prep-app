@@ -150,10 +150,49 @@ export const updateOpacity = (state, { payload }) => {
 };
 
 export const setMultiActiveLayer = (state, { payload }) => {
-  const { temporalResolution, period, scenario, id, layerId } = payload;
+  const { temporalResolution, period, scenario, id, previousId, layerId } = payload;
+  let { items } = state.datasets;
 
-  const items = state.datasets.items.map((d) => {
+  // disabling datasets
+  if (previousId) {
+    items = state.datasets.items.map((d) => {
+      if (d.id === previousId) {
+        return {
+          ...d,
+          isLayerActive: false,
+          layer: d.layer.map(
+            (l) => ({
+              ...l,
+              isActive: false,
+              isLayerActive: false,
+              active: false,
+              isSelected: false,
+            }),
+          ),
+        };
+      }
+      return d;
+    });
+  }
+
+  // enabling datasets
+  items = items.map((d) => {
     const newDataset = {...d};
+    const isNexLocaGeeDataset = newDataset.vocabulary.find((v) => v.tags.includes('nexlocagee'));
+
+    // Switch layer fro NEXLOCAGEE layers
+    if (newDataset.id === id && isNexLocaGeeDataset) {
+      newDataset.isLayerActive = true;
+      newDataset.layer = newDataset.layer.map(l => ({
+        ...l,
+        isActive: l.id === layerId,
+        isLayerActive: l.id === layerId,
+        active: l.id === layerId,
+        isSelected: newDataset.isSelected
+      }));
+
+      return newDataset;
+    }
 
     // Switch layer for NEXGDDP and LOCA
     if (newDataset.id === id && (newDataset.provider === 'nexgddp' || newDataset.provider === 'loca')) {

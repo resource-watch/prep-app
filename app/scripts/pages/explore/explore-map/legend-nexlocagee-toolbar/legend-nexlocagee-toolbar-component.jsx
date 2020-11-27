@@ -5,11 +5,15 @@ import './legend-nexlocagee-toolbar-style.scss';
 
 class LegendNexLocaGeeToolbar extends PureComponent {
   static propTypes = {
+    datasetId: PropTypes.string,
+    nexLocaGeeDatasets: PropTypes.arrayOf(PropTypes.shape({})),
     layers: PropTypes.arrayOf(PropTypes.shape({})),
-    onMultiLayer: PropTypes.func
+    onMultiLayer: PropTypes.func,
   }
 
   static defaultProps = {
+    datasetId: null,
+    nexLocaGeeDatasets: null,
     layers: null,
     onMultiLayer: () => {}
   }
@@ -27,7 +31,6 @@ class LegendNexLocaGeeToolbar extends PureComponent {
       scenariosOptions: null
     };
 
-    this.updatingPeriods = this.updatingPeriods.bind(this);
     this.onPeriodChange = this.onPeriodChange.bind(this);
     this.onScenarioChange = this.onScenarioChange.bind(this);
   }
@@ -48,57 +51,55 @@ class LegendNexLocaGeeToolbar extends PureComponent {
   }
 
   onScenarioChange(scenario) {
-    const { onMultiLayer, layerSpec } = this.props;
+    const { datasetId, onMultiLayer } = this.props;
+    const { period } = this.state;
+    const { value } = scenario;
+
+    const dataset = this.getDataset(datasetId);
+    const { metadata } = dataset;
+    const { info } = metadata[0];
+    const { change } = info;
+    const scenarioDatasetId = change[value];
+
+    const { layer: layers } = this.getDataset(scenarioDatasetId);
+    const activeLayer = layers.find(({ layerConfig }) => layerConfig.order === period.value);
+
     this.setState({ scenario }, () => {
-      onMultiLayer({ ...this.state, id: layerSpec.dataset });
+      onMultiLayer({
+        ...this.state,
+        id: scenarioDatasetId,
+        layerId: activeLayer.id,
+        previousId: datasetId,
+      });
     });
   }
 
-  updatingPeriods() {
-    const { layerSpec, onMultiLayer } = this.props;
-    const { period: propPeriod } = layerSpec;
-    const { temporalResolutionOptions, temporalResolution } = this.state;
-    const temporalResolutionResult = temporalResolutionOptions.find(t => t.value === temporalResolution.value);
-    const periodsOptions = temporalResolutionResult.periods.map(p => ({ label: p.label, value: p.id }));
-    const period = periodsOptions.find(s => s.value === (propPeriod || {}).label) || periodsOptions[0];
-
-    this.setState({
-      period,
-      periodsOptions
-    }, () => {
-      onMultiLayer({ ...this.state, id: layerSpec.dataset });
-    });
+  getDataset = (datasetId) => {
+    const { nexLocaGeeDatasets } = this.props;
+    return nexLocaGeeDatasets.find(({ id }) => id === datasetId);
   }
 
   updatingCombos(layers) {
+    const { datasetId } = this.props;
+    const dataset = this.getDataset(datasetId);
+    const { metadata } = dataset;
+    const { info } = metadata[0];
+    const { change } = info;
+
     const periodsOptions = layers.map(({ layerConfig }) => ({ label: layerConfig.order, value: layerConfig.order }))
       .sort((a, b) => (a.value - b.value));
     const period = periodsOptions[0];
 
+    // Scenarios: always are two; high and low
+    const scenariosOptions = [{ label: 'Low', value: 'low' }, { label: 'High', value: 'high' }];
+    const scenario = scenariosOptions.find(({ value }) => datasetId === change[value]) || scenariosOptions[0];
+
     this.setState({
       period,
       periodsOptions,
-    })
-    // const { layerSpec } = this.props;
-    // const {
-    //   temp_resolution: propTemporalSolution,
-    //   scenario: propScenarioSolution
-    // } = layerSpec;
-
-    // // Temporal resolution (decadal, 30 years)
-    // const temporalResolutionOptions = data.temporalResolution.map(t => ({ label: t.label, value: t.id, periods: t.periods }));
-    // const temporalResolution = temporalResolutionOptions.find(t => t.value === propTemporalSolution) || temporalResolutionOptions[0];
-
-    // // Scenarios
-    // const scenariosOptions = data.scenarios.map(s => ({ label: s.label, value: s.id }));
-    // const scenario = scenariosOptions.find(s => s.value === propScenarioSolution) || scenariosOptions[0];
-
-    // this.setState({
-    //   temporalResolution,
-    //   temporalResolutionOptions,
-    //   scenario,
-    //   scenariosOptions
-    // }, this.updatingPeriods);
+      scenario,
+      scenariosOptions,
+    });
   }
 
   render() {

@@ -158,6 +158,7 @@ class ExploreMap extends PureComponent {
     if (isNexLocaGeeDataset) {
       return (
         <LegendNexLocaGeeToolbar
+          datasetId={dataset}
           layers={layers}
           onMultiLayer={l => setMultiActiveLayer(l)}
         />
