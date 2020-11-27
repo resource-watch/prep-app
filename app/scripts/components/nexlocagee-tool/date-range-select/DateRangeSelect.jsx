@@ -1,14 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import Select from 'react-select';
 import './style.scss';
 
-// Redux
-import { setRange1Selection, setRange2Selection } from 'actions/nexlocageetool';
-
 class DateSelect extends React.PureComponent {
   render() {
+    console.log(this.props)
     const { range1, range2, tempResolution, setRange1Selection, setRange2Selection } = this.props;
 
     let range1Options = [];
@@ -61,23 +58,8 @@ DateSelect.propTypes = {
     options: PropTypes.object,
     selection: option
   }),
-  tempResolution: PropTypes.shape({
-    options: PropTypes.arrayOf(option),
-    selection: option
-  }),
   setRange1Selection: PropTypes.func,
   setRange2Selection: PropTypes.func
 };
 
-const mapStateToProps = state => ({
-  range1: state.nexlocageetool.range1,
-  range2: state.nexlocageetool.range2,
-  tempResolution: state.nexlocageetool.tempResolution
-});
-
-const mapDispatchToProps = dispatch => ({
-  setRange1Selection: (...params) => dispatch(setRange1Selection(...params)),
-  setRange2Selection: (...params) => dispatch(setRange2Selection(...params))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(DateSelect);
+export default DateSelect;

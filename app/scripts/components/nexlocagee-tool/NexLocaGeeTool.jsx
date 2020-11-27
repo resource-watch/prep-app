@@ -1,19 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import Icon from 'components/ui/Icon';
+import Spinner from 'components/Loading/LoadingSpinner';
 import ScenarioSelect from './scenario-select';
 import DateSelect from './date-select';
 import DateRangeSelect from './date-range-select';
 import { CompareMap, ToggleMap, DifferenceMap, SimpleMap } from './tool-map';
 import LocationSearch from './location-search/LocationSearch';
 import TimeseriesChart from './tool-chart/TimeseriesChart';
-
-// Redux
-import { getSelectorsInfo, getUrlState, setDefaultState, setMapMode, resetState, setDataset } from 'actions/nexgddptool';
-
-// Component
-import Spinner from 'components/Loading/LoadingSpinner';
 
 import './style.scss';
 
@@ -172,22 +166,4 @@ NexGDDPTool.propTypes = {
   setDataset: PropTypes.func
 };
 
-const mapStateToProps = state => ({
-  open: state.shareModal.open,
-  render: state.nexgddptool.render,
-  marker: state.nexgddptool.marker,
-  isComparing: !!state.nexgddptool.range2.selection,
-  mapMode: state.nexgddptool.mapMode,
-  indicatorDataset: state.nexgddptool.indicatorDataset
-});
-
-const mapDispatchToProps = dispatch => ({
-  getSelectorsInfo: () => dispatch(getSelectorsInfo()),
-  restoreState: () => dispatch(getUrlState()),
-  setDefaultState: () => dispatch(setDefaultState()),
-  setMapMode: (...params) => dispatch(setMapMode(...params)),
-  resetState: () => dispatch(resetState()),
-  setDataset: (...params) => dispatch(setDataset(...params))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(NexGDDPTool);
+export default NexGDDPTool;

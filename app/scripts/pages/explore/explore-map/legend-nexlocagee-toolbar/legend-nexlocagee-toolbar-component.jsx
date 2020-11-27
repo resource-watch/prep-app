@@ -86,12 +86,17 @@ class LegendNexLocaGeeToolbar extends PureComponent {
     const { info } = metadata[0];
     const { change } = info;
 
-    const periodsOptions = layers.map(({ layerConfig }) => ({ label: layerConfig.order, value: layerConfig.order }))
+    const periodsOptions = layers.map(
+        ({ layerConfig }) => ({
+          label: `${layerConfig.order - 15}-${layerConfig.order + 15}`,
+          value: layerConfig.order,
+        })
+      )
       .sort((a, b) => (a.value - b.value));
     const period = periodsOptions[0];
 
     // Scenarios: always are two; high and low
-    const scenariosOptions = [{ label: 'Low', value: 'low' }, { label: 'High', value: 'high' }];
+    const scenariosOptions = [{ label: 'Low emissions', value: 'low' }, { label: 'High emissions', value: 'high' }];
     const scenario = scenariosOptions.find(({ value }) => datasetId === change[value]) || scenariosOptions[0];
 
     this.setState({

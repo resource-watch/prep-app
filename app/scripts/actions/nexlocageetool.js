@@ -550,7 +550,45 @@ export function setDefaultState() {
 export function getSelectorsInfo() {
   return (dispatch, getState) => {
     const state = getState();
+    console.log(state);
+    // We keep the promises so we wait for the state to be set
+    // before moving on to something else
+    const promises = [];
+
+    // We populate the scenario selector
+    const scenarioOptions = [{ label: 'Low emissions', value: 'low' }, { label: 'High emissions', value: 'high' }];
+    const scenarioPromise = dispatch(setScenarioOptions(scenarioOptions));
+    promises.push(scenarioPromise);
+
+    // const periodsOptions = layers.map(
+    //   ({ layerConfig }) => ({
+    //     label: `${layerConfig.order - 15}-${layerConfig.order + 15}`,
+    //     value: layerConfig.order,
+    //   })
+    // )
+    // .sort((a, b) => (a.value - b.value));
+    // // We populate the date range selectors
+    // const dateRangeOptions = tempResolutionOptions
+    //   .map((tempResolutionOption) => { // eslint-disable-line arrow-body-style
+    //     return {
+    //       [tempResolutionOption.value]: temporalResolution
+    //         .find(t => t.id === tempResolutionOption.value).periods
+    //         .map(d => ({ label: d.label, value: d.id }))
+    //     };
+    //   })
+    //   .reduce((res, options) => Object.assign({}, res, options), {});
+    // const dateRangePromise = Promise.all([
+    //   dispatch(setRange1Options(dateRangeOptions)),
+    //   dispatch(setRange2Options(dateRangeOptions))
+    // ]);
+    // promises.push(dateRangePromise);
+
+    console.log(promises)
+
+    return Promise.resolve(promises);
+
     const indicatorId = getIndicatorId(state);
+    console.log(indicatorId)
 
     return fetch(`${process.env.RW_API_URL}/nexgddp/info/${indicatorId}`, {
       headers: {
