@@ -21,7 +21,6 @@ import LoadingSpinner from 'components/Loading/LoadingSpinner';
 import NexGDDPTool from 'components/nexgddp-tool';
 import LOCATool from 'components/loca-tool';
 import NexLocaGeeTool from 'components/nexlocagee-tool';
-import { NexLocaGEEDatasetIds } from '../explore/core-datasets-list/core-datasets-list-constants';
 
 const logoImage = '/images/prep-logo.png';
 
@@ -119,7 +118,7 @@ class DatasetPage extends PureComponent {
     // Widget editor
     const isLOCADataset = dataset.provider === 'loca';
     const isNEXTGDDPDataset = dataset.provider === 'nexgddp';
-    const isNexLocaGeeDataset = NexLocaGEEDatasetIds.includes(dataset.id);
+    const isNexLocaGeeDataset = dataset.vocabulary.find((v) => v.tags.includes('nexlocagee'));
     const isWidgetEditor = (!isLOCADataset && !isNEXTGDDPDataset && !isNexLocaGeeDataset && !EXCEPTIONS[dataset.id]);
 
     // Page title

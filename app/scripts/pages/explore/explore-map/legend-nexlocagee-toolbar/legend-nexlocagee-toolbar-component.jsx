@@ -71,7 +71,6 @@ class LegendNexLocaGeeToolbar extends PureComponent {
   }
 
   updatingCombos(layers) {
-    console.log(layers)
     const periodsOptions = layers.map(({ layerConfig }) => ({ label: layerConfig.order, value: layerConfig.order }))
       .sort((a, b) => (a.value - b.value));
     const period = periodsOptions[0];

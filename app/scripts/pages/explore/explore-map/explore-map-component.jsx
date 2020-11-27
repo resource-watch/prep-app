@@ -19,8 +19,6 @@ import LegendNexGDDPToolbar from './legend-nexgddp-toolbar';
 import LegendLOCAToolbar from './legend-loca-toolbar';
 import LegendNexLocaGeeToolbar from './legend-nexlocagee-toolbar';
 import Popup from './explore-map-popup';
-import { NexLocaGEEDatasetIds } from '../core-datasets-list/core-datasets-list-constants';
-// import { updateActiveDatasets } from '../explore-datasets-list/explore-datasets-list-reducers';
 
 class ExploreMap extends PureComponent {
 
@@ -29,6 +27,8 @@ class ExploreMap extends PureComponent {
     labels: PropTypes.oneOf(['none', 'dark', 'light']),
     water: PropTypes.oneOf(['none', 'dark', 'light']),
     boundaries: PropTypes.bool,
+
+    nexLocaGeeDatasetsIds: PropTypes.arrayOf(PropTypes.string),
 
     activeLayers: PropTypes.arrayOf(PropTypes.shape({})),
     activeLayersForMap: PropTypes.arrayOf(PropTypes.shape({})),
@@ -66,6 +66,8 @@ class ExploreMap extends PureComponent {
     basemap: 'default',
     labels: 'none',
     water: 'none',
+
+    nexLocaGeeDatasetsIds: null,
 
     boundaries: false,
     activeLayers: [],
@@ -149,9 +151,9 @@ class ExploreMap extends PureComponent {
   }
 
   getLegendToolbar(layerGroups) {
-    const { setMultiActiveLayer } = this.props;
+    const { setMultiActiveLayer, nexLocaGeeDatasetsIds } = this.props;
     const { dataset, layers } = layerGroups;
-    const isNexLocaGeeDataset = NexLocaGEEDatasetIds.includes(dataset);
+    const isNexLocaGeeDataset = nexLocaGeeDatasetsIds.includes(dataset);
 
     if (isNexLocaGeeDataset) {
       return (
@@ -190,7 +192,7 @@ class ExploreMap extends PureComponent {
       setMapParams, setBBox, basemap, labels, water, boundaries, bbox, sidebar, zoom, lat, lng, minZoom, setBasemap,
       setLabels, setBoundaries, setWater, embed, embedExport, layersGroups, activeLayersForMap, activeLayers,
       toggleVisibility, toggleInfo, updateOpacity, toggleDataset, setOpen, setLinks, setTab, setMultiActiveLayer,
-      setInteractions
+      setInteractions,
     } = this.props;
     const classNames = classnames({ '-embed': embed, '-embed-export': embedExport });
     const { open } = sidebar;

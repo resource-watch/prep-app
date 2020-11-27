@@ -150,7 +150,7 @@ export function getChartData() {
     const lat = state.nexlocageetool.marker[0];
     const lng = state.nexlocageetool.marker[1];
     const indicatorId = getIndicatorId(state);
-    const slug = state.nexlocageetool.indicatorDataset.slug;
+    const { slug } = state.nexlocageetool.indicatorDataset;
 
     return fetch(`${process.env.RW_API_URL}/query?sql=select ${indicatorId}_q25 as q25, ${indicatorId} as q50, ${indicatorId}_q75 as q75, year as x from ${slug}&lat=${lat}&lon=${lng}`, {
       headers: {
