@@ -4,11 +4,11 @@ import Component from './NexLocaGeeTool';
 
 const mapStateToProps = state => ({
   open: state.shareModal.open,
-  render: state.nexgddptool.render,
-  marker: state.nexgddptool.marker,
-  isComparing: !!state.nexgddptool.range2.selection,
-  mapMode: state.nexgddptool.mapMode,
-  indicatorDataset: state.nexgddptool.indicatorDataset
+  render: state.nexlocageetool.render,
+  marker: state.nexlocageetool.marker,
+  isComparing: !!state.nexlocageetool.range2.selection,
+  mapMode: state.nexlocageetool.mapMode,
+  indicatorDataset: state.nexlocageetool.indicatorDataset
 });
 
 const mapDispatchToProps = dispatch => ({

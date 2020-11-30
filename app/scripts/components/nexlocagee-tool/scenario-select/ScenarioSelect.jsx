@@ -1,11 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
+import { browserHistory } from 'react-router';
 import './style.scss';
 
 class ScenarioSelect extends React.PureComponent {
+  handleScenario = (currentScenario) => {
+    const { dataset, setScenarioSelection } = this.props;
+    const { slug } = dataset;
+    setScenarioSelection(currentScenario);
+    browserHistory.push(`/dataset/${slug}${window.location.search}`);
+  }
+
   render() {
-    const { scenario, setScenarioSelection } = this.props;
+    const { scenario } = this.props;
 
     return (
       <div className="c-scenario-select">
@@ -13,7 +21,7 @@ class ScenarioSelect extends React.PureComponent {
           name="scenario"
           id="nexgddp-scenario-select"
           value={scenario.selection}
-          onChange={setScenarioSelection}
+          onChange={this.handleScenario}
           options={scenario.options}
           clearable={false}
         />
@@ -22,17 +30,23 @@ class ScenarioSelect extends React.PureComponent {
   }
 }
 
-const option = PropTypes.shape({
+const optionTypes = PropTypes.shape({
   label: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired
+  value: PropTypes.string.isRequired,
 });
 
+ScenarioSelect.defaultProps = {
+  dataset: null,
+  scenario: null,
+};
+
 ScenarioSelect.propTypes = {
+  dataset: PropTypes.shape({}),
   scenario: PropTypes.shape({
-    options: PropTypes.arrayOf(option),
-    selection: option
+    options: PropTypes.arrayOf(optionTypes),
+    selection: optionTypes,
   }),
-  setScenarioSelection: PropTypes.func
+  setScenarioSelection: PropTypes.func.isRequired,
 };
 
 export default ScenarioSelect;

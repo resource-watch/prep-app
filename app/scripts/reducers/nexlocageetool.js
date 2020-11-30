@@ -72,15 +72,15 @@ const initialState = {
   },
   // Range for the visualization
   range1: {
-    /** @type {{ [tempResolution: string]: { label: string, value: string }[] }} options */
-    options: {},
+    /** @type {{ label: string, value: string  }} options */
+    options: [],
     /** @type {{ label: string, value: string }} selection */
     selection: undefined
   },
   // Comparison range for the visualization
   range2: {
-    /** @type {{ [tempResolution: string]: { label: string, value: string }[] }} options */
-    options: {},
+    /** @type {{ label: string, value: string  }} options */
+    options: [],
     /** @type {{ label: string, value: string }} selection */
     selection: undefined
   },

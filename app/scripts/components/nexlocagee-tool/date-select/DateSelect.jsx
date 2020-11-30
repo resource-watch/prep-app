@@ -1,30 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import Select from 'react-select';
 import './style.scss';
 
-// Redux
-import { setRange1Selection, setRange2Selection } from 'actions/nexlocageetool';
-
-class DateRangeSelect extends React.PureComponent {
+class DateSelect extends React.PureComponent {
   render() {
-    const { range1, range2, tempResolution, setRange1Selection, setRange2Selection } = this.props;
-
-    let range1Options = [];
-    if (tempResolution.selection) {
-      range1Options = range1.options[tempResolution.selection.value];
-    }
-
-    let range2Options = [];
-    if (tempResolution.selection) {
-      range2Options = range2.options[tempResolution.selection.value];
-    }
-
-    range2Options = range2Options.map(o => ({
-      ...o,
-      isDisabled: range1.selection && o.value === range1.selection.value
-    }));
+    const { range1, setRange1Selection } = this.props;
+    const range1Options = range1.options;
 
     return (
       <div className="c-date-range-select">
@@ -40,37 +22,22 @@ class DateRangeSelect extends React.PureComponent {
   }
 }
 
-const option = PropTypes.shape({
+const optionTypes = PropTypes.shape({
   label: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired
+  value: PropTypes.number.isRequired,
 });
 
-DateRangeSelect.propTypes = {
-  range1: PropTypes.shape({
-    options: PropTypes.object,
-    selection: option
-  }),
-  range2: PropTypes.shape({
-    options: PropTypes.object,
-    selection: option
-  }),
-  tempResolution: PropTypes.shape({
-    options: PropTypes.arrayOf(option),
-    selection: option
-  }),
-  setRange1Selection: PropTypes.func,
-  setRange2Selection: PropTypes.func
+DateSelect.defaultProps = {
+  range1: { options: [] },
+  setRange1Selection: null,
 };
 
-const mapStateToProps = state => ({
-  range1: state.nexlocageetool.range1,
-  range2: state.nexlocageetool.range2,
-  tempResolution: state.nexlocageetool.tempResolution
-});
+DateSelect.propTypes = {
+  range1: PropTypes.shape({
+    options: PropTypes.arrayOf(optionTypes),
+    selection: optionTypes,
+  }),
+  setRange1Selection: PropTypes.func,
+};
 
-const mapDispatchToProps = dispatch => ({
-  setRange1Selection: (...params) => dispatch(setRange1Selection(...params)),
-  setRange2Selection: (...params) => dispatch(setRange2Selection(...params))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(DateRangeSelect);
+export default DateSelect;

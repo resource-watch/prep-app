@@ -5,20 +5,10 @@ import './style.scss';
 
 class DateSelect extends React.PureComponent {
   render() {
-    console.log(this.props)
-    const { range1, range2, tempResolution, setRange1Selection, setRange2Selection } = this.props;
+    const { range1, range2, setRange1Selection, setRange2Selection } = this.props;
 
-    let range1Options = [];
-    if (tempResolution.selection) {
-      range1Options = range1.options[tempResolution.selection.value];
-    }
-
-    let range2Options = [];
-    if (tempResolution.selection) {
-      range2Options = range2.options[tempResolution.selection.value];
-    }
-
-    range2Options = range2Options.map(o => ({
+    const range1Options = range1.options;
+    const range2Options = range1.options.map(o => ({
       ...o,
       isDisabled: range1.selection && o.value === range1.selection.value
     }));
@@ -44,19 +34,26 @@ class DateSelect extends React.PureComponent {
   }
 }
 
-const option = PropTypes.shape({
+const optionTypes = PropTypes.shape({
   label: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired
+  value: PropTypes.number.isRequired,
 });
+
+DateSelect.defaultProps = {
+  range1: null,
+  range2: null,
+  setRange1Selection: null,
+  setRange2Selection: null,
+};
 
 DateSelect.propTypes = {
   range1: PropTypes.shape({
-    options: PropTypes.object,
-    selection: option
+    options: PropTypes.arrayOf(optionTypes),
+    selection: optionTypes
   }),
   range2: PropTypes.shape({
-    options: PropTypes.object,
-    selection: option
+    options: PropTypes.arrayOf(optionTypes),
+    selection: optionTypes
   }),
   setRange1Selection: PropTypes.func,
   setRange2Selection: PropTypes.func

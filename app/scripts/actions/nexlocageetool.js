@@ -1,3 +1,4 @@
+import { select } from 'react-dom-factories';
 import { replace } from 'react-router-redux';
 import { getIndicatorId, getTempResolution } from 'selectors/nexlocageetool';
 import {
@@ -512,7 +513,6 @@ export function getUrlState() {
 export function setDefaultState() {
   return (dispatch, getState) => {
     const store = getState();
-    const tempResolutionValue = getTempResolution(store);
 
     // We keep the promises so we wait for the state to be set
     // before moving on to something else
@@ -526,20 +526,15 @@ export function setDefaultState() {
       promises.push(dispatch(setScenarioSelection(store.nexlocageetool.scenario.options[0])));
     }
 
-    if (!store.nexlocageetool.range1.selection && Object.keys(store.nexlocageetool.range1.options).length && store.nexlocageetool.tempResolution.options.length) {
-      const options = store.nexlocageetool.range1.options[tempResolutionValue];
+    const { options, selection } = store.nexlocageetool.range1;
+    if (!selection && Object.keys(options).length) {
       if (options && options.length) {
         const currentYear = (new Date()).getUTCFullYear();
-        const selectedOption = options.find(option => currentYear >= option.label.split('-')[0]
-          && currentYear <= option.label.split('-')[1]);
+        const selectedOption = options.find(option => currentYear >= (option.value - 15)
+          && currentYear <= (option.value + 15));
         const range1Promise = dispatch(setRange1Selection(selectedOption || options[0]));
         promises.push(range1Promise);
       }
-    }
-
-    if (!store.nexlocageetool.tempResolution.selection && store.nexlocageetool.tempResolution.options.length) {
-      const tempResolution = store.nexlocageetool.tempResolution.options.find(t => t.value === tempResolutionValue);
-      promises.push(dispatch(setTempResolutionSelection(tempResolution || store.nexlocageetool.tempResolution.options[0])));
     }
 
     // Needed to chain the action
@@ -550,7 +545,7 @@ export function setDefaultState() {
 export function getSelectorsInfo() {
   return (dispatch, getState) => {
     const state = getState();
-    console.log(state);
+    const { datasetPage } = state;
     // We keep the promises so we wait for the state to be set
     // before moving on to something else
     const promises = [];
@@ -560,80 +555,23 @@ export function getSelectorsInfo() {
     const scenarioPromise = dispatch(setScenarioOptions(scenarioOptions));
     promises.push(scenarioPromise);
 
-    // const periodsOptions = layers.map(
-    //   ({ layerConfig }) => ({
-    //     label: `${layerConfig.order - 15}-${layerConfig.order + 15}`,
-    //     value: layerConfig.order,
-    //   })
-    // )
-    // .sort((a, b) => (a.value - b.value));
-    // // We populate the date range selectors
-    // const dateRangeOptions = tempResolutionOptions
-    //   .map((tempResolutionOption) => { // eslint-disable-line arrow-body-style
-    //     return {
-    //       [tempResolutionOption.value]: temporalResolution
-    //         .find(t => t.id === tempResolutionOption.value).periods
-    //         .map(d => ({ label: d.label, value: d.id }))
-    //     };
-    //   })
-    //   .reduce((res, options) => Object.assign({}, res, options), {});
-    // const dateRangePromise = Promise.all([
-    //   dispatch(setRange1Options(dateRangeOptions)),
-    //   dispatch(setRange2Options(dateRangeOptions))
-    // ]);
-    // promises.push(dateRangePromise);
+    const { data } = datasetPage;
+    const { layer: layers } = data;
 
-    console.log(promises)
+    const periodsOptions = layers.map(
+        ({ layerConfig }) => ({
+          label: `${layerConfig.order - 15}-${layerConfig.order + 15}`,
+          value: layerConfig.order,
+        })
+      )
+      .sort((a, b) => (a.value - b.value));
+    const dateRangePromise = Promise.all([
+      dispatch(setRange1Options(periodsOptions)),
+      dispatch(setRange2Options(periodsOptions))
+    ]);
+    promises.push(dateRangePromise);
 
     return Promise.resolve(promises);
-
-    const indicatorId = getIndicatorId(state);
-    console.log(indicatorId)
-
-    return fetch(`${process.env.RW_API_URL}/nexgddp/info/${indicatorId}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Upgrade-Insecure-Requests': 1
-      }
-    })
-      .then((res) => {
-        if (res.ok) return res.json();
-        throw new Error('Unable to fetch the data of the selectors');
-      })
-      .then(({ scenarios, temporalResolution }) => {
-        // We keep the promises so we wait for the state to be set
-        // before moving on to something else
-        const promises = [];
-
-        // We populate the scenario selector
-        const scenarioOptions = scenarios.map(s => ({ label: s.label, value: s.id }));
-        const scenarioPromise = dispatch(setScenarioOptions(scenarioOptions));
-        promises.push(scenarioPromise);
-
-        // We populate the temporal resoution selector
-        const tempResolutionOptions = temporalResolution.map(t => ({ label: t.label, value: t.id }));
-        const tempResolutionPromise = dispatch(setTempResolutionOptions(tempResolutionOptions));
-        promises.push(tempResolutionPromise);
-
-        // We populate the date range selectors
-        const dateRangeOptions = tempResolutionOptions
-          .map((tempResolutionOption) => { // eslint-disable-line arrow-body-style
-            return {
-              [tempResolutionOption.value]: temporalResolution
-                .find(t => t.id === tempResolutionOption.value).periods
-                .map(d => ({ label: d.label, value: d.id }))
-            };
-          })
-          .reduce((res, options) => Object.assign({}, res, options), {});
-        const dateRangePromise = Promise.all([
-          dispatch(setRange1Options(dateRangeOptions)),
-          dispatch(setRange2Options(dateRangeOptions))
-        ]);
-        promises.push(dateRangePromise);
-
-        return promises;
-      })
-      .catch(err => console.error(err));
   };
 }
 

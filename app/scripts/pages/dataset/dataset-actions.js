@@ -6,7 +6,7 @@ import { wriAPISerializer } from 'wri-json-api-serializer';
 export const receiveDataset = createAction('receiveDataset');
 export const failureDataset = createAction('failureDataset');
 export const fetchDataset = createThunkAction('fetchDataset', (datasetId) => {
-  const includes = ['metadata', 'widget', 'vocabulary'];
+  const includes = ['metadata', 'layer', 'widget', 'vocabulary'];
   const params = {
     application: 'prep',
     status: 'saved',

@@ -15,50 +15,37 @@ const mapIndicatorToUnitSignal = {
 };
 
 const state = state => state; // eslint-disable-line no-shadow
-const mapMode = ({ nexlocageetool }) => nexlocageetool.mapMode;
 const range1Selection = ({ nexlocageetool }) => nexlocageetool.range1.selection;
 const range2Selection = ({ nexlocageetool }) => nexlocageetool.range2.selection;
 const dataset = ({ nexlocageetool }) => nexlocageetool.dataset || null;
-const layers = ({ nexlocageetool }) => (nexlocageetool.indicatorDataset ? nexlocageetool.indicatorDataset.layer : []);
+const layers = ({ nexlocageetool }) => nexlocageetool.dataset ? nexlocageetool.dataset.layer : [];
 
 // eslint-disable-next-line import/prefer-default-export
 export const getLayers = createSelector(
   layers,
-  mapMode,
   range1Selection,
   range2Selection,
-  (layers, mapMode, range1Selection, range2Selection) => { // eslint-disable-line no-shadow
+  (layers, range1Selection, range2Selection) => { // eslint-disable-line no-shadow
     if ((!range1Selection && !range2Selection) || !layers.length) return [];
 
-    let currentLayer = {};
     const activeLayers = [];
 
-    if (mapMode !== 'difference') {
-      currentLayer = layers.find(l => !l.attributes.layerConfig.compareWith);
+    if (range1Selection) {
+      const currentLayer1 = layers.find(({ layerConfig }) => layerConfig.order === range1Selection.value);
+      const range1Date = `${range1Selection.value}`;
+      activeLayers.push({
+        url: `${config.apiUrlRW}/layer/${currentLayer1.id}/tile/gee/{z}/{x}/{y}`,
+        date: range1Date
+      });
+    }
 
-      if (currentLayer && range1Selection) {
-        const range1Date = `${range1Selection.value}`;
-        activeLayers.push({
-          url: `${config.apiUrlRW}/layer/${currentLayer.id}/tile/nexgddp/{z}/{x}/{y}?year=${range1Date}`,
-          date: range1Date
-        });
-      }
-
-      if (currentLayer && range2Selection) {
-        const range2Date = `${range2Selection.value}`;
-        activeLayers.push({
-          url: `${config.apiUrlRW}/layer/${currentLayer.id}/tile/nexgddp/{z}/{x}/{y}?year=${range2Date}`,
-          date: range2Date
-        });
-      }
-    } else {
-      currentLayer = layers.find(l => l.attributes.layerConfig.compareWith);
-
-      if (currentLayer && range1Selection && range2Selection) {
-        const range1Date = `${range1Selection.value}`;
-        const range2Date = `${range2Selection.value}`;
-        activeLayers.push({ url: `${config.apiUrlRW}/layer/${currentLayer.id}/tile/nexgddp/{z}/{x}/{y}?year=${range1Date}&compareYear=${range2Date}` });
-      }
+    if (range2Selection) {
+      const currentLayer2 = layers.find(({ layerConfig }) => layerConfig.order === range2Selection.value);
+      const range2Date = `${range2Selection.value}`;
+      activeLayers.push({
+        url: `${config.apiUrlRW}/layer/${currentLayer2.id}/tile/gee/{z}/{x}/{y}`,
+        date: range2Date
+      });
     }
 
     return activeLayers;
@@ -67,15 +54,9 @@ export const getLayers = createSelector(
 
 export const getRawLayers = createSelector(
   layers,
-  mapMode,
-  (layers, mapMode) => { // eslint-disable-line no-shadow
+  (layers) => { // eslint-disable-line no-shadow
     if (!layers.length) return [];
-
-    if (mapMode !== 'difference') {
-      return [layers.find(l => !l.attributes.layerConfig.compareWith)];
-    }
-
-    return [layers.find(l => l.attributes.layerConfig.compareWith)];
+    return layers.slice(0, 1);
   }
 );
 

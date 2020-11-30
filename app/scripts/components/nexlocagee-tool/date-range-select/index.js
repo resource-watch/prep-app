@@ -5,7 +5,6 @@ import Component from './DateRangeSelect';
 const mapStateToProps = state => ({
   range1: state.nexlocageetool.range1,
   range2: state.nexlocageetool.range2,
-  tempResolution: state.nexlocageetool.tempResolution,
 });
 
 const mapDispatchToProps = dispatch => ({
