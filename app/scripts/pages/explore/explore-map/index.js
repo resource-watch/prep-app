@@ -3,11 +3,12 @@ import * as shareModalActions from 'components/share-modal/share-modal-actions';
 import * as exploreActions from '../explore-actions';
 import * as reducers from './explore-map-reducers';
 import initialState from './explore-map-initial-state';
-import { getActiveLayers, getActiveLayersForMap, getLayersGroups } from './explore-map-selector';
+import { getNexLocaGeeDatasetsIds, getActiveLayers, getActiveLayersForMap, getLayersGroups } from './explore-map-selector';
 
 import Component from './explore-map-component';
 
 const mapStateToProps = state => ({
+  nexLocaGeeDatasetsIds: getNexLocaGeeDatasetsIds(state),
   activeLayers: getActiveLayers(state),
   activeLayersForMap: getActiveLayersForMap(state),
   layersGroups: getLayersGroups(state),

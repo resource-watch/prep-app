@@ -149,8 +149,6 @@ class DatasetDetail extends React.PureComponent {
     const widget = dataset.widget || [];
     const defaultEditableWidget = widget.find(w => w.defaultEditableWidget === true);
 
-    console.log(data, metaData);
-
     return (
       <div>
         <SectionIntro data={data} downloadUrl={DatasetDetail.getDownloadUrl(this.props.data)} currentSection={currentSection} >

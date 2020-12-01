@@ -3,7 +3,6 @@ require('dotenv').config({ silent: true });
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const DashboardPlugin = require('webpack-dashboard/plugin');
 
 const rootPath = process.cwd();
 
@@ -60,7 +59,6 @@ const config = {
         assetsUrl: JSON.stringify(process.env.ASSETS_URL || ''),
       },
     }),
-    new DashboardPlugin(),
   ],
 };
 

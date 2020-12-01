@@ -6,6 +6,16 @@ import { calcZIndex } from 'components/map-vis/map-vis-helper';
 
 const getAllDatasets = state => state.explorePage.datasets.items;
 
+export const getNexLocaGeeDatasets = createSelector(getAllDatasets, (_datasets) => {
+  const result = _datasets.filter((d) => d.vocabulary.find((v) => v.tags.includes('nexlocagee')));
+  return result;
+});
+
+export const getNexLocaGeeDatasetsIds = createSelector(
+  getNexLocaGeeDatasets,
+  (_datasets) => _datasets.map((d) => d.id),
+);
+
 export const getActiveLayers = createSelector(
   getAllDatasets,
   (datasets) => {
@@ -27,7 +37,7 @@ export const getActiveLayersForMap = createSelector(
     const activeDatasets = sortBy(filter(datasets, { isLayerActive: true }), l => l.zIndex);
     const { length } = activeDatasets;
     const layers = filter(flatten(
-      activeDatasets.map(({ layer, opacity, visibility, isLayerActive, zIndex }) => {
+      activeDatasets.map(({ layer, opacity, visibility, zIndex }) => {
         const layerActive = layer.find((ly) => ly.isLayerActive === true) ||
           layer.find((ly) => ly.default === true) || layer[0];
         const layerIndex = calcZIndex(length, zIndex);

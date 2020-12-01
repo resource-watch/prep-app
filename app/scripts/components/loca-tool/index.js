@@ -1,3 +1,1 @@
-import LOCATool from './LOCATool';
-
-export default LOCATool;
+export { default } from './LOCATool';

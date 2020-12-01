@@ -17,8 +17,8 @@ import Legend, {
 } from 'wri-api-components/dist/legend';
 import LegendNexGDDPToolbar from './legend-nexgddp-toolbar';
 import LegendLOCAToolbar from './legend-loca-toolbar';
+import LegendNexLocaGeeToolbar from './legend-nexlocagee-toolbar';
 import Popup from './explore-map-popup';
-// import { updateActiveDatasets } from '../explore-datasets-list/explore-datasets-list-reducers';
 
 class ExploreMap extends PureComponent {
 
@@ -28,9 +28,11 @@ class ExploreMap extends PureComponent {
     water: PropTypes.oneOf(['none', 'dark', 'light']),
     boundaries: PropTypes.bool,
 
-    activeLayers: PropTypes.array,
-    activeLayersForMap: PropTypes.array,
-    layersGroups: PropTypes.array,
+    nexLocaGeeDatasetsIds: PropTypes.arrayOf(PropTypes.string),
+
+    activeLayers: PropTypes.arrayOf(PropTypes.shape({})),
+    activeLayersForMap: PropTypes.arrayOf(PropTypes.shape({})),
+    layersGroups: PropTypes.arrayOf(PropTypes.shape({})),
 
     zoom: PropTypes.number,
     minZoom: PropTypes.number,
@@ -40,8 +42,8 @@ class ExploreMap extends PureComponent {
     embed: PropTypes.bool,
     embedExport: PropTypes.bool,
     open: PropTypes.bool,
-    bbox: PropTypes.any,
-    sidebar: PropTypes.object,
+    bbox: PropTypes.arrayOf(PropTypes.number),
+    sidebar: PropTypes.shape({}),
     setBasemap: PropTypes.func,
     setLabels: PropTypes.func,
     setBoundaries: PropTypes.func,
@@ -64,6 +66,8 @@ class ExploreMap extends PureComponent {
     basemap: 'default',
     labels: 'none',
     water: 'none',
+
+    nexLocaGeeDatasetsIds: null,
 
     boundaries: false,
     activeLayers: [],
@@ -146,8 +150,23 @@ class ExploreMap extends PureComponent {
     return { zoom: this.map.getZoom(), lat: center.lat, lng: center.lng };
   }
 
-  getLegendToolbar(layerActive) {
-    const { setMultiActiveLayer } = this.props;
+  getLegendToolbar(layerGroups) {
+    const { setMultiActiveLayer, nexLocaGeeDatasetsIds } = this.props;
+    const { dataset, layers } = layerGroups;
+    const isNexLocaGeeDataset = nexLocaGeeDatasetsIds.includes(dataset);
+
+    if (isNexLocaGeeDataset) {
+      return (
+        <LegendNexLocaGeeToolbar
+          datasetId={dataset}
+          layers={layers}
+          onMultiLayer={l => setMultiActiveLayer(l)}
+        />
+      );
+    }
+
+    const layerActive = layers.find(l => l.isLayerActive) || layers[0];
+
     if (layerActive.provider === 'nexgddp') {
       return (
         <LegendNexGDDPToolbar
@@ -156,6 +175,7 @@ class ExploreMap extends PureComponent {
         />
       );
     }
+
     if (layerActive.provider === 'loca') {
       return (
         <LegendLOCAToolbar
@@ -164,6 +184,7 @@ class ExploreMap extends PureComponent {
         />
       );
     }
+
     return null;
   }
 
@@ -172,7 +193,7 @@ class ExploreMap extends PureComponent {
       setMapParams, setBBox, basemap, labels, water, boundaries, bbox, sidebar, zoom, lat, lng, minZoom, setBasemap,
       setLabels, setBoundaries, setWater, embed, embedExport, layersGroups, activeLayersForMap, activeLayers,
       toggleVisibility, toggleInfo, updateOpacity, toggleDataset, setOpen, setLinks, setTab, setMultiActiveLayer,
-      setInteractions
+      setInteractions,
     } = this.props;
     const classNames = classnames({ '-embed': embed, '-embed-export': embedExport });
     const { open } = sidebar;
@@ -311,20 +332,17 @@ class ExploreMap extends PureComponent {
           maxHeight={300}
           onChangeOrder={layers => this.onSortChange(layers)}
         >
-          {layersGroups.map((lg, i) => {
-            const layerActive = lg.layers.find(l => l.isLayerActive) || lg.layers[0];
-            return (
-              <LegendListItem
-                index={i}
-                key={lg.dataset}
-                layerGroup={lg}
-                toolbar={<Toolbar lg={lg} />}
-              >
-                {this.getLegendToolbar(layerActive)}
-                <LegendItemTypes />
-              </LegendListItem>
-            );
-          })}
+          {layersGroups.map((lg, i) => (
+            <LegendListItem
+              index={i}
+              key={lg.dataset}
+              layerGroup={lg}
+              toolbar={<Toolbar lg={lg} />}
+            >
+              {this.getLegendToolbar(lg)}
+              <LegendItemTypes />
+            </LegendListItem>
+          ))}
         </Legend>
 
         { !embedExport && (

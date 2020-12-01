@@ -18,8 +18,9 @@ import MetadataInfo from './dataset-metadata-component';
 import SimpleMap from 'containers/SimpleMap/SimpleMap';
 import LoadingSpinner from 'components/Loading/LoadingSpinner';
 
-import NexGDDPTool from 'components/nexgddp-tool/NexGDDPTool';
+import NexGDDPTool from 'components/nexgddp-tool';
 import LOCATool from 'components/loca-tool';
+import NexLocaGeeTool from 'components/nexlocagee-tool';
 
 const logoImage = '/images/prep-logo.png';
 
@@ -115,7 +116,10 @@ class DatasetPage extends PureComponent {
     const { description: infoDescription } = info;
 
     // Widget editor
-    const isWidgetEditor = (dataset.id && dataset.provider !== 'nexgddp' && dataset.provider !== 'loca' && !EXCEPTIONS[dataset.id]);
+    const isLOCADataset = dataset.provider === 'loca';
+    const isNEXTGDDPDataset = dataset.provider === 'nexgddp';
+    const isNexLocaGeeDataset = dataset.vocabulary.find((v) => v.tags.includes('nexlocagee'));
+    const isWidgetEditor = (!isLOCADataset && !isNEXTGDDPDataset && !isNexLocaGeeDataset && !EXCEPTIONS[dataset.id]);
 
     // Page title
     document.title = name;
@@ -166,7 +170,7 @@ class DatasetPage extends PureComponent {
                   </div>
                 </SectionIntro>
 
-                {(dataset.id && dataset.provider === 'loca') && (
+                {isLOCADataset && (
                   <div className="row">
                     <div className="columns small-12">
                       <LOCATool dataset={dataset} />
@@ -174,10 +178,18 @@ class DatasetPage extends PureComponent {
                   </div>
                 )}
 
-                {(dataset.id && dataset.provider === 'nexgddp') &&(
+                {isNEXTGDDPDataset && (
                   <div className="row">
                     <div className="columns small-12">
                       <NexGDDPTool dataset={dataset} />
+                    </div>
+                  </div>
+                )}
+
+                {isNexLocaGeeDataset && (
+                  <div className="row">
+                    <div className="columns small-12">
+                      <NexLocaGeeTool dataset={dataset} />
                     </div>
                   </div>
                 )}
