@@ -36,8 +36,7 @@ class LegendNexLocaGeeToolbar extends PureComponent {
   }
 
   componentDidMount() {
-    const { layers } = this.props;
-    this.updatingCombos(layers);
+    this.updatingCombos();
   }
 
   onPeriodChange(period) {
@@ -79,8 +78,8 @@ class LegendNexLocaGeeToolbar extends PureComponent {
     return nexLocaGeeDatasets.find(({ id }) => id === datasetId);
   }
 
-  updatingCombos(layers) {
-    const { datasetId } = this.props;
+  updatingCombos() {
+    const { datasetId, layers, onMultiLayer } = this.props;
     const dataset = this.getDataset(datasetId);
     const { metadata } = dataset;
     const { info } = metadata[0];
@@ -98,12 +97,19 @@ class LegendNexLocaGeeToolbar extends PureComponent {
     // Scenarios: always are two; high and low
     const scenariosOptions = [{ label: 'Low emissions', value: 'low' }, { label: 'High emissions', value: 'high' }];
     const scenario = scenariosOptions.find(({ value }) => datasetId === change[value]) || scenariosOptions[0];
+    const activeLayer = layers.find(({ layerConfig }) => layerConfig.order === period.value);
 
     this.setState({
       period,
       periodsOptions,
       scenario,
       scenariosOptions,
+    }, () => {
+      onMultiLayer({
+        ...this.state,
+        id: activeLayer.dataset,
+        layerId: activeLayer.id,
+      });
     });
   }
 
