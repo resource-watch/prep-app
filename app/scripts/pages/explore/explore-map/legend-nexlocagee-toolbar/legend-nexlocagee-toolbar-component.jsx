@@ -6,6 +6,7 @@ import './legend-nexlocagee-toolbar-style.scss';
 class LegendNexLocaGeeToolbar extends PureComponent {
   static propTypes = {
     datasetId: PropTypes.string,
+    defaultPeriod: PropTypes.shape({}),
     nexLocaGeeDatasets: PropTypes.arrayOf(PropTypes.shape({})),
     layers: PropTypes.arrayOf(PropTypes.shape({})),
     onMultiLayer: PropTypes.func,
@@ -13,6 +14,7 @@ class LegendNexLocaGeeToolbar extends PureComponent {
 
   static defaultProps = {
     datasetId: null,
+    defaultPeriod: null,
     nexLocaGeeDatasets: null,
     layers: null,
     onMultiLayer: () => {}
@@ -45,7 +47,12 @@ class LegendNexLocaGeeToolbar extends PureComponent {
     const activeLayer = layers.find(({ layerConfig }) => layerConfig.order === value);
 
     this.setState({ period, activeLayer }, () => {
-      onMultiLayer({ ...this.state, id: activeLayer.dataset, layerId: activeLayer.id });
+      onMultiLayer({
+        ...this.state,
+        id: activeLayer.dataset,
+        layerId: activeLayer.id,
+        period: period.value,
+      });
     });
   }
 
@@ -66,9 +73,10 @@ class LegendNexLocaGeeToolbar extends PureComponent {
     this.setState({ scenario }, () => {
       onMultiLayer({
         ...this.state,
-        id: scenarioDatasetId,
+        id: activeLayer.dataset,
         layerId: activeLayer.id,
         previousId: datasetId,
+        scenario: scenario.value,
       });
     });
   }
@@ -79,7 +87,7 @@ class LegendNexLocaGeeToolbar extends PureComponent {
   }
 
   updatingCombos() {
-    const { datasetId, layers, onMultiLayer } = this.props;
+    const { datasetId, defaultPeriod, layers, onMultiLayer } = this.props;
     const dataset = this.getDataset(datasetId);
     const { metadata } = dataset;
     const { info } = metadata[0];
@@ -92,7 +100,7 @@ class LegendNexLocaGeeToolbar extends PureComponent {
         })
       )
       .sort((a, b) => (a.value - b.value));
-    const period = periodsOptions[0];
+    const period = defaultPeriod || periodsOptions[0];
 
     // Scenarios: always are two; high and low
     const scenariosOptions = [{ label: 'Low emissions', value: 'low' }, { label: 'High emissions', value: 'high' }];
