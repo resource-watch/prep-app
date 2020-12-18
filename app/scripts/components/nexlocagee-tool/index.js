@@ -6,7 +6,7 @@ const mapStateToProps = state => ({
   open: state.shareModal.open,
   render: state.nexlocageetool.render,
   marker: state.nexlocageetool.marker,
-  isComparing: !!state.nexlocageetool.range2.selection,
+  isComparing: !!state.nexlocageetool.range2.selection || state.nexlocageetool.mapMode === 'difference',
   mapMode: state.nexlocageetool.mapMode,
   indicatorDataset: state.nexlocageetool.indicatorDataset
 });

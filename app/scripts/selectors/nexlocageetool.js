@@ -1,3 +1,4 @@
+import { data } from 'react-dom-factories';
 import { createSelector } from 'reselect';
 
 // Temporal code
@@ -15,6 +16,7 @@ const mapIndicatorToUnitSignal = {
 };
 
 const state = state => state; // eslint-disable-line no-shadow
+const mapMode = ({ nexlocageetool }) => nexlocageetool.mapMode;
 const range1Selection = ({ nexlocageetool }) => nexlocageetool.range1.selection;
 const range2Selection = ({ nexlocageetool }) => nexlocageetool.range2.selection;
 const dataset = ({ nexlocageetool }) => nexlocageetool.dataset || null;
@@ -22,13 +24,26 @@ const layers = ({ nexlocageetool }) => nexlocageetool.dataset ? nexlocageetool.d
 
 // eslint-disable-next-line import/prefer-default-export
 export const getLayers = createSelector(
+  dataset,
   layers,
+  mapMode,
   range1Selection,
   range2Selection,
-  (layers, range1Selection, range2Selection) => { // eslint-disable-line no-shadow
+  (dataset, layers, mapMode, range1Selection, range2Selection) => { // eslint-disable-line no-shadow
     if ((!range1Selection && !range2Selection) || !layers.length) return [];
 
     const activeLayers = [];
+
+    console.log(dataset);
+    console.log(mapMode);
+
+    if (mapMode === 'difference') {
+      const datasetId = dataset.id;
+      const diffDatasetId = dataset.metadata[0].info.change;
+      const isHigh = dataset.id === diffDatasetId.high;
+      const currentLayer = layers.find(({ layerConfig }) => layerConfig.order === range1Selection.value);
+      return activeLayers;
+    }
 
     if (range1Selection) {
       const currentLayer1 = layers.find(({ layerConfig }) => layerConfig.order === range1Selection.value);
