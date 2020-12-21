@@ -147,12 +147,15 @@ export function getChartData() {
     });
 
     const state = getState();
+    const { id, tableName } = state.datasetPage.data;
     const lat = state.nexlocageetool.marker[0];
     const lng = state.nexlocageetool.marker[1];
-    const indicatorId = getIndicatorId(state);
-    const { slug } = state.nexlocageetool.indicatorDataset;
-
-    return fetch(`${process.env.RW_API_URL}/query?sql=select ${indicatorId}_q25 as q25, ${indicatorId} as q50, ${indicatorId}_q75 as q75, year as x from ${slug}&lat=${lat}&lon=${lng}`, {
+    // const indicatorId = getIndicatorId(state);
+    // const { slug } = state.nexlocageetool.indicatorDataset;
+    // const oldQuery = `select ${indicatorId}_q25 as q25, ${indicatorId} as q50, ${indicatorId}_q75 as q75, year as x from ${slug}&lat=${lat}&lon=${lng}`;
+    const query = `select avg(q25), avg(q50), avg(q75), system:index from '${tableName}' where (ST_INTERSECTS(ST_SetSRID(ST_GeomFromGeoJSON('{"type":"Point","coordinates":[${lng},${lat}]}'),4326),the_geom)) AND change_vs_absolute like 'abs' GROUP BY system:index`;
+    console.log(`${process.env.RW_API_URL}/query/${id}?sql=${encodeURIComponent(query)}`)
+    return fetch(`${process.env.RW_API_URL}/query/${id}?sql=${encodeURIComponent(query)}`, {
       headers: {
         'Content-Type': 'application/json',
         'Upgrade-Insecure-Requests': 1
@@ -165,11 +168,11 @@ export function getChartData() {
       .then(json => json.data)
       .then(data => dispatch({
         type: NEXLOCAGEE_SET_CHART_DATA,
-        payload: data
+        // TO-DO: no years from data
+        payload: data.map((d, index) => ({ ...d, x: 1980 + (index * 5) })),
       }))
       .catch((err) => {
         console.error(err);
-
         dispatch({
           type: NEXLOCAGEE_SET_CHART_ERROR,
           payload: true

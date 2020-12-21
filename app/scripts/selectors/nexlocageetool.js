@@ -95,8 +95,10 @@ export const getIndicatorId = createSelector(
 export const getIndicatorUnitSignal = createSelector(
   state,
   (state) => { // eslint-disable-line no-shadow
-    const indicatorId = getIndicatorId(state);
-    return indicatorId ? mapIndicatorToUnitSignal[indicatorId] : null;
+    // TO-DO: indicator id doesn't exit anymore, use an alternative
+    return mapIndicatorToUnitSignal.tasmin;
+    // const indicatorId = getIndicatorId(state);
+    // return indicatorId ? mapIndicatorToUnitSignal[indicatorId] : null;
   }
 );
 

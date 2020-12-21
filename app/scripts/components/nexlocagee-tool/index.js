@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getSelectorsInfo, getUrlState, setDefaultState, setMapMode, resetState, setDataset } from 'actions/nexlocageetool';
+import { getChartData, getSelectorsInfo, getUrlState, setDefaultState, setMapMode, resetState, setDataset } from 'actions/nexlocageetool';
 import Component from './NexLocaGeeTool';
 
 const mapStateToProps = state => ({
@@ -12,6 +12,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  getChartData: () => dispatch(getChartData()),
   getSelectorsInfo: () => dispatch(getSelectorsInfo()),
   restoreState: () => dispatch(getUrlState()),
   setDefaultState: () => dispatch(setDefaultState()),
