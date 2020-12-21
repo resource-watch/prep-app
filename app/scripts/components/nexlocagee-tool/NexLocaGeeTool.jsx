@@ -166,7 +166,7 @@ class NexLocaGeeTool extends React.PureComponent {
           </div>
         )}
 
-        {(render === 'chart' || !render) && marker && (
+        {(render === 'chart' || !render) && !!marker.length && (
           <div className="chart">
             <div className="row">
               <div className="columns small-12">
