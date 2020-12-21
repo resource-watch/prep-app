@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
@@ -6,8 +7,10 @@ import './style.scss';
 
 class ScenarioSelect extends React.PureComponent {
   handleScenario = (currentScenario) => {
-    const { dataset, setScenarioSelection } = this.props;
-    const { slug } = dataset;
+    const { additionalData, dataset, setScenarioSelection } = this.props;
+    const isAbsolute = additionalData.absolute.low.id === dataset.id || additionalData.absolute.high.id === dataset.id;
+    const { slug } = additionalData[isAbsolute ? 'absolute' : 'change'][currentScenario.value === 'low' ? 'high' : 'low'];
+
     setScenarioSelection(currentScenario);
     browserHistory.push(`/dataset/${slug}${window.location.search}`);
   }
@@ -36,11 +39,13 @@ const optionTypes = PropTypes.shape({
 });
 
 ScenarioSelect.defaultProps = {
+  additionalData: null,
   dataset: null,
   scenario: null,
 };
 
 ScenarioSelect.propTypes = {
+  additionalData: PropTypes.shape({}),
   dataset: PropTypes.shape({}),
   scenario: PropTypes.shape({
     options: PropTypes.arrayOf(optionTypes),

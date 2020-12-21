@@ -1,4 +1,4 @@
-import { data } from 'react-dom-factories';
+import 'whatwg-fetch';
 import { createSelector } from 'reselect';
 
 // Temporal code
@@ -17,36 +17,41 @@ const mapIndicatorToUnitSignal = {
 
 const state = state => state; // eslint-disable-line no-shadow
 const mapMode = ({ nexlocageetool }) => nexlocageetool.mapMode;
+const scenario = ({ nexlocageetool }) => nexlocageetool.scenario;
 const range1Selection = ({ nexlocageetool }) => nexlocageetool.range1.selection;
 const range2Selection = ({ nexlocageetool }) => nexlocageetool.range2.selection;
 const dataset = ({ nexlocageetool }) => nexlocageetool.dataset || null;
+const additionalData = ({ datasetPage }) => datasetPage.additionalData || null;
 const layers = ({ nexlocageetool }) => nexlocageetool.dataset ? nexlocageetool.dataset.layer : [];
 
 // eslint-disable-next-line import/prefer-default-export
 export const getLayers = createSelector(
   dataset,
-  layers,
   mapMode,
+  scenario,
   range1Selection,
   range2Selection,
-  (dataset, layers, mapMode, range1Selection, range2Selection) => { // eslint-disable-line no-shadow
-    if ((!range1Selection && !range2Selection) || !layers.length) return [];
-
+  additionalData,
+  (dataset, mapMode, scenario, range1Selection, range2Selection, additionalData) => { // eslint-disable-line no-shadow
+    if ((!range1Selection && !range2Selection) || !dataset || !additionalData || !dataset.layer.length) return [];
+    const { layer } = dataset;
     const activeLayers = [];
 
-    console.log(dataset);
-    console.log(mapMode);
-
     if (mapMode === 'difference') {
-      const datasetId = dataset.id;
-      const diffDatasetId = dataset.metadata[0].info.change;
-      const isHigh = dataset.id === diffDatasetId.high;
-      const currentLayer = layers.find(({ layerConfig }) => layerConfig.order === range1Selection.value);
+      const range1Date = `${range1Selection.value}`;
+      const { layer: additionalLayers } = additionalData.change[scenario.selection.value];
+      const currentLayer = additionalLayers.find(({ layerConfig }) => layerConfig.order === range1Selection.value);
+
+      activeLayers.push({
+        url: `${config.apiUrlRW}/layer/${currentLayer.id}/tile/gee/{z}/{x}/{y}`,
+        date: range1Date,
+      });
+
       return activeLayers;
     }
 
     if (range1Selection) {
-      const currentLayer1 = layers.find(({ layerConfig }) => layerConfig.order === range1Selection.value);
+      const currentLayer1 = layer.find(({ layerConfig }) => layerConfig.order === range1Selection.value);
       const range1Date = `${range1Selection.value}`;
       activeLayers.push({
         url: `${config.apiUrlRW}/layer/${currentLayer1.id}/tile/gee/{z}/{x}/{y}`,
@@ -55,7 +60,7 @@ export const getLayers = createSelector(
     }
 
     if (range2Selection) {
-      const currentLayer2 = layers.find(({ layerConfig }) => layerConfig.order === range2Selection.value);
+      const currentLayer2 = layer.find(({ layerConfig }) => layerConfig.order === range2Selection.value);
       const range2Date = `${range2Selection.value}`;
       activeLayers.push({
         url: `${config.apiUrlRW}/layer/${currentLayer2.id}/tile/gee/{z}/{x}/{y}`,

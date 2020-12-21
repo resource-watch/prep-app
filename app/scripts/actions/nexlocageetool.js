@@ -1,6 +1,5 @@
-import { select } from 'react-dom-factories';
 import { replace } from 'react-router-redux';
-import { getIndicatorId, getTempResolution } from 'selectors/nexlocageetool';
+import { getIndicatorId } from 'selectors/nexlocageetool';
 import {
   NEXLOCAGEE_SET_MAP_ZOOM,
   NEXLOCAGEE_SET_MAP_CENTER,
@@ -71,7 +70,7 @@ export function updateUrl() {
       .map(key => `${key}=${encodeURIComponent(params[key])}`)
       .reduce(
         (res, chunk, index) => `${res}${index === 0 ? '?' : '&'}${chunk}`,
-        location.pathname
+        window.location.pathname
       );
 
     dispatch(replace(url));
@@ -435,8 +434,8 @@ export function setRender(render, changeUrl = true) {
 
 export function getUrlState() {
   return (dispatch, getState) => {
-    const params = location.search
-      .substring(1, location.search.length)
+    const params = window.location.search
+      .substring(1, window.location.search.length)
       .split('&')
       .map(chunk => ({ [chunk.split('=')[0]]: decodeURIComponent(chunk.split('=')[1]) }))
       .reduce((res, param) => ({ ...res, ...param }), {});

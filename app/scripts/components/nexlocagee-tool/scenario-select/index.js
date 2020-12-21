@@ -3,6 +3,7 @@ import { setScenarioSelection } from 'actions/nexlocageetool';
 import ScenarioSelect from './ScenarioSelect';
 
 const mapStateToProps = state => ({
+  additionalData: state.datasetPage.additionalData,
   dataset: state.nexlocageetool.dataset,
   scenario: state.nexlocageetool.scenario,
 });
