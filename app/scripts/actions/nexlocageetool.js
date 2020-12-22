@@ -153,7 +153,7 @@ export function getChartData() {
     const detectScenario = (value) => scenario.selection && scenarioMap[value] === scenario.selection.value;
     const lat = marker[0];
     const lng = marker[1];
-    const query = `select avg(q25), avg(q50), avg(q75), system:index, RCP from '${tableName}' where (ST_INTERSECTS(ST_SetSRID(ST_GeomFromGeoJSON('{"type":"Point","coordinates":[${lng},${lat}]}'),4326),the_geom)) AND change_vs_absolute like 'abs' GROUP BY system:index, RCP`;
+    const query = `select avg(q25), avg(q50), avg(q75), system:index, RCP, year_start, year_end from '${tableName}' where (ST_INTERSECTS(ST_SetSRID(ST_GeomFromGeoJSON('{"type":"Point","coordinates":[${lng},${lat}]}'),4326),the_geom)) AND change_vs_absolute like 'abs' GROUP BY system:index, RCP, year_start, year_end`;
     return fetch(`${process.env.RW_API_URL}/query/${id}?sql=${encodeURIComponent(query)}&application=prep`, {
       headers: {
         'Content-Type': 'application/json',
@@ -167,7 +167,7 @@ export function getChartData() {
       .then(json => json.data)
       .then(data => {
         const payload = data.filter((d) => detectScenario(d.RCP))
-          .map((d, index) => ({ ...d, x: 1980 + (index * 5) }));
+          .map((d) => ({ ...d, x: Number(d.year_start) + 15 }));
         dispatch({
           type: NEXLOCAGEE_SET_CHART_DATA,
           // TO-DO: no years from data
