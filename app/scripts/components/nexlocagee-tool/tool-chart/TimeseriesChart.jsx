@@ -821,7 +821,7 @@ class TimeseriesChart extends React.Component {
   }
 
   render() {
-    const { removeMarker, range1Selection, chartDataLoaded, chartDataError, datasetId, render } = this.props;
+    const { removeMarker, range1Selection, chartData, chartDataLoaded, chartDataError, datasetId, render } = this.props;
     const { chartLoaded, vegaSpec } = this.state;
 
     // If for some reason, the range 1 is not selected or if the data
@@ -848,7 +848,7 @@ class TimeseriesChart extends React.Component {
           </button>
         )}
 
-        {chartDataLoaded &&
+        {chartDataLoaded && !!chartData.length &&
           <VegaChart data={vegaSpec} reloadOnResize toggleLoading={loading => this.setState({ chartLoaded: !loading })} />
         }
 
