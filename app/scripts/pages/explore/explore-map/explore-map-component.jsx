@@ -105,6 +105,11 @@ class ExploreMap extends PureComponent {
 
   constructor(props) {
     super(props);
+    this.state = {
+      nexLocaGeeDatasetType: null,
+      nexLocaGeePeriod: null,
+      nexLocaGeeScenario: null,
+    };
     this.onSortChange = this.onSortChange.bind(this);
   }
 
@@ -152,6 +157,7 @@ class ExploreMap extends PureComponent {
 
   getLegendToolbar(layerGroups) {
     const { setMultiActiveLayer, nexLocaGeeDatasetsIds } = this.props;
+    const { nexLocaGeePeriod, nexLocaGeeDatasetType, nexLocaGeeScenario } = this.state;
     const { dataset, layers } = layerGroups;
     const isNexLocaGeeDataset = nexLocaGeeDatasetsIds.includes(dataset);
 
@@ -159,8 +165,19 @@ class ExploreMap extends PureComponent {
       return (
         <LegendNexLocaGeeToolbar
           datasetId={dataset}
+          defaultDatasetType={nexLocaGeeDatasetType}
+          defaultPeriod={nexLocaGeePeriod}
+          defaultScenario={nexLocaGeeScenario}
           layers={layers}
-          onMultiLayer={l => setMultiActiveLayer(l)}
+          onMultiLayer={(l) => {
+            this.setState({
+              nexLocaGeeDatasetType: l.datasetType,
+              nexLocaGeePeriod: l.period,
+              nexLocaGeeScenario: l.scenario,
+            }, () => {
+              setMultiActiveLayer(l);
+            });
+          }}
         />
       );
     }

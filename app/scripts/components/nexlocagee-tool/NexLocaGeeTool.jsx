@@ -36,6 +36,13 @@ class NexLocaGeeTool extends React.PureComponent {
       .then(() => this.setState({ loading: false }));
   }
 
+  componentDidUpdate() {
+    const { marker, getChartData } = this.props;
+    if (marker && marker.length) {
+      getChartData();
+    }
+  }
+
   switchMapView(mapMode) {
     const { setMapMode } = this.props;
     setMapMode(mapMode);
@@ -46,7 +53,6 @@ class NexLocaGeeTool extends React.PureComponent {
       marker,
       isComparing,
       mapMode,
-      indicatorDataset,
       render,
       embed
     } = this.props;
@@ -160,7 +166,7 @@ class NexLocaGeeTool extends React.PureComponent {
           </div>
         )}
 
-        {(render === 'chart' || !render) && marker && indicatorDataset && (
+        {(render === 'chart' || !render) && !!marker.length && (
           <div className="chart">
             <div className="row">
               <div className="columns small-12">
@@ -180,7 +186,6 @@ NexLocaGeeTool.defaultProps = {
   render: null,
   marker: [],
   mapMode: 'side-by-side',
-  indicatorDataset: null,
 };
 
 NexLocaGeeTool.propTypes = {
@@ -193,10 +198,10 @@ NexLocaGeeTool.propTypes = {
   render: PropTypes.oneOf(['map', 'chart', undefined]),
   marker: PropTypes.array,
   mapMode: PropTypes.oneOf(['difference', 'side-by-side', 'toggle']),
-  indicatorDataset: PropTypes.object,
   resetState: PropTypes.func.isRequired,
   dataset: PropTypes.object.isRequired,
   setDataset: PropTypes.func.isRequired,
+  getChartData: PropTypes.func.isRequired,
 };
 
 export default NexLocaGeeTool;

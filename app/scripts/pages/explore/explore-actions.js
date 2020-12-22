@@ -234,6 +234,7 @@ export const initialURLParams = createThunkAction('initialURLParams', () => (dis
       const parsedSt = s.split('|');
       const params = {};
       if (parsedSt.length) {
+        // eslint-disable-next-line prefer-destructuring
         if (parsedSt[0]) params.id = parsedSt[0];
         params.opacity = typeof parsedSt[1] === 'undefined' ? 1 : parseFloat(parsedSt[1]);
         params.visibility = typeof parsedSt[2] === 'undefined' || parsedSt[2] !== 'true' || parsedSt[2] !== 'false' ?

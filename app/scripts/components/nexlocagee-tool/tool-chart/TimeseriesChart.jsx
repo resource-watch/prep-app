@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import deepClone from 'lodash/cloneDeep';
 import isEqual from 'lodash/isEqual';
 import { getConfig, VegaChart } from 'widget-editor';
 
@@ -712,7 +711,7 @@ class TimeseriesChart extends React.Component {
    * @returns {object}
    */
   static generateVegaSpec(props) {
-    const { range1Selection, range2Selection, chartData, indicatorId, indicatorUnitSignal, chartDataError } = props;
+    const { range1Selection, range2Selection, chartData, indicatorUnitSignal, chartDataError } = props;
 
     // If for some reason, the range 1 is not selected or if the data
     // failed to load, we return
@@ -804,8 +803,9 @@ class TimeseriesChart extends React.Component {
   onClickShare(e) {
     // Prevent the tooltip from auto-closing
     e.stopPropagation();
+    const { toggleTooltip: toggleTooltipProp } = this.props;
 
-    this.props.toggleTooltip(true, {
+    toggleTooltipProp(true, {
       follow: false,
       position: {
         x: window.scrollX + e.clientX,
@@ -821,7 +821,7 @@ class TimeseriesChart extends React.Component {
   }
 
   render() {
-    const { removeMarker, range1Selection, chartDataLoaded, chartDataError, datasetId, render } = this.props;
+    const { removeMarker, range1Selection, chartData, chartDataLoaded, chartDataError, datasetId, render } = this.props;
     const { chartLoaded, vegaSpec } = this.state;
 
     // If for some reason, the range 1 is not selected or if the data
@@ -837,7 +837,7 @@ class TimeseriesChart extends React.Component {
           <Spinner inner transparent={!chartDataLoaded} />
         }
 
-        {render !== 'chart' &&
+        {render !== 'chart' && (
           <button
             type="button"
             className="close-button"
@@ -846,9 +846,9 @@ class TimeseriesChart extends React.Component {
           >
             <Icon name="icon-cross" />
           </button>
-        }
+        )}
 
-        {chartDataLoaded &&
+        {chartDataLoaded && !!chartData.length &&
           <VegaChart data={vegaSpec} reloadOnResize toggleLoading={loading => this.setState({ chartLoaded: !loading })} />
         }
 
@@ -863,6 +863,20 @@ class TimeseriesChart extends React.Component {
     );
   }
 }
+
+TimeseriesChart.defaultProps = {
+  render: null,
+  removeMarker: () => null,
+  range1Selection: null,
+  range2Selection: null,
+  chartDataLoaded: false,
+  chartData: null,
+  chartDataError: null,
+  indicatorId: null,
+  indicatorUnitSignal: null,
+  toggleTooltip: () => null,
+  datasetId: null,
+};
 
 /* eslint-disable react/no-unused-prop-types */
 TimeseriesChart.propTypes = {

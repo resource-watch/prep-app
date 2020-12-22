@@ -16,5 +16,24 @@ export default {
     isFetching: false,
     status: 'success',
     data: payload
+  }),
+
+  [actions.fetchAdditionalDataset]: (state) => ({
+    ...state,
+    isAdditionalDataFetching: true,
+    additionalDataError: null,
+    additionalData: null,
+  }),
+  [actions.failureAdditionalDataset]: (state, { payload }) => ({
+    ...state,
+    isAdditionalDataFetching: false,
+    additionalDataError: payload,
+    additionalData: null,
+  }),
+  [actions.receiveAdditionalDataset]: (state, { payload }) => ({
+    ...state,
+    isAdditionalDataFetching: false,
+    additionalDataError: null,
+    additionalData: payload
   })
 };

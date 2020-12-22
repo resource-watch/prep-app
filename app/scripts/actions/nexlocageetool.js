@@ -1,6 +1,5 @@
-import { select } from 'react-dom-factories';
 import { replace } from 'react-router-redux';
-import { getIndicatorId, getTempResolution } from 'selectors/nexlocageetool';
+import { getIndicatorId } from 'selectors/nexlocageetool';
 import {
   NEXLOCAGEE_SET_MAP_ZOOM,
   NEXLOCAGEE_SET_MAP_CENTER,
@@ -71,7 +70,7 @@ export function updateUrl() {
       .map(key => `${key}=${encodeURIComponent(params[key])}`)
       .reduce(
         (res, chunk, index) => `${res}${index === 0 ? '?' : '&'}${chunk}`,
-        location.pathname
+        window.location.pathname
       );
 
     dispatch(replace(url));
@@ -148,12 +147,14 @@ export function getChartData() {
     });
 
     const state = getState();
-    const lat = state.nexlocageetool.marker[0];
-    const lng = state.nexlocageetool.marker[1];
-    const indicatorId = getIndicatorId(state);
-    const { slug } = state.nexlocageetool.indicatorDataset;
-
-    return fetch(`${process.env.RW_API_URL}/query?sql=select ${indicatorId}_q25 as q25, ${indicatorId} as q50, ${indicatorId}_q75 as q75, year as x from ${slug}&lat=${lat}&lon=${lng}`, {
+    const { id, tableName } = state.datasetPage.data;
+    const { marker, scenario } = state.nexlocageetool;
+    const scenarioMap = { '4.5': 'low', '8.5': 'hight' };
+    const detectScenario = (value) => scenario.selection && scenarioMap[value] === scenario.selection.value;
+    const lat = marker[0];
+    const lng = marker[1];
+    const query = `select avg(q25), avg(q50), avg(q75), system:index, RCP from '${tableName}' where (ST_INTERSECTS(ST_SetSRID(ST_GeomFromGeoJSON('{"type":"Point","coordinates":[${lng},${lat}]}'),4326),the_geom)) AND change_vs_absolute like 'abs' GROUP BY system:index, RCP`;
+    return fetch(`${process.env.RW_API_URL}/query/${id}?sql=${encodeURIComponent(query)}&application=prep`, {
       headers: {
         'Content-Type': 'application/json',
         'Upgrade-Insecure-Requests': 1
@@ -164,13 +165,17 @@ export function getChartData() {
         throw new Error('Unable to fetch the data of the chart');
       })
       .then(json => json.data)
-      .then(data => dispatch({
-        type: NEXLOCAGEE_SET_CHART_DATA,
-        payload: data
-      }))
+      .then(data => {
+        const payload = data.filter((d) => detectScenario(d.RCP))
+          .map((d, index) => ({ ...d, x: 1980 + (index * 5) }));
+        dispatch({
+          type: NEXLOCAGEE_SET_CHART_DATA,
+          // TO-DO: no years from data
+          payload,
+        })
+      })
       .catch((err) => {
         console.error(err);
-
         dispatch({
           type: NEXLOCAGEE_SET_CHART_ERROR,
           payload: true
@@ -435,8 +440,8 @@ export function setRender(render, changeUrl = true) {
 
 export function getUrlState() {
   return (dispatch, getState) => {
-    const params = location.search
-      .substring(1, location.search.length)
+    const params = window.location.search
+      .substring(1, window.location.search.length)
       .split('&')
       .map(chunk => ({ [chunk.split('=')[0]]: decodeURIComponent(chunk.split('=')[1]) }))
       .reduce((res, param) => ({ ...res, ...param }), {});

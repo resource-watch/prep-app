@@ -77,6 +77,8 @@ class CompareMap extends React.PureComponent {
     const { layers: nextLayers } = nextProps;
     const { layers: currentLayers } = this.props;
 
+    console.log(nextLayers)
+
     const hasChangedLayers = (currentLayers.length !== nextLayers.length)
       || nextLayers.some((l, i) => l.url !== (currentLayers[i] || {}).url);
 
