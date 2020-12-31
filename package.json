@@ -117,7 +117,7 @@
     "style-loader": "0.13.2",
     "twitter": "1.7.0",
     "uglifyjs-webpack-plugin": "^2.0.1",
-    "urijs": "1.18.10",
+    "urijs": "1.19.4",
     "url-loader": "0.5.8",
     "vega": "^3.2.1",
     "vega-lib": "^4.2.0",
