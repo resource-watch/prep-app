@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import compact from 'lodash/compact';
 import { createSelector } from 'reselect';
 import { CATEGORIES } from './core-datasets-list-constants';
@@ -21,11 +22,33 @@ export const getCoreDatasets = createSelector(
 
     searchDatasetsRecursive(CATEGORIES, coreDatasets);
 
-    return allDatasets.filter((dataset) => {
-      // const { vocabulary } = dataset;
-      // const tags = vocabulary && vocabulary.length ? vocabulary[0].tags || [] : [];
-      return coreDatasetsResult.includes(dataset.id);
+    // d.vocabulary.find((v) => v.tags.includes('nexlocagee'))
+
+    const result = allDatasets.filter((dataset) => coreDatasetsResult.includes(dataset.id));
+
+    /**
+     * Filtering and grouping core datasets in order to don't repeat NEX LOCA GEE datasets
+     * Date: January 2021
+     */
+    const resultFiltered = result.filter((d) => d.vocabulary.find((v) => !v.tags.includes('nexlocagee')));
+
+    // Grouping datasets for NEXLOCAGEE
+    const nexLocaGeeDatasets = result.filter((d) => d.vocabulary.find((v) => v.tags.includes('nexlocagee')));
+    const nexLocaGeeIndicators = [];
+
+    nexLocaGeeDatasets.forEach((n) => {
+      const exists = nexLocaGeeIndicators.find((d) => d.id === n.id);
+      // Absolute low as base
+      if (n.id === n.metadata[0].info.absolute.low && !exists) {
+        nexLocaGeeIndicators.push(n);
+      }
     });
+
+    // Returning core datasets without nex loca gee datasets, and then join grouped nex loca gee indicators
+    return [
+      ...resultFiltered,
+      ...nexLocaGeeIndicators,
+    ];
   }
 );
 
