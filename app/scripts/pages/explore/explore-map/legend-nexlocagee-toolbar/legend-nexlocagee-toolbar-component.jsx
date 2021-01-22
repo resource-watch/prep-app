@@ -116,12 +116,13 @@ class LegendNexLocaGeeToolbar extends PureComponent {
   }
 
   updatingCombos() {
-    const { datasetId, defaultPeriod, defaultScenario, layers, onMultiLayer } = this.props;
+    const { datasetId, defaultPeriod, defaultScenario, layers } = this.props;
     const dataset = this.getDataset(datasetId);
     const { metadata } = dataset;
     const { info } = metadata[0];
     const { absolute } = info;
     const isAbsolute = datasetId === absolute.low || datasetId === absolute.high;
+    const activeLayer = layers.find(({ isActive }) => isActive);
 
     // Period
     const periodsOptions = layers.map(
@@ -131,7 +132,9 @@ class LegendNexLocaGeeToolbar extends PureComponent {
         })
       )
       .sort((a, b) => (a.value - b.value));
-    const period = defaultPeriod || periodsOptions[0];
+    const period = periodsOptions.find((p) => p.value === activeLayer.layerConfig.order)
+      || defaultPeriod
+      || periodsOptions[0];
 
     // Dataset types: absolute or change
     const datasetTypeOptions = [{ label: 'Absolute', value: 'absolute' }, { label: 'Change', value: 'change' }];
@@ -141,8 +144,6 @@ class LegendNexLocaGeeToolbar extends PureComponent {
     const scenariosOptions = [{ label: 'Low emissions', value: 'low' }, { label: 'High emissions', value: 'high' }];
     const scenario = defaultScenario || scenariosOptions[0];
 
-    const activeLayer = layers.find(({ layerConfig }) => layerConfig.order === period.value);
-
     this.setState({
       datasetType,
       datasetTypeOptions,
@@ -150,12 +151,6 @@ class LegendNexLocaGeeToolbar extends PureComponent {
       periodsOptions,
       scenario,
       scenariosOptions,
-    }, () => {
-      onMultiLayer({
-        ...this.state,
-        id: activeLayer.dataset,
-        layerId: activeLayer.id,
-      });
     });
   }
 

@@ -119,7 +119,7 @@ export function getDatasets(defaultActiveLayers) {
       .then((data) => {
         const datasetData = wriAPISerializer(data);
 
-        // Ñapa: We have to conservate layer config
+        // Ñapa: We have to keep layer config
         const datasets = (datasetData || []).map((d, i) => Object.assign(d, { layer: data.data[i].attributes.layer }));
 
         if (datasets.length) {
