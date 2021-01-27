@@ -65,8 +65,13 @@ class LegendNexLocaGeeToolbar extends PureComponent {
         ...this.state,
         id: activeLayer.dataset,
         layerId: activeLayer.id,
-        previousId: datasetId,
         datasetType,
+        nexLocaGeeIds: [
+          info.change.low,
+          info.change.high,
+          info.absolute.low,
+          info.absolute.high,
+        ]
       });
     });
   }

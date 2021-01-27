@@ -2,14 +2,15 @@
 import compact from 'lodash/compact';
 import { createSelector } from 'reselect';
 import { CATEGORIES } from './core-datasets-list-constants';
+import { getActiveLayersForMap, checkNexLocaGeeDataset } from '../explore-map/explore-map-selector';
 
 const getAllDatasets = state => state.explorePage.datasets.items;
 const getAllCoreDatasets = state => state.explorePage.coreDatasets.items;
 const getLocationFilter = state => state.explorePage.coreDatasets.location;
 
 export const getCoreDatasets = createSelector(
-  [getAllDatasets, getAllCoreDatasets],
-  (allDatasets, coreDatasets) => {
+  [getAllDatasets, getAllCoreDatasets, getActiveLayersForMap],
+  (allDatasets, coreDatasets, activeLayers) => {
     const coreDatasetsResult = [];
     const searchDatasetsRecursive = (categories, items) => {
       items.forEach((item) => {
@@ -37,9 +38,15 @@ export const getCoreDatasets = createSelector(
     const nexLocaGeeIndicators = [];
 
     nexLocaGeeDatasets.forEach((n) => {
-      const exists = nexLocaGeeIndicators.find((d) => d.id === n.id);
+      const exists = nexLocaGeeIndicators.find((d) => d.id === n.id)
+        || nexLocaGeeIndicators.find((d) => checkNexLocaGeeDataset(n.id, d));
+      const hasActiveLayer = activeLayers.find((l) => l.dataset === n.id);
+
+      if (hasActiveLayer && !exists) {
+        nexLocaGeeIndicators.push(n);
+      }
       // Absolute low as base
-      if (n.id === n.metadata[0].info.absolute.low && !exists) {
+      else if (n.id === n.metadata[0].info.absolute.low && !exists) {
         nexLocaGeeIndicators.push(n);
       }
     });

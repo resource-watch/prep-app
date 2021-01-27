@@ -1,5 +1,6 @@
 import find from 'lodash/find';
 import { calcZIndex } from 'components/map-vis/map-vis-helper';
+import { checkNexLocaGeeDataset } from '../explore-map/explore-map-selector';
 
 /**
  * This function will add all necessary attributes to work in explore page.
@@ -150,7 +151,7 @@ export const updateOpacity = (state, { payload }) => {
 };
 
 export const setMultiActiveLayer = (state, { payload }) => {
-  const { temporalResolution, period, scenario, id, previousId, layerId } = payload;
+  const { temporalResolution, period, scenario, id, previousId, nexLocaGeeIds, layerId } = payload;
   let { items } = state.datasets;
 
   // disabling datasets
@@ -175,14 +176,35 @@ export const setMultiActiveLayer = (state, { payload }) => {
     });
   }
 
+  if (nexLocaGeeIds) {
+    items = state.datasets.items.map((d) => {
+      if (nexLocaGeeIds.includes(d.id)) {
+        return {
+          ...d,
+          isLayerActive: false,
+          layer: d.layer.map(
+            (l) => ({
+              ...l,
+              isActive: false,
+              isLayerActive: false,
+              active: false,
+              isSelected: false,
+            }),
+          ),
+        };
+      }
+      return d;
+    });
+  }
+
   // enabling datasets
   items = items.map((d) => {
     const newDataset = {...d};
     const isNexLocaGeeDataset = newDataset.vocabulary.find((v) => v.tags.includes('nexlocagee'));
 
     // Switch layer fro NEXLOCAGEE layers
-    if (newDataset.id === id && isNexLocaGeeDataset) {
-      newDataset.isLayerActive = true;
+    if (isNexLocaGeeDataset && checkNexLocaGeeDataset(id, newDataset)) {
+      newDataset.isLayerActive = !!newDataset.layer.find((l) => layerId === l.id);
       newDataset.layer = newDataset.layer.map(l => ({
         ...l,
         isActive: l.id === layerId,

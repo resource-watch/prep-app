@@ -31,13 +31,24 @@ export const getActiveLayers = createSelector(
   }
 );
 
+export const checkNexLocaGeeDataset = (datasetId, dataset) => {
+  const isNexLocaGeeDataset =  !!(
+    dataset.metadata[0].info.change.high === datasetId ||
+    dataset.metadata[0].info.change.low === datasetId ||
+    dataset.metadata[0].info.absolute.high === datasetId ||
+    dataset.metadata[0].info.absolute.low === datasetId
+  );
+  return isNexLocaGeeDataset;
+};
+
 export const getActiveLayersForMap = createSelector(
   getAllDatasets,
   (datasets) => {
     const activeDatasets = sortBy(filter(datasets, { isLayerActive: true }), l => l.zIndex);
     const { length } = activeDatasets;
     const layers = filter(flatten(
-      activeDatasets.map(({ layer, opacity, visibility, zIndex }) => {
+      activeDatasets.map((dataset) => {
+        const { layer, opacity, visibility, zIndex } = dataset;
         const layerActive = layer.find((ly) => ly.isLayerActive === true) ||
           layer.find((ly) => ly.default === true) || layer[0];
         const layerIndex = calcZIndex(length, zIndex);
@@ -63,24 +74,26 @@ export const getLayersGroups = createSelector(
   getAllDatasets,
   getActiveLayersForMap,
   (datasets, activeLayers) => {
+    if (!activeLayers || !activeLayers.length) return [];
     const activeDatasets = sortBy(filter(datasets, { isLayerActive: true }), l => l.zIndex);
-    const groups = activeDatasets.map((d) => {
-      const { id, opacity, zIndex, visibility } = activeLayers.find((l) => l.dataset === d.id);
-      return {
-        dataset: d.id,
-        layers: d.layer.map(ly => ({
-          ...ly,
-          opacity,
-          zIndex,
-          visibility,
-          active: id === ly.id,
-          isActive: id === ly.id,
-          isLayerActive: id === ly.id
-        }))
-      };
-    });
+    const groups = activeDatasets
+      .map((d) => {
+        const { id, opacity, zIndex, visibility } = activeLayers.find((l) => l.dataset === d.id);
+        return {
+          dataset: d.id,
+          layers: d.layer.map(ly => ({
+            ...ly,
+            opacity,
+            zIndex,
+            visibility,
+            active: id === ly.id,
+            isActive: id === ly.id,
+            isLayerActive: id === ly.id
+          }))
+        };
+      });
     return groups;
   }
 );
 
-export default { getActiveLayers, getActiveLayersForMap, getLayersGroups };
+export default { getActiveLayers, getActiveLayersForMap, getLayersGroups, checkNexLocaGeeDataset };

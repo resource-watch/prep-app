@@ -3,8 +3,8 @@ import { createSelector } from 'reselect';
 
 // Temporal code
 const mapIndicatorToUnitSignal = {
-  hdds: { from: 'Degrees', to: 'Degrees', value: 1, type: 'factor' },
-  cdds: { from: 'Degrees', to: 'Degrees', value: 1, type: 'factor' },
+  hdds: { from: 'Degrees', to: 'Degrees ºC', value: 1, type: 'factor' },
+  cdds: { from: 'Degrees', to: 'Degrees ºC', value: 1, type: 'factor' },
   cum_pr: { from: 'Kg*m-2*s-1', to: 'mm', value: 86400, type: 'factor' },
   dry: { from: 'Nº 5-day periods', to: 'Nº 5-day periods', value: 1, type: 'factor' },
   tasmax: { from: 'Kelvin', to: 'ºC', value: 273.23, type: 'minus' },
@@ -96,7 +96,7 @@ export const getIndicatorUnitSignal = createSelector(
   state,
   (state) => { // eslint-disable-line no-shadow
     // TO-DO: indicator id doesn't exit anymore, use an alternative
-    return mapIndicatorToUnitSignal.tasmin;
+    return mapIndicatorToUnitSignal.hdds;
     // const indicatorId = getIndicatorId(state);
     // return indicatorId ? mapIndicatorToUnitSignal[indicatorId] : null;
   }
