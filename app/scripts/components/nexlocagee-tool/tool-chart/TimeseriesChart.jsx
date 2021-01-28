@@ -749,13 +749,11 @@ class TimeseriesChart extends React.Component {
     // We add a new column to the data "range" so we can display the
     // date range in the tooltip
     const resolution = chartData.length >= 2
-      ? new Date(chartData[1].x).getUTCFullYear() - new Date(chartData[0].x).getUTCFullYear()
+      ? new Date(`${chartData[1].x}`).getUTCFullYear() - new Date(`${chartData[0].x}`).getUTCFullYear()
       : null;
     spec.data[0].values = chartData.map((d) => {
       if (!resolution) return d;
-      const start = new Date(d.x).getUTCFullYear();
-      const end = (start + resolution) - 1;
-      return Object.assign({}, d, { range: `${start}-${end}` });
+      return Object.assign({}, d, { range: `${d.year_start}-${d.year_end}` });
     });
 
     // We add the unit to the y axis
