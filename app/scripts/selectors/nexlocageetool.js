@@ -94,11 +94,14 @@ export const getIndicatorId = createSelector(
 
 export const getIndicatorUnitSignal = createSelector(
   state,
-  (state) => { // eslint-disable-line no-shadow
-    // TO-DO: indicator id doesn't exit anymore, use an alternative
-    return mapIndicatorToUnitSignal.hdds;
-    // const indicatorId = getIndicatorId(state);
-    // return indicatorId ? mapIndicatorToUnitSignal[indicatorId] : null;
+  ({ datasetPage : { data: { layer } } }) => {
+    const { legendConfig: { unit } } = layer[0];
+    return {
+      from: '',
+      to: unit,
+      value: 1,
+      type: 'factor',
+    };
   }
 );
 
