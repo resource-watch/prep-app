@@ -7,6 +7,7 @@ metadata:
   namespace: prep
 spec:
   progressDeadlineSeconds: 2147483647
+  replicas: 1
   revisionHistoryLimit: 2
   selector:
     matchLabels:
@@ -103,6 +104,8 @@ spec:
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: regcred
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: { }
