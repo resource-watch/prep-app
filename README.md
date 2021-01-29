@@ -1,6 +1,6 @@
 # Partnership for Resilience and Preparedness
 
-[![Build Status](https://travis-ci.org/resource-watch/prep-app.svg?branch=master)](https://travis-ci.org/resource-watch/prep-app)
+[![Build Status](https://travis-ci.com/resource-watch/prep-app.svg?branch=master)](https://travis-ci.com/resource-watch/prep-app)
 
 ![PREP](screenshot.png?raw=true "Partnership for Resilience and Preparedness")
 
