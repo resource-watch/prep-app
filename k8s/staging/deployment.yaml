@@ -2,16 +2,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    name: prep-app
-  name: prep-app
+    name: prep-app-staging
+  name: prep-app-staging
   namespace: prep
 spec:
   progressDeadlineSeconds: 2147483647
-  replicas: 1
-  revisionHistoryLimit: 2
+  revisionHistoryLimit: 0
   selector:
     matchLabels:
-      name: prep-app
+      name: prep-app-staging
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -20,7 +19,7 @@ spec:
   template:
     metadata:
       labels:
-        name: prep-app
+        name: prep-app-staging
     spec:
       affinity:
         nodeAffinity:
@@ -39,7 +38,7 @@ spec:
                     - key: name
                       operator: In
                       values:
-                        - prep-app
+                        - prep-app-staging
                 topologyKey: kubernetes.io/hostname
               weight: 100
       containers:
@@ -90,17 +89,14 @@ spec:
                   name: appsecrets
           image: gfwdockerhub/prep-app
           imagePullPolicy: Always
-          name: prep-app
+          name: prep-app-staging
           ports:
             - containerPort: 3000
               protocol: TCP
           resources:
-            limits:
-              cpu: "1"
-              memory: 512M
             requests:
-              cpu: 500m
-              memory: 256M
+              cpu: "0"
+              memory: "0"
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
@@ -110,3 +106,8 @@ spec:
       schedulerName: default-scheduler
       securityContext: { }
       terminationGracePeriodSeconds: 30
+      tolerations:
+        - effect: NoSchedule
+          key: type
+          operator: Equal
+          value: webapps
