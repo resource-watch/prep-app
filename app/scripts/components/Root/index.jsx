@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Tooltip, Icons } from 'widget-editor';
+import WelcomeModal from '../Modal/WelcomeModal';
 import ShareModalComponent from '../share-modal';
 import EmbedModalComponent from '../embed-modal';
 import GDPRBanner from '../gdpr-banner';
@@ -9,6 +10,11 @@ import Ribbon from '../ribbon';
 class Root extends React.Component {
   componentDidMount() {
     const { location } = this.props;
+
+    if (localStorage.getItem('modalWelcomeOpened') === false ||
+      localStorage.getItem('modalWelcomeOpened') === null) {
+      this.setModalWelcome();
+    }
 
     if ((location.pathname.indexOf('embed') === -1) && (location.pathname.indexOf('export') === -1)) {
       const script = document.createElement('script');
@@ -23,8 +29,17 @@ class Root extends React.Component {
     }
   }
 
+  setModalWelcome() {
+    const { location } = this.props;
+
+    if (location.pathname.indexOf('embed') === -1) {
+      this.setState({ modalWelcomeOpen: true });
+    }
+  }
+
   render() {
     const { children } = this.props;
+    const { modalWelcomeOpen } = this.state;
 
     return (
       <div style={{ height: '100%' }}>
@@ -38,6 +53,19 @@ class Root extends React.Component {
         <Ribbon />
 
         {children}
+
+        {modalWelcomeOpen && (
+          <WelcomeModal
+            title="Welcome to PREPdata"
+            opened={modalWelcomeOpen}
+            close={() => {
+              this.setState({ modalWelcomeOpen: false });
+              localStorage.setItem('modalWelcomeOpened', JSON.stringify(true));
+            }
+            }
+            hideCloseButton
+          />
+)}
       </div>
     );
   }
