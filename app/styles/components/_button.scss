@@ -238,6 +238,8 @@
 
   // used on light backgrounds
   &.-light {
+    color: $dark-blue;
+
     &.-transparent {
       border-color: $yellow-orange;
       color: $dark-blue;
@@ -246,6 +248,10 @@
 
   &.-compressed {
     padding: 7px 20px;
+  }
+
+  &.-mini {
+    padding: 4px 10px;
   }
 
   &.-fullwidth {

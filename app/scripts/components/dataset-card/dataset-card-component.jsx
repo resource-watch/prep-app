@@ -49,18 +49,22 @@ class DatasetCard extends PureComponent {
       dataset.isSelected ? '-info-active' : null
     ].join(' ');
 
+    const widgets = dataset.widget ? dataset.widget.filter(w => w.default) : [];
+    const hasWidget = widgets.length > 0;
+
     return (
       <div className={classNames}>
         <header className="item-header">
           <div className="header-container">
             <div className="title-container">
-              {hasLayer &&
+              {hasLayer && (
                 <div className="left-element">
                   <Switch
                     onChange={() => this.onToggleDataset(dataset)}
                     checked={dataset.isLayerActive}
                   />
-                </div>}
+                </div>
+              )}
               <h3 className="item-title">
                 { embed && (
                   <a className="item-title-link" href={`/dataset/${dataset.slug}`} target="_blank">
@@ -75,16 +79,6 @@ class DatasetCard extends PureComponent {
               </h3>
             </div>
             <div className="item-tools">
-              { embed && (
-                <a className="item-link" href={`/dataset/${dataset.slug}`} target="_blank">
-                  <Icon name="icon-widgets" />
-                </a>
-              )}
-              { !embed && (
-                <Link className="item-link" to={`/dataset/${dataset.slug}`}>
-                  <Icon name="icon-widgets" />
-                </Link>
-              )}
               {dataset.isSelected ?
                 <button key="info-close" onClick={() => this.onToggleInfo(dataset)} className="cancel">
                   <Icon name="icon-cancel" />
@@ -99,8 +93,14 @@ class DatasetCard extends PureComponent {
         </header>
 
         <div className="item-content">
-          {info.function &&
-            <p className="description">{truncate(info.function, { length: 75, separator: ' ', omission: '...' })}</p>}
+          {info.function && (
+            <p className="description">{truncate(info.function, { length: 75, separator: ' ', omission: '...' })}</p>
+          )}
+          {hasWidget && (
+            <div className="item-content-visualization">
+              <Link to={`/dataset/${dataset.slug}`} className="c-new-button -light -mini">Visualization</Link>
+            </div>
+          )}
         </div>
       </div>
     );
