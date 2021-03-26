@@ -26,12 +26,12 @@ class HowTo extends React.PureComponent {
                     Home
                   </Link>
                 </div>
-                <div className="action">
+                {/* <div className="action">
                   <a href="#" className="c-button -alternative -action">
                     <Icon name="icon-share" className="-medium" />
                     Share
                   </a>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
