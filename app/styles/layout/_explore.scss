@@ -3,3 +3,7 @@
   position: relative;
   overflow: hidden;
 }
+
+.c-ribbon + .l-explore {
+  height: calc(100% - 45px);
+}
