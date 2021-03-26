@@ -5,6 +5,7 @@ import WelcomeModal from '../Modal/WelcomeModal';
 import ShareModalComponent from '../share-modal';
 import EmbedModalComponent from '../embed-modal';
 import GDPRBanner from '../gdpr-banner';
+import Ribbon from '../ribbon';
 
 class Root extends React.Component {
   constructor() {
@@ -13,12 +14,14 @@ class Root extends React.Component {
   }
 
   componentDidMount() {
+    const { location } = this.props;
+
     if (localStorage.getItem('modalWelcomeOpened') === false ||
       localStorage.getItem('modalWelcomeOpened') === null) {
       this.setModalWelcome();
     }
 
-    if ((this.props.location.pathname.indexOf('embed') === -1) && (this.props.location.pathname.indexOf('export') === -1)) {
+    if ((location.pathname.indexOf('embed') === -1) && (location.pathname.indexOf('export') === -1)) {
       const script = document.createElement('script');
       script.type = 'text/javascript';
       script.innerHTML = `window._urq = window._urq || [];
@@ -32,12 +35,17 @@ class Root extends React.Component {
   }
 
   setModalWelcome() {
-    if (this.props.location.pathname.indexOf('embed') === -1) {
+    const { location } = this.props;
+
+    if (location.pathname.indexOf('embed') === -1) {
       this.setState({ modalWelcomeOpen: true });
     }
   }
 
   render() {
+    const { children } = this.props;
+    const { modalWelcomeOpen } = this.state;
+
     return (
       <div style={{ height: '100%' }}>
 
@@ -47,13 +55,14 @@ class Root extends React.Component {
         <ShareModalComponent />
         <EmbedModalComponent />
         <GDPRBanner />
+        <Ribbon />
 
-        {this.props.children}
+        {children}
 
-        {this.state.modalWelcomeOpen && (
-<WelcomeModal
+        {modalWelcomeOpen && (
+          <WelcomeModal
             title="Welcome to PREPdata"
-            opened={this.state.modalWelcomeOpen}
+            opened={modalWelcomeOpen}
             close={() => {
               this.setState({ modalWelcomeOpen: false });
               localStorage.setItem('modalWelcomeOpened', JSON.stringify(true));
@@ -67,9 +76,13 @@ class Root extends React.Component {
   }
 }
 
+Root.defaultProps = {
+  location: {},
+};
+
 Root.propTypes = {
-  location: PropTypes.object,
-  children: PropTypes.any
+  location: PropTypes.shape({}),
+  children: PropTypes.node.isRequired,
 };
 
 export default Root;
