@@ -4,14 +4,12 @@ import { Link } from 'react-router';
 // Components
 import Article from '../../components/Content/Article';
 import Icon from '../../components/ui/Icon';
-import ContactForm from '../../components/ContactForm';
 
 const discoverImg = '/images/how-to/img-discover.png';
 const exploreImg = '/images/how-to/img-explore.png';
 const uploadImg = '/images/how-to/img-upload.png';
 const createImg = '/images/how-to/img-create.png';
 const shareImg = '/images/how-to/img-share.png';
-
 
 class HowTo extends React.PureComponent {
   render() {
@@ -23,17 +21,17 @@ class HowTo extends React.PureComponent {
             <div className="column small-12">
               <div className="c-toolbar-actions">
                 <div className="action">
-                  <Link to="/about" className="c-button -alternative -action">
+                  <Link to="/" className="c-button -alternative -action">
                     <Icon name="icon-arrow-left" className="-medium" />
-                    About
+                    Home
                   </Link>
                 </div>
-                <div className="action">
+                {/* <div className="action">
                   <a href="#" className="c-button -alternative -action">
                     <Icon name="icon-share" className="-medium" />
                     Share
                   </a>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -50,23 +48,31 @@ class HowTo extends React.PureComponent {
               <div className="c-card -border -border-neutral">
                 <div className="how-to-card">
                   <Icon name="icon-user" className="-extra-large how-to-icon" />
-                  <p>To get started, create a MyPREP account. Login with your Facebook, Google, or Twitter account.</p>
+                  <p>
+                    To get started, create a MyPREP account. Login with your Facebook, Google, or Twitter account.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </Article>
         <Article grid="small-12">
-          <h2>With PREPdata, you can</h2>
+          <h2>
+            With PREPdata, you can
+          </h2>
           <div className="how-to-wrapper">
             <div className="row align-center">
               <div className="column small-12 medium-6">
-                <h3>Discover Data</h3>
+                <h3>
+                  Discover Data
+                </h3>
                 <p>
                   Search for climate, physical, and socioeconomic data on Explore.
                   Create and share beautiful map visualizations and overlays.
                 </p>
-                <Link to="/explore">See Data</Link>
+                <Link to="/explore">
+                  See Data
+                </Link>
               </div>
               <div className="column small-12 medium-6">
                 <img src={discoverImg} alt="Discover data" />
@@ -79,7 +85,9 @@ class HowTo extends React.PureComponent {
                 <img src={exploreImg} alt="Discover data" />
               </div>
               <div className="column small-12 medium-6">
-                <h3>Explore Climate Projections for Your Geography</h3>
+                <h3>
+                  Explore Climate Projections for Your Geography
+                </h3>
                 <p>
                   PREPdata offers two sets of downscaled climate projections: NASA
                   Earth Exchange Global Daily Downscaled Projections (NEX-GDDP) for
@@ -89,15 +97,21 @@ class HowTo extends React.PureComponent {
                   determine how each indicator is projected to change for any point
                   you’re interested in.
                 </p>
-                <Link to="/explore?basemap=default&bbox&boundaries=false&filterQuery=NEX&labels=none&lat=48.46038&lng=-123.889823&location=global&minZoom=3&tab=all_datasets&water=none&zoom=3">EXPLORE THE NEX-GDDP DATA</Link>
-                <Link to="/explore?basemap=default&bbox&boundaries=false&filterQuery=Pierce+et+al.&labels=none&lat=48.46038&lng=-123.889823&location=global&minZoom=3&tab=all_datasets&water=none&zoom=3">EXPLORE THE LOCA DATA</Link>
+                <Link to="/explore?basemap=default&bbox&boundaries=false&filterQuery=NEX&labels=none&lat=48.46038&lng=-123.889823&location=global&minZoom=3&tab=all_datasets&water=none&zoom=3">
+                  EXPLORE THE NEX-GDDP DATA
+                </Link>
+                <Link to="/explore?basemap=default&bbox&boundaries=false&filterQuery=Pierce+et+al.&labels=none&lat=48.46038&lng=-123.889823&location=global&minZoom=3&tab=all_datasets&water=none&zoom=3">
+                  EXPLORE THE LOCA DATA
+                </Link>
               </div>
             </div>
           </div>
           <div className="how-to-wrapper">
             <div className="row align-center">
               <div className="column small-12 medium-6">
-                <h3>Upload Your Own Data and Create Visualizations</h3>
+                <h3>
+                  Upload Your Own Data and Create Visualizations
+                </h3>
                 <p>
                   Supplement the curated data available on PREPdata with your own
                   local data. If you’d like to see a specific dataset available on
@@ -106,7 +120,9 @@ class HowTo extends React.PureComponent {
                   visualizations on your own website or add them to your custom
                   dashboard.
                 </p>
-                <Link to="/myprep">See my prep</Link>
+                <Link to="/myprep">
+                  See my prep
+                </Link>
               </div>
               <div className="column small-12 medium-6">
                 <img src={uploadImg} alt="Discover data" />
@@ -119,7 +135,9 @@ class HowTo extends React.PureComponent {
                 <img src={createImg} alt="Personalised dashboards" />
               </div>
               <div className="column small-12 medium-6">
-                <h3>Create Personalized Dashboards</h3>
+                <h3>
+                  Create Personalized Dashboards
+                </h3>
                 <p>
                   Collect data, maps, tools, and stories relevant to you and your
                   community in one place. Track indicators most relevant to your
@@ -128,14 +146,18 @@ class HowTo extends React.PureComponent {
                   see what data similar communities are using to build resilience
                   around the world.
                 </p>
-                <a href="/dashboards/sample-dashboard-landslides-in-western-south-america">SEE A SAMPLE USER DASHBOARD</a>
+                <a href="/dashboards/sample-dashboard-landslides-in-western-south-america">
+                  SEE A SAMPLE USER DASHBOARD
+                </a>
               </div>
             </div>
           </div>
           <div className="how-to-wrapper">
             <div className="row align-center">
               <div className="column small-12 medium-6">
-                <h3>Share Your Content</h3>
+                <h3>
+                  Share Your Content
+                </h3>
                 <p>
                   Supplement the curated data available on PREPdata with your own
                   local data. If you’d like to see a specific dataset available on
@@ -144,59 +166,12 @@ class HowTo extends React.PureComponent {
                   visualizations on your own website or add them to your custom
                   dashboard.
                 </p>
-                <a href="/myprep">See my prep</a>
+                <a href="/myprep">
+                  See my prep
+                </a>
               </div>
               <div className="column small-12 medium-6">
                 <img src={shareImg} alt="Discover data" />
-              </div>
-            </div>
-          </div>
-        </Article>
-        <Article grid="small-12">
-          <h2>Resources to Help You Use PREPdata</h2>
-          <div className="cards">
-            <div className="row">
-              <div className="column small-12 medium-4">
-                <div className="c-card -border -border-neutral">
-                  <h3>Introduction to PREPdata</h3>
-                  <p>Learn how PREPdata can help with climate adaptation and resilience planning.</p>
-                  <a href="https://youtu.be/AJzz9-76Bgk">INTRODUCTION TO PREPDATA</a>
-                </div>
-              </div>
-              <div className="column small-12 medium-4">
-                <div className="c-card -border -border-neutral">
-                  <h3>Explore the Data</h3>
-                  <p>Discover climate, physical, and socioeconomic data.</p>
-                  <a href="https://youtu.be/7PmMh6DWCbA">EXPLORE PREP’S DATA</a>
-                </div>
-              </div>
-              <div className="column small-12 medium-4">
-                <div className="c-card -border -border-neutral">
-                  <h3>Make a PREPdata account</h3>
-                  <p>Login with your Facebook, Google, or Twitter account.</p>
-                  <span className="link-placeholder">COMING SOON!</span>
-                </div>
-              </div>
-              <div className="column small-12 medium-4">
-                <div className="c-card -border -border-neutral">
-                  <h3>Custom visualizations</h3>
-                  <p>Upload your own data and create custom visualizations.</p>
-                  <span className="link-placeholder">COMING SOON!</span>
-                </div>
-              </div>
-              <div className="column small-12 medium-4">
-                <div className="c-card -border -border-neutral">
-                  <h3>Areas of interest</h3>
-                  <p>Explore climate projections for your area of interest.</p>
-                  <span className="link-placeholder">COMING SOON!</span>
-                </div>
-              </div>
-              <div className="column small-12 medium-4">
-                <div className="c-card -border -border-neutral">
-                  <h3>Dashboards builder</h3>
-                  <p>Create a dashboard to track the climate resilience indicators you’re most interested in.</p>
-                  <span className="link-placeholder">COMING SOON!</span>
-                </div>
               </div>
             </div>
           </div>

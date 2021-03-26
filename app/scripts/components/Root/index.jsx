@@ -66,11 +66,11 @@ class Root extends React.Component {
             close={() => {
               this.setState({ modalWelcomeOpen: false });
               localStorage.setItem('modalWelcomeOpened', JSON.stringify(true));
-            }
-            }
+              window.location.href = '/explore';
+            }}
             hideCloseButton
           />
-)}
+        )}
       </div>
     );
   }

@@ -42,11 +42,6 @@ class MainNav extends React.Component {
                     </Link>
                   </li>
                   <li>
-                    <Link activeClassName="-current" to="/how-to">
-                      How to
-                    </Link>
-                  </li>
-                  <li>
                     <Link activeClassName="-current" to="/contact">
                       Contact us
                     </Link>
@@ -54,6 +49,11 @@ class MainNav extends React.Component {
                 </ul>
               </div>
             )}
+          </li>
+          <li>
+            <Link activeClassName="-current" to="/how-to">
+              How to
+            </Link>
           </li>
           <li>
             <Link activeClassName="-current" to="/explore">
