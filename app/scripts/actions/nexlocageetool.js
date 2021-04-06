@@ -149,7 +149,7 @@ export function getChartData() {
     const state = getState();
     const { id, tableName } = state.datasetPage.data;
     const { marker, scenario } = state.nexlocageetool;
-    const scenarioMap = { '4.5': 'low', '8.5': 'hight' };
+    const scenarioMap = { '4.5': 'low', '8.5': 'high' };
     const detectScenario = (value) => scenario.selection && scenarioMap[value] === scenario.selection.value;
     const lat = marker[0];
     const lng = marker[1];

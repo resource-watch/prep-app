@@ -8,7 +8,8 @@ const mapStateToProps = state => ({
   marker: state.nexlocageetool.marker,
   isComparing: !!state.nexlocageetool.range2.selection || state.nexlocageetool.mapMode === 'difference',
   mapMode: state.nexlocageetool.mapMode,
-  indicatorDataset: state.nexlocageetool.indicatorDataset
+  indicatorDataset: state.nexlocageetool.indicatorDataset,
+  scenario: state.nexlocageetool.scenario,
 });
 
 const mapDispatchToProps = dispatch => ({
