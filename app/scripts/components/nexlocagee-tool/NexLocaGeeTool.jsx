@@ -18,7 +18,7 @@ class NexLocaGeeTool extends React.PureComponent {
     this.state = { loading: true };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const {
       dataset,
       resetState,
@@ -37,8 +37,8 @@ class NexLocaGeeTool extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    const { marker, getChartData } = this.props;
-    if (marker && marker.length) {
+    const { marker, getChartData, scenario } = this.props;
+    if (marker && marker.length && scenario && scenario.selection) {
       getChartData();
     }
   }
@@ -186,6 +186,7 @@ NexLocaGeeTool.defaultProps = {
   render: null,
   marker: [],
   mapMode: 'side-by-side',
+  scenario: null,
 };
 
 NexLocaGeeTool.propTypes = {
@@ -202,6 +203,7 @@ NexLocaGeeTool.propTypes = {
   dataset: PropTypes.object.isRequired,
   setDataset: PropTypes.func.isRequired,
   getChartData: PropTypes.func.isRequired,
+  scenario: PropTypes.shape({}),
 };
 
 export default NexLocaGeeTool;
