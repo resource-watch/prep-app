@@ -6,7 +6,7 @@ import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 
 // Redux
-import { getLayers, getRawLayers } from 'selectors/nexlocageetool';
+import { getActiveLayers, getActiveRawLayers } from 'selectors/nexlocageetool';
 import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setWater, setMarkerMode } from 'actions/nexlocageetool';
 import * as shareModalActions from 'components/share-modal/share-modal-actions';
 import { toggleTooltip } from 'actions/tooltip';
@@ -353,8 +353,8 @@ const mapStateToProps = state => ({
   map: state.nexlocageetool.map,
   marker: state.nexlocageetool.marker,
   markerMode: state.nexlocageetool.markerMode,
-  layers: getLayers(state),
-  rawLayers: getRawLayers(state),
+  layers: getActiveLayers(state),
+  rawLayers: getActiveRawLayers(state),
   range1Selection: state.nexlocageetool.range1.selection,
   range2Selection: state.nexlocageetool.range2.selection,
   dataset: state.nexlocageetool.dataset,
