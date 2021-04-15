@@ -118,7 +118,7 @@ class InsightsDetail extends React.Component {
           <div className="column small-12">
             <div className="c-insight-link">
               <img alt="" src={config.assetsUrl + this.props.data.image} />
-              <a className="c-button -border" href={this.props.data.content_url} target="_blank">
+              <a className="c-button -border" href={this.props.data.content_url} target="_blank" rel="noreferrer">
                 See insight
               </a>
             </div>

@@ -21,12 +21,12 @@ class FAQ extends React.PureComponent {
           <p>You may find general information about the impacts of climate
             change around the world at the <a
               href="http://www.ipcc.ch"
-              target="_blank"
+              target="_blank" rel="noreferrer"
             >Intergovernmental
               Panel on Climate Change (IPCC)
             </a> and in the United States in the <a
                                              href="http://nca2014.globalchange.gov/"
-                                             target="_blank"
+                                             target="_blank" rel="noreferrer"
                                            >U.S. National Climate
               Assessment
                                                                                 </a>. For additional information please visit the <Link to="/resources">Resources</Link> page.
@@ -50,7 +50,7 @@ class FAQ extends React.PureComponent {
                                                                               >form
                                                                                                     </Link>.
           </p>
-          <p>If you would like to <Link to="/about">join</Link> PREP, please express your interest by filling out this <a href="https://docs.google.com/forms/d/e/1FAIpQLSeXe9mfEvFr-dIpj87-lCi6NlnWRKHP-5qBj3E46ISrdiwOHg/viewform?c=0&w=1&usp=send_form" target="_blank">form</a>, describing how your organization or company could contribute to the PREP mission, and how you meet the partner criteria. During the application process, partners self-select into one of three categories: Core Partner (high level of engagement), Contributing Partner (moderate level of engagement), or Resource Partner (low level of engagement). These categories and the roles corresponding to each will be explained in greater detail during an informational session.
+          <p>If you would like to <Link to="/about">join</Link> PREP, please express your interest by filling out this <a href="https://docs.google.com/forms/d/e/1FAIpQLSeXe9mfEvFr-dIpj87-lCi6NlnWRKHP-5qBj3E46ISrdiwOHg/viewform?c=0&w=1&usp=send_form" target="_blank" rel="noreferrer">form</a>, describing how your organization or company could contribute to the PREP mission, and how you meet the partner criteria. During the application process, partners self-select into one of three categories: Core Partner (high level of engagement), Contributing Partner (moderate level of engagement), or Resource Partner (low level of engagement). These categories and the roles corresponding to each will be explained in greater detail during an informational session.
           </p>
 
           <h3>Who do I contact about media inquiries?</h3>
@@ -82,7 +82,7 @@ class FAQ extends React.PureComponent {
           <h3>How do I get my dataset added to PREPdata?</h3>
           <p>We welcome submissions for new datasets on PREPdata. Currently we are prioritizing global and
             national datasets that are relevant to evaluating climate-related risks or impacts. If
-            you would like to submit your data for consideration, please fill out this <a href="https://docs.google.com/forms/d/1wZzQno3De7Ul6vlOkkdHhWK_9csErSrOlo6pOAZHIds/viewform?edit_requested=true" target="_blank">form</a>.
+            you would like to submit your data for consideration, please fill out this <a href="https://docs.google.com/forms/d/1wZzQno3De7Ul6vlOkkdHhWK_9csErSrOlo6pOAZHIds/viewform?edit_requested=true" target="_blank" rel="noreferrer">form</a>.
           </p>
 
           <h3>How do I create a dashboard or story in PREPdata?</h3>
@@ -90,7 +90,7 @@ class FAQ extends React.PureComponent {
           </p>
           <p>If you are interested in data storytelling, you may wish to try Esri <a
             href="https://storymaps.arcgis.com/en/"
-            target="_blank"
+            target="_blank" rel="noreferrer"
           >Story Maps
           </a>.
           </p>
@@ -101,7 +101,7 @@ class FAQ extends React.PureComponent {
           >Chrome
           </a> or <a
                                                                                         href="https://www.mozilla.org/en-US/firefox/"
-                                                                                        target="_blank"
+                                                                                        target="_blank" rel="noreferrer"
                                                                                       >Firefox
                                                                                               </a>.
           </p>

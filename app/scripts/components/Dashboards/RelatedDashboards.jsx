@@ -30,7 +30,7 @@ function RelatedDasboards(props) {
                 {item.summary}
               </p>
               {item.partner &&
-              <a href={item.partner.url} target="_blank">
+              <a href={item.partner.url} target="_blank" rel="noreferrer">
                 <img
                   src={config.assetsUrl + item.partner.logo}
                   className="logo"

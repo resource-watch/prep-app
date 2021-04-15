@@ -66,7 +66,7 @@ const MetadataInfo = ({ dataset }) => {
         <li>
           <span>License: </span>
           {info.license_link && info.license_link !== '' ?
-            <a href={info.license_link} target="_blank"><span>{info.license}</span></a> :
+            <a href={info.license_link} target="_blank" rel="noreferrer"><span>{info.license}</span></a> :
             <span>{info.license}</span>}
         </li>
       }

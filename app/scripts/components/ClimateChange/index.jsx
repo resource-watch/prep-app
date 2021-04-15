@@ -6,7 +6,7 @@ class ClimateChange extends React.Component {
       <div className="c-climate-change">
         <div className="row">
           <div className="column small-12">
-            <p className="credits -small">Data from: <a href="http://climate.nasa.gov/vital-signs/carbon-dioxide/" target="_blank">NASA: Global Climate Change</a></p>
+            <p className="credits -small">Data from: <a href="http://climate.nasa.gov/vital-signs/carbon-dioxide/" target="_blank" rel="noreferrer">NASA: Global Climate Change</a></p>
           </div>
         </div>
         <div className="box">

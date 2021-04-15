@@ -56,7 +56,7 @@ function ContentCard(props) {
           <a
             href={downloadUrl}
             target="_blank"
-            className="c-button -action -icon"
+            className="c-button -action -icon" rel="noreferrer"
           >
             <svg className="icon" width="10" height="12" viewBox="0 0 10 12"><title>Download</title>
               <g fill="none" fillRule="evenodd">

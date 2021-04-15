@@ -20,7 +20,7 @@ function DashboardDetailInsights(props) {
               </p>
 
               {card.partner &&
-              <a target="_blank" href={card.partner.href}>
+              <a target="_blank" href={card.partner.href} rel="noreferrer">
                 <img
                   src={config.assetsUrl + card.partner.logo}
                   className="logo"

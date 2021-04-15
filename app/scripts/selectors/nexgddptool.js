@@ -21,7 +21,6 @@ const range2Selection = ({ nexgddptool }) => nexgddptool.range2.selection;
 const dataset = ({ nexgddptool }) => nexgddptool.dataset || null;
 const layers = ({ nexgddptool }) => (nexgddptool.indicatorDataset ? nexgddptool.indicatorDataset.layer : []);
 
-// eslint-disable-next-line import/prefer-default-export
 export const getLayers = createSelector(
   layers,
   mapMode,

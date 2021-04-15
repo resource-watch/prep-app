@@ -1,4 +1,3 @@
-/* eslint-disable import/no-dynamic-require */
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');

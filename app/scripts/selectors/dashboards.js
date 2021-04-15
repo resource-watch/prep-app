@@ -4,7 +4,6 @@ const dashboards = state => state.dashboards.list;
 const topics = state => state.dashboards.topics;
 const geographies = state => state.dashboards.geographies;
 
-/* eslint-disable-next-line import/prefer-default-export */
 export const getDashboards = createSelector(
   dashboards,
   topics,

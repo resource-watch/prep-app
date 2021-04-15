@@ -67,7 +67,7 @@ class DatasetCard extends PureComponent {
               )}
               <h3 className="item-title">
                 { embed && (
-                  <a className="item-title-link" href={`/dataset/${dataset.slug}`} target="_blank">
+                  <a className="item-title-link" href={`/dataset/${dataset.slug}`} target="_blank" rel="noreferrer">
                     {title}
                   </a>
                 )}

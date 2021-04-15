@@ -1,2 +1,3 @@
 dist/**/*.js
 app/scripts/lib/**/*.js
+public

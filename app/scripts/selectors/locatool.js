@@ -21,7 +21,6 @@ const range2Selection = ({ locatool }) => locatool.range2.selection;
 const dataset = ({ locatool }) => locatool.dataset || null;
 const layers = ({ locatool }) => (locatool.indicatorDataset ? locatool.indicatorDataset.layer : []);
 
-// eslint-disable-next-line import/prefer-default-export
 export const getLayers = createSelector(
   layers,
   mapMode,

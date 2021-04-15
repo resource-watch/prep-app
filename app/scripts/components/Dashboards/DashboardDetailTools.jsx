@@ -14,7 +14,7 @@ function DashboardDetailTools(props) {
           >
             <Card border="neutral">
               <h3>
-                <a target="_blank" href={card.url}>
+                <a target="_blank" href={card.url} rel="noreferrer">
                   {card.title}
                 </a>
               </h3>
@@ -23,7 +23,7 @@ function DashboardDetailTools(props) {
               </p>
 
               {card.partner &&
-              <a target="_blank" href={card.partner.href}>
+              <a target="_blank" href={card.partner.href} rel="noreferrer">
                 <img
                   src={config.assetsUrl + card.partner.logo}
                   className="logo"

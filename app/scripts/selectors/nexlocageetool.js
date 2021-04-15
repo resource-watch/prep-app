@@ -24,7 +24,6 @@ const dataset = ({ nexlocageetool }) => nexlocageetool.dataset || null;
 const additionalData = ({ datasetPage }) => datasetPage.additionalData || null;
 const layers = ({ nexlocageetool }) => nexlocageetool.dataset ? nexlocageetool.dataset.layer : [];
 
-// eslint-disable-next-line import/prefer-default-export
 export const getLayers = createSelector(
   dataset,
   mapMode,
