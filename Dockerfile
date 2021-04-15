@@ -1,4 +1,4 @@
-FROM node:8.17.0-alpine
+FROM node:14.16.1-alpine
 
 ARG datasetEnv=production
 ARG facebookUser=worldresources
@@ -34,7 +34,7 @@ WORKDIR /usr/src/app
 # Install app dependencies
 COPY package.json /usr/src/app/
 COPY yarn.lock /usr/src/app/
-RUN yarn install --production=true --silent
+RUN yarn install --prod --ignore-optional --frozen-lockfile
 
 # Bundle app source
 COPY . /usr/src/app
