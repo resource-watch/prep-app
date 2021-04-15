@@ -1,4 +1,4 @@
-FROM node:10.24.1-alpine
+FROM node:14.16.1-alpine
 
 ARG datasetEnv=production
 ARG facebookUser=worldresources
