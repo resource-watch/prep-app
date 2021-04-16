@@ -195,7 +195,9 @@ class DatasetPage extends PureComponent {
                 )}
 
                 {isWidgetEditor &&
-                  <WidgetEditor />
+                  <div id="widget-maker" >
+                    <WidgetEditor />
+                  </div>
                 }
 
                 {!!EXCEPTIONS[dataset.id] && (
