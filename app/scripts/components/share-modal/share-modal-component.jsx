@@ -16,6 +16,16 @@ class ShareModalComponent extends PureComponent {
     }
   }
 
+  getHelp() {
+    return (
+      <div>
+        <h3>Add to my dashboard</h3>
+        <p>Users can create customized dashboards through their <a href="/sing-in">MyPREP account</a>. We also welcome hearing from groups interested in developing dashboards and stories to be published on PREPdata.</p>
+        <p><a href="/contact">Contact us</a> if you&apos;re interested. If you are interested in data storytelling, you may wish to try <a href="https://learn.arcgis.com/en/projects/get-started-with-story-maps/">Esri Story Maps</a>.</p>
+      </div>
+    );
+  }
+
   /**
    * Return the content of the current tab
    */
@@ -33,6 +43,7 @@ class ShareModalComponent extends PureComponent {
             iframe={false}
             analytics={this.props.analytics}
           />
+          {this.getHelp()}
         </div>
       );
     } else if (tab === 'embed') {
@@ -45,6 +56,7 @@ class ShareModalComponent extends PureComponent {
             iframe
             analytics={this.props.analytics}
           />
+          {this.getHelp()}
         </div>
       );
     } else if (tab === 'widget') {
@@ -57,6 +69,7 @@ class ShareModalComponent extends PureComponent {
             dataset={links[tab].dataset}
             links={links[tab].widgetLinks || []}
           />
+          {this.getHelp()}
         </div>
       );
     }

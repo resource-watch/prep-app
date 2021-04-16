@@ -262,3 +262,8 @@
     height: 100%;
   }
 }
+
+.c-new-button + .c-new-button {
+  margin-left: 15px;
+  margin-right: 15px;
+}

@@ -72,7 +72,7 @@ class DatasetCard extends PureComponent {
                   </a>
                 )}
                 { !embed && (
-                  <Link className="item-title-link" to={`/dataset/${dataset.slug}`}>
+                  <Link className="item-title-link" to={`/dataset/${dataset.slug}#widget-maker`}>
                     {title}
                   </Link>
                 )}
@@ -98,7 +98,7 @@ class DatasetCard extends PureComponent {
           )}
           {hasWidget && (
             <div className="item-content-visualization">
-              <Link to={`/dataset/${dataset.slug}`} className="c-new-button -light -mini">Visualization</Link>
+              <Link to={`/dataset/${dataset.slug}#widget-maker`} className="c-new-button -light -mini">Visualization</Link>
             </div>
           )}
         </div>

@@ -37,6 +37,19 @@
       padding: $medium-margin;
       max-height: 90vh;
       overflow: auto;
+
+      h2 {
+        margin-top: 0;
+        margin-bottom: $medium-margin;
+      }
+
+      aside {
+        margin-top: $medium-margin;
+      }
+
+      iframe {
+        width: 100%;
+      }
     }
 
     &.share {

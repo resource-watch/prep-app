@@ -18,6 +18,7 @@ import DatasetsList from './explore-datasets-list';
 import DatasetInfo from './explore-dataset-info';
 import ExploreMap from './explore-map';
 import { tabOptions } from './explore-constants';
+import DiscoverDataModal from 'components/Modal/DiscoverDataModal';
 
 class ExplorePage extends PureComponent {
   constructor(props) {
@@ -232,6 +233,7 @@ class ExplorePage extends PureComponent {
 
         {/* Map */}
         <ExploreMap />
+        <DiscoverDataModal />
       </div>
     );
   }
