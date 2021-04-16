@@ -2,9 +2,9 @@ import React, { useCallback, useState } from 'react';
 import Modal from './Modal';
 import Button from '../Button/Button';
 
-const LOCAL_STORAGE_KEY = 'modalWelcomeOpened';
+const LOCAL_STORAGE_KEY = 'modalDiscoverDataOpened';
 
-const WelcomeModal = () => {
+const DiscoverDataModal = () => {
   const opened = localStorage.getItem(LOCAL_STORAGE_KEY) === 'true'
     && location.pathname.indexOf('embed') === -1; // also, don't show modals on embed
 
@@ -13,12 +13,6 @@ const WelcomeModal = () => {
   const handleClose = useCallback(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
     setModalOpened(true);
-  }, []);
-
-  const handleToExplore = useCallback(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
-    setModalOpened(true);
-    window.location.href = '/explore';
   }, []);
 
   const handleToHowTo = useCallback(() => {
@@ -40,11 +34,10 @@ const WelcomeModal = () => {
         <article>
           <div className="row">
             <div className="column small-12">
-              <h2>Welcome to Partnership<br /> for Resilience &amp; Preparedness</h2>
+              <h2>Discover Data</h2>
             </div>
             <div className="column small-12 medium-6">
-              <p>We are continuing to add data and functionality to PREPdata. We welcome feedback on the platform&apos;s content and navigation and welcome suggestions for other features you would like to see. Have a suggestion? Send us a message at info@prepdata.org.</p>
-              <p className="-small"><strong>DISCLAIMER:</strong> YOU AGREE THAT YOUR USE OF THE SITE AND ITS CONTENT IS AT YOUR SOLE RISK. WE MAKE NO PROMISES OR COMMITMENTS ABOUT THE SITE OR ITS CONTENT, AND THE SITE AND CONTENT ARE PROVIDED ON AN “AS IS” BASIS AND WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED. TO THE FULLEST EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, STATUTORY, EXPRESS OR IMPLIED, INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT.</p>
+              <p>Search for climate, physical, and socioeconomic data. Create and share beautiful map visualizations and overlays, etc.</p>
             </div>
             <div className="column small-12 medium-6">
               <iframe
@@ -61,8 +54,8 @@ const WelcomeModal = () => {
         </article>
         <aside>
           <div className="small-12 align-center" style={{ display: 'flex' }}>
-            <Button click={handleToExplore} className="c-new-button">Continue</Button>
-            <Button click={handleToHowTo} className="c-new-button -transparent">How to use PREPDATA</Button>
+            <Button click={handleClose} className="c-new-button">Continue</Button>
+            <Button click={handleToHowTo} className="c-new-button -transparent">Learn more</Button>
           </div>
         </aside>
       </div>
@@ -70,4 +63,4 @@ const WelcomeModal = () => {
   );
 };
 
-export default WelcomeModal;
+export default DiscoverDataModal;
