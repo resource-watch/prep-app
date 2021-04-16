@@ -37,11 +37,9 @@ class Modal extends React.Component {
               </svg>
             }
             <div className="m-content">
-              <div className="l-main">
-                <div className="row">
-                  <div className="columns small-12">
-                    {this.props.children}
-                  </div>
+              <div className="row">
+                <div className="columns small-12">
+                  {this.props.children}
                 </div>
               </div>
             </div>

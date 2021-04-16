@@ -8,18 +8,8 @@ import GDPRBanner from '../gdpr-banner';
 import Ribbon from '../ribbon';
 
 class Root extends React.Component {
-  constructor() {
-    super();
-    this.state = { modalWelcomeOpen: false };
-  }
-
   componentDidMount() {
     const { location } = this.props;
-
-    if (localStorage.getItem('modalWelcomeOpened') === false ||
-      localStorage.getItem('modalWelcomeOpened') === null) {
-      this.setModalWelcome();
-    }
 
     if ((location.pathname.indexOf('embed') === -1) && (location.pathname.indexOf('export') === -1)) {
       const script = document.createElement('script');
@@ -34,17 +24,8 @@ class Root extends React.Component {
     }
   }
 
-  setModalWelcome() {
-    const { location } = this.props;
-
-    if (location.pathname.indexOf('embed') === -1) {
-      this.setState({ modalWelcomeOpen: true });
-    }
-  }
-
   render() {
     const { children } = this.props;
-    const { modalWelcomeOpen } = this.state;
 
     return (
       <div style={{ height: '100%' }}>
@@ -59,18 +40,7 @@ class Root extends React.Component {
 
         {children}
 
-        {modalWelcomeOpen && (
-          <WelcomeModal
-            title="Welcome to PREPdata"
-            opened={modalWelcomeOpen}
-            close={() => {
-              this.setState({ modalWelcomeOpen: false });
-              localStorage.setItem('modalWelcomeOpened', JSON.stringify(true));
-              window.location.href = '/explore';
-            }}
-            hideCloseButton
-          />
-        )}
+        <WelcomeModal />
       </div>
     );
   }
@@ -81,7 +51,9 @@ Root.defaultProps = {
 };
 
 Root.propTypes = {
-  location: PropTypes.shape({}),
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }),
   children: PropTypes.node.isRequired,
 };
 

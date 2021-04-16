@@ -1,64 +1,56 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useCallback, useState } from 'react';
 import Modal from './Modal';
 import Button from '../Button/Button';
 
-class WelcomeModal extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+const WelcomeModal = () => {
+  const opened = localStorage.getItem('modalWelcomeOpened') === 'true'
+    && location.pathname.indexOf('embed') === -1; // also, don't show modals on embed
 
-  getContent() {
-    return (
-      <div className="m-content">
-        <article>
-          <h2>{this.props.title}</h2>
-          <p>We are continuing to add data and functionality to PREPdata. We welcome feedback on the platform's content and navigation and welcome suggestions for other features you would like to see. Have a suggestion? Send us a message at info@prepdata.org.</p>
-          <p className="-small"><strong>DISCLAIMER:</strong> YOU AGREE THAT YOUR USE OF THE SITE AND ITS CONTENT IS AT YOUR SOLE RISK. WE MAKE NO PROMISES OR COMMITMENTS ABOUT THE SITE OR ITS CONTENT, AND THE SITE AND CONTENT ARE PROVIDED ON AN “AS IS” BASIS AND WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED. TO THE FULLEST EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, STATUTORY, EXPRESS OR IMPLIED, INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT.</p>
-        </article>
-        <aside>
-          <div className="small-12 align-center" style={{ display: 'flex' }}>
-            <Button click={() => this.props.close()} alternative border="alternative">
-              Continue
-            </Button>
-          </div>
-        </aside>
-      </div>
-    );
-  }
+  const [isModalOpened, setModalOpened] = useState(opened);
 
-  render() {
-    return (
-      <Modal
-        opened={this.props.opened}
-        close={this.props.close}
-        hideCloseButton={this.props.hideCloseButton}
-      >
-        <div className="content">
-          {this.getContent()}
+  const handleClose = useCallback(() => {
+    localStorage.setItem('modalWelcomeOpened', 'true');
+    setModalOpened(true);
+  }, []);
+
+  const handleToExplore = useCallback(() => {
+    localStorage.setItem('modalWelcomeOpened', 'true');
+    setModalOpened(true);
+    window.location.href = '/explore';
+  }, []);
+
+  const handleToHowTo = useCallback(() => {
+    localStorage.setItem('modalWelcomeOpened', 'true');
+    setModalOpened(true);
+    window.location.href = '/how-to';
+  }, []);
+
+  // don't show modal when user already click on it
+  if (isModalOpened) return null;
+
+  return (
+    <Modal
+      opened
+      close={handleClose}
+      hideCloseButton
+    >
+      <div className="content">
+        <div className="m-content">
+          <article>
+            <h2>Welcome to PREPdata</h2>
+            <p>We are continuing to add data and functionality to PREPdata. We welcome feedback on the platform&apos;s content and navigation and welcome suggestions for other features you would like to see. Have a suggestion? Send us a message at info@prepdata.org.</p>
+            <p className="-small"><strong>DISCLAIMER:</strong> YOU AGREE THAT YOUR USE OF THE SITE AND ITS CONTENT IS AT YOUR SOLE RISK. WE MAKE NO PROMISES OR COMMITMENTS ABOUT THE SITE OR ITS CONTENT, AND THE SITE AND CONTENT ARE PROVIDED ON AN “AS IS” BASIS AND WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED. TO THE FULLEST EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, STATUTORY, EXPRESS OR IMPLIED, INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT.</p>
+          </article>
+          <aside>
+            <div className="small-12 align-center" style={{ display: 'flex' }}>
+              <Button click={handleToExplore} className="c-new-button">Continue</Button>
+              <Button click={handleToHowTo} className="c-new-button -transparent">How to use PREPDATA</Button>
+            </div>
+          </aside>
         </div>
-      </Modal>
-    );
-  }
-}
-
-WelcomeModal.propTypes = {
-  /**
-   * Define the welcome modal title
-   */
-  title: PropTypes.string.isRequired,
-  /**
-   * Define the welcome modal status
-   */
-  opened: PropTypes.bool.isRequired,
-  /**
-   * Define whether the modal has a close button or not
-   */
-  hideCloseButton: PropTypes.bool,
-  /**
-   * Define the welcome modal function to close the modal
-   */
-  close: PropTypes.func.isRequired
+      </div>
+    </Modal>
+  );
 };
 
 export default WelcomeModal;

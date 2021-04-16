@@ -13,6 +13,7 @@ function Button(props) {
   if (props.fill) classes.push('-fill');
   if (props.action) classes.push('-action');
   if (props.icon) classes.push('-icon');
+  if (props.className) classes.push(props.className);
 
   return (
     <button
@@ -83,7 +84,8 @@ Button.propTypes = {
   /**
    * Define click handler function
    */
-  click: PropTypes.func
+  click: PropTypes.func,
+  className: PropTypes.string,
 };
 
 export default Button;
