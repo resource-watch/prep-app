@@ -27,17 +27,17 @@ const chartSpec = {
         {
           "type": "formula",
           "as": "q25",
-          "expr": "units.type =='factor' ? round(units.value*datum.q25,2) : ( datum.q25-units.value)"
+          "expr": "datum.q25-units.value"
         },
         {
           "type": "formula",
           "as": "q50",
-          "expr": "units.type =='factor' ? round(units.value*datum.q50,2) : (datum.q50-units.value)"
+          "expr": "datum.q50-units.value"
         },
         {
           "type": "formula",
           "as": "q75",
-          "expr": "units.type =='factor' ? round(units.value*datum.q75,2) : (datum.q75-units.value)"
+          "expr": "datum.q75-units.value"
         }
       ]
     },
@@ -183,7 +183,7 @@ const chartSpec = {
   "scales": [
     {
       "name": "x",
-      "type": "utc",
+      "type": "linear",
       "range": "width",
       "zero": false,
       "domain": {
@@ -236,6 +236,7 @@ const chartSpec = {
       "scale": "x",
       "labelOverlap": "parity",
       "orient": "bottom",
+      "format": "d",
       "encode": {
         "labels": {
           "update": {
@@ -828,6 +829,9 @@ class TimeseriesChart extends React.Component {
     if (!range1Selection || chartDataError) return null;
 
     const canSave = !!getConfig().userToken;
+
+    console.log('vegaSpec', vegaSpec);
+    console.log('chartData', chartData);
 
     return (
       <div className="c-tool-timeseries-chart">

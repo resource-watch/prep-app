@@ -6,7 +6,7 @@ import { Map, TileLayer, ZoomControl, Marker } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 
 // Redux
-import { getLayers, getRawLayers } from 'selectors/nexlocageetool';
+import { getActiveLayers, getActiveRawLayers } from 'selectors/nexlocageetool';
 import { setMarkerPosition, setMapZoom, setMapCenter, setBasemap, setBoundaries, setLabels, setWater, setMarkerMode } from 'actions/nexlocageetool';
 import * as shareModalActions from 'components/share-modal/share-modal-actions';
 import { toggleTooltip } from 'actions/tooltip';
@@ -38,10 +38,11 @@ class DifferenceMap extends React.PureComponent {
   }
 
   onViewportChanged({ zoom, center }) {
-    if (zoom !== this.props.map.zoom) this.props.setMapZoom(zoom);
-    if (center[0] !== this.props.map.center[0]
-      || center[1] !== this.props.map.center[1]) {
-      this.props.setMapCenter(center);
+    const { map, setMapZoom: setMapZoomProp, setMapCenter: setMapCenterProp } = this.props;
+    if (zoom !== map.zoom) setMapZoomProp(zoom);
+    if (center[0] !== map.center[0]
+      || center[1] !== map.center[1]) {
+        setMapCenterProp(center);
     }
   }
 
@@ -53,10 +54,10 @@ class DifferenceMap extends React.PureComponent {
     // Prevent the tooltip from auto-closing
     e.stopPropagation();
 
-    const { dataset } = this.props;
+    const { dataset, toggleTooltip: toggleTooltipProp } = this.props;
     const { origin, search } = window.location;
 
-    this.props.toggleTooltip(true, {
+    toggleTooltipProp(true, {
       follow: false,
       position: {
         x: window.scrollX + e.clientX,
@@ -84,9 +85,9 @@ class DifferenceMap extends React.PureComponent {
     // Prevent the tooltip from auto-closing
     e.stopPropagation();
 
-    const { toggleTooltip } = this.props;
+    const { toggleTooltip: toggleTooltipProp } = this.props;
 
-    toggleTooltip(true, {
+    toggleTooltipProp(true, {
       follow: false,
       position: {
         x: window.scrollX + e.clientX,
@@ -98,21 +99,24 @@ class DifferenceMap extends React.PureComponent {
   }
 
   setMarkerMode() {
-    const { markerMode } = this.props;
-    this.props.setMarkerMode(!markerMode);
+    const { markerMode, setMarkerMode: setMarkerModeProp } = this.props;
+    setMarkerModeProp(!markerMode);
   }
 
   addMarker({ latlng }) {
-    const { markerMode } = this.props;
+    const { markerMode, setMarkerPosition: setMarkerPositionProp, setMarkerMode: setMarkerModeProp } = this.props;
 
     if (markerMode) {
-      this.props.setMarkerPosition([latlng.lat, latlng.lng]);
-      this.props.setMarkerMode(false);
+      setMarkerPositionProp([latlng.lat, latlng.lng]);
+      setMarkerModeProp(false);
     }
   }
 
   render() {
-    const { embed, map, marker, markerMode, layers, rawLayers } = this.props;
+    const {
+      embed, map, marker, markerMode, layers, rawLayers,
+      setBasemap: setBasemapProp, setWater: setWaterProp, setLabels: setLabelsProp, setBoundaries: setBoundariesProp,
+    } = this.props;
 
     // It will change center of map on marker location
     const mapOptions = Object.assign({}, mapDefaultOptions, {
@@ -144,7 +148,7 @@ class DifferenceMap extends React.PureComponent {
 
           <ZoomControl position="bottomright" />
 
-          <Control position="bottomright" >
+          <Control position="bottomright">
             <button
               type="button"
               className={`c-button-map ${makerControlClassNames}`}
@@ -160,16 +164,16 @@ class DifferenceMap extends React.PureComponent {
             </button>
           </Control>
 
-          <Control position="bottomright" >
+          <Control position="bottomright">
             <BasemapControl
               basemap={map.basemap}
               labels={map.labels}
               boundaries={map.boundaries}
               water={map.water}
-              setBasemap={this.props.setBasemap}
-              setLabels={this.props.setLabels}
-              setWater={this.props.setWater}
-              setBoundaries={this.props.setBoundaries}
+              setBasemap={setBasemapProp}
+              setLabels={setLabelsProp}
+              setWater={setWaterProp}
+              setBoundaries={setBoundariesProp}
             />
           </Control>
 
@@ -181,7 +185,7 @@ class DifferenceMap extends React.PureComponent {
             </Control>
           )}
 
-          {!embed &&
+          {!embed && (
             <Control position="bottomright">
               <button
                 type="button"
@@ -191,7 +195,7 @@ class DifferenceMap extends React.PureComponent {
                 <Icon name="icon-share" className="-small" />
               </button>
             </Control>
-          }
+          )}
 
         </Map>
 
@@ -207,37 +211,40 @@ class DifferenceMap extends React.PureComponent {
   }
 }
 
+DifferenceMap.defaultProps = {
+};
+
 DifferenceMap.propTypes = {
-  dataset: PropTypes.object,
+  dataset: PropTypes.shape({}).isRequired,
   map: PropTypes.shape({
     zoom: PropTypes.number,
     center: PropTypes.array
-  }),
-  marker: PropTypes.array,
-  markerMode: PropTypes.bool,
-  setMarkerMode: PropTypes.func,
-  setMarkerPosition: PropTypes.func,
-  setMapZoom: PropTypes.func,
-  setMapCenter: PropTypes.func,
-  open: PropTypes.bool,
-  embed: PropTypes.bool,
-  layers: PropTypes.array,
-  rawLayers: PropTypes.array,
-  setBasemap: PropTypes.func,
-  setLabels: PropTypes.func,
-  setWater: PropTypes.func,
-  setBoundaries: PropTypes.func,
-  setOpen: PropTypes.func,
-  setLinks: PropTypes.func,
-  toggleTooltip: PropTypes.func
+  }).isRequired,
+  marker: PropTypes.arrayOf(PropTypes.number).isRequired,
+  markerMode: PropTypes.bool.isRequired,
+  setMarkerMode: PropTypes.func.isRequired,
+  setMarkerPosition: PropTypes.func.isRequired,
+  setMapZoom: PropTypes.func.isRequired,
+  setMapCenter: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
+  embed: PropTypes.bool.isRequired,
+  layers: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  rawLayers: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  setBasemap: PropTypes.func.isRequired,
+  setLabels: PropTypes.func.isRequired,
+  setWater: PropTypes.func.isRequired,
+  setBoundaries: PropTypes.func.isRequired,
+  setOpen: PropTypes.func.isRequired,
+  setLinks: PropTypes.func.isRequired,
+  toggleTooltip: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   map: state.nexlocageetool.map,
   marker: state.nexlocageetool.marker,
   markerMode: state.nexlocageetool.markerMode,
-  layers: getLayers(state),
-  rawLayers: getRawLayers(state),
+  layers: getActiveLayers(state),
+  rawLayers: getActiveRawLayers(state),
   dataset: state.nexlocageetool.dataset,
   open: state.shareModal.open
 });
