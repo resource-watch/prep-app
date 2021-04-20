@@ -17,6 +17,8 @@
   border: 0;
   border-radius: 0;
 
+  z-index: 3;
+
   &:last-of-type {
     position: relative;
     left: -2px;
