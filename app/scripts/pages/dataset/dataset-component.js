@@ -15,7 +15,6 @@ import SectionIntro from 'components/SectionIntro';
 import { getData, getDownloadUrl } from './dataset-helpers';
 import PartnersSlider from '../../containers/PartnersSlider';
 import MetadataInfo from './dataset-metadata-component';
-import SimpleMap from 'containers/SimpleMap/SimpleMap';
 import LoadingSpinner from 'components/Loading/LoadingSpinner';
 
 import NexGDDPTool from 'components/nexgddp-tool';

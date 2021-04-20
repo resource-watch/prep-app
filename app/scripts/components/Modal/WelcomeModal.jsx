@@ -5,8 +5,9 @@ import Button from '../Button/Button';
 const LOCAL_STORAGE_KEY = 'modalWelcomeOpened';
 
 const WelcomeModal = () => {
-  const opened = localStorage.getItem(LOCAL_STORAGE_KEY) === 'true'
-    && location.pathname.indexOf('embed') === -1; // also, don't show modals on embed
+  const opened = localStorage.getItem(LOCAL_STORAGE_KEY) === 'true';
+
+  if (location.pathname.indexOf('embed') > 0) return null; // also, don't show modals on embed
 
   const [isModalOpened, setModalOpened] = useState(opened);
 

@@ -16,7 +16,7 @@ import BasemapControl from 'components/basemap-control';
 import { basemapsSpec, labelsSpec, boundariesSpec, waterSpec } from 'components/basemap-control/basemap-control-constants';
 import Legend from 'components/legend/index';
 import Icon from 'components/ui/Icon';
-import ShareNexgddpTooltip from 'components/Tooltip/ShareNexgddpTooltip';
+import ShareNexgddpTooltip from 'components/Tooltip/ShareNexLocaGeeTooltip';
 import PositionControlTooltip from 'components/nexlocagee-tool/position-control-tooltip';
 
 const mapDefaultOptions = {

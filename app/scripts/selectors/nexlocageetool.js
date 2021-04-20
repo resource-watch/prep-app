@@ -81,6 +81,7 @@ export const getIndicatorId = createSelector(
 export const getIndicatorUnitSignal = createSelector(
   state,
   ({ datasetPage : { data: { layer } } }) => {
+    if (!layer) return {};
     const { legendConfig: { unit } } = layer[0];
     return {
       from: '',

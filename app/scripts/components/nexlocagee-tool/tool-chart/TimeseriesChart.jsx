@@ -830,9 +830,6 @@ class TimeseriesChart extends React.Component {
 
     const canSave = !!getConfig().userToken;
 
-    console.log('vegaSpec', vegaSpec);
-    console.log('chartData', chartData);
-
     return (
       <div className="c-tool-timeseries-chart">
         {!chartLoaded &&

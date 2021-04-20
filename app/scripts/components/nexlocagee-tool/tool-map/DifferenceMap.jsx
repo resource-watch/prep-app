@@ -16,7 +16,7 @@ import Legend from 'components/legend/index';
 import BasemapControl from 'components/basemap-control';
 import { basemapsSpec, labelsSpec, boundariesSpec, waterSpec } from 'components/basemap-control/basemap-control-constants';
 import Icon from 'components/ui/Icon';
-import ShareNexgddpTooltip from 'components/Tooltip/ShareNexgddpTooltip';
+import ShareNexgddpTooltip from 'components/Tooltip/ShareNexLocaGeeTooltip';
 import PositionControlTooltip from 'components/nexlocagee-tool/position-control-tooltip';
 
 
@@ -190,7 +190,7 @@ class DifferenceMap extends React.PureComponent {
               <button
                 type="button"
                 className="c-button-map"
-                onClick={e => this.onClickShare(e)}
+                onClick={this.onClickShare}
               >
                 <Icon name="icon-share" className="-small" />
               </button>

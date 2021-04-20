@@ -472,31 +472,22 @@ export function getUrlState() {
         promises.push(dispatch(setScenarioSelection(scenarioOption, false)));
       }
     }
-    if (params.tempResolution) {
-      const tempResolutionOptions = getState().nexlocageetool.tempResolution.options;
-      const tempResolutionOption = tempResolutionOptions.find(t => t.value === params.tempResolution);
-      if (tempResolutionOption) {
-        promises.push(dispatch(setTempResolutionSelection(tempResolutionOption, false)));
-      }
-
-      if (params.range1) {
-        const range1Options = getState().nexlocageetool.range1.options;
-        const range1Option = range1Options[tempResolutionOption.value]
-          && range1Options[tempResolutionOption.value].find(s => s.value === params.range1);
-        if (range1Option) {
-          promises.push(dispatch(setRange1Selection(range1Option, false)));
-        }
-      }
-
-      if (params.range2) {
-        const range2Options = getState().nexlocageetool.range2.options;
-        const range2Option = range2Options[tempResolutionOption.value]
-          && range2Options[tempResolutionOption.value].find(s => s.value === params.range2);
-        if (range2Option) {
-          promises.push(dispatch(setRange2Selection(range2Option, false)));
-        }
+    if (params.range1) {
+      const range1Options = getState().nexlocageetool.range1.options;
+      const range1Option = range1Options.find(s => s.value === new Date(params.range1).getFullYear());
+      if (range1Option) {
+        promises.push(dispatch(setRange1Selection(range1Option, false)));
       }
     }
+
+    if (params.range2) {
+      const range2Options = getState().nexlocageetool.range1.options;
+      const range2Option = range2Options.find(s => s.value === new Date(params.range2).getFullYear());
+      if (range2Option) {
+        promises.push(dispatch(setRange1Selection(range2Option, false)));
+      }
+    }
+
     if (params.basemap) {
       promises.push(dispatch(setBasemap(params.basemap)));
     }
@@ -563,7 +554,7 @@ export function getSelectorsInfo() {
     const { data } = datasetPage;
     const { layer: layers } = data;
 
-    const periodsOptions = layers.map(
+    const periodsOptions = (layers || []).map(
         ({ layerConfig }) => ({
           label: `${layerConfig.order - 15}-${layerConfig.order + 15}`,
           value: layerConfig.order,

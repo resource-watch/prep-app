@@ -29,6 +29,7 @@ import Root from './components/Root';
 import PartnerDetail from './containers/PartnerDetail';
 import Auth from './modules/auth';
 import NexGDDPEmbedPage from './pages/nexgddp-embed';
+import NexLocaGeeEmbedPage from './pages/nexlocagee-embed';
 
 function shouldUpdateScroll(prevRouterProps, { location }) {
   /**
@@ -157,6 +158,7 @@ function Routes(props) {
         <Route path="export/explore" component={ExplorePageEmbed} />
         <Route path="embed/explore" component={ExplorePageEmbed} />
         <Route path="embed/nexgddp/:slug" component={NexGDDPEmbedPage} />
+        <Route path="embed/nexlocagee/:slug" component={NexLocaGeeEmbedPage} />
         <Route path="embed/:slug" component={Embed} />
       </Route>
     </Router>

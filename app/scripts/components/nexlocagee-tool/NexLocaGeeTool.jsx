@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-for */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'components/ui/Icon';

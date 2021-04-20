@@ -16,7 +16,7 @@ import Legend from 'components/legend/index';
 import BasemapControl from 'components/basemap-control';
 import { basemapsSpec, labelsSpec, boundariesSpec, waterSpec } from 'components/basemap-control/basemap-control-constants';
 import Icon from 'components/ui/Icon';
-import ShareNexgddpTooltip from 'components/Tooltip/ShareNexgddpTooltip';
+import ShareNexgddpTooltip from 'components/Tooltip/ShareNexLocaGeeTooltip';
 import PositionControlTooltip from 'components/nexlocagee-tool/position-control-tooltip';
 
 const mapDefaultOptions = {
@@ -76,8 +76,6 @@ class CompareMap extends React.PureComponent {
   componentWillReceiveProps(nextProps) {
     const { layers: nextLayers } = nextProps;
     const { layers: currentLayers } = this.props;
-
-    console.log(nextLayers)
 
     const hasChangedLayers = (currentLayers.length !== nextLayers.length)
       || nextLayers.some((l, i) => l.url !== (currentLayers[i] || {}).url);
