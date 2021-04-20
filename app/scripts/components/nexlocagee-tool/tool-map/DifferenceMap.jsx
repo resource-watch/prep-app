@@ -70,7 +70,7 @@ class DifferenceMap extends React.PureComponent {
         getWidgetConfig: () => new Promise((resolve) => {
           resolve({
             type: 'embed',
-            url: `${origin}/embed/nexgddp/${dataset.id}${search}&render=map`
+            url: `${origin}/embed/nexlocagee/${dataset.id}${search}&render=map`
           });
         })
       }
@@ -220,7 +220,7 @@ DifferenceMap.propTypes = {
     zoom: PropTypes.number,
     center: PropTypes.array
   }).isRequired,
-  marker: PropTypes.arrayOf(PropTypes.number).isRequired,
+  marker: PropTypes.arrayOf(PropTypes.number),
   markerMode: PropTypes.bool.isRequired,
   setMarkerMode: PropTypes.func.isRequired,
   setMarkerPosition: PropTypes.func.isRequired,
