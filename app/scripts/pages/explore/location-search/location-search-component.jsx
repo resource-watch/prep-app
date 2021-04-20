@@ -1,31 +1,27 @@
-import React, { PureComponent } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Geosuggest from 'react-geosuggest';
 
 // styles
 import './location-search-styles.scss';
 
-class LocationSearchComponent extends PureComponent {
-  propTypes = {
-    setMapParams: PropTypes.func.isRequired,
-    setBBox: PropTypes.func.isRequired,
-    onSearch: PropTypes.func.isRequired
-  }
+const LocationSearchComponent = (props) => {
+  const {
+    setBBox,
+    setMapParams,
+    onSearch
+  } = props;
 
-  onSuggestSelect = (e) => {
-    const {
-      setBBox,
-      setMapParams,
-      onSearch
-    } = this.props;
+  const handleSuggest = useCallback((e) => {
     const { gmaps, location } = e;
 
     const viewport = gmaps.geometry && gmaps.geometry.viewport;
 
     if (viewport) {
+      const { south, west, north, east } = viewport.toJSON();
       setBBox([
-        viewport.j.j, viewport.l.j,
-        viewport.j.l, viewport.l.l
+        east, north,
+        west, south,
       ]);
     }
 
@@ -38,17 +34,20 @@ class LocationSearchComponent extends PureComponent {
     }
 
     onSearch(false);
-  }
+  });
 
-  render() {
-    return (
-      <Geosuggest
-        ref={(node) => { this.geoSuggest = node; }}
-        onSuggestSelect={this.onSuggestSelect}
-        className="-explore"
-      />
-    );
-  }
-}
+  return (
+    <Geosuggest
+      onSuggestSelect={handleSuggest}
+      className="-explore"
+    />
+  );
+};
+
+LocationSearchComponent.propTypes = {
+  setMapParams: PropTypes.func.isRequired,
+  setBBox: PropTypes.func.isRequired,
+  onSearch: PropTypes.func.isRequired
+};
 
 export default LocationSearchComponent;
