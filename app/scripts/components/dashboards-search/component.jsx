@@ -10,11 +10,13 @@ const DashboardSearch = ({ setSearchTerm }) => {
     <div>
       <div className="row">
         <div className="columns small-10 small-offset-1">
-          <label>Search: </label>
-          <input
-            type="search"
-            onChange={handleSearch}
-          />
+          <div className="c-form-container -inline">
+            <label>Search: </label>
+            <input
+              type="search"
+              onChange={handleSearch}
+            />
+          </div>
         </div>
       </div>
     </div>

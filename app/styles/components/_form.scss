@@ -41,6 +41,11 @@
   padding: $medium-margin;
   border: 2px solid $border-color;
 
+  &.-inline {
+    padding: $small-margin;
+    border: 0;
+  }
+
   label {
     margin-right: $small-margin;
     font-weight: bold;
