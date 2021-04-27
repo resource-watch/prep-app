@@ -1,11 +1,13 @@
 import {
   INSIGHTS_LIST_RECEIVED,
-  INSIGHTS_DETAIL_RECEIVED
+  INSIGHTS_DETAIL_RECEIVED,
+  INSIGHTS_SEARCH_TERM,
 } from '../constants';
 
 const initialState = {
   list: [],
-  detail: {}
+  detail: {},
+  searchTerm: null,
 };
 
 export default function (state = initialState, action) {
@@ -17,6 +19,12 @@ export default function (state = initialState, action) {
       const obj = {};
       obj[action.payload.data.slug] = action.payload.data;
       return Object.assign({}, state, { detail: obj });
+    }
+    case INSIGHTS_SEARCH_TERM: {
+      return {
+        ...state,
+        searchTerm: action.payload,
+      };
     }
     default:
       return state;

@@ -16,7 +16,6 @@ export const getDashboards = createSelector(
     const fuse = new Fuse(dashboards, {
       keys: ['title']
     });
-    console.log(fuse.search(searchTerm))
     return fuse.search(searchTerm);
   }
 

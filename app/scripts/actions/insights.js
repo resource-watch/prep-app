@@ -2,7 +2,8 @@ import 'whatwg-fetch';
 import {
   INSIGHTS_FETCH_ERROR,
   INSIGHTS_LIST_RECEIVED,
-  INSIGHTS_DETAIL_RECEIVED
+  INSIGHTS_DETAIL_RECEIVED,
+  INSIGHTS_SEARCH_TERM,
 } from '../constants';
 
 export default function () {}
@@ -48,5 +49,13 @@ export function getInsightBySlug(slug) {
           payload: err.message
         });
       });
+  };
+}
+
+
+export function setSearchTerm(payload) {
+  return {
+    type: INSIGHTS_SEARCH_TERM,
+    payload,
   };
 }

@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { logEvent } from 'helpers/analytics';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 import Card from '../Cards/Card';
+import InsightsSearch from 'components/insights-search';
 
 class InsightsPage extends React.Component {
   constructor(props) {
@@ -87,6 +88,9 @@ class InsightsPage extends React.Component {
             </div>
           </div>
         </article>
+
+        <InsightsSearch />
+
         {content}
 
       </div>
