@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import debounce from 'lodash/debounce';
 import { Link } from 'react-router';
+// import Tour from 'reactour';
 
 import { logEvent } from 'helpers/analytics';
 
@@ -20,174 +20,122 @@ import ExploreMap from './explore-map';
 import { tabOptions } from './explore-constants';
 import DiscoverDataModal from 'components/Modal/DiscoverDataModal';
 
-class ExplorePage extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = { filters: false };
+function logSearchEvent(query) { // eslint-disable-line class-methods-use-this
+  logEvent('Explore menu', 'Search datasets', query);
+}
 
-    this.onChangeTab = this.onChangeTab.bind(this);
-    this.onSearch = this.onSearch.bind(this);
-    this.logSearchEvent = debounce(this.logSearchEvent, 500);
-  }
+const ExplorePage = (props) => {
+  const { currentLocation, setTab, sidebar } = props;
+  const [filters, setFilters] = useState(false);
+  const sidebarExploreClass = classnames({
+    'c-explore-sidebar': true,
+    '-open': sidebar.open
+  });
 
-  componentWillMount() {
-    this.props.initialURLParams();
-    this.props.getDatasetsByGraph();
-  }
-
-  componentDidMount() {
-    this.props.updateURLParams();
-    this.props.fetchLocations();
-    this.props.fetchDatasets();
-    this.props.fetchCoreDatasets();
-
-    this.props.setSidebar({
-      width: 430,
-      open: true
-    });
-  }
-
-  /**
-   * Event handler executed when the user goes from
-   * one tab to another
-   * @param {string} tab Tab name
-   */
-  onChangeTab(tab) {
-    this.props.setTab(tab);
+  const onChangeTab = useCallback((tab) => {
+    setTab(tab);
 
     const label = (tab === 'all_datasets')
       ? 'All datasets'
-      : `Core ${this.props.currentLocation}`;
+      : `Core ${currentLocation}`;
     logEvent('Explore menu', 'Changes dataset view', label);
-  }
+  }, [currentLocation]);
 
-  /**
-   * Event handler executed when the user types some
-   * terms in the search field
-   * @param {string} query Search terms
-   */
-  onSearch(query) {
-    this.props.filterQuery(query);
-    this.logSearchEvent(query);
-  }
+  const onSearch = useCallback((query) => {
+    props.filterQuery(query);
+    logSearchEvent(query);
+  }, []);
 
-  /**
-   * Event handler executed when the user toggles
-   * the sidebar
-   */
-  onToggleSidebar() {
-    const { sidebar } = this.props;
+  const handleFilters = useCallback(() => {
+    setFilters(!filters);
+  }, [filters]);
 
-    this.props.setSidebar({
+  const onToggleSidebar = useCallback(() => {
+    const { setSidebar } = props;
+
+    setSidebar({
       width: (sidebar.open) ? 0 : 430,
-      open: !sidebar.open
+      open: !sidebar.open,
     });
 
     if (!sidebar.open) {
       logEvent('Explore menu', 'Close menu', 'Click');
     }
-  }
+  }, [sidebar, props.setSidebar]);
 
-  /**
-   * Log the search events
-   * NOTE: this function is debounced in the constructor
-   * @param {string} query Search terms
-   */
-  logSearchEvent(query) { // eslint-disable-line class-methods-use-this
-    logEvent('Explore menu', 'Search datasets', query);
-  }
+  useEffect(() => {
+    const {
+      fetchCoreDatasets,
+      fetchDatasets,
+      fetchLocations,
+      getDatasetsByGraph,
+      initialURLParams,
+      setSidebar,
+      updateURLParams,
+    } = props;
 
-  render() {
-    const { sidebar, selectedDataset, currentTab, toggleInfo } = this.props;
-    const { filters } = this.state;
+    initialURLParams();
+    updateURLParams();
+    getDatasetsByGraph();
+    fetchLocations();
+    fetchDatasets();
+    fetchCoreDatasets();
+    setSidebar({ width: 430, open: true });
+  }, []);
 
-    const sidebarExploreClass = classnames({
-      'c-explore-sidebar': true,
-      '-open': sidebar.open
-    });
+  const { selectedDataset, currentTab, toggleInfo } = props;
 
-    return (
-      <div className="l-explore">
-        <header className="l-header -expanded">
-          <div className="l-header-nav -short">
-            <div className="row align-middle">
-              <div className="column small-10 medium-4">
-                <Link to="/" className="logo">
-                  <img src="/images/prep-logo.png" alt="Partnership for Resilience and Preparedness" />
-                </Link>
-              </div>
-              <div className="column small-2 medium-8">
-                <MainNav />
-              </div>
+  return (
+    <div className="l-explore">
+      <header className="l-header -expanded">
+        <div className="l-header-nav -short">
+          <div className="row align-middle">
+            <div className="column small-10 medium-4">
+              <Link to="/" className="logo">
+                <img src="/images/prep-logo.png" alt="Partnership for Resilience and Preparedness" />
+              </Link>
+            </div>
+            <div className="column small-2 medium-8">
+              <MainNav />
             </div>
           </div>
-        </header>
+        </div>
+      </header>
 
-        {/* Datasets list */}
-        <div className={sidebarExploreClass}>
-          <div className="sidebar-container">
-            <header className="sidebar-header">
-              <h1 className="sidebar-title">Explore</h1>
-              <Tabs
-                className="-center"
-                options={tabOptions}
-                selected={currentTab || tabOptions[0].value}
-                onChange={this.onChangeTab}
-              />
-            </header>
+      {/* Datasets list */}
+      <div className={sidebarExploreClass}>
+        <div className="sidebar-container">
+          <header className="sidebar-header">
+            <h1 className="sidebar-title">Explore</h1>
+            <Tabs
+              className="-center"
+              options={tabOptions}
+              selected={currentTab || tabOptions[0].value}
+              onChange={onChangeTab}
+            />
+          </header>
 
-            <div className="content">
-              <div className="c-datasets-list">
-                {currentTab === 'core_datasets' &&
-                  <div className="datasets-list-content">
-                    <DatasetLocationFilter />
-                    <div className="list-container">
-                      <CoreDatasetsList />
-                      <footer className="sidebar-footer">
-                        <div className="footer-section">
-                          <p>These datasets are a curated collection. If you don&apos;t find what you are interested in, you can explore all the data:</p>
+          <div className="content">
+            <div className="c-datasets-list">
+              {currentTab === 'core_datasets' &&
+                <div className="datasets-list-content">
+                  <DatasetLocationFilter />
+                  <div className="list-container">
+                    <CoreDatasetsList />
+                    <footer className="sidebar-footer">
+                      <div className="footer-section">
+                        <p>These datasets are a curated collection. If you don&apos;t find what you are interested in, you can explore all the data:</p>
 
-                          <div className="footer-actions">
-                            <button
-                              type="button"
-                              className="c-new-button -light -transparent"
-                              onClick={() => this.onChangeTab('all_datasets')}
-                            >
-                              Browse all datasets
-                            </button>
-                          </div>
+                        <div className="footer-actions">
+                          <button
+                            type="button"
+                            className="c-new-button -light -transparent"
+                            onClick={() => this.onChangeTab('all_datasets')}
+                          >
+                            Browse all datasets
+                          </button>
                         </div>
-                        <div className="footer-section">
-                          <p>We’re actively adding new datasets to PREP. If you can’t find what you’re looking for, you can suggest a dataset for us to consider:</p>
-                          <div className="footer-actions">
-                            <a href="https://docs.google.com/forms/d/1wZzQno3De7Ul6vlOkkdHhWK_9csErSrOlo6pOAZHIds/viewform?edit_requested=true" target="_blank" rel="noopener noreferrer">
-                              <button type="button" className="c-new-button -light -transparent">Suggest dataset</button>
-                            </a>
-                          </div>
-                        </div>
-                      </footer>
-                    </div>
-                  </div>}
-                {currentTab === 'all_datasets' &&
-                  <div className="datasets-list-content">
-                    <div className="list-filters">
-                      <div className="list-filters-container">
-                        <button className="btn-filters" onClick={() => this.setState({ filters: !filters })}>
-                          <span>Filter results</span>
-                          {filters ?
-                            <Icon name="icon-arrow-up" /> :
-                            <Icon name="icon-arrow-down" />
-                          }
-                        </button>
-                        {<Search
-                          onChange={this.onSearch}
-                          label="Search dataset"
-                        />}
                       </div>
-                    </div>
-                    {filters && <ExploreDatasetFilters />}
-                    <DatasetsList />
-                    <footer className="sidebar-footer -border">
                       <div className="footer-section">
                         <p>We’re actively adding new datasets to PREP. If you can’t find what you’re looking for, you can suggest a dataset for us to consider:</p>
                         <div className="footer-actions">
@@ -197,53 +145,84 @@ class ExplorePage extends PureComponent {
                         </div>
                       </div>
                     </footer>
-                  </div>}
-              </div>
+                  </div>
+                </div>}
+              {currentTab === 'all_datasets' &&
+                <div className="datasets-list-content">
+                  <div className="list-filters">
+                    <div className="list-filters-container">
+                      <button className="btn-filters" onClick={handleFilters}>
+                        <span>Filter results</span>
+                        {filters ?
+                          <Icon name="icon-arrow-up" /> :
+                          <Icon name="icon-arrow-down" />
+                        }
+                      </button>
+                      {<Search
+                        onChange={onSearch}
+                        label="Search dataset"
+                      />}
+                    </div>
+                  </div>
+                  {filters && <ExploreDatasetFilters />}
+                  <DatasetsList />
+                  <footer className="sidebar-footer -border">
+                    <div className="footer-section">
+                      <p>We’re actively adding new datasets to PREP. If you can’t find what you’re looking for, you can suggest a dataset for us to consider:</p>
+                      <div className="footer-actions">
+                        <a href="https://docs.google.com/forms/d/1wZzQno3De7Ul6vlOkkdHhWK_9csErSrOlo6pOAZHIds/viewform?edit_requested=true" target="_blank" rel="noopener noreferrer">
+                          <button type="button" className="c-new-button -light -transparent">Suggest dataset</button>
+                        </a>
+                      </div>
+                    </div>
+                  </footer>
+                </div>}
             </div>
           </div>
-          {!selectedDataset &&
-            <div className="actions">
-              <div>
-                <button
-                  className="toggle-status"
-                  onClick={() => this.onToggleSidebar()}
-                >
-                  {sidebar.open ?
-                    <Icon name="icon-arrow-right" className="-medium" /> :
-                    <Icon name="icon-arrow-left" className="-medium" />}
-                </button>
-              </div>
-            </div>}
         </div>
-
-        {/* Datasets panel info */}
-        <div className={`c-info-sidebar ${selectedDataset ? '-open' : ''}`}>
+        {!selectedDataset &&
           <div className="actions">
             <div>
               <button
                 className="toggle-status"
-                onClick={() => toggleInfo(selectedDataset)}
+                onClick={onToggleSidebar}
               >
-                <Icon name="icon-arrow-left" className="-medium" />
+                {sidebar.open ?
+                  <Icon name="icon-arrow-right" className="-medium" /> :
+                  <Icon name="icon-arrow-left" className="-medium" />}
               </button>
             </div>
-          </div>
-          <DatasetInfo />
-        </div>
-
-        {/* Map */}
-        <ExploreMap />
-        <DiscoverDataModal />
+          </div>}
       </div>
-    );
-  }
+
+      {/* Datasets panel info */}
+      <div className={`c-info-sidebar ${selectedDataset ? '-open' : ''}`}>
+        <div className="actions">
+          <div>
+            <button
+              className="toggle-status"
+              onClick={() => toggleInfo(selectedDataset)}
+            >
+              <Icon name="icon-arrow-left" className="-medium" />
+            </button>
+          </div>
+        </div>
+        <DatasetInfo />
+      </div>
+
+      {/* Map */}
+      <ExploreMap />
+      <DiscoverDataModal />
+    </div>
+  );
 }
 
 ExplorePage.defaultProps = {
   currentTab: 'core_datasets',
-  fetchDatasets: () => {},
-  fetchCoreDatasets: () => {},
-  getDatasetsByGraph: () => {}
+  fetchDatasets: () => null,
+  fetchLocations: () => null,
+  fetchCoreDatasets: () => null,
+  getDatasetsByGraph: () => null,
 };
 
 ExplorePage.propTypes = {
@@ -253,13 +232,14 @@ ExplorePage.propTypes = {
   currentLocation: PropTypes.string,
   setTab: PropTypes.func,
   setSidebar: PropTypes.func,
+  fetchLocations: PropTypes.func,
   fetchDatasets: PropTypes.func,
   fetchCoreDatasets: PropTypes.func,
   filterQuery: PropTypes.func,
   toggleInfo: PropTypes.func,
   initialURLParams: PropTypes.func,
   updateURLParams: PropTypes.func,
-  getDatasetsByGraph: PropTypes.func
+  getDatasetsByGraph: PropTypes.func,
 };
 
 export default ExplorePage;
