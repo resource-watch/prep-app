@@ -73,6 +73,16 @@
       }
     }
   }
+
+  &.-how-to {
+    position: sticky;
+    top: 0;
+    background-color: white;
+
+    ul > li {
+      opacity: 1;
+    }
+  }
 }
 .-dark {
   background-color: $navy;

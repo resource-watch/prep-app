@@ -4,6 +4,8 @@ import { Link } from 'react-router';
 // Components
 import Article from '../../components/Content/Article';
 import Icon from '../../components/ui/Icon';
+import HowToNav from 'components/how-to-nav';
+import { HOW_TO_SECTIONS } from '../../general-constants/general';
 
 const discoverImg = '/images/how-to/img-discover.png';
 const exploreImg = '/images/how-to/img-explore.png';
@@ -56,6 +58,7 @@ class HowTo extends React.PureComponent {
             </div>
           </div>
         </Article>
+        <HowToNav anchor />
         <Article grid="small-12">
           <h2>
             With PREPdata, you can
@@ -63,7 +66,7 @@ class HowTo extends React.PureComponent {
           <div className="how-to-wrapper">
             <div className="row align-center">
               <div className="column small-12 medium-6">
-                <h3>
+                <h3 id={HOW_TO_SECTIONS[0].slug}>
                   Discover Data
                 </h3>
                 <p>
@@ -85,7 +88,7 @@ class HowTo extends React.PureComponent {
                 <img src={exploreImg} alt="Discover data" />
               </div>
               <div className="column small-12 medium-6">
-                <h3>
+                <h3 id={HOW_TO_SECTIONS[1].slug}>
                   Explore Climate Projections for Your Geography
                 </h3>
                 <p>
@@ -109,7 +112,7 @@ class HowTo extends React.PureComponent {
           <div className="how-to-wrapper">
             <div className="row align-center">
               <div className="column small-12 medium-6">
-                <h3>
+                <h3 id={HOW_TO_SECTIONS[2].slug}>
                   Upload Your Own Data and Create Visualizations
                 </h3>
                 <p>
@@ -135,7 +138,7 @@ class HowTo extends React.PureComponent {
                 <img src={createImg} alt="Personalised dashboards" />
               </div>
               <div className="column small-12 medium-6">
-                <h3>
+                <h3 id={HOW_TO_SECTIONS[3].slug}>
                   Create Personalized Dashboards
                 </h3>
                 <p>
@@ -155,7 +158,7 @@ class HowTo extends React.PureComponent {
           <div className="how-to-wrapper">
             <div className="row align-center">
               <div className="column small-12 medium-6">
-                <h3>
+                <h3 id={HOW_TO_SECTIONS[4].slug}>
                   Share Your Content
                 </h3>
                 <p>
