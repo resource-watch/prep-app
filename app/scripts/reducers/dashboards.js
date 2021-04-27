@@ -2,7 +2,8 @@ import {
   DASHBOARD_LIST_RECEIVED,
   DASHBOARD_DETAIL_RECEIVED,
   DASHBOARD_TOPICS_FILTER,
-  DASHBOARD_GEOGRAPHIES_FILTER
+  DASHBOARD_GEOGRAPHIES_FILTER,
+  DASHBOARD_SEARCH_TERM
 } from '../constants';
 
 const initialState = {
@@ -11,7 +12,8 @@ const initialState = {
   detail: {},
   // Dashboard filters below
   topics: [],
-  geographies: []
+  geographies: [],
+  searchTerm: null,
 };
 
 export default function (state = initialState, action) {
@@ -35,6 +37,13 @@ export default function (state = initialState, action) {
 
     case DASHBOARD_GEOGRAPHIES_FILTER: {
       return Object.assign({}, state, { geographies: action.payload });
+    }
+
+    case DASHBOARD_SEARCH_TERM: {
+      return {
+        ...state,
+        searchTerm: action.payload,
+      };
     }
 
     default:

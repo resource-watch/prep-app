@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
 import { logEvent } from 'helpers/analytics';
 import Card from '../Cards/Card';
 import LoadingSpinner from '../Loading/LoadingSpinner';
 import Icon from '../ui/Icon';
-import DashboardsFilters from 'components/dashboards-filters';
+import DashboardsSearch from 'components/dashboards-search';
 
 class DashboardsPage extends React.Component {
   constructor(props) {
@@ -128,7 +127,7 @@ class DashboardsPage extends React.Component {
           </div>
         </article>
 
-        <DashboardsFilters />
+        <DashboardsSearch />
 
         {content}
 

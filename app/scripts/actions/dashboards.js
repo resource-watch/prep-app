@@ -4,7 +4,8 @@ import {
   DASHBOARD_LIST_RECEIVED,
   DASHBOARD_DETAIL_RECEIVED,
   DASHBOARD_TOPICS_FILTER,
-  DASHBOARD_GEOGRAPHIES_FILTER
+  DASHBOARD_GEOGRAPHIES_FILTER,
+  DASHBOARD_SEARCH_TERM
 } from '../constants';
 
 export default function () {}
@@ -64,5 +65,12 @@ export function setGeographiesFilter(selected) {
   return {
     type: DASHBOARD_GEOGRAPHIES_FILTER,
     payload: selected
+  };
+}
+
+export function setSearchTerm(payload) {
+  return {
+    type: DASHBOARD_SEARCH_TERM,
+    payload,
   };
 }
