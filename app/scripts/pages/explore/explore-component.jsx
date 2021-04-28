@@ -33,16 +33,24 @@ const LOCAL_STORAGE_TOUR_KEY = 'exploreTour';
 
 const steps = [
   {
-    selector: '.c-explore-sidebar .c-tabs',
-    content: 'Lorem ipsum.',
+    selector: '.dataset-group',
+    content: 'Here you can expand a category to see datasets, providers and layers in the map. Also, you can see more details following the Learn more link inside (info icon).'
   },
   {
     selector: '.c-dataset-location-filter',
-    content: 'Lorem ipsum.',
+    content: 'You can select global datasets or chose a location.',
   },
   {
-    selector: '.c-search-control',
+    selector: '.c-explore-sidebar .c-tabs',
+    content: 'By default you are seeing datasets by categories, but you can also explore all the datasets available.',
+  },
+  {
+    selector: '.c-search-control.-locations',
     content: 'Click on this button to search any location and move the map to that location.',
+  },
+  {
+    selector: '.c-search-control.-share',
+    content: 'Click on this button to share it in social networks or create a embed for your articles.',
   }
 ];
 
