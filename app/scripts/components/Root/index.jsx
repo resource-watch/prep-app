@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Tooltip, Icons } from 'widget-editor';
-import WelcomeModal from '../Modal/WelcomeModal';
 import ShareModalComponent from '../share-modal';
 import EmbedModalComponent from '../embed-modal';
 import GDPRBanner from '../gdpr-banner';
@@ -39,8 +38,6 @@ class Root extends React.Component {
         <Ribbon />
 
         {children}
-
-        <WelcomeModal />
       </div>
     );
   }
