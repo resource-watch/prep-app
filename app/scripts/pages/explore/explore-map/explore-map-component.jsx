@@ -378,7 +378,7 @@ class ExploreMap extends PureComponent {
 
         {!(embed || embedExport) && (
           <ShareControl
-            className="-absolute" // pfff....
+            className="-absolute -share" // pfff....
             open={open}
             links={Object.assign(
               {
@@ -411,7 +411,7 @@ class ExploreMap extends PureComponent {
 
         {!(embed || embedExport) && (
           <SearchControl
-            className="-absolute -explore"
+            className="-absolute -explore -locations"
             onChange={(nextBbox) => {
               setBBox(nextBbox);
               // Reset the bounds inmediatly to have the possibility to click on it again
