@@ -1,10 +1,11 @@
 import React, { useCallback, useState } from 'react';
+import PropTypes from 'prop-types';
 import Modal from './Modal';
 import Button from '../Button/Button';
 
-const LOCAL_STORAGE_KEY = 'modalDiscoverDataOpened';
+export const LOCAL_STORAGE_KEY = 'modalDiscoverDataOpened';
 
-const DiscoverDataModal = () => {
+const DiscoverDataModal = ({ onClose }) => {
   const opened = localStorage.getItem(LOCAL_STORAGE_KEY) === 'true'
     && location.pathname.indexOf('embed') === -1; // also, don't show modals on embed
 
@@ -13,6 +14,7 @@ const DiscoverDataModal = () => {
   const handleClose = useCallback(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
     setModalOpened(true);
+    onClose();
   }, []);
 
   const handleToHowTo = useCallback(() => {
@@ -61,6 +63,14 @@ const DiscoverDataModal = () => {
       </div>
     </Modal>
   );
+};
+
+DiscoverDataModal.defaultProps = {
+  onClose: () => null,
+};
+
+DiscoverDataModal.propTypes = {
+  onClose: PropTypes.func,
 };
 
 export default DiscoverDataModal;

@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { logEvent } from 'helpers/analytics';
 import PartnersSlider from 'containers/PartnersSlider';
 import DemoSlider from './demo-slider/demo-slider-component';
+import WelcomeModal from 'components/Modal/WelcomeModal';
 
 const module1 = '/images/home/module-1.jpg';
 const module2 = '/images/home/module-2.jpg';
@@ -92,6 +93,7 @@ const Home = () => (
       </div>
     </section>
     <PartnersSlider thumbnail />
+    <WelcomeModal />
   </div>
 );
 

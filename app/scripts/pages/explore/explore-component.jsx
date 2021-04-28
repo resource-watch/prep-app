@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Link } from 'react-router';
-// import Tour from 'reactour';
+import Tour from 'reactour';
 
 import { logEvent } from 'helpers/analytics';
 
@@ -18,19 +18,53 @@ import DatasetsList from './explore-datasets-list';
 import DatasetInfo from './explore-dataset-info';
 import ExploreMap from './explore-map';
 import { tabOptions } from './explore-constants';
-import DiscoverDataModal from 'components/Modal/DiscoverDataModal';
+import DiscoverDataModal, { LOCAL_STORAGE_KEY } from 'components/Modal/DiscoverDataModal';
 
 function logSearchEvent(query) { // eslint-disable-line class-methods-use-this
   logEvent('Explore menu', 'Search datasets', query);
 }
 
+function shouldShowTour() {
+  return localStorage.getItem(LOCAL_STORAGE_KEY) === 'true'
+    && !localStorage.getItem(LOCAL_STORAGE_TOUR_KEY);
+}
+
+const LOCAL_STORAGE_TOUR_KEY = 'exploreTour';
+
+const steps = [
+  {
+    selector: '.c-explore-sidebar .c-tabs',
+    content: 'Lorem ipsum.',
+  },
+  {
+    selector: '.c-dataset-location-filter',
+    content: 'Lorem ipsum.',
+  },
+  {
+    selector: '.c-search-control',
+    content: 'Click on this button to search any location and move the map to that location.',
+  }
+];
+
 const ExplorePage = (props) => {
   const { currentLocation, setTab, sidebar } = props;
   const [filters, setFilters] = useState(false);
+  const [isTourOpen, setIsTourOpen] = useState(false);
   const sidebarExploreClass = classnames({
     'c-explore-sidebar': true,
     '-open': sidebar.open
   });
+
+  const handleFinishTour = useCallback(() => {
+    localStorage.setItem(LOCAL_STORAGE_TOUR_KEY, 'false');
+    setIsTourOpen(false);
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    if (shouldShowTour()) {
+      setIsTourOpen(true);
+    }
+  }, []);
 
   const onChangeTab = useCallback((tab) => {
     setTab(tab);
@@ -212,7 +246,12 @@ const ExplorePage = (props) => {
 
       {/* Map */}
       <ExploreMap />
-      <DiscoverDataModal />
+      <DiscoverDataModal onClose={handleCloseModal} />
+      <Tour
+        steps={steps}
+        isOpen={isTourOpen}
+        onRequestClose={handleFinishTour}
+      />
     </div>
   );
 }
