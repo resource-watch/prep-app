@@ -1,0 +1,16 @@
+@import 'settings';
+
+.c-temp-resolution-select {
+  position: relative;
+  z-index: 1;
+
+  > div {
+    border: 0;
+    border-radius: 0;
+
+    > div {
+      border: 2px solid $border-color;
+      border-radius: 0;
+    }
+  }
+}

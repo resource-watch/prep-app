@@ -1,0 +1,178 @@
+[
+  {
+    "name": "home",
+    "pathname": "/",
+    "metaTitle": "Welcome",
+    "metaDescription": "",
+    "title": "Visualizing data to build climate resilience",
+    "bannerSize": "big",
+    "bg": "home",
+    "widgets": [
+      { "slug":"projected-changes-in-streamflow-rain-dominant", "category":"water"},
+      { "slug":"historical-and-projected-annual-changes-in-summer-air-temperature-c", "category":"water"},
+      { "slug":"precipitation-change", "category":"forest"}
+    ]
+  },
+  {
+    "name": "partnership",
+    "pathname": "/partnership",
+    "metaTitle": "Partnership",
+    "metaDescription": "",
+    "title": "Partnership for Resilience and Preparedness",
+    "bannerSize": "medium",
+    "bannerBg": "partnership"
+  },
+  {
+    "name": "about",
+    "pathname": "/about",
+    "metaTitle": "About",
+    "metaDescription": "",
+    "title": "About",
+    "bannerSize": "medium",
+    "bannerBg": "partnership"
+  },
+  {
+    "name": "engagement-workgroup",
+    "pathname": "/about/engagement",
+    "metaTitle": "Engagement Workgroup",
+    "metaDescription": "",
+    "title": "Engagement Workgroup",
+    "bannerSize": "small",
+    "bannerBg": "partnershipEngagement"
+  },
+  {
+    "name": "data-accessibility",
+    "pathname": "/about/data",
+    "metaTitle": "Data Workgroup",
+    "metaDescription": "",
+    "title": "Data Workgroup",
+    "bannerSize": "small",
+    "bannerBg": "partnershipData"
+  },
+  {
+    "name": "platform-development",
+    "pathname": "/about/platforms",
+    "metaTitle": "Platform Workgroup",
+    "metaDescription": "",
+    "title": "Platform Workgroup",
+    "bannerSize": "small",
+    "bannerBg": "partnershipPlatforms"
+  },
+  {
+    "name": "explore",
+    "pathname": "/explore",
+    "metaTitle": "Explore",
+    "metaDescription": "",
+    "title": "Explore",
+    "bannerSize": "medium",
+    "bannerBg": "explore"
+  },
+  {
+    "name": "dataset",
+    "pathname": "/dataset",
+    "metaTitle": "Dataset",
+    "metaDescription": "",
+    "title": "Dataset",
+    "bannerSize": "medium",
+    "bannerBg": "datasets"
+  },
+  {
+    "name": "faq",
+    "pathname": "/faqs",
+    "metaTitle": "FAQ",
+    "metaDescription": "",
+    "title": "FAQ",
+    "bannerSize": "small",
+    "bannerBg": "faq"
+  },
+  {
+    "name": "privacy-policy",
+    "pathname": "/privacy-policy",
+    "metaTitle": "Privacy Policy",
+    "metaDescription": "",
+    "title": "Privacy Policy",
+    "bannerSize": "small",
+    "bannerBg": "faq"
+  },
+  {
+    "name": "terms-of-service",
+    "pathname": "/terms-of-service",
+    "metaTitle": "Terms of Service",
+    "metaDescription": "",
+    "title": "Terms of Service",
+    "bannerSize": "small",
+    "bannerBg": "faq"
+  },
+  {
+    "name": "how-to",
+    "pathname": "/how-to",
+    "metaTitle": "How to",
+    "metaDescription": "",
+    "title": "How to",
+    "bannerSize": "medium",
+    "bannerBg": "faq"
+  },
+  {
+    "name": "dashboards",
+    "pathname": "/dashboards",
+    "metaTitle": "Dashboards",
+    "metaDescription": "",
+    "title": "Dashboards",
+    "bannerSize": "medium",
+    "bannerBg": "dashboards"
+  },
+  {
+    "name": "dashboard",
+    "pathname": "dashboard",
+    "metaTitle": "Dashboard",
+    "metaDescription": "",
+    "title": "Dashboards",
+    "bannerSize": "medium",
+    "bannerBg": "dashboard"
+  },
+  {
+    "name": "stories",
+    "pathname": "stories",
+    "metaTitle": "Stories",
+    "metaDescription": "",
+    "title": "Stories",
+    "bannerSize": "medium",
+    "bannerBg": "insights"
+  },
+  {
+    "name": "create",
+    "pathname": "create",
+    "metaTitle": "Create",
+    "metaDescription": "",
+    "title": "Create",
+    "bannerSize": "medium",
+    "bannerBg": "create"
+  },
+  {
+    "name": "partners",
+    "pathname": "partners",
+    "metaTitle": "Partners",
+    "metaDescription": "",
+    "title": "Partners",
+    "bannerSize": "small",
+    "bannerBg": "partners"
+  },
+  {
+    "name": "resources",
+    "pathname": "resources",
+    "metaTitle": "Resources",
+    "metaDescription": "",
+    "title": "Resources",
+    "bannerSize": "medium",
+    "bannerBg": "resources"
+  },
+  {
+    "name": "contact",
+    "pathname": "contact",
+    "metaTitle": "Contact",
+    "metaDescription": "",
+    "title": "Contact",
+    "bannerSize": "small",
+    "bannerBg": "contact"
+  }
+]

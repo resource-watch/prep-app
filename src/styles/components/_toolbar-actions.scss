@@ -1,0 +1,60 @@
+.c-toolbar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $small-margin;
+
+  > div {
+    display: flex;
+  }
+
+  a {
+    margin: 0;
+  }
+
+  .action {
+    font-size: $small-font-size;
+    font-weight: 700;
+    margin: .5rem;
+    line-height: 1.8;
+    letter-spacing: 0.3px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    outline: none;
+    color: $secondary-color;
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+
+    > .icon {
+      margin-right: 5px;
+
+      path {
+        fill: $secondary-color;
+      }
+
+    }
+
+  }
+
+  .-alternative {
+    color: $link-font-color;
+
+    > .icon {
+      margin-right: 5px;
+
+      path {
+        fill: $link-font-color;
+      }
+
+    }
+  }
+}

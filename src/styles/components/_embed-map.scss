@@ -1,0 +1,18 @@
+
+.c-embed-map {
+  legend {
+    text-transform: uppercase;
+    font-size: $micro-font-size;
+    opacity: .7;
+    font-weight: normal;
+    margin-bottom: rem(25);
+  }
+}
+
+.leaflet-popup-content {
+  table {
+    th {
+      padding-right: 15px;
+    }
+  }
+}

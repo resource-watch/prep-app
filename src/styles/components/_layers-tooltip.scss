@@ -1,0 +1,43 @@
+
+.c-explore-layers-tooltip {
+  max-width: 250px;
+
+  label {
+    color: $white;
+  }
+
+  .c-radio-box {
+    padding: 5px 0;
+
+    .c-radio {
+      padding: 2px 5px;
+      cursor: pointer;
+
+      input {
+        display: none;
+      }
+
+      label {
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        font-size: 15px;
+        line-height: 26px;
+        cursor: pointer;
+
+        &.-checked {
+          color: $light-gold;
+          font-weight: bold;
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+
+        &:hover {
+          opacity: .7;
+        }
+      }
+    }
+  }
+}

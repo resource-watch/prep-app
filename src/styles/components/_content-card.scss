@@ -1,0 +1,146 @@
+$content-header-height: 80px;
+
+.c-content-card {
+  position: relative;
+  width: 100%;
+  margin: $small-margin 0 0 0;
+  padding: $small-margin;
+
+  border: solid 2px $border-color;
+
+  transition: all .3s ease-out;
+
+  &:hover {
+    box-shadow: 0 7px 15px 0 rgba(0, 0, 0, 0.15);
+  }
+
+  &.-no-margin { margin: 0; }
+
+  &.-inner {
+    padding: 0;
+    border: none;
+    > .header {
+      padding: $small-margin $small-margin 0;
+      border: solid 2px $border-color;
+    }
+    > .content {
+      border: solid 2px $border-color;
+      border-top: 0;
+    }
+  }
+
+  &.-float-attribution {
+    margin-bottom: $large-margin;
+    > .attribution {
+      position: absolute;
+      margin-top: $small-margin;
+    }
+  }
+
+  &.-auto-height {
+    > .content {
+      height: auto;
+    }
+  }
+  &.-short {
+    > .content {
+      height: 240px;
+    }
+  }
+
+  &.-large {
+    > .content {
+      height: 480px;
+    }
+  }
+
+  &.-no-border {
+    border: none;
+  }
+
+  &:not(&.-no-border):hover {
+    border-color: transparent;
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  &.-bg {
+    border: none;
+    background-color: $secondary-color;
+    > .header {
+      .legend {
+        color: $inverse-font-color;
+      }
+      .card-options .icon path {
+        fill: $button-font-color;
+      }
+    }
+  }
+
+  > .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    > .title {
+      h3 {
+        margin-top: 0;
+      }
+    }
+
+    > .card-options {
+      margin: 0.5rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      .c-button {
+        margin-right: rem(8);
+
+        &.-icon {
+          display: flex;
+        }
+      }
+    }
+
+    .legend {
+      font-size: $small-font-size;
+      font-weight: 700;
+      line-height: 1.8;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      color: $secondary-color;
+    }
+  }
+
+  > .content {
+    height: 460px;
+
+    .c-we-chart {
+      height: 100%;
+    }
+  }
+
+  > .attribution {
+    position: relative;
+    margin-top: 1rem;
+    color: rgba($main-color, 0.7);
+    font-size: $small-font-size;
+    line-height: 1.6;
+
+    &:before {
+      content: "";
+      position: absolute;
+      display: block;
+      top: -.5rem;
+      left: 0;
+      width: 50px;
+      height: 1px;
+      background-color: $secondary-color;
+    }
+  }
+
+  .c-vega-chart {
+    min-height: 0;
+  }
+}

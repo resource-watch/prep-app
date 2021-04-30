@@ -1,0 +1,36 @@
+.c-switch {
+  position: relative;
+  display: inline-block;
+  width: 17px;
+  height: 10px;
+  border-radius: 22px;
+  border: 1px solid $dark-blue;
+  cursor: pointer;
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    left: 2px;
+    top: 50%;
+    border-radius: 50%;
+    background-color: $dark-blue;
+    transform: translate(0, -50%);
+    transition: transform .15s ease-out;
+  }
+
+  &.-checked {
+    background-color: $yellow-orange;
+    border-color: $yellow-orange;
+
+    &:after{
+      transform: translate(100%, -50%);
+      background-color: $white;
+    }
+  }
+
+  .layer & {
+    margin-top: 0.45rem;
+  }
+}

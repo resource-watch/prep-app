@@ -1,0 +1,39 @@
+$section-intro-height: 50px;
+
+.c-section-intro {
+  position: relative;
+
+  > .top-bar {
+    width: 100%;
+    position: absolute;
+    top: - $section-intro-height - 10px;
+
+    .logo {
+      height: $section-intro-height;
+
+      > img {
+        width: auto;
+        max-height: 100%;
+      }
+
+    }
+
+    .author {
+      margin-top: 1rem;
+      text-align: center;
+      font-size: $normal-font-size;
+      font-weight: 700;
+
+      @media #{$mq-medium} {
+        margin-top: 0;
+        text-align: right;
+        color: $inverse-font-color;
+      }
+
+      > span {
+        display: block;
+        color: $secondary-color;
+      }
+    }
+  }
+}

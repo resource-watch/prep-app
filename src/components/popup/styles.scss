@@ -1,0 +1,23 @@
+.c-map-popup {
+  > * {
+    margin: 16px 0 0;
+
+    &:first-child {
+      margin: 0;
+    }
+  }
+
+  .map-popup--table {
+    th, td {
+      padding: 2px;
+    }
+
+    th {
+      text-transform: uppercase;
+    }
+
+    td {
+
+    }
+  }
+}

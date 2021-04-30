@@ -1,0 +1,117 @@
+@import 'settings';
+
+/**
+ * The geosuggest module
+ * NOTE: duplicated font-sizes' are for browsers which don't support rem (only IE 8)
+ */
+
+.geosuggest {
+  &.-explore {
+    font-size: 13px;
+    font-weight: bold;
+    position: relative;
+    width: auto;
+    margin: 0 auto;
+    text-align: left;
+
+    .geosuggest__input {
+      width: 200px;
+      border: 2px solid transparent;
+      padding: 5px;
+      padding-left: 10px;
+      text-transform: none;
+    }
+
+    .geosuggest__input::placeholder {
+      color: $dark-blue;
+      text-transform: none;
+    }
+
+    .geosuggest__input:focus {
+      border-color: none;
+      box-shadow: 0 0 0 transparent;
+    }
+
+    .geosuggest__suggests:before {
+      content: '';
+      position: relative;
+      display: block;
+      height: 20px;
+      width: 100%;
+      background-color: transparent;
+    }
+
+    .geosuggest__suggests:after {
+      content: '';
+      display: block;
+      bottom: 100%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      background: $dark-slate-blue;
+      position: absolute;
+      z-index: 800;
+      transform: translate(-50%, 50%) rotate(45deg);
+    }
+
+    .geosuggest__suggests {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      max-height: 194px; // Height based on fixed aspect of existing explore controls
+      padding: 0;
+      border-top-width: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      list-style: none;
+      z-index: 5;
+      -webkit-transition: max-height 0.2s, border 0.2s;
+              transition: max-height 0.2s, border 0.2s;
+      background-color: $dark-slate-blue;
+      border: none;
+      border-radius: 4px;
+      margin-right: -15px;
+      margin-top: 10px;
+      overflow: initial;
+    }
+
+    .geosuggest__suggests--hidden {
+     display: none;
+    }
+
+    /**
+     * A geosuggest item
+     */
+    .geosuggest__item {
+      font-size: $normal-font-size;
+      padding: 5px 10px;
+      margin: 0;
+      cursor: pointer;
+      overflow: auto;
+      color: $pale-white;
+      font-weight: normal;
+    }
+
+    .geosuggest__item:hover,
+    .geosuggest__item:focus {
+      background: $pale-grey;
+      color: $dark-slate-blue;
+    }
+
+    .geosuggest__item--active {
+      background: $pale-grey;
+      color: $dark-slate-blue;
+    }
+
+    .geosuggest__item--active:hover,
+    .geosuggest__item--active:focus {
+      background: $border-color;
+    }
+
+    .geosuggest__item__matched-text {
+      font-weight: normal;
+      color: $light-gold;
+    }
+  }
+}

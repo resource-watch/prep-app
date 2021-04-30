@@ -1,0 +1,49 @@
+.c-twitter-feed {
+  padding: $medium-margin;
+  color: $inverse-font-color;
+  background-color: $main-color;
+
+  h3, a {
+    color: $inverse-font-color;
+  }
+
+  h3 {
+    margin: 0 0 $small-margin 0;
+    text-align: center;
+  }
+
+  &.-sliced {
+    margin-top: -200px;
+    min-height: 260px;
+  }
+
+  .slick-slider {
+    margin: 0;
+  }
+
+  .twitter-icon {
+    text-align: center;
+  }
+
+  .tweet-item p {
+    margin: 0;
+  }
+
+  .slick-prev, .slick-next {
+    top: 0;
+    margin-top: -60px;
+  }
+
+  .slick-prev {
+    left: 0;
+  }
+
+  .slick-next {
+    right: 0;
+  }
+
+  .slick-prev:before, .slick-next:before {
+    color: $secondary-color;
+    font-size: 30px;
+  }
+}

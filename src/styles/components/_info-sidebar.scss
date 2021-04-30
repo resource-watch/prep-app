@@ -1,0 +1,275 @@
+.c-info-sidebar {
+  position: absolute;
+  top: $header-height-short;
+  left: $sidebar-width;
+  height: calc(100% - #{$header-height-short});
+  width: 100%;
+  max-width: calc(100% - 50px); // For the embeds
+  background-color: $base-bg-color;
+  z-index: 2;
+  transform: translateX(-($sidebar-width * 2));
+  transition: transform 0.3s ease-out;
+  box-shadow: 0 20px 30px 0 rgba($black, .1);
+
+  &.-open {
+    transform: translateX(0);
+  }
+
+  &.-embed {
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+
+  &.-embed-with-sidebar {
+    top: 0;
+    height: 100vh;
+  }
+
+  @media #{$mq-medium} {
+    width: $sidebar-width;
+    background-color: $base-bg-color;
+  }
+
+  .info-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    border-right: 1px solid rgba(26,28,34,0.1);
+    background-color: #f7f7f7;
+
+    //I desactivate this shadow because IMHO, it is a bit too much and I can not find it in Dani's design.
+    //In Dani's design there is a shadow in the whole screen width. Clara.
+    // &:before {
+    //   content: '';
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   width: 100%;
+    //   height: 30px;
+
+    //   background: linear-gradient(180deg, rgba($black, .2) 0%, transparent 100%);
+    // }
+  }
+
+  .actions {
+    position: absolute;
+    top: 15px;
+    right: -29px;
+    border: 1px solid #ddd;
+    border-radius: 0 3px 3px 0;
+    overflow: hidden;
+    z-index: 0;
+    box-shadow: 0 7px 15px 0 rgba(0, 0, 0, 0.15);
+
+    > div {
+      display: block;
+      width: 30px;
+      height: 39px;
+      padding: 0;
+      background-color: $base-bg-color;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      > .toggle-status {
+        height: 100%;
+        width: 100%;
+
+        svg {
+          fill: $dark-blue;
+        }
+      }
+    }
+  }
+
+  .content {
+    position: relative;
+
+    @media #{$mq-medium} {
+      height: 100%;
+    }
+
+    .item-prop {
+      word-break: break-word;
+
+      &:not(:first-child) {
+        margin-top: 30px;
+      }
+
+      .prop-label {
+        font-weight: $font-weight-bold;
+        color: $dark-blue;
+      }
+
+      .item-list {
+        margin: 16px 0 16px 30px;
+        padding: 0;
+
+        > li {
+          margin: 16px 0 0;
+
+          &:first-child {
+            margin: 0;
+          }
+
+          > * {
+            margin: 8px 0 0;
+
+            &:first-child { margin: 0; }
+          }
+
+          h4 {
+            margin: 0;
+          }
+        }
+      }
+
+      .item-tag {
+        display: inline-block;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        > li {
+          display: inline-block;
+
+          > span {
+            color: $yellow-orange;
+            font-weight: $font-weight-bold;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .info-actions {
+      display: flex;
+      align-items: center;
+      padding: 0 40px 20px;
+      color: $dark-blue;
+      font-size: $small-font-size;
+      font-weight: $font-weight-bold;
+      text-transform: uppercase;
+
+      .c-btn {
+        text-transform: uppercase;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .layer {
+        .c-switch {
+          margin-top: 0;
+          border-color: $light-gold;
+
+          &:after {
+            background-color: $light-gold;
+          }
+
+          &.-checked:after {
+            background-color: $white;
+          }
+        }
+      }
+
+      .layer svg,
+      .star-button svg,
+      .download svg,
+      .more svg {
+        width: 12px;
+        height: 12px;
+        fill: $light-gold;
+      }
+
+      .info-tool {
+        display: flex;
+        align-items: center;
+
+        text-transform: uppercase;
+        color: $dark-blue;
+        font-weight: $font-weight-bold;
+        font-size: $small-font-size;
+        line-height: 13px;
+
+        &:not(:first-child) {
+          margin-left: 20px;
+        }
+
+        button {
+          display: flex;
+        }
+
+        svg,
+        .c-switch {
+          margin-right: 5px;
+        }
+      }
+    }
+
+    .header-container {
+      padding: 40px 40px 20px;
+
+      .item-title {
+        margin: 0;
+        padding: 0;
+        font-size: $big-font-size;
+        line-height: 45px;
+        word-break: break-word;
+
+        &:after { display: none; }
+      }
+
+      .item-subtitle {
+        margin: 5px 0 0;
+
+        font-family: $base-font-family;
+        font-size: $tiny-font-size;
+        font-weight: $font-weight-bold;
+        line-height: 15px;
+        text-transform: uppercase;
+        color: rgba($dark-blue, .5);
+      }
+    }
+
+    .content-container {
+      padding: 20px 40px;
+      border-top: 1px solid $border-color;
+
+      .button-container {
+        margin: 20px 0 0;
+      }
+    }
+
+    .widget-container {
+      width: 100%;
+      padding: 20px 30px;
+      border-top: 1px solid $border-color;
+
+      .c-we-chart {
+        height: 200px;
+      }
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .actions-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media #{$mq-medium} {
+      display: none;
+    }
+  }
+}

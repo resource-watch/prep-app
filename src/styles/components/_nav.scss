@@ -1,0 +1,225 @@
+.c-nav {
+  &.-main, &.-secondary {
+    position: relative;
+
+    & > ul {
+      justify-content: flex-end;
+    }
+  }
+
+  .submenu {
+    position: absolute;
+    width: auto;
+    min-width: 160px;
+    margin-top: 22px;
+    left: 50%;
+    top: 50%;
+    padding-top: 10px;
+
+    z-index: 1000;
+    transform: translate(-50%, 7px);
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 10px;
+      pointer-events: none;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid $dark-slate-blue;
+      border-right: 8px solid transparent;
+      border-left: 8px solid transparent;
+      transform: translate(-50%, -100%)
+    }
+
+    .submenu-list {
+      padding: 7px 15px;
+
+      background-color: $dark-slate-blue;
+      border: 0;
+      border-radius: 4px;
+      box-shadow: 0 7px 15px 0 rgba(0, 0, 0, 0.15);
+
+      text-align: center;
+      list-style: none;
+
+      li {
+        margin: 1rem 0;
+
+        color: white;
+        list-style: none;
+        font-weight: 500;
+        text-transform: none;
+
+        a {
+          color: white;
+          text-decoration: none;
+
+          &:hover {
+            color: $light-gold;
+          }
+
+          &.-current {
+            font-weight: bold;
+            color: $light-gold;
+          }
+        }
+      }
+    }
+  }
+
+  &.-main {
+    & > ul > li {
+      position: relative;
+      margin-left: 1rem;
+      margin-right: 1rem;
+      color: $inverse-font-color;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      line-height: 1;
+      text-transform: uppercase;
+
+      & > a {
+        display: block;
+        padding: 30px 0;
+        color: $inverse-font-color;
+
+        border-top: 5px solid transparent;
+
+        transition: all .3s ease-out;
+
+        .l-header-nav.-short & {
+          padding: 20px 0;
+        }
+      }
+
+      & button {
+        padding: 38px 0;
+        display: block;
+      }
+
+      & > a.-current,
+      & > a:hover {
+        text-decoration: none;
+        cursor: pointer;
+        border-top-color: $secondary-color;
+      }
+
+      &:last-child {
+        margin-right: 0;
+
+        &.avatar-container {
+          display: flex;
+          justify-content: center;
+          width: 50px;
+
+          .c-user {
+            display: flex;
+            align-items: center;
+            height: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  &.-secondary {
+    & > ul > li {
+      position: relative;
+      margin-left: .6rem;
+      margin-right: .6rem;
+
+      color: $inverse-font-color;
+      font-size: $small-font-size;
+      font-family: $base-font-family;
+      font-weight: bold;
+      line-height: 1;
+      text-transform: uppercase;
+
+      & > a {
+        color: $inverse-font-color;
+      }
+
+      &:after {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 100%;
+        margin-left: .5rem;
+        width: 1px;
+        height: 100%;
+        background-color: $bay-of-many;
+        content: "";
+      }
+
+      &:last-child {
+        margin-right: 0;
+
+        &:after {
+          display: none;
+        }
+      }
+    }
+    @media #{$mq-medium} {
+      ul {
+        justify-content: flex-start;
+      }
+    }
+
+    @media #{$mq-large} {
+      ul {
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  &.-social {
+    color: $inverse-font-color;
+
+    & > ul {
+      align-items: center;
+    }
+
+    & > ul > li {
+      display: flex;
+      margin-right: 2.5rem;
+      > span {
+        margin-right: .5rem;
+      }
+    }
+
+    .social-links {
+      padding-right: 20px;
+      position: relative;
+      margin-right: 20px;
+
+      &:after {
+        display: block;
+        content: "";
+        position: absolute;
+        top: rem(6);
+        right: 0;
+        width: 1px;
+        height: rem(13);
+        background-color: $bay-of-many;
+      }
+
+      a {
+        line-height: 0;
+      }
+
+      a:not(:last-child) {
+        margin-right: 20px;
+      }
+    }
+
+    .powered-by {
+      position: relative;
+      margin-top: rem(5);
+    }
+
+    .c-icon {
+      fill: $white;
+    }
+  }
+}

@@ -1,0 +1,269 @@
+.c-button {
+  font-size: $small-font-size;
+  font-weight: 700;
+  color: $button-font-color;
+  text-transform: uppercase;
+  border: none;
+  outline: none;
+  padding: rem(15) rem(30);
+  cursor: pointer;
+  background-color: transparent;
+
+  &.-inline {
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  &.-active {
+    color: $link-font-color;
+    border-bottom: 3px solid $link-font-color;
+    padding-bottom: rem(12);
+  }
+
+  &.-theme-color {
+    color: $secondary-color;
+  }
+
+  &.-inverse { color: $button-font-color-inverse; }
+
+  &.-filled {
+    color: $button-font-color-inverse;
+    background-color: $main-color;
+
+    &.-secondary-color {
+      background-color: $secondary-color;
+      color: $main-color;
+    }
+  }
+
+  &.-action {
+    display: flex;
+    align-items: center;
+    padding: .3rem .9rem;
+
+    font-size: $small-font-size;
+    line-height: 1.8;
+    letter-spacing: 0.3px;
+
+    background: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    > .icon {
+      margin-right: 5px;
+
+      path {
+        fill: $secondary-color;
+      }
+
+    }
+  }
+
+  &.-alternative {
+    color: $link-font-color;
+
+    > .icon {
+      margin-right: 5px;
+
+      path {
+        fill: $link-font-color;
+      }
+
+    }
+  }
+
+  &.-no-border-radius {
+    border-radius: 0;
+  }
+
+  &.-icon {
+    width: 22px;
+    height: 22px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid $border-color;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+
+    > .icon {
+      margin: 0;
+    }
+  }
+
+  &.-border {
+    border: 2px solid $secondary-color;
+    border-radius: 0;
+    &.-fill { background-color: $secondary-color; }
+
+    &.-border-alternative {
+      border-color: $link-font-color;
+      &.-fill { background-color: $link-font-color; }
+    }
+
+    &.-border-neutral {
+      border-color: $button-font-color;
+      &.-fill { background-color: $button-font-color; }
+    }
+
+    &.-action {
+      position: relative;
+      height: ($small-margin / 2) + $small-margin;
+    }
+  }
+
+  &.-arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 100%;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+
+    &.-previous {
+      right: 100%;
+
+      .c-icon {
+        transform: rotate(90deg);
+      }
+
+      transform: translate(100%, -50%);
+
+      @media #{$mq-large} {
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    &.-next {
+      left: 100%;
+
+      .c-icon {
+        transform: rotate(-90deg);
+      }
+
+      transform: translate(-100%, -50%);
+
+      @media #{$mq-large} {
+        transform: translate(50%, -50%);
+      }
+    }
+
+    &.-full {
+      &.-previous {
+        left: $medium-margin;
+        right: auto;
+        transform: translateY(-50%);
+      }
+
+      &.-next {
+        left: auto;
+        right: $medium-margin;
+        transform: translateY(-50%);
+      }
+    }
+
+    &.-hidden {
+      display: none;
+    }
+
+    & .arrow-label {
+      position: absolute;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      height: 1px; width: 1px;
+      margin: -1px; padding: 0; border: 0;
+    }
+  }
+
+  .c-icon {
+    fill: $link-font-color;
+  }
+
+  &.-secondary-color {
+    .c-icon {
+      fill: $main-color;
+    }
+  }
+}
+
+.c-button + .c-button {
+  margin-left: 15px;
+}
+
+
+// These styles should replace c-button styles. Please,
+// if you find some button with previous styles, try to
+// change to new ones.
+.c-new-button {
+  display: inline-block;
+  padding: 15px 35px;
+
+  border-width: 2px;
+  border-style: solid;
+  border-color: $light-gold;
+  border-radius: 0;
+  background: $light-gold;
+
+  font-family: $base-font-family;
+  font-size: $tiny-font-size;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+
+  &:hover {
+    box-shadow: 0 20px 30px 0 rgba($black, .1);
+  }
+
+  &.-transparent {
+    background: transparent;
+
+    &:hover {
+      background: rgba($light-gold, .1);
+      box-shadow: none;
+    }
+  }
+
+  // used on dark backgrounds
+  &.-dark {
+    &.-transparent {
+      color: $white;
+    }
+  }
+
+  // used on light backgrounds
+  &.-light {
+    color: $dark-blue;
+
+    &.-transparent {
+      border-color: $yellow-orange;
+      color: $dark-blue;
+    }
+  }
+
+  &.-compressed {
+    padding: 7px 20px;
+  }
+
+  &.-mini {
+    padding: 4px 10px;
+  }
+
+  &.-fullwidth {
+    width: 100%;
+  }
+
+  &.-fullheight {
+    height: 100%;
+  }
+}
+
+.c-new-button + .c-new-button {
+  margin-left: 15px;
+  margin-right: 15px;
+}

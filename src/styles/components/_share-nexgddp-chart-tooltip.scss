@@ -1,0 +1,16 @@
+.c-share-nexgddp-chart-tooltip {
+  padding: 5px;
+  color: $white;
+
+  ul {
+    margin: 0;
+    padding: 0;
+
+    li {
+      list-style: none;
+
+      &:first-of-type { margin-top: 0; }
+      &:last-of-type { margin-bottom: 0; }
+    }
+  }
+}

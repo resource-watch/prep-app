@@ -1,0 +1,35 @@
+.c-create-embed-widget {
+  label {
+    display: block;
+    font-weight: $font-weight-bold;
+
+    &:not(:first-of-type) {
+      margin-top: 15px;
+    }
+  }
+
+  input,
+  textarea {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+    font-size: $normal-font-size;
+    color: $main-color;
+    cursor: text;
+    border: 0;
+    border-bottom: 1px solid rgba($main-color, 0.3);
+  }
+
+  button {
+    margin-top: 15px;
+  }
+
+  a {
+    display: inline-block;
+    margin: 0;
+  }
+
+  .error {
+    color: red;
+  }
+}

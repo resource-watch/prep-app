@@ -6,8 +6,7 @@
     "mocha": true
   },
   "globals": {
-    "L": true,
-    "config": true
+    "L": "readonly"
   },
   "extends": [
     "eslint:recommended",
@@ -23,5 +22,10 @@
   "plugins": [
     "react"
   ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "rules": {}
 }

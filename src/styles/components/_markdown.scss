@@ -1,0 +1,16 @@
+.c-markdown {
+
+  &.-inline {
+    display: inline-block;
+    width: 100%; // Needed for long URLs
+  }
+
+  p {
+    margin: 0;
+    overflow-wrap: break-word; // Needed for long URLs
+
+    &:not(:first-child) {
+      margin: 1rem 0 0;
+    }
+  }
+}

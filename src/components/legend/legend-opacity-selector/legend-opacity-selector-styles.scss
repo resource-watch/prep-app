@@ -1,0 +1,55 @@
+@import 'settings';
+
+.c-legend-opacity-selector {
+  .rc-tooltip-inner {
+    padding: 16px;
+  }
+}
+
+// tooltip styles
+// This is wrong... We should try to isolate the map tooltip styles instead of doind this :shit:
+.rc-tooltip {
+  opacity: 1;
+
+  .rc-tooltip-inner {
+    background-color: $dark-slate-blue;
+    border: none;
+    border-radius: 4px;
+    padding: 0;
+
+    .tooltip-content {
+      padding: 8px 10px;
+
+      .title {
+        margin: 0;
+        font-family: $secondary-font-family;
+        font-size: $normal-font-size;
+        font-weight: $font-weight-bold;
+        color: $white;
+      }
+
+      // arrow
+      .rc-tooltip-arrow {
+        border-bottom-color: $dark-slate-blue;
+      }
+
+      .c-explore-slider-tooltip {
+        margin-top: 10px;
+      }
+    }
+  }
+
+  &.rc-tooltip-placement-left {
+    .rc-tooltip-arrow {
+      border-left-color: currentColor;
+      border-bottom-color: transparent;
+    }
+  }
+
+
+  &.rc-tooltip-placement-bottom {
+    .rc-tooltip-arrow {
+      border-bottom-color: $dark-slate-blue;
+    }
+  }
+}

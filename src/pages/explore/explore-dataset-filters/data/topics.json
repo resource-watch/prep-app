@@ -1,0 +1,180 @@
+[
+  {
+    "tagClassName": "selected-item",
+    "checked": false,
+    "className": "parent-category",
+    "label": "Administrative Boundaries",
+    "value": "administrative_boundaries",
+    "labels": [
+      "TOPIC"
+    ]
+  },
+  {
+    "tagClassName": "selected-item",
+    "checked": false,
+    "className": "parent-category",
+    "label": "Climate",
+    "value": "climate",
+    "labels": [
+      "TOPIC"
+    ]
+  },
+  {
+    "tagClassName": "selected-item",
+    "checked": false,
+    "label": "Climate Hazard",
+    "value": "climate_hazard",
+    "labels": [
+      "TOPIC"
+    ]
+  },
+  {
+    "tagClassName": "selected-item",
+    "checked": false,
+    "className": "parent-category",
+    "label": "Coasts",
+    "value": "coast",
+    "labels": [
+      "TOPIC"
+    ]
+  },
+  {
+    "tagClassName": "selected-item",
+    "checked": false,
+    "className": "parent-category",
+    "label": "Economic",
+    "value": "economic",
+    "labels": [
+      "TOPIC"
+    ]
+  },
+  {
+    "tagClassName": "selected-item",
+    "checked": false,
+    "className": "parent-category",
+    "label": "Ecosystems",
+    "value": "ecosystem",
+    "labels": [
+      "TOPIC"
+    ]
+  },
+  {
+    "tagClassName": "selected-item",
+    "checked": false,
+    "className": "parent-category",
+    "label": "Energy",
+    "value": "energy",
+    "labels": [
+      "TOPIC"
+    ]
+  },
+  {
+    "tagClassName": "selected-item",
+    "checked": false,
+    "className": "parent-category",
+    "label": "Extreme Events",
+    "value": "extreme_event",
+    "labels": [
+      "TOPIC"
+    ]
+  },
+  {
+    "tagClassName": "selected-item",
+    "checked": false,
+    "className": "parent-category",
+    "label": "Food and Agriculture",
+    "value": "food_and_agriculture",
+    "labels": [
+      "TOPIC"
+    ]
+  },
+  {
+    "tagClassName": "selected-item",
+    "checked": false,
+    "className": "parent-category",
+    "label": "Infrastructure",
+    "value": "infrastructure",
+    "labels": [
+      "TOPIC"
+    ]
+  },
+  {
+    "tagClassName": "selected-item",
+    "checked": false,
+    "className": "parent-category",
+    "label": "Land",
+    "value": "land",
+    "labels": [
+      "TOPIC"
+    ]
+  },
+  {
+    "tagClassName": "selected-item",
+    "checked": false,
+    "className": "parent-category",
+    "label": "Oceans",
+    "value": "ocean",
+    "labels": [
+      "TOPIC"
+    ]
+  },
+  {
+    "tagClassName": "selected-item",
+    "checked": false,
+    "className": "parent-category",
+    "label": "Society",
+    "value": "society",
+    "labels": [
+      "TOPIC"
+    ]
+  },
+  {
+    "tagClassName": "selected-item",
+    "checked": false,
+    "className": "parent-category",
+    "label": "Precipitation",
+    "value": "precipitation",
+    "labels": [
+      "TOPIC"
+    ]
+  },
+  {
+    "tagClassName": "selected-item",
+    "checked": false,
+    "className": "parent-category",
+    "label": "Settlements",
+    "value": "settlements",
+    "labels": [
+      "TOPIC"
+    ]
+  },
+  {
+    "tagClassName": "selected-item",
+    "checked": false,
+    "className": "parent-category",
+    "label": "Temperature",
+    "value": "temperature",
+    "labels": [
+      "TOPIC"
+    ]
+  },
+  {
+    "tagClassName": "selected-item",
+    "checked": false,
+    "label": "Vulnerability",
+    "value": "vulnerability",
+    "labels": [
+      "TOPIC"
+    ]
+  },
+  {
+    "tagClassName": "selected-item",
+    "checked": false,
+    "className": "parent-category",
+    "label": "Water",
+    "value": "water",
+    "labels": [
+      "TOPIC"
+    ]
+  }
+]

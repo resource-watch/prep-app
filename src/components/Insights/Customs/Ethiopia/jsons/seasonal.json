@@ -1,0 +1,221 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v3.json",
+  "autosize": {"type": "pad", "resize": true, "contains":"padding"},
+  "data": [
+    {
+      "name": "hist",
+      "url": "https://prep-admin.carto.com/api/v2/sql?q=select index, month, region, type from eth_crop_calendar order by index asc, region asc",
+      "format": {
+        "type": "json",
+        "property": "rows"
+      },
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.month != null"
+        }]
+    },
+    {
+      "name": "stats",
+      "source": "hist",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.month != null"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.type != null"
+        },
+        {
+          "type": "aggregate",
+          "groupby": [
+            "region",
+            "type"
+          ],
+          "fields": [
+            "type",
+            "index"
+          ],
+          "ops": [
+            "count",
+            "min"
+          ],
+          "as": [
+            "counts",
+            "min"
+          ]
+        },
+        {
+          "type": "collect",
+          "sort": {
+            "field": [
+              "region",
+              "min"
+            ],
+            "order": [
+              "ascending",
+              "ascending"
+            ]
+          }
+        },
+        {
+          "type": "formula",
+          "as": "max",
+          "expr": "(+datum.min + +datum.counts)"
+        },
+        {
+          "type": "formula",
+          "as": "max",
+          "expr": "datum.region=='Meher' && datum.type=='harvesting'? datum.max-1: datum.max"
+        }
+      ]
+    },
+    {
+      "name": "legend",
+      "values": [
+        {
+          "cat": "sowing"
+        },
+        {
+          "cat": "growing"
+        },
+        {
+          "cat": "harvesting"
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "x",
+      "type": "point",
+      "domain": {
+        "fields": [
+          {
+            "data": "hist",
+            "field": "index"
+          }
+        ]
+      },
+      "range": "width"
+    },
+    {
+      "name": "xL",
+
+      "type": "point",
+      "domain": {
+        "fields": [
+          {
+            "data": "hist",
+            "field": "month"
+          }
+        ]
+      },
+      "range": "width"
+    },
+    {"type":"band",
+      "name": "y",
+      "range": "height",
+      "padding": 0.6,
+      "domain": {
+        "fields": [
+          {
+            "data": "stats",
+            "field": "region"
+          }
+        ]
+      }
+    },
+    {
+      "name": "color",
+      "type": "ordinal",
+      "range": [
+        "#DE585A",
+        "#FEC859",
+        "#6EBD57"
+      ],
+      "domain": {
+        "data": "legend",
+        "field": "cat"
+      }
+    }
+  ],
+  "axes": [
+    {
+      "orient": "bottom",
+      "scale": "xL",
+      "grid": true,
+      "zindex":1
+    },
+    {
+      "orient": "left",
+      "scale": "y",
+      "grid": true,
+      "zindex":1
+    }
+  ],
+  "marks": [
+    {
+      "name": "col",
+      "type": "rect",
+      "from": {
+        "data": "stats"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "scale": "x",
+            "field": "max"
+          },
+          "x2": {
+            "scale": "x",
+            "field": "min"
+          },
+          "y": {
+            "scale": "y",
+            "field": "region"
+          },
+          "height": {"scale": "y", "band": 1},
+          "fill": {
+            "scale": "color",
+            "field": "type"
+          }
+        },
+        "update":{
+          "fillOpacity":{"value": 1}
+        },
+        "hover":{
+          "fillOpacity":{"value": 0.8}
+        }
+      }
+    }
+  ],
+  "legends": [
+    {
+      "fill": "color",
+      "orient": "top-right"
+    }
+  ],
+  "interaction_config": [
+    {
+      "name": "tooltip",
+      "config": {
+        "fields": [
+          {
+            "column": "datum.region",
+            "property": "Region",
+            "type":"string",
+            "format": null
+          },
+          {
+            "column": "datum.type",
+            "property": "Status",
+            "type":"string",
+            "format": null
+          }
+        ]
+      }
+    }
+  ]
+}

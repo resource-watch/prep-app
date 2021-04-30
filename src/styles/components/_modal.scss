@@ -1,0 +1,190 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10001;
+  background-color: rgba($inverse-bg-color, .7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+
+  @media #{$mq-medium} {
+    padding: 1.25rem 4rem;
+  }
+
+  > .c-modal {
+    position: relative;
+    background-color:$base-bg-color;
+    width: 80%;
+    max-width: rem($max-width);
+    max-height: calc(100vh * 0.9);
+
+    @media #{$mq-medium} {
+      min-width: rem(370);
+    }
+
+    &.metadata-modal {
+      .m-content {
+        height: 420px;
+      }
+    }
+
+    .m-content {
+      padding: $medium-margin;
+      max-height: 90vh;
+      overflow: auto;
+
+      h2 {
+        margin-top: 0;
+        margin-bottom: $medium-margin;
+      }
+
+      aside {
+        margin-top: $medium-margin;
+      }
+
+      iframe {
+        width: 100%;
+      }
+    }
+
+    &.share {
+      width: auto;
+      min-width: auto;
+
+      @media #{$mq-medium} {
+        width: rem(620);
+        & .m-content {
+          padding: $medium-margin $large-margin;
+        }
+      }
+
+      .c-share-url {
+        margin: $small-margin 0 1rem;
+      }
+
+      .openEmbed {
+        margin-top: rem(35);
+      }
+    }
+
+    &.embed {
+      width: auto;
+      min-width: auto;
+
+      @media #{$mq-medium} {
+        width: rem(620);
+        & .m-content {
+          padding: $medium-margin $large-margin;
+        }
+      }
+    }
+
+    &.presentation {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      overflow: overlay;
+      max-width: 100%;
+
+      > .close-button {
+        top: $small-margin;
+        right: $small-margin;
+        fill: $dark-blue;
+
+        & :hover {
+          fill: $secondary-color;
+        }
+      }
+    }
+
+    .media {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100px;
+      padding: 1.25rem 1.25rem 0 1.25rem;
+
+      > a {
+        padding: 1.25rem;
+
+        > svg {
+          fill: $secondary-color;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    > .close-button {
+      position: absolute;
+      top: -20px;
+      right: 0px;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      fill: $base-bg-color;
+      transition: fill .3s;
+
+      &:hover {
+        fill: $secondary-color;
+      }
+    }
+  }
+}
+
+/* React animations for when the modal will appear */
+.animation-appear {
+  opacity: 0;
+  .modal { transform: scale(1.1); }
+
+  &.animation-appear-active {
+    opacity: 1;
+    transition: opacity .3s ease;
+
+    .modal {
+      transform: scale(1);
+      transition: transform .2s ease-out;
+      transition-delay: transform .1s;
+    }
+  }
+}
+
+/* Global animations for the modal */
+.modal-enter, .modal-appear {
+  opacity: 0;
+  .modal { transform: scale(1.1); }
+
+  &.modal-enter-active, &.modal-appear-active {
+    opacity: 1;
+    transition: opacity .3s ease;
+
+    .modal {
+      transform: scale(1);
+      transition: transform .2s ease-out;
+      transition-delay: transform .1s;
+    }
+  }
+}
+
+.modal-leave {
+  opacity: 1;
+  .modal { transform: scale(1); }
+
+  &.modal-leave-active {
+    opacity: 0;
+    transition: opacity .3s ease;
+
+    .modal {
+      transform: scale(1.1);
+      transition: transform .2s ease-out;
+      transition-delay: transform .1s;
+    }
+  }
+}

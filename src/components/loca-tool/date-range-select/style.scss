@@ -1,0 +1,31 @@
+@import 'settings';
+
+.c-date-range-select {
+  display: flex;
+  width: 100%;
+  position: relative;
+
+  & > div {
+    margin-right: 10px;
+  }
+}
+
+.c-date-range-select > div {
+  width: 50%;
+  min-width: 100px;
+
+  border: 0;
+  border-radius: 0;
+
+  z-index: 3;
+
+  &:last-of-type {
+    position: relative;
+    left: -2px;
+  }
+
+  > div {
+    border: 2px solid $border-color;
+    border-radius: 0;
+  }
+}

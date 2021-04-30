@@ -1,0 +1,48 @@
+.c-rc-tooltip, .c-rc-tooltip.-default {
+  opacity: 1;
+  padding: 0;
+  background-color: none;
+  font-size: inherit;
+
+  .rc-tooltip-content {
+    > .rc-tooltip-inner {
+      padding: 15px;
+      border: 0;
+      border-radius: 4px;
+      background-color: $dark-slate-blue;
+      color: white;
+    }
+
+    > .rc-tooltip-arrow {
+      border-top-color: $dark-slate-blue;
+      border-bottom-color: $dark-slate-blue;
+    }
+
+
+    // Layer selector
+    .wri_api__c-legend-item-button-layers-tooltip {
+      .wri_api__layers-list > .wri_api__layers-list-item {
+        list-style: none;
+
+        &:hover {
+          color: $light-gold;
+        }
+
+        &.wri_api__-active:before {
+          background-color: $light-gold;
+        }
+      }
+    }
+
+    // Opacity selector
+    .rc-slider-track {
+      background-color: $light-gold !important;
+    }
+    .rc-slider-handle {
+      background-color: $light-gold !important;
+    }
+    .rc-slider-mark-text {
+      color: white;
+    }
+  }
+}

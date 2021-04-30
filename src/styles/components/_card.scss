@@ -1,0 +1,62 @@
+.c-card {
+  flex: 1 1 auto;
+  width: 100%;
+  padding: $small-margin;
+  margin: $small-margin 0 0 0;
+
+  transition: all 0.3s ease-out;
+
+  &:hover {
+    box-shadow: 0 7px 15px 0 rgba(0, 0, 0, 0.15);
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+
+  > .content {
+    margin-top: $small-margin;
+    margin-bottom: 5px;
+    line-height: 28px;
+  }
+
+  > .attribution {
+    display: block;
+    position: relative;
+    margin-top: 1.5rem;
+    color: rgba($main-color, 0.7);
+    font-size: $small-font-size;
+    line-height: 1.6;
+
+    &:before {
+      content: '';
+      position: absolute;
+      display: block;
+      top: -0.5rem;
+      left: 0;
+      width: 50px;
+      height: 1px;
+
+      background-color: $secondary-color;
+    }
+  }
+
+  > .link {
+    display: block;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    color: $link-font-color;
+  }
+
+  &.-border {
+    border: 2px solid $secondary-color;
+
+    &.-border-neutral {
+      border-color: $pale-grey;
+    }
+  }
+
+  &.-inverse {
+    color: $inverse-font-color;
+  }
+}

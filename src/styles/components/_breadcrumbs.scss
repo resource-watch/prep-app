@@ -1,0 +1,31 @@
+.c-breadcrumbs {
+  > ul {
+    justify-content: center;
+    > li {
+      margin: 0 6px;
+      position: relative;
+      &:after {
+        content: ".";
+        position: absolute;
+        top: 2px;
+        right: -8px;
+        line-height: 1;
+        color: $inverse-font-color;
+      }
+      &:last-of-type{
+        pointer-events: none;
+        &:after {
+          display: none;
+        }
+      }
+      > a {
+        text-transform: uppercase;
+        text-decoration: none;
+        color: $inverse-font-color;
+        font-size: $micro-font-size;
+        font-weight: 600;
+        line-height: 1.2;
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+.c-thumbnail {
+  height: rem(150);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  > a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: rem(150);
+    margin: 0;
+  }
+
+  &.-border {
+    border: 2px solid $secondary-color;
+    box-sizing: content-box;
+
+    &.-border-neutral {
+      border-color: $pale-grey;
+    }
+  }
+
+  img {
+    max-width: 200px;
+    margin: 0 auto;
+  }
+}
