@@ -10,9 +10,6 @@ import CollectionPanelItem from './collections-panel-item/collections-panel-item
 // constants
 import { FAVOURITES_COLLECTION } from './collections-panel-constants';
 
-// styles
-import styles from './collections-panel-styles.scss';
-
 class CollectionsPanel extends PureComponent {
   constructor(props) {
     super(props);
