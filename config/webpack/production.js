@@ -2,7 +2,7 @@
 const merge = require('webpack-merge');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const sharedConfig = require('./shared.js');
@@ -55,13 +55,9 @@ module.exports = merge(sharedConfig, {
   },
   optimization: {
     concatenateModules: true,
+    minimize: true,
     minimizer: [
-      new UglifyJSPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: true,
-        uglifyOptions: { compress: { inline: false } },
-      }),
+      new TerserPlugin(),
       new OptimizeCSSAssetsPlugin({}),
     ],
     runtimeChunk: true,
