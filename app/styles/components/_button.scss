@@ -267,3 +267,12 @@
   margin-left: 15px;
   margin-right: 15px;
 }
+
+.c-button-group {
+  margin: 1rem 0;
+
+  &.-centered {
+    display: flex;
+    justify-content: center;
+  }
+}
