@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router';
 import { logEvent } from 'helpers/analytics';
 import Card from '../Cards/Card';
 import LoadingSpinner from '../Loading/LoadingSpinner';
@@ -123,6 +124,18 @@ class DashboardsPage extends React.Component {
                 climate resilience
               </h2>
               <p>This is a selection of initial dashboards developed by members of the PREP community. Partners are in the process of developing additional dashboards and we welcome hearing from groups interested in developing their own.</p>
+            </div>
+          </div>
+          <div className="row align-center">
+            <div className="column small-8">
+              <div className="c-card -border -border-neutral">
+                <div className="how-to-card">
+                  <Icon name="icon-user" className="-extra-large how-to-icon" />
+                  <p>
+                    To <a href="/myprep/dashboards">create your own dashboard</a> you need to create a <Link to="sign-in">MyPREP account</Link>.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </article>

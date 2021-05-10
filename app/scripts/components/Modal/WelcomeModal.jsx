@@ -1,8 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import Modal from './Modal';
 import Button from '../Button/Button';
+import ToggleHelp from 'components/toggle-help';
 
-const LOCAL_STORAGE_KEY = 'modalWelcomeOpened';
+export const LOCAL_STORAGE_KEY = 'modalWelcomeOpened';
 
 const WelcomeModal = () => {
   const opened = localStorage.getItem(LOCAL_STORAGE_KEY) === 'true';
@@ -12,18 +13,15 @@ const WelcomeModal = () => {
   const [isModalOpened, setModalOpened] = useState(opened);
 
   const handleClose = useCallback(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
     setModalOpened(true);
   }, []);
 
   const handleToExplore = useCallback(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
     setModalOpened(true);
     window.location.href = '/explore';
   }, []);
 
   const handleToHowTo = useCallback(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
     setModalOpened(true);
     window.location.href = '/how-to';
   }, []);
@@ -59,11 +57,12 @@ const WelcomeModal = () => {
               />
             </div>
           </div>
+          <ToggleHelp keys={[LOCAL_STORAGE_KEY]} customText="Show this modal next time" />
         </article>
         <aside>
           <div className="small-12 align-center" style={{ display: 'flex' }}>
-            <Button click={handleToExplore} className="c-new-button">Continue</Button>
-            <Button click={handleToHowTo} className="c-new-button -transparent">How to use PREPDATA</Button>
+            <Button click={handleToExplore} className="c-new-button">Continue to PREPDATA Overview</Button>
+            <Button click={handleToHowTo} className="c-new-button -transparent">Detailed instructions for PREPDATA</Button>
           </div>
         </aside>
       </div>

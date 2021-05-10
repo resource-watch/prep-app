@@ -19,22 +19,22 @@
       opacity: .5;
     }
   }
+}
 
-  .how-to-card {
-    display: flex;
+.how-to-card {
+  display: flex;
 
-    p {
-      margin: 0;
-    }
-
-    .how-to-icon {
-      width: 57px;
-      height: 57px;
-      margin: 0 50px;
-    }
+  p {
+    margin: 0;
   }
 
-  .how-to-wrapper {
-    margin: 100px 0;
+  .how-to-icon {
+    width: 57px;
+    height: 57px;
+    margin: 0 50px;
   }
+}
+
+.how-to-wrapper {
+  margin: 100px 0;
 }

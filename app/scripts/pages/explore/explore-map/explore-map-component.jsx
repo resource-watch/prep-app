@@ -117,6 +117,7 @@ class ExploreMap extends PureComponent {
     if (this.map) {
       this.setBoundaries();
       this.setWater();
+      this.map.invalidateSize();
     }
   }
 
