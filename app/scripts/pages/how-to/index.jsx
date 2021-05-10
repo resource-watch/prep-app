@@ -51,7 +51,7 @@ class HowTo extends React.PureComponent {
                 <div className="how-to-card">
                   <Icon name="icon-user" className="-extra-large how-to-icon" />
                   <p>
-                    To get started, create a MyPREP account. Login with your Facebook, Google, or Twitter account.
+                    To get started, create a <Link to="sign-in">MyPREP account</Link>. Login with your Facebook, Google, or Twitter account.
                   </p>
                 </div>
               </div>
