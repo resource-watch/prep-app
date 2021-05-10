@@ -5,7 +5,10 @@ import { Link } from 'react-router';
 import Article from '../../components/Content/Article';
 import Icon from '../../components/ui/Icon';
 import HowToNav from 'components/how-to-nav';
+import ToggleHelp from 'components/toggle-help';
 import { HOW_TO_SECTIONS } from '../../general-constants/general';
+import { LOCAL_STORAGE_KEY as WELCOME_KEY } from 'components/Modal/WelcomeModal';
+import { LOCAL_STORAGE_KEY as DISCOVER_DATA_KEY } from 'components/Modal/DiscoverDataModal';
 
 const discoverImg = '/images/how-to/img-discover.png';
 const exploreImg = '/images/how-to/img-explore.png';
@@ -28,12 +31,6 @@ class HowTo extends React.PureComponent {
                     Home
                   </Link>
                 </div>
-                {/* <div className="action">
-                  <a href="#" className="c-button -alternative -action">
-                    <Icon name="icon-share" className="-medium" />
-                    Share
-                  </a>
-                </div> */}
               </div>
             </div>
           </div>
@@ -55,6 +52,11 @@ class HowTo extends React.PureComponent {
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="row align-center">
+            <div className="column small-12">
+              <ToggleHelp keys={[WELCOME_KEY, DISCOVER_DATA_KEY]} />
             </div>
           </div>
         </Article>
