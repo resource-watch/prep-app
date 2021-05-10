@@ -56,7 +56,7 @@ const DiscoverDataModal = ({ onClose }) => {
         </article>
         <aside>
           <div className="small-12 align-center" style={{ display: 'flex' }}>
-            <Button click={handleClose} className="c-new-button">Continue</Button>
+            <Button click={handleClose} className="c-new-button">Continue to Site</Button>
             <Button click={handleToHowTo} className="c-new-button -transparent">Learn more</Button>
           </div>
         </aside>

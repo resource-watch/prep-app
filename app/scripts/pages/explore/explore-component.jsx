@@ -18,18 +18,17 @@ import DatasetsList from './explore-datasets-list';
 import DatasetInfo from './explore-dataset-info';
 import ExploreMap from './explore-map';
 import { tabOptions } from './explore-constants';
-import DiscoverDataModal, { LOCAL_STORAGE_KEY } from 'components/Modal/DiscoverDataModal';
+import DiscoverDataModal from 'components/Modal/DiscoverDataModal';
 
 function logSearchEvent(query) { // eslint-disable-line class-methods-use-this
   logEvent('Explore menu', 'Search datasets', query);
 }
 
 function shouldShowTour() {
-  return localStorage.getItem(LOCAL_STORAGE_KEY) === 'true'
-    && !localStorage.getItem(LOCAL_STORAGE_TOUR_KEY);
+  return !localStorage.getItem(LOCAL_STORAGE_TOUR_KEY);
 }
 
-const LOCAL_STORAGE_TOUR_KEY = 'exploreTour';
+export const LOCAL_STORAGE_TOUR_KEY = 'exploreTour';
 
 const steps = [
   {

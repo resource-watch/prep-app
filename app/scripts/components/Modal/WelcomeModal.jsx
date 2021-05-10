@@ -61,8 +61,8 @@ const WelcomeModal = () => {
         </article>
         <aside>
           <div className="small-12 align-center" style={{ display: 'flex' }}>
-            <Button click={handleToExplore} className="c-new-button">Continue to Site</Button>
-            <Button click={handleToHowTo} className="c-new-button -transparent">How to use PREPDATA</Button>
+            <Button click={handleToExplore} className="c-new-button">Continue to PREPDATA Overview</Button>
+            <Button click={handleToHowTo} className="c-new-button -transparent">Detailed instructions for PREPDATA</Button>
           </div>
         </aside>
       </div>

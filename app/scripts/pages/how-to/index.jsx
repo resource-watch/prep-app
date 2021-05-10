@@ -9,6 +9,7 @@ import ToggleHelp from 'components/toggle-help';
 import { HOW_TO_SECTIONS } from '../../general-constants/general';
 import { LOCAL_STORAGE_KEY as WELCOME_KEY } from 'components/Modal/WelcomeModal';
 import { LOCAL_STORAGE_KEY as DISCOVER_DATA_KEY } from 'components/Modal/DiscoverDataModal';
+import { LOCAL_STORAGE_TOUR_KEY as TOUR_KEY } from 'pages/explore/explore-component';
 
 const discoverImg = '/images/how-to/img-discover.png';
 const exploreImg = '/images/how-to/img-explore.png';
@@ -56,7 +57,7 @@ class HowTo extends React.PureComponent {
           </div>
           <div className="row align-center">
             <div className="column small-12">
-              <ToggleHelp keys={[WELCOME_KEY, DISCOVER_DATA_KEY]} />
+              <ToggleHelp keys={[WELCOME_KEY, DISCOVER_DATA_KEY, TOUR_KEY]} />
             </div>
           </div>
         </Article>
