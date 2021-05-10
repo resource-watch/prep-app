@@ -33,30 +33,35 @@ export const LOCAL_STORAGE_TOUR_KEY = 'exploreTour';
 const steps = [
   {
     selector: '.dataset-group',
-    content: 'Here you can expand a category to see datasets, providers and layers in the map. Also, you can see more details following the Learn more link inside (info icon).'
+    content: 'Expand a category to view datasets, providers an layers in the map.'
+  },
+  {
+    selector: '.dataset-group .collapsible-title',
+    content: 'Click the dataset toggle to quickly view maps and learn more by following the i icon or click on dataset name or Learn More link to take a deeper study of information.',
+    action: (node) => node.click(),
   },
   {
     selector: '.c-dataset-location-filter',
-    content: 'You can select global datasets or chose a location.',
+    content: 'Select global dataset of select dataset by country.',
   },
   {
     selector: '.c-explore-sidebar .c-tabs',
-    content: 'By default you are seeing datasets by categories, but you can also explore all the datasets available.',
+    content: 'Explore categorized datasets or select all datasets to find full data library.',
   },
   {
     selector: '.c-search-control.-locations',
-    content: 'Click on this button to search any location and move the map to that location.',
+    content: 'Click magnifying glass and search for a location to zoom to an area of interest.',
   },
   {
-    selector: '.c-search-control.-share',
-    content: 'Click on this button to share it in social networks or create a embed for your articles.',
+    selector: '.c-share-control.-share',
+    content: 'Click this button to share maps on social networks or create an embed for your articles, websites, and dashboards.',
   }
 ];
 
 const ExplorePage = (props) => {
   const { currentLocation, setTab, sidebar } = props;
   const [filters, setFilters] = useState(false);
-  const [isTourOpen, setIsTourOpen] = useState(false);
+  const [isTourOpen, setIsTourOpen] = useState(localStorage.getItem(LOCAL_STORAGE_TOUR_KEY) !== 'false');
   const sidebarExploreClass = classnames({
     'c-explore-sidebar': true,
     '-open': sidebar.open
