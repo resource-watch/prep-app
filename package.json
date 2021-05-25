@@ -60,7 +60,7 @@
     "leaflet": "1.2.0",
     "lodash": "4.17.21",
     "mini-css-extract-plugin": "^0.4.3",
-    "morgan": "1.8.1",
+    "morgan": "1.9.1",
     "node-sass": "^4",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss": "6.0.14",
