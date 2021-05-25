@@ -58,7 +58,7 @@
     "image-webpack-loader": "3.3.0",
     "layer-manager": "1.16.0",
     "leaflet": "1.2.0",
-    "lodash": "4.17.19",
+    "lodash": "4.17.21",
     "mini-css-extract-plugin": "^0.4.3",
     "morgan": "1.8.1",
     "node-sass": "^4",
