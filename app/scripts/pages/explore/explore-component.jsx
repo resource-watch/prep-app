@@ -18,15 +18,15 @@ import DatasetsList from './explore-datasets-list';
 import DatasetInfo from './explore-dataset-info';
 import ExploreMap from './explore-map';
 import { tabOptions } from './explore-constants';
-import DiscoverDataModal from 'components/Modal/DiscoverDataModal';
+// import DiscoverDataModal from 'components/Modal/DiscoverDataModal';
 
 function logSearchEvent(query) { // eslint-disable-line class-methods-use-this
   logEvent('Explore menu', 'Search datasets', query);
 }
 
-function shouldShowTour() {
-  return !localStorage.getItem(LOCAL_STORAGE_TOUR_KEY);
-}
+// function shouldShowTour() {
+//   return !localStorage.getItem(LOCAL_STORAGE_TOUR_KEY);
+// }
 
 export const LOCAL_STORAGE_TOUR_KEY = 'exploreTour';
 
@@ -72,11 +72,11 @@ const ExplorePage = (props) => {
     setIsTourOpen(false);
   }, []);
 
-  const handleCloseModal = useCallback(() => {
-    if (shouldShowTour()) {
-      setIsTourOpen(true);
-    }
-  }, []);
+  // const handleCloseModal = useCallback(() => {
+  //   if (shouldShowTour()) {
+  //     setIsTourOpen(true);
+  //   }
+  // }, []);
 
   const onChangeTab = useCallback((tab) => {
     setTab(tab);
@@ -258,7 +258,7 @@ const ExplorePage = (props) => {
 
       {/* Map */}
       <ExploreMap />
-      <DiscoverDataModal onClose={handleCloseModal} />
+      {/* <DiscoverDataModal onClose={handleCloseModal} /> */}
       <Tour
         steps={steps}
         isOpen={isTourOpen}
