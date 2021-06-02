@@ -11,6 +11,7 @@ const mapStateToProps = state => ({
   routing: state.routing,
   sidebar: state.explorePage.sidebar,
   datasets: state.explorePage.datasets.items,
+  status: state.explorePage.datasets.status,
   selectedDataset: getSelectedDataset(state),
   datasetsList: state.explorePage.datasets,
   currentTab: state.explorePage.tab,

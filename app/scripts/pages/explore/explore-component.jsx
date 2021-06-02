@@ -59,9 +59,9 @@ const steps = [
 ];
 
 const ExplorePage = (props) => {
-  const { currentLocation, setTab, sidebar } = props;
+  const { currentLocation, setTab, sidebar, status, selectedDataset, currentTab, toggleInfo } = props;
   const [filters, setFilters] = useState(false);
-  const [isTourOpen, setIsTourOpen] = useState(localStorage.getItem(LOCAL_STORAGE_TOUR_KEY) !== 'false');
+  const [isTourOpen, setIsTourOpen] = useState(false);
   const sidebarExploreClass = classnames({
     'c-explore-sidebar': true,
     '-open': sidebar.open
@@ -129,7 +129,7 @@ const ExplorePage = (props) => {
     setSidebar({ width: 430, open: true });
   }, []);
 
-  const { selectedDataset, currentTab, toggleInfo } = props;
+  console.log(status)
 
   return (
     <div className="l-explore">
@@ -261,7 +261,7 @@ const ExplorePage = (props) => {
       <DiscoverDataModal onClose={handleCloseModal} />
       <Tour
         steps={steps}
-        isOpen={isTourOpen}
+        isOpen={(!!status && status === 'success' && isTourOpen)}
         onRequestClose={handleFinishTour}
       />
     </div>
@@ -279,6 +279,7 @@ ExplorePage.defaultProps = {
 ExplorePage.propTypes = {
   sidebar: PropTypes.object,
   selectedDataset: PropTypes.object,
+  status: PropTypes.string,
   currentTab: PropTypes.oneOf(['core_datasets', 'all_datasets']),
   currentLocation: PropTypes.string,
   setTab: PropTypes.func,
