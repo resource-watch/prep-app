@@ -30,6 +30,7 @@ import PartnerDetail from './containers/PartnerDetail';
 import Auth from './modules/auth';
 import NexGDDPEmbedPage from './pages/nexgddp-embed';
 import NexLocaGeeEmbedPage from './pages/nexlocagee-embed';
+import PlacardPage from './pages/placard';
 
 function shouldUpdateScroll(prevRouterProps, { location }) {
   /**
@@ -153,6 +154,8 @@ function Routes(props) {
         <Route path="dashboard/:slug(/:tab)" component={DashboardsDetail} />
         <Route path="stories/:slug" component={InsightsDetail} />
         <Route path="dataset/:slug" component={DatasetDetail} />
+
+        <Route path="placard-connectivity-hub" component={PlacardPage} />
 
         {/* Embed */}
         <Route path="export/explore" component={ExplorePageEmbed} />
