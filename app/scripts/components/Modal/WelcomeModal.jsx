@@ -57,11 +57,11 @@ const WelcomeModal = () => {
               />
             </div>
           </div>
-          <ToggleHelp keys={[LOCAL_STORAGE_KEY]} customText="Show this modal next time" />
+          <ToggleHelp keys={[LOCAL_STORAGE_KEY]} customText="Show this info box next time" />
         </article>
         <aside>
           <div className="small-12 align-center" style={{ display: 'flex' }}>
-            <Button click={handleToExplore} className="c-new-button">Continue to PREPDATA Overview</Button>
+            <Button click={handleToExplore} className="c-new-button">Continue to PREPdata brief overview</Button>
             <Button click={handleToHowTo} className="c-new-button -transparent">Detailed instructions for PREPDATA</Button>
           </div>
         </aside>
