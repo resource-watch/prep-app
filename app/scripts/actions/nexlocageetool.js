@@ -556,7 +556,7 @@ export function getSelectorsInfo() {
 
     const periodsOptions = (layers || []).map(
         ({ layerConfig }) => ({
-          label: layerConfig.order,
+          label: layerConfig.order.toString(),
           value: layerConfig.order,
         })
       )

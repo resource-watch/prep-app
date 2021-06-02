@@ -8,13 +8,36 @@ import DateRangeSelect from './date-range-select';
 import { CompareMap, ToggleMap, DifferenceMap, SimpleMap } from './tool-map';
 import LocationSearch from './location-search/LocationSearch';
 import TimeseriesChart from './tool-chart/TimeseriesChart';
+import Tour from 'reactour';
 
 import './style.scss';
+
+const TUTORIAL_STEPS = [
+  {
+    selector: '.c-nexgddp-tool .filters',
+    content: 'Select a year and a scenario to start.'
+  },
+  {
+    selector: '.c-nexgddp-tool .toolbar',
+    content: 'Use location search input to go to a specific location.'
+  },
+  {
+    selector: '.c-nexgddp-tool .map',
+    content: 'Visualize the layer and legend.'
+  },
+  {
+    selector: '.leaflet-bottom.leaflet-right',
+    content: 'Use these buttons to share, select a location, configure the map and change the zoom.'
+  }
+];
 
 class NexLocaGeeTool extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = { loading: true };
+    this.state = { loading: true, enableTutorial: false };
+
+    this.handleEnableTutorial = this.handleEnableTutorial.bind(this);
+    this.handleFinishTour = this.handleFinishTour.bind(this);
   }
 
   componentDidMount() {
@@ -47,6 +70,14 @@ class NexLocaGeeTool extends React.PureComponent {
     setMapMode(mapMode);
   }
 
+  handleEnableTutorial() {
+    this.setState({ enableTutorial: true });
+  }
+
+  handleFinishTour() {
+    this.setState({ enableTutorial: false });
+  }
+
   render() {
     const {
       marker,
@@ -56,7 +87,7 @@ class NexLocaGeeTool extends React.PureComponent {
       embed
     } = this.props;
 
-    const { loading } = this.state;
+    const { loading, enableTutorial } = this.state;
 
     return (
       <div className="c-nexgddp-tool">
@@ -120,8 +151,17 @@ class NexLocaGeeTool extends React.PureComponent {
                   </div>
                 )}
               </div>
-              <div className="columns small-12 medium-4">
-                <LocationSearch />
+              <div className="columns small-12">
+                <div className="row">
+                  <div className="columns small-8">
+                    <button onClick={this.handleEnableTutorial} type="button">
+                      <Icon name="icon-info" />
+                      &nbsp;
+                      How does this tool work?
+                    </button>
+                  </div>
+                  <div className="columns small-4"><LocationSearch /></div>
+                </div>
               </div>
             </div>
           </div>
@@ -174,6 +214,12 @@ class NexLocaGeeTool extends React.PureComponent {
             </div>
           </div>
         )}
+
+        <Tour
+          steps={TUTORIAL_STEPS}
+          isOpen={enableTutorial}
+          onRequestClose={this.handleFinishTour}
+        />
       </div>
     );
   }
@@ -202,7 +248,9 @@ NexLocaGeeTool.propTypes = {
   dataset: PropTypes.object.isRequired,
   setDataset: PropTypes.func.isRequired,
   getChartData: PropTypes.func.isRequired,
-  scenario: PropTypes.shape({}),
+  scenario: PropTypes.shape({
+    selection: PropTypes.shape({}),
+  }),
 };
 
 export default NexLocaGeeTool;
