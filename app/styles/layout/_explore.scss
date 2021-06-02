@@ -6,4 +6,8 @@
 
 .c-ribbon + .l-explore {
   height: calc(100% - 45px);
+
+  .content {
+    height: calc(100% - 45px);
+  }
 }
