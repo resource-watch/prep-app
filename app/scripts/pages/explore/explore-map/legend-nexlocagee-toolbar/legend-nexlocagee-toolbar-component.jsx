@@ -132,7 +132,7 @@ class LegendNexLocaGeeToolbar extends PureComponent {
     // Period
     const periodsOptions = layers.map(
         ({ layerConfig }) => ({
-          label: `${layerConfig.order - 15}-${layerConfig.order + 15}`,
+          label: layerConfig.order,
           value: layerConfig.order,
         })
       )
