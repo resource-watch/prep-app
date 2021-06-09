@@ -30,7 +30,18 @@ function shouldShowTour() {
 
 export const LOCAL_STORAGE_TOUR_KEY = 'exploreTour';
 
-const steps = [
+const commonSteps = [
+  {
+    selector: '.c-search-control.-locations',
+    content: 'Click magnifying glass and search for a location to zoom to an area of interest.',
+  },
+  {
+    selector: '.c-share-control.-share',
+    content: 'Click this button to share maps on social networks or create an embed for your articles, websites, and dashboards.',
+  }
+];
+
+const coreDatasetsSteps = [
   {
     selector: '.dataset-group',
     content: 'Expand a category to view datasets, providers an layers in the map.'
@@ -48,14 +59,19 @@ const steps = [
     selector: '.c-explore-sidebar .c-tabs',
     content: 'Explore categorized datasets or select all datasets to find full data library.',
   },
+  ...commonSteps,
+];
+
+const allDatasetsSteps = [
   {
-    selector: '.c-search-control.-locations',
-    content: 'Click magnifying glass and search for a location to zoom to an area of interest.',
+    selector: '.c-dataset-item',
+    content: 'Visualize a dataset on the map or click on info icon to get more info'
   },
   {
-    selector: '.c-share-control.-share',
-    content: 'Click this button to share maps on social networks or create an embed for your articles, websites, and dashboards.',
-  }
+    selector: '.list-filters',
+    content: 'Filter or search datasets'
+  },
+  ...commonSteps,
 ];
 
 const ExplorePage = (props) => {
@@ -129,8 +145,6 @@ const ExplorePage = (props) => {
     setSidebar({ width: 430, open: true });
   }, []);
 
-  console.log(status)
-
   return (
     <div className="l-explore">
       <header className="l-header -expanded">
@@ -191,6 +205,11 @@ const ExplorePage = (props) => {
                         </div>
                       </div>
                     </footer>
+                    <Tour
+                      steps={coreDatasetsSteps}
+                      isOpen={(!!status && status === 'success' && isTourOpen)}
+                      onRequestClose={handleFinishTour}
+                    />
                   </div>
                 </div>}
               {currentTab === 'all_datasets' &&
@@ -222,6 +241,11 @@ const ExplorePage = (props) => {
                       </div>
                     </div>
                   </footer>
+                  <Tour
+                    steps={allDatasetsSteps}
+                    isOpen={(!!status && status === 'success' && isTourOpen)}
+                    onRequestClose={handleFinishTour}
+                  />
                 </div>}
             </div>
           </div>
@@ -259,11 +283,6 @@ const ExplorePage = (props) => {
       {/* Map */}
       <ExploreMap />
       <DiscoverDataModal onClose={handleCloseModal} />
-      <Tour
-        steps={steps}
-        isOpen={(!!status && status === 'success' && isTourOpen)}
-        onRequestClose={handleFinishTour}
-      />
     </div>
   );
 }
