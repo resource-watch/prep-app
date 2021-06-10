@@ -4,7 +4,6 @@ import { Modal, Tooltip, Icons } from 'widget-editor';
 import ShareModalComponent from '../share-modal';
 import EmbedModalComponent from '../embed-modal';
 import GDPRBanner from '../gdpr-banner';
-import Ribbon from '../ribbon';
 
 class Root extends React.Component {
   componentDidMount() {
@@ -35,7 +34,6 @@ class Root extends React.Component {
         <ShareModalComponent />
         <EmbedModalComponent />
         <GDPRBanner />
-        <Ribbon />
 
         {children}
       </div>
