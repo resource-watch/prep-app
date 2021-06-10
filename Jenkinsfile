@@ -84,7 +84,7 @@ node {
           }
           if ((userInput == true && !didTimeout) || "${SKIP_DEPLOYMENT_CONFIRMATION}" != "true") {
             sh("echo Deploying to PROD cluster")
-            sh("kubectl config use-context ${KUBECTL_CONTEXT_PREFIX}_${CLOUD_PROJECT_NAME}_${CLOUD_PROJECT_ZONE}_${KUBE_PROD_CLUSTER}}")
+            sh("kubectl config use-context ${KUBECTL_CONTEXT_PREFIX}_${CLOUD_PROJECT_NAME}_${CLOUD_PROJECT_ZONE}_${KUBE_PROD_CLUSTER}")
             sh("kubectl apply -f k8s/production/")
             sh("kubectl set image deployment ${appName} ${appName}=${imageTag} --namespace=prep --record")
           } else {
