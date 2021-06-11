@@ -52,7 +52,7 @@ const DiscoverDataModal = ({ onClose }) => {
               />
             </div>
           </div>
-          <ToggleHelp keys={[LOCAL_STORAGE_KEY]} customText="Show this modal next time" />
+          <ToggleHelp keys={[LOCAL_STORAGE_KEY]} customText="Show this info box next time" />
         </article>
         <aside>
           <div className="small-12 align-center" style={{ display: 'flex' }}>

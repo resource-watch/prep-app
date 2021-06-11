@@ -18,19 +18,30 @@ import DatasetsList from './explore-datasets-list';
 import DatasetInfo from './explore-dataset-info';
 import ExploreMap from './explore-map';
 import { tabOptions } from './explore-constants';
-// import DiscoverDataModal from 'components/Modal/DiscoverDataModal';
+import DiscoverDataModal from 'components/Modal/DiscoverDataModal';
 
 function logSearchEvent(query) { // eslint-disable-line class-methods-use-this
   logEvent('Explore menu', 'Search datasets', query);
 }
 
-// function shouldShowTour() {
-//   return !localStorage.getItem(LOCAL_STORAGE_TOUR_KEY);
-// }
+function shouldShowTour() {
+  return !localStorage.getItem(LOCAL_STORAGE_TOUR_KEY);
+}
 
 export const LOCAL_STORAGE_TOUR_KEY = 'exploreTour';
 
-const steps = [
+const commonSteps = [
+  {
+    selector: '.c-search-control.-locations',
+    content: 'Click magnifying glass and search for a location to zoom to an area of interest.',
+  },
+  {
+    selector: '.c-share-control.-share',
+    content: 'Click this button to share maps on social networks or create an embed for your articles, websites, and dashboards.',
+  }
+];
+
+const coreDatasetsSteps = [
   {
     selector: '.dataset-group',
     content: 'Expand a category to view datasets, providers an layers in the map.'
@@ -48,20 +59,25 @@ const steps = [
     selector: '.c-explore-sidebar .c-tabs',
     content: 'Explore categorized datasets or select all datasets to find full data library.',
   },
+  ...commonSteps,
+];
+
+const allDatasetsSteps = [
   {
-    selector: '.c-search-control.-locations',
-    content: 'Click magnifying glass and search for a location to zoom to an area of interest.',
+    selector: '.c-dataset-item',
+    content: 'Visualize a dataset on the map or click on info icon to get more info'
   },
   {
-    selector: '.c-share-control.-share',
-    content: 'Click this button to share maps on social networks or create an embed for your articles, websites, and dashboards.',
-  }
+    selector: '.list-filters',
+    content: 'Filter or search datasets'
+  },
+  ...commonSteps,
 ];
 
 const ExplorePage = (props) => {
-  const { currentLocation, setTab, sidebar } = props;
+  const { currentLocation, setTab, sidebar, status, selectedDataset, currentTab, toggleInfo } = props;
   const [filters, setFilters] = useState(false);
-  const [isTourOpen, setIsTourOpen] = useState(localStorage.getItem(LOCAL_STORAGE_TOUR_KEY) !== 'false');
+  const [isTourOpen, setIsTourOpen] = useState(false);
   const sidebarExploreClass = classnames({
     'c-explore-sidebar': true,
     '-open': sidebar.open
@@ -72,11 +88,11 @@ const ExplorePage = (props) => {
     setIsTourOpen(false);
   }, []);
 
-  // const handleCloseModal = useCallback(() => {
-  //   if (shouldShowTour()) {
-  //     setIsTourOpen(true);
-  //   }
-  // }, []);
+  const handleCloseModal = useCallback(() => {
+    if (shouldShowTour()) {
+      setIsTourOpen(true);
+    }
+  }, []);
 
   const onChangeTab = useCallback((tab) => {
     setTab(tab);
@@ -128,8 +144,6 @@ const ExplorePage = (props) => {
     fetchCoreDatasets();
     setSidebar({ width: 430, open: true });
   }, []);
-
-  const { selectedDataset, currentTab, toggleInfo } = props;
 
   return (
     <div className="l-explore">
@@ -191,6 +205,11 @@ const ExplorePage = (props) => {
                         </div>
                       </div>
                     </footer>
+                    <Tour
+                      steps={coreDatasetsSteps}
+                      isOpen={(!!status && status === 'success' && isTourOpen)}
+                      onRequestClose={handleFinishTour}
+                    />
                   </div>
                 </div>}
               {currentTab === 'all_datasets' &&
@@ -222,6 +241,11 @@ const ExplorePage = (props) => {
                       </div>
                     </div>
                   </footer>
+                  <Tour
+                    steps={allDatasetsSteps}
+                    isOpen={(!!status && status === 'success' && isTourOpen)}
+                    onRequestClose={handleFinishTour}
+                  />
                 </div>}
             </div>
           </div>
@@ -258,12 +282,7 @@ const ExplorePage = (props) => {
 
       {/* Map */}
       <ExploreMap />
-      {/* <DiscoverDataModal onClose={handleCloseModal} /> */}
-      <Tour
-        steps={steps}
-        isOpen={isTourOpen}
-        onRequestClose={handleFinishTour}
-      />
+      <DiscoverDataModal onClose={handleCloseModal} />
     </div>
   );
 }
@@ -279,6 +298,7 @@ ExplorePage.defaultProps = {
 ExplorePage.propTypes = {
   sidebar: PropTypes.object,
   selectedDataset: PropTypes.object,
+  status: PropTypes.string,
   currentTab: PropTypes.oneOf(['core_datasets', 'all_datasets']),
   currentLocation: PropTypes.string,
   setTab: PropTypes.func,

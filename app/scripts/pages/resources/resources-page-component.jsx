@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Article from 'components/Content/Article';
+import { Link } from 'react-router';
 
 import LoadingSpinner from 'components/Loading/LoadingSpinner';
 import ResourceItem from './resource-item-component';
@@ -24,6 +25,19 @@ class Resources extends React.PureComponent {
           <p>This is a selection of resources to understand the impacts of climate change, learn how to build resilience,
             and locate additional climate relevant data. We welcome receiving suggestions for additional resources to include.
           </p>
+
+          {/* Placard Connectivity Hub */}
+          <div className="row align-center">
+            <div className="column small-12">
+              <div className="c-card -border -border-neutral">
+                <div className="how-to-card">
+                  <p>
+                    Visit <Link to="placard-connectivity-hub">Placard Connectivity Hub</Link>.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </Article>
 
         {RESOURCES_CATEGORIES.map(resourceCategory => (
