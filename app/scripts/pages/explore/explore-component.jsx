@@ -41,27 +41,6 @@ const commonSteps = [
   }
 ];
 
-const coreDatasetsSteps = [
-  {
-    selector: '.dataset-group',
-    content: 'Expand a category to view datasets, providers an layers in the map.'
-  },
-  {
-    selector: '.dataset-group .collapsible-title',
-    content: 'Click the dataset toggle to quickly view maps and learn more by following the i icon or click on dataset name or Learn More link to take a deeper study of information.',
-    action: (node) => node.click(),
-  },
-  {
-    selector: '.c-dataset-location-filter',
-    content: 'Select global dataset of select dataset by country.',
-  },
-  {
-    selector: '.c-explore-sidebar .c-tabs',
-    content: 'Explore categorized datasets or select all datasets to find full data library.',
-  },
-  ...commonSteps,
-];
-
 const allDatasetsSteps = [
   {
     selector: '.c-dataset-item',
@@ -124,6 +103,33 @@ const ExplorePage = (props) => {
       logEvent('Explore menu', 'Close menu', 'Click');
     }
   }, [sidebar, props.setSidebar]);
+
+  const coreDatasetsSteps = [
+    {
+      selector: '.dataset-group',
+      content: 'Expand a category to view datasets, providers an layers in the map.'
+    },
+    {
+      selector: '.dataset-group .collapsible-title',
+      content: 'Click the dataset toggle to quickly view maps and learn more by following the i icon or click on dataset name or Learn More link to take a deeper study of information.',
+      action: (node) => node.click(),
+    },
+    {
+      selector: '.c-dataset-location-filter',
+      content: 'Select global dataset of select dataset by country.',
+    },
+    {
+      selector: '.c-explore-sidebar .c-tabs',
+      // eslint-disable-next-line react/display-name
+      content: () => (
+        <div>
+          <p>Explore categorized datasets or select all datasets to find full data library.</p>
+          <button type="button" className="c-new-button -light -transparent" onClick={handleFinishTour}>Go to explore</button>
+        </div>
+      ),
+    },
+    ...commonSteps,
+  ];
 
   useEffect(() => {
     const {
