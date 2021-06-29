@@ -152,7 +152,7 @@ export function getChartData() {
     const indicatorId = getIndicatorId(state);
     const slug = state.locatool.indicatorDataset.slug;
 
-    return fetch(`${process.env.RW_API_URL}/query?sql=select ${indicatorId}_q25 as q25, ${indicatorId} as q50, ${indicatorId}_q75 as q75, year as x from ${slug}&lat=${lat}&lon=${lng}`, {
+    return fetch(`${process.env.REACT_APP_RW_API_URL}/query?sql=select ${indicatorId}_q25 as q25, ${indicatorId} as q50, ${indicatorId}_q75 as q75, year as x from ${slug}&lat=${lat}&lon=${lng}`, {
       headers: {
         'Content-Type': 'application/json',
         'Upgrade-Insecure-Requests': 1
@@ -237,7 +237,7 @@ export function loadIndicatorDataset() {
     const scenario = state.locatool.scenario.selection.value;
     const tempResolution = state.locatool.tempResolution.selection;
 
-    return fetch(`${process.env.RW_API_URL}/loca/dataset/${indicatorId}/${scenario}/${tempResolution.value}?env=${process.env.REACT_APP_DATASET_ENV}`, {
+    return fetch(`${process.env.REACT_APP_RW_API_URL}/loca/dataset/${indicatorId}/${scenario}/${tempResolution.value}?env=${process.env.REACT_APP_DATASET_ENV}`, {
       headers: {
         'Content-Type': 'application/json',
         'Upgrade-Insecure-Requests': 1
@@ -552,7 +552,7 @@ export function getSelectorsInfo() {
     const state = getState();
     const indicatorId = getIndicatorId(state);
 
-    return fetch(`${process.env.RW_API_URL}/loca/info/${indicatorId}`, {
+    return fetch(`${process.env.REACT_APP_RW_API_URL}/loca/info/${indicatorId}`, {
       headers: {
         'Content-Type': 'application/json',
         'Upgrade-Insecure-Requests': 1

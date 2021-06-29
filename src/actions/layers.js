@@ -5,8 +5,6 @@ import {
 } from '../constants';
 import { updateURL } from './links';
 
-export default function () {}
-
 export function getLayerById(layerId) {
   return (dispatch) => {
     fetch(`${process.env.REACT_APP_RW_API_URL}/layer/${layerId}`, {

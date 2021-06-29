@@ -16,8 +16,6 @@ import {
 } from '../constants';
 import { updateURL } from './links';
 
-export default function () { }
-
 export function changeTab(tab) {
   return (dispatch) => {
     dispatch({

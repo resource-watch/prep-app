@@ -152,7 +152,7 @@ export function getChartData() {
     const indicatorId = getIndicatorId(state);
     const slug = state.nexgddptool.indicatorDataset.slug;
 
-    return fetch(`${process.env.RW_API_URL}/query?sql=select ${indicatorId}_q25 as q25, ${indicatorId} as q50, ${indicatorId}_q75 as q75, year as x from ${slug}&lat=${lat}&lon=${lng}`, {
+    return fetch(`${process.env.REACT_APP_RW_API_URL}/query?sql=select ${indicatorId}_q25 as q25, ${indicatorId} as q50, ${indicatorId}_q75 as q75, year as x from ${slug}&lat=${lat}&lon=${lng}`, {
       headers: {
         'Content-Type': 'application/json',
         'Upgrade-Insecure-Requests': 1
@@ -237,7 +237,7 @@ export function loadIndicatorDataset() {
     const scenario = state.nexgddptool.scenario.selection.value;
     const tempResolution = state.nexgddptool.tempResolution.selection;
 
-    return fetch(`${process.env.RW_API_URL}/nexgddp/dataset/${indicatorId}/${scenario}/${tempResolution.value}?env=${process.env.REACT_APP_DATASET_ENV}`, {
+    return fetch(`${process.env.REACT_APP_RW_API_URL}/nexgddp/dataset/${indicatorId}/${scenario}/${tempResolution.value}?env=${process.env.REACT_APP_DATASET_ENV}`, {
       headers: {
         'Content-Type': 'application/json',
         'Upgrade-Insecure-Requests': 1
@@ -552,7 +552,7 @@ export function getSelectorsInfo() {
     const state = getState();
     const indicatorId = getIndicatorId(state);
 
-    return fetch(`${process.env.RW_API_URL}/nexgddp/info/${indicatorId}`, {
+    return fetch(`${process.env.REACT_APP_RW_API_URL}/nexgddp/info/${indicatorId}`, {
       headers: {
         'Content-Type': 'application/json',
         'Upgrade-Insecure-Requests': 1

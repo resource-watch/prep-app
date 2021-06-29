@@ -31,7 +31,7 @@ const initialState = {
   tab: 'core_datasets'
 };
 
-export default function (state = initialState, action) {
+export default function DatasetsReducer(state = initialState, action) {
   switch (action.type) {
     case DATASET_LIST_RECEIVED: {
       return Object.assign({}, state, { list: action.payload.data });

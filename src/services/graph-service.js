@@ -15,7 +15,7 @@ class GraphService {
     };
 
     return new Promise((resolve, reject) => {
-      fetch(`${process.env.RW_API_URL}/graph/query/search-datasets?${filtersString}&${queryString.stringify(queryParams)}`, {
+      fetch(`${process.env.REACT_APP_RW_API_URL}/graph/query/search-datasets?${filtersString}&${queryString.stringify(queryParams)}`, {
         headers: {
           'Content-Type': 'application/json',
           'Upgrade-Insecure-Requests': 1

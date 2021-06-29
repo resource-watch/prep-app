@@ -3,8 +3,6 @@ import * as queryString from 'query-string';
 import { replace } from 'react-router-redux';
 import { LINK_SHORTEN_RECEIVE, LINK_SHORTEN_ERROR } from '../constants';
 
-export default function () {}
-
 export function updateURL() {
   return (dispatch, getState) => {
     const params = getState().exploremap;

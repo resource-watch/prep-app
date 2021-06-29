@@ -6,7 +6,7 @@ import { reducers as mapReducers } from './explore-map';
 import { reducers as popupReducers } from './explore-map/explore-map-popup';
 import * as actions from './explore-actions';
 
-export default {
+const exploreReducers = {
   [actions.setTab]: (state, { payload }) => ({ ...state, tab: payload }),
   [actions.setBasemap]: mapReducers.setBasemap,
   [actions.setLabels]: mapReducers.setLabels,
@@ -42,3 +42,5 @@ export default {
   [actions.updateDataFilters]: datasetFiltersReducers.updateDataFilters,
   [actions.setSidebar]: (state, { payload }) => ({ ...state, sidebar: payload })
 };
+
+export default exploreReducers;

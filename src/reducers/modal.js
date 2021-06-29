@@ -13,7 +13,7 @@ const initialState = {
   }
 };
 
-export default function (state = initialState, action) {
+const ModalReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_MODAL_UNDER_DEVELOP:
       return Object.assign({}, state, { underDevelop: action.payload });
@@ -24,4 +24,6 @@ export default function (state = initialState, action) {
     default:
       return state;
   }
-}
+};
+
+export default ModalReducer;

@@ -37,9 +37,9 @@ import './styles/lib/custom-foundation.css';
 import './styles/index.scss';
 
 setConfig({
-  url: process.env.RW_API_URL,
-  env: process.env.DATASET_ENV,
-  applications: process.env.APPLICATIONS,
+  url: process.env.REACT_APP_RW_API_URL,
+  env: process.env.REACT_APP_DATASET_ENV,
+  applications: process.env.REACT_APP_APPLICATIONS,
   authUrl: 'https://api.resourcewatch.org/auth',
   userToken: localStorage.getItem('token') || null,
   assetsPath: '/images/'

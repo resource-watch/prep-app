@@ -4,8 +4,6 @@ import {
   WIDGET_DETAIL_RECEIVED
 } from '../constants';
 
-export default function () {}
-
 export function getWidgetBySlug(slug) {
   return (dispatch) => {
     fetch(`${process.env.REACT_APP_API_URL}/widgets/${slug}?cache=false`, {

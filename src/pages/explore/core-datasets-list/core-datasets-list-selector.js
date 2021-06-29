@@ -46,7 +46,7 @@ export const getCoreDatasets = createSelector(
         nexLocaGeeIndicators.push(n);
       }
       // Absolute low as base
-      else if (n.id === n.metadata[0].info.absolute.low && !exists) {
+      else if (n.id === n.metadata[0].info.absolute?.low && !exists) {
         nexLocaGeeIndicators.push(n);
       }
     });

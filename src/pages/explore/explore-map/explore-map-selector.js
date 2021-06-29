@@ -32,13 +32,11 @@ export const getActiveLayers = createSelector(
 );
 
 export const checkNexLocaGeeDataset = (datasetId, dataset) => {
-  console.log('dataset', dataset)
-  console.log('metadata', dataset.metadata[0].info.absolute)
   const isNexLocaGeeDataset =  !!(
-    dataset.metadata[0].info.change.high === datasetId ||
-    dataset.metadata[0].info.change.low === datasetId ||
-    dataset.metadata[0].info.absolute.high === datasetId ||
-    dataset.metadata[0].info.absolute.low === datasetId
+    dataset.metadata[0].info.change?.high === datasetId ||
+    dataset.metadata[0].info.change?.low === datasetId ||
+    dataset.metadata[0].info.absolute?.high === datasetId ||
+    dataset.metadata[0].info.absolute?.low === datasetId
   );
   return isNexLocaGeeDataset;
 };

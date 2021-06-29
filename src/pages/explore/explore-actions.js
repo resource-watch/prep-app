@@ -142,7 +142,7 @@ export const fetchDatasets = createThunkAction('fetchDatasets', () => (dispatch)
       dispatch(receiveDatasets(datasets));
       dispatch(updateActiveDatasets());
     })
-    .catch(error => dispatch(failureDatasets(error)));
+    .catch(error => console.error(error) || dispatch(failureDatasets(error)));
 });
 
 export const receiveCoreDatasets = createAction('receiveCoreDatasets');

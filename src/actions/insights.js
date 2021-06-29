@@ -6,8 +6,6 @@ import {
   INSIGHTS_SEARCH_TERM,
 } from '../constants';
 
-export default function () {}
-
 export function getInsightsList() {
   return (dispatch) => {
     fetch(`${process.env.REACT_APP_API_URL}/insights?env=${process.env.REACT_APP_DATASET_ENV}`)

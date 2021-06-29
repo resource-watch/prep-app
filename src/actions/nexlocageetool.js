@@ -154,7 +154,7 @@ export function getChartData() {
     const lat = marker[0];
     const lng = marker[1];
     const query = `select avg(q25), avg(q50), avg(q75), system:index, RCP, year_start, year_end from '${tableName}' where (ST_INTERSECTS(ST_SetSRID(ST_GeomFromGeoJSON('{"type":"Point","coordinates":[${lng},${lat}]}'),4326),the_geom)) AND change_vs_absolute like 'abs' GROUP BY system:index, RCP, year_start, year_end`;
-    return fetch(`${process.env.RW_API_URL}/query/${id}?sql=${encodeURIComponent(query)}&application=prep`, {
+    return fetch(`${process.env.REACT_APP_RW_API_URL}/query/${id}?sql=${encodeURIComponent(query)}&application=prep`, {
       headers: {
         'Content-Type': 'application/json',
         'Upgrade-Insecure-Requests': 1
@@ -243,7 +243,7 @@ export function loadIndicatorDataset() {
     const scenario = state.nexlocageetool.scenario.selection.value;
     const tempResolution = state.nexlocageetool.tempResolution.selection;
 
-    return fetch(`${process.env.RW_API_URL}/nexgddp/dataset/${indicatorId}/${scenario}/${tempResolution.value}?env=${process.env.REACT_APP_DATASET_ENV}`, {
+    return fetch(`${process.env.REACT_APP_RW_API_URL}/nexgddp/dataset/${indicatorId}/${scenario}/${tempResolution.value}?env=${process.env.REACT_APP_DATASET_ENV}`, {
       headers: {
         'Content-Type': 'application/json',
         'Upgrade-Insecure-Requests': 1

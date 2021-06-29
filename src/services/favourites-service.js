@@ -9,7 +9,7 @@ class FavouritesService {
     const queryParams = queryString.stringify({ application: process.env.APPLICATIONS });
 
     return new Promise((resolve, reject) => {
-      fetch(`${process.env.RW_API_URL}/favourite?${queryParams}`, {
+      fetch(`${process.env.REACT_APP_RW_API_URL}/favourite?${queryParams}`, {
         method: 'GET',
         headers: {
           Authorization: token,
@@ -44,7 +44,7 @@ class FavouritesService {
     const { resourceId, resourceType } = resource;
 
     return new Promise((resolve, reject) => {
-      fetch(`${process.env.RW_API_URL}/favourite`, {
+      fetch(`${process.env.REACT_APP_RW_API_URL}/favourite`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ class FavouritesService {
    */
   static deleteFavourite(token, resourceId) {
     return new Promise((resolve, reject) => {
-      fetch(`${process.env.RW_API_URL}/favourite/${resourceId}`, {
+      fetch(`${process.env.REACT_APP_RW_API_URL}/favourite/${resourceId}`, {
         method: 'DELETE',
         headers: { Authorization: token }
       })

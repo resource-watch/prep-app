@@ -8,8 +8,6 @@ import {
   DASHBOARD_SEARCH_TERM
 } from '../constants';
 
-export default function () {}
-
 export function getDashboardList() {
   return (dispatch) => {
     fetch(`${process.env.REACT_APP_API_URL}/dashboards?env=${process.env.REACT_APP_DATASET_ENV}`)

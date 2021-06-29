@@ -16,7 +16,7 @@ const initialState = {
   searchTerm: null,
 };
 
-export default function (state = initialState, action) {
+export default function DashboardsReducer(state = initialState, action) {
   switch (action.type) {
     case DASHBOARD_LIST_RECEIVED: {
       return Object.assign({}, state, {

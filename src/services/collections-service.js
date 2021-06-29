@@ -9,7 +9,7 @@ class CollectionsService {
     const queryParams = queryString.stringify({ application: [process.env.APPLICATIONS] });
 
     return new Promise((resolve, reject) => {
-      fetch(`${process.env.RW_API_URL}/collection?${queryParams}`, {
+      fetch(`${process.env.REACT_APP_RW_API_URL}/collection?${queryParams}`, {
         method: 'GET',
         headers: { Authorization: token }
       })
@@ -37,7 +37,7 @@ class CollectionsService {
    */
   static getCollection(token, collectionId) {
     return new Promise((resolve, reject) => {
-      fetch(`${process.env.RW_API_URL}/collection/${collectionId}`, {
+      fetch(`${process.env.REACT_APP_RW_API_URL}/collection/${collectionId}`, {
         method: 'GET',
         headers: { Authorization: token }
       })
@@ -66,7 +66,7 @@ class CollectionsService {
    */
   static createCollection(token, name, resources = []) {
     return new Promise((resolve, reject) => {
-      fetch(`${process.env.RW_API_URL}/collection`, {
+      fetch(`${process.env.REACT_APP_RW_API_URL}/collection`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -103,7 +103,7 @@ class CollectionsService {
    */
   static deleteCollection(token, collectionId) {
     return new Promise((resolve, reject) => {
-      fetch(`${process.env.RW_API_URL}/collection/${collectionId}`, {
+      fetch(`${process.env.REACT_APP_RW_API_URL}/collection/${collectionId}`, {
         method: 'DELETE',
         headers: { Authorization: token }
       })
@@ -133,7 +133,7 @@ class CollectionsService {
    */
   static editCollection(token, collectionId, name) {
     return new Promise((resolve, reject) => {
-      fetch(`${process.env.RW_API_URL}/collection/${collectionId}`, {
+      fetch(`${process.env.REACT_APP_RW_API_URL}/collection/${collectionId}`, {
         method: 'PATCH',
         headers: { Authorization: token },
         body: { name }
@@ -166,7 +166,7 @@ class CollectionsService {
    */
   static addResourceToCollection(token, collectionId, resource = []) {
     return new Promise((resolve, reject) => {
-      fetch(`${process.env.RW_API_URL}/collection/${collectionId}/resource`, {
+      fetch(`${process.env.REACT_APP_RW_API_URL}/collection/${collectionId}/resource`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -201,7 +201,7 @@ class CollectionsService {
   static removeResourceFromCollection(token, collectionId, resource = []) {
     const { type, id } = resource;
     return new Promise((resolve, reject) => {
-      fetch(`${process.env.RW_API_URL}/collection/${collectionId}/resource/${type}/${id}`, {
+      fetch(`${process.env.REACT_APP_RW_API_URL}/collection/${collectionId}/resource/${type}/${id}`, {
         method: 'DELETE',
         headers: { Authorization: token },
         body: {}

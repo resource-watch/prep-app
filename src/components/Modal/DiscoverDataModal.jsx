@@ -15,6 +15,7 @@ const DiscoverDataModal = ({ onClose }) => {
   const handleClose = useCallback(() => {
     setModalOpened(true);
     onClose();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleToHowTo = useCallback(() => {
