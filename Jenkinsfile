@@ -19,7 +19,7 @@ node {
       switch ("${env.BRANCH_NAME}") {
         // Roll out to staging
         case "develop":
-          sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production,preproduction --build-arg apiUrl=https://staging.prepdata.org/api --build-arg basemapUrl=https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png --build-arg rwApiUrl=https://staging-api.globalforestwatch.org/v1 --build-arg callbackUrl=https://staging.prepdata.org/auth .")
+          sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production,preproduction --build-arg apiUrl=https://staging.prepdata.org/api --build-arg basemapUrl=https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png --build-arg rwApiUrl=https://staging-api.resourcewatch.org/v1 --build-arg callbackUrl=https://staging.prepdata.org/auth .")
           break
         case "master":
           sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production --build-arg apiUrl=https://www.prepdata.org/api .")
