@@ -5,9 +5,32 @@ import { Link } from 'react-router';
 
 import LoadingSpinner from 'components/Loading/LoadingSpinner';
 import ResourceItem from './resource-item-component';
+import HowToNav from 'components/how-to-nav';
 
 // constants
 import { RESOURCES_CATEGORIES } from './resources-page-constants';
+
+const RESOURCES_SECTIONS = [
+  {
+    name: 'Connectivity Hub',
+    slug: 'connectivity-hub',
+  },
+  {
+    name: 'Understanding Climate Change Impacts',
+    slug: 'understanding-climate-change-impacts',
+  },
+  {
+    name: 'Climate Assessment & Preparedness Tools',
+    slug: 'climate-assessment-and-preparedness-tools',
+  },
+  {
+    name: 'Climate Data Portals',
+    slug: 'climate-data-portals',
+  }, {
+    name: 'Multi-resource Platforms',
+    slug: 'multi-resource-platforms',
+  }
+];
 
 class Resources extends React.PureComponent {
   componentDidMount() {
@@ -27,10 +50,12 @@ class Resources extends React.PureComponent {
           </p>
         </Article>
 
+        <HowToNav anchor list={RESOURCES_SECTIONS} />
+
         <Article no-border>
-          <h2>Connectivity Hub</h2>
-          <p>PREPdata provides a centralized location to merge tools, processes, climate information, and communities together for tailored and informed decision-making around the climate future. Developing sustainable, location-based solutions for climate change preparedness requires a wide variety of expertise, requiring better sharing of information and collaboration across groups that do not necessarily use the same terminology or live in the same geographic region. The Stockholm Environment Institute, a PREPdata partner, has developed the <Link to="placard-connectivity-hub">Connectivity Hub</Link>.</p>
-          <p>The Hub is a <a href="https://www.sei.org/featured/the-connectivity-hub-expands/">‘search and discovery’</a> tool that supports communities, practitioners, students, researchers and policymakers to share and find climate-resilient adaptation strategies that inform policy processes. This helps users quickly and easily find information that they may not know exists, break down silos, and avoid wasted resources when people are not aware of parallel or complementary ongoing work. New and unexpected combinations of information can produce powerful policy-relevant insights, collaboration, dialogue and learning.  Simply type in your keyword of interest and view the results.</p>
+          <h2 id={RESOURCES_SECTIONS[0].slug}>Connectivity Hub</h2>
+          <p>Developing sustainable, location-based solutions for climate change preparedness requires a wide variety of expertise, requiring better sharing of information and collaboration across groups that do not necessarily use the same terminology or live in the same geographic region. The Stockholm Environment Institute, a PREPdata partner, has developed the <Link to="connectivity-hub">Connectivity Hub</Link>.</p>
+          <p>The Hub is a <a href="https://www.sei.org/featured/the-connectivity-hub-expands/">‘search and discovery’</a> supporting communities, practitioners, students, researchers, and policymakers to share and find climate-resilient adaptation strategies to find relevant information. New and unexpected combinations of information can produce powerful policy-relevant insights, collaboration, dialogue and learning.  Simply type in your keyword of interest and view the results.</p>
           {/* Placard Connectivity Hub */}
           <div className="row align-center">
             <div className="column small-12">
@@ -45,10 +70,10 @@ class Resources extends React.PureComponent {
           </div>
         </Article>
 
-        {RESOURCES_CATEGORIES.map(resourceCategory => (
+        {RESOURCES_CATEGORIES.map((resourceCategory, index) => (
           !!(resources[resourceCategory.value] || []).length &&
             <Article grid="small-12" key={resourceCategory.value}>
-              <h2>{resourceCategory.label}</h2>
+              <h2 id={RESOURCES_SECTIONS[index + 1].slug}>{resourceCategory.label}</h2>
 
               <div className="row align-stretch">
                 {(resources[resourceCategory.value] || []).map(resource => <ResourceItem key={resource.id} data={resource} />) }

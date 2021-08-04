@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import MainNav from 'layout/navigation/MainNav';
 
 const PlacardPage = () => (
-  <div className="l-explore">
+  <div className="l-explore" style={{ display: 'flex', flexDirection: 'column' }}>
     <header className="l-header -expanded">
       <div className="l-header-nav -short">
         <div className="row align-middle">
@@ -18,7 +18,7 @@ const PlacardPage = () => (
         </div>
       </div>
     </header>
-    <div className="content">
+    <div className="content" style={{ flex: 1 }}>
       <iframe
         height="100%"
         width="100%"
