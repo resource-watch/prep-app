@@ -23,7 +23,7 @@ const PlacardPage = () => (
         height="100%"
         width="100%"
         title="Placard Connectivity Hub"
-        src="http://connectivity-hub.placard-network.eu/?resource=http%3A%2F%2Fplacard.wiredcanvas.uk%2Fapi%2Ftaxonomy_term%2F8066.jsonld&teaser_resource=false"
+        src="/proxy?url=http://connectivity-hub.placard-network.eu/?resource=http%3A%2F%2Fplacard.wiredcanvas.uk%2Fapi%2Ftaxonomy_term%2F8066.jsonld&teaser_resource=false"
       />
     </div>
   </div>
