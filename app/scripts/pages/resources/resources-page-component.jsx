@@ -54,7 +54,7 @@ class Resources extends React.PureComponent {
 
         <Article no-border>
           <h2 id={RESOURCES_SECTIONS[0].slug}>Connectivity Hub</h2>
-          <p>Developing sustainable, location-based solutions for climate change preparedness requires a wide variety of expertise, requiring better sharing of information and collaboration across groups that do not necessarily use the same terminology or live in the same geographic region. The Stockholm Environment Institute, a PREPdata partner, has developed the <Link to="connectivity-hub">Connectivity Hub</Link>.</p>
+          <p>Developing sustainable, location-based solutions for climate change preparedness requires a wide variety of expertise, requiring better sharing of information and collaboration across groups that do not necessarily use the same terminology or live in the same geographic region. The Stockholm Environment Institute, a PREPdata partner, has developed the <Link to="connectivity-hub">Connectivity Hub</Link> to meet this need.</p>
           <p>The Hub is a <a href="https://www.sei.org/featured/the-connectivity-hub-expands/">‘search and discovery’</a> supporting communities, practitioners, students, researchers, and policymakers to share and find climate-resilient adaptation strategies to find relevant information. New and unexpected combinations of information can produce powerful policy-relevant insights, collaboration, dialogue and learning.  Simply type in your keyword of interest and view the results.</p>
           {/* Placard Connectivity Hub */}
           <div className="row align-center">
