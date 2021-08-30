@@ -11,7 +11,7 @@ ARG nodeEnv=production
 ARG callbackUrl=https://prepdata.org/auth
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV RW_API_LOGIN_URL https://production-api.globalforestwatch.org/auth
+ENV RW_API_LOGIN_URL https://api.resourcewatch.org/auth
 ENV RW_API_IS_LOGGEDIN_URL https://api.resourcewatch.org/auth/check-logged
 ENV CALLBACK_URL $callbackUrl
 ENV APPLICATIONS prep
