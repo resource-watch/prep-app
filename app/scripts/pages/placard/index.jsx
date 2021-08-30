@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import MainNav from 'layout/navigation/MainNav';
 
 const PlacardPage = () => (
-  <div className="l-explore">
+  <div className="l-explore" style={{ display: 'flex', flexDirection: 'column' }}>
     <header className="l-header -expanded">
       <div className="l-header-nav -short">
         <div className="row align-middle">
@@ -18,12 +18,12 @@ const PlacardPage = () => (
         </div>
       </div>
     </header>
-    <div className="content">
+    <div className="content" style={{ flex: 1 }}>
       <iframe
         height="100%"
         width="100%"
         title="Placard Connectivity Hub"
-        src="http://connectivity-hub.placard-network.eu/?resource=http%3A%2F%2Fplacard.wiredcanvas.uk%2Fapi%2Ftaxonomy_term%2F849.jsonld&teaser_resource=false"
+        src="/proxy?url=http://connectivity-hub.placard-network.eu/?resource=http%3A%2F%2Fplacard.wiredcanvas.uk%2Fapi%2Ftaxonomy_term%2F8066.jsonld&teaser_resource=false"
       />
     </div>
   </div>
