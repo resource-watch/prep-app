@@ -155,7 +155,7 @@ function Routes(props) {
         <Route path="stories/:slug" component={InsightsDetail} />
         <Route path="dataset/:slug" component={DatasetDetail} />
 
-        <Route path="placard-connectivity-hub" component={PlacardPage} />
+        <Route path="connectivity-hub" component={PlacardPage} />
 
         {/* Embed */}
         <Route path="export/explore" component={ExplorePageEmbed} />
