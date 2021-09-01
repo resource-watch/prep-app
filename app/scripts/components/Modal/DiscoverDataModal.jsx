@@ -37,19 +37,32 @@ const DiscoverDataModal = ({ onClose }) => {
             <div className="column small-12">
               <h2>Discover Data</h2>
             </div>
-            <div className="column small-12 medium-6">
+            <div className="column small-12 medium-8">
               <p>Search for climate, physical, and socioeconomic data. Create and share beautiful map visualizations and overlays, etc.</p>
             </div>
             <div className="column small-12 medium-6">
               <iframe
                 width="400"
                 height="260"
-                src="https://www.youtube.com/embed/AJzz9-76Bgk"
-                title="Introduction to PREP DATA"
+                src="https://www.youtube.com/embed/7eT8PE0XAnE"
+                title="Making maps with Explore"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
+              <span>Making maps with Explore</span>
+            </div>
+            <div className="column small-12 medium-6">
+              <iframe
+                width="400"
+                height="260"
+                src="https://www.youtube.com/embed/G9Bx-0q2wMA"
+                title="Climate indicators on Explore"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+              <span>Climate indicators on Explore</span>
             </div>
           </div>
           <ToggleHelp keys={[LOCAL_STORAGE_KEY]} customText="Show this info box next time" />
