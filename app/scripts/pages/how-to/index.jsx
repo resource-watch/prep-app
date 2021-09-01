@@ -79,6 +79,15 @@ class HowTo extends React.PureComponent {
                 <Link to="/explore">
                   See Data
                 </Link>
+                <iframe
+                  width="400"
+                  height="260"
+                  src="https://www.youtube.com/embed/7eT8PE0XAnE"
+                  title="Making maps with Explore"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
               </div>
               <div className="column small-12 medium-6">
                 <img src={discoverImg} alt="Discover data" />
@@ -109,6 +118,24 @@ class HowTo extends React.PureComponent {
                 <Link to="/explore?basemap=default&bbox&boundaries=false&filterQuery=Pierce+et+al.&labels=none&lat=48.46038&lng=-123.889823&location=global&minZoom=3&tab=all_datasets&water=none&zoom=3">
                   EXPLORE THE LOCA DATA
                 </Link>
+                <iframe
+                  width="400"
+                  height="260"
+                  src="https://www.youtube.com/embed/G9Bx-0q2wMA"
+                  title="Climate indicators on Explore"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+                <iframe
+                  width="400"
+                  height="260"
+                  src="https://www.youtube.com/embed/CoBr6a-AAlQ"
+                  title="Create an area of interest"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
               </div>
             </div>
           </div>
@@ -129,6 +156,24 @@ class HowTo extends React.PureComponent {
                 <Link to="/myprep">
                   See my prep
                 </Link>
+                <iframe
+                  width="400"
+                  height="260"
+                  src="https://www.youtube.com/embed/JVENMLZk4yw"
+                  title="Uploading tabular data"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+                <iframe
+                  width="400"
+                  height="260"
+                  src="https://www.youtube.com/embed/jkHzlAEcOJ0"
+                  title="Creating widgets pivot table"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
               </div>
               <div className="column small-12 medium-6">
                 <img src={uploadImg} alt="Discover data" />
@@ -155,6 +200,24 @@ class HowTo extends React.PureComponent {
                 <a href="/dashboards/sample-dashboard-landslides-in-western-south-america">
                   SEE A SAMPLE USER DASHBOARD
                 </a>
+                <iframe
+                  width="400"
+                  height="260"
+                  src="https://www.youtube.com/embed/SyN1dlEMhxY"
+                  title="Creating dashboards"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+                <iframe
+                  width="400"
+                  height="260"
+                  src="https://www.youtube.com/embed/__CU6EpeOTA"
+                  title="Creating stories"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
               </div>
             </div>
           </div>
