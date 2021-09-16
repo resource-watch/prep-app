@@ -724,7 +724,7 @@ class TimeseriesChart extends React.Component {
 
     const range1Signal = {
       name: 'range1',
-      update: `{ start: utc(${range1[0]}, 0, 1), end: utc(${range1[1]}, 0, 1) }`
+      update: `{ start: utc(${range1[0]}, 0, 1), end: utc(${range1[0]}, 0, 1) }`
     };
 
     const range2Signal = { name: 'range2', update: 'false' };
@@ -732,7 +732,7 @@ class TimeseriesChart extends React.Component {
       const range2 = range2Selection.label.split('-')
         .map(v => +v);
 
-      range2Signal.update = `{ start: utc(${range2[0]}, 0, 1), end: utc(${range2[1]}, 0, 1) }`;
+      range2Signal.update = `{ start: utc(${range2[0]}, 0, 1), end: utc(${range2[0]}, 0, 1) }`;
     }
 
     const unitsSignal = indicatorUnitSignal
