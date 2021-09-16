@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 
 // component
 import GDPRBanner from './component';
@@ -18,10 +19,16 @@ class GDPRBannerContainer extends PureComponent {
   };
 
   render() {
+    const { routing } = this.props;
     const { accepted } = this.state;
+    const isEmbed = routing.locationBeforeTransitions.pathname.search('embed') > 0;
 
-    return !accepted ? <GDPRBanner handleGDPR={this.handleGDPR} /> : null;
+    return !accepted && !isEmbed ? <GDPRBanner handleGDPR={this.handleGDPR} /> : null;
   }
 };
 
-export default GDPRBannerContainer;
+const mapStateToProps = state => ({
+  routing: state.routing,
+});
+
+export default connect(mapStateToProps, null)(GDPRBannerContainer);
