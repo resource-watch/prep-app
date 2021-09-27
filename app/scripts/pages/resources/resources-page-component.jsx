@@ -35,7 +35,7 @@ const RESOURCES_SECTIONS = [
 
 const CONNECTIVITY_HUB_DATA = {
   name: 'Connectivity Hub',
-  logo: 'http://connectivity-hub.placard-network.eu/images/logo.png',
+  logo: '/images/resources/placard-logo.png',
   url: 'http://connectivity-hub.placard-network.eu',
 };
 
