@@ -6,6 +6,7 @@ import LoadingSpinner from 'components/Loading/LoadingSpinner';
 import ResourceItem from './resource-item-component';
 import HowToNav from 'components/how-to-nav';
 import Thumbnail from 'components/Thumbnails/Thumbnail';
+import { logEvent } from 'helpers/analytics';
 
 // constants
 import { RESOURCES_CATEGORIES } from './resources-page-constants';
@@ -71,9 +72,9 @@ class Resources extends React.PureComponent {
               action: 'Clicks on an external tool'
             }}
           />
-          <p style={{ marginTop: '1rem' }}>Developing sustainable, location-based solutions for climate change preparedness requires a wide variety of expertise, requiring better sharing of information and collaboration across groups that do not necessarily use the same terminology or live in the same geographic region. The Stockholm Environment Institute, a PREPdata partner, has developed the <a href={CONNECTIVITY_HUB_DATA.url} target="_blank" rel="noreferrer">{CONNECTIVITY_HUB_DATA.name}</a> to meet this need.</p>
+          <p style={{ marginTop: '1rem' }}>Developing sustainable, location-based solutions for climate change preparedness requires a wide variety of expertise, requiring better sharing of information and collaboration across groups that do not necessarily use the same terminology or live in the same geographic region. The Stockholm Environment Institute, a PREPdata partner, has developed the <a href={CONNECTIVITY_HUB_DATA.url} target="_blank" rel="noreferrer" onClick={() => logEvent('Resources', 'Clicks on an external tool', CONNECTIVITY_HUB_DATA.name)}>{CONNECTIVITY_HUB_DATA.name}</a> to meet this need.</p>
           <p>The Hub is a <a href="https://www.sei.org/featured/the-connectivity-hub-expands/">‘search and discovery’</a> supporting communities, practitioners, students, researchers, and policymakers to share and find climate-resilient adaptation strategies to find relevant information. New and unexpected combinations of information can produce powerful policy-relevant insights, collaboration, dialogue and learning.  Simply type in your keyword of interest and view the results.</p>
-          <p><a href={CONNECTIVITY_HUB_DATA.url} target="_blank" rel="noreferrer" style={{ textTransform: 'uppercase' }}>{CONNECTIVITY_HUB_DATA.url}</a></p>
+          <p><a href={CONNECTIVITY_HUB_DATA.url} target="_blank" rel="noreferrer" style={{ textTransform: 'uppercase' }} onClick={() => logEvent('Resources', 'Clicks on an external tool', CONNECTIVITY_HUB_DATA.name)}>{CONNECTIVITY_HUB_DATA.url}</a></p>
         </Article>
 
         {RESOURCES_CATEGORIES.map((resourceCategory, index) => (
