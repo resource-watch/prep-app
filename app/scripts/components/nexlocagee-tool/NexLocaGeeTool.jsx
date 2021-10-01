@@ -84,7 +84,8 @@ class NexLocaGeeTool extends React.PureComponent {
       isComparing,
       mapMode,
       render,
-      embed
+      embed,
+      startDate,
     } = this.props;
 
     const { loading, enableTutorial } = this.state;
@@ -151,6 +152,11 @@ class NexLocaGeeTool extends React.PureComponent {
                   </div>
                 )}
               </div>
+              {mapMode === 'difference' && startDate.selection && (
+                <div className="columns small-12">
+                  <p>The Projected Change in Annual Average Temperature dataset shows the change in annual average temperature at year {startDate.selection.value}, compared to a baseline time period of 1960-1990.</p>
+                </div>
+              )}
               <div className="columns small-12">
                 <div className="row">
                   <div className="columns small-8">
@@ -226,6 +232,7 @@ class NexLocaGeeTool extends React.PureComponent {
 }
 
 NexLocaGeeTool.defaultProps = {
+  startDate: { selection: { value: null }},
   embed: false,
   isComparing: false,
   render: null,
@@ -235,6 +242,11 @@ NexLocaGeeTool.defaultProps = {
 };
 
 NexLocaGeeTool.propTypes = {
+  startDate: PropTypes.shape({
+    selection: {
+      value: PropTypes.number,
+    },
+  }),
   embed: PropTypes.bool,
   getSelectorsInfo: PropTypes.func.isRequired,
   restoreState: PropTypes.func.isRequired,
