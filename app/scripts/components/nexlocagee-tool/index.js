@@ -4,6 +4,7 @@ import Component from './NexLocaGeeTool';
 
 const mapStateToProps = state => ({
   open: state.shareModal.open,
+  startDate: state.nexlocageetool.range1,
   render: state.nexlocageetool.render,
   marker: state.nexlocageetool.marker,
   isComparing: !!state.nexlocageetool.range2.selection || state.nexlocageetool.mapMode === 'difference',

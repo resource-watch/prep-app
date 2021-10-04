@@ -202,7 +202,7 @@ export const setMultiActiveLayer = (state, { payload }) => {
     const newDataset = {...d};
     const isNexLocaGeeDataset = newDataset.vocabulary.find((v) => v.tags.includes('nexlocagee'));
 
-    // Switch layer fro NEXLOCAGEE layers
+    // Switch layer for NEXLOCAGEE layers
     if (isNexLocaGeeDataset && checkNexLocaGeeDataset(id, newDataset)) {
       newDataset.isLayerActive = !!newDataset.layer.find((l) => layerId === l.id);
       newDataset.layer = newDataset.layer.map(l => ({

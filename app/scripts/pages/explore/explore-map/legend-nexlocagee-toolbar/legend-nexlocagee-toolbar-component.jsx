@@ -92,14 +92,14 @@ class LegendNexLocaGeeToolbar extends PureComponent {
   }
 
   onScenarioChange(scenario) {
-    const { datasetId, defaultDatasetType, onMultiLayer } = this.props;
-    const { period } = this.state;
+    const { datasetId, onMultiLayer } = this.props;
+    const { period, datasetType } = this.state;
     const { value } = scenario;
 
     const dataset = this.getDataset(datasetId);
     const { metadata } = dataset;
     const { info } = metadata[0];
-    const scenarioDatasetId = info[defaultDatasetType.value][value];
+    const scenarioDatasetId = info[datasetType.value][value];
 
     const { layer: layers } = this.getDataset(scenarioDatasetId);
     const activeLayer = layers.find(({ layerConfig }) => layerConfig.order === period.value);
@@ -156,6 +156,8 @@ class LegendNexLocaGeeToolbar extends PureComponent {
       periodsOptions,
       scenario,
       scenariosOptions,
+    }, () => {
+      this.props.onMultiLayer(this.state);
     });
   }
 
