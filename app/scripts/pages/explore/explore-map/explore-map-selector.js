@@ -83,7 +83,7 @@ export const getLayersGroups = createSelector(
           dataset: d.id,
           layers: d.layer.map(ly => ({
             ...ly,
-            name: `${ly.name} ${ly.legendConfig.unit || ''}`,
+            name: `${ly.name} ${ly.legendConfig.unit ? `(${ly.legendConfig.unit})` : ''}`,
             opacity,
             zIndex,
             visibility,
