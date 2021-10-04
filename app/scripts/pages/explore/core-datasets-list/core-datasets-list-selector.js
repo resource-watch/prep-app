@@ -23,8 +23,6 @@ export const getCoreDatasets = createSelector(
 
     searchDatasetsRecursive(CATEGORIES, coreDatasets);
 
-    // d.vocabulary.find((v) => v.tags.includes('nexlocagee'))
-
     const result = allDatasets.filter((dataset) => coreDatasetsResult.includes(dataset.id));
 
     /**
@@ -42,9 +40,10 @@ export const getCoreDatasets = createSelector(
         || nexLocaGeeIndicators.find((d) => checkNexLocaGeeDataset(n.id, d));
       const hasActiveLayer = activeLayers.find((l) => l.dataset === n.id);
 
-      if (hasActiveLayer && !exists) {
+      if (hasActiveLayer) {
         nexLocaGeeIndicators.push(n);
       }
+
       // Absolute low as base
       else if (n.metadata[0].info.absolute && n.id === n.metadata[0].info.absolute.low && !exists) {
         nexLocaGeeIndicators.push(n);

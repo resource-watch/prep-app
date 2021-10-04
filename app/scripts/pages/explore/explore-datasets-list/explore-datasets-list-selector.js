@@ -23,7 +23,7 @@ export const filteredDatasets = createSelector(
     if ((!existsQuery) && !enabledFilters) return datasets;
     const regex = new RegExp(`${filterQuery}`, 'gi');
 
-    return datasets.filter((dataset) => {
+    const result = datasets.filter((dataset) => {
       let searchFilterPassed = false;
       let conceptsCheckPassed = true;
 
@@ -54,6 +54,8 @@ export const filteredDatasets = createSelector(
 
       return searchCheck && conceptsCheckPassed;
     });
+
+    return result;
   }
 );
 
