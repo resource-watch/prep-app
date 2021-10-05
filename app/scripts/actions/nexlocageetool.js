@@ -435,7 +435,6 @@ export function getUrlState() {
       .split('&')
       .map(chunk => ({ [chunk.split('=')[0]]: decodeURIComponent(chunk.split('=')[1]) }))
       .reduce((res, param) => ({ ...res, ...param }), {});
-    console.log('params', params);
 
     // We keep the promises so we wait for the state to be restored
     // before moving on to something else
@@ -467,7 +466,6 @@ export function getUrlState() {
       const range1Options = getState().nexlocageetool.range1.options;
       const range1Option = range1Options.find(s => s.value === new Date(params.range1).getFullYear());
       if (range1Option) {
-        console.log('range1Option', range1Option);
         promises.push(dispatch(setRange1Selection(range1Option, false)));
       }
     }
@@ -476,7 +474,6 @@ export function getUrlState() {
       const range2Options = getState().nexlocageetool.range1.options;
       const range2Option = range2Options.find(s => s.value === new Date(params.range2).getFullYear());
       if (range2Option) {
-        console.log('range2Option', range2Option);
         promises.push(dispatch(setRange2Selection(range2Option, false)));
       }
     }
@@ -546,7 +543,6 @@ export function getSelectorsInfo() {
 
     const { data } = datasetPage;
     const { layer: layers } = data;
-    console.log(layers);
 
     const periodsOptions = (layers || []).map(
         ({ layerConfig }) => ({
