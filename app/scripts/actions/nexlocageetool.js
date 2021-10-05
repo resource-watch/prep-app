@@ -342,22 +342,12 @@ export function setRange1Options(options) {
 }
 
 export function setRange1Selection(selection, changeUrl = true) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     // We set the selection
     dispatch({
       type: NEXLOCAGEE_SET_RANGE1_SELECTION,
       payload: selection
     });
-
-    // If the selection is the same as the one of the
-    // second range selector, we reset it
-    const range2Selection = getState().nexlocageetool.range2.selection;
-    if (range2Selection && selection.value === range2Selection.value) {
-      dispatch({
-        type: NEXLOCAGEE_SET_RANGE2_SELECTION,
-        payload: null
-      });
-    }
 
     if (changeUrl) dispatch(updateUrl());
   };
@@ -484,7 +474,7 @@ export function getUrlState() {
       const range2Options = getState().nexlocageetool.range1.options;
       const range2Option = range2Options.find(s => s.value === new Date(params.range2).getFullYear());
       if (range2Option) {
-        promises.push(dispatch(setRange1Selection(range2Option, false)));
+        promises.push(dispatch(setRange2Selection(range2Option, false)));
       }
     }
 
