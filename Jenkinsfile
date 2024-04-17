@@ -19,7 +19,7 @@ node {
       switch ("${env.BRANCH_NAME}") {
         // Roll out to staging
         case "develop":
-          sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production,preproduction --build-arg apiUrl=https://www.prepdata.org/api --build-arg basemapUrl=https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png --build-arg rwApiUrl=https://api.resourcewatch.org/v1 --build-arg callbackUrl=https://staging.prepdata.org/auth .")
+          sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production,preproduction --build-arg apiUrl=https://www.prepdata.org/api --build-arg MAPBOX_API_TOKEN=${env.PREP_MAPBOX_API_TOKEN} --build-arg rwApiUrl=https://api.resourcewatch.org/v1 --build-arg callbackUrl=https://staging.prepdata.org/auth .")
           break
         case "master":
           sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production --build-arg apiUrl=https://www.prepdata.org/api .")
@@ -53,7 +53,7 @@ node {
 
         // Roll out to staging
         case "develop":
-          sh("echo Deploying to PROD cluster")
+          sh("echo Deploying to staging cluster")
           sh("kubectl config use-context ${KUBECTL_CONTEXT_PREFIX}_${CLOUD_PROJECT_NAME}_${CLOUD_PROJECT_ZONE}_${KUBE_PROD_CLUSTER}")
           sh("sed -i -e 's/{name}/${appName}/g' k8s/staging/*.yaml")
           sh("kubectl apply -f k8s/staging/")
