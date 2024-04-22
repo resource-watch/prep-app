@@ -23,7 +23,7 @@ node {
           break
         case "master":
           sh("docker -H :2375 build -t ${imageTag} --build-arg datasetEnv=production --build-arg apiUrl=https://www.prepdata.org/api .")
-          sh("docker -H :2375 build -t ${dockerUsername}/${appName}:latest --build-arg datasetEnv=production --build-arg apiUrl=https://www.prepdata.org/api .")
+          sh("docker -H :2375 build -t ${dockerUsername}/${appName}:latest --build-arg datasetEnv=production --build-arg apiUrl=https://www.prepdata.org/api --build-arg MAPBOX_API_TOKEN=${env.PREP_MAPBOX_API_TOKEN} .")
           break
         default:
           sh("docker -H :2375 build -t ${imageTag} .")
@@ -53,7 +53,7 @@ node {
 
         // Roll out to staging
         case "develop":
-          sh("echo Deploying to PROD cluster")
+          sh("echo Deploying to staging cluster")
           sh("kubectl config use-context ${KUBECTL_CONTEXT_PREFIX}_${CLOUD_PROJECT_NAME}_${CLOUD_PROJECT_ZONE}_${KUBE_PROD_CLUSTER}")
           sh("sed -i -e 's/{name}/${appName}/g' k8s/staging/*.yaml")
           sh("kubectl apply -f k8s/staging/")
