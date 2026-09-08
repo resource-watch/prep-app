@@ -13,8 +13,6 @@ import ContactForm from '../../components/ContactForm';
 
 import metadata from '../../metadata.json';
 
-import DeprecationBanner from 'components/deprecation-banner/DeprecationBanner';
-
 const logoImage = '/images/prep-logo.png';
 
 class App extends React.Component {
@@ -58,10 +56,6 @@ class App extends React.Component {
 
     return (
       <div>
-        <DeprecationBanner>
-          Thank you for visting PREP. This site is no longer being updated and will be archived in the coming months.
-          <br/>See <a href="https://www.wri.org/data/data-applications/" target="_blank" rel="noreferrer">WRI&apos;s Applications Portfolio</a> or visit the <a href="https://datasets.wri.org/" target="_blank" rel="noreferrer">Data Explorer</a> to browse WRI data.
-        </DeprecationBanner>
         <header className="l-header">
           <div className={`l-header-nav ${currentData.name === 'home' ? '-no-bg' : ''}`}>
             <div className="row align-middle">
