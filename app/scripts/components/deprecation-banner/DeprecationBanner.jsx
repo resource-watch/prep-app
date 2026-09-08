@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import styles from './styles.module.scss';
-
 const DeprecationBanner = ({ children }) => (
-  <div role="alert" className={styles.banner}>
+  <div role="alert" className=".banner">
     {children}
   </div>
 );
