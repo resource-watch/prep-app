@@ -154,13 +154,12 @@ const ExplorePage = (props) => {
   }, []);
 
   return (
-    <div>
-    <DeprecationBanner>
-        Thank you for visting PREP. This site is no longer being updated and will be archived in the coming months.
-        <br/>See <a href="https://www.wri.org/data/data-applications/" target="_blank" rel="noreferrer">WRI&apos;s Applications Portfolio</a> or visit the <a href="https://datasets.wri.org/" target="_blank" rel="noreferrer">Data Explorer</a> to browse WRI data.
-      </DeprecationBanner>
       <div className="l-explore">
         <header className="l-header -expanded">
+          <DeprecationBanner>
+            Thank you for visting PREP. This site is no longer being updated and will be archived in the coming months.
+            <br/>See <a href="https://www.wri.org/data/data-applications/" target="_blank" rel="noreferrer">WRI&apos;s Applications Portfolio</a> or visit the <a href="https://datasets.wri.org/" target="_blank" rel="noreferrer">Data Explorer</a> to browse WRI data.
+          </DeprecationBanner>
           <div className="l-header-nav -short">
             <div className="row align-middle">
               <div className="column small-10 medium-4">
@@ -297,7 +296,6 @@ const ExplorePage = (props) => {
         <ExploreMap />
         <DiscoverDataModal onClose={handleCloseModal} />
       </div>
-    </div>
   );
 }
 
