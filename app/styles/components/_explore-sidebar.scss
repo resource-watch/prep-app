@@ -2,9 +2,9 @@ $sidebar-padding-content: 20px;
 
 .c-explore-sidebar {
   position: absolute;
-  top: $header-height-short;
+  top: 135px;
   left: 0;
-  height: calc(100% - #{$header-height-short});
+  height: calc(100% - 135px);
   width: 100%;
   background-color: $base-bg-color;
   z-index: 3;
