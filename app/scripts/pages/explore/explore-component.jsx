@@ -20,6 +20,8 @@ import ExploreMap from './explore-map';
 import { tabOptions } from './explore-constants';
 import DiscoverDataModal from 'components/Modal/DiscoverDataModal';
 
+import DeprecationBanner from 'components/deprecation-banner/DeprecationBanner';
+
 function logSearchEvent(query) { // eslint-disable-line class-methods-use-this
   logEvent('Explore menu', 'Search datasets', query);
 }
@@ -153,6 +155,10 @@ const ExplorePage = (props) => {
 
   return (
     <div className="l-explore">
+      <DeprecationBanner>
+        Thank you for visting PREP. This site is no longer being updated and will be archived in the coming months.
+        <br/>See <a href="https://www.wri.org/data/data-applications/" target="_blank" rel="noreferrer">WRI&apos;s Applications Portfolio</a> or visit the <a href="https://datasets.wri.org/" target="_blank" rel="noreferrer">Data Explorer</a> to browse WRI data.
+      </DeprecationBanner>
       <header className="l-header -expanded">
         <div className="l-header-nav -short">
           <div className="row align-middle">
