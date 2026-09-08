@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const DeprecationBanner = ({ children }) => (
-  <div role="alert" className=".banner">
+  <div role="alert" className="banner">
     {children}
   </div>
 );
